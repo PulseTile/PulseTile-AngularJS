@@ -1,0 +1,29 @@
+.wrap-logo {
+  float: left;
+  padding: 6px 9px;
+}
+.logo {
+  line-height: 38px;
+  font-family: 'MyriadPro';
+  font-size: 18px;
+  color: #0C662D;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: middle;
+  .logo-icon,
+  .logo-icon-mob {
+    display: block;
+    width: auto;
+    height: 37px;
+    cursor: pointer;
+  }
+  .logo-icon {display: none;}
+}
+@include respond-to(xs) {
+  .logo {
+    font-size: 23px;
+    .logo-icon {display: block;}
+    .logo-icon-mob {display: none;}
+  }
+}

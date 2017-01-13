@@ -1,0 +1,78 @@
+<!--
+  ~  Copyright 2016 Ripple Foundation C.I.C. Ltd
+  ~  
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~  
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  -->
+<div class="wrapper" ng-class="classShowSidebar">
+  <header-component></header-component>
+
+  <div class="content">
+    <!-- Sidebar-->
+    <div class="sidebar" ng-if="isSidebar" role="navigation" >
+        <div class="sidebar-nav">
+          <div side-menu ui-view="actions"></div>
+        </div>
+    </div>
+    <!-- /.Sidebar-->
+
+    <div class="main">
+
+      <!-- Breadcrumbs-->
+      <div class="wrap-breadcrumbs" ng-if="breadcrumbs.length">
+        <div class="container-fluid">
+          <div class="breadcrumbs">
+            <ng-repeat
+              ng-repeat="breadcrumb in breadcrumbs">
+              <!-- <a ng-if="!$last" ng-click="$ctrl.goBreadcrumb(breadcrumb.state)" class="breadcrumb-link">{{ breadcrumb.title }}</a> -->
+              <a ng-if="!$last" class="breadcrumb-link">{{ breadcrumb.title }}</a>
+              <span ng-if="$last"  class="breadcrumb-link">{{ breadcrumb.title }}</span>
+              <span ng-if="!$last" class="breadcrumb-separate"></span>
+            </ng-repeat>
+          </div>
+        </div>
+      </div>
+      <!-- /.Breadcrumbs-->
+      
+      <!-- /page-wrapper -->
+      <div class="page-wrapper">
+        <div class="section" ng-if="!isSecondPanel">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="section-main" ui-view="main"></div>
+            </div>
+          </div>
+        </div>
+        <div class="section" ng-class="getFullPanelClass()" ng-if="isSecondPanel">
+          <div class="row">
+            <div class="col-xs-12 col-panel-main">
+              <div class="section-main" ui-view="main"></div>
+            </div>
+            <div class="col-xs-12 col-panel-details" ng-if="isSecondPanel">
+              <div class="section-detail" ui-view="detail"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container-fluid">
+    <div class="footer-povered">
+      <span>Powered By</span>
+      <a href="#" class="footer-logo"><img src="../assets/images/footer-logo.png" alt="Ripple Icon" class="footer-logo-img"></a>
+    </div>
+    <p class="footer-text">IDCR POC</p>
+  </div>
+</footer>

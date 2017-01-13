@@ -1,0 +1,77 @@
+.user-drop {
+  width: 266px;
+  padding: 10px 12px 9px 11px;
+  
+  .user-profile-image {
+    float: left;
+    overflow: hidden;
+    width: 80px;
+    margin: 0 10px 0 0;
+    font-size: 60px;
+    line-height: 80px;
+    color: #82BE36;
+    text-align: center;
+    border-radius: 4px;
+    background-color: #eef8e7;
+    .img {
+      position: relative;
+      height: 0;
+      padding-bottom: 100%;
+      cursor: pointer;
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        z-index: 1;
+      }
+    }
+  }
+  
+  .user-profile-info {
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 18px;
+    color: #3c3c3c;
+  }
+  .name {
+    margin-bottom: 2px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .specification {
+    margin-bottom: 9px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #d7d7d7;
+    .item {
+      margin-bottom: 2px;
+      line-height: 20px;
+    }
+    .gray {color: #9c9c9c;}
+  }
+  .btn-signout i {
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: 400;
+  }
+  // .user-type {
+  //   text-transform: uppercase;
+  //   display: block;
+  //   padding: 2px 5px 0px 5px;
+  //   float: right;
+  //   font-size: 12px;
+  //   &.superuser {
+  //     background-color: orange;
+  //     color: #fff;
+  //   }
+  //   &.clinician {
+  //     background-color: blue;
+  //     color: #fff;
+  //   }
+  //   &.patient {
+  //     background-color: green;
+  //     color: #fff;
+  //   }
+  // }
+}

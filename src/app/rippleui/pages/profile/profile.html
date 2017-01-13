@@ -1,0 +1,378 @@
+<!--
+  ~  Copyright 2016 Ripple Foundation C.I.C. Ltd
+  ~  
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~  
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  -->
+
+  <div mc-full-panel mc-accordion mc-open-panel="personal" class="panel-group accordion">
+    <div class="panel panel-secondary" ng-if="!isPersonalEdit" ng-class="getOpenPanelClass('personal')">
+      <div class="panel-heading">
+        <div class="control-group right">
+          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+          <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('personal')"><i class="fa fa-chevron-up"></i></button>
+        </div>
+        <h3 class="panel-title">Personal Information</h3>
+      </div>
+      <div class="panel-body">
+        <div class="panel-body-inner">
+          <div class="form">
+            <div class="form-group-wrapper">
+              <div class="row">
+                <div class="col-xs-12 col-md-6">
+                  <div class="row">
+                    <div class="col-md-11">
+                      <div class="form-group">
+                        <label class="control-label">First Name</label>
+                        <div class="form-control-static">{{ $ctrl.profile.firstname }}</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label">Last Name</label>
+                        <div class="form-control-static">{{ $ctrl.profile.lastname }}</div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label class="control-label">NHS No</label>
+                        <div class="form-control-static">{{ $ctrl.profile.nhs }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                  <div class="row">
+                    <div class="col-md-11 col-md-offset-1">
+                      <div class="form-group">
+                        <label class="control-label">Date of Birth</label>
+                        <div class="form-control-static">{{ $ctrl.profile.birthday | date:'dd-MMM-yyyy'}}</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label">Gender</label>
+                        <div class="form-control-static">{{ $ctrl.profile.gender }}</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label">Doctor</label>
+                        <div class="form-control-static">{{ $ctrl.profile.doctor }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
+          <div class="wrap-control-group">
+            <div class="control-group right">
+              <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.personalEdit();"><i class="fa fa-edit"></i> Edit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-secondary" ng-if="isPersonalEdit" ng-class="getOpenPanelClass('personal')">
+      <div class="panel-heading">
+        <div class="control-group right">
+          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+          <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('personal')"><i class="fa fa-chevron-up"></i></button>
+        </div>
+        <h3 class="panel-title">Personal Information</h3>
+      </div>
+      <div class="panel-body">
+        <div class="panel-body-inner">
+          <form name="personalForm" class="form">
+            <div class="form-group-wrapper">
+              <div class="row">
+                <div class="col-xs-12 col-md-6">
+                  <div class="row">
+                    <div class="col-md-11">
+                      <div class="form-group" ng-class="{'has-error': (formSubmitted || personalForm.firstname.$dirty) && personalForm.firstname.$invalid, 'has-success': personalForm.firstname.$valid && personalForm.firstname.$dirty}">
+                        <label for="firstname" class="control-label">First Name</label>
+                        <div class="input-holder">
+                          <input class="form-control input-sm" id="firstname" name="firstname" ng-model="personalEdit.firstname" required />
+                        </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && personalForm.firstname.$error.required">You must enter a value.</span>
+                      </div>
+
+                      <div class="form-group" ng-class="{'has-error': (formSubmitted || personalForm.lastname.$dirty) && personalForm.lastname.$invalid, 'has-success': personalForm.lastname.$valid && personalForm.lastname.$dirty}">
+                        <label for="lastname" class="control-label">Last Name</label>
+                        <div class="input-holder">
+                          <input class="form-control input-sm" id="lastname" name="lastname" ng-model="personalEdit.lastname" required />
+                        </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && personalForm.lastname.$error.required">You must enter a value.</span>
+                      </div>
+
+                      <div class="form-group" ng-class="{'has-error': (formSubmitted || personalForm.nhs.$dirty) && personalForm.nhs.$invalid, 'has-success': personalForm.nhs.$valid && personalForm.nhs.$dirty}">
+                        <label for="nhs" class="control-label">NHS No</label>
+                        <div class="input-holder">
+                          <input class="form-control input-sm" id="nhs" name="nhs" ng-model="personalEdit.nhs" required />
+                        </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && personalForm.nhs.$error.required">You must enter a value.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                  <div class="row">
+                    <div class="col-md-11 col-md-offset-1">
+                      <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || personalForm.birthday.$dirty) && personalForm.birthday.$invalid, 'has-success': personalForm.birthday.$valid && personalForm.birthday.$dirty}">
+                          <label for="birthday" class="control-label">Date of Birth</label>
+                          <div class="inner-addon addon-left">
+                            <div class="addon">
+                              <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control" id="birthday" name="birthday" ng-model="medicationEdit.startDate" ng-click="openDatepicker($event, 'birthday')" uib-datepicker-popup="dd-MMM-yyyy" is-open="birthday" required />
+                          </div>
+                          <span class="help-block animate-fade" ng-show="formSubmitted && personalForm.birthday.$error.required">You must enter a valid date.</span>
+                      </div>
+
+                      <div class="form-group" ng-class="{'has-error': (formSubmitted || personalForm.gender.$dirty) && personalForm.gender.$invalid, 'has-success': personalForm.gender.$valid && personalForm.gender.$dirty}">
+                        <label for="gender" class="control-label">Gender</label>
+                        <div class="input-holder">
+                          <select class="form-control input-sm" class="form-control input-sm" id="gender" name="gender" ng-model="personalEdit.gender" required>
+                              <option>Female</option>
+                              <option>Male</option>
+                          </select>
+                        </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && personalForm.gender.$error.required">You must enter a value.</span>
+                      </div>
+
+                      <div class="form-group" ng-class="{'has-error': (formSubmitted || personalForm.doctor.$dirty) && personalForm.doctor.$invalid, 'has-success': personalForm.doctor.$valid && personalForm.doctor.$dirty}">
+                        <label for="doctor" class="control-label">Doctor</label>
+                        <div class="input-holder">
+                          <input class="form-control input-sm" id="doctor" name="doctor" ng-model="personalEdit.doctor" required />
+                        </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && personalForm.doctor.$error.required">You must enter a value.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
+          <div class="wrap-control-group">
+            <div class="control-group right">
+              <button class="btn btn-danger" ng-click="$ctrl.cancelPersonalEdit()"><i class="fa fa-ban"></i> Cancel</button>
+              <button class="btn btn-success" ng-click="confirmPersonalEdit(personalForm, personalEdit)"><i class="fa fa-check"></i> Complete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="panel panel-secondary" ng-if="!isContactEdit" ng-class="getOpenPanelClass('contact')">
+      <div class="panel-heading">
+        <div class="control-group right">
+          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+          <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('contact')"><i class="fa fa-chevron-up"></i></button>
+        </div>
+        <h3 class="panel-title">Contact Information</h3>
+      </div>
+      <div class="panel-body">
+        <div class="panel-body-inner">
+          <div class="form">
+            <div class="form-group-wrapper">
+              <div class="row">
+                <div class="col-xs-12 col-md-6">
+                  <div class="row">
+                    <div class="col-md-11">
+                      <div class="form-group">
+                        <label class="control-label">Address</label>
+                        <div class="form-control-static">{{ $ctrl.profile.address }}</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label">City</label>
+                        <div class="form-control-static">{{ $ctrl.profile.city }}</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label">State</label>
+                        <div class="form-control-static">{{ $ctrl.profile.state }}</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label">Postal Code</label>
+                        <div class="form-control-static">{{ $ctrl.profile.postalCode }}</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label">Country</label>
+                        <div class="form-control-static">{{ $ctrl.profile.country }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                  <div class="row">
+                    <div class="col-md-11 col-md-offset-1">
+                      <div class="form-group">
+                        <label class="control-label">Phone Number</label>
+                        <div class="form-control-static">{{ $ctrl.profile.phone }}</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label">Email</label>
+                        <div class="form-control-static">{{ $ctrl.profile.email }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
+          <div class="wrap-control-group">
+            <div class="control-group right">
+              <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.contactEdit();"><i class="fa fa-edit"></i> Edit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-secondary" ng-if="isContactEdit" ng-class="getOpenPanelClass('contact')">
+      <div class="panel-heading">
+        <div class="control-group right">
+          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+          <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('contact')"><i class="fa fa-chevron-up"></i></button>
+        </div>
+        <h3 class="panel-title">Contact Information</h3>
+      </div>
+      <div class="panel-body">
+        <div class="panel-body-inner">
+          <form name="contactForm" class="form">
+            <div class="form-group-wrapper">
+              <div class="row">
+                <div class="col-xs-12 col-md-6">
+                  <div class="row">
+                    <div class="col-md-11">
+                      <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.address.$dirty) && contactForm.address.$invalid, 'has-success': contactForm.address.$valid && contactForm.address.$dirty}">
+                        <label for="address" class="control-label">Address</label>
+                        <div class="input-holder">
+                          <input class="form-control input-sm" id="address" name="address" ng-model="contactEdit.address" required />
+                        </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.address.$error.required">You must enter a value.</span>
+                      </div>
+
+                      <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.city.$dirty) && contactForm.city.$invalid, 'has-success': contactForm.city.$valid && contactForm.city.$dirty}">
+                        <label for="city" class="control-label">City</label>
+                        <div class="input-holder">
+                          <input class="form-control input-sm" id="city" name="city" ng-model="contactEdit.city" required />
+                        </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.city.$error.required">You must enter a value.</span>
+                      </div>
+
+                      <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.state.$dirty) && contactForm.state.$invalid, 'has-success': contactForm.state.$valid && contactForm.state.$dirty}">
+                        <label for="state" class="control-label">State</label>
+                        <div class="input-holder">
+                          <input class="form-control input-sm" id="state" name="state" ng-model="contactEdit.state" required />
+                        </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.state.$error.required">You must enter a value.</span>
+                      </div>
+
+                      <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.postalCode.$dirty) && contactForm.postalCode.$invalid, 'has-success': contactForm.postalCode.$valid && contactForm.postalCode.$dirty}">
+                        <label for="postalCode" class="control-label">Postal Code</label>
+                        <div class="input-holder">
+                          <input class="form-control input-sm" id="postalCode" name="postalCode" ng-model="contactEdit.postalCode" required />
+                        </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.postalCode.$error.required">You must enter a value.</span>
+                      </div>
+
+                      <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.country.$dirty) && contactForm.country.$invalid, 'has-success': contactForm.country.$valid && contactForm.country.$dirty}">
+                        <label for="country" class="control-label">Country</label>
+                        <div class="input-holder">
+                          <select class="form-control input-sm" class="form-control input-sm" id="country" name="country" ng-model="contactForm.country" required>
+                              <option>USA</option>
+                              <option>Country 1</option>
+                              <option>Country 2</option>
+                              <option>Country 3</option>
+                              <option>Country 4</option>
+                              <option>Country 5</option>
+                          </select>
+                        </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.country.$error.required">You must enter a value.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                  <div class="row">
+                    <div class="col-md-11 col-md-offset-1">
+                      <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.phone.$dirty) && contactForm.phone.$invalid, 'has-success': contactForm.phone.$valid && contactForm.phone.$dirty}">
+                        <label for="phone" class="control-label">Phone Number</label>
+                        <div class="input-holder">
+                          <input class="form-control input-sm" id="phone" name="phone" ng-model="contactEdit.phone" required />
+                        </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.phone.$error.required">You must enter a value.</span>
+                      </div>
+
+                      <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.email.$dirty) && contactForm.email.$invalid, 'has-success': contactForm.email.$valid && contactForm.email.$dirty}">
+                        <label for="email" class="control-label">Email</label>
+                        <div class="input-holder">
+                          <input class="form-control input-sm" id="email" name="email" ng-model="contactEdit.email" required />
+                        </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.email.$error.required">You must enter a value.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
+          <div class="wrap-control-group">
+            <div class="control-group right">
+              <button class="btn btn-danger" ng-click="$ctrl.cancelContactEdit()"><i class="fa fa-ban"></i> Cancel</button>
+              <button class="btn btn-success" ng-click="confirmContactEdit(contactForm, contactEdit)"><i class="fa fa-check"></i> Complete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="panel panel-secondary" ng-class="getOpenPanelClass('history')">
+      <div class="panel-heading">
+        <div class="control-group right">
+          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+          <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('history')"><i class="fa fa-chevron-up"></i></button>
+        </div>
+        <h3 class="panel-title">Change History</h3>
+      </div>
+      <div class="panel-body">
+        <div class="panel-body-inner" ng-repeat="historyChange in $ctrl.profile.historyChanges">
+          <div class="form">
+            <div class="form-group-wrapper">
+              <div class="form-group">
+                <label class="control-label">Change #{{$index + 1}} Date</label>
+                <div class="form-control-static">{{ historyChange.data | date:'y-MM-dd HH:mm'}}</div>
+              </div>
+              <div class="form-group">
+                <label class="control-label">Changes</label>
+                <div class="form-control-static">{{ historyChange.field }}: <em>{{ historyChange.valueOld }}</em> <span class="next-separate"><i class="fa fa-caret-right"></i></span> {{ historyChange.valueNew }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="profile-spinner" spinner-start-active="true"></span> -->
+  </div>

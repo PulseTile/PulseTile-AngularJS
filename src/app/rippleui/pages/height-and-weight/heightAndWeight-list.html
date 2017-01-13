@@ -1,0 +1,46 @@
+<h3><strong>Heights And Weights</strong></h3>
+
+<div class="inner-addon left-addon filterInput">
+    <i class="fa fa-filter"></i>
+    <input type="text" class="form-control" placeholder="Filter..." ng-model="$ctrl.query" />
+</div>
+
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Measure</th>
+      <th>Value</th>
+      <th>Date Recorded</th>
+      <th>Source</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr dir-paginate="heightAndWeight in $ctrl.heightAndWeights| filter: $ctrl.search | itemsPerPage: 10 " current-page="$ctrl.currentPage"  ng-click="$ctrl.go(heightAndWeight.sourceId)" ng-class="{info: $ctrl.selected(heightAndWeight.sourceId)}">
+        <td>Height<br>Weight</td>
+        <td>{{ heightAndWeight.height }}m<br>{{ heightAndWeight.weight }}kg</td>
+        <td>{{ heightAndWeight.heightRecorded | date:'dd-MMM-yyyy' }}<br>{{ heightAndWeight.weightRecorded | date:'dd-MMM-yyyy' }}</td>
+        <td>{{ heightAndWeight.source }}</td>
+    </tr>
+
+
+    <tr ng-if="!$ctrl.heightAndWeights.length">
+      <td colspan="3"><span class="label label-default">No heights and weights</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="col-md-12">
+    <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="patientSummary-spinner" spinner-start-active="true"></span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 hidden-xs"><div class="text-right"><dir-pagination-controls on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>
+  <div class="col-md-6 hidden-xs"><div class="text-right create-button"><button class="btn btn-info" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> Create</button></div></div>
+</div>
+<div class="row">
+  <div class="col-xs-6 hidden-sm hidden-md hidden-lg"><div class="text-right"><dir-pagination-controls on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>
+  <div class="col-xs-6 hidden-sm hidden-md hidden-lg"><div class="text-right create-button"><button class="btn btn-info" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> Create</button></div></div>
+</div>

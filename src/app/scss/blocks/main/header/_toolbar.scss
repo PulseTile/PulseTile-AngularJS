@@ -1,0 +1,19 @@
+.wrap-header-toolbar {
+  background: $secondary-color;
+}
+
+.header-toolbar {
+  position: relative;
+  min-height: 50px;
+  padding: 7px 0 10px;
+  font-size: 15px;
+  line-height: 20px;
+  color: #fff;
+  @include respond-to(xs) {
+    min-height: 56px;
+    padding: 11px 0;
+  }
+  @include respond-to(sm) {
+    padding-left: 109px;
+  }
+}

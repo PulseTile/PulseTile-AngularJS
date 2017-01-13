@@ -1,0 +1,76 @@
+<!--
+  ~  Copyright 2016 Ripple Foundation C.I.C. Ltd
+  ~  
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~  
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  -->
+<!-- START Main Content Area -->
+<div class ="row">
+  <div class="col-xs-12 col-md-6">
+    <div class="panel panel-secondary">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-bar-chart"></i> Patients By Setting</h3>
+      </div>
+      <div class="panel-body">
+        <div class="panel-body-inner">
+          <div class="chart" ng-class="{hoverChart: hoverSettings}" ng-mouseenter="hoverSettings = true" ng-mouseleave="hoverSettings = false">
+            <div class="chart-title-group">
+              <h2 class="chart-title">Patients By Setting</h2>
+              <p class="chart-subtitle">This is a brief description of patients by setting.</p>
+            </div>
+            <div id="chart-department" class="chart-wrapper"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-md-6">
+    <div class="panel panel-secondary">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-bar-chart"></i> Patients By Age</h3>
+      </div>
+      <div class="panel-body">
+        <div class="panel-body-inner">
+          <div class="chart" ng-class="{hoverChart: hoverAge}" ng-mouseenter="hoverAge = true" ng-mouseleave="hoverAge = false">
+            <div class="chart-title-group">
+              <h2 class="chart-title">Patients By Age</h2>
+              <p class="chart-subtitle">This is a brief description of patients by age.</p>
+            </div>
+            <div id="chart-age" class="chart-wrapper"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class ="row">
+  <div class="col-xs-12">
+    <div class="panel panel-secondary">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-bar-chart"></i> Patients By Age</h3>
+      </div>
+      <div class="panel-body">
+        <div class="panel-body-inner">
+          <div class="chart age" ng-class="{hoverChart: hoverGeography}" ng-mouseenter="hoverGeography = true" ng-mouseleave="hoverGeography = false" id="age">
+            <div class="chart-title-group">
+              <h2 class="chart-title">Patients By Geography</h2>
+              <p class="chart-subtitle">This is a brief description of patients by geography.</p>
+            </div>
+            <div id="chart-geography" class="chart-wrapper"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

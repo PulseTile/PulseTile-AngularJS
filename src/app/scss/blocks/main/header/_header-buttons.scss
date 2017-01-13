@@ -1,0 +1,58 @@
+.btn-header {
+  position: relative;
+  display: block;
+  width: 45px;
+  height: 52px;
+  background: #F7F7F7;
+  text-align: center;
+  line-height: 52px;
+  color: #0D672F;
+  font-size: 19px;
+  color: $icon-chevron-color;
+  border: none;
+  outline: none;
+  @include respond-to(xs) {
+    width: 52px;
+  }
+  &:hover {color: #7cbe31;}
+  &.inverse {
+    background: #fff;
+  }
+  &.secondary {
+    background: $secondary-color;
+    color: #fff;
+  }
+  .count {
+    position: absolute;
+    top: 9px;
+    right: 1px;
+    font-size: 10px;
+    font-family: arial;
+    background-color: $icon-chevron-color;
+    color: #fff;
+    display: block;
+    padding: 0;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    border-radius: 50%;
+    font-weight: 400;
+    @include respond-to(xs) {
+      right: 3px;
+    }
+  }
+}
+.btn-header-prev {
+  float: left;
+  width: 52px;
+}
+.btn-header.btn-user {
+  font-size: 21px;
+}
+.btn-notification {
+  font-size: 18px;
+  @include respond-to(xs) {
+    font-size: 19px;
+  }
+}

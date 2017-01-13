@@ -1,0 +1,63 @@
+<!--
+  ~  Copyright 2016 Ripple Foundation C.I.C. Ltd
+  ~  
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~  
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  -->
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <div class="control-group left dropdown">
+      <button mc-dropdown class="btn btn-success btn-inverse btn-dropdown-toggle" ng-click="toggleDropdown($event);"><i class="fa fa-cog"></i></button>
+      <div class="dropdown-menu dm-panel dm-summery">
+        <div class="heading">SHOW</div>
+        <div class="row">
+          <div class="col-xs-6 col-sm-4" ng-repeat="(key, dashboard) in listsDashboards">
+            <div class="wrap-fcustominp">
+              <div class="fcustominp">
+                <input type="checkbox" id="dashboard-{{key}}" name="dashboard-{{key}}" ng-model="dashboard.show" />
+                <label for="dashboard-{{key}}"></label>
+              </div>
+              <label for="dashboard-{{key}}" class="fcustominp-label">{{ dashboard.title }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3 class="panel-title">Patient Summary</h3>
+  </div>
+  <div class="panel-body">
+    <div class="dashboard">
+      <div class="dashboard-item" ng-repeat="dashboard in listsDashboards" ng-if="dashboard.show">
+        <div class="board">
+          <div class="board-header">
+            <div class="control-group right">
+              <button class="btn btn-success btn-inverse btn-board-more" ng-click="$ctrl.goToSection(dashboard.toState)"><i class="fa fa-caret-right"></i></button>
+            </div>
+            <h3 class="board-title">{{ dashboard.title }}</h3>
+          </div>
+          <div class="board-body">
+            <ul class="board-list">
+              <li class="board-list-item" ng-repeat="dashboardItem in dashboard.array">
+                <span class="board-list-link" ng-if="dashboardItem.text" ng-click="go(dashboard.toState, dashboardItem.sourceId, dashboard.goNameIndex)">{{ dashboardItem.text }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="patientSummary-spinner" spinner-start-active="true"></span>
+    
+  </div>
+</div>
+

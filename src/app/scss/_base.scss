@@ -1,0 +1,119 @@
+html {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  min-width: $min-width; 
+  background: #fff;
+  font-family: $font-family-main;
+}
+
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+textarea {
+  resize: vertical;
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+  color: #283536;
+  cursor: pointer;
+}
+
+a {
+  color: #000000;
+  text-decoration: none;
+}
+
+a:hover {
+  color: $link-color-hover;
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active {
+  outline:0px !important;
+  -webkit-appearance:none;
+}
+
+.wrap-overflow {overflow: hidden;}
+.wrap-icon {
+  font-size: 0;
+  i, span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  i {margin-right: 3px;}
+}
+.clearfix {
+  @include clearfix;
+}
+.text-truncate {
+  @include text-truncate;
+}
+
+
+.wrapper {
+  position: relative;
+  overflow: hidden;
+  min-height: 100%;
+}
+.content {
+  // position: relative;
+  // overflow: hidden;
+}
+.main {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+#page-wrapper {
+  padding: 0;
+  min-height: 0;
+}
+
+.page-wrapper {
+  padding: 10px 0;
+  background-color: transparent;
+  @include respond-to(xs) {
+    padding: $indent-wrapper-big;
+  }
+}

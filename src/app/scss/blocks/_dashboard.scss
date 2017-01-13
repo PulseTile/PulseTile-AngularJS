@@ -1,0 +1,88 @@
+// .patient-dashboard {
+//   width: 98%;
+// }
+
+// .button-icons:before {
+//   color: #82BE36;
+//   font-size: 70px;
+// }
+.dashboard {
+  padding-top: 8px;
+  font-size: 0;
+  line-height: 0;
+  margin-right: (-1) * $gutter-small;
+  margin-left: (-1) * $gutter-small;
+  min-height: 300px;
+  @include respond-to(xs) {
+    margin-right: (-1) * $gutter-big;
+    margin-left: (-1) * $gutter-big;
+  }
+}
+.dashboard-item {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  margin-bottom: 14px;
+  padding-right: $gutter-small;
+  padding-left: $gutter-small;
+  @include respond-to(xs) {
+    padding-right: $gutter-big;
+    padding-left: $gutter-big;
+  }
+}
+@include respond-to(md) {
+  .dashboard-item {
+    width: 25%;
+  }
+  .showSidebar .dashboard-item {
+    width: 33.333%
+  }
+}
+@include respond-to(lg) {
+  .showSidebar .dashboard-item {
+    width: 25%
+  }
+}
+
+.board {
+  width: 100%;
+  color: #303030;
+  border: 1px solid #B4B5B4;
+  @media (max-width: map-get($breakpoints, 'xs') - 1) {
+    border-left: 0;
+    border-right: 0;
+  }
+}
+.board-header {
+  @include clearfix;
+  padding: 5px;
+  background-color: $table-header-background;
+}
+.board-title {
+  @include text-truncate;
+  padding: 0 5px;
+  font-size: 18px;
+  line-height: 34px;
+  font-weight: 400;
+}
+
+.board-list-item {
+  min-height: 40px;
+  background: #fff;
+  &:nth-of-type(even) {
+    background: #f3f3f3;
+  }
+}
+.board-list-link {
+  @include text-truncate;
+  display: block;
+  padding: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+  &:hover {
+    background: $table-row-background-hover;
+  }
+}
+ .board-list-link {
+}

@@ -1,0 +1,232 @@
+.table {
+  width: 100%;
+  margin-bottom: 5px;
+  font-size: 11px;
+  line-height: 20px;
+  color: #303030;
+  border: none;
+  border-radius: 0;
+  background-color: $table-background;
+  thead {
+    background-color: $table-header-background;
+    font-weight: 700;
+    i {
+      margin-left: 5px;
+    }
+  }
+  thead tr th,
+  tbody tr td {
+    padding: 10px;
+    vertical-align: middle;
+  }
+  &.clickable tbody tr {cursor: pointer;}
+  .dropdown-menu {
+    left: auto;
+    right: 0;
+    li {
+      width: 100%;
+      i {
+        width: 18px;
+        display: inline-block;
+      }
+    }
+  }
+  .view {
+    min-width: 93px;
+    .btn-dropdown-toggle:hover {
+      background-color: #7dbe31;
+      border-color: #7dbe31;
+      & > li > a:hover {
+        background-color: #d0e8af;
+      }
+    }
+  }
+}
+@include respond-to(xs) {
+  .table { font-size: 14px; }
+}
+.table > thead > tr > td.info,
+.table > tbody > tr > td.info,
+.table > tfoot > tr > td.info,
+.table > thead > tr > th.info,
+.table > tbody > tr > th.info,
+.table > tfoot > tr > th.info,
+.table > thead > tr.info > td,
+.table > tbody > tr.info > td,
+.table > tfoot > tr.info > td,
+.table > thead > tr.info > th,
+.table > tbody > tr.info > th,
+.table > tfoot > tr.info > th,
+.table > tbody > tr.info {
+  background-color: $table-row-background-hover !important;
+}
+
+.table-striped {
+  tbody {
+    tr {
+      &[ng-click]:hover td,
+      &:hover td[ng-click] {
+        background-color: $table-row-background-hover;
+      }
+      &:nth-of-type(odd) {
+        background-color: $table-row-odd-background;
+      }
+    }
+  }
+}
+tr[ng-click],
+td[ng-click] {
+  cursor: pointer;
+}
+.table-hover > tbody > tr > td.info:hover,
+.table-hover > tbody > tr > th.info:hover,
+.table-hover > tbody > tr.info:hover > td,
+.table-hover > tbody > tr:hover > .info,
+.table-hover > tbody > tr.info:hover > th,
+.table-hover > tbody > tr[ng-click]:hover > td,
+.table-hover > tbody > tr:hover > td[ng-click],
+.table-hover > tbody > tr[ng-click]:hover {
+  background-color: $table-row-background-hover;
+}
+
+.table-bordered {
+  border: 1px solid #B4B5B4;
+  border-collapse: separate;
+  // @include respond-to(xs) {
+  //   border-collapse: collapse;
+  // }
+  thead tr th,
+  tbody tr td {
+    border: none;
+    @include respond-to(xs) {
+      border-left: 1px solid #B4B5B4;
+      &:first-child {
+        border: none;
+      }
+    }
+  }
+}
+@media (max-width: map-get($breakpoints, 'xs') - 1) {
+  .table-bordered {
+    border-left: 0;
+    border-right: 0;
+  }
+}
+
+@media (max-width: map-get($breakpoints, 'xs') - 1) {
+  // Responsive Tables - http://codepen.io/geoffyuen/pen/FCBEg
+  .rwd-table {
+    display: block;
+    min-width: 300px; // adjust to your needs
+
+    th {
+      display: none; // for accessibility, use a visually hidden method here instead! Thanks, reddit!
+    }
+    & > tbody {display: block;}
+    & > tbody > tr {
+      position: relative;
+      display: block;
+      padding: 6px 0;
+      & > td {
+        position: static;
+        display: block;
+        padding: 0 10px;
+        line-height: 20px;
+        &.cell-truncate {
+          @include text-truncate;
+        }
+        &:before {
+          content: attr(data-th)": "; // who knew you could do this? The internet, that's who.
+          font-weight: bold;
+
+          // optional stuff to make it look nicer
+          width: 100px;
+          display: inline-block;
+          padding-right: 10px;
+          // end options
+          @include respond-to(xs) {
+            display: none;
+          }
+        }
+      }
+      td.dateTime {
+        width: auto;
+      }
+    }
+
+
+    th, td {
+      text-align: left;
+      
+      @include respond-to(xs) {
+        display: table-cell;
+        padding: .25em .5em;
+
+        &:first-child {
+        }
+      }
+    }
+  }
+  .rwd-table td.hidden-xs-cell,
+  .hidden-xs-cell {
+    display: none ;
+  }
+}
+.sort-asc:after {
+  padding-left: 5px;
+  content: '\25BC'
+}
+
+.sort-desc:after {
+  padding-left: 5px;
+  content: '\25B2'
+}
+@include respond-to(xs) {
+  .table-sorted {
+    thead tr th {
+      cursor: pointer;
+      &.sorted {
+        position: relative;
+        background: #A9D38E;
+        &.asc,
+        &.desc {padding-right: 22px;}
+        &.asc:after,
+        &.desc:after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          right: 10px;
+          border-style: solid;
+          transform: translateY(-50%);
+        }
+        &.asc:after {
+          border-width: 5px 5px 0;
+          border-color: #303030 transparent transparent;
+        }
+        &.desc:after {
+          border-width: 0 5px 5px;
+          border-color: transparent transparent #303030;
+        }
+      }
+    }
+    tbody tr td.sorted {
+      background: #E7EFDD;
+    }
+    &.table-striped {
+      tbody {
+        tr {
+          &:nth-of-type(odd) td.sorted {
+            background-color: #EFF7E5;
+          }
+          &:hover td.sorted {
+            background-color: $table-row-background-hover;
+          }
+        }
+      }
+    }
+  }
+}
+
+.table-icon {
+  color: #9493a1;
+}

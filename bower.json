@@ -1,0 +1,23 @@
+{
+  "name": "Org-Ripple-UI-rf3",
+  "description": "Ripple OSI App UI built using Angular 1.5 and Redux",
+  "main": "index.js",
+  "license": "ISC",
+  "homepage": "https://github.com/RippleOSI/Org-Ripple-UI-rf3",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "moment": "^2.15.1",
+    "spin.js": "^2.3.2",
+    "morrisjs": "~0.5.1",
+    "angular-animate": "^1.5.8",
+    "jquery-timepicker": "*",
+    "jquery-timepicker-jt": "*",
+    "angular-jquery-timepicker": "^0.11.0"
+  }
+}

@@ -1,0 +1,48 @@
+<h3><strong>Transfer of Care</strong></h3>
+
+<div class="inner-addon left-addon filterInput">
+    <i class="fa fa-filter"></i>
+    <input type="text" class="form-control" placeholder="Filter..." ng-model="$ctrl.query[queryBy]" />
+</div>
+
+<table class="table table-bordered table-striped table-hover rwd-table">
+  <thead>
+  <tr>
+    <th>Transfer</th>
+    <th>From (Site / Organisation)</th>
+    <th>To (Site / Organisation) </th>
+    <th>Date / Time</th>
+    <th>Source</th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <tr dir-paginate="transfer in $ctrl.transferofCareComposition | filter:$ctrl.query | itemsPerPage: 6 " current-page="$ctrl.currentPage"  ng-click="$ctrl.go(transfer.sourceId)" ng-class="{info: $ctrl.selected(transfer.sourceId)}">
+    <td data-th="Transfer">Transfer #{{($index + 1)}}</td>
+    <td data-th="From (Site / Organisation)">{{transfer.siteFrom}}</td>
+    <td data-th="To (Site / Organisation)">{{transfer.siteTo}}</td>
+    <td data-th="Date / Time" class="dateTime">{{transfer.dateOfTransfer}}</td>
+    <td data-th="Source">local</td>
+  </tr>
+
+  <tr ng-if="!$ctrl.transferofCareComposition.length">
+    <td colspan="5"><span class="label label-default">No transfers</span></td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="col-md-12">
+    <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="patientSummary-spinner" spinner-start-active="true"></span>
+  </div>
+</div>
+
+<div class="row" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
+  <div class="col-md-6 hidden-xs"><div class="text-right"><dir-pagination-controls on-page-change="$ctrl.pageChangeHandler($ctrl.newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>
+  <div class="col-md-6 hidden-xs"><div class="text-right create-button"><button class="btn btn-info" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> Create</button></div></div>
+</div>
+<div class="row" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
+  <div class="col-xs-6 hidden-sm hidden-md hidden-lg"><div class="text-right"><dir-pagination-controls on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>
+  <div class="col-xs-6 hidden-sm hidden-md hidden-lg"><div class="text-right create-button"><button class="btn btn-info" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> Create</button></div></div>
+</div>

@@ -1,0 +1,14 @@
+.header {}
+.header .navbar {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+@import 'logo';
+@import 'user-panel';
+@import 'header-buttons';
+@import 'toolbar';
+@import 'title';
+@import 'notification';
+@import 'user';

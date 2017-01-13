@@ -1,0 +1,144 @@
+.wrap-search {
+  .form-control {
+    display: block;
+    width: 100%;
+    height: 44px;
+    padding: 0 24px 0 12px;
+    font-size: 15px;
+    line-height: 1.42857143;
+    color: #C5C5C5;
+    background-color: white;
+    background-image: none;
+    border: 1px solid #C3C3C3;
+    border-radius: 0;
+    &::-webkit-input-placeholder {
+      color: #C5C5C5;
+    }
+    &:-moz-placeholder {
+      color: #C5C5C5;
+    }
+    &::-moz-placeholder {
+      color: #C5C5C5;
+    }
+    &:-ms-input-placeholder {
+      color: #C5C5C5;
+    }
+  }
+  .holder {
+    position: relative;
+  }
+  i.clearAll {
+    position: absolute;
+    color: #da534f;
+    right: 10px;
+    top: 50%;
+    font-size: 16px;
+    transform: translateY(-50%);
+  }
+}
+
+.btn-search {
+  float: right;
+  width: 43px;
+}
+
+.search-logo {
+  display: none;
+  max-width: 223px;
+  height: auto;
+  margin: 50px auto 65px;
+}
+@include respond-to(xs) {
+  .search-logo { display: block; }
+}
+
+.wrap-header-search {
+  overflow: hidden;
+  width: auto;
+  @include respond-to(sm) {
+    .form-control {
+      height: 36px;
+      border-radius: 2px;
+    }
+  }
+}
+.wrap-search-mobile {
+  width: 100%;
+  padding: 5px;
+  @include respond-to(sm) {
+    display: none !important;
+    .header-search {padding: 5px 0;}
+  }
+}
+.header-search {
+  width: 100%;
+  @include respond-to(sm) {
+    max-width: 452px;
+    margin: 0 auto;
+  }
+}
+.header-search-inner {
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  @include respond-to(sm) {
+    padding: 7px 4px 9px;
+  }
+}
+.main-search {
+  max-width: 832px;
+  margin: 0 auto;
+}
+.main-search-inner {
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+.wrap-search-mobile,
+.main-search {
+  .btn-search {
+    width: 60px;
+    height: 44px;
+    padding: 0;
+    line-height: 44px;
+    i {
+      font-size: 19px;
+      font-weight: 400;
+    }
+  }
+}
+
+.search-left-inner-addon {
+  position: absolute;
+  top: 2px; 
+  left: 2px;
+  margin: 0;
+  padding: 0 25px 0 8px;
+  height: 32px;
+  width: 105px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 32px;
+  color: #fefefe;
+  border-radius: 2px;
+  background-color: $secondary-color;
+  i {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    margin-top: -1px;
+    font-size: 14px;
+    transform: translateY(-50%);
+  }
+}
+
+.wrap-search-mobile .search-left-inner-addon {
+  top: 3px; 
+  left: 3px;
+  height: 38px;
+  line-height: 38px;
+}
+
+.wrap-search input.moveRight {
+  padding-left: 115px!important;
+}

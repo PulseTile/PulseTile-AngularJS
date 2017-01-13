@@ -1,0 +1,10 @@
+.panel-primary .panel-control {
+  padding: 2px 5px 0;
+  @include respond-to(xs) {
+    padding: 2px 0 0;
+  }
+}
+.panel-secondary .panel-control {
+  padding: 5px;
+  background: #F3F3F3;
+}

@@ -1,0 +1,44 @@
+@import 'abstracts/colors';
+@import 'abstracts/config';
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
+@import 'abstracts/variables';
+
+@import 'base/fonts';
+@import 'base/typography';
+@import 'base/grid';
+
+// @import 'components/';
+@import 'components/btn';
+@import 'components/table';
+@import 'components/pagination';
+@import 'components/form';
+@import 'components/highlighter';
+@import 'components/dropdown';
+
+@import 'base';
+@import 'main';
+
+@import 'blocks/main/header/index';
+@import 'blocks/main/sidebar';
+@import 'blocks/main/footer';
+@import 'blocks/search';
+@import 'blocks/breadcrumbs';
+@import 'blocks/patient-info';
+@import 'blocks/section';
+@import 'blocks/panel/index';
+@import 'blocks/spinner';
+@import 'blocks/control';
+@import 'blocks/dashboard';
+@import 'blocks/chart';
+// @import 'blocks/sb-admin-2';
+
+
+
+
+
+
+// @import '../assets/foundation-icons/foundation-icons.css';
+@import '~angular-loading-bar/src/loading-bar.css';
+@import '~fullcalendar/dist/fullcalendar.min.css';
+@import '../../../bower_components/jquery-timepicker-jt/jquery.timepicker.css';

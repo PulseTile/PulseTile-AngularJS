@@ -1,0 +1,46 @@
+/**
+  * BASE COLORS
+  */
+  $white: #ffffff;
+  $jewel: #0D672F;
+  $atlantis: #7cbe31;
+  $fun-green: #007a41;
+  $deco: #C5E29F;
+  $astral: #337AB7;
+  $boston-blue: #347BB7;
+  $roman: #DA534F;
+  $sandy-brown: #F0AD4E;
+
+/**
+  * COLORS for use across the site
+  */
+  $secondary-color: $jewel;
+  
+  $toolbar-background: $jewel;
+  $tab-background: $jewel;
+  $header-color: $jewel;
+
+  $icon-chevron-color: $jewel;
+  $icon-user-color: #82BE36;
+  $icon-sidebar-color: $atlantis;
+  $icon-patient-landing-color: $deco;
+
+  $colored-buttons: (
+    default: $white,
+    primary: $astral,
+    success: $fun-green,
+    info: $boston-blue,
+    warning: $sandy-brown,
+    danger: $roman
+  );
+
+  $button-sidebar-background-hover: #f4f8ec;
+
+  $table-background: #F3F3F3;
+  $table-header-background: $deco;
+  $table-row-odd-background: #FDFDFD;
+  $table-row-background-hover: #E7EFDD;
+
+  $panel-background: $fun-green;
+  $link-color-hover: $atlantis;
+  $rounded-connected-background: $deco;

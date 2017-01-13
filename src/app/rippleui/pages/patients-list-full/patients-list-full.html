@@ -1,0 +1,112 @@
+<!--
+  ~  Copyright 2016 Ripple Foundation C.I.C. Ltd
+  ~  
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~  
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  -->
+<div class="panel panel-primary">
+  <div ng-if="false" class="dropdown pull-right visible-xs">
+    <button uib-dropdown-toggle class="btn btn-info btn-dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      <span>{{$ctrl.tabName}}</span>
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <li><a href="#" ng-click="$ctrl.viewPatients()">Patient Info</a></li>
+      <li><a href="#" ng-click="$ctrl.viewDateTime()">Date / Time</a></li>
+      <li><a href="#" ng-click="$ctrl.viewCounts()">Counts</a></li>
+    </ul>
+  </div>
+  <div class="panel-heading">
+    <div class="control-group right">
+      <button class="btn btn-success btn-inverse btn-dropdown-toggle btn-table"><i class="fa fa-table"></i></button>
+      <button class="btn btn-success btn-inverse btn-filter" ng-click="$ctrl.toggleFilter()"><i class="fa fa-filter"></i></button>
+    </div>
+    <h3 class="panel-title" ng-if="!$ctrl.isFilter">{{$root.subHeader}}</h3>
+    <div class="panel-filter" ng-if="$ctrl.isFilter">
+      <div class="inner-addon addon-left">
+        <div class="addon">
+          <i class="fa fa-filter"></i>
+        </div>
+        <input type="text" class="form-control" placeholder="Filter..." ng-model="$ctrl.query" />
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <table ng-if="$ctrl.tab == 'patientInfo'" class="table table-striped table-hover table-bordered rwd-table table-sorted">
+      <thead>
+        <tr>
+            <th ng-click="$ctrl.sort('name')" ng-class="$ctrl.sortClass('name')">Name</th>
+            <th ng-click="$ctrl.sort('address')" ng-class="$ctrl.sortClass('address')">Address</th>
+            <th ng-click="$ctrl.sort('dateOfBirth')" ng-class="$ctrl.sortClass('dateOfBirth')">Date of Birth</th>
+            <th ng-click="$ctrl.sort('gender')" ng-class="$ctrl.sortClass('gender')">Gender</th>
+            <th ng-click="$ctrl.sort('nhsNumber')" ng-class="$ctrl.sortClass('nhsNumber')">NHS No.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr dir-paginate="patient in $ctrl.patients | filter:$ctrl.query | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" ng-click="$ctrl.go(patient)">
+            <td data-th="Name">{{ patient.name }}</td>
+            <td data-th="Address" class="cell-truncate">{{ patient.address }}</td>
+            <td data-th="Date of Birth" class="dateTime">{{ patient.dateOfBirth | date:'dd-MMM-yyyy' }}</td>
+            <td data-th="Gender">{{ patient.gender }}</td>
+            <td data-th="NHS No">{{ patient.nhsNumber | formatNHSNumber }}</td>
+        </tr>
+
+        <tr ng-if="!$ctrl.patients.length">
+            <td colspan="5"><span class="label label-default">No patients found</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <table ng-if="$ctrl.tab == 'dateTime' || $ctrl.tab == 'counts'" class="table table-striped table-hover table-bordered rwd-table table-sorted">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>DOB</th>
+          <th>Vitals</th>
+          <th>Orders</th>
+          <th>Results</th>
+          <th>Treatments</th>
+          <th>Medications</th>
+        </tr>
+      </thead>
+      <tbody ng-if="$ctrl.tab == 'dateTime'">
+        <tr ng-repeat="patient in $ctrl.patients" ng-click="$ctrl.go(patient)">
+          <td data-th="Name">{{ patient.name }}</td>
+          <td data-th="DOB">{{ patient.dateOfBirth | date:'dd-MMM-yyyy' }}</td>
+          <td data-th="Vitals">{{ patient.vitalsHeadline.latestEntry }}</td>
+          <td data-th="Orders" ng-click="$ctrl.getItem('orders', patient.nhsNumber, patient.ordersHeadline.sourceId)"><a>{{ patient.ordersHeadline.latestEntry }}</a></td>
+          <td data-th="Results" ng-click="$ctrl.getItem('results', patient.nhsNumber, patient.resultsHeadline.sourceId)"><a>{{ patient.resultsHeadline.latestEntry }}</a></td>
+          <td data-th="Treatments" ng-click="$ctrl.getItem('procedures', patient.nhsNumber, patient.treatmentsHeadline.sourceId)"><a>{{ patient.treatmentsHeadline.latestEntry }}</a></td>
+          <td data-th="Medications" ng-click="$ctrl.getItem('medications', patient.nhsNumber, patient.medsHeadline.sourceId)"><a>{{ patient.medsHeadline.latestEntry }}</a></td>
+        </tr>
+      </tbody>
+      <tbody ng-if="$ctrl.tab == 'counts'">
+        <tr ng-repeat="patient in $ctrl.patients" ng-click="$ctrl.go(patient)">
+          <td data-th="Name">{{ patient.name }}</td>
+          <td data-th="DOB">{{ patient.dateOfBirth | date:'dd-MMM-yyyy' }}</td>
+          <td data-th="Vitals">{{ patient.vitalsHeadline.totalEntries }}</td>
+          <td data-th="Orders" ng-click="$ctrl.goToSection('orders', patient.nhsNumber)"><a>{{ patient.ordersHeadline.totalEntries }}</a></td>
+          <td data-th="Results" ng-click="$ctrl.goToSection('results', patient.nhsNumber)"><a>{{ patient.resultsHeadline.totalEntries }}</a></td>
+          <td data-th="Treatments" ng-click="$ctrl.goToSection('procedures', patient.nhsNumber)"><a>{{ patient.treatmentsHeadline.totalEntries }}</a></td>
+          <td data-th="Medications" ng-click="$ctrl.goToSection('medications', patient.nhsNumber)"><a>{{ patient.medsHeadline.totalEntries }}</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="panel-control">
+      <div class="wrap-control-group">
+        <div class="control-group with-indent left">
+          <dir-pagination-controls max-size="5" boundary-links="false"></dir-pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

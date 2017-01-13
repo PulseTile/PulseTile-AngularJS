@@ -1,0 +1,30 @@
+<!--
+  ~  Copyright 2016 Ripple Foundation C.I.C. Ltd
+  ~  
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~  
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  -->
+<div class="modal-body">    
+            <legend>Confirm Date</legend>
+        <div class="row confirm-modal-row">
+            <div class="col-md-5 col-md-offset-1"><label>Date:</label></div>
+            <div class="col-md-6">{{time | date:'dd-MMM-yyyy'}}</div>
+        </div>  
+         <div class="row">
+            <div class="col-md-5 col-md-offset-1"><label>Time Slot:</label></div>
+            <div class="col-md-6">{{time | date:'HH:mm'}} - {{time | date:'HH:59'}}</div>
+        </div> 
+    </div>
+<div class="modal-footer">
+   <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-success" ng-click="ok();"><i class="fa fa-check"></i> Confirm</button>
+</div>

@@ -1,0 +1,1033 @@
+.voffset {
+  margin-top: 2px;
+}
+
+.voffset1 {
+  margin-top: 5px;
+}
+
+.voffset2 {
+  margin-top: 10px;
+}
+
+.voffset3 {
+  margin-top: 15px;
+}
+
+.voffset4 {
+  margin-top: 30px;
+}
+
+.voffset5 {
+  margin-top: 40px;
+}
+
+.voffset6 {
+  margin-top: 60px;
+}
+
+.voffset7 {
+  margin-top: 80px;
+}
+
+.voffset8 {
+  margin-top: 100px;
+}
+
+.voffset9 {
+  margin-top: 150px;
+}
+
+/* Index */
+
+a[ui-sref] {
+  cursor: pointer;
+}
+
+.notifications {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 400px;
+  z-index: 2000;
+}
+
+.notifications .alert {
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.animate-fade {
+  height: 20px;
+  -moz-transition: height 0.2s ease-in-out;
+  -o-transition: height 0.2s ease-in-out;
+  -webkit-transition: height 0.2s ease-in-out;
+  transition: height 0.2s ease-in-out;
+}
+
+.animate-fade.ng-hide {
+  height: 0;
+}
+
+.radio label,
+.checkbox label {
+  color: #555;
+}
+
+.radio input[type="radio"],
+.checkbox input[type="checkbox"] {
+  margin-top: 2px
+}
+
+
+
+/* Confirmation Modal */
+
+.modal-header {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  padding-bottom: 0;
+  border-bottom: 0;
+  background-color: #007a41;
+}
+
+.modal-title {
+  padding: 4px 10px 10px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007a41;
+}
+
+.modal-footer {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.modal-backdrop {
+  background-color: #ffffff;
+}
+
+.modal-body {
+  background-color: #ffffff;
+}
+
+fieldset {
+  position: relative;
+  padding: 54px 10px 10px 10px;
+  border: 1px solid #ddd;
+}
+
+legend {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #eee;
+  padding: 4px 10px;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+
+
+.panel-appointment {
+  position: fixed;
+  bottom: 42px;
+  left: 30px;
+  right: 30px;
+  z-index: 10;
+
+  .panel-heading {
+    font-size: 16px;
+    font-weight: bold;
+    i {
+      margin-right: 5px;
+    }
+  }
+  .panel-body {
+    &--message {
+      font-size: 15px;
+      padding: 8px 0 3px;
+    }
+    &--btn {
+      text-align: right;
+      padding: 3px 0;
+    }
+  }
+}
+
+.container1 > div,
+.container2 > div,
+.container3 > div {
+  width: 6px;
+  height: 6px;
+  background-color: #777;
+  border-radius: 100%;
+  position: absolute;
+  -webkit-animation: bouncedelay 1.2s infinite ease-in-out;
+  animation: bouncedelay 1.2s infinite ease-in-out;
+  /* Prevent first frame from flickering when animation starts */
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.container2 {
+  -webkit-transform: rotateZ(45deg);
+  transform: rotateZ(45deg);
+}
+
+.container3 {
+  -webkit-transform: rotateZ(90deg);
+  transform: rotateZ(90deg);
+}
+
+.circle1 {
+  top: 0;
+  left: 0;
+}
+
+.circle2 {
+  top: 0;
+  right: 0;
+}
+
+.circle3 {
+  right: 0;
+  bottom: 0;
+}
+
+.circle4 {
+  left: 0;
+  bottom: 0;
+}
+
+.container2 .circle1 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+.container3 .circle1 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+.container1 .circle2 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.container2 .circle2 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+.container3 .circle2 {
+  -webkit-animation-delay: -0.7s;
+  animation-delay: -0.7s;
+}
+
+.container1 .circle3 {
+  -webkit-animation-delay: -0.6s;
+  animation-delay: -0.6s;
+}
+
+.container2 .circle3 {
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s;
+}
+
+.container3 .circle3 {
+  -webkit-animation-delay: -0.4s;
+  animation-delay: -0.4s;
+}
+
+.container1 .circle4 {
+  -webkit-animation-delay: -0.3s;
+  animation-delay: -0.3s;
+}
+
+.container2 .circle4 {
+  -webkit-animation-delay: -0.2s;
+  animation-delay: -0.2s;
+}
+
+.container3 .circle4 {
+  -webkit-animation-delay: -0.1s;
+  animation-delay: -0.1s;
+}
+
+@-webkit-keyframes bouncedelay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0.0)
+  }
+  40% {
+    -webkit-transform: scale(1.0)
+  }
+}
+
+@keyframes bouncedelay {
+  0%,
+  80%,
+  100% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  }
+  40% {
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+
+
+/* Header */
+
+.header-title-1 {
+  color: $header-color;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.header-title-2 {
+  color: $header-color;
+}
+
+.header-title-3 {
+  color: #000000;
+}
+
+
+.button-icons-stack:before {
+  color: #000066;
+}
+
+
+
+.main-nav a.button {
+  display: block;
+  width: 100%;
+  border: 1px solid #bdbdbd;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding: 0 10px 20px 10px;
+  font-size: 22px;
+  background-color: #fff;
+  color: #000000;
+}
+
+.main-nav a.button:hover {
+  background-color: $button-sidebar-background-hover;
+  text-decoration: none;
+}
+
+.main-nav a.button i {
+  color: $icon-sidebar-color;
+  line-height: 70px;
+  height: 70px;
+  display: block;
+}
+
+
+/* Button Icons - Variable Sizes to fit */
+
+.main-nav a.button.viewall i {
+  font-size: 110px;
+}
+
+.main-nav a.button.spine i {
+  font-size: 90px;
+  margin-top: 10px;
+}
+
+.main-nav a.button.saved i {
+  font-size: 85px;
+  margin-top: 10px;
+}
+
+
+/* User Profile Menu */
+
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {
+  background-color: #eee;
+  border-color: transparent;
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.navbar-login {
+  width: 305px;
+  padding: 10px;
+  padding-bottom: 0px;
+}
+
+.navbar-login-session {
+  padding: 10px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+
+.dropdown-profile-text {
+  color: black;
+  font-family: 'MyriadPro';
+  font-size: 14px;
+  padding-top: 10px;
+}
+
+/* Patient Landing */
+.patient-landing-icon {
+  color: $icon-patient-landing-color;
+}
+
+.border {
+  border:1px solid #bebcbd;
+}
+
+.rounded-border-nolink {
+  border-radius: 20px;
+  border:1px solid #bebcbd;
+  background-color: #bebcbd;
+}
+
+.rounded-border-connected {
+  border-radius: 20px;
+  border:1px solid $rounded-connected-background;
+  background-color: $rounded-connected-background;
+}
+
+
+/* Use this instead of hide as doesn't carry the '!important'a attribute.
+	Useful when calling jQuery show() on hidden elements */
+
+.soft-hide {
+  display: none;
+}
+
+.clearfix {
+  clear: both;
+}
+
+
+/* MDT Detail*/
+
+.participants-list {
+  margin-left: 80px;
+  padding-top: 10px;
+}
+
+
+/* MDT */
+
+.participants-column {
+  overflow: scroll;
+  height: 400px;
+}
+
+.no-attendance {
+  padding-left: 35px;
+}
+
+.remove-person-button {
+  background: #d9534f;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 21px;
+  border: 0;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+  line-height: 100%;
+  margin: 10px 0;
+  float: right;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.add-person-button {
+  background: #5cb85c;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 21px;
+  border: 0;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+  line-height: 100%;
+  margin: 10px 0;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  float: right;
+}
+
+.participant-border {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.participant-label {
+  padding-top: 5px;
+}
+
+.notes-label {
+  text-align: left;
+  padding-bottom: 10px;
+}
+
+
+.validation-error {
+  color: #a94442;
+}
+
+textarea#prioritycarecomment {
+  height: 100px;
+  width: 102%;
+}
+
+textarea#treatmentdecisioncomment {
+  height: 100px;
+  width: 109%;
+}
+
+textarea#cprdecisioncomment {
+  height: 100px;
+  width: 109%;
+}
+
+textarea#procedureNotes {
+  height: 108px;
+}
+
+#dateofdecision {
+  width: 60%;
+}
+
+.DetailsSubHeadingt {
+  padding-top: 15px;
+}
+
+.previousGroup {
+  margin-left: 5%;
+}
+
+.tabContent {
+  border-left: 1px solid #DDDDDD;
+  margin-top: -3%;
+  height: 363px;
+  background-color: white;
+  width: 108.5%;
+  margin-left: -7%
+}
+
+.appointmentTabContent .tabContent {
+  height: 265px !important;
+}
+
+.tabContetInner {
+  padding-left: 5%;
+  padding-top: 16px;
+}
+
+.applyFloatRight {
+  float: left;
+}
+
+.scrollcontainer1 {
+  height: 90%;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.scrollcontainer2 {
+  height: 90%;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow: auto;
+}
+
+.scrollcontainer2EmptyList {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow: auto;
+}
+
+.modal-open {
+  overflow: auto;
+}
+
+.appointmentTabs {
+  width: 80% !important;
+}
+
+.eolTabs {
+  width: 100%;
+  border-top: 1px solid #DDDDDD;
+  border-radius: 0 !important;
+  margin-left: -10px;
+}
+
+.eolTabsBottom {
+  border-bottom: 1px solid #DDDDDD;
+}
+
+.eolTabs .active {
+  background-color: white;
+}
+
+.eolForm {
+  height: 430px;
+  background-color: #F7F7F7;
+}
+
+.eolForm .tabContent {
+  height: 393px;
+}
+
+.appointmentForm {
+  background-color: #F7F7F7;
+}
+
+.appointmentForm .form-Group {
+  padding-top: 33px;
+  width: 97%;
+}
+
+.appointmentForm fieldset {
+  background-color: #F7F7F7 !important;
+  padding-bottom: 0px !important;
+}
+
+.appointmentForm .form-group {
+  padding-top: 15px;
+}
+
+.appointmentForm .tabContent {
+  height: 554px !important;
+  margin-left: -78px;
+  width: 715px !important;
+}
+
+.appointmentForm .tabContent img {
+  margin-left: 17px;
+}
+
+.eolForm .btn:active,
+.btn.active {
+  box-shadow: none;
+  background-color: white;
+}
+
+.eolForm input,
+.eolForm .input-group {
+  width: 100% !important;
+  padding-top: 5px;
+}
+
+.eolForm .form-group {
+  padding-top: 10px;
+  width: 97%;
+}
+
+.procedureForm input {
+  padding-top: 8px;
+}
+
+.procedureForm .input-group {
+  width: 100% !important;
+  padding-top: 8px;
+}
+
+.procedureForm .form-group {
+  padding-top: 10px;
+  width: 97%;
+  padding-left: 15px;
+}
+
+.procedureRightModal {
+  margin-left: -85px;
+}
+
+.procedureRightModal .rowTwo {
+  margin-left: -15px;
+}
+
+.procedureForm .procedureRightModal .input-group {
+  width: 140% !important;
+}
+
+.procedureForm .procedureRightModal .proceduretimeform {
+  padding-left: 55px;
+}
+
+.procedureForm .procedureRightModal .proceduretimepicker {
+  width: 350% !important;
+}
+
+.procedureRightModal .proceduredateform input {
+  width: 220px;
+}
+
+.procedureMobileform label {
+  float: none;
+}
+
+.procedureMobileform .popupinputs {
+  height: 30px;
+}
+
+.procedureMobileform .terminologylabel {
+  padding-left: 16px
+}
+
+.procedureMobileform {
+  width: 98% !important;
+}
+
+.procedureMobileform label {
+  padding-top: 10px;
+}
+
+#careserviceteam {
+  width: 159%;
+}
+
+.referralForm .input-group {
+  width: 100% !important;
+  padding-top: 8px;
+}
+
+.referralForm .form-control {
+  height: 30px;
+}
+
+.appointmentLocationGroup {
+  margin-left: -10px;
+}
+
+.appointmentStatusGroup {
+  margin-left: -25px;
+}
+
+.appointmentStatusGroup .input-group .form-control {
+  width: 150px !important;
+}
+
+.appointmentTabContent {
+  background-color: white;
+  border-left: 1px solid #DDDDDD;
+  width: 715px;
+  margin-left: -78px;
+  margin-top: -21px;
+}
+
+.appointmentdateGroup {
+  margin-left: -25px !important;
+}
+
+.appointmentTabContent .outerRow {
+  padding-left: 30px;
+}
+
+.appointmentTabContent .btn-primary {
+  margin-top: 33px;
+  margin-left: -25px;
+}
+
+.appointmentTabContentMobile .input-group {
+  width: 100%
+}
+
+.referralDate {
+  margin-left: -12px;
+}
+
+.referralDate input {
+  width: 108% !important;
+}
+
+#reasonforreferral,
+#clinicalsummary {
+  height: 100px;
+}
+
+.reasonforreferralGroup {
+  padding-top: 22px;
+}
+
+.referral-calendar-view {
+  margin-right: 0px;
+  padding-right: 15px;
+}
+
+.referral-calendar-view label {
+  padding-bottom: 35px;
+}
+
+.referral-calendar-group {
+  float: right;
+  padding-right: 15px;
+}
+
+.filterInput input {
+  width: 100%;
+  margin-bottom: 15px;
+}
+/* enable absolute positioning */
+
+.fa-ellipsis-h {
+  color: black;
+}
+
+.genericMdtForm textarea {
+  height: 80px !important;
+}
+
+.genericMdtForm .input-group {
+  padding-top: 5px;
+  width: 100%;
+}
+
+.orderForm .input-group {
+  width: 95%;
+}
+
+.orderForm .date-form {
+  margin-top: 5px;
+}
+
+.mdtLinkGroup {
+  width: 100%;
+  margin-left: 0px !important;
+}
+
+.confirm-modal {
+  margin-top: 15%;
+}
+
+.confirm-modal .modal-footer {
+  margin-left: -15px;
+}
+
+.confirm-modal-row {
+  margin-top: 35px;
+}
+
+.modal-sm {
+  width: 280px;
+}
+
+.orderForm {
+  padding-right: 20px;
+}
+
+.orderForm .input-group {
+  width: 100%;
+}
+
+.elipsis-span {
+  float: right;
+  margin-right: 10px;
+  margin-top: -20px;
+  position: relative;
+  z-index: 2;
+  color: black;
+}
+
+
+td.dateTime {
+  width: 130px;
+}
+
+.orderForm table {
+  display: block;
+  position: relative;
+  font-size: 12px;
+  font-weight: 500;
+  height: 200px;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 1px solid #D8D8D8;
+}
+
+.orderForm tbody {
+  display: block;
+}
+
+.orderForm tr {
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  border-bottom: 1px solid #D8D8D8;
+  padding-left: 10px;
+}
+
+tr.ng-scope.selectedItemLeft {
+  background-color: #EDF2C3;
+}
+
+#switchImg {
+  float: left;
+  margin-left: -28px;
+  margin-top: 108px;
+}
+
+#switchImg:hover {
+  cursor: pointer;
+}
+
+.orderCreateButton {
+  padding-top: 10px;
+}
+
+
+
+.ordersPageTwo li {
+  padding-top: 10px;
+}
+
+.ordersPageTwo .fa-times-circle {
+  color: red;
+  float: right;
+  margin-right: 180px;
+}
+
+.fa-times-circle:hover {
+  cursor: pointer;
+}
+
+.orderBackButton .btn {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  height: 27px;
+  line-height: 10px;
+}
+
+.fa.fa-times:hover {
+  cursor: pointer;
+}
+
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.report-chart-inner {
+  border: 1px solid #bdbdbd;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.patient-list-full-subheader {
+  padding-bottom: 15px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.patient-list-full-subheader span.subheader {
+  min-width: 300px;
+  display: inline-block;
+}
+
+
+.reportTypeSet {
+  background-color: #6AB123;
+  margin-left: 84px;
+  padding-left: 10px;
+  padding-right: 25px;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  margin-top: -6px;
+  cursor: context-menu;
+  border-radius: 2px;
+}
+
+i.fa.cancel-reportType.fa-times {
+  margin-left: 4px;
+  margin-top: -2px;
+}
+
+
+
+.dicom-image {
+  margin: auto;
+  display: block;
+  max-height: 680px;
+  min-height: 650px;
+  max-width: 768px;
+  height: auto;
+  width: auto;
+}
+
+.dicomImageMini {
+  height: 50ch;
+  width: 30ch;
+}
+
+.thumb {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.thumbnail {
+  margin-bottom: 0;
+}
+
+.dicomImageMetadata {
+  margin-top: 5px;
+}
+
+.patientFilterOptions:hover {
+  text-decoration: overline;
+  cursor: pointer !important;
+}
+
+
+.import-record {
+  cursor: pointer;
+}
+.glyphs .g{width:40px;float:left;text-align:center;padding:0 3px 0 3px;white-space:nowrap;margin-bottom:0px;min-height:0px}
+.glyphs p{font-size:30px;padding:0;margin:0px 0 0 0; display: inline }
+
+#title,.glyphs p
+{font-family:"MyriadPro"}
+
+.black-color-text{color: black;}

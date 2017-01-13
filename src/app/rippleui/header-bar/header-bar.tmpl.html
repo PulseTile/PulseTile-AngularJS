@@ -1,0 +1,160 @@
+<!--
+  ~  Copyright 2016 Ripple Foundation C.I.C. Ltd
+  ~  
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~  
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  -->
+<header class="header">
+  <nav class="navbar">
+    <div class="header-navbar">
+      <a ng-click="$ctrl.goHome()" class="btn-header btn-header-prev" ng-if="isShowPreviousBtn"><i class="fa fa-arrow-left"></i></a>
+      <div class="wrap-logo">
+        <a class="logo" ng-click="$ctrl.goChart()">
+          <img src="../../assets/images/ripple-icon.png" class="logo-icon" alt="{{$ctrl.title}}">
+          <img src="../../assets/images/ripple-icon-mob.png" class="logo-icon-mob" alt="{{$ctrl.title}}">
+        </a>
+      </div>
+
+      <ul class="user-panel" role="tablist">
+        <li ng-class="$ctrl.activeNavTab('searchBar')" ng-if="searchBar" class="visible-xs"><a class="btn-header" ng-click="$ctrl.changeNavTab('searchBar')">
+          <i class="fa fa-search"></i></a>
+        </li>
+        <li uib-dropdown>
+          <a class="btn-header btn-notification" uib-dropdown-toggle>
+            <i class="fa fa-bell-o"><span class="count">2</span></i>
+          </a>
+          <div class="notifications-drop dm-right" id="tab-notifications" uib-dropdown-menu>
+            <div class="notifications-header">Notifications (2)</div>
+            <div class="notifications-body">
+              <ul>
+                <li>
+                  <div class="notification-info">Information from Liquid Logic (Social Care) is currently unavailable.</div>
+                  <div class="notification-time">10 minutes ago</div>
+                </li>
+                <li>
+                  <div class="notification-info">Information from Liquid Logic (Social Care) is currently unavailable.</div>
+                  <div class="notification-time">15 minutes ago</div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li uib-dropdown>
+          <a class="btn-header btn-user" uib-dropdown-toggle>
+            <i class="fa fa-user"></i>
+          </a>
+          <div class="user-drop dm-right" uib-dropdown-menu>
+            <div class="user-profile-image" ng-click="$ctrl.goProfile()">
+              <!-- <i class="fa fa-user"></i> -->
+              <div class="img">
+                <img src="../../assets/images/user.jpg" alt="">
+              </div>
+            </div>
+            <div class="user-profile-info">
+              <div class="name"  ng-click="$ctrl.goProfile()">John Smith{{$ctrl.user.given_name}} {{$ctrl.user.family_name}}</div>
+              <div class="specification">
+                <div class="item" ng-if="$ctrl.user.role"><em>{{$ctrl.user.role}}</em></div>
+                <div class="item" ng-if="$ctrl.user.email">{{$ctrl.user.email}}</div>
+                <div class="item"><em>IDCR</em></div>
+                <div class="item">johnsmith@gmail.com</div>
+                <div class="item gray"><em>10/05/2099</em></div>
+              </div>
+              <a class="btn btn-success btn-block btn-signout" ng-click="$ctrl.signout()">Sign Out <i class="fa fa-sign-out"></i></a>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Nav Search -->
+      <div class="wrap-search wrap-header-search ng-cloak hidden-xs" ng-if="searchBar" ng-cloak ng-class="{'searchBarHidden' : !$ctrl.searchBarEnabled }">
+        <div class="header-search">
+          <button class="btn-header inverse btn-search" ng-click="$ctrl.searchFunction();"><i class="fa fa-search"></i></button>
+          <div class="header-search-inner">
+            <div class="holder">
+              <div ng-show="$root.searchMode" class="ng-cloak" ng-cloak>
+                <span ng-cloak class="ng-cloak search-left-inner-addon">
+                  <span ng-if="$root.reportMode">Reports&nbsp;</span>
+                  <span ng-if="$root.settingsMode">Setting&nbsp;</span>
+                  <span ng-if="$root.patientMode">Patients&nbsp;</span>
+                  <i ng-click="$ctrl.cancelSearchMode()" class="fa fa-times"></i>
+                </span>
+              </div>
+              <div ng-show="$root.reportTypeSet" class="ng-cloak" ng-cloak>
+                <span ng-cloak class="ng-cloak reportType-label">
+                <div class="reportTypeSet">
+                  {{$root.reportTypeString}}&nbsp;
+                  <i ng-click="$ctrl.cancelReportType()" class="fa cancel-reportType fa-times"></i>
+                </div>
+                </span>
+              </div>
+              <input key-bind="{ enter: '$ctrl.searchFunction()', esc: '$ctrl.cancelSearchMode()' }" class="form-control" placeholder="Search" type="text" uib-typeahead="report for report in $ctrl.reportTypes | filter:$viewValue" ng-model="search.searchExpression" ng-keyup="$ctrl.checkExpression(search.searchExpression)" ng-trim="false" ng-class="{'moveRight': $root.searchMode && !$root.reportTypeSet, 'moveFurtherRight': $root.searchMode && $root.reportTypeSet}" focus-element="searchFocused"/>
+              <i ng-show="search.searchExpression !== '' || $root.searchMode" ng-click="$ctrl.cancelSearchMode()" class="clearAll fa fa-times-circle"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / Nav Search -->
+
+      <!-- Nav Mobile Search -->
+      <div class="wrap-search wrap-search-mobile clearfix ng-cloak" ng-if="searchBar && $ctrl.currentNavTab==='searchBar'" ng-cloak ng-class="{'searchBarHidden' : !$ctrl.searchBarEnabled }">
+        <div class="header-search">
+          <button class="btn-header secondary btn-search" ng-click="$ctrl.searchFunction();"><i class="fa fa-search"></i></button>
+          <div class="header-search-inner">
+            <div class="holder">
+              <div ng-show="$root.searchMode" class="ng-cloak" ng-cloak>
+                <span ng-cloak class="ng-cloak search-left-inner-addon">
+                  <span ng-if="$root.reportMode">Reports&nbsp;</span>
+                  <span ng-if="$root.settingsMode">Setting&nbsp;</span>
+                  <span ng-if="$root.patientMode">Patients&nbsp;</span>
+                  <i ng-click="$ctrl.cancelSearchMode()" class="fa fa-times"></i>
+                </span>
+              </div>
+              <div ng-show="$root.reportTypeSet" class="ng-cloak" ng-cloak>
+                <span ng-cloak class="ng-cloak reportType-label">
+                  <div class="reportTypeSet">
+                    {{$root.reportTypeString}}&nbsp;
+                    <i ng-click="$ctrl.cancelReportType()" class="fa cancel-reportType fa-times"></i>
+                  </div>
+                </span>
+              </div>
+              <input key-bind="{ enter: '$ctrl.searchFunction()', esc: '$ctrl.cancelSearchMode()' }" class="form-control" placeholder="Search" type="text" uib-typeahead="report for report in $ctrl.reportTypes | filter:$viewValue" ng-model="search.searchExpression" ng-keyup="$ctrl.checkExpression(search.searchExpression)" ng-trim="false" ng-class="{'moveRight': $root.searchMode && !$root.reportTypeSet, 'moveFurtherRight': $root.searchMode && $root.reportTypeSet}" focus-element="searchFocused"/>
+              <i ng-show="search.searchExpression !== '' || $root.searchMode" ng-click="$ctrl.cancelSearchMode()" class="clearAll fa fa-times-circle"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / Nav Mobile Search -->
+    </div>
+  </nav>
+
+  <!-- Header title -->
+  <div class="wrap-header-title" ng-if="isPageHeader">
+    <div class="container-fluid">
+      <div class="header-title">{{pageHeader}}</div>
+    </div>
+  </div>
+  <!-- /.Header title -->
+
+  <!-- Header toolbar -->
+  <div class="wrap-header-toolbar" ng-if=userContextViewExists>
+    <div class="container-fluid">
+      <div class="header-toolbar">
+        <button ng-click="$ctrl.clickSidebarBtn()" class="btn-toggle-sidebar wrap-icon" data-toggle="collapse" data-target="#sidebar-nav" aria-expanded="false">
+          <i class="fa fa-bars"></i>
+          <span>Menu</span>
+        </button>
+        <div ui-view="banner"></div>
+      </div>
+    </div>
+  </div>
+  <!-- /.Header toolbar-->
+</header>

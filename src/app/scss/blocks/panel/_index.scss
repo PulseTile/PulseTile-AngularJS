@@ -1,0 +1,25 @@
+.panel {
+  border-radius: 0;
+  &.panel-default {
+    border-color: $panel-background;
+    border-width: 2px;
+  }
+  &.panel-primary {
+    margin-bottom: 14px;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  &.panel-secondary {
+    margin-bottom: 14px;
+    border: 1px solid #D8D8D8;
+    background: transparent;
+    box-shadow: none;
+  }
+}
+
+@import 'group';
+@import 'heading';
+@import 'body';
+@import 'control';
+@import 'filter';

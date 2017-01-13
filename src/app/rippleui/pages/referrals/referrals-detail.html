@@ -1,0 +1,174 @@
+<!--
+  ~  Copyright 2016 Ripple Foundation C.I.C. Ltd
+  ~  
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~  
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  -->
+
+
+<div mc-full-panel mc-accordion mc-open-panel="personalNote" class="panel-group accordion">
+  <div class="panel panel-secondary" ng-if="!isEdit" ng-class="getOpenPanelClass('personalNote')">
+    <div class="panel-heading">
+      <div class="control-group right">
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('personalNote')"><i class="fa fa-chevron-up"></i></button>
+      </div>
+      <h3 class="panel-title">Referral</h3>
+    </div>
+    <div class="panel-body">
+      <div class="panel-body-inner">
+        <div class="form">
+          <div class="form-group-wrapper">
+
+            <div class="form-group">
+              <label class="control-label">Referral From:</label>
+              <div class="form-control-static">{{ $ctrl.referral.referralFrom }}</div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Referral To:</label>
+              <div class="form-control-static">{{ $ctrl.referral.referralTo }}</div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Date of Referral:</label>
+              <div class="form-control-static">{{ $ctrl.referral.dateOfReferral | date:'dd-MMM-y'}}</div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Reason for Referral:</label>
+              <div class="form-control-static">{{ $ctrl.referral.reason }}</div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Clinical Summary:</label>
+              <div class="form-control-static">{{ $ctrl.referral.clinicalSummary }}</div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Author:</label>
+              <div class="form-control-static">{{ $ctrl.referral.author }}</div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Date Created:</label>
+              <div class="form-control-static">{{ $ctrl.referral.dateCreated | date:'dd-MMM-y' }}</div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Source:</label>
+              <div class="form-control-static">{{ $ctrl.referral.source }}</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
+        <div class="wrap-control-group">
+          <div class="control-group right">
+            <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.edit();"><i class="fa fa-edit"></i> Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-secondary" ng-if="isEdit" ng-class="getOpenPanelClass('personalNote')">
+    <div class="panel-heading">
+      <div class="control-group right">
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('personalNote')"><i class="fa fa-chevron-up"></i></button>
+      </div>
+      <h3 class="panel-title">Referral</h3>
+    </div>
+    <div class="panel-body">
+      <div class="panel-body-inner">
+        <form name="referralsForm" class="form">
+          <div class="form-group-wrapper">
+
+            <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.referralFrom.$dirty) && referralsForm.referralFrom.$invalid, 'has-success': referralsForm.referralFrom.$valid && referralsForm.referralFrom.$dirty}">
+              <label for="referralFrom" class="control-label">Referral From:</label>
+              <div class="input-holder">
+                <input class="form-control input-sm" id="referralFrom" name="referralFrom" ng-model="referralsEdit.referralFrom" required />
+              </div>
+              <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.referralFrom.$error.required">You must enter a value.</span>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.referralTo.$dirty) && referralsForm.referralTo.$invalid, 'has-success': referralsForm.referralTo.$valid && referralsForm.referralTo.$dirty}">
+              <label for="referralTo" class="control-label">Referral To:</label>
+              <div class="input-holder">
+                <input class="form-control input-sm" id="referralTo" name="referralTo" ng-model="referralsEdit.referralTo" required />
+              </div>
+              <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.referralTo.$error.required">You must enter a value.</span>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.dateOfReferral.$dirty) && referralsForm.dateOfReferral.$invalid, 'has-success': referralsForm.dateOfReferral.$valid && referralsForm.dateOfReferral.$dirty}">
+              <label for="dateOfReferral" class="control-label">Date of Referral:</label>
+              <div class="input-holder">
+                <input class="form-control input-sm" id="dateOfReferral" name="dateOfReferral" ng-model="referralsEdit.dateOfReferral" required disabled />
+              </div>
+              <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.dateOfReferral.$error.required">You must enter a value.</span>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.reason.$dirty) && referralsForm.reason.$invalid, 'has-success': referralsForm.reason.$valid && referralsForm.reason.$dirty}">
+              <label for="reason" class="control-label">Reason for Referral:</label>
+              <div class="input-holder">
+                <input class="form-control input-sm" id="reason" name="reason" ng-model="referralsEdit.reason" required />
+              </div>
+              <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.reason.$error.required">You must enter a value.</span>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.clinicalSummary.$dirty) && referralsForm.clinicalSummary.$invalid, 'has-success': referralsForm.clinicalSummary.$valid && referralsForm.clinicalSummary.$dirty}">
+              <label for="clinicalSummary" class="control-label">Clinical Summary:</label>
+              <div class="input-holder">
+                <input class="form-control input-sm" id="clinicalSummary" name="clinicalSummary" ng-model="referralsEdit.clinicalSummary" required />
+              </div>
+              <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.clinicalSummary.$error.required">You must enter a value.</span>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.author.$dirty) && referralsForm.author.$invalid, 'has-success': referralsForm.author.$valid && referralsForm.author.$dirty}">
+              <label for="author" class="control-label">Author:</label>
+              <div class="input-holder">
+                <input class="form-control input-sm" id="author" name="author" ng-model="referralsEdit.author" required />
+              </div>
+              <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.author.$error.required">You must enter a value.</span>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.dateCreated.$dirty) && referralsForm.dateCreated.$invalid, 'has-success': referralsForm.dateCreated.$valid && referralsForm.dateCreated.$dirty}">
+              <label for="dateCreated" class="control-label">Date Created:</label>
+              <div class="input-holder">
+                <input class="form-control input-sm" id="dateCreated" name="author" ng-model="referralsEdit.dateCreated" required disabled />
+              </div>
+              <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.dateCreated.$error.required">You must enter a value.</span>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.source.$dirty) && referralsForm.source.$invalid, 'has-success': referralsForm.source.$valid && referralsForm.source.$dirty}">
+              <label for="source" class="control-label">Source:</label>
+              <div class="input-holder">
+                <input class="form-control input-sm" id="source" name="source" ng-model="referralsEdit.source" required disabled />
+              </div>
+              <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.source.$error.required">You must enter a value.</span>
+            </div>
+
+          </div>
+        </form>
+      </div>
+      <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
+        <div class="wrap-control-group">
+          <div class="control-group right">
+            <button class="btn btn-danger" ng-click="$ctrl.cancelEdit()"><i class="fa fa-ban"></i> Cancel</button>
+            <button class="btn btn-success" ng-click="confirmEdit(referralsForm, referralsEdit)"><i class="fa fa-check"></i> Complete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

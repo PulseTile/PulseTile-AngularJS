@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'MyriadPro';
+    src: url($path-assets-fonts + 'MyriadProRegular.eot');
+    src: url($path-assets-fonts + 'MyriadProRegular.eot') format('embedded-opentype'),
+         url($path-assets-fonts + 'MyriadProRegular.woff2') format('woff2'),
+         url($path-assets-fonts + 'MyriadProRegular.woff') format('woff'),
+         url($path-assets-fonts + 'MyriadProRegular.ttf') format('truetype'),
+         url($path-assets-fonts + 'MyriadProRegular.svg#MyriadProRegular') format('svg');
+     font-weight: 400;
+     font-style: normal;
+}

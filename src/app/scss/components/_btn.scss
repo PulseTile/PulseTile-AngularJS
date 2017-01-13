@@ -1,0 +1,157 @@
+.btn {
+  height: 34px;
+  min-width: 34px;
+  font-size: 16px;
+  line-height: 22px;
+  border-radius: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  i {font-weight: 700;}
+}
+.btn-rounded {
+  border-radius: 2px;
+}
+.btn-sm {
+  height: 30px;
+  line-height: 18px;
+  i {
+    font-weight: 400;
+  }
+}
+
+@each $button, $color in $colored-buttons {
+  .btn-#{$button},
+  .btn-#{$button}:focus,
+  .btn-#{$button}:active {
+    background-color: $color !important;
+    border-color: $color !important;
+    &:hover,
+    &.active {
+      background-color: darken($color, 10%) !important;
+      border-color: darken($color, 10%) !important;
+    }
+  }
+}
+
+.btn.disabled,
+.btn[disabled] {
+  opacity: 1;
+  background-color: #C3C3C3 !important;
+  border-color: #C3C3C3 !important;
+}
+.btn-dropdown-toggle {
+  position: relative;
+  padding-right: 32px;
+  &:after {
+    content: '\f0d7';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    font-family: 'FontAwesome';
+    font-size: inherit;
+    color: inherit;
+    transform: translateY(-50%);
+  }
+}
+.open, .show {
+  .btn-dropdown-toggle:after {
+    transform: translateY(-50%) rotate(180deg);
+  }
+}
+
+.btn-inverse {
+  background: transparent !important;
+  border: 1px solid #ccc !important;
+  @each $button, $color in $colored-buttons {
+    &.btn-#{$button},
+    &.btn-#{$button}:focus,
+    &.btn-#{$button}:active {
+      color: $color !important;
+      border-color: $color !important;
+      background: transparent !important;
+      &:hover,
+      &.active {
+        color: darken($color, 10%);
+        background: transparent !important;
+        border-color: darken($color, 10%) !important;
+      }
+    }
+  }
+
+  .btn.disabled,
+  .btn[disabled] {
+    color: #C3C3C3 !important;
+    background-color: transparent !important;
+    border-color: #C3C3C3 !important;
+  }
+}
+
+.has-success .input-group .input-group-btn .btn {
+  border-color: #3c763d !important;
+}
+.has-error .input-group .input-group-btn .btn {
+  border-color: #a94442 !important;
+}
+
+.btn-toggle-rotate i {
+  transform: rotate(0) translateY(-1px);
+}
+.open .btn-toggle-rotate i {
+  transform: rotate(180deg) translateY(-2px);
+}
+
+.btn-table i {
+  font-size: 20px;
+  font-weight: 400;
+}
+.btn-filter {
+  width: 42px;
+  i {
+    font-size: 19px;
+    font-weight: 400;
+  }
+}
+.btn-board-more {
+  width: 43px;
+}
+.btn-pause i {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.btn-edit {
+  font-weight: 600;
+  i {
+    font-size: 17px;
+    font-weight: 400;
+    margin-right: 3px;
+  }
+}
+.btn-success.btn-create,
+.btn-success.btn-create:focus,
+.btn-success.btn-create:active {
+  font-weight: 600;
+  background: #fff !important;
+  &:hover,
+  &.active {
+    background: #fff !important;
+  }
+  i {
+    font-size: 17px;
+    font-weight: 400;
+    margin-right: 3px;
+  }
+} 
+.btn-square {
+  padding: 0;
+  width: 36px;
+}
+
+.btn-expand-panel {
+  .fa.fa-expand {display: inline-block;}
+  .fa.fa-compress {display: none;}
+}
+.full-panel .btn-expand-panel {
+  .fa.fa-expand {display: none;}
+  .fa.fa-compress {display: inline-block;}
+}

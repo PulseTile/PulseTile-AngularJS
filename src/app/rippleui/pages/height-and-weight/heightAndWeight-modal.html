@@ -1,0 +1,54 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ modal.title }}</h4>
+</div>
+
+<div class="modal-body">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">{{ patient.name }}</h4>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-4 text-left">
+          <label>Born:</label> <strong>{{ patient.dateOfBirth | date:'dd-MMM-yyyy' }}</strong></div>
+        <div class="col-sm-4 text-center">
+          <label>Gender:</label> <strong>{{ patient.gender }}</strong></div>
+        <div class="col-sm-4 text-right">
+          <label>NHS No:</label> <strong>{{ patient.nhsNumber }}</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <form name="heightAndWeightForm" class="form-horizontal text-left">
+    <fieldset class="heightAndWeightForm">
+      <legend>{{ modal.title }}</legend>
+      <div class="row">
+
+        <div class="form-group" ng-class="{'has-error': (formSubmitted || heightAndWeightForm.weight.$dirty) && heightAndWeightForm.weight.$invalid, 'has-success': heightAndWeightForm.weight.$valid && heightAndWeightForm.weight.$dirty}">
+          <label for="weight" class="control-label col-md-12">Weight</label>
+          <div class="col-md-12">
+            <div class="input-group">
+              <input type="number" min="0" class="form-control input-sm" id="weight" name="weight" ng-model="heightAndWeight.weight" placeholder="kg" required />
+            </div>
+            <span class="help-block animate-fade" ng-show="formSubmitted && heightAndWeightForm.weight.$error.required">You must enter a value.</span>
+          </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': (formSubmitted || heightAndWeightForm.height.$dirty) && heightAndWeightForm.height.$invalid, 'has-success': heightAndWeightForm.height.$valid && heightAndWeightForm.height.$dirty}">
+          <label for="height" class="control-label col-md-12">Height</label>
+          <div class="col-md-12">
+            <div class="input-group">
+              <input type="number" min="0" class="form-control input-sm" id="height" name="height" ng-model="heightAndWeight.height" placeholder="m" required />
+            </div>
+            <span class="help-block animate-fade" ng-show="formSubmitted && heightAndWeightForm.height.$error.required">You must enter a value.</span>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <a class="btn btn-danger" ng-click="cancel()">Cancel</a>
+  <button class="btn btn-success" ng-click="formSubmitted = true; ok(heightAndWeightForm, heightAndWeight);"><i class="fa fa-check"></i> Complete</button>
+</div>
