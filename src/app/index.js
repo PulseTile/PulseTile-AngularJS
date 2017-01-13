@@ -86,8 +86,11 @@ import VaccinationsDetailComponent from './rippleui/pages/vaccinations/vaccinati
 
 import OrdersListComponent from './rippleui/pages/orders/orders-list.component';
 import OrdersDetailComponent from './rippleui/pages/orders/orders-detail.component';
+
 import ReferralsListComponent from './rippleui/pages/referrals/referrals-list.component';
 import ReferralsDetailComponent from './rippleui/pages/referrals/referrals-detail.component';
+import ReferralsCreateComponent from './rippleui/pages/referrals/referrals-create.component';
+
 import ProceduresListComponent from './rippleui/pages/procedures/procedures-list.component';
 import ProceduresDetailComponent from './rippleui/pages/procedures/procedures-detail.component';
 import ResultsListComponent from './rippleui/pages/results/results-list.component';
@@ -177,8 +180,12 @@ const app = angular
 
     .component('ordersListComponent', OrdersListComponent)
     .component('ordersDetailComponent', OrdersDetailComponent)
+
     .component('referralsListComponent', ReferralsListComponent)
     .component('referralsDetailComponent', ReferralsDetailComponent)
+    .component('referralsCreateComponent', ReferralsCreateComponent)
+
+
     .component('proceduresListComponent', ProceduresListComponent)
     .component('proceduresDetailComponent', ProceduresDetailComponent)
     .component('patientsListFullComponent', PatientsListFullComponent)

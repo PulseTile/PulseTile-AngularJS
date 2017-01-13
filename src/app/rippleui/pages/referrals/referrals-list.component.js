@@ -17,13 +17,14 @@ let templateReferralsList = require('./referrals-list.html');
 
 class ReferralsListController {
   constructor($scope, $state, $stateParams, $ngRedux, referralsActions, serviceRequests, ReferralsModal, usSpinnerService) {
-    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-details'});
+    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
     this.currentPage = 1;
     this.query = '';
 		this.isShowExpandBtn = true;//$state.router.globals.$current.name !== 'clinicalNotes'
 		this.isFilter = false;
+		this.isShowCreateBtn = true;
 
     if ($stateParams.filter) {
       this.query = $stateParams.filter;
@@ -62,9 +63,9 @@ class ReferralsListController {
       return referralId === $stateParams.referralId;
     };
 
-    this.create = function () {
-      ReferralsModal.openModal(this.currentPatient, {title: 'Create Referral'}, {}, this.currentUser);
-    };
+    // this.create = function () {
+    //   ReferralsModal.openModal(this.currentPatient, {title: 'Create Referral'}, {}, this.currentUser);
+    // };
 
 		this.toggleFilter = function () {
 			this.isFilter = !this.isFilter;
@@ -88,7 +89,15 @@ class ReferralsListController {
       }
     };
 
-    let unsubscribe = $ngRedux.connect(state => ({
+		this.create = function () {
+			$state.go('referrals-create', {
+				patientId: $stateParams.patientId,
+				filter: this.query.$,
+				page: this.currentPage
+			});
+		};
+
+		let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
 
