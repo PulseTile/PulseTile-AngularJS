@@ -33,10 +33,6 @@ after_success:
 #  - npm run report-coverage
   - npm run semantic-release
 
-branches:
-  only:
-    - develop
-
 notifications:
   email:
     on_failure: change
