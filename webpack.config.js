@@ -16,11 +16,11 @@ const ENV_DEVELOPMENT = NODE_ENV === 'development';
 const ENV_PRODUCTION = NODE_ENV === 'production';
 const ENV_TEST = NODE_ENV === 'test';
 const ENV_COPY = NODE_ENV === 'copy';
+const ENV_PRODUCTION_EXTENSION = NODE_ENV === 'extension';
 
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 9000;
 
-// const API_URL = process.env.API_URL || 'http://localhost:19191';
 const API_URL =  'http://138.68.134.7';
 // const API_URL =  'http://139.59.187.100';
 
@@ -32,7 +32,7 @@ const config = {
   resolve: {
     extensions: ['', '.js'],
     modulesDirectories: ["node_modules", "bower_components"],
-    
+
     root: path.resolve('./src'),
     alias: {
       'morrisjs': '../../bower_components/morrisjs/morris.js',
@@ -48,13 +48,6 @@ const config = {
       {test: /\.(ttf|eot|svg)/, loader: 'file?name=assets/fonts/[name].[ext]'},
       {test: /\.(jpg|png|jpeg|gif)$/, loader: 'url-loader?limit=25000/&name=assets/images/[name].[ext]' },
       {test: /\.css$/, loader: "style-loader!css-loader!"}
-      /*{test: /\.woff(\?.*)?$/,loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff'},
-      {test: /\.woff2(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2' },
-      {test: /\.otf(\?.*)?$/, loader: 'file?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentype' },
-      {test: /\.ttf(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream' },
-      {test: /\.eot(\?.*)?$/, loader: 'file?prefix=fonts/&name=[path][name].[ext]' },
-      {test: /\.svg(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
-      {test: /\.(png|jpg)$/, loader: 'url?limit=8192'}*/
     ]
   },
 
@@ -67,7 +60,7 @@ const config = {
       modulesDirectories: ['bower_components']
     }),
     new webpack.ResolverPlugin(
-      new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(".bower.json", ["main"])
+        new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(".bower.json", ["main"])
     ),
     new webpack.ProvidePlugin({
       angularSpinner: 'angular-spinner',
@@ -98,7 +91,8 @@ const config = {
 //=====================================
 //  DEVELOPMENT or PRODUCTION
 //-------------------------------------
-if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
+if (ENV_DEVELOPMENT || ENV_PRODUCTION || ENV_PRODUCTION_EXTENSION) {
+
   config.entry = {
     index: [
       'bootstrap-loader',
@@ -107,6 +101,10 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
     vendor: './src/app/vendor'
   };
 
+  if (ENV_PRODUCTION_EXTENSION) {
+    config.entry.index[1] = './src/app/plugins-extension';
+  }
+
   config.output = {
     filename: '[name].js',
     path: path.resolve('./dist'),
@@ -114,17 +112,17 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
   };
 
   config.plugins.push(
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      hash: true,
-      inject: 'body',
-      favicon: './src/favicon.png',
-      template: './src/index.html'
-    })
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor',
+        minChunks: Infinity
+      }),
+      new HtmlWebpackPlugin({
+        filename: 'index.html',
+        hash: true,
+        inject: 'body',
+        favicon: './src/favicon.png',
+        template: './src/index.html'
+      })
   );
 }
 
@@ -138,7 +136,7 @@ if (ENV_DEVELOPMENT) {
   config.entry.index.unshift(`webpack-dev-server/client?http://${HOST}:${PORT}`);
 
   config.module.loaders.push(
-    {test: /\.scss$/, loader: 'style!css!postcss!sass'}
+      {test: /\.scss$/, loader: 'style!css!postcss!sass'}
   );
 
   config.devServer = {
@@ -170,26 +168,16 @@ if (ENV_DEVELOPMENT) {
 //=====================================
 //  PRODUCTION
 //-------------------------------------
-if (ENV_PRODUCTION) {
+if (ENV_PRODUCTION || ENV_PRODUCTION_EXTENSION) {
   config.devtool = 'source-map';
 
   config.module.loaders.push(
-    {test: /\.scss$/, loader: 'style!css!postcss!sass'}
+      {test: /\.scss$/, loader: 'style!css!postcss!sass'}
   );
 
   config.plugins.push(
-    // new ExtractTextPlugin('styles.css'),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      mangle: false,
-      beautify: true,
-      compress: {
-        dead_code: true, // eslint-disable-line camelcase
-        screw_ie8: true, // eslint-disable-line camelcase
-        unused: true,
-        warnings: false
-      }
-    })
+      new webpack.optimize.OccurenceOrderPlugin(),
+      new webpack.optimize.DedupePlugin()
   );
 }
 
@@ -201,15 +189,15 @@ if (ENV_COPY) {
     filename: '[name].[ext]',
     publicPath: ''
   };
-  
+
   config.module.loaders.push(
-    {test: /\.scss$/, loader: 'style!css!postcss!sass'}
+      {test: /\.scss$/, loader: 'style!css!postcss!sass'}
   );
 
   config.plugins.push(
-    new CopyWebpackPlugin([
-      { from: './bower_components/moment', to: './build' }
-    ])
+      new CopyWebpackPlugin([
+        { from: './bower_components/moment', to: './build' }
+      ])
   );
 }
 
@@ -221,7 +209,7 @@ if (ENV_TEST) {
   config.devtool = 'inline-source-map';
 
   config.module.loaders.push(
-    {test: /\.scss$/, loader: 'style!css!postcss!sass'}
+      {test: /\.scss$/, loader: 'style!css!postcss!sass'}
   );
 }
 

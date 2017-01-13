@@ -120,7 +120,7 @@ import routeConfig from 'app/index.route';
 import 'app/scss/core.scss';
 
 const app = angular
-    .module('app', [
+    .module('ripple-ui', [
         uiRouter,
         ngAnimate,
         uiBootstrap,
