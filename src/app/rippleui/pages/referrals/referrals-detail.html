@@ -121,7 +121,7 @@
             <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.reason.$dirty) && referralsForm.reason.$invalid, 'has-success': referralsForm.reason.$valid && referralsForm.reason.$dirty}">
               <label for="reason" class="control-label">Reason for Referral:</label>
               <div class="input-holder">
-                <input class="form-control input-sm" id="reason" name="reason" ng-model="referralsEdit.reason" required />
+                <textarea type="text" class="form-control textarea-big input-sm" id="reason" name="reason" ng-model="referralsEdit.reason" required></textarea>
               </div>
               <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.reason.$error.required">You must enter a value.</span>
             </div>
@@ -129,7 +129,7 @@
             <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.clinicalSummary.$dirty) && referralsForm.clinicalSummary.$invalid, 'has-success': referralsForm.clinicalSummary.$valid && referralsForm.clinicalSummary.$dirty}">
               <label for="clinicalSummary" class="control-label">Clinical Summary:</label>
               <div class="input-holder">
-                <input class="form-control input-sm" id="clinicalSummary" name="clinicalSummary" ng-model="referralsEdit.clinicalSummary" required />
+                <textarea type="text" class="form-control textarea-big input-sm" id="clinicalSummary" name="clinicalSummary" ng-model="referralsEdit.clinicalSummary" required></textarea>
               </div>
               <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.clinicalSummary.$error.required">You must enter a value.</span>
             </div>
