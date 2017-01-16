@@ -28,7 +28,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
   });
   
   $urlRouterProvider.otherwise('/search');
-  console.log('routing test');
+  
   $stateProvider
       .state('profile', {
         url: '/profile',
@@ -423,7 +423,17 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           banner: {template: '<patients-banner-component></patients-banner-component>'},
           actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
           main: {template: '<referrals-list-component></referrals-list-component>'}
-        }
+        },
+				breadcrumbs: [{
+					title: 'Patient Listings',
+					state: 'patients-list'
+				}, {
+					title: 'Patient Summary',
+					state: 'patients-summary'
+				}, {
+					title: 'Referrals',
+					state: 'referrals'
+				}]
       })
       .state('referrals-detail', {
         url: '/patients/{patientId:int}/referrals/{referralId}?filter&page&reportType&searchString&queryType',
@@ -432,7 +442,36 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
           main: {template: '<referrals-list-component></referrals-list-component>'},
           detail: {template: '<referrals-detail-component></referrals-detail-component>'}
-        }
+        },
+				breadcrumbs: [{
+					title: 'Patient Listings',
+					state: 'patients-list'
+				}, {
+					title: 'Patient Summary',
+					state: 'patients-summary'
+				}, {
+					title: 'Referrals',
+					state: 'referrals'
+				}]
+      })
+      .state('referrals-create', {
+        url: '/patients/{patientId:int}/referrals/create?reportType&searchString&queryType',
+        views: {
+          banner: {template: '<patients-banner-component></patients-banner-component>'},
+          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+          main: {template: '<referrals-list-component></referrals-list-component>'},
+					detail: {template: '<referrals-create-component></referrals-create-component>'}
+        },
+				breadcrumbs: [{
+					title: 'Patient Listings',
+					state: 'patients-list'
+				}, {
+					title: 'Patient Summary',
+					state: 'patients-summary'
+				}, {
+					title: 'Referrals',
+					state: 'referrals'
+				}]
       })
 
       .state('procedures', {
