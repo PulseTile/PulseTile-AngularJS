@@ -113,7 +113,7 @@
             <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.dateOfReferral.$dirty) && referralsForm.dateOfReferral.$invalid, 'has-success': referralsForm.dateOfReferral.$valid && referralsForm.dateOfReferral.$dirty}">
               <label for="dateOfReferral" class="control-label">Date of Referral:</label>
               <div class="input-holder">
-                <input class="form-control input-sm" id="dateOfReferral" name="dateOfReferral" ng-model="referralsEdit.dateOfReferral" required disabled />
+                <input class="form-control input-sm" id="dateOfReferral" name="dateOfReferral" ng-model="referralsEdit.dateOfReferral" ng-click="openDatepicker($event, 'dateOfReferral')" uib-datepicker-popup="dd-MMM-y" is-open="dateOfReferral" required disabled />
               </div>
               <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.dateOfReferral.$error.required">You must enter a value.</span>
             </div>
@@ -145,7 +145,7 @@
             <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.dateCreated.$dirty) && referralsForm.dateCreated.$invalid, 'has-success': referralsForm.dateCreated.$valid && referralsForm.dateCreated.$dirty}">
               <label for="dateCreated" class="control-label">Date Created:</label>
               <div class="input-holder">
-                <input class="form-control input-sm" id="dateCreated" name="author" ng-model="referralsEdit.dateCreated" required disabled />
+                <input class="form-control input-sm" id="dateCreated" name="author" ng-model="referralsEdit.dateCreated" ng-click="openDatepicker($event, 'dateCreated')" uib-datepicker-popup="dd-MMM-y" is-open="dateCreated" required disabled />
               </div>
               <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.dateCreated.$error.required">You must enter a value.</span>
             </div>

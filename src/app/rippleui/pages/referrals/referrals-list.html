@@ -37,10 +37,10 @@
     <table class="table table-striped table-hover table-bordered rwd-table table-sorted">
       <thead>
       <tr>
-        <th class="sorted asc">Date of Referral</th>
-        <th>Referral From</th>
-        <th>Referral To</th>
-        <th>Source</th>
+        <th ng-click="$ctrl.sort('dateOfReferral')" ng-class="$ctrl.sortClass('dateOfReferral')" >Date of Referral</th>
+        <th ng-click="$ctrl.sort('referralFrom')" ng-class="$ctrl.sortClass('referralFrom')" >Referral From</th>
+        <th ng-click="$ctrl.sort('referralTo')" ng-class="$ctrl.sortClass('referralTo')" >Referral To</th>
+        <th ng-click="$ctrl.sort('source')" ng-class="$ctrl.sortClass('source')">Source</th>
       </tr>
       </thead>
 
@@ -48,11 +48,11 @@
       <!--
 			clinicalNote.source - It should actually transmitted
 			<tr dir-paginate="clinicalNote in $ctrl.clinicalNotes | filter:$ctrl.search | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(clinicalNote.sourceId, clinicalNote.source)" ng-class="{info: $ctrl.selected(clinicalNote.sourceId)}"> -->
-      <tr dir-paginate="referral in $ctrl.referrals | filter:$ctrl.query | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(referral.sourceId)" ng-class="{info: $ctrl.selected(referral.sourceId)}">
-        <td data-th="Date of Referral" class="dateTime">{{ referral.dateOfReferral}}</td>
-        <td data-th="Referral From">{{ referral.referralFrom }}</td>
-        <td data-th="Referral To">{{ referral.referralTo }}</td>
-        <td data-th="Source">{{ referral.source }}</td>
+      <tr dir-paginate="referral in $ctrl.referrals | filter:$ctrl.query| orderBy:[$ctrl.order] : $ctrl.reverse  | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(referral.sourceId)" ng-class="{info: $ctrl.selected(referral.sourceId)}">
+        <td data-th="Date of Referral" ng-class="$ctrl.sortClass('dateOfReferral')" class="dateTime">{{ referral.dateOfReferral}}</td>
+        <td data-th="Referral From" ng-class="$ctrl.sortClass('referralFrom')" >{{ referral.referralFrom }}</td>
+        <td data-th="Referral To" ng-class="$ctrl.sortClass('referralTo')" >{{ referral.referralTo }}</td>
+        <td data-th="Source" ng-class="$ctrl.sortClass('source')" >{{ referral.source }}</td>
       </tr>
 
       <tr ng-if="!$ctrl.referrals.length">

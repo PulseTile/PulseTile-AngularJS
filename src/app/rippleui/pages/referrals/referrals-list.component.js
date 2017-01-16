@@ -92,11 +92,45 @@ class ReferralsListController {
 		this.create = function () {
 			$state.go('referrals-create', {
 				patientId: $stateParams.patientId,
-				filter: this.query.$,
-				page: this.currentPage
+				// referralId: id,
+				filter: $scope.query,
+				page: this.currentPage,
+				reportType: $stateParams.reportType,
+				searchString: $stateParams.searchString,
+				queryType: $stateParams.queryType
 			});
 		};
 
+		$scope.openDatepicker = function ($event, name) {
+			$event.preventDefault();
+			$event.stopPropagation();
+
+			$scope[name] = true;
+		};
+
+		this.sort = function (field) {
+			var reverse = this.reverse;
+			if (this.order === field) {
+				this.reverse = !reverse;
+			} else {
+				this.order = field;
+				this.reverse = false;
+			}
+		};
+
+		this.sortClass = function (field) {
+			if (this.order === field) {
+				return this.reverse ? 'sorted desc' : 'sorted asc';
+			}
+		};
+
+		this.order = serviceRequests.currentSort.order || 'dateOfReferral';
+		this.reverse = serviceRequests.currentSort.reverse || false;
+		if (serviceRequests.filter) {
+			this.query[this.queryBy] = serviceRequests.filter;
+			this.isFilter = true;
+		}
+		
 		let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);

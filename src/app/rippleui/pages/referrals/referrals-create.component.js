@@ -18,6 +18,23 @@ let templateCreate= require('./referrals-create.html');
 class ReferralsCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, referralsActions, ReferralsModal, usSpinnerService) {
 
+  	$scope.referralsEdit = {};
+  	$scope.referralsEdit.dateCreated = new Date();
+
+		this.goList = function () {
+			$state.go('referrals', {
+				patientId: $stateParams.patientId,
+				reportType: $stateParams.reportType,
+				searchString: $stateParams.searchString,
+				queryType: $stateParams.queryType,
+				page: $stateParams.page,
+			});
+		};
+		this.cancel = function () {
+			this.goList();
+		};
+
+
 		$scope.isEdit = false;
 
 		this.setCurrentPageData = function (data) {
@@ -52,32 +69,23 @@ class ReferralsCreateController {
 			$scope.isEdit = false;
 		};
 
-		$scope.confirmEdit = function (referralsForm, referrals) {
+		$scope.openDatepicker = function ($event, name) {
+			$event.preventDefault();
+			$event.stopPropagation();
+
+			$scope[name] = true;
+		};
+
+		$scope.create = function (referralForm, referral) {
 			$scope.formSubmitted = true;
 
-			if (referralsForm.$valid) {
-				let toUpdate = {
-					referralFrom: referrals.referralFrom,
-					referralTo: referrals.referralTo,
-					dateOfReferral: referrals.dateOfReferral,
-					reason: referrals.reason,
-					clinicalSummary: referrals.clinicalSummary,
-					author: referrals.author,
-					dateCreated: referrals.dateCreated,
-					source: referrals.source
-				};
+			if (referralForm.$valid) {
 
-				this.referralsEdit = Object.assign(referrals, $scope.clinicalNoteEdit);
-				$scope.isEdit = false;
-				referralsActions.update($scope.patient.id, toUpdate);
-				setTimeout(function () {
-					$state.go('clinicalNotes-detail', {
-						patientId: $scope.patient.id,
-						clinicalNoteIndex: referrals.sourceId
-					});
-				}, 1000);
+				$scope.contactsCreate($scope.currentPatient.id, referral);
 			}
 		};
+
+		$scope.contactsCreate = referralsActions.create;
 
 
     $scope.$on('$destroy', unsubscribe);
