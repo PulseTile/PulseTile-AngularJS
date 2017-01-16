@@ -20,12 +20,52 @@ class ProceduresListController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.currentPage = 1;
-    $scope.query = '';
+		this.queryBy = '$';
+		this.query = {};
+		this.query[this.queryBy] = '';
+		this.isShowCreateBtn = true;
+		this.isFilter = false;
+		this.isShowCreateBtn = $state.router.globals.$current.name !== 'procedures-create';
+		this.isShowExpandBtn = $state.router.globals.$current.name !== 'procedures';
+
+		this.toggleFilter = function () {
+			this.isFilter = !this.isFilter;
+		};
+
+		this.sort = function (field) {
+			var reverse = this.reverse;
+			if (this.order === field) {
+				this.reverse = !reverse;
+			} else {
+				this.order = field;
+				this.reverse = false;
+			}
+		};
+
+		this.sortClass = function (field) {
+			if (this.order === field) {
+				return this.reverse ? 'sorted desc' : 'sorted asc';
+			}
+		};
+
+		this.order = serviceRequests.currentSort.order || 'name';
+		this.reverse = serviceRequests.currentSort.reverse || false;
+		if (serviceRequests.filter) {
+			this.query[this.queryBy] = serviceRequests.filter;
+			this.isFilter = true;
+		}
 
     this.pageChangeHandler = function (newPage) {
       this.currentPage = newPage;
     };
+
+		this.create = function () {
+			$state.go('procedures-create', {
+				patientId: $stateParams.patientId,
+				filter: this.query.$,
+				page: this.currentPage
+			});
+		};
 
     if ($stateParams.page) {
       this.currentPage = $stateParams.page;

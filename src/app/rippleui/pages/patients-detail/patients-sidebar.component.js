@@ -59,12 +59,12 @@ class PatientsSidebarController {
         linkDetail: 'results-detail',
         title: 'Test Results'
       },
-      // {
-      //   name: 'procedures',
-      //   link: 'procedures',
-      //   linkDetail: 'procedures-detail',
-      //   title: 'Procedures'
-      // },
+      {
+        name: 'procedures',
+        link: 'procedures',
+        linkDetail: 'procedures-detail',
+        title: 'Procedures'
+      },
       {
         name: 'referrals',
         link: 'referrals',

@@ -13,6 +13,80 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
+
+<div mc-full-panel mc-accordion mc-open-panel="contacts" class="panel-group accordion">
+  <div class="panel panel-secondary" ng-if="!isEdit" ng-class="getOpenPanelClass('contacts')">
+    <div class="panel-heading">
+      <div class="control-group right">
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('contacts')"><i class="fa fa-chevron-up"></i></button>
+      </div>
+      <h3 class="panel-title">Contact</h3>
+    </div>
+    <div class="panel-body">
+      <div class="panel-body-inner">
+        <div class="form">
+          <div class="form-group-wrapper">
+            <div class="form-group">
+              <label class="control-label">Name</label>
+              <div class="form-control-static">{{ $ctrl.contact.name }}</div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Relationship</label>
+              <div class="form-control-static">{{ $ctrl.contact.relationship }}</div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Relationship Type</label>
+              <div class="form-control-static">{{ $ctrl.contact.relationshipType }}</div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Contact Information</label>
+              <div class="form-control-static">{{ $ctrl.contact.contactInformation }}</div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Next of Kin</label>
+              <div class="form-control-static"><span class="table-icon"><i class="fa fa-fw fa-check" ng-if="$ctrl.contact.nextOfKin"></i><i class="fa fa-fw fa-minus" ng-if="!$ctrl.contact.nextOfKin"></i></span></div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Note</label>
+              <div class="form-control-static">{{ $ctrl.contact.notes }}</div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Author</label>
+              <div class="form-control-static">{{ $ctrl.contact.author }}</div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Date</label>
+              <div class="form-control-static">{{ $ctrl.contact.dateCreated | date:'dd-MMM-yyyy'}}</div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Source</label>
+              <div class="form-control-static">{{ $ctrl.contact.source }}</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
+        <div class="wrap-control-group">
+          <div class="control-group right">
+            <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.edit();"><i class="fa fa-edit"></i> Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
 <div class="transbox">
   <div class="innerTransbox">
     <h3><strong>Procedure</strong></h3>
@@ -108,3 +182,4 @@
 <div class="form-group text-right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
   <button class="btn btn-info" ng-click="$ctrl.edit();"><i class="fa fa-pencil"></i> Edit</button>
 </div>
+-->
