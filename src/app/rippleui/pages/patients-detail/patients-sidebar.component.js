@@ -89,12 +89,12 @@ class PatientsSidebarController {
       //   linkDetail: 'eolcareplans-detail',
       //   title: 'Care Plans'
       // },
-      // {
-      //   name: 'mdt',
-      //   link: 'genericMdt',
-      //   linkDetail: 'genericMdt-detail',
-      //   title: 'MDT'
-      // },
+      {
+        name: 'mdt',
+        link: 'genericMdt',
+        linkDetail: 'genericMdt-detail',
+        title: 'MDT'
+      },
       // {
       //   name: 'images',
       //   link: 'images',
