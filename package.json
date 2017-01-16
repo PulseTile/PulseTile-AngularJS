@@ -1,21 +1,21 @@
 {
-  "name": "Org-Ripple-UI-rf3",
-  "version": "1.1.0",
+  "name": "pulsetile",
+  "version": "0.0.0-development",
   "description": "Ripple OSI App UI built using Angular 1.5 and Redux",
   "homepage": "http://demo.rippleosi.org/",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RippleOSI/Org-Ripple-UI-rf3.git"
+    "url": "https://github.com/RippleOSI/PulseTile.git"
   },
   "author": "",
-  "private": true,
+  "private": false,
   "engines": {
     "node": ">=6.2"
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/RippleOSI/Org-Ripple-UI-rf3/issues"
+    "url": "https://github.com/RippleOSI/PulseTile/issues"
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --display-chunks --progress",
@@ -26,7 +26,8 @@
     "server:dev": "cross-env NODE_ENV=development webpack-dev-server --progress --host 0.0.0.0",
     "start": "npm run server:dev",
     "test": "cross-env NODE_ENV=test karma start --single-run",
-    "test:watch": "cross-env NODE_ENV=test karma start"
+    "test:watch": "cross-env NODE_ENV=test karma start",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "devDependencies": {
     "autoprefixer": "~6.3.6",
@@ -73,7 +74,8 @@
     "style-loader": "~0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "~1.13.1",
-    "webpack-dev-server": "~1.14.1"
+    "webpack-dev-server": "~1.14.1",
+    "semantic-release": "^6.3.2"
   },
   "dependencies": {
     "angular": "1.5.8",
