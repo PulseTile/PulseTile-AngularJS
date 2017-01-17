@@ -23,6 +23,7 @@ class ProceduresListController {
 		this.queryBy = '$';
 		this.query = {};
 		this.query[this.queryBy] = '';
+		this.currentPage = 1;
 		this.isShowCreateBtn = true;
 		this.isFilter = false;
 		this.isShowCreateBtn = $state.router.globals.$current.name !== 'procedures-create';
