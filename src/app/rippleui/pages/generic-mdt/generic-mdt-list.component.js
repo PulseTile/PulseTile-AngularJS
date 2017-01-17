@@ -93,7 +93,11 @@ class GenericMdtListController {
     };
 
     this.create = function () {
-      GenericMdtModal.openModal(this.currentPatient, {title: 'Create MDT'}, {}, this.currentUser);
+      $state.go('genericMdt-create', {
+        patientId: $stateParams.patientId,
+        filter: this.query.$,
+        page: this.currentPage
+      });
     };
 
     this.setCurrentPageData = function (data) {

@@ -112,8 +112,11 @@ import ClinicalnotesDetailComponent from './rippleui/pages/clinical-notes/clinic
 
 import HeightAndWeightListComponent from './rippleui/pages/height-and-weight/heightAndWeight-list.component';
 import HeightAndWeightDetailComponent from './rippleui/pages/height-and-weight/heightAndWeight-detail.component';
+
 import GenericMdtListComponent from './rippleui/pages/generic-mdt/generic-mdt-list.component';
 import GenericMdtDetailComponent from './rippleui/pages/generic-mdt/generic-mdt-detail.component';
+import GenericMdtCreateComponent from './rippleui/pages/generic-mdt/generic-mdt-create.component';
+
 import TransferOfCareListComponent from './rippleui/pages/transfer-of-care/transfer-of-care-list.component';
 import TransferOfCareDetailComponent from './rippleui/pages/transfer-of-care/transfer-of-care-detail.component';
 
@@ -210,8 +213,11 @@ const app = angular
 
     .component('heightAndWeightListComponent', HeightAndWeightListComponent)
     .component('heightAndWeightDetailComponent', HeightAndWeightDetailComponent)
+    
     .component('genericMdtListComponent', GenericMdtListComponent)
     .component('genericMdtDetailComponent', GenericMdtDetailComponent)
+    .component('genericMdtCreateComponent', GenericMdtCreateComponent)
+    
     .component('transferOfCareListComponent', TransferOfCareListComponent)
     .component('transferOfCareDetailComponent', TransferOfCareDetailComponent)
     .config(routeConfig)

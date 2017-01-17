@@ -716,7 +716,25 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           state: 'genericMdt'
         }]
       })
-      
+      .state('genericMdt-create', {
+        url: '/patients/{patientId:int}/generic-mdt/create?reportType&searchString&queryType',
+        views: {
+          banner: {template: '<patients-banner-component></patients-banner-component>'},
+          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+          main: {template: '<generic-mdt-list-component></generic-mdt-list-component>'},
+          detail: {template: '<generic-mdt-create-component></generic-mdt-create-component>'}
+        },
+        breadcrumbs: [{
+          title: 'Patient Listings',
+          state: 'patients-list'
+        }, {
+          title: 'Patient Summary',
+          state: 'patients-summary'
+        }, {
+          title: 'MDT',
+          state: 'genericMdt'
+        }]
+      })
       .state('transferOfCare', {
         url: '/patients/{patientId:int}/transfer-of-care-list?reportType&searchString&queryType',
         views: {
