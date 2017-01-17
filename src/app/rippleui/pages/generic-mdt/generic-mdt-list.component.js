@@ -80,7 +80,7 @@ class GenericMdtListController {
       $state.go('genericMdt-detail', {
         patientId: $stateParams.patientId,
         genericMdtIndex: id,
-        filter: this.query,
+        filter: this.query.$,
         page: this.currentPage,
         reportType: $stateParams.reportType,
         searchString: $stateParams.searchString,
