@@ -480,7 +480,17 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           banner: {template: '<patients-banner-component></patients-banner-component>'},
           actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
           main: {template: '<procedures-list-component></procedures-list-component>'}
-        }
+        },
+				breadcrumbs: [{
+					title: 'Patient Listings',
+					state: 'patients-list'
+				}, {
+					title: 'Patient Summary',
+					state: 'patients-summary'
+				}, {
+					title: 'Procedures',
+					state: 'procedures'
+				}]
       })
       .state('procedures-detail', {
         url: '/patients/{patientId:int}/procedures/{procedureId}?filter&page&reportType&searchString&queryType&source',
@@ -489,7 +499,36 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
           main: {template: '<procedures-list-component></procedures-list-component>'},
           detail: {template: '<procedures-detail-component></procedures-detail-component>'}
-        }
+        },
+				breadcrumbs: [{
+					title: 'Patient Listings',
+					state: 'patients-list'
+				}, {
+					title: 'Patient Summary',
+					state: 'patients-summary'
+				}, {
+					title: 'Procedures',
+					state: 'procedures'
+				}]
+      })
+      .state('procedures-create', {
+        url: '/patients/{patientId:int}/procedures/create?filter&page&reportType&searchString&queryType&source',
+        views: {
+          banner: {template: '<patients-banner-component></patients-banner-component>'},
+          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+          main: {template: '<procedures-list-component></procedures-list-component>'},
+          detail: {template: '<procedures-create-component></procedures-create-component>'}
+        },
+				breadcrumbs: [{
+					title: 'Patient Listings',
+					state: 'patients-list'
+				}, {
+					title: 'Patient Summary',
+					state: 'patients-summary'
+				}, {
+					title: 'Procedures',
+					state: 'procedures'
+				}]
       })
 
       .state('results', {
@@ -506,7 +545,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           title: 'Patient Summary',
           state: 'patients-summary'
         }, {
-          title: 'Test Results',
+          title: 'Procedures',
           state: 'results'
         }]
       })  

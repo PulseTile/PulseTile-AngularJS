@@ -17,7 +17,7 @@ let templateProceduresList = require('./procedures-list.html');
 
 class ProceduresListController {
   constructor($scope, $state, $stateParams, $ngRedux, proceduresActions, serviceRequests, ProceduresModal, usSpinnerService) {
-    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-details'});
+    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
 		this.queryBy = '$';
@@ -102,9 +102,17 @@ class ProceduresListController {
       return procedureId === $stateParams.procedureId;
     };
 
-    this.create = function () {
-      ProceduresModal.openModal(this.currentPatient, {title: 'Create Procedure'}, {}, this.currentUser);
-    };
+    // this.create = function () {
+    //   ProceduresModal.openModal(this.currentPatient, {title: 'Create Procedure'}, {}, this.currentUser);
+    // };
+
+		this.create = function () {
+			$state.go('procedures-create', {
+				patientId: $stateParams.patientId,
+				filter: this.query.$,
+				page: this.currentPage
+			});
+		};
 
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {

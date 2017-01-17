@@ -93,6 +93,8 @@ import ReferralsCreateComponent from './rippleui/pages/referrals/referrals-creat
 
 import ProceduresListComponent from './rippleui/pages/procedures/procedures-list.component';
 import ProceduresDetailComponent from './rippleui/pages/procedures/procedures-detail.component';
+import ProceduresCreateComponent from './rippleui/pages/procedures/procedures-create.component';
+
 import ResultsListComponent from './rippleui/pages/results/results-list.component';
 import ResultsDetailComponent from './rippleui/pages/results/results-detail.component';
 import DocumentsListComponent from './rippleui/pages/documents/documents-list.component';
@@ -188,6 +190,8 @@ const app = angular
 
     .component('proceduresListComponent', ProceduresListComponent)
     .component('proceduresDetailComponent', ProceduresDetailComponent)
+    .component('proceduresCreateComponent', ProceduresCreateComponent)
+
     .component('patientsListFullComponent', PatientsListFullComponent)
     .component('resultsListComponent', ResultsListComponent)
     .component('resultsDetailComponent', ResultsDetailComponent)
