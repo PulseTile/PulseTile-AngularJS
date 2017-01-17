@@ -42,16 +42,18 @@ class ContactsCreateController {
         searchString: $stateParams.searchString,
         queryType: $stateParams.queryType
       });
-    }
+    };
+
     this.cancel = function () {
       this.goList();
     };
+    
     $scope.create = function (contactForm, contact) {
       $scope.formSubmitted = true;
 
       if (contactForm.$valid) {
-
         $scope.contactsCreate($scope.currentPatient.id, contact);
+        this.goList();
       }
     };
 
