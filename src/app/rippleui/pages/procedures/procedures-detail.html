@@ -21,56 +21,53 @@
         <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
         <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('contacts')"><i class="fa fa-chevron-up"></i></button>
       </div>
-      <h3 class="panel-title">Contact</h3>
+      <h3 class="panel-title">Procedure</h3>
     </div>
     <div class="panel-body">
       <div class="panel-body-inner">
         <div class="form">
           <div class="form-group-wrapper">
+
             <div class="form-group">
-              <label class="control-label">Name</label>
-              <div class="form-control-static">{{ $ctrl.contact.name }}</div>
+              <label class="control-label">Procedure Name:</label>
+              <div class="form-control-static">{{ $ctrl.procedure.procedureName }}</div>
             </div>
 
             <div class="form-group">
-              <label class="control-label">Relationship</label>
-              <div class="form-control-static">{{ $ctrl.contact.relationship }}</div>
+              <label class="control-label">Procedure Notes:</label>
+              <div class="form-control-static">{{ $ctrl.procedure.notes }}</div>
             </div>
 
             <div class="form-group">
-              <label class="control-label">Relationship Type</label>
-              <div class="form-control-static">{{ $ctrl.contact.relationshipType }}</div>
+              <label class="control-label">Date of Procedure:</label>
+              <div class="form-control-static">{{ $ctrl.procedure.date | date:'dd-MMM-yyyy' }}</div>
             </div>
 
             <div class="form-group">
-              <label class="control-label">Contact Information</label>
-              <div class="form-control-static">{{ $ctrl.contact.contactInformation }}</div>
+              <label class="control-label">Terminology:</label>
+              <div class="form-control-static">{{ $ctrl.procedure.procedureTerminology }}</div>
             </div>
 
             <div class="form-group">
-              <label class="control-label">Next of Kin</label>
-              <div class="form-control-static"><span class="table-icon"><i class="fa fa-fw fa-check" ng-if="$ctrl.contact.nextOfKin"></i><i class="fa fa-fw fa-minus" ng-if="!$ctrl.contact.nextOfKin"></i></span></div>
+              <label class="control-label">Code:</label>
+              <div class="form-control-static">{{ $ctrl.procedure.procedureCode }}</div>
             </div>
 
             <div class="form-group">
-              <label class="control-label">Note</label>
-              <div class="form-control-static">{{ $ctrl.contact.notes }}</div>
+              <label class="control-label">Procedure Performed By:</label>
+              <div class="form-control-static">{{ $ctrl.procedure.performer }}</div>
             </div>
 
             <div class="form-group">
-              <label class="control-label">Author</label>
-              <div class="form-control-static">{{ $ctrl.contact.author }}</div>
+              <label class="control-label">Author:</label>
+              <div class="form-control-static">{{ $ctrl.procedure.author }}</div>
             </div>
 
             <div class="form-group">
-              <label class="control-label">Date</label>
-              <div class="form-control-static">{{ $ctrl.contact.dateCreated | date:'dd-MMM-yyyy'}}</div>
+              <label class="control-label">Date Created:</label>
+              <div class="form-control-static">{{ $ctrl.procedure.dateSubmitted | date:'dd-MMM-yyyy' }}</div>
             </div>
 
-            <div class="form-group">
-              <label class="control-label">Source</label>
-              <div class="form-control-static">{{ $ctrl.contact.source }}</div>
-            </div>
           </div>
         </div>
 
@@ -81,6 +78,75 @@
             <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.edit();"><i class="fa fa-edit"></i> Edit</button>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-secondary" ng-if="isEdit" ng-class="getOpenPanelClass('contacts')">
+    <div class="panel-heading">
+      <div class="control-group right">
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('contacts')"><i class="fa fa-chevron-up"></i></button>
+      </div>
+      <h3 class="panel-title">Edit Contact</h3>
+    </div>
+    <div class="panel-body">
+      <div class="panel-body-inner">
+        <form name="procedureForm" class="form">
+          <div class="form-group-wrapper">
+
+            <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.procedureName.$dirty) && procedureForm.procedureName.$invalid, 'has-success': procedureForm.procedureName.$valid && procedureForm.procedureName.$dirty}">
+              <label for="procedureName" class="control-label">Procedure Name:</label>
+              <div class="input-holder">
+                <input type="text" class="form-control input-sm" id="procedureName" name="procedureName" ng-model="procedureEdit.procedureName" required />
+              </div>
+              <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.procedureName.$error.required">You must enter a value.</span>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.notes.$dirty) && procedureForm.notes.$invalid, 'has-success': procedureForm.notes.$valid && procedureForm.notes.$dirty}">
+              <label for="notes" class="control-label">Procedure Notes:</label>
+              <div class="input-holder">
+                <textarea type="text" class="form-control textarea-big input-sm" id="notes" name="notes" ng-model="procedureEdit.notes" required></textarea>
+              </div>
+              <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.notes.$error.required">You must enter a value.</span>
+            </div>
+
+            <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || procedureForm.date.$dirty) && procedureForm.date.$invalid, 'has-success': procedureForm.date.$valid && procedureForm.date.$dirty}">
+              <label for="date" class="control-label">Date of Procedure:</label>
+              <div class="inner-addon addon-left">
+                <div class="addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" class="form-control" id="date" name="date" ng-model="procedureEdit.date" ng-click="dateofSubmittedDatepicker($event, 'Date')" uib-datepicker-popup="dd-MMM-y" is-open="Date" required disabled />
+              </div>
+              <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.datesubmitted.$error.required">You must enter a valid date.</span>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.procedureTerminology.$dirty) && procedureForm.procedureTerminology.$invalid, 'has-success': procedureForm.procedureTerminology.$valid && procedureForm.procedureTerminology.$dirty}">
+              <label for="procedureTerminology" class="control-label">Terminology:</label>
+              <div class="input-holder">
+                <input type="text" class="form-control input-sm" id="procedureTerminology" name="procedureTerminology" ng-model="procedureEdit.procedureTerminology" required />
+              </div>
+              <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.procedureTerminology.$error.required">You must enter a value.</span>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.procedureCode.$dirty) && procedureForm.procedureCode.$invalid, 'has-success': procedureForm.procedureCode.$valid && procedureForm.procedureCode.$dirty}">
+              <label for="procedureTerminology" class="control-label">Code:</label>
+              <div class="input-holder">
+                <input type="text" class="form-control input-sm" id="procedureCode" name="procedureCode" ng-model="procedureEdit.procedureCode" required />
+              </div>
+              <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.procedureCode.$error.required">You must enter a value.</span>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.performer.$dirty) && procedureForm.performer.$invalid, 'has-success': procedureForm.performer.$valid && procedureForm.performer.$dirty}">
+              <label for="performer" class="control-label">Procedure Performed By:</label>
+              <div class="input-holder">
+                <input type="text" class="form-control input-sm" id="performer" name="performer" ng-model="procedureEdit.performer" required />
+              </div>
+              <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.procedureCode.$error.required">You must enter a value.</span>
+            </div>
+
+          </div>
+        </form>
       </div>
     </div>
   </div>
