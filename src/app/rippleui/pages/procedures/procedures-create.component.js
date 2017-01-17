@@ -13,10 +13,10 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-let templateContactsCreate= require('./contacts-create.html');
+let templateProceduresCreate= require('./procedures-create.html');
 
-class ContactsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, contactsActions, serviceRequests) {
+class ProceduresCreateController {
+  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, proceduresActions, serviceRequests) {
     $scope.contact = {};
     $scope.contact.dateSubmitted = new Date();
     // $scope.contact.dateSubmitted = new Date().toISOString().slice(0, 10);
@@ -24,7 +24,7 @@ class ContactsCreateController {
     $scope.contact.relationshipTerminology = 'local';
 
     this.setCurrentPageData = function (data) {
-      if (data.contacts.dataCreate !== null) {
+      if (data.procedures.dataCreate !== null) {
         this.goList();
       }
       if (data.patientsGet.data) {
@@ -36,7 +36,7 @@ class ContactsCreateController {
     };
 
     this.goList = function () {
-      $state.go('contacts', {
+      $state.go('procedures', {
         patientId: $stateParams.patientId,
         reportType: $stateParams.reportType,
         searchString: $stateParams.searchString,
@@ -47,13 +47,13 @@ class ContactsCreateController {
     this.cancel = function () {
       this.goList();
     };
-    
-    $scope.create = function (contactForm, contact) {
+
+    $scope.create = function (procedureForm, procedure) {
       $scope.formSubmitted = true;
 
-      if (contactForm.$valid) {
-        $scope.contactsCreate($scope.currentPatient.id, contact);
-        this.goList();
+      if (procedureForm.$valid) {
+
+        $scope.proceduresCreate($scope.currentPatient.id, procedure);
       }
     };
 
@@ -63,14 +63,14 @@ class ContactsCreateController {
 
     $scope.$on('$destroy', unsubscribe);
 
-    $scope.contactsCreate = contactsActions.create;
+    $scope.proceduresCreate = proceduresActions.create;
   }
 }
 
-const ContactsCreateComponent = {
-  template: templateContactsCreate,
-  controller: ContactsCreateController
+const ProceduresCreateComponent = {
+  template: templateProceduresCreate,
+  controller: ProceduresCreateController
 };
 
-ContactsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'contactsActions', 'serviceRequests'];
-export default ContactsCreateComponent;
+ProceduresCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'proceduresActions', 'serviceRequests'];
+export default ProceduresCreateComponent;

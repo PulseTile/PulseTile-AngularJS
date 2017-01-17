@@ -41,7 +41,6 @@ import httpMiddleware from './helpers/httpMiddleware';
 import AdvancedSearch from './helpers/advancedSearch';
 import Patient from './helpers/patient';
 import OrdersModal from './rippleui/pages/orders/orders-modal';
-import ReferralsModal from './rippleui/pages/referrals/referrals-modal';
 import AppointmentsModal from './rippleui/pages/appointments/appointments-modal';
 import AppointmentConfirmModal from './rippleui/pages/appointments/appointments-confirm-modal';
 import ProceduresModal from './rippleui/pages/procedures/procedures-modal';
@@ -49,7 +48,6 @@ import ImageModal from './rippleui/pages/dicom/image-modal';
 import EolcareplansModal from './rippleui/pages/care-plans/eolcareplans-modal';
 import LookupModal from './rippleui/pages/patients-lookup/patients-lookup-modal';
 import HeightAndWeightModal from './rippleui/pages/height-and-weight/heightAndWeight-modal';
-import GenericMdtModal from './rippleui/pages/generic-mdt/generic-mdt-modal';
 import TransferOfCareModal from './rippleui/pages/transfer-of-care/transfer-of-care-modal';
 
 //components 
@@ -93,6 +91,8 @@ import ReferralsCreateComponent from './rippleui/pages/referrals/referrals-creat
 
 import ProceduresListComponent from './rippleui/pages/procedures/procedures-list.component';
 import ProceduresDetailComponent from './rippleui/pages/procedures/procedures-detail.component';
+import ProceduresCreateComponent from './rippleui/pages/procedures/procedures-create.component';
+
 import ResultsListComponent from './rippleui/pages/results/results-list.component';
 import ResultsDetailComponent from './rippleui/pages/results/results-detail.component';
 import DocumentsListComponent from './rippleui/pages/documents/documents-list.component';
@@ -112,8 +112,11 @@ import ClinicalnotesDetailComponent from './rippleui/pages/clinical-notes/clinic
 
 import HeightAndWeightListComponent from './rippleui/pages/height-and-weight/heightAndWeight-list.component';
 import HeightAndWeightDetailComponent from './rippleui/pages/height-and-weight/heightAndWeight-detail.component';
+
 import GenericMdtListComponent from './rippleui/pages/generic-mdt/generic-mdt-list.component';
 import GenericMdtDetailComponent from './rippleui/pages/generic-mdt/generic-mdt-detail.component';
+import GenericMdtCreateComponent from './rippleui/pages/generic-mdt/generic-mdt-create.component';
+
 import TransferOfCareListComponent from './rippleui/pages/transfer-of-care/transfer-of-care-list.component';
 import TransferOfCareDetailComponent from './rippleui/pages/transfer-of-care/transfer-of-care-detail.component';
 
@@ -138,7 +141,6 @@ const app = angular
     .factory('httpMiddleware', httpMiddleware)
     .factory('AdvancedSearch', AdvancedSearch)
     .factory('OrdersModal', OrdersModal)
-    .factory('ReferralsModal', ReferralsModal)
     .factory('ProceduresModal', ProceduresModal)
     .factory('AppointmentsModal', AppointmentsModal)
     .factory('AppointmentConfirmModal', AppointmentConfirmModal)
@@ -147,7 +149,6 @@ const app = angular
     .factory('LookupModal', LookupModal)
     .factory('Patient', Patient)
     .factory('HeightAndWeightModal', HeightAndWeightModal)
-    .factory('GenericMdtModal', GenericMdtModal)
     .factory('TransferOfCareModal', TransferOfCareModal)
     .service('serviceRequests', ServiceRequests)
     .component('profileComponent', ProfileComponent)
@@ -188,6 +189,8 @@ const app = angular
 
     .component('proceduresListComponent', ProceduresListComponent)
     .component('proceduresDetailComponent', ProceduresDetailComponent)
+    .component('proceduresCreateComponent', ProceduresCreateComponent)
+
     .component('patientsListFullComponent', PatientsListFullComponent)
     .component('resultsListComponent', ResultsListComponent)
     .component('resultsDetailComponent', ResultsDetailComponent)
@@ -210,8 +213,11 @@ const app = angular
 
     .component('heightAndWeightListComponent', HeightAndWeightListComponent)
     .component('heightAndWeightDetailComponent', HeightAndWeightDetailComponent)
+    
     .component('genericMdtListComponent', GenericMdtListComponent)
     .component('genericMdtDetailComponent', GenericMdtDetailComponent)
+    .component('genericMdtCreateComponent', GenericMdtCreateComponent)
+    
     .component('transferOfCareListComponent', TransferOfCareListComponent)
     .component('transferOfCareDetailComponent', TransferOfCareDetailComponent)
     .config(routeConfig)

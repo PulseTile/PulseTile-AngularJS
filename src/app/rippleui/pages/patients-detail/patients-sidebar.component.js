@@ -59,12 +59,12 @@ class PatientsSidebarController {
         linkDetail: 'results-detail',
         title: 'Test Results'
       },
-      // {
-      //   name: 'procedures',
-      //   link: 'procedures',
-      //   linkDetail: 'procedures-detail',
-      //   title: 'Procedures'
-      // },
+      {
+        name: 'procedures',
+        link: 'procedures',
+        linkDetail: 'procedures-detail',
+        title: 'Procedures'
+      },
       {
         name: 'referrals',
         link: 'referrals',
@@ -89,12 +89,12 @@ class PatientsSidebarController {
       //   linkDetail: 'eolcareplans-detail',
       //   title: 'Care Plans'
       // },
-      // {
-      //   name: 'mdt',
-      //   link: 'genericMdt',
-      //   linkDetail: 'genericMdt-detail',
-      //   title: 'MDT'
-      // },
+      {
+        name: 'mdt',
+        link: 'genericMdt',
+        linkDetail: 'genericMdt-detail',
+        title: 'MDT'
+      },
       // {
       //   name: 'images',
       //   link: 'images',

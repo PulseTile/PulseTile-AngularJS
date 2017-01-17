@@ -13,81 +13,14 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
-
-<div mc-full-panel mc-accordion mc-open-panel="procedure" class="panel-group accordion">
-  <div class="panel panel-secondary" ng-if="!isEdit" ng-class="getOpenPanelClass('procedure')">
+<div mc-full-panel mc-accordion mc-open-panel="procedureCreate" class="panel-group accordion">
+  <div class="panel panel-secondary" ng-class="getOpenPanelClass('procedureCreate')">
     <div class="panel-heading">
       <div class="control-group right">
         <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('contacts')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('procedureCreate')"><i class="fa fa-chevron-up"></i></button>
       </div>
-      <h3 class="panel-title">Procedure</h3>
-    </div>
-    <div class="panel-body">
-      <div class="panel-body-inner">
-        <div class="form">
-          <div class="form-group-wrapper">
-
-            <div class="form-group">
-              <label class="control-label">Procedure Name:</label>
-              <div class="form-control-static">{{ $ctrl.procedure.procedureName }}</div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label">Procedure Notes:</label>
-              <div class="form-control-static">{{ $ctrl.procedure.notes }}</div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label">Date of Procedure:</label>
-              <div class="form-control-static">{{ $ctrl.procedure.date | date:'dd-MMM-yyyy' }}</div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label">Terminology:</label>
-              <div class="form-control-static">{{ $ctrl.procedure.procedureTerminology }}</div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label">Code:</label>
-              <div class="form-control-static">{{ $ctrl.procedure.procedureCode }}</div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label">Procedure Performed By:</label>
-              <div class="form-control-static">{{ $ctrl.procedure.performer }}</div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label">Author:</label>
-              <div class="form-control-static">{{ $ctrl.procedure.author }}</div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label">Date Created:</label>
-              <div class="form-control-static">{{ $ctrl.procedure.dateSubmitted | date:'dd-MMM-yyyy' }}</div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-      <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
-        <div class="wrap-control-group">
-          <div class="control-group right">
-            <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.edit();"><i class="fa fa-edit"></i> Edit</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-secondary" ng-if="isEdit" ng-class="getOpenPanelClass('procedure')">
-    <div class="panel-heading">
-      <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('contacts')"><i class="fa fa-chevron-up"></i></button>
-      </div>
-      <h3 class="panel-title">Edit Procedure</h3>
+      <h3 class="panel-title">Create Procedure</h3>
     </div>
     <div class="panel-body">
       <div class="panel-body-inner">
@@ -105,7 +38,7 @@
             <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.notes.$dirty) && procedureForm.notes.$invalid, 'has-success': procedureForm.notes.$valid && procedureForm.notes.$dirty}">
               <label for="notes" class="control-label">Procedure Notes:</label>
               <div class="input-holder">
-                <textarea type="text" class="form-control textarea-big input-sm" id="notes" name="notes" ng-model="procedureEdit.notes" required></textarea>
+                <textarea type="text" class="form-control textarea-big input-sm" id="notes" name="notes" ng-model="procedure.notes" required></textarea>
               </div>
               <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.notes.$error.required">You must enter a value.</span>
             </div>
@@ -116,7 +49,7 @@
                 <div class="addon">
                   <i class="fa fa-calendar"></i>
                 </div>
-                <input type="text" class="form-control" id="date" name="date" ng-model="procedureEdit.date" ng-click="dateofSubmittedDatepicker($event, 'Date')" uib-datepicker-popup="dd-MMM-y" is-open="Date" required disabled />
+                <input type="text" class="form-control" id="date" name="date" ng-model="procedure.date" ng-click="dateofSubmittedDatepicker($event, 'Date')" uib-datepicker-popup="dd-MMM-y" is-open="Date" required disabled />
               </div>
               <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.datesubmitted.$error.required">You must enter a valid date.</span>
             </div>
@@ -124,7 +57,7 @@
             <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.procedureTerminology.$dirty) && procedureForm.procedureTerminology.$invalid, 'has-success': procedureForm.procedureTerminology.$valid && procedureForm.procedureTerminology.$dirty}">
               <label for="procedureTerminology" class="control-label">Terminology:</label>
               <div class="input-holder">
-                <input type="text" class="form-control input-sm" id="procedureTerminology" name="procedureTerminology" ng-model="procedureEdit.procedureTerminology" required />
+                <input type="text" class="form-control input-sm" id="procedureTerminology" name="procedureTerminology" ng-model="procedure.procedureTerminology" required />
               </div>
               <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.procedureTerminology.$error.required">You must enter a value.</span>
             </div>
@@ -132,7 +65,7 @@
             <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.procedureCode.$dirty) && procedureForm.procedureCode.$invalid, 'has-success': procedureForm.procedureCode.$valid && procedureForm.procedureCode.$dirty}">
               <label for="procedureTerminology" class="control-label">Code:</label>
               <div class="input-holder">
-                <input type="text" class="form-control input-sm" id="procedureCode" name="procedureCode" ng-model="procedureEdit.procedureCode" required />
+                <input type="text" class="form-control input-sm" id="procedureCode" name="procedureCode" ng-model="procedure.procedureCode" required />
               </div>
               <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.procedureCode.$error.required">You must enter a value.</span>
             </div>
@@ -140,7 +73,7 @@
             <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.performer.$dirty) && procedureForm.performer.$invalid, 'has-success': procedureForm.performer.$valid && procedureForm.performer.$dirty}">
               <label for="performer" class="control-label">Procedure Performed By:</label>
               <div class="input-holder">
-                <input type="text" class="form-control input-sm" id="performer" name="performer" ng-model="procedureEdit.performer" required />
+                <input type="text" class="form-control input-sm" id="performer" name="performer" ng-model="procedure.performer" required />
               </div>
               <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.performer.$error.required">You must enter a value.</span>
             </div>
@@ -148,7 +81,7 @@
             <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.author.$dirty) && procedureForm.author.$invalid, 'has-success': procedureForm.author.$valid && procedureForm.author.$dirty}">
               <label for="author" class="control-label">Author:</label>
               <div class="input-holder">
-                <input type="text" class="form-control input-sm" id="author" name="author" ng-model="procedureEdit.author" required />
+                <input type="text" class="form-control input-sm" id="author" name="author" ng-model="procedure.author" required />
               </div>
               <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.author.$error.required">You must enter a value.</span>
             </div>
@@ -159,7 +92,7 @@
                 <div class="addon">
                   <i class="fa fa-calendar"></i>
                 </div>
-                <input type="text" class="form-control" id="dateSubmitted" name="dateSubmitted" ng-model="procedureEdit.dateSubmitted" ng-click="dateofSubmittedDatepicker($event, 'DateSubmitted')" uib-datepicker-popup="dd-MMM-y" is-open="DateSubmitted" required disabled />
+                <input type="text" class="form-control" id="dateSubmitted" name="dateSubmitted" ng-model="procedure.dateSubmitted" ng-click="dateofSubmittedDatepicker($event, 'DateSubmitted')" uib-datepicker-popup="dd-MMM-y" is-open="DateSubmitted" required disabled />
               </div>
               <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.dateSubmitted.$error.required">You must enter a valid date.</span>
             </div>
@@ -167,7 +100,7 @@
             <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.source.$dirty) && procedureForm.source.$invalid, 'has-success': procedureForm.source.$valid && procedureForm.source.$dirty}">
               <label for="source" class="control-label">Source:</label>
               <div class="input-holder">
-                <input type="text" class="form-control input-sm" id="source" name="source" ng-model="procedureEdit.source" required />
+                <input type="text" class="form-control input-sm" id="source" name="source" ng-model="procedure.source" required />
               </div>
               <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.source.$error.required">You must enter a value.</span>
             </div>
@@ -175,11 +108,11 @@
           </div>
         </form>
       </div>
-      <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
+      <div class="panel-control">
         <div class="wrap-control-group">
           <div class="control-group right">
-            <button class="btn btn-danger" ng-click="$ctrl.cancelEdit()"><i class="fa fa-ban"></i> Cancel</button>
-            <button class="btn btn-success" ng-click="confirmEdit(procedureForm)"><i class="fa fa-check"></i> Complete</button>
+            <button class="btn btn-danger" ng-click="$ctrl.cancel()"><i class="fa fa-ban"></i> Cancel</button>
+            <button class="btn btn-success" ng-click="create(procedureForm, procedureEdit)"><i class="fa fa-check"></i> Complete</button>
           </div>
         </div>
       </div>
