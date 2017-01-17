@@ -43,9 +43,11 @@ class ProceduresCreateController {
         queryType: $stateParams.queryType
       });
     };
+
     this.cancel = function () {
       this.goList();
     };
+
     $scope.create = function (procedureForm, procedure) {
       $scope.formSubmitted = true;
 

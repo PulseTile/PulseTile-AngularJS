@@ -40,7 +40,6 @@ class ProceduresDetailController {
 			}
 		}.bind(this);
 
-
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
