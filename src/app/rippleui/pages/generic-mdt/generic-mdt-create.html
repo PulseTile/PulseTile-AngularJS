@@ -1,0 +1,95 @@
+<!--
+  ~  Copyright 2016 Ripple Foundation C.I.C. Ltd
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  -->
+<div mc-full-panel mc-accordion mc-open-panel="genericMdtCreate" class="panel-group accordion">
+    <div class="panel panel-secondary" ng-class="getOpenPanelClass('genericMdtCreate')">
+        <div class="panel-heading">
+            <div class="control-group right">
+                <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+                <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('genericMdtCreate')"><i class="fa fa-chevron-up"></i></button>
+            </div>
+            <h3 class="panel-title">Create MDT</h3>
+        </div>
+        <div class="panel-body">
+            <div class="panel-body-inner">
+                <form name="mdtForm" class="form">
+                    <div class="form-group-wrapper">
+                        <div class="form-group" ng-class="{'has-error': (formSubmitted || mdtForm.serviceTeam.$dirty) && mdtForm.serviceTeam.$invalid, 'has-success': mdtForm.serviceTeam.$valid && mdtForm.serviceTeam.$dirty}">
+                            <label for="serviceTeam" class="control-label">Service / Team:</label>
+                            <div class="input-holder">
+                                <input type="text" class="form-control input-sm" id="serviceTeam" name="serviceTeam" ng-model="genericMdt.serviceTeam" required />
+                            </div>
+                            <span class="help-block animate-fade" ng-show="formSubmitted && mdtForm.serviceTeam.$error.required">You must enter a value.</span>
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error': (formSubmitted || mdtForm.dateOfRequest.$dirty) && mdtForm.dateOfRequest.$invalid, 'has-success': mdtForm.dateOfRequest.$valid && mdtForm.dateOfRequest.$dirty}">
+                            <label for="dateOfRequest" class="control-label">Date of Request:</label>
+                            <div class="inner-addon addon-left">
+                                <div class="addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input type="text" class="form-control" id="dateOfRequest" name="dateOfRequest" ng-model="genericMdt.dateOfRequest" ng-click="openDatepicker($event, 'dateOfRequest')" uib-datepicker-popup="dd-MMM-y" is-open="dateOfRequest" required />
+                            </div>
+                            <span class="help-block animate-fade" ng-show="formSubmitted && mdtForm.dateOfRequest.$error.required">You must enter a value.</span>
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error': (formSubmitted || mdtForm.dateOfMeeting.$dirty) && mdtForm.dateOfMeeting.$invalid, 'has-success': mdtForm.dateOfMeeting.$valid && mdtForm.dateOfMeeting.$dirty}">
+                            <label for="dateOfMeeting" class="control-label">Date of Meeting:</label>
+                            <div class="inner-addon addon-left">
+                                <div class="addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input type="text" class="form-control" id="dateOfMeeting" name="dateOfMeeting" ng-model="genericMdt.dateOfMeeting" ng-click="openDatepicker($event, 'dateOfMeeting')" uib-datepicker-popup="dd-MMM-y" is-open="dateOfMeeting" required />
+                            </div>
+                            <span class="help-block animate-fade" ng-show="formSubmitted && mdtForm.dateOfMeeting.$error.required">You must enter a value.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Link to MDT Web Service Directory:</label>
+                            <div class="form-control-static">
+                                <a href="https://www.mdtwebservicedirectory.com?123080s9ijass">https://www.mdtwebservicedirectory.com?123080s9ijass</a>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error': (formSubmitted || mdtForm.question.$dirty) && mdtForm.question.$invalid, 'has-success': mdtForm.question.$valid && mdtForm.question.$dirty}">
+                            <label for="question" class="control-label">Question For MDT:</label>
+                            <div class="input-holder">
+                                <input type="text" class="form-control input-sm" id="question" name="question" ng-model="genericMdt.question" required />
+                            </div>
+                            <span class="help-block animate-fade" ng-show="formSubmitted && mdtForm.question.$error.required">You must enter a value.</span>
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error': (formSubmitted || mdtForm.notes.$dirty) && mdtForm.notes.$invalid, 'has-success': mdtForm.notes.$valid && mdtForm.notes.$dirty}">
+                            <label for="notes" class="control-label">Meeting Discussion:</label>
+                            <div class="input-holder">
+                                <input type="text" class="form-control input-sm" id="notes" name="notes" ng-model="genericMdt.notes" required />
+                            </div>
+                            <span class="help-block animate-fade" ng-show="formSubmitted && mdtForm.notes.$error.required">You must enter a value.</span>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="panel-control">
+                <div class="wrap-control-group">
+                    <div class="control-group right">
+                        <button class="btn btn-danger" ng-click="$ctrl.cancel()"><i class="fa fa-ban"></i> Cancel</button>
+                        <button class="btn btn-success" ng-click="create(mdtForm, genericMdt)"><i class="fa fa-check"></i> Complete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
