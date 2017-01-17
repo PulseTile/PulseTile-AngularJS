@@ -49,7 +49,6 @@ import ImageModal from './rippleui/pages/dicom/image-modal';
 import EolcareplansModal from './rippleui/pages/care-plans/eolcareplans-modal';
 import LookupModal from './rippleui/pages/patients-lookup/patients-lookup-modal';
 import HeightAndWeightModal from './rippleui/pages/height-and-weight/heightAndWeight-modal';
-import GenericMdtModal from './rippleui/pages/generic-mdt/generic-mdt-modal';
 import TransferOfCareModal from './rippleui/pages/transfer-of-care/transfer-of-care-modal';
 
 //components 
@@ -150,7 +149,6 @@ const app = angular
     .factory('LookupModal', LookupModal)
     .factory('Patient', Patient)
     .factory('HeightAndWeightModal', HeightAndWeightModal)
-    .factory('GenericMdtModal', GenericMdtModal)
     .factory('TransferOfCareModal', TransferOfCareModal)
     .service('serviceRequests', ServiceRequests)
     .component('profileComponent', ProfileComponent)

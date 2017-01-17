@@ -1,7 +1,7 @@
 let templateGenericMdtDetail= require('./generic-mdt-detail.html');
 
 class GenericMdtDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, genericmdtActions, GenericMdtModal, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, genericmdtActions, serviceRequests, usSpinnerService) {
     $scope.isEdit = false;
     
     this.edit = function () {
@@ -61,5 +61,5 @@ const GenericMdtDetailComponent = {
   controller: GenericMdtDetailController
 };
 
-GenericMdtDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'genericmdtActions', 'GenericMdtModal', 'serviceRequests', 'usSpinnerService'];
+GenericMdtDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'genericmdtActions', 'serviceRequests', 'usSpinnerService'];
 export default GenericMdtDetailComponent;

@@ -16,7 +16,7 @@
 let templateGenericMdtList = require('./generic-mdt-list.html');
 
 class GenericMdtListController {
-  constructor($scope, $state, $stateParams, $ngRedux, genericmdtActions, serviceRequests, GenericMdtModal, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, genericmdtActions, serviceRequests, usSpinnerService) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -134,5 +134,5 @@ const GenericMdtListComponent = {
   controller: GenericMdtListController
 };
 
-GenericMdtListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'genericmdtActions', 'serviceRequests', 'GenericMdtModal', 'usSpinnerService'];
+GenericMdtListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'genericmdtActions', 'serviceRequests', 'usSpinnerService'];
 export default GenericMdtListComponent;
