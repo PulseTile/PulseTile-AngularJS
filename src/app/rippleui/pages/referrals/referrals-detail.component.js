@@ -45,7 +45,14 @@ class ReferralsDetailController {
 			$scope.referralsEdit = Object.assign({}, this.referral);
 			$scope.patient = this.currentPatient;
 
-			$scope.referralsEdit.dateCreated = new Date(this.clinicalNote.dateCreated).toISOString().slice(0, 10);
+			$scope.referralsEdit.dateCreated = new Date(this.referralsEdit.dateCreated).toISOString().slice(0, 10);
+		};
+
+		$scope.openDatepicker = function ($event, name) {
+			$event.preventDefault();
+			$event.stopPropagation();
+
+			$scope[name] = true;
 		};
 
 		this.cancelEdit = function () {
@@ -67,11 +74,11 @@ class ReferralsDetailController {
 					source: referrals.source
 				};
 
-				this.referralsEdit = Object.assign(referrals, $scope.clinicalNoteEdit);
+				this.referralsEdit = Object.assign(referrals, toUpdate);
 				$scope.isEdit = false;
-				referralsActions.update($scope.patient.id, toUpdate);
+				referralsActions.update($scope.patient.id, this.referralsEdit);
 				setTimeout(function () {
-					$state.go('clinicalNotes-detail', {
+					$state.go('referrals', {
 						patientId: $scope.patient.id,
 						clinicalNoteIndex: referrals.sourceId
 					});

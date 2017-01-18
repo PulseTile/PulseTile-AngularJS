@@ -112,8 +112,11 @@
 
             <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.dateOfReferral.$dirty) && referralsForm.dateOfReferral.$invalid, 'has-success': referralsForm.dateOfReferral.$valid && referralsForm.dateOfReferral.$dirty}">
               <label for="dateOfReferral" class="control-label">Date of Referral:</label>
-              <div class="input-holder">
-                <input class="form-control input-sm" id="dateOfReferral" name="dateOfReferral" ng-model="referralsEdit.dateOfReferral" ng-click="openDatepicker($event, 'dateOfReferral')" uib-datepicker-popup="dd-MMM-y" is-open="dateOfReferral" required disabled />
+              <div class="inner-addon addon-left">
+                <div class="addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" class="form-control" id="dateOfReferral" name="dateOfReferral" ng-model="referralsEdit.dateOfReferral" ui-date ng-click="openDatepicker($event, 'DateOfReferral')" uib-datepicker-popup="dd-MMM-y" is-open="DateOfReferral" required disabled />
               </div>
               <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.dateOfReferral.$error.required">You must enter a value.</span>
             </div>
@@ -144,8 +147,11 @@
 
             <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.dateCreated.$dirty) && referralsForm.dateCreated.$invalid, 'has-success': referralsForm.dateCreated.$valid && referralsForm.dateCreated.$dirty}">
               <label for="dateCreated" class="control-label">Date Created:</label>
-              <div class="input-holder">
-                <input class="form-control input-sm" id="dateCreated" name="author" ng-model="referralsEdit.dateCreated" ng-click="openDatepicker($event, 'dateCreated')" uib-datepicker-popup="dd-MMM-y" is-open="dateCreated" required disabled />
+              <div class="inner-addon addon-left">
+                <div class="addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" class="form-control" id="dateCreated" name="dateCreated" ng-model="referralsEdit.dateCreated" ui-date ng-click="openDatepicker($event, 'DateCreated')" uib-datepicker-popup="dd-MMM-y" is-open="DateCreated" required disabled />
               </div>
               <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.dateCreated.$error.required">You must enter a value.</span>
             </div>
