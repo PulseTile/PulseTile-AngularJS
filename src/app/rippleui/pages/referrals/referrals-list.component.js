@@ -22,9 +22,10 @@ class ReferralsListController {
 
     this.currentPage = 1;
     this.query = '';
-		this.isShowExpandBtn = true;//$state.router.globals.$current.name !== 'clinicalNotes'
 		this.isFilter = false;
-		this.isShowCreateBtn = true;
+
+		this.isShowCreateBtn = $state.router.globals.$current.name !== 'referrals-create';
+		this.isShowExpandBtn = $state.router.globals.$current.name !== 'referrals';
 
     if ($stateParams.filter) {
       this.query = $stateParams.filter;
@@ -37,15 +38,6 @@ class ReferralsListController {
     if ($stateParams.page) {
       this.currentPage = $stateParams.page;
     }
-
-    // $scope.search = function (row) {
-    //   return (
-    //     row.dateOfReferral.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-    //     row.referralFrom.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-    //     row.referralTo.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-    //     row.source.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1
-    //   );
-    // };
 
     this.go = function (id) {
       $state.go('referrals-detail', {
@@ -62,10 +54,6 @@ class ReferralsListController {
     this.selected = function (referralId) {
       return referralId === $stateParams.referralId;
     };
-
-    // this.create = function () {
-    //   ReferralsModal.openModal(this.currentPatient, {title: 'Create Referral'}, {}, this.currentUser);
-    // };
 
 		this.toggleFilter = function () {
 			this.isFilter = !this.isFilter;
@@ -92,7 +80,6 @@ class ReferralsListController {
 		this.create = function () {
 			$state.go('referrals-create', {
 				patientId: $stateParams.patientId,
-				// referralId: id,
 				filter: $scope.query,
 				page: this.currentPage,
 				reportType: $stateParams.reportType,
