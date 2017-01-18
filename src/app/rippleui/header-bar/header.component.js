@@ -44,7 +44,7 @@ class HeaderController {
       // Direct different roles to different pages at login
       switch (currentUser.role) {
         case 'IDCR':
-          $state.go('main-search');
+          $state.go('patients-charts');
           break;
         case 'PHR':
           //Trick for PHR user login
