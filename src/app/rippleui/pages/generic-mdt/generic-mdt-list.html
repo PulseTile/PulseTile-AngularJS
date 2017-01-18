@@ -14,51 +14,6 @@
   ~  limitations under the License.
   -->
 
-<!--<h3><strong>MultiDisciplinary Teams</strong></h3>-->
-
-<!--<div class="inner-addon left-addon filterInput">-->
-    <!--<i class="fa fa-filter"></i>-->
-    <!--<input type="text" class="form-control" placeholder="Filter..." ng-model="$ctrl.query" />-->
-<!--</div>-->
-
-<!--<table class="table table-bordered table-striped table-hover rwd-table">-->
-  <!--<thead>-->
-  <!--<tr>-->
-    <!--<th>Date of Request</th>-->
-    <!--<th>Service / Team</th>-->
-    <!--<th>Date of Meeting</th>-->
-    <!--<th>Source</th>-->
-  <!--</tr>-->
-  <!--</thead>-->
-  <!--<tbody>-->
-  <!--<tr dir-paginate="mdt in $ctrl.genericMdtComposition | filter:$ctrl.search | itemsPerPage: 10" current-page="$ctrl.currentPage" ng-click="$ctrl.go(mdt.sourceId)" ng-class="{info: $ctrl.selected(mdt.sourceId)}">-->
-    <!--<td data-th="Date of Request" class="dateTime">{{mdt.dateOfRequest}}</td>-->
-    <!--<td data-th="Service / Team">{{mdt.serviceTeam}}</td>-->
-    <!--<td data-th="Date of Meeting" class="dateTime">{{mdt.dateOfMeeting}}</td>-->
-    <!--<td data-th="Source">{{mdt.source}}</td>-->
-  <!--</tr>-->
-  <!--<tr ng-if="!$ctrl.genericMdtComposition.length">-->
-    <!--<td colspan="4"><span class="label label-default">No MDTs</span></td>-->
-  <!--</tr>-->
-  <!--</tbody>-->
-<!--</table>-->
-
-<!--<div class="row">-->
-  <!--<div class="col-md-12">-->
-    <!--<span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="patientSummary-spinner" spinner-start-active="true"></span>-->
-  <!--</div>-->
-<!--</div>-->
-
-<!--<div class="row" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">-->
-  <!--<div class="col-md-6 hidden-xs"><div class="text-right"><dir-pagination-controls on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>-->
-  <!--<div class="col-md-6 hidden-xs"><div class="text-right create-button"><button class="btn btn-info" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> Create</button></div></div>-->
-<!--</div>-->
-<!--<div class="row" ng-if="currentUser.permissions.indexOf('WRITE') !== -1">-->
-  <!--<div class="col-xs-6 hidden-sm hidden-md hidden-lg"><div class="text-right"><dir-pagination-controls on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>-->
-  <!--<div class="col-xs-6 hidden-sm hidden-md hidden-lg"><div class="text-right create-button"><button class="btn btn-info" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> Create</button></div></div>-->
-<!--</div>-->
-
-
 <div mc-full-panel class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
