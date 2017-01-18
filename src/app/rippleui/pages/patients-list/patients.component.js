@@ -46,6 +46,7 @@ class PatientsController {
       }
     };
 
+
     vm.go = function (patient) {
       $state.go('patients-summary', {
         patientId: patient.id,
@@ -77,7 +78,7 @@ class PatientsController {
     };
 
     if ($stateParams.patientsList.length === 0 && !$stateParams.displayEmptyTable) {
-      vm.order = $stateParams.order || 'nhsNumber';
+      vm.order = $stateParams.order || 'name';
       vm.reverse = $stateParams.reverse === 'true';
       vm.filters = {
         department: $stateParams.department,
