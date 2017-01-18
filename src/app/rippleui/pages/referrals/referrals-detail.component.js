@@ -16,7 +16,7 @@
 let templateReferralsDetail= require('./referrals-detail.html');
 
 class ReferralsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, referralsActions, ReferralsModal, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, referralsActions, usSpinnerService) {
 
 		$scope.isEdit = false;
 
@@ -67,11 +67,11 @@ class ReferralsDetailController {
 					source: referrals.source
 				};
 
-				this.referralsEdit = Object.assign(referrals, $scope.clinicalNoteEdit);
+				this.referralsEdit = Object.assign(referrals, $scope.referralsEdit);
 				$scope.isEdit = false;
 				referralsActions.update($scope.patient.id, toUpdate);
 				setTimeout(function () {
-					$state.go('clinicalNotes-detail', {
+					$state.go('referrals-detail', {
 						patientId: $scope.patient.id,
 						clinicalNoteIndex: referrals.sourceId
 					});
@@ -81,7 +81,7 @@ class ReferralsDetailController {
 
 
     $scope.$on('$destroy', unsubscribe);
-console.log('$stateParams.referralId', $stateParams.referralId);
+
     this.referralsLoad = referralsActions.get;
     this.referralsLoad($stateParams.patientId, $stateParams.referralId);
   }
@@ -92,5 +92,5 @@ const ReferralsDetailComponent = {
   controller: ReferralsDetailController
 };
 
-ReferralsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'ReferralsModal', 'usSpinnerService'];
+ReferralsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'usSpinnerService'];
 export default ReferralsDetailComponent;

@@ -16,7 +16,7 @@
 let templateReferralsList = require('./referrals-list.html');
 
 class ReferralsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, referralsActions, serviceRequests, ReferralsModal, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, referralsActions, serviceRequests, usSpinnerService) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -147,5 +147,5 @@ const ReferralsListComponent = {
   controller: ReferralsListController
 };
 
-ReferralsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'serviceRequests', 'ReferralsModal', 'usSpinnerService'];
+ReferralsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'serviceRequests', 'usSpinnerService'];
 export default ReferralsListComponent;

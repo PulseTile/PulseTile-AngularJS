@@ -16,7 +16,7 @@
 let templateCreate= require('./referrals-create.html');
 
 class ReferralsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, referralsActions, ReferralsModal, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, referralsActions, usSpinnerService) {
 
   	$scope.referralsEdit = {};
   	$scope.referralsEdit.dateCreated = new Date();
@@ -27,7 +27,7 @@ class ReferralsCreateController {
 				reportType: $stateParams.reportType,
 				searchString: $stateParams.searchString,
 				queryType: $stateParams.queryType,
-				page: $stateParams.page,
+				page: $stateParams.page
 			});
 		};
 		this.cancel = function () {
@@ -89,7 +89,7 @@ class ReferralsCreateController {
 
 
     $scope.$on('$destroy', unsubscribe);
-console.log('$stateParams.referralId', $stateParams.referralId);
+
     this.referralsLoad = referralsActions.get;
     this.referralsLoad($stateParams.patientId, $stateParams.referralId);
   }
@@ -100,5 +100,5 @@ const ReferralsCreateComponent = {
   controller: ReferralsCreateController
 };
 
-ReferralsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'ReferralsModal', 'usSpinnerService'];
+ReferralsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'usSpinnerService'];
 export default ReferralsCreateComponent;
