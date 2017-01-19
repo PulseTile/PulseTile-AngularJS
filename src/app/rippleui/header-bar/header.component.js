@@ -21,8 +21,13 @@ class HeaderController {
     var self = this;
 
     this.goHome = function () {
-      if ($scope.title === 'PHR POC') return; 
-      $state.go('patients-list');
+      if ($scope.title === 'PHR POC') return;
+
+			if ($state.router.globals.$current.name === 'patients-charts') {
+				$state.go('main-search');
+			} else {
+				$state.go('patients-list');
+      }
     };
     this.goChart = function () {
       $state.go('patients-charts');
@@ -312,7 +317,7 @@ class HeaderController {
     };
     this.checkIsShowPreviousBtn = function () {
       $scope.isShowPreviousBtn = $state.router.globals.$current.name !== 'main-search';
-    }
+		}
     
     serviceRequests.subscriber('routeState', this.getPageComponents);
     serviceRequests.subscriber('populateHeaderSearch', this.getPopulateHeaderSearch);

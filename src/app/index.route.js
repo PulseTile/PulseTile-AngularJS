@@ -71,7 +71,11 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           main: {template: '<patients-component><patients-component>'},
           actions: {}
         },
-        params: { patientsList: [], advancedSearchParams: [], displayEmptyTable: false }
+        params: { patientsList: [], advancedSearchParams: [], displayEmptyTable: false },
+				breadcrumbs: [{
+					title: 'Patient Listings',
+					state: 'patients-list'
+				}]
       })
       .state('patients-summary', {
         url: '/patients/{patientId:int}/patients-summary?reportType&searchString&queryType',
