@@ -19,7 +19,7 @@ class PatientsController {
   constructor($scope, $state, $stateParams, $location, $ngRedux, patientsActions, serviceRequests, Patient) {
     let vm = this;
 
-    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-list'});
+    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-list'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Lists', isShowTitle: true});
     
     vm.query = '';

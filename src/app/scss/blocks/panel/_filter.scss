@@ -1,4 +1,7 @@
 .panel-filter {
   overflow: hidden;
-  padding: 2px 5px;
+  padding: 2px 0;//2px 5px
+  &.active {
+    margin-top: 6px;
+  }
 }
