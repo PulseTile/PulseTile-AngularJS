@@ -15,50 +15,12 @@
 */
 class MainController {
   constructor($window, $rootScope, $scope, $state, $stateParams, serviceRequests, $timeout) {
-    $scope.previousState = '';
-    $scope.previousPage = '';
     $scope.isSidebar = false;
     $scope.isSecondPanel = false;
     $scope.fullPanelClass = '';
     $scope.classShowSidebar = '';
     $scope.breadcrumbs;
 
-    $scope.getState = function (state) {
-      switch (state.name) {
-        case 'main-search':
-          $scope.previousState = '';
-          $scope.previousPage = '';
-          break;
-        case 'patients-list':
-          $scope.previousState = 'patients-charts';
-          $scope.previousPage = 'Patient Dashboard';
-          break;
-        case 'patients-charts':
-          $scope.previousState = '';
-          $scope.previousPage = '';
-          break;
-        case 'patients-summary':
-          $scope.previousState = 'patients-list';
-          $scope.previousPage = 'Patient Lists';
-          break;
-        case 'patients-lookup':
-          $scope.previousState = '';
-          $scope.previousPage = '';
-          break;
-        case 'search-report':
-          $scope.previousState = 'patients-charts';
-          $scope.previousPage = 'Patient Dashboard';
-          break;
-        case 'patients-list-full':
-          $scope.previousState = 'patients-charts';
-          $scope.previousPage = 'Patient Dashboard';
-          break;
-        default:
-          $scope.previousState = 'patients-list';
-          $scope.previousPage = 'Patient Lists';
-          break;
-        }
-    };
     $scope.setBreadcrumbs = function (breadcrumbs) {
       if (serviceRequests.currentUserData.role === "PHR" && breadcrumbs) {
         breadcrumbs.shift();
@@ -81,7 +43,6 @@ class MainController {
     };
     
     this.getPageComponents = function (data) {
-      $scope.getState(data);
       $scope.setBreadcrumbs(data.breadcrumbs);
       // $scope.userContextViewExists = ('banner' in data.state);
       // $scope.actionsExists = ('actions' in data.state);

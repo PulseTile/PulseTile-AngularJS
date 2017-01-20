@@ -20,13 +20,17 @@ class HeaderController {
 
     var self = this;
 
-    this.goHome = function () {
+    this.goBack = function () {
       if ($scope.title === 'PHR POC') return;
 
 			if ($state.router.globals.$current.name === 'patients-charts') {
 				$state.go('main-search');
-			} else {
+			} else if ($state.router.globals.$current.name === 'patients-summary') {
 				$state.go('patients-list');
+      } else {
+        $state.go('patients-summary', {
+          patientId: $stateParams.patientId,
+        });
       }
     };
     this.goChart = function () {
