@@ -33,8 +33,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       .state('profile', {
         url: '/profile',
         views: {
-          main: {template: '<profile-component></profile-component>'},
-          actions: {}
+          main: {template: '<profile-component></profile-component>'}
         },
         breadcrumbs: [{
           title: 'Patient Listings',
@@ -47,8 +46,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       .state('main-search', {
         url: '/search',
         views: {
-          main: {template: '<search-component><search-component>'},
-          actions: {}
+          main: {template: '<search-component><search-component>'}
         }
 
       })
@@ -61,15 +59,13 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       .state('patients-charts', {
         url: '/charts',
         views: {
-          main: {template: '<patients-charts-component><patients-charts-component>'},
-          actions: {}
+          main: {template: '<patients-charts-component><patients-charts-component>'}
         }
       })
       .state('patients-list', {
         url: '/patients?ageRange&department&order&reverse',
         views: {
-          main: {template: '<patients-component><patients-component>'},
-          actions: {}
+          main: {template: '<patients-component><patients-component>'}
         },
         params: { patientsList: [], advancedSearchParams: [], displayEmptyTable: false },
 				breadcrumbs: [{
@@ -96,15 +92,13 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       .state('search-report', {
         url: '/search-report?searchString',
         views: {
-          main: {template: '<report-chart-component><report-chart-component>'},
-          actions: {}
+          main: {template: '<report-chart-component><report-chart-component>'}
         }
       })
       .state('patients-list-full', {
         url: '/patients-full-details?ageFrom&ageTo&orderType&pageNumber&reportType&searchString&queryType',
         views: {
-          main: {template: '<patients-list-full-component><patients-list-full-component>'},
-          actions: {}
+          main: {template: '<patients-list-full-component><patients-list-full-component>'}
         }
       })
 

@@ -117,8 +117,10 @@ class MainController {
     serviceRequests.subscriber('changeStateSidebar', this.changeClassShowSidebar);
 
     this.checkIsViews = function() {
-      $scope.isSecondPanel = $state.router.globals.$current.views.detail ? true : false;
-      $scope.isSidebar = $state.router.globals.$current.views.actions ? true : false;
+      if ($state.router.globals.$current.views) {
+        $scope.isSecondPanel = $state.router.globals.$current.views.detail ? true : false;
+        $scope.isSidebar = $state.router.globals.$current.views.actions ? true : false;
+      }
     };
 
     this.setHeightSidebarForMobile = function() {
