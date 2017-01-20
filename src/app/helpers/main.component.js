@@ -14,7 +14,7 @@
   ~  limitations under the License.
 */
 class MainController {
-  constructor($window, $rootScope, $scope, $state, $stateParams, serviceRequests) {
+  constructor($window, $rootScope, $scope, $state, $stateParams, serviceRequests, $timeout) {
     $scope.previousState = '';
     $scope.previousPage = '';
     $scope.isSidebar = false;
@@ -153,9 +153,12 @@ class MainController {
     $rootScope.$on('$locationChangeStart', function() {
       $scope.fullPanelClass = '';
       this.hideSidebarOnMobile();
-      this.checkIsViews();
+
+      $timeout(function() {
+        this.checkIsViews();
+      }.bind(this), 0);
+      
     }.bind(this));
- 
   }
 }
 const MainComponent = {
@@ -163,5 +166,5 @@ const MainComponent = {
   controller: MainController
 };
 
-MainController.$inject = ['$window', '$rootScope', '$scope',  '$state', '$stateParams', 'serviceRequests'];
+MainController.$inject = ['$window', '$rootScope', '$scope',  '$state', '$stateParams', 'serviceRequests', '$timeout'];
 export default MainComponent;
