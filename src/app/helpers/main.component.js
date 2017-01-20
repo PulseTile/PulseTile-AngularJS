@@ -65,8 +65,19 @@ class MainController {
       }
       $scope.breadcrumbs = breadcrumbs || [];
     };
+
     this.goBreadcrumb = function (state) {
-      $state.go(state);
+      serviceRequests.currentSort.order = '';
+      serviceRequests.currentSort.reverse = false;
+      serviceRequests.filter = '';
+      var requestHeader = {
+        patientId: $stateParams.patientId,
+        reportType: $stateParams.reportType,
+        searchString: $stateParams.searchString,
+        queryType: $stateParams.queryType
+      };
+
+      $state.go(state, requestHeader);
     };
     
     this.getPageComponents = function (data) {
