@@ -102,8 +102,12 @@ class MedicationsListController {
         /*
           TODO: Remove. Only for demo
         */
-        this.medications[0].warning = true;
-        this.medications[1].danger = true;
+        if (this.medications[0]) {
+          this.medications[0].warning = true;
+        }
+        if (this.medications[1]) {
+          this.medications[1].danger = true;
+        }
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
