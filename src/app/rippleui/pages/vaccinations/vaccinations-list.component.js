@@ -66,7 +66,6 @@ class VaccinationsListController {
       serviceRequests.currentSort.order = this.order;
       serviceRequests.currentSort.reverse = this.reverse;
       serviceRequests.filter = this.query || '';
-      id = id || 1;
       $state.go('vaccinations-detail', {
         // patientId: $stateParams.patientId,
         // vaccinationIndex: id,
@@ -98,6 +97,7 @@ class VaccinationsListController {
       var date = new Date();
       this.vaccinations = [
         {
+          sourceId: '1',
           name: 'Inactivated Poliovirus Vaccine',
           source: 'Marand',
           seriesNumber: 1,
@@ -106,6 +106,7 @@ class VaccinationsListController {
           author: 'ripple_osi',
           dataCreate: date.setDate(date.getDate() - 1)
         }, {
+          sourceId: '2',
           name: 'Cell-Culture Influenza Vaccine',
           source: 'EtherCIS',
           seriesNumber: 2,
@@ -114,6 +115,7 @@ class VaccinationsListController {
           author: 'ripple_osi',
           dataCreate: date
         }, {
+          sourceId: '3',
           name: 'Varicella Vaccine',
           source: 'Marand',
           seriesNumber: 3,
