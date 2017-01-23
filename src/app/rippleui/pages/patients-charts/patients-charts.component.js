@@ -18,7 +18,7 @@ let templatePatientsCharts = require('./patients-charts.html');
 class PatientsChartsController {
   constructor($scope, $state, $window, patientsActions, $ngRedux, $uibModal, serviceRequests, $timeout, Patient) {
     serviceRequests.publisher('headerTitle', {title: 'System Dashboard', isShowTitle: true});
-    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-charts'});
+    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-charts'});
     // Selected chart on page load
 
     //click on "View all Patients"

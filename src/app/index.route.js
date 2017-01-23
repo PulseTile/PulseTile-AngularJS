@@ -59,8 +59,15 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       .state('patients-charts', {
         url: '/charts',
         views: {
-          main: {template: '<patients-charts-component><patients-charts-component>'}
-        }
+          main: {template: '<patients-charts-component><patients-charts-component>'},
+        },
+        breadcrumbs: [{
+          title: 'Home',
+          state: 'main-search'
+        }, {
+          title: 'System Dashboard',
+          state: 'patients-charts'
+        }]
       })
       .state('patients-list', {
         url: '/patients?ageRange&department&order&reverse',
