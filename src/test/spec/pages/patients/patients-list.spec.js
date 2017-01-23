@@ -65,12 +65,14 @@ describe('Patients List', function() {
     spyOn(ctrl, 'go');
     spyOn(ctrl, 'patientFilter');
     spyOn(ctrl, 'setPatients');
+    spyOn(Patient, 'patient');
 
     ctrl.sort();
     ctrl.sortClass();
     ctrl.go();
     ctrl.patientFilter();
     ctrl.setPatients();
+    Patient.patient();
   
   });
 
@@ -100,5 +102,8 @@ describe('Patients List', function() {
   });
   it("setPatients was called", function() {
     expect(ctrl.setPatients).toHaveBeenCalled();
+  });
+  it('patient  exist', function() {
+    expect(Patient.patient).toHaveBeenCalled();
   });
 });

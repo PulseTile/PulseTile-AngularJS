@@ -16,7 +16,7 @@
 let templateProceduresDetail= require('./procedures-detail.html');
 
 class ProceduresDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, proceduresActions, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, proceduresActions, usSpinnerService, serviceRequests) {
 
 		$scope.isEdit = false;
 
@@ -48,8 +48,8 @@ class ProceduresDetailController {
         this.procedure = data.procedures.dataGet;
         usSpinnerService.stop('proceduresDetail-spinner');
       }
-      if (data.user.data) {
-        this.currentUser = data.user.data;
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
       }
     };
 
@@ -69,5 +69,5 @@ const ProceduresDetailComponent = {
   controller: ProceduresDetailController
 };
 
-ProceduresDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'proceduresActions', 'usSpinnerService'];
+ProceduresDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'proceduresActions', 'usSpinnerService', 'serviceRequests'];
 export default ProceduresDetailComponent;

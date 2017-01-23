@@ -6,18 +6,22 @@ describe('MainComponent', function() {
 
     beforeEach(angular.mock.module('ripple-ui'));
 
-    let scope, ctrl, controller, template, rootScope, $scope, serviceRequests;
-
-    beforeEach(inject(($injector, $controller, _$rootScope_, _serviceRequests_) => {
+    let scope, ctrl, controller, template, rootScope, $window, state, serviceRequests;
+    
+    beforeEach(inject(($injector, $controller, _$rootScope_, _$window_, _$state_, _serviceRequests_) => {
         controller = $controller;
         scope = $injector.get('$rootScope').$new();
         serviceRequests = _serviceRequests_;
         rootScope = _$rootScope_;
+        $window = _$window_;
+        state = _$state_;
 
         template = MainComponent.template;
         ctrl = controller(MainComponent.controller, {
-            $rootScope: rootScope,
             $scope: scope,
+            $rootScope: rootScope,
+            $window: $window,
+            $state: state,
             serviceRequests: serviceRequests
         });
     }));
@@ -25,38 +29,41 @@ describe('MainComponent', function() {
         spyOn(scope, 'getState');
         spyOn(ctrl, 'getPageComponents');
 
-        scope.getState();
+        scope.getState('main-search');
         ctrl.getPageComponents();
     });
 
-    // it('$scope.previousState exist', function() {
-    //     expect(scope.previousState).toBe('');
-    // });
-    // it('$scope.pageHeader exist', function() {
-    //     expect(scope.classShowSidebar).toBe('');
-    // });
-    // it('$scope.previousPage exist', function() {
-    //     expect(scope.previousPage).toBe('');
-    // });
-    // it('$scope.mainWidth exist', function() {
-    //     expect(scope.isSidebar).toBe(false);
-    // });
-    // it('$scope.detailWidth', function() {
-    //     expect(scope.isSecondPanel).toBe(false);
-    // });
-    // it('Controller exist', function() {
-    //     expect(ctrl).toBeDefined();
-    // });
-    // it('Template exist', function() {
-    //     expect(template).toBeDefined();
-    // });
-    // it("serviceRequests exist", function() {
-    //     expect(serviceRequests).toBeDefined();
-    // });
-    // it("getState was called", function() {
-    //     expect(scope.getState).toHaveBeenCalled();
-    // });
-    // it("getPageComponents was called", function() {
-    //     expect(ctrl.getPageComponents).toHaveBeenCalled();
-    // });
+    it('$scope.previousState exist', function() {
+        expect(scope.previousState).toBe('');
+    });
+    it('$scope.pageHeader exist', function() {
+        expect(scope.classShowSidebar).toBe('');
+    });
+    it('$scope.previousPage exist', function() {
+        expect(scope.previousPage).toBe('');
+    });
+    it('$scope.mainWidth exist', function() {
+        expect(scope.isSidebar).toBe(false);
+    });
+    it('$scope.detailWidth', function() {
+        expect(scope.isSecondPanel).toBe(false);
+    });
+    it('Controller exist', function() {
+        expect(ctrl).toBeDefined();
+    });
+    it('Template exist', function() {
+        expect(template).toBeDefined();
+    });
+    it("serviceRequests exist", function() {
+        expect(serviceRequests).toBeDefined();
+    });
+    it("getState was called", function() {
+        expect(scope.getState).toHaveBeenCalled();
+    });
+    it("getState was called with params", function() {
+        expect(scope.getState).toHaveBeenCalledWith('main-search');
+    });
+    it("getPageComponents was called", function() {
+        expect(ctrl.getPageComponents).toHaveBeenCalled();
+    });
 });

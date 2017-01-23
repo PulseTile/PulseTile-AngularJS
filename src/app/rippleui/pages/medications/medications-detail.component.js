@@ -16,7 +16,7 @@
 let templateMedicationsDetail= require('./medications-detail.html');
 
 class MedicationsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, usSpinnerService, serviceRequests) {
     $scope.UnlockedSources = [
       'handi.ehrscape.com'
     ];
@@ -31,8 +31,8 @@ class MedicationsDetailController {
         this.medication = data.medication.dataGet;
         usSpinnerService.stop('medicationsDetail-spinner');
       }
-      if (data.user.data) {
-        this.currentUser = data.user.data;
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
       }
       if (data.medication.dataUpdate !== null) {
         $scope.medicationsLoad($stateParams.patientId);
@@ -131,5 +131,5 @@ const MedicationsDetailComponent = {
   controller: MedicationsDetailController
 };
 
-MedicationsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'medicationsActions', 'usSpinnerService'];
+MedicationsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'medicationsActions', 'usSpinnerService', 'serviceRequests'];
 export default MedicationsDetailComponent;

@@ -17,7 +17,6 @@ import { combineReducers } from 'redux';
 
 import patients from '../rippleui/pages/patients-list/patients-reducer-all';
 import patientsGet from '../rippleui/pages/patients-list/patients-reducer-get';
-import user from './user';
 import search from '../rippleui/search/search-reducer-all';
 import diagnoses from '../rippleui/pages/diagnoses/diagnoses-reducer-all';
 import allergies from '../rippleui/pages/allergies/allergies-reducer-all';
@@ -47,7 +46,6 @@ import transferOfCare from '../rippleui/pages/transfer-of-care/transfer-of-care-
 export default combineReducers({
   patients,
   patientsGet,
-  user, 
   search, 
   diagnoses,
   allergies,

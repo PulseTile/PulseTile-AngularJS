@@ -28,9 +28,11 @@ describe('SearchComponent', function() {
     beforeEach(function() {
         spyOn(ctrl, 'hideSearch');
         spyOn(ctrl, 'searchFunction');
+        spyOn(AdvancedSearch, 'openAdvancedSearch');
 
         ctrl.hideSearch();
         ctrl.searchFunction();
+        AdvancedSearch.openAdvancedSearch();
     });
 
     it('isClickToAdvancedSearch is true', function() {
@@ -53,5 +55,8 @@ describe('SearchComponent', function() {
     });
     it("searchFunction was called", function() {
         expect(ctrl.searchFunction).toHaveBeenCalled();
+    });
+    it("AdvancedSearch was called", function() {
+        expect(AdvancedSearch.openAdvancedSearch).toHaveBeenCalled();
     });
 });

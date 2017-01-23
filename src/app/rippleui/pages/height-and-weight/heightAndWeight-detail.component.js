@@ -1,7 +1,7 @@
 let templateHeightAndWeightDetail= require('./heightAndWeight-detail.html');
 
 class HeightAndWeightDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, heightAndWeightActions, HeightAndWeightModal, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, heightAndWeightActions, HeightAndWeightModal, usSpinnerService, serviceRequests) {
     this.edit = function () {
       HeightAndWeightModal.openModal(this.currentPatient, {title: 'Edit Height And Weight'}, this.heightAndWeight, this.currentUser);
     };
@@ -20,8 +20,8 @@ class HeightAndWeightDetailController {
         this.heightAndWeight = data.heightAndWeight.dataGet;
         usSpinnerService.stop("heightAndWeightsDetail-spinner");
       }
-      if (data.user.data) {
-        this.currentUser = data.user.data;
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
       }
     };
 
@@ -41,5 +41,5 @@ const HeightAndWeightDetailComponent = {
   controller: HeightAndWeightDetailController
 };
 
-HeightAndWeightDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'heightAndWeightActions', 'HeightAndWeightModal', 'usSpinnerService'];
+HeightAndWeightDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'heightAndWeightActions', 'HeightAndWeightModal', 'usSpinnerService', 'serviceRequests'];
 export default HeightAndWeightDetailComponent;

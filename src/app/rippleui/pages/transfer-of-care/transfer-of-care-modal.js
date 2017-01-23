@@ -1,4 +1,4 @@
-export default function TransferOfCareModal($uibModal, $state, $stateParams, $window, transferOfCareActions, $ngRedux, allergiesActions, diagnosesActions, medicationsActions, contactsActions) {
+export default function TransferOfCareModal($uibModal, $state, $stateParams, $window, transferOfCareActions, $ngRedux, allergiesActions, diagnosesActions, medicationsActions, contactsActions, serviceRequests) {
   var isModalClosed = true;
 
   var openModal = function (patient, modal, transferOfCareCompositions, currentUser) {
@@ -56,8 +56,8 @@ export default function TransferOfCareModal($uibModal, $state, $stateParams, $wi
               $scope.transferOfCare.contacts = data.contacts.data;
               $scope.contacts = $scope.transferOfCare.contacts;
             }
-            if (data.user.data) {
-              $scope.currentUser = data.user.data;
+            if (serviceRequests.currentUserData) {
+              this.currentUser = serviceRequests.currentUserData;
             }
             if (data.transferOfCare.dataCreate !== null) {
               setTimeout(function () {
@@ -258,4 +258,4 @@ export default function TransferOfCareModal($uibModal, $state, $stateParams, $wi
     openModal: openModal
   };
 }
-TransferOfCareModal.$inject = ['$uibModal', '$state', '$stateParams', '$window','transferOfCareActions', '$ngRedux', 'allergiesActions', 'diagnosesActions', 'medicationsActions', 'contactsActions'];
+TransferOfCareModal.$inject = ['$uibModal', '$state', '$stateParams', '$window','transferOfCareActions', '$ngRedux', 'allergiesActions', 'diagnosesActions', 'medicationsActions', 'contactsActions', 'serviceRequests'];

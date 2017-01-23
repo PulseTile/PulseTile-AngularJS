@@ -16,7 +16,6 @@
 import angular from 'angular';
 
 import patientsActions from '../rippleui/pages/patients-list/patients-actions';
-import userActions from './user';
 import searchActions from '../rippleui/search/search-actions';
 import searchReport from '../rippleui/search/search-report-actions';
 import diagnosesActions from '../rippleui/pages/diagnoses/diagnoses-actions';
@@ -40,7 +39,6 @@ import transferOfCareActions from '../rippleui/pages/transfer-of-care/transfer-o
 export default angular
     .module('app.actions', [])
     .factory('patientsActions', patientsActions)
-    .factory('userActions', userActions)
     .factory('searchActions', searchActions)
     .factory('searchReport', searchReport)
     .factory('diagnosesActions', diagnosesActions)

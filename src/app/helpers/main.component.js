@@ -16,7 +16,7 @@
 let templateMain= require('./main.html');
 
 class MainController {
-  constructor($window, $rootScope, $scope, $state, $stateParams, serviceRequests) {
+  constructor($scope, $rootScope, $window, $state, serviceRequests) {
     $scope.previousState = '';
     $scope.previousPage = '';
     $scope.isSidebar = false;
@@ -108,12 +108,19 @@ class MainController {
     serviceRequests.subscriber('changeStateSidebar', this.changeClassShowSidebar);
 
     this.checkIsViews = function() {
-      $scope.isSecondPanel = $state.router.globals.$current.views.detail ? true : false;
-      $scope.isSidebar = $state.router.globals.$current.views.actions ? true : false;
+      let views = $state.router.globals.$current.views;
+
+      if (!views) return;
+      
+      $scope.isSecondPanel = views.detail ? true : false;
+      $scope.isSidebar = views.actions ? true : false;
     };
 
     this.setHeightSidebarForMobile = function() {
       var page = angular.element(document);
+
+      if (!page.find('.wrapper').length) return;
+
       var wrapperHeight = page.find('.wrapper').outerHeight();
       var headerHeight = page.find('.header').outerHeight();
       var footerHeight = page.find('.footer').outerHeight();
@@ -152,5 +159,5 @@ const MainComponent = {
   controller: MainController
 };
 
-MainController.$inject = ['$window', '$rootScope', '$scope',  '$state', '$stateParams', 'serviceRequests'];
+MainController.$inject = ['$scope', '$rootScope', '$window',  '$state', 'serviceRequests'];
 export default MainComponent;

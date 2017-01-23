@@ -324,8 +324,7 @@ class PatientsListFullController {
     };
 
     let unsubscribe = $ngRedux.connect(state => ({
-      error: state.user.error,
-      user: state.user.data,
+      user: serviceRequests.currentUserData,
       getDataRequest: this.setDataRequest(state.search)
     }))(this);
     

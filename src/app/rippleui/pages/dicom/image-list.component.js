@@ -78,8 +78,8 @@ class ImageListController {
         }
         usSpinnerService.stop('imagesList-spinner');
       }
-      if (data.user.data) {
-        this.currentUser = data.user.data;
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
       }
     };
 

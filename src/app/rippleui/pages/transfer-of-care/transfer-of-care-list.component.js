@@ -43,8 +43,8 @@ class TransferOfCareListController {
       if (data.transferOfCare.data) {
         this.transferofCareComposition = data.transferOfCare.data;
       }
-      if (data.user.data) {
-        this.currentUser = data.user.data;
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
       }
     };
 
