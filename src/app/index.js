@@ -46,7 +46,6 @@ import AppointmentConfirmModal from './rippleui/pages/appointments/appointments-
 import ProceduresModal from './rippleui/pages/procedures/procedures-modal';
 import ImageModal from './rippleui/pages/dicom/image-modal';
 import EolcareplansModal from './rippleui/pages/care-plans/eolcareplans-modal';
-import LookupModal from './rippleui/pages/patients-lookup/patients-lookup-modal';
 import HeightAndWeightModal from './rippleui/pages/height-and-weight/heightAndWeight-modal';
 import TransferOfCareModal from './rippleui/pages/transfer-of-care/transfer-of-care-modal';
 
@@ -146,7 +145,6 @@ const app = angular
     .factory('AppointmentConfirmModal', AppointmentConfirmModal)
     .factory('ImageModal', ImageModal)
     .factory('EolcareplansModal', EolcareplansModal)
-    .factory('LookupModal', LookupModal)
     .factory('Patient', Patient)
     .factory('HeightAndWeightModal', HeightAndWeightModal)
     .factory('TransferOfCareModal', TransferOfCareModal)

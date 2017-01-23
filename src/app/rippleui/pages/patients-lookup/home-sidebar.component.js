@@ -16,9 +16,8 @@
 let templateHomeSidebar= require('./home-sidebar.html');
 
 class HomeSidebarController {
-    constructor($scope, $state, LookupModal, serviceRequests) {
+    constructor($scope, $state, serviceRequests) {
         serviceRequests.publisher('headerTitle', {title: 'Patients Lookup'});
-        LookupModal.openModal();
     }
 }
 
@@ -27,5 +26,5 @@ const HomeSidebarComponent = {
     controller: HomeSidebarController
 };
 
-HomeSidebarController.$inject = ['$scope', '$state', 'LookupModal', 'serviceRequests'];
+HomeSidebarController.$inject = ['$scope', '$state', 'serviceRequests'];
 export default HomeSidebarComponent;

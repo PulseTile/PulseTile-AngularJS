@@ -58,7 +58,7 @@ describe('HeaderComponent', function() {
 
         scope.setTitle();
         scope.switchDirectByRole();
-        scope.setLoginData();
+        scope.setLoginData({data:{role: 'PHR'}});
         scope.login();
         ctrl.goHome();
         ctrl.goChart();
@@ -109,6 +109,9 @@ describe('HeaderComponent', function() {
     });
     it("setLoginData was called", function() {
         expect(scope.setLoginData).toHaveBeenCalled();
+    });
+    it("switchDirectByRole was called with params", function() {
+        expect(scope.setLoginData).toHaveBeenCalledWith({data:{role: 'PHR'}});
     });
     it("login was called", function() {
         expect(scope.login).toHaveBeenCalled();
