@@ -27,7 +27,7 @@
     "prebuild": "npm-run-all clean",
     "server:dev": "cross-env NODE_ENV=development webpack-dev-server --progress --host 0.0.0.0",
     "start": "npm run server:dev",
-    "test": "cross-env NODE_ENV=test karma start --single-run",
+    "test": "cross-env NODE_ENV=test nyc karma start --single-run",
     "test:watch": "cross-env NODE_ENV=test karma start",
     "check-coverage": "nyc check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
     "report-coverage": "cat ./coverage/lcov.info | codecov",
