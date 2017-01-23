@@ -256,6 +256,7 @@ const app = angular
       return {
         link: function(scope, element, attrs) {
             scope.panelOpen = '';
+
             scope.openPanel = function (namePanel) {
                 if (scope.panelOpen === namePanel) {
                     scope.panelOpen = '';
@@ -276,8 +277,19 @@ const app = angular
     .directive('mcFullPanel', function() {
         return {
             controller: ['$scope', 'serviceRequests', function($scope, serviceRequests) {
-                $scope.changeFullPanel = function (panelName) {
-                    serviceRequests.publisher('changeFullPanel', {panelName: panelName});
+                $scope.showPanel = '';
+                $scope.panelOpen = '';
+                $scope.getShowPanel = function (panelName) {
+                    if ($scope.showPanel === '') return true;
+
+                    return $scope.showPanel === panelName ? true : false;
+                }
+                $scope.changeFullPanel = function (fullPanelName, panelName) {
+                    if (panelName) {
+                        $scope.showPanel = $scope.showPanel === panelName ? '' : panelName;
+                        $scope.panelOpen = panelName;
+                    }
+                    serviceRequests.publisher('changeFullPanel', {panelName: fullPanelName});
                 };
             }]
         };

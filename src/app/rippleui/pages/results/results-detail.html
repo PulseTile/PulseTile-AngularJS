@@ -14,10 +14,10 @@
   ~  limitations under the License.
   -->
 <div mc-full-panel mc-accordion mc-open-panel="result" class="panel-group accordion">
-  <div class="panel panel-secondary" ng-class="getOpenPanelClass('result')">
+  <div class="panel panel-secondary" ng-if="getShowPanel('result')" ng-class="getOpenPanelClass('result')">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'result')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
         <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('result')"><i class="fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Test Result</h3>
@@ -66,10 +66,10 @@
       </div>
     </div>
   </div>
-  <div class="panel panel-secondary" ng-class="getOpenPanelClass('results')">
+  <div class="panel panel-secondary" ng-if="getShowPanel('results')" ng-class="getOpenPanelClass('results')">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'results')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
         <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('results')"><i class="fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Results ({{ $ctrl.result.testResults.length || 0 }})</h3>

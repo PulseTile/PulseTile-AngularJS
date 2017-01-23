@@ -15,10 +15,10 @@
   -->
 
 <div mc-full-panel mc-accordion mc-open-panel="procedure" class="panel-group accordion">
-  <div class="panel panel-secondary" ng-if="!isEdit" ng-class="getOpenPanelClass('procedure')">
+  <div class="panel panel-secondary" ng-if="getShowPanel('procedure') && !isEdit" ng-class="getOpenPanelClass('procedure')">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'procedure')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
         <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('contacts')"><i class="fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Procedure</h3>
@@ -81,10 +81,10 @@
       </div>
     </div>
   </div>
-  <div class="panel panel-secondary" ng-if="isEdit" ng-class="getOpenPanelClass('procedure')">
+  <div class="panel panel-secondary" ng-if="getShowPanel('procedure') && isEdit" ng-class="getOpenPanelClass('procedure')">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'procedure')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
         <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('contacts')"><i class="fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Edit Procedure</h3>
