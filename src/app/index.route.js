@@ -96,7 +96,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       .state('search-report', {
         url: '/search-report?searchString',
         views: {
-          main: {template: '<report-chart-component><report-chart-component>'},
+          main: {template: '<helpers-component><helpers-component>'},
           actions: {}
         }
       })

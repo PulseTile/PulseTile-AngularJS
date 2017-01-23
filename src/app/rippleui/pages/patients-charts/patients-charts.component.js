@@ -22,7 +22,7 @@ class PatientsChartsController {
     // Selected chart on page load
 
     //click on "View all Patients"
-    var openModal = function (row, chartType) {
+    this.openModal = function (row, chartType) {
       $uibModal.open({
         template: require('app/rippleui/confirmation.html'),
         size: 'md',

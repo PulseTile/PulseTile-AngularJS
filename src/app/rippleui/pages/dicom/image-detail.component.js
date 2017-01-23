@@ -16,7 +16,7 @@
 let templateImageDetail= require('./image-detail.html');
 
 class ImageDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, imageActions, ImageModal) {
+  constructor($scope, $state, $stateParams, $ngRedux, imageActions, ImageModal, serviceRequests) {
     var seriesIdsIndex;
 
     this.openImage = function (imageId) {
@@ -27,6 +27,7 @@ class ImageDetailController {
     this.series = [];
 
     this.setCurrentPageData = function (data) {
+      if (!data.series.dataGet) return;
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
@@ -46,8 +47,8 @@ class ImageDetailController {
         this.instance = data.instance.data.parentSeries;
         ImageModal.openModal(this.currentPatient, {title: 'View Dicom Image'}, this.imageId, this.series, this.instance);
       }
-      if (data.user.data) {
-        this.currentUser = data.user.data;
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
       }
     };
 
@@ -86,5 +87,5 @@ const ImageDetailComponent = {
   controller: ImageDetailController
 };
 
-ImageDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'imageActions', 'ImageModal'];
+ImageDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'imageActions', 'ImageModal', 'serviceRequests'];
 export default ImageDetailComponent;

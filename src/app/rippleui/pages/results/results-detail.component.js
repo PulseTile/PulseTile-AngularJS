@@ -33,8 +33,8 @@ class ResultsDetailController {
 
     $scope.$on('$destroy', unsubscribe);
 
-    this.allergiesLoad = resultsActions.get;
-    this.allergiesLoad($stateParams.patientId, $stateParams.resultIndex, $stateParams.source);
+    this.resultsLoad = resultsActions.get;
+    this.resultsLoad($stateParams.patientId, $stateParams.resultIndex, $stateParams.source);
   }
 }
 

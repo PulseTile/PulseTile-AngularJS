@@ -55,9 +55,9 @@ class ReferralsListController {
       return referralId === $stateParams.referralId;
     };
 
-		this.toggleFilter = function () {
-			this.isFilter = !this.isFilter;
-		};
+    this.toggleFilter = function () {
+        this.isFilter = !this.isFilter;
+    };
 
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {

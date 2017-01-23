@@ -108,6 +108,7 @@
     "copy-webpack-plugin": "^3.0.1",
     "cz-conventional-changelog": "^1.2.0",
     "fullcalendar": "^3.0.0",
+    "isparta-loader": "^2.0.0",
     "istanbul": "^0.4.5",
     "jquery": "~2.1.4",
     "karma-chai": "^0.1.0",

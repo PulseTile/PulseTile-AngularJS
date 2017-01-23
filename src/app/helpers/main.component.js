@@ -13,6 +13,8 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
+let templateMain= require('./main.html');
+
 class MainController {
   constructor($window, $rootScope, $scope, $state, $stateParams, serviceRequests) {
     $scope.previousState = '';
@@ -21,7 +23,7 @@ class MainController {
     $scope.isSecondPanel = false;
     $scope.fullPanelClass = '';
     $scope.classShowSidebar = '';
-    $scope.breadcrumbs;
+    $scope.breadcrumbs = [];
 
     $scope.getState = function (state) {
       switch (state.name) {
@@ -86,7 +88,7 @@ class MainController {
       } else {
         $scope.fullPanelClass = data.panelName;
       }
-    }
+    };
     serviceRequests.subscriber('changeFullPanel', this.changeFullPanel);
 
     this.changeClassShowSidebar = function (data) {
@@ -124,7 +126,7 @@ class MainController {
           sidebar.css('height', 'auto');
         }
       }
-    }
+    };
     serviceRequests.subscriber('setHeightSidebar', this.setHeightSidebarForMobile);
     
     angular.element(document).ready(function () {
@@ -146,7 +148,7 @@ class MainController {
   }
 }
 const MainComponent = {
-  template: require('./main.html'),
+  template: templateMain,
   controller: MainController
 };
 
