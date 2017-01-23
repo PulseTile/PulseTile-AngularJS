@@ -19,7 +19,9 @@ class HeaderController {
   constructor($rootScope, $scope, $state, $stateParams, $ngRedux, patientsActions, AdvancedSearch, serviceRequests) {
 
     var self = this;
-
+    $scope.title = '';
+    $scope.user = [];
+    
     this.goHome = function () {
       if ($scope.title === 'PHR POC') return;
 
@@ -317,7 +319,7 @@ class HeaderController {
     };
     this.checkIsShowPreviousBtn = function () {
       $scope.isShowPreviousBtn = $state.router.globals.$current.name !== 'main-search';
-		}
+    };
     
     serviceRequests.subscriber('routeState', this.getPageComponents);
     serviceRequests.subscriber('populateHeaderSearch', this.getPopulateHeaderSearch);
