@@ -286,9 +286,13 @@ const app = angular
         return {
             link: function(scope, element, attrs) {
                 scope.closeDropdown = function (ev) {
+                    var currentDropdown = angular.element(ev.target.closest('.dropdown'));
+                    var isOpenDropdown = currentDropdown.hasClass('open');
+                    
                     angular.element('.dropdown').removeClass('open');
-                    if (ev.target.closest('.dropdown')) {
-                        ev.target.closest('.dropdown').classList.add('open')
+
+                    if (isOpenDropdown) {
+                        currentDropdown.addClass('open');
                     }
                 };
             }
