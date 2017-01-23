@@ -35,7 +35,7 @@ module.exports = config => {
       suite: 'unit'
     },
 
-    reporters: ['progress', 'spec', 'coverage'],
+    reporters: ['progress', 'coverage'],
 
     coverageReporter: {
       reporters: [
