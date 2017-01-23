@@ -25,10 +25,17 @@
   .btn-#{$button}:active {
     background-color: $color !important;
     border-color: $color !important;
-    &:hover,
+    &:hover {
+      background-color: $color !important;
+      border-color: $color !important;
+      @include respond-to(sm) {
+        background-color: darken($color, 10%) !important;
+        border-color: darken($color, 10%) !important;
+      }
+    }
     &.active {
-      background-color: darken($color, 10%) !important;
-      border-color: darken($color, 10%) !important;
+      background-color: $color !important;
+      border-color: $color !important;
     }
   }
 }
@@ -69,11 +76,19 @@
       color: $color !important;
       border-color: $color !important;
       background: transparent !important;
-      &:hover,
+      &:hover {
+        color: $color !important;
+        border-color: $color !important;
+        background: transparent !important;
+        @include respond-to(sm) {
+          color: darken($color, 10%) !important;
+          border-color: darken($color, 10%) !important;
+        }
+      }
       &.active {
         color: darken($color, 10%) !important;
-        background: transparent !important;
         border-color: darken($color, 10%) !important;
+        background: transparent !important;
       }
     }
   }
