@@ -1,27 +1,26 @@
-'use strict';
-import VaccinationsCreateComponent from '../../../../app/rippleui/pages/vaccinations/vaccinations-create.component';
+import ProceduresCreateComponent from '../../../../app/rippleui/pages/procedures/procedures-create.component';
 import '../../../../app/index';
 
-describe('Vaccinations Create', function() {
+describe('Procedures Create', function() {
 
     beforeEach(angular.mock.module('ripple-ui'));
 
-    let scope, ctrl, controller, template, stateParams, state, ngRedux, referralsActions, usSpinnerService;
+    let scope, ctrl, controller, template, state;
     
-    beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _patientsActions_, _vaccinationsActions_, _serviceRequests_) => {
+    beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _patientsActions_, _proceduresActions_, _serviceRequests_) => {
         controller = $controller;
         scope = $injector.get('$rootScope').$new();
         state = _$state_;
 
-        template = VaccinationsCreateComponent.template;
-        ctrl = controller(VaccinationsCreateComponent.controller, {
+        template = ProceduresCreateComponent.template;
+        ctrl = controller(ProceduresCreateComponent.controller, {
             $scope: scope,
             $state: state,
             $stateParams: _$stateParams_,
             $ngRedux: _$ngRedux_,
             patientsActions: _patientsActions_,
-            vaccinationsActions: _vaccinationsActions_,
-            usSpinnerService: _serviceRequests_
+            proceduresActions: _proceduresActions_,
+            serviceRequests: _serviceRequests_
         });
     }));
 
@@ -29,13 +28,13 @@ describe('Vaccinations Create', function() {
         spyOn(ctrl, 'setCurrentPageData');
         spyOn(ctrl, 'goList');
         spyOn(ctrl, 'cancel');
-        spyOn(scope, 'vaccinationsCreate');
+        spyOn(scope, 'proceduresCreate');
         spyOn(scope, 'create');
 
         ctrl.setCurrentPageData();
         ctrl.goList();
         ctrl.cancel();
-        scope.vaccinationsCreate();
+        scope.proceduresCreate();
         scope.create();
 
     });
@@ -52,8 +51,8 @@ describe('Vaccinations Create', function() {
     it("cancel was called", function() {
         expect(ctrl.cancel).toHaveBeenCalled();
     });
-    it("vaccinationsCreate was called", function() {
-        expect(scope.vaccinationsCreate).toHaveBeenCalled();
+    it("proceduresCreate was called", function() {
+        expect(scope.proceduresCreate).toHaveBeenCalled();
     });
     it("create was called", function() {
         expect(scope.create).toHaveBeenCalled();

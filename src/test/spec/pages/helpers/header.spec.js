@@ -6,14 +6,15 @@ describe('HeaderComponent', function() {
 
     beforeEach(angular.mock.module('ripple-ui'));
 
-    let scope, ctrl, controller, template, state, stateParams, ngRedux, serviceRequests, AdvancedSearch, patientsActions;
+    let scope, ctrl, controller, template, state, rootScope, ngRedux, serviceRequests, AdvancedSearch, patientsActions;
     
-    beforeEach(inject(($injector, $controller,_$state_, _$stateParams_,_$ngRedux_, _patientsActions_, _AdvancedSearch_, _serviceRequests_) => {
+    beforeEach(inject(($injector, $controller, _$rootScope_, _$state_, _$stateParams_,_$ngRedux_, _patientsActions_, _AdvancedSearch_, _serviceRequests_) => {
         controller = $controller;
         scope = $injector.get('$rootScope').$new();
         state = _$state_;
         serviceRequests = _serviceRequests_;
         AdvancedSearch = _AdvancedSearch_;
+        rootScope = _$rootScope_;
 
         template = HeaderComponent.template;
         ctrl = controller(HeaderComponent.controller, {
@@ -27,6 +28,8 @@ describe('HeaderComponent', function() {
         });
     }));
     beforeEach(function() {
+        scope.title = 'IDCR';
+        
         spyOn(scope, 'setTitle');
         spyOn(scope, 'switchDirectByRole');
         spyOn(scope, 'setLoginData');
@@ -57,7 +60,7 @@ describe('HeaderComponent', function() {
         spyOn(ctrl, 'checkIsShowPreviousBtn');
 
         scope.setTitle();
-        scope.switchDirectByRole();
+        scope.switchDirectByRole({role: 'PHR'});
         scope.setLoginData({data:{role: 'PHR'}});
         scope.login();
         ctrl.goHome();
@@ -110,13 +113,14 @@ describe('HeaderComponent', function() {
     it("setLoginData was called", function() {
         expect(scope.setLoginData).toHaveBeenCalled();
     });
-    it("switchDirectByRole was called with params", function() {
-        expect(scope.setLoginData).toHaveBeenCalledWith({data:{role: 'PHR'}});
+    it("reportMode was called with params", function() {
+        expect(scope.reportMode).toBe(false);
     });
     it("login was called", function() {
         expect(scope.login).toHaveBeenCalled();
     });
     it("goHome was called", function() {
+        expect(scope.title).toEqual('IDCR');
         expect(ctrl.goHome).toHaveBeenCalled();
     });
     it("goChart was called", function() {

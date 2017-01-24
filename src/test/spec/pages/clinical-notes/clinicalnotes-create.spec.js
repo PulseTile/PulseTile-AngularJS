@@ -1,27 +1,25 @@
-'use strict';
-import VaccinationsCreateComponent from '../../../../app/rippleui/pages/vaccinations/vaccinations-create.component';
+import ClinicalnotesCreateComponent from '../../../../app/rippleui/pages/clinical-notes/clinicalnotes-create.component';
 import '../../../../app/index';
 
-describe('Vaccinations Create', function() {
+describe('Clinicalnotes Create', function() {
 
     beforeEach(angular.mock.module('ripple-ui'));
 
-    let scope, ctrl, controller, template, stateParams, state, ngRedux, referralsActions, usSpinnerService;
-    
-    beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _patientsActions_, _vaccinationsActions_, _serviceRequests_) => {
+    let scope, ctrl, controller, template, state;
+
+    beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _personalnotesActions_, _serviceRequests_) => {
         controller = $controller;
         scope = $injector.get('$rootScope').$new();
         state = _$state_;
 
-        template = VaccinationsCreateComponent.template;
-        ctrl = controller(VaccinationsCreateComponent.controller, {
+        template = ClinicalnotesCreateComponent.template;
+        ctrl = controller(ClinicalnotesCreateComponent.controller, {
             $scope: scope,
             $state: state,
             $stateParams: _$stateParams_,
             $ngRedux: _$ngRedux_,
-            patientsActions: _patientsActions_,
-            vaccinationsActions: _vaccinationsActions_,
-            usSpinnerService: _serviceRequests_
+            personalnotesActions: _personalnotesActions_,
+            serviceRequests: _serviceRequests_
         });
     }));
 
@@ -29,15 +27,14 @@ describe('Vaccinations Create', function() {
         spyOn(ctrl, 'setCurrentPageData');
         spyOn(ctrl, 'goList');
         spyOn(ctrl, 'cancel');
-        spyOn(scope, 'vaccinationsCreate');
+        spyOn(scope, 'clinicalnotesCreate');
         spyOn(scope, 'create');
 
         ctrl.setCurrentPageData();
         ctrl.goList();
         ctrl.cancel();
-        scope.vaccinationsCreate();
+        scope.clinicalnotesCreate();
         scope.create();
-
     });
 
     it('Template exist', function() {
@@ -52,8 +49,8 @@ describe('Vaccinations Create', function() {
     it("cancel was called", function() {
         expect(ctrl.cancel).toHaveBeenCalled();
     });
-    it("vaccinationsCreate was called", function() {
-        expect(scope.vaccinationsCreate).toHaveBeenCalled();
+    it("clinicalnotesCreate was called", function() {
+        expect(scope.clinicalnotesCreate).toHaveBeenCalled();
     });
     it("create was called", function() {
         expect(scope.create).toHaveBeenCalled();

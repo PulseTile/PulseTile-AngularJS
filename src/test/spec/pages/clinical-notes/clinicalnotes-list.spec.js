@@ -62,6 +62,10 @@ describe('Clinicalnotes List', function() {
     spyOn(ctrl, 'setCurrentPageData');
     spyOn(ctrl, 'search');
     spyOn(ctrl, 'personalnotesLoad');
+    spyOn(actions, 'all');
+    spyOn(actions, 'get');
+    spyOn(actions, 'create');
+    spyOn(actions, 'update');
 
     fakeCall.callClinicalnotes({}, types.EOLCAREPLANS);
 
@@ -72,6 +76,10 @@ describe('Clinicalnotes List', function() {
     ctrl.setCurrentPageData();
     ctrl.search();
     ctrl.personalnotesLoad();
+    actions.all();
+    actions.get();
+    actions.create();
+    actions.update();
   });
   
   it('Query is empty', function() {
@@ -88,6 +96,12 @@ describe('Clinicalnotes List', function() {
   });
   it("Clinicalnotes reducer was called", function() {
     expect(fakeCall.callClinicalnotes).toHaveBeenCalled();
+  });
+  it("personalnotesActions methods was called", function() {
+    expect(actions.all).toHaveBeenCalled();
+    expect(actions.get).toHaveBeenCalled();
+    expect(actions.create).toHaveBeenCalled();
+    expect(actions.update).toHaveBeenCalled();
   });
   it("pageChangeHandler was called", function() {
     expect(ctrl.pageChangeHandler).toHaveBeenCalled();

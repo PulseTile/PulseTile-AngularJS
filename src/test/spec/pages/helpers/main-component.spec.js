@@ -6,7 +6,7 @@ describe('MainComponent', function() {
 
     beforeEach(angular.mock.module('ripple-ui'));
 
-    let scope, ctrl, controller, template, rootScope, $window, state, serviceRequests;
+    let scope, ctrl, controller, template, rootScope, $window, state, serviceRequests, foo, fetchedBar, bar;
     
     beforeEach(inject(($injector, $controller, _$rootScope_, _$window_, _$state_, _serviceRequests_) => {
         controller = $controller;
@@ -31,6 +31,30 @@ describe('MainComponent', function() {
 
         scope.getState('main-search');
         ctrl.getPageComponents();
+    });
+
+    beforeEach(function() {
+        foo = {
+            setBar: function(value) {
+                bar = value;
+            },
+            getBar: function() {
+                return bar;
+            }
+        };
+
+        spyOn(foo, 'getBar').and.callThrough();
+
+        foo.setBar(123);
+        fetchedBar = foo.getBar();
+    });
+
+    it("tracks that the spy was called", function() {
+        expect(foo.getBar).toHaveBeenCalled();
+    });
+
+    it("should not affect other functions", function() {
+        expect(bar).toEqual(123);
     });
 
     it('$scope.previousState exist', function() {

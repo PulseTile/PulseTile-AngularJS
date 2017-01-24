@@ -1,27 +1,26 @@
-'use strict';
-import VaccinationsCreateComponent from '../../../../app/rippleui/pages/vaccinations/vaccinations-create.component';
+import MedicationsCreateComponent from '../../../../app/rippleui/pages/medications/medications-create.component';
 import '../../../../app/index';
 
-describe('Vaccinations Create', function() {
+describe('Medications Create', function() {
 
     beforeEach(angular.mock.module('ripple-ui'));
 
-    let scope, ctrl, controller, template, stateParams, state, ngRedux, referralsActions, usSpinnerService;
+    let scope, ctrl, controller, template, state;
     
-    beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _patientsActions_, _vaccinationsActions_, _serviceRequests_) => {
+    beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _medicationsActions_, _serviceRequests_, _usSpinnerService_) => {
         controller = $controller;
         scope = $injector.get('$rootScope').$new();
         state = _$state_;
 
-        template = VaccinationsCreateComponent.template;
-        ctrl = controller(VaccinationsCreateComponent.controller, {
+        template = MedicationsCreateComponent.template;
+        ctrl = controller(MedicationsCreateComponent.controller, {
             $scope: scope,
             $state: state,
             $stateParams: _$stateParams_,
             $ngRedux: _$ngRedux_,
-            patientsActions: _patientsActions_,
-            vaccinationsActions: _vaccinationsActions_,
-            usSpinnerService: _serviceRequests_
+            medicationsActions: _medicationsActions_,
+            serviceRequests: _serviceRequests_,
+            usSpinnerService: _usSpinnerService_
         });
     }));
 
@@ -29,17 +28,19 @@ describe('Vaccinations Create', function() {
         spyOn(ctrl, 'setCurrentPageData');
         spyOn(ctrl, 'goList');
         spyOn(ctrl, 'cancel');
-        spyOn(scope, 'vaccinationsCreate');
+        spyOn(scope, 'medicationsCreate');
+        spyOn(scope, 'medicationsLoad');
         spyOn(scope, 'create');
 
         ctrl.setCurrentPageData();
         ctrl.goList();
         ctrl.cancel();
-        scope.vaccinationsCreate();
+        scope.medicationsCreate();
+        scope.medicationsLoad();
         scope.create();
 
     });
-
+    
     it('Template exist', function() {
         expect(template).toBeDefined();
     });
@@ -52,8 +53,11 @@ describe('Vaccinations Create', function() {
     it("cancel was called", function() {
         expect(ctrl.cancel).toHaveBeenCalled();
     });
-    it("vaccinationsCreate was called", function() {
-        expect(scope.vaccinationsCreate).toHaveBeenCalled();
+    it("medicationsCreate was called", function() {
+        expect(scope.medicationsCreate).toHaveBeenCalled();
+    });
+    it("medicationsLoad was called", function() {
+        expect(scope.medicationsLoad).toHaveBeenCalled();
     });
     it("create was called", function() {
         expect(scope.create).toHaveBeenCalled();

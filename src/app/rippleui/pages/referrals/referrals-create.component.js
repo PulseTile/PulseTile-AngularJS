@@ -16,7 +16,7 @@
 let templateCreate= require('./referrals-create.html');
 
 class ReferralsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, referralsActions, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, referralsActions, usSpinnerService, serviceRequests) {
 
   	$scope.referralsEdit = {};
   	$scope.referralsEdit.dateCreated = new Date();
@@ -38,20 +38,20 @@ class ReferralsCreateController {
 		$scope.isEdit = false;
 
 		this.setCurrentPageData = function (data) {
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
-      if (data.referrals.dataGet) {
-        this.referral = data.referrals.dataGet;
-        usSpinnerService.stop('referralsDetail-spinner');
-      }
-      if (data.user.data) {
-        this.currentUser = data.user.data;
-      }
+		  if (data.patientsGet.data) {
+			this.currentPatient = data.patientsGet.data;
+		  }
+		  if (data.referrals.dataGet) {
+			this.referral = data.referrals.dataGet;
+			usSpinnerService.stop('referralsDetail-spinner');
+		  }
+		  if (serviceRequests.currentUserData) {
+			$scope.currentUser = serviceRequests.currentUserData;
+		  }
 		};
 
 		let unsubscribe = $ngRedux.connect(state => ({
-      getStoreData: this.setCurrentPageData(state)
+      		getStoreData: this.setCurrentPageData(state)
 		}))(this);
 
 		this.edit = function () {
@@ -100,5 +100,5 @@ const ReferralsCreateComponent = {
   controller: ReferralsCreateController
 };
 
-ReferralsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'usSpinnerService'];
+ReferralsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'usSpinnerService', 'serviceRequests'];
 export default ReferralsCreateComponent;

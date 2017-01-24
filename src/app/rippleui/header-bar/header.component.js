@@ -16,7 +16,7 @@
 let templateHeader = require('./header-bar.tmpl.html');
 
 class HeaderController {
-  constructor($rootScope, $scope, $state, $stateParams, $ngRedux, patientsActions, AdvancedSearch, serviceRequests) {
+  constructor($scope, $rootScope, $state, $stateParams, $ngRedux, patientsActions, AdvancedSearch, serviceRequests) {
 
     var self = this;
     $scope.title = '';
@@ -25,10 +25,10 @@ class HeaderController {
     this.goHome = function () {
       if ($scope.title === 'PHR POC') return;
 
-			if ($state.router.globals.$current.name === 'patients-charts') {
-				$state.go('main-search');
-			} else {
-				$state.go('patients-list');
+        if ($state.router.globals.$current.name === 'patients-charts') {
+          $state.go('main-search');
+        } else {
+          $state.go('patients-list');
       }
     };
     this.goChart = function () {
