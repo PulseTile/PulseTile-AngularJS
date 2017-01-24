@@ -27,6 +27,7 @@ describe('HeaderComponent', function() {
     }));
     beforeEach(function() {
         scope.title = 'IDCR';
+        rootScope.searchMode = false;
         
         spyOn(scope, 'setTitle');
         spyOn(scope, 'switchDirectByRole');

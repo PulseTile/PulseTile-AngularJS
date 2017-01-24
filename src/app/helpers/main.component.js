@@ -83,6 +83,7 @@ class MainController {
       return $scope.fullPanelClass ? 'full-panel full-panel-' + $scope.fullPanelClass : '';
     };
     this.changeFullPanel = function (data) {
+      /* istanbul ignore if  */
       if ($scope.fullPanelClass === data.panelName) {
         $scope.fullPanelClass = '';
       } else {
@@ -92,6 +93,7 @@ class MainController {
     serviceRequests.subscriber('changeFullPanel', this.changeFullPanel);
 
     this.changeClassShowSidebar = function (data) {
+      /* istanbul ignore if  */
       if (data.click) {
         if ($scope.classShowSidebar === 'showSidebar') {
           $scope.classShowSidebar = '';

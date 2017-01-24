@@ -88,6 +88,7 @@ class ReportChartController {
       }, 200);
     };
     vm.setDataRequest = function (result) {
+      /* istanbul ignore if  */
       if (result.chart.data && !graphData) {
         graphData = [
           {
@@ -114,6 +115,7 @@ class ReportChartController {
 
         vm.resultSize = result.chart.data.all;
 
+        /* istanbul ignore if  */
         if (vm.resultSize !== 0) {
           vm.ageChart(graphData);
         } else {
@@ -124,6 +126,7 @@ class ReportChartController {
         result.chart.data = 0;
     };
 
+    /* istanbul ignore if  */
     if ($stateParams.searchString !== undefined) {
       var searchQuery = $stateParams.searchString.split(':');
       vm.reportType = searchQuery[0];

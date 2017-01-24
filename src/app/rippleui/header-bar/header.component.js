@@ -47,6 +47,7 @@ class HeaderController {
     };
 
     $scope.switchDirectByRole = function (currentUser) {
+      /* istanbul ignore if  */
       if (!currentUser) return;
       // Direct different roles to different pages at login
       switch (currentUser.role) {
@@ -90,7 +91,7 @@ class HeaderController {
     var auth0;
     
     serviceRequests.initialise().then(function (result){
-      
+      /* istanbul ignore if  */
       if (result.data.token) {
         // reset the JSESSIONID cookie with the new incoming cookie
 
@@ -98,7 +99,7 @@ class HeaderController {
         location.reload();
         return;
       }
-
+      /* istanbul ignore if  */
       if (result.data.redirectTo === 'auth0') {
         console.log('running in UAT mode, so now login via auth0');
 
@@ -109,7 +110,7 @@ class HeaderController {
         return;
 
       }
-
+      /* istanbul ignore if  */
       if (result.data.ok) {
         console.log('Cookie was for a valid session, so fetch the simulated user');
         $scope.login();
@@ -188,7 +189,7 @@ class HeaderController {
 
     this.checkExpression = function (expression) {
       $scope.search.searchExpression = expression;
-
+      /* istanbul ignore if  */
       if ($rootScope.searchMode) {
         if ($rootScope.reportMode && !$rootScope.reportTypeSet) {
           this.reportTypes = [

@@ -75,7 +75,9 @@ class PatientsSummaryController {
       return arr;
     }
     this.getPatientData = function (data) {
-      if (!data || !data.nhsNumber) return false;
+      if (!data || !data.nhsNumber) {
+        return false;
+      }
 
       usSpinnerService.stop('patientSummary-spinner');
 
@@ -83,12 +85,12 @@ class PatientsSummaryController {
 
       // Putting it all together dashboards
       for (var dashboard in $scope.listsDashboards) {
-        $scope.listsDashboards[dashboard].array = this.patient[dashboard].slice(0, this.countPatientArr);;
+        $scope.listsDashboards[dashboard].array = this.patient[dashboard].slice(0, this.countPatientArr);
       }
 
       // Fill dashboards empty elements
       for (var dashboard in $scope.listsDashboards) {
-        var arr = $scope.listsDashboards[dashboard].array
+        var arr = $scope.listsDashboards[dashboard].array;
         arr = fillPatientArray(arr, this.countPatientArr - arr.length);
       }
 

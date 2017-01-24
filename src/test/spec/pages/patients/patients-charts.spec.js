@@ -35,13 +35,11 @@ describe('Patients Charts', function() {
   }));
   //         
   beforeEach(function() {
-    spyOn(ctrl, 'openModal');
     spyOn(ctrl, 'goToPatientsList');
     spyOn(ctrl, 'goToLookUp');
     spyOn(ctrl, 'getPatients');
     spyOn(ctrl, 'toggleChart');
     
-    ctrl.openModal();
     ctrl.goToPatientsList();
     ctrl.goToLookUp();
     ctrl.getPatients();
@@ -54,9 +52,6 @@ describe('Patients Charts', function() {
   });
   it('Controller exist', function() {
     expect(ctrl).toBeDefined();
-  });
-  it("openModal was called", function() {
-    expect(ctrl.openModal).toHaveBeenCalled();
   });
   it("goToPatientsList was called", function() {
     expect(ctrl.goToPatientsList).toHaveBeenCalled();
