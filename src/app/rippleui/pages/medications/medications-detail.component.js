@@ -74,7 +74,7 @@ class MedicationsDetailController {
       $scope.medicationEdit.dateCreated = new Date($scope.medicationEdit.dateCreated);
     };
 
-    $scope.isPrescriptionEdit = true;
+    $scope.isPrescriptionEdit = false;
     this.editPrescription = function () {
       $scope.isPrescriptionEdit = true;
       $scope.prescriptionForm = {};
