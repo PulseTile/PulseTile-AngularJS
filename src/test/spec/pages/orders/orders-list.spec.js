@@ -9,9 +9,9 @@ describe('Orders List', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope, ctrl, controller, template, actions, fakeCall, stateParams, state, ngRedux, ordersActions, serviceRequests, OrdersModal, usSpinnerService;
+  let scope, ctrl, controller, template, actions, fakeCall, stateParams, state, ngRedux, ordersActions, serviceRequests, usSpinnerService;
 
-  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _ordersActions_, _serviceRequests_, _OrdersModal_, _usSpinnerService_) => {
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _ordersActions_, _serviceRequests_, _usSpinnerService_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
     state = _$state_;
@@ -19,7 +19,6 @@ describe('Orders List', function() {
     ngRedux = _$ngRedux_;
     stateParams = _$stateParams_;
     ordersActions = _ordersActions_;
-    OrdersModal = _OrdersModal_;
     usSpinnerService = _usSpinnerService_;
 
     template = OrdersListComponent.template;
@@ -31,7 +30,6 @@ describe('Orders List', function() {
       $ngRedux: ngRedux,
       ordersActions: ordersActions,
       serviceRequests: serviceRequests,
-      OrdersModal: OrdersModal,
       usSpinnerService: usSpinnerService
     });
     actions = $injector.get('ordersActions');
@@ -48,7 +46,6 @@ describe('Orders List', function() {
     spyOn(ctrl, 'go');
     spyOn(ctrl, 'selected');
     spyOn(ctrl, 'search');
-    spyOn(ctrl, 'create');
     spyOn(ctrl, 'setCurrentPageData');
 
     fakeCall.callOrders({}, types.ORDERS);
@@ -57,7 +54,6 @@ describe('Orders List', function() {
     ctrl.go();
     ctrl.selected();
     ctrl.search();
-    ctrl.create();
     ctrl.setCurrentPageData();
   });
 
@@ -84,9 +80,6 @@ describe('Orders List', function() {
   });
   it("selected was called", function() {
     expect(ctrl.selected).toHaveBeenCalled();
-  });
-  it("create was called", function() {
-    expect(ctrl.create).toHaveBeenCalled();
   });
   it("search was called", function() {
     expect(ctrl.search).toHaveBeenCalled();

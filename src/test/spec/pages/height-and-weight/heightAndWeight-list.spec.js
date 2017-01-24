@@ -9,9 +9,9 @@ describe('HeightAndWeight List', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope, ctrl, controller, template, actions, fakeCall, stateParams, state, ngRedux, heightAndWeightActions, serviceRequests, HeightAndWeightModal, usSpinnerService;
+  let scope, ctrl, controller, template, actions, fakeCall, stateParams, state, ngRedux, heightAndWeightActions, serviceRequests, usSpinnerService;
 
-  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _heightAndWeightActions_, _serviceRequests_, _HeightAndWeightModal_, _usSpinnerService_) => {
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _heightAndWeightActions_, _serviceRequests_, _usSpinnerService_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
     state = _$state_;
@@ -19,7 +19,6 @@ describe('HeightAndWeight List', function() {
     ngRedux = _$ngRedux_;
     stateParams = _$stateParams_;
     heightAndWeightActions = _heightAndWeightActions_;
-    HeightAndWeightModal = _HeightAndWeightModal_;
     usSpinnerService = _usSpinnerService_;
 
     template = HeightAndWeightListComponent.template;
@@ -31,7 +30,6 @@ describe('HeightAndWeight List', function() {
       $ngRedux: ngRedux,
       heightAndWeightActions: heightAndWeightActions,
       serviceRequests: serviceRequests,
-      HeightAndWeightModal: HeightAndWeightModal,
       usSpinnerService: usSpinnerService
     });
     actions = $injector.get('heightAndWeightActions');
@@ -48,7 +46,6 @@ describe('HeightAndWeight List', function() {
     spyOn(ctrl, 'go');
     spyOn(ctrl, 'selected');
     spyOn(ctrl, 'search');
-    spyOn(ctrl, 'create');
     spyOn(ctrl, 'setCurrentPageData');
 
     fakeCall.callHeightAndWeight({}, types.HEIGHTANDWEIGHT);
@@ -57,7 +54,6 @@ describe('HeightAndWeight List', function() {
     ctrl.go();
     ctrl.selected();
     ctrl.search();
-    ctrl.create();
     ctrl.setCurrentPageData();
   });
 
@@ -84,9 +80,6 @@ describe('HeightAndWeight List', function() {
   });
   it("selected was called", function() {
     expect(ctrl.selected).toHaveBeenCalled();
-  });
-  it("create was called", function() {
-    expect(ctrl.create).toHaveBeenCalled();
   });
   it("search was called", function() {
     expect(ctrl.search).toHaveBeenCalled();

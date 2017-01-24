@@ -6,14 +6,13 @@ describe('HeaderComponent', function() {
 
     beforeEach(angular.mock.module('ripple-ui'));
 
-    let scope, ctrl, controller, template, state, rootScope, ngRedux, serviceRequests, AdvancedSearch, patientsActions;
+    let scope, ctrl, controller, template, state, rootScope, ngRedux, serviceRequests, patientsActions;
     
-    beforeEach(inject(($injector, $controller, _$rootScope_, _$state_, _$stateParams_,_$ngRedux_, _patientsActions_, _AdvancedSearch_, _serviceRequests_) => {
+    beforeEach(inject(($injector, $controller, _$rootScope_, _$state_, _$stateParams_,_$ngRedux_, _patientsActions_, _serviceRequests_) => {
         controller = $controller;
         scope = $injector.get('$rootScope').$new();
         state = _$state_;
         serviceRequests = _serviceRequests_;
-        AdvancedSearch = _AdvancedSearch_;
         rootScope = _$rootScope_;
 
         template = HeaderComponent.template;
@@ -23,7 +22,6 @@ describe('HeaderComponent', function() {
             $stateParams: _$stateParams_,
             $ngRedux: _$ngRedux_,
             patientsActions: _patientsActions_,
-            AdvancedSearch: AdvancedSearch,
             serviceRequests: serviceRequests
         });
     }));
@@ -38,7 +36,6 @@ describe('HeaderComponent', function() {
         spyOn(ctrl, 'goChart');
         spyOn(ctrl, 'goProfile');
         spyOn(ctrl, 'signout');
-        spyOn(ctrl, 'openAdvancedSearch');
         spyOn(ctrl, 'containsReportString');
         spyOn(ctrl, 'containsSettingString');
         spyOn(ctrl, 'containsPatientString');
@@ -67,7 +64,6 @@ describe('HeaderComponent', function() {
         ctrl.goChart();
         ctrl.goProfile();
         ctrl.signout();
-        ctrl.openAdvancedSearch();
         ctrl.containsReportString();
         ctrl.containsSettingString();
         ctrl.containsPatientString();
@@ -131,9 +127,6 @@ describe('HeaderComponent', function() {
     });
     it("signout was called", function() {
         expect(ctrl.signout).toHaveBeenCalled();
-    });
-    it("openAdvancedSearch was called", function() {
-        expect(ctrl.openAdvancedSearch).toHaveBeenCalled();
     });
     it("containsReportString was called", function() {
         expect(ctrl.containsReportString).toHaveBeenCalled();

@@ -16,10 +16,10 @@
 let templateAppointmentsDetail= require('./appointments-detail.html');
 
 class AppointmentsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, appointmentsActions, AppointmentsModal, usSpinnerService, serviceRequests) {
-    this.edit = function () {
-      AppointmentsModal.openModal(this.currentPatient, {title: 'Edit Appointment'}, this.appointment, this.currentUser);
-    };
+  constructor($scope, $state, $stateParams, $ngRedux, appointmentsActions, usSpinnerService, serviceRequests) {
+    // this.edit = function () {
+    //   AppointmentsModal.openModal(this.currentPatient, {title: 'Edit Appointment'}, this.appointment, this.currentUser);
+    // };
 
     $scope.UnlockedSources = [
       'handi.ehrscape.com'
@@ -56,5 +56,5 @@ const AppointmentsDetailComponent = {
   controller: AppointmentsDetailController
 };
 
-AppointmentsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'appointmentsActions', 'AppointmentsModal', 'usSpinnerService', 'serviceRequests'];
+AppointmentsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'appointmentsActions', 'usSpinnerService', 'serviceRequests'];
 export default AppointmentsDetailComponent;

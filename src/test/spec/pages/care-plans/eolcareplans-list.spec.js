@@ -18,12 +18,11 @@ describe('Care Plans List', function() {
     ngRedux, 
     eolcareplansActions, 
     serviceRequests, 
-    EolcareplansModal, 
     usSpinnerService,
     actions,
     fakeCall;
 
-  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _eolcareplansActions_, _serviceRequests_, _EolcareplansModal_, _usSpinnerService_) => {
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _eolcareplansActions_, _serviceRequests_, _usSpinnerService_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
     state = _$state_;
@@ -31,7 +30,6 @@ describe('Care Plans List', function() {
     ngRedux = _$ngRedux_;
     stateParams = _$stateParams_;
     eolcareplansActions = _eolcareplansActions_;
-    EolcareplansModal = _EolcareplansModal_;
     usSpinnerService = _usSpinnerService_;
 
     template = EolcareplansListComponent.template;
@@ -43,7 +41,6 @@ describe('Care Plans List', function() {
       $ngRedux: ngRedux,
       eolcareplansActions: eolcareplansActions,
       serviceRequests: serviceRequests,
-      EolcareplansModal: EolcareplansModal,
       usSpinnerService: usSpinnerService
     });
 
@@ -61,7 +58,6 @@ describe('Care Plans List', function() {
     spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
     spyOn(ctrl, 'selected');
-    spyOn(ctrl, 'create');
     spyOn(ctrl, 'setCurrentPageData');
     spyOn(ctrl, 'search');
     spyOn(ctrl, 'eolcareplansLoad');
@@ -71,7 +67,6 @@ describe('Care Plans List', function() {
     ctrl.pageChangeHandler();
     ctrl.go();
     ctrl.selected();
-    ctrl.create();
     ctrl.setCurrentPageData();
     ctrl.search();
     ctrl.eolcareplansLoad();
@@ -100,9 +95,6 @@ describe('Care Plans List', function() {
   });
   it("selected was called", function() {
     expect(ctrl.selected).toHaveBeenCalled();
-  });
-  it("create was called", function() {
-    expect(ctrl.create).toHaveBeenCalled();
   });
   it("setCurrentPageData was called", function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();

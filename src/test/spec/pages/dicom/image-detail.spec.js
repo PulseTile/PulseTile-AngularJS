@@ -6,16 +6,15 @@ describe('Image Details', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope, ctrl, controller, template, stateParams, state, ngRedux, imageActions, ImageModal;
+  let scope, ctrl, controller, template, stateParams, state, ngRedux, imageActions;
 
-  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _imageActions_, _ImageModal_) => {
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _imageActions_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
     state = _$state_;
     ngRedux = _$ngRedux_;
     stateParams = _$stateParams_;
     imageActions = _imageActions_;
-    ImageModal = _ImageModal_;
 
     template = ImageDetailComponent.template;
     ctrl = controller(ImageDetailComponent.controller, {
@@ -23,19 +22,16 @@ describe('Image Details', function() {
       $state: state,
       $stateParams: stateParams,
       $ngRedux: ngRedux,
-      imageActions: imageActions,
-      ImageModal: ImageModal
+      imageActions: imageActions
     });
   }));
 
   beforeEach(function() {
-    spyOn(ctrl, 'openImage');
     spyOn(ctrl, 'setCurrentPageData');
     spyOn(ctrl, 'seriesDetailsLoad');
     spyOn(ctrl, 'instanceLoad');
     spyOn(ctrl, 'imageLoad');
 
-    ctrl.openImage();
     ctrl.setCurrentPageData();
     ctrl.seriesDetailsLoad();
     ctrl.instanceLoad();
@@ -50,9 +46,6 @@ describe('Image Details', function() {
   });
   it('Controller exist', function() {
     expect(ctrl).toBeDefined();
-  });
-  it("openImage was called", function() {
-    expect(ctrl.openImage).toHaveBeenCalled();
   });
   it("setCurrentPageData was called", function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();

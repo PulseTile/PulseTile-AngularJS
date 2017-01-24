@@ -1,10 +1,10 @@
 let templateHeightAndWeightDetail= require('./heightAndWeight-detail.html');
 
 class HeightAndWeightDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, heightAndWeightActions, HeightAndWeightModal, usSpinnerService, serviceRequests) {
-    this.edit = function () {
-      HeightAndWeightModal.openModal(this.currentPatient, {title: 'Edit Height And Weight'}, this.heightAndWeight, this.currentUser);
-    };
+  constructor($scope, $state, $stateParams, $ngRedux, heightAndWeightActions, usSpinnerService, serviceRequests) {
+    // this.edit = function () {
+    //   HeightAndWeightModal.openModal(this.currentPatient, {title: 'Edit Height And Weight'}, this.heightAndWeight, this.currentUser);
+    // };
 
     $scope.UnlockedSources = [
       'handi.ehrscape.com'
@@ -41,5 +41,5 @@ const HeightAndWeightDetailComponent = {
   controller: HeightAndWeightDetailController
 };
 
-HeightAndWeightDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'heightAndWeightActions', 'HeightAndWeightModal', 'usSpinnerService', 'serviceRequests'];
+HeightAndWeightDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'heightAndWeightActions', 'usSpinnerService', 'serviceRequests'];
 export default HeightAndWeightDetailComponent;

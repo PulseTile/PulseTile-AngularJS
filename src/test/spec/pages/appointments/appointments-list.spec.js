@@ -19,12 +19,11 @@ describe('Appointments List', function() {
       ngRedux,
       appointmentsActions,
       serviceRequests,
-      AppointmentsModal,
       usSpinnerService,
       actions,
       fakeCall;
 
-  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _appointmentsActions_, _serviceRequests_, _AppointmentsModal_, _usSpinnerService_) => {
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _appointmentsActions_, _serviceRequests_, _usSpinnerService_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
     state = _$state_;
@@ -32,7 +31,6 @@ describe('Appointments List', function() {
     ngRedux = _$ngRedux_;
     stateParams = _$stateParams_;
     appointmentsActions = _appointmentsActions_;
-    AppointmentsModal = _AppointmentsModal_;
     usSpinnerService = _usSpinnerService_;
 
     template = AppointmentsListComponent.template;
@@ -44,7 +42,6 @@ describe('Appointments List', function() {
       $ngRedux: ngRedux,
       appointmentsActions: appointmentsActions,
       serviceRequests: serviceRequests,
-      AppointmentsModal: AppointmentsModal,
       usSpinnerService: usSpinnerService
     });
     
@@ -61,7 +58,6 @@ describe('Appointments List', function() {
     spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
     spyOn(ctrl, 'selected');
-    spyOn(ctrl, 'create');
     spyOn(ctrl, 'setCurrentPageData');
     spyOn(ctrl, 'search');
     spyOn(ctrl, 'appointmentsLoad');
@@ -71,7 +67,6 @@ describe('Appointments List', function() {
     ctrl.pageChangeHandler();
     ctrl.go();
     ctrl.selected();
-    ctrl.create();
     ctrl.setCurrentPageData();
     ctrl.search();
     ctrl.appointmentsLoad();
@@ -97,9 +92,6 @@ describe('Appointments List', function() {
   });
   it("selected was called", function() {
     expect(ctrl.selected).toHaveBeenCalled();
-  });
-  it("create was called", function() {
-    expect(ctrl.create).toHaveBeenCalled();
   });
   it("setCurrentPageData was called", function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();

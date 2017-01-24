@@ -6,20 +6,18 @@ describe('SearchComponent', function() {
 
     beforeEach(angular.mock.module('ripple-ui'));
     
-    let scope, ctrl, controller, state, template, serviceRequests, AdvancedSearch, isClickToAdvancedSearch;
+    let scope, ctrl, controller, state, template, serviceRequests, isClickToAdvancedSearch;
 
-    beforeEach(inject(($injector, $controller, _serviceRequests_, _AdvancedSearch_, _$state_) => {
+    beforeEach(inject(($injector, $controller, _serviceRequests_, _$state_) => {
         controller = $controller;
         scope = $injector.get('$rootScope').$new();
         state = _$state_;
         serviceRequests = _serviceRequests_;
-        AdvancedSearch = _AdvancedSearch_;
 
         template = SearchComponent.template;
         ctrl = controller(SearchComponent.controller, {
             $scope: scope,
             serviceRequests: serviceRequests,
-            AdvancedSearch: AdvancedSearch,
             $state: state
         });
         isClickToAdvancedSearch = ctrl.isClickToAdvancedSearch;
@@ -27,17 +25,10 @@ describe('SearchComponent', function() {
 
     beforeEach(function() {
         spyOn(ctrl, 'hideSearch');
-        spyOn(ctrl, 'searchFunction');
-        spyOn(AdvancedSearch, 'openAdvancedSearch');
 
         ctrl.hideSearch();
-        ctrl.searchFunction();
-        AdvancedSearch.openAdvancedSearch();
     });
 
-    it('isClickToAdvancedSearch is true', function() {
-        expect(isClickToAdvancedSearch).toBe(true);
-    });
     it('mainSearchEnabled is true', function() {
         expect(ctrl.mainSearchEnabled).toBe(true);
     });
@@ -52,11 +43,5 @@ describe('SearchComponent', function() {
     });
     it("hideSearch was called", function() {
         expect(ctrl.hideSearch).toHaveBeenCalled();
-    });
-    it("searchFunction was called", function() {
-        expect(ctrl.searchFunction).toHaveBeenCalled();
-    });
-    it("AdvancedSearch was called", function() {
-        expect(AdvancedSearch.openAdvancedSearch).toHaveBeenCalled();
     });
 });

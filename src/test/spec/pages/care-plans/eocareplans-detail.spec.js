@@ -13,9 +13,9 @@ describe('Care Plans Detail', function() {
     stateParams,
     state,
     ngRedux,
-    eolcareplansActions, serviceRequests, EolcareplansModal, usSpinnerService;
+    eolcareplansActions, serviceRequests, usSpinnerService;
 
-  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _eolcareplansActions_, _serviceRequests_, _EolcareplansModal_, _usSpinnerService_) => {
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _eolcareplansActions_, _serviceRequests_, _usSpinnerService_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
     state = _$state_;
@@ -23,7 +23,6 @@ describe('Care Plans Detail', function() {
     ngRedux = _$ngRedux_;
     stateParams = _$stateParams_;
     eolcareplansActions = _eolcareplansActions_;
-    EolcareplansModal = _EolcareplansModal_;
     usSpinnerService = _usSpinnerService_;
 
     template = EolcareplansDetailComponent.template;
@@ -35,33 +34,24 @@ describe('Care Plans Detail', function() {
       $ngRedux: ngRedux,
       eolcareplansActions: eolcareplansActions,
       serviceRequests: serviceRequests,
-      EolcareplansModal: EolcareplansModal,
       usSpinnerService: usSpinnerService
     });
     // scope.$digest();
   }));
 
   beforeEach(function() {
-    spyOn(ctrl, 'edit');
     spyOn(ctrl, 'setCurrentPageData');
     spyOn(ctrl, 'eolcareplansLoad');
 
-    ctrl.edit();
     ctrl.setCurrentPageData();
     ctrl.eolcareplansLoad();
   });
 
-  it('Modal exist', function() {
-    expect(EolcareplansModal).toBeDefined();
-  });
   it('Template exist', function() {
     expect(template).toBeDefined();
   });
   it('Controller exist', function() {
     expect(ctrl).toBeDefined();
-  });
-  it("edit was called", function() {
-    expect(ctrl.edit).toHaveBeenCalled();
   });
   it("setCurrentPageData was called", function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();

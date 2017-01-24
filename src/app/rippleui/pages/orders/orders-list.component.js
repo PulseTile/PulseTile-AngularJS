@@ -16,7 +16,7 @@
 let templateOrdersList = require('./orders-list.html');
 
 class OrdersListController {
-  constructor($scope, $state, $stateParams, $ngRedux, ordersActions, serviceRequests, OrdersModal, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, ordersActions, serviceRequests, usSpinnerService) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -35,9 +35,9 @@ class OrdersListController {
       $scope.query = $stateParams.filter;
     }
 
-    this.create = function () {
-      OrdersModal.openModal(this.currentPatient, {title: 'Create Order'}, {}, this.currentUser);
-    };
+    // this.create = function () {
+    //   OrdersModal.openModal(this.currentPatient, {title: 'Create Order'}, {}, this.currentUser);
+    // };
 
     this.search = function (row) {
       return (
@@ -97,5 +97,5 @@ const OrdersListComponent = {
   controller: OrdersListController
 };
 
-OrdersListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'ordersActions', 'serviceRequests', 'OrdersModal', 'usSpinnerService'];
+OrdersListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'ordersActions', 'serviceRequests', 'usSpinnerService'];
 export default OrdersListComponent;

@@ -16,7 +16,7 @@
 let templateHeader = require('./header-bar.tmpl.html');
 
 class HeaderController {
-  constructor($scope, $rootScope, $state, $stateParams, $ngRedux, patientsActions, AdvancedSearch, serviceRequests) {
+  constructor($scope, $rootScope, $state, $stateParams, $ngRedux, patientsActions, serviceRequests) {
 
     var self = this;
     $scope.title = '';
@@ -128,7 +128,6 @@ class HeaderController {
     $rootScope.reportTypeSet = false;
     $rootScope.reportTypeString = '';
 
-    this.openAdvancedSearch = AdvancedSearch.openAdvancedSearch;
     $scope.search = {};
     $scope.search.searchExpression = $rootScope.searchExpression;
     this.searchBarEnabled = !$state.is('main-search');
@@ -190,11 +189,6 @@ class HeaderController {
     this.checkExpression = function (expression) {
       $scope.search.searchExpression = expression;
 
-      // if (this.autoAdvancedSearch) {
-      //   if ($scope.search.searchExpression.length >= 3) {
-      //     AdvancedSearch.openAdvancedSearch($scope.search.searchExpression);
-      //   }
-      // } else 
       if ($rootScope.searchMode) {
         if ($rootScope.reportMode && !$rootScope.reportTypeSet) {
           this.reportTypes = [
@@ -232,9 +226,6 @@ class HeaderController {
     };
 
     this.searchFunction = function () {
-      // if (this.autoAdvancedSearch) {
-      //   AdvancedSearch.openAdvancedSearch();
-      // }
 
       if ($rootScope.reportTypeSet && $scope.search.searchExpression !== '') {
         var tempExpression = $rootScope.reportTypeString + ': ' + $scope.search.searchExpression;
@@ -341,5 +332,5 @@ const HeaderComponent = {
   controller: HeaderController
 };
 
-HeaderController.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'AdvancedSearch', 'serviceRequests'];
+HeaderController.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'serviceRequests'];
 export default HeaderComponent;

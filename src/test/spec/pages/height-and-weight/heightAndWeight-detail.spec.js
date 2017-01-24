@@ -6,16 +6,15 @@ describe('HeightAndWeight Details', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope, ctrl, controller, template, stateParams, state, ngRedux, heightAndWeightActions, HeightAndWeightModal, usSpinnerService;
+  let scope, ctrl, controller, template, stateParams, state, ngRedux, heightAndWeightActions, usSpinnerService;
 
-  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _heightAndWeightActions_, _HeightAndWeightModal_, _usSpinnerService_) => {
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _heightAndWeightActions_, _usSpinnerService_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
     state = _$state_;
     ngRedux = _$ngRedux_;
     stateParams = _$stateParams_;
     heightAndWeightActions = _heightAndWeightActions_;
-    HeightAndWeightModal = _HeightAndWeightModal_;
     usSpinnerService = _usSpinnerService_;
 
     template = HeightAndWeightDetailComponent.template;
@@ -25,18 +24,15 @@ describe('HeightAndWeight Details', function() {
       $stateParams: stateParams,
       $ngRedux: ngRedux,
       heightAndWeightActions: heightAndWeightActions,
-      HeightAndWeightModal: HeightAndWeightModal,
       usSpinnerService: usSpinnerService
     });
   }));
   beforeEach(function() {
     spyOn(ctrl, 'setCurrentPageData');
     spyOn(ctrl, 'heightAndWeightLoad');
-    spyOn(ctrl, 'edit');
 
     ctrl.heightAndWeightLoad();
     ctrl.setCurrentPageData();
-    ctrl.edit();
   });
 
   it('formDisabled', function() {
@@ -53,8 +49,5 @@ describe('HeightAndWeight Details', function() {
   });
   it("setCurrentPageData was called", function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
-  });
-  it("edit was called", function() {
-    expect(ctrl.edit).toHaveBeenCalled();
   });
 });

@@ -14,17 +14,15 @@ describe('Appointments Details', function() {
       state, 
       ngRedux, 
       appointmentsActions, 
-      AppointmentsModal, 
       usSpinnerService;
 
-  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _appointmentsActions_, _AppointmentsModal_, _usSpinnerService_) => {
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _appointmentsActions_, _usSpinnerService_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
     state = _$state_;
     ngRedux = _$ngRedux_;
     stateParams = _$stateParams_;
     appointmentsActions = _appointmentsActions_;
-    AppointmentsModal = _AppointmentsModal_;
     usSpinnerService = _usSpinnerService_;
 
     template = AppointmentsDetailComponent.template;
@@ -35,17 +33,14 @@ describe('Appointments Details', function() {
       $stateParams: stateParams,
       $ngRedux: ngRedux,
       appointmentsActions: appointmentsActions,
-      AppointmentsModal: AppointmentsModal,
       usSpinnerService: usSpinnerService
     });
   }));
 
   beforeEach(function() {
-    spyOn(ctrl, 'edit');
     spyOn(ctrl, 'setCurrentPageData');
     spyOn(ctrl, 'appointmentsLoad');
 
-    ctrl.edit();
     ctrl.appointmentsLoad();
     ctrl.setCurrentPageData();
   });
@@ -58,9 +53,6 @@ describe('Appointments Details', function() {
   });
   it('Template exist', function() {
     expect(template).toBeDefined();
-  });
-  it("edit was called", function() {
-    expect(ctrl.edit).toHaveBeenCalled();
   });
   it("appointmentsLoad was called", function() {
     expect(ctrl.appointmentsLoad).toHaveBeenCalled();
