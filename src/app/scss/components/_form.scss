@@ -27,6 +27,9 @@ label.control-label {
 
 .form-control {
   height: 30px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  line-height: 20px;
   border-color: #c3c3c3;
   border-radius: 2px;
   box-shadow: 0 0 0 #fff !important;
@@ -127,6 +130,14 @@ textarea.textarea-big {
 }
 
 // Custom Inputs radio, checkbox
+  .wrap-fcustominps-inline {
+    overflow: hidden;
+    .wrap-fcustominp {
+      float: left;
+      margin-right: 20px;
+      & + .wrap-fcustominp {margin-top: 0;}
+    }
+  }
   .wrap-fcustominp {
     padding: 5px 0;
     overflow: hidden;
@@ -154,6 +165,7 @@ textarea.textarea-big {
       position: relative;
       display: block;
       width: 100%; height: 100%;
+      margin: 0;
       border-radius: 3px;
       border: 1px solid #C9C9C9;
       background: #ffffff;
@@ -176,26 +188,21 @@ textarea.textarea-big {
     }
 
     input[type=radio] + label {
+      width: 14px; height: 14px;
+      margin-top: 1px;
       border-radius: 50%;
     }
-    input[type=radio]:checked + label:before,
+    input[type=radio]:checked + label {
+      border-color: #389dff;
+      background: #389dff;
+    }
     input[type=radio]:checked + label:after {
       content: '';
       position: absolute;
-      
-      background: #222222;
-      border-radius: 50%;
-    }
-    input[type=radio]:checked + label:before {
       top: 4px; left: 4px;
-      width: 14px; height: 14px;
-      background: #fff;
-      z-index: 1;
-    }
-    input[type=radio]:checked + label:after {
-      top: 5px; left: 5px;
-      width: 12px; height: 12px;
-      background: #222222;
+      width: 4px; height: 4px;
+      background: #ffffff;
+      border-radius: 50%;
       z-index: 1;
     }
   }

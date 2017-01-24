@@ -6,7 +6,7 @@
   color: #303030;
   border: none;
   border-radius: 0;
-  background-color: $table-background;
+  background: #ffffff;
   thead {
     background-color: $table-header-background;
     font-weight: 700;
@@ -18,6 +18,14 @@
   tbody tr td {
     padding: 10px;
     vertical-align: middle;
+  }
+  thead tr th.selected {
+    background: #A9D38E;
+  }
+  tbody tr td.selected {
+    color: #ffffff;
+    background: #b4b4b4;
+
   }
   &.clickable tbody tr {cursor: pointer;}
   .dropdown-menu {
@@ -60,8 +68,20 @@
 .table > tbody > tr.info {
   background-color: $table-row-background-hover !important;
 }
+.wrap-table-scrollX {
+  width: 100%;
+  max-width: initial;
+  overflow-x: scroll; 
+  .table {
+    width: 1px;
+  }
+}
 
+.table-fixedcol {
+  table-layout: fixed;
+}
 .table-striped {
+  background-color: $table-background;
   tbody {
     tr {
       &[ng-click]:hover td,

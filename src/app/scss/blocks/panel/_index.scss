@@ -16,6 +16,21 @@
     background: transparent;
     box-shadow: none;
   }
+  &.panel-small {
+    margin-bottom: 0;
+    background: #ffffff;
+    box-shadow: none;
+    border: 1px solid #D8D8D8;
+    &.panel-table {
+      border-bottom: 0;
+    }
+  }
+}
+.panel-table .table {
+  margin-bottom: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
 }
 
 @import 'group';

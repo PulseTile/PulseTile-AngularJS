@@ -11,6 +11,8 @@
   font-size: 18px;
   line-height: 34px;
   font-weight: 700;
+  color: #303030;
+  @include text-truncate;
 }
 .panel-title i.fa-bar-chart {font-size: 20px;}
 
@@ -24,11 +26,8 @@
     border-radius: 0;
     @include clearfix;
   }
-  .panel-title {
-    color: #303030;
-    @include text-truncate;
-  }
 }
+
 .panel-secondary {
   .panel-heading {
     padding: 5px;
@@ -37,8 +36,18 @@
     border-radius: 0;
     @include clearfix;
   }
-  .panel-title {
+}
+
+.panel-small {
+  .panel-heading {
+    padding: 3px;
     color: #303030;
-    @include text-truncate;
+    background: #E8E8E8;
+    border-radius: 0;
+    @include clearfix;
+  }
+  .panel-title {
+    font-size: 12px;
+    line-height: 24px;
   }
 }

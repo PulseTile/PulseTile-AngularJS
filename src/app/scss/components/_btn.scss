@@ -18,6 +18,7 @@
     font-weight: 400;
   }
 }
+.btn.btn-icon-normal i {font-weight: 400;}
 
 @each $button, $color in $colored-buttons {
   .btn-#{$button},
@@ -61,7 +62,7 @@
   }
 }
 .open, .show {
-  .btn-dropdown-toggle:after {
+  & > .btn-dropdown-toggle:after {
     transform: translateY(-50%) rotate(180deg);
   }
 }
