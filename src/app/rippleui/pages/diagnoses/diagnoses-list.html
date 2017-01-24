@@ -33,7 +33,12 @@
     </div>
   </div>
   <div class="panel-body">
-    <table class="table table-striped table-hover table-bordered rwd-table table-sorted">
+    <table class="table table-striped table-hover table-bordered rwd-table table-sorted table-fixedcol">
+      <colgroup>
+        <col style="width: 56%;">
+        <col style="width: 25%;">
+        <col style="width: 19%;">
+      </colgroup>
       <thead>
         <tr>
             <th ng-click="$ctrl.sort('diagnoses')" ng-class="$ctrl.sortClass('diagnoses')">Problems / Diagnoses</th>

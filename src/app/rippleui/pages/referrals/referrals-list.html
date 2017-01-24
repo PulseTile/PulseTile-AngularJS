@@ -23,7 +23,7 @@
       <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')" ng-if="$ctrl.isShowExpandBtn"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
       <!--<button class="btn btn-success btn-inverse btn-dropdown-toggle btn-table"><i class="fa fa-table"></i></button>-->
     </div>
-    <h3 class="panel-title" >Referrals</h3>
+    <h3 class="panel-title">Referrals</h3>
     <div class="panel-filter" ng-if="$ctrl.isFilter" ng-class="{active : $ctrl.isFilter}">
       <div class="inner-addon addon-left">
         <div class="addon">
@@ -34,30 +34,36 @@
     </div>
   </div>
   <div class="panel-body">
-    <table class="table table-striped table-hover table-bordered rwd-table table-sorted">
+    <table class="table table-striped table-hover table-bordered rwd-table table-sorted table-fixedcol">
+      <colgroup>
+        <col style="width: 25%;">
+        <col style="width: 28%;">
+        <col style="width: 28%;"> 
+        <col style="width: 19%;">
+      </colgroup>
       <thead>
-      <tr>
-        <th ng-click="$ctrl.sort('dateOfReferral')" ng-class="$ctrl.sortClass('dateOfReferral')" >Date of Referral</th>
-        <th ng-click="$ctrl.sort('referralFrom')" ng-class="$ctrl.sortClass('referralFrom')" >Referral From</th>
-        <th ng-click="$ctrl.sort('referralTo')" ng-class="$ctrl.sortClass('referralTo')" >Referral To</th>
-        <th ng-click="$ctrl.sort('source')" ng-class="$ctrl.sortClass('source')">Source</th>
-      </tr>
+        <tr>
+          <th ng-click="$ctrl.sort('dateOfReferral')" ng-class="$ctrl.sortClass('dateOfReferral')" >Date of Referral</th>
+          <th ng-click="$ctrl.sort('referralFrom')" ng-class="$ctrl.sortClass('referralFrom')" >Referral From</th>
+          <th ng-click="$ctrl.sort('referralTo')" ng-class="$ctrl.sortClass('referralTo')" >Referral To</th>
+          <th ng-click="$ctrl.sort('source')" ng-class="$ctrl.sortClass('source')">Source</th>
+        </tr>
       </thead>
 
       <tbody>
-      <!--
-			clinicalNote.source - It should actually transmitted
-			<tr dir-paginate="clinicalNote in $ctrl.clinicalNotes | filter:$ctrl.search | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(clinicalNote.sourceId, clinicalNote.source)" ng-class="{info: $ctrl.selected(clinicalNote.sourceId)}"> -->
-      <tr dir-paginate="referral in $ctrl.referrals | filter:$ctrl.query| orderBy:[$ctrl.order] : $ctrl.reverse  | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(referral.sourceId)" ng-class="{info: $ctrl.selected(referral.sourceId)}">
-        <td data-th="Date of Referral" ng-class="$ctrl.sortClass('dateOfReferral')" class="dateTime">{{ referral.dateOfReferral}}</td>
-        <td data-th="Referral From" ng-class="$ctrl.sortClass('referralFrom')" >{{ referral.referralFrom }}</td>
-        <td data-th="Referral To" ng-class="$ctrl.sortClass('referralTo')" >{{ referral.referralTo }}</td>
-        <td data-th="Source" ng-class="$ctrl.sortClass('source')" >{{ referral.source }}</td>
-      </tr>
+        <!--
+  			clinicalNote.source - It should actually transmitted
+  			<tr dir-paginate="clinicalNote in $ctrl.clinicalNotes | filter:$ctrl.search | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(clinicalNote.sourceId, clinicalNote.source)" ng-class="{info: $ctrl.selected(clinicalNote.sourceId)}"> -->
+        <tr dir-paginate="referral in $ctrl.referrals | filter:$ctrl.query| orderBy:[$ctrl.order] : $ctrl.reverse  | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(referral.sourceId)" ng-class="{info: $ctrl.selected(referral.sourceId)}">
+          <td data-th="Date of Referral" ng-class="$ctrl.sortClass('dateOfReferral')" class="dateTime">{{ referral.dateOfReferral}}</td>
+          <td data-th="Referral From" ng-class="$ctrl.sortClass('referralFrom')" >{{ referral.referralFrom }}</td>
+          <td data-th="Referral To" ng-class="$ctrl.sortClass('referralTo')" >{{ referral.referralTo }}</td>
+          <td data-th="Source" ng-class="$ctrl.sortClass('source')" >{{ referral.source }}</td>
+        </tr>
 
-      <tr ng-if="!$ctrl.referrals.length">
-        <td colspan="4"><span class="label label-default">No personal notes</span></td>
-      </tr>
+        <tr ng-if="!$ctrl.referrals.length">
+          <td colspan="4"><span class="label label-default">No personal notes</span></td>
+        </tr>
       </tbody>
     </table>
 

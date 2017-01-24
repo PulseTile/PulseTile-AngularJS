@@ -16,8 +16,11 @@
   }
   thead tr th,
   tbody tr td {
-    padding: 10px;
+    padding: 10px 5px;
     vertical-align: middle;
+    @include respond-to(sm) {
+      padding: 10px;
+    }
   }
   thead tr th.selected {
     background: #A9D38E;
