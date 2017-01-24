@@ -22,7 +22,7 @@ class MedicationsDetailController {
     ];
 
     $scope.formDisabled = true;
-    $scope.isShowShedule = true;
+    $scope.isShowSchedule = true;
 
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
@@ -77,7 +77,12 @@ class MedicationsDetailController {
     $scope.isPrescriptionEdit = false;
     this.editPrescription = function () {
       $scope.isPrescriptionEdit = true;
-      $scope.prescriptionForm = {};
+      $scope.prescriptionForm = {
+        pStartDateTime: new Date(),
+        finishCancelled: true,
+        doseInterval: '',
+        doseQuantity: ''
+      };
     };
 
     $scope.openDatepicker = function ($event, name) {
@@ -122,8 +127,8 @@ class MedicationsDetailController {
       $scope.isPrescriptionEdit = false;
     }.bind(this);
 
-    $scope.toggleShowShedule = function () {
-      $scope.isShowShedule = !$scope.isShowShedule;
+    $scope.toggleShowSchedule = function () {
+      $scope.isShowSchedule = !$scope.isShowSchedule;
     }
 
     $scope.medicationsLoad = medicationsActions.all;
