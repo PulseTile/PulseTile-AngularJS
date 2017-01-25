@@ -16,7 +16,7 @@
 let templateProceduresList = require('./procedures-list.html');
 
 class ProceduresListController {
-  constructor($scope, $state, $stateParams, $ngRedux, proceduresActions, serviceRequests, ProceduresModal, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, proceduresActions, serviceRequests, usSpinnerService) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -102,10 +102,6 @@ class ProceduresListController {
       return procedureId === $stateParams.procedureId;
     };
 
-    // this.create = function () {
-    //   ProceduresModal.openModal(this.currentPatient, {title: 'Create Procedure'}, {}, this.currentUser);
-    // };
-
 		this.create = function () {
 			$state.go('procedures-create', {
 				patientId: $stateParams.patientId,
@@ -157,5 +153,5 @@ const ProceduresListComponent = {
   controller: ProceduresListController
 };
 
-ProceduresListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'proceduresActions', 'serviceRequests', 'ProceduresModal', 'usSpinnerService'];
+ProceduresListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'proceduresActions', 'serviceRequests', 'usSpinnerService'];
 export default ProceduresListComponent;

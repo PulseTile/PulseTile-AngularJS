@@ -52,7 +52,7 @@
         <tr dir-paginate="vaccination in $ctrl.vaccinations | filter: $ctrl.query | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage" ng-click="$ctrl.go(vaccination.sourceId, vaccination)" ng-class="{info: $ctrl.selected(vaccination.sourceId)}">
           <td data-th="Name" ng-class="$ctrl.sortClass('name');">{{ vaccination.name }}</td>
           <td data-th="Source" ng-class="$ctrl.sortClass('source')">{{ vaccination.source }}</td>
-          <td data-th="Date" ng-class="$ctrl.sortClass('Date')">{{ vaccination.dataCreate | date:'dd-MMM-yyyy' }}</td>
+          <td data-th="Date" ng-class="$ctrl.sortClass('date')">{{ vaccination.dataCreate | date:'dd-MMM-yyyy' }}</td>
         </tr>
 
         <tr ng-if="!$ctrl.vaccinations.length">

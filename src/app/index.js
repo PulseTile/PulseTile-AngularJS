@@ -43,7 +43,6 @@ import Patient from './helpers/patient';
 import OrdersModal from './rippleui/pages/orders/orders-modal';
 import AppointmentsModal from './rippleui/pages/appointments/appointments-modal';
 import AppointmentConfirmModal from './rippleui/pages/appointments/appointments-confirm-modal';
-import ProceduresModal from './rippleui/pages/procedures/procedures-modal';
 import ImageModal from './rippleui/pages/dicom/image-modal';
 import EolcareplansModal from './rippleui/pages/care-plans/eolcareplans-modal';
 import LookupModal from './rippleui/pages/patients-lookup/patients-lookup-modal';
@@ -141,7 +140,6 @@ const app = angular
     .factory('httpMiddleware', httpMiddleware)
     .factory('AdvancedSearch', AdvancedSearch)
     .factory('OrdersModal', OrdersModal)
-    .factory('ProceduresModal', ProceduresModal)
     .factory('AppointmentsModal', AppointmentsModal)
     .factory('AppointmentConfirmModal', AppointmentConfirmModal)
     .factory('ImageModal', ImageModal)
