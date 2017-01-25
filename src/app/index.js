@@ -81,6 +81,10 @@ import VaccinationsListComponent from './rippleui/pages/vaccinations/vaccination
 import VaccinationsCreateComponent from './rippleui/pages/vaccinations/vaccinations-create.component';
 import VaccinationsDetailComponent from './rippleui/pages/vaccinations/vaccinations-detail.component';
 
+import VitalsListComponent from './rippleui/pages/vitals/vitals-list.component';
+import VitalsCreateComponent from './rippleui/pages/vitals/vitals-create.component';
+import VitalsDetailComponent from './rippleui/pages/vitals/vitals-detail.component';
+
 import OrdersListComponent from './rippleui/pages/orders/orders-list.component';
 import OrdersDetailComponent from './rippleui/pages/orders/orders-detail.component';
 
@@ -176,6 +180,10 @@ const app = angular
     .component('vaccinationsListComponent', VaccinationsListComponent)
     .component('vaccinationsCreateComponent', VaccinationsCreateComponent)
     .component('vaccinationsDetailComponent', VaccinationsDetailComponent)
+
+    .component('vitalsListComponent', VitalsListComponent)
+    .component('vitalsCreateComponent', VitalsCreateComponent)
+    .component('vitalsDetailComponent', VitalsDetailComponent)
 
     .component('ordersListComponent', OrdersListComponent)
     .component('ordersDetailComponent', OrdersDetailComponent)

@@ -24,6 +24,7 @@ import allergiesActions from '../rippleui/pages/allergies/allergies-actions';
 import medicationsActions from '../rippleui/pages/medications/medications-actions';
 import contactsActions from '../rippleui/pages/contacts/contacts-actions';
 import vaccinationsActions from '../rippleui/pages/vaccinations/vaccinations-actions';
+import vitalsActions from '../rippleui/pages/vitals/vitals-actions';
 import ordersActions from '../rippleui/pages/orders/orders-actions';
 import resultsActions from '../rippleui/pages/results/results-actions';
 import referralsActions from '../rippleui/pages/referrals/referrals-actions';
@@ -48,6 +49,7 @@ export default angular
     .factory('medicationsActions', medicationsActions)
     .factory('contactsActions', contactsActions)
     .factory('vaccinationsActions', vaccinationsActions)
+    .factory('vitalsActions', vitalsActions)
     .factory('ordersActions', ordersActions)
     .factory('resultsActions', resultsActions)
     .factory('referralsActions', referralsActions)

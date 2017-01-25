@@ -13,10 +13,10 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-let templateVaccinationsList = require('./vaccinations-list.html');
+let templateVitalsList = require('./vitals-list.html');
 
-class VaccinationsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, vaccinationsActions, serviceRequests, usSpinnerService) {
+class VitalsListController {
+  constructor($scope, $state, $stateParams, $ngRedux, vitalsActions, serviceRequests, usSpinnerService) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -24,8 +24,8 @@ class VaccinationsListController {
     this.currentPage = 1;
     this.isFilter = false;
 
-    this.isShowCreateBtn = $state.router.globals.$current.name !== 'vaccinations-create';
-    this.isShowExpandBtn = $state.router.globals.$current.name !== 'vaccinations';
+    this.isShowCreateBtn = $state.router.globals.$current.name !== 'vitals-create';
+    this.isShowExpandBtn = $state.router.globals.$current.name !== 'vitals';
     
     this.toggleFilter = function () {
       this.isFilter = !this.isFilter;
@@ -47,7 +47,7 @@ class VaccinationsListController {
       }
     };
 
-    this.order = serviceRequests.currentSort.order || 'name';
+    this.order = serviceRequests.currentSort.order || 'id';
     this.reverse = serviceRequests.currentSort.reverse || false;
     if (serviceRequests.filter) {
       this.query = serviceRequests.filter;
@@ -55,20 +55,20 @@ class VaccinationsListController {
     }
 
     this.create = function () {
-      $state.go('vaccinations-create', {
+      $state.go('vitals-create', {
         patientId: $stateParams.patientId,
         filter: this.query,
         page: this.currentPage
       });
     };
 
-    this.go = function (id, vaccination) {
+    this.go = function (id, vital) {
       serviceRequests.currentSort.order = this.order;
       serviceRequests.currentSort.reverse = this.reverse;
       serviceRequests.filter = this.query || '';
-      $state.go('vaccinations-detail', {
+      $state.go('vitals-detail', {
         // patientId: $stateParams.patientId,
-        // vaccinationIndex: id,
+        // vitalIndex: id,
         // filter: this.query,
         // page: this.currentPage,
         // reportType: $stateParams.reportType,
@@ -76,13 +76,13 @@ class VaccinationsListController {
         // queryType: $stateParams.queryType
 
         patientId: $stateParams.patientId,
-        vaccinationIndex: id,
+        vitalIndex: id,
         filter: this.query,
         page: this.currentPage,
         reportType: null,
         searchString: null,
         queryType: null,
-        source: vaccination
+        source: vital
       });
     };
     this.pageChangeHandler = function (newPage) {
@@ -90,40 +90,81 @@ class VaccinationsListController {
     };
 
     this.setCurrentPageData = function (data) {
-      // if (data.vaccinations.data) {
-      //   this.vaccinations = data.vaccinations.data;
+      // if (data.vitals.data) {
+      //   this.vitals = data.vitals.data;
       //   usSpinnerService.stop('patientSummary-spinner');
       // }
       var date = new Date();
-      this.vaccinations = [
+      this.vitals = [
         {
           sourceId: '1',
-          name: 'Inactivated Poliovirus Vaccine',
-          source: 'Marand',
           seriesNumber: 1,
-          comment: 'Hospital staff',
-          date: Date.parse(new Date()),
+          source: 'Marand',
           author: 'ripple_osi',
-          dateCreate: Date.parse(new Date())
+          dateCreate: Date.parse(new Date()),
+          vitalsSigns: {
+            respirationRate: 25,
+            oxygenSaturation: 97,
+            oxygenSupplemental: null,
+            systolicBP: 90, 
+            distolicBP: 60,
+            heartRate: 45,
+            temperature: 35.4,
+            levelOfConsciousness: 'A',
+            newsScore: 3
+          }
         }, {
           sourceId: '2',
-          name: 'Cell-Culture Influenza Vaccine',
-          source: 'EtherCIS',
           seriesNumber: 2,
-          comment: 'Hospital staff',
-          date: Date.parse(new Date(date.setDate(date.getDate()-1))),
+          source: 'EtherCIS',
           author: 'ripple_osi',
-          dateCreate: Date.parse(new Date(date.setDate(date.getDate()-1)))
+          dateCreate: Date.parse(new Date(date.setDate(date.getDate()-1))),
+          vitalsSigns: {
+            respirationRate: 29,
+            oxygenSaturation: 115,
+            oxygenSupplemental: null,
+            systolicBP: 60, 
+            distolicBP: 78,
+            heartRate: 99,
+            temperature: 36.6,
+            levelOfConsciousness: 'B',
+            newsScore: 3
+          }
         }, {
           sourceId: '3',
-          name: 'Varicella Vaccine',
-          source: 'Marand',
           seriesNumber: 3,
-          comment: 'Hospital staff',
-          date: Date.parse(new Date(date.setDate(date.getDate()-4))),
+          source: 'Marand',
           author: 'ripple_osi',
-          dateCreate: Date.parse(new Date(date.setDate(date.getDate()-4)))
-        }
+          dateCreate: Date.parse(new Date(date.setDate(date.getDate()-4))),
+          vitalsSigns: {
+            respirationRate: 35,
+            oxygenSaturation: 69,
+            oxygenSupplemental: null,
+            systolicBP: 92, 
+            distolicBP: 69,
+            heartRate: 74,
+            temperature: 39.9,
+            levelOfConsciousness: 'C',
+            newsScore: 2
+          }
+        }, {
+          sourceId: '4',
+          seriesNumber: 4,
+          source: 'EtherCIS',
+          author: 'ripple_osi',
+          dateCreate: Date.parse(new Date(date.setDate(date.getDate()-5))),
+          vitalsSigns: {
+            respirationRate: 25,
+            oxygenSaturation: 97,
+            oxygenSupplemental: null,
+            systolicBP: 93, 
+            distolicBP: 63,
+            heartRate: 45,
+            temperature: 40.0,
+            levelOfConsciousness: 'D',
+            newsScore: 1
+          }
+        },
       ];
       usSpinnerService.stop('patientSummary-spinner');
       if (data.patientsGet.data) {
@@ -134,8 +175,8 @@ class VaccinationsListController {
       }
     };
 
-    this.selected = function (vaccinationIndex) {
-      return vaccinationIndex === $stateParams.vaccinationIndex;
+    this.selected = function (vitalIndex) {
+      return vitalIndex === $stateParams.vitalIndex;
     };
 
     if ($stateParams.page) {
@@ -152,15 +193,15 @@ class VaccinationsListController {
     
     $scope.$on('$destroy', unsubscribe);
     
-    // this.vaccinationsLoad = vaccinationsActions.all;
-    // this.vaccinationsLoad($stateParams.patientId);
+    // this.vitalsLoad = vitalsActions.all;
+    // this.vitalsLoad($stateParams.patientId);
   }
 }
 
-const VaccinationsListComponent = {
-  template: templateVaccinationsList,
-  controller: VaccinationsListController
+const VitalsListComponent = {
+  template: templateVitalsList,
+  controller: VitalsListController
 };
 
-VaccinationsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'vaccinationsActions', 'serviceRequests', 'usSpinnerService'];
-export default VaccinationsListComponent;
+VitalsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'vitalsActions', 'serviceRequests', 'usSpinnerService'];
+export default VitalsListComponent;
