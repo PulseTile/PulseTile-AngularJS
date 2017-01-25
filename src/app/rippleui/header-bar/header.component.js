@@ -23,8 +23,9 @@ class HeaderController {
     $scope.user = [];
     
     this.goHome = function () {
+      /* istanbul ignore if  */
       if ($scope.title === 'PHR POC') return;
-
+      /* istanbul ignore if  */
         if ($state.router.globals.$current.name === 'patients-charts') {
           $state.go('main-search');
         } else {
@@ -37,7 +38,9 @@ class HeaderController {
     this.goProfile = function () {
       $state.go('profile');
     };
-    function deleteCookie(name) {
+    
+    /* istanbul ignore next */
+    function deleteCookie(name) {      
         document.cookie = name + 
         '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
     } 
@@ -47,9 +50,9 @@ class HeaderController {
     };
 
     $scope.switchDirectByRole = function (currentUser) {
-      /* istanbul ignore if  */
       if (!currentUser) return;
       // Direct different roles to different pages at login
+      /* istanbul ignore next */
       switch (currentUser.role) {
         case 'IDCR':
           $state.go('patients-charts');

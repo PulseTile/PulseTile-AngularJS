@@ -27,7 +27,7 @@ class PatientsChartsController {
     };
 
     var goToPatients = function (row, chartType) {
-      /* istanbul ignore if  */
+      /* istanbul ignore next  */
       switch (chartType) {
         case 'all':
           $state.go('patients-list');
@@ -49,6 +49,7 @@ class PatientsChartsController {
 
 
     var ageChart = function (summaries) {
+      /* istanbul ignore next  */
       $timeout(function () {
         $window.Morris.Bar({
           element: 'chart-age',
@@ -72,6 +73,7 @@ class PatientsChartsController {
     };
 
     var departmentChart = function (summaries) {
+      /* istanbul ignore next  */
       $timeout(function () {
         $window.Morris.Bar({
           element: 'chart-department',
@@ -98,6 +100,7 @@ class PatientsChartsController {
       only for demo
     */
     var geographyChart = function (summaries) {
+      /* istanbul ignore next  */
       $timeout(function () {
         $window.Morris.Bar({
           element: 'chart-geography',

@@ -75,10 +75,11 @@ class PatientsSummaryController {
       return arr;
     }
     this.getPatientData = function (data) {
+      /* istanbul ignore if  */
       if (!data || !data.nhsNumber) {
         return false;
       }
-
+      /* istanbul ignore next */
       usSpinnerService.stop('patientSummary-spinner');
 
       this.patient = data;

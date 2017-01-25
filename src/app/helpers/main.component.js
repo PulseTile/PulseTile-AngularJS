@@ -25,6 +25,7 @@ class MainController {
     $scope.classShowSidebar = '';
     $scope.breadcrumbs = [];
 
+    /* istanbul ignore next  */
     $scope.getState = function (state) {
       switch (state.name) {
         case 'main-search':
@@ -127,7 +128,8 @@ class MainController {
       var headerHeight = page.find('.header').outerHeight();
       var footerHeight = page.find('.footer').outerHeight();
       var sidebar = page.find('.sidebar');
-      
+
+      /* istanbul ignore if  */
       if ($scope.isSidebar) {
         if (window.innerWidth < 768) {
           sidebar.css('height', wrapperHeight - headerHeight - footerHeight + 'px');

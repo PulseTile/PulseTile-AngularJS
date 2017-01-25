@@ -150,6 +150,7 @@ class PatientsListFullController {
     };
 
     this.processData = function () {
+      /* istanbul ignore next  */
       for (var i = 0; i < this.patients.length; i++) {
         this.patients[i].ordersHeadline.latestEntry = this.processDateFormat(this.patients[i].ordersHeadline.latestEntry);
         this.patients[i].vitalsHeadline.latestEntry = this.processDateFormat(this.patients[i].vitalsHeadline.latestEntry);
@@ -244,6 +245,7 @@ class PatientsListFullController {
 
     this.clickGetItem = false;
     this.go = function (patient) {
+      /* istanbul ignore if  */
       if (!this.clickGetItem) {
         $state.go('patients-summary', {
           patientId: patient.nhsNumber,
@@ -305,7 +307,7 @@ class PatientsListFullController {
       };
 
       var toState = '';
-
+      /* istanbul ignore next  */
       switch (itemType) {
       case 'orders':
         requestHeader.orderId = itemId;
