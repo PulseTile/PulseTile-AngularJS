@@ -16,10 +16,9 @@
 let templateImageList = require('./image-list.html');
 
 class ImageListController {
-  constructor($scope, $window, $state, $stateParams, $ngRedux, imageActions, serviceRequests, usSpinnerService, cornerstoneJS) {
+  constructor($scope, $window, $state, $stateParams, $ngRedux, imageActions, serviceRequests, usSpinnerService) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
-console.log('ImageListController', $window, cornerstoneJS);
 
     this.currentPage = 1;
     $scope.query = '';
@@ -159,5 +158,5 @@ const ImageListComponent = {
   controller: ImageListController
 };
 
-ImageListController.$inject = ['$scope', '$window', '$state', '$stateParams', '$ngRedux', 'imageActions', 'serviceRequests', 'usSpinnerService', 'cornerstoneJS'];
+ImageListController.$inject = ['$scope', '$window', '$state', '$stateParams', '$ngRedux', 'imageActions', 'serviceRequests', 'usSpinnerService'];
 export default ImageListComponent;

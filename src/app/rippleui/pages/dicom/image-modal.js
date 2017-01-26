@@ -16,7 +16,7 @@
 export default function AllergiesModal($uibModal, allergiesActions, $ngRedux) {
   var isModalClosed = true;
 
-  var openModal = function (patient, modal, dicomImageId, series, seriesId) {
+  var openModal = function (patient, modal, dicomImageId) {
     if (isModalClosed) {
       isModalClosed = false;
 

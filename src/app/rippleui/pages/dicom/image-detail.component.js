@@ -20,36 +20,31 @@ class ImageDetailController {
     var seriesIdsIndex;
 
     this.openImage = function (imageId) {
-      this.instanceLoad($stateParams.patientId, imageId);
-      this.imageId = imageId;
+      ImageModal.openModal(this.currentPatient, {title: 'View Dicom Image'}, imageId);
     };
 
     this.series = [];
 
     this.setCurrentPageData = function (data) {
       usSpinnerService.stop('patientSummary-spinner');
-      // if (data.patientsGet.data) {
-      //   this.currentPatient = data.patientsGet.data;
-      // }
-      // if (data.series.dataGet) {
-      //   this.study = data.series.dataGet;
-      //
-      //   var seriesIds = this.study.seriesIds;
-      //   this.instanceIds = [];
-      //
-      //   for (var i = 0; i < seriesIds.length; i++) {
-      //     this.instanceIdLoad.getInstanceId($stateParams.patientId, seriesIds[i], $stateParams.source);
-      //     this.seriesDetailsLoad.getSeriesDetails($stateParams.patientId, seriesIds[i]);
-      //     seriesIdsIndex = i;
-      //   }
-      // }
-      // if (data.instance.data) {
-      //   this.instance = data.instance.data.parentSeries;
-      //   ImageModal.openModal(this.currentPatient, {title: 'View Dicom Image'}, this.imageId, this.series, this.instance);
-      // }
-      // if (data.user.data) {
-      //   this.currentUser = data.user.data;
-      // }
+      this.instance = {
+        series_images: [{
+          imageLink: 'http://www.bmrentgen.pl/wp-content/uploads/2015/05/AP_czaszki.jpg',
+          imgName: 'screen1'
+        }],
+        modality: '',
+        protocol_name: '',
+        operator_name: '',
+        series_date: '',
+        author: '',
+        station: '',
+        time: '',
+        date: ''  
+      };
+      
+      if (data.patientsGet.data) {
+        this.currentPatient = data.patientsGet.data;
+      }
     };
 
      var findFirstInstanceId = function (result) {

@@ -13,50 +13,6 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
-<!--<div class="panel panel-primary">-->
-  <!--<div class="panel-heading">-->
-    <!--<h3 class="panel-title">Images</h3>-->
-  <!--</div>-->
-  <!--<div class="panel-body">-->
-    <!--&lt;!&ndash;<div class="inner-addon left-addon filterInput">&ndash;&gt;-->
-        <!--&lt;!&ndash;<i class="fa fa-filter"></i>&ndash;&gt;-->
-        <!--&lt;!&ndash;<input type="text" class="form-control" placeholder="Filter..." ng-model="$ctrl.query" />&ndash;&gt;-->
-    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-    <!--<cornerstone-image imageId="example://1"></cornerstone-image>-->
-
-
-    <!--&lt;!&ndash;<table class="table table-bordered table-striped table-hover rwd-table">&ndash;&gt;-->
-      <!--&lt;!&ndash;<thead>&ndash;&gt;-->
-        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-          <!--&lt;!&ndash;<th>Image Description</th>&ndash;&gt;-->
-          <!--&lt;!&ndash;<th>Date</th>&ndash;&gt;-->
-          <!--&lt;!&ndash;<th>Source</th>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-      <!--&lt;!&ndash;</thead>&ndash;&gt;-->
-
-      <!--&lt;!&ndash;<tbody>&ndash;&gt;-->
-        <!--&lt;!&ndash;<tr dir-paginate="image in $ctrl.images | filter:$ctrl.earch | itemsPerPage: 10 " current-page="$ctrl.currentPage" ng-click="$ctrl.go(image.studyId, image.source)" ng-class="{info: $ctrl.selected(image.studyId)}">&ndash;&gt;-->
-          <!--&lt;!&ndash;<td data-th="Image Description">{{ image.studyDescription }}</td>&ndash;&gt;-->
-          <!--&lt;!&ndash;<td data-th="Date" class="dateTime">{{ image.dateRecorded }}</td>&ndash;&gt;-->
-          <!--&lt;!&ndash;<td data-th="Source">{{ image.source }}</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-
-        <!--&lt;!&ndash;<tr ng-if="! $ctrl.images || ! $ctrl.images.length">&ndash;&gt;-->
-          <!--&lt;!&ndash;<td colspan="3"><span class="label label-default">No images</span></td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-      <!--&lt;!&ndash;</tbody>&ndash;&gt;-->
-    <!--&lt;!&ndash;</table>&ndash;&gt;-->
-
-    <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
-      <!--&lt;!&ndash;<div class="col-md-6 hidden-xs"><div class="text-right"><dir-pagination-controls on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>&ndash;&gt;-->
-    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-    <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
-      <!--&lt;!&ndash;<div class="col-xs-6 hidden-sm hidden-md hidden-lg"><div class="text-right"><dir-pagination-controls on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>&ndash;&gt;-->
-    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-    <!--&lt;!&ndash;<span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="imagesList-spinner" spinner-start-active="true"></span>&ndash;&gt;-->
-  <!--</div>-->
-<!--</div>-->
-
 <div mc-full-panel class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
@@ -77,27 +33,6 @@
     </div>
   </div>
   <div class="panel-body">
-    <!--<table class="table table-striped table-hover table-bordered rwd-table table-sorted">-->
-      <!--<thead>-->
-      <!--<tr>-->
-        <!--<th class="sorted asc">Name</th>-->
-        <!--<th>Date</th>-->
-        <!--<th>Source</th>-->
-      <!--</tr>-->
-      <!--</thead>-->
-
-      <!--<tbody>-->
-      <!--<tr dir-paginate="image in $ctrl.images | filter:query | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(personalNote.sourceId, personalNote)" ng-class="{info: $ctrl.selected(personalNote.sourceId)}">-->
-        <!--<td data-th="Name">{{ image.name }}</td>-->
-        <!--<td data-th="Date" class="orderDateTime">{{ image.date | date:'dd-MMM-yyyy' }}</td>-->
-        <!--<td data-th="Source" class="hidden-xs">{{ image.source }}</td>-->
-      <!--</tr>-->
-
-      <!--<tr ng-if="!$ctrl.images.length">-->
-        <!--<td colspan="4"><span class="label label-default">No images</span></td>-->
-      <!--</tr>-->
-      <!--</tbody>-->
-    <!--</table>-->
     <table class="table table-striped table-hover table-bordered rwd-table table-sorted">
       <thead>
       <tr>
@@ -108,9 +43,9 @@
       </thead>
 
       <tbody>
-      <tr dir-paginate="image in $ctrl.images | filter: $ctrl.query | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage" ng-click="$ctrl.go(image.sourceId,image.source)" ng-class="{info: $ctrl.selected(procedure.sourceId)}">
+      <tr dir-paginate="image in $ctrl.images | filter: $ctrl.query | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage" ng-click="$ctrl.go(image.sourceId,image.source)" ng-class="{info: $ctrl.selected(image.sourceId)}">
         <td data-th="Name" ng-class="$ctrl.sortClass('name');">{{image.name}}</td>
-        <td data-th="Date" class="dateTime" ng-class="$ctrl.sortClass('procedureDate');">{{image.date}}</td>
+        <td data-th="Date" class="dateTime" ng-class="$ctrl.sortClass('date');">{{image.date | date:'dd-MMM-yyyy'}}</td>
         <td data-th="Source" ng-class="$ctrl.sortClass('source');">{{image.source}}</td>
       </tr>
 
