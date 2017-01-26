@@ -26,76 +26,78 @@
     <div class="panel-body">
       <div class="form">
         <div class="panel-body-inner">
-          <div class="row">
-            <div class="col-xs-12 col-md-6">
-              <div class="vitals-group highlighter-wrapper">
-                <span class="highlighter-danger"></span>  
-                <label class="vitals-label">Respiration Rate</label>
-                <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.respirationRate }}</div>
+          <div class="vitals-group-wrapper">
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass($ctrl.vital.vitalsSigns.respirationRate.status)"></span>  
+                  <label class="vitals-label">Respiration Rate</label>
+                  <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.respirationRate.value }}</div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass($ctrl.vital.vitalsSigns.oxygenSaturation.status)"></span>  
+                  <label class="vitals-label">Oxygen Saturation</label>
+                  <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.oxygenSaturation.value }}</div>
+                </div>
               </div>
             </div>
-            <div class="col-xs-12 col-md-6">
-              <div class="vitals-group">
-                <span class="highlighter-warning"></span>  
-                <label class="vitals-label">Oxygen Saturation</label>
-                <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.oxygenSaturation }}</div>
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass($ctrl.vital.vitalsSigns.oxygenSupplemental.status)"></span>  
+                  <label class="vitals-label">Any Supplemental Oxygen</label>
+                  <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.oxygenSupplemental.value }}</div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass($ctrl.vital.vitalsSigns.systolicBP.status)"></span>  
+                  <label class="vitals-label">Systolic BP</label>
+                  <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.systolicBP.value }}</div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12 col-md-6">
-              <div class="vitals-group highlighter-wrapper">
-                <span class="highlighter-not-vital"></span>  
-                <label class="vitals-label">Any Supplemental Oxygen</label>
-                <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.oxygenSupplemental }}</div>
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass($ctrl.vital.vitalsSigns.distolicBP.status)"></span>  
+                  <label class="vitals-label">Distolic BP</label>
+                  <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.distolicBP.value }}</div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass($ctrl.vital.vitalsSigns.heartRate.status)"></span>  
+                  <label class="vitals-label">Heart Rate</label>
+                  <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.heartRate.value }}</div>
+                </div>
               </div>
             </div>
-            <div class="col-xs-12 col-md-6">
-              <div class="vitals-group">
-                <span class="highlighter-warning"></span>  
-                <label class="vitals-label">Systolic BP</label>
-                <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.systolicBP }}</div>
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass($ctrl.vital.vitalsSigns.temperature.status)"></span>  
+                  <label class="vitals-label">Temperature</label>
+                  <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.temperature.value }}</div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass($ctrl.vital.vitalsSigns.levelOfConsciousness.status)"></span>  
+                  <label class="vitals-label">Level of Consciousness</label>
+                  <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.levelOfConsciousness.value }}</div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12 col-md-6">
-              <div class="vitals-group highlighter-wrapper">
-                <span class="highlighter-warning"></span>  
-                <label class="vitals-label">Distolic BP</label>
-                <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.distolicBP }}</div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-md-6">
-              <div class="vitals-group">
-                <span class="highlighter-danger"></span>  
-                <label class="vitals-label">Heart Rate</label>
-                <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.heartRate }}</div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12 col-md-6">
-              <div class="vitals-group highlighter-wrapper">
-                <span class="highlighter-success"></span>  
-                <label class="vitals-label">Temperature</label>
-                <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.temperature }}</div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-md-6">
-              <div class="vitals-group">
-                <span class="highlighter-not-vital"></span>  
-                <label class="vitals-label">Level of Consciousness</label>
-                <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.levelOfConsciousness }}</div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12 col-md-6">
-              <div class="vitals-group highlighter-wrapper">
-                <span class="highlighter-warning"></span>  
-                <label class="vitals-label">NEWS Score</label>
-                <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.newsScore }}</div>
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass($ctrl.vital.vitalsSigns.newsScore.status)"></span>  
+                  <label class="vitals-label">NEWS Score</label>
+                  <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.newsScore.value }}</div>
+                </div>
               </div>
             </div>
           </div>
@@ -104,7 +106,7 @@
           <div class="form-group-wrapper">
             <div class="form-group">
               <label class="control-label">Author</label>
-              <div class="form-control-static">{{ $ctrl.vital.author }}</div>
+              <div class="form-control-static">{{ $ctrl.vital.author}}</div>
             </div>
 
             <div class="form-group">
@@ -135,6 +137,135 @@
       <h3 class="panel-title">Edit Vital</h3>
     </div>
     <div class="panel-body">
+      <div class="panel-body-inner">
+        <div class="vitals-group-wrapper">
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.respirationRate.value.$dirty) && vitalEdit.vitalsSigns.respirationRate.value.$invalid, 'has-success': vitalEdit.vitalsSigns.respirationRate.value.$valid && vitalEdit.vitalsSigns.respirationRate.value.$dirty}">
+                <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.respirationRate.status)"></span>  
+                <label class="vitals-label">Respiration Rate</label>
+                <div class="input-group vitals-holder {{vitalEdit.vitalsSigns.respirationRate.status}}">
+                  <input class="form-control input-sm" id="respirationRate" name="respirationRate" type="text" ng-model="vitalEdit.vitalsSigns.respirationRate.value" required />
+                  <span class="vitals-addon" uib-popover="I appeared on focus! Click away and I'll vanish..." popover-trigger="'click'">resps/min</span>
+
+                </div>
+                <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.respirationRate.value.$error.required">You must enter a value.</span>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.oxygenSaturation.value.$dirty) && vitalEdit.vitalsSigns.oxygenSaturation.value.$invalid, 'has-success': vitalEdit.vitalsSigns.oxygenSaturation.value.$valid && vitalEdit.vitalsSigns.oxygenSaturation.value.$dirty}">
+                <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.oxygenSaturation.status)"></span>  
+                <label class="vitals-label">Oxygen Saturation</label>
+                <div class="input-group vitals-holder {{vitalEdit.vitalsSigns.oxygenSaturation.status}}">
+                  <input class="form-control input-sm" id="oxygenSaturation" name="oxygenSaturation" type="text" ng-model="vitalEdit.vitalsSigns.oxygenSaturation.value" required />
+                  <span class="vitals-addon">%</span>
+                </div>
+                <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.oxygenSaturation.value.$error.required">You must enter a value.</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.oxygenSupplemental.value.$dirty) && vitalEdit.vitalsSigns.oxygenSupplemental.value.$invalid, 'has-success': vitalEdit.vitalsSigns.oxygenSupplemental.value.$valid && vitalEdit.vitalsSigns.oxygenSupplemental.value.$dirty}">
+                <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.oxygenSupplemental.status)"></span>  
+                <label class="vitals-label">Any Supplemental Oxygen</label>
+                <div class="input-holder">
+                  <select class="form-control input-sm" class="form-control input-sm" id="route" name="route" ng-model="vitalEdit.vitalsSigns.oxygenSupplemental.value" required>
+                      <option value="N">No</option>
+                      <option value="Y">Yes</option>
+                  </select>
+                </div>
+                <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.oxygenSupplemental.value.$error.required">You must enter a value.</span>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.systolicBP.value.$dirty) && vitalEdit.vitalsSigns.systolicBP.value.$invalid, 'has-success': vitalEdit.vitalsSigns.systolicBP.value.$valid && vitalEdit.vitalsSigns.systolicBP.value.$dirty}">
+                <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.systolicBP.status)"></span>  
+                <label class="vitals-label">Systolic BP</label>
+                <div class="input-group vitals-holder {{vitalEdit.vitalsSigns.systolicBP.status}}">
+                  <input class="form-control input-sm" id="systolicBP" name="systolicBP" type="text" ng-model="vitalEdit.vitalsSigns.systolicBP.value" required />
+                  <span class="vitals-addon">mmHg</span>
+                </div>
+                <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.systolicBP.value.$error.required">You must enter a value.</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.distolicBP.value.$dirty) && vitalEdit.vitalsSigns.distolicBP.value.$invalid, 'has-success': vitalEdit.vitalsSigns.distolicBP.value.$valid && vitalEdit.vitalsSigns.distolicBP.value.$dirty}">
+                <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.distolicBP.status)"></span>  
+                <label class="vitals-label">Distolic BP</label>
+                <div class="input-group vitals-holder {{vitalEdit.vitalsSigns.distolicBP.status}}">
+                  <input class="form-control input-sm" id="distolicBP" name="distolicBP" type="text" ng-model="vitalEdit.vitalsSigns.distolicBP.value" required />
+                  <span class="vitals-addon">mmHg</span>
+                </div>
+                <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.distolicBP.value.$error.required">You must enter a value.</span>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.heartRate.value.$dirty) && vitalEdit.vitalsSigns.heartRate.value.$invalid, 'has-success': vitalEdit.vitalsSigns.heartRate.value.$valid && vitalEdit.vitalsSigns.heartRate.value.$dirty}">
+                <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.heartRate.status)"></span>  
+                <label class="vitals-label">Heart Rate</label>
+                <div class="input-group vitals-holder {{vitalEdit.vitalsSigns.heartRate.status}}">
+                  <input class="form-control input-sm" id="heartRate" name="heartRate" type="text" ng-model="vitalEdit.vitalsSigns.heartRate.value" required />
+                  <span class="vitals-addon">bpm</span>
+                </div>
+                <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.heartRate.value.$error.required">You must enter a value.</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.temperature.value.$dirty) && vitalEdit.vitalsSigns.temperature.value.$invalid, 'has-success': vitalEdit.vitalsSigns.temperature.value.$valid && vitalEdit.vitalsSigns.temperature.value.$dirty}">
+                <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.temperature.status)"></span>  
+                <label class="vitals-label">Temperature</label>
+                <div class="input-group vitals-holder {{vitalEdit.vitalsSigns.temperature.status}}">
+                  <input class="form-control input-sm" id="temperature" name="temperature" type="text" ng-model="vitalEdit.vitalsSigns.temperature.value" required />
+                  <span class="vitals-addon" uib-popover-html="htmlPopover" popover-title="Temperature" popover-trigger="'click'" popover-class="vitals-popover">c</span>
+                </div>
+                <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.temperature.value.$error.required">You must enter a value.</span>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.levelOfConsciousness.value.$dirty) && vitalEdit.vitalsSigns.levelOfConsciousness.value.$invalid, 'has-success': vitalEdit.vitalsSigns.levelOfConsciousness.value.$valid && vitalEdit.vitalsSigns.levelOfConsciousness.value.$dirty}">
+                <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.levelOfConsciousness.status)"></span>  
+                <label class="vitals-label">Level of Consciousness</label>
+                <div class="input-holder">
+                  <select class="form-control input-sm" class="form-control input-sm" id="route" name="route" ng-model="vitalEdit.vitalsSigns.levelOfConsciousness.value" required>
+                      <option value="A">Awake</option>
+                      <option value="B">Awake 1</option>
+                      <option value="C">Awake 2</option>
+                      <option value="D">Awake 3</option>
+                      <option value="A1">Awake 4</option>
+                      <option value="A2">Awake 5</option>
+                      <option value="A3">Awake 6</option>
+                  </select>
+                </div>
+                <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.levelOfConsciousness.value.$error.required">You must enter a value.</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.newsScore.value.$dirty) && vitalEdit.vitalsSigns.newsScore.value.$invalid, 'has-success': vitalEdit.vitalsSigns.newsScore.value.$valid && vitalEdit.vitalsSigns.newsScore.value.$dirty}">
+                <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.newsScore.status)"></span>  
+                <label class="vitals-label">NEWS Score</label>
+                <div class="vitals-holder {{vitalEdit.vitalsSigns.newsScore.status}}">
+                  <input class="form-control input-sm" id="newsScore" name="newsScore" type="text" ng-model="vitalEdit.vitalsSigns.newsScore.value" required />
+                </div>
+                <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.newsScore.value.$error.required">You must enter a value.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script type="text/ng-template" id="myPopoverTemplate">
+              <div>{{dynamicPopover.content}}</div>
+              <div class="form-group">
+                <label>Popup Title:</label>
+                <input type="text" ng-model="dynamicPopover.title" class="form-control">
+              </div>
+          </script>
+      </div>
       <div class="panel-body-inner">
         <form name="vitalForm" class="form">
           <div class="form-group-wrapper">

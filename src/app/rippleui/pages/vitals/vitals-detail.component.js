@@ -16,14 +16,20 @@
 let templateVitalsDetail = require('./vitals-detail.html');
 
 class VitalsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, usSpinnerService) {
-    $scope.isEdit = false;
+  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, usSpinnerService, $sce) {
+    $scope.isEdit = true;
 
     /*
       TODO: Only for demo
     */
     this.vital = $stateParams.source;
 
+    $scope.getHighlighterClass = function (status) {
+      if (!status) return 'highlighter-not-vital';
+
+      return 'highlighter-' + status;
+    }
+    $scope.htmlPopover = $sce.trustAsHtml('<b style="color: red">I can</b> have <div class="label label-success">HTML</div> content');
     this.edit = function () {
       $scope.isEdit = true;
 
@@ -89,5 +95,5 @@ const VitalsDetailComponent = {
   controller: VitalsDetailController
 };
 
-VitalsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vitalsActions', 'serviceRequests', 'usSpinnerService'];
+VitalsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vitalsActions', 'serviceRequests', 'usSpinnerService', '$sce'];
 export default VitalsDetailComponent;

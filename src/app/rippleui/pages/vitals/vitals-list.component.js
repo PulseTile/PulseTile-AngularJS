@@ -106,15 +106,40 @@ class VitalsListController {
           author: 'ripple_osi',
           dateCreate: Date.parse(new Date()),
           vitalsSigns: {
-            respirationRate: 25,
-            oxygenSaturation: 97,
-            oxygenSupplemental: 'N',
-            systolicBP: 90, 
-            distolicBP: 60,
-            heartRate: 45,
-            temperature: 35.4,
-            levelOfConsciousness: 'A',
-            newsScore: 3
+            respirationRate: {
+              value: 25,
+              status: 'warning'
+            },
+            oxygenSaturation: {
+              value: 97,
+              status: 'danger'
+            },
+            oxygenSupplemental: {
+              value: 'N'
+            },
+            systolicBP: {
+              value: 90,
+              status: 'danger'
+            }, 
+            distolicBP: {
+              value: 60,
+              status: 'danger'
+            },
+            heartRate: {
+              value: 45,
+              status: 'success'
+            },
+            temperature: {
+              value: 35.4,
+              status: 'success'
+            },
+            levelOfConsciousness: {
+              value: 'A'
+            },
+            newsScore: {
+              value: 3,
+              status: 'danger'
+            }
           }
         }, {
           sourceId: '2',
@@ -123,15 +148,39 @@ class VitalsListController {
           author: 'ripple_osi',
           dateCreate: Date.parse(new Date(date.setDate(date.getDate()-1))),
           vitalsSigns: {
-            respirationRate: 29,
-            oxygenSaturation: 115,
-            oxygenSupplemental: 'N',
-            systolicBP: 60, 
-            distolicBP: 78,
-            heartRate: 99,
-            temperature: 36.6,
-            levelOfConsciousness: 'B',
-            newsScore: 3
+            respirationRate: {
+              value: 29,
+              status: 'warning'
+            },
+            oxygenSaturation: {
+              value: 115,
+              status: 'success'
+            },
+            oxygenSupplemental: {
+              value: 'N'
+            },
+            systolicBP: {
+              value: 60,
+              status: 'warning'
+            }, 
+            distolicBP: {
+              value: 78,
+              status: 'warning'
+            },
+            heartRate: {
+              value: 99,
+              status: 'danger'
+            },
+            temperature: {
+              value: 36.6,
+              status: 'success'
+            },
+            levelOfConsciousness: {
+              value: 'B'
+            },
+            newsScore: {
+              value: 3
+            }
           }
         }, {
           sourceId: '3',
@@ -140,15 +189,40 @@ class VitalsListController {
           author: 'ripple_osi',
           dateCreate: Date.parse(new Date(date.setDate(date.getDate()-4))),
           vitalsSigns: {
-            respirationRate: 35,
-            oxygenSaturation: 69,
-            oxygenSupplemental: 'N',
-            systolicBP: 92, 
-            distolicBP: 69,
-            heartRate: 74,
-            temperature: 39.9,
-            levelOfConsciousness: 'C',
-            newsScore: 2
+            respirationRate: {
+              value: 35,
+              status: 'danger'
+            },
+            oxygenSaturation: {
+              value: 69,
+              status: 'warning'
+            },
+            oxygenSupplemental: {
+              value: 'N'
+            },
+            systolicBP: {
+              value: 92,
+              status: 'warning'
+            }, 
+            distolicBP: {
+              value: 69,
+              status: 'warning'
+            },
+            heartRate: {
+              value: 74,
+              status: 'danger'
+            },
+            temperature: {
+              value: 39.9,
+              status: 'success'
+            },
+            levelOfConsciousness: {
+              value: 'C'
+            },
+            newsScore: {
+              value: 2,
+              status: 'warning'
+            }
           }
         }, {
           sourceId: '4',
@@ -157,15 +231,40 @@ class VitalsListController {
           author: 'ripple_osi',
           dateCreate: Date.parse(new Date(date.setDate(date.getDate()-5))),
           vitalsSigns: {
-            respirationRate: 25,
-            oxygenSaturation: 97,
-            oxygenSupplemental: 'N',
-            systolicBP: 93, 
-            distolicBP: 63,
-            heartRate: 45,
-            temperature: 40.0,
-            levelOfConsciousness: 'D',
-            newsScore: 1
+            respirationRate: {
+              value: 25,
+              status: 'success'
+            },
+            oxygenSaturation: {
+              value: 97,
+              status: 'success'
+            },
+            oxygenSupplemental: {
+              value: 'N'
+            },
+            systolicBP: {
+              value: 93,
+              status: 'success'
+            }, 
+            distolicBP: {
+              value: 63,
+              status: 'success'
+            },
+            heartRate: {
+              value: 45,
+              status: 'success'
+            },
+            temperature: {
+              value: 40.0,
+              status: 'success'
+            },
+            levelOfConsciousness: {
+              value: 'D'
+            },
+            newsScore: {
+              value: 1,
+              status: 'success'
+            }
           }
         },
       ];

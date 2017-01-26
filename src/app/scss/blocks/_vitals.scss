@@ -1,10 +1,48 @@
+$vitalsInputColor: (
+  warning: #e3d19d,
+  danger: #ca9193,
+  success: #94ceaa
+);
+.vitals-group-wrapper {
+  padding-top: 7px;
+  padding-bottom: 5px;
+  margin-bottom: -23px;
+}
 .vitals-group {
   position: relative;
   margin-bottom: 23px;
   padding-left: 12px;
+  .input-holder,
+  .input-group {
+    padding-bottom: 3px;
+  }
+}
+.vitals-holder {
+  width: 150px;
+  .form-control {
+    width: 51px;
+  }
+  .vitals-addon {
+    float: right;
+    width: 99px;
+    padding: 0 12px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 28px;
+    color: #000000;
+    background-color: #e8e8e8;
+    border: 1px solid #c3c3c3;
+    border-left: 0;
+    border-radius: 0 2px 2px 0;
+  }
+}
+@each $vitalInput, $color in $vitalsInputColor {
+  .vitals-holder.#{$vitalInput} .form-control {
+    background-color: $color;
+  }
 }
 .vitals-label {
-  display: block;
+  display: block; 
   margin-bottom: 4px;
   font-size: 13px;
   line-height: 18px;
@@ -17,4 +55,72 @@
   line-height: 18px;
   font-weight: 400;
   color: #303030;
+}
+
+.vitals-popover {
+  width: 266px;
+  padding: 0;
+  border: 1px solid #c3c3c3;
+  box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.3);
+
+  .popover-title {
+    padding: 0 10px;
+    font-size: 13px;
+    line-height: 26px;
+    font-weight: 400;
+    color: #000000;
+    background: #e8e8e8;
+    border-bottom: 1px solid #c3c3c3;
+  }
+  & > .arrow {
+      border-width: 6px;
+      &:after {
+        border-width: 5px;
+      }
+  }
+  &.right,
+  &.left {
+    top: 50% !important;
+    transform: translateY(-50%);
+  }
+  &.right > .arrow
+  &.left > .arrow {
+      top: 50%;
+      margin-top: -6px;
+  }
+
+  &.right > .arrow {
+      left: -8px;
+      border-left-width: 0;
+      border-right-width: 8px;
+      border-right-color: #c3c3c3;
+      &:after {
+        bottom: -5px;
+        border-right-width: 8px;
+      }
+  }
+  &.left > .arrow {
+      right: -8px;
+      margin-top: -6px;
+      border-right-width: 0;
+      border-left-width: 8px;
+      border-left-color: #c3c3c3;
+      &:after {
+        bottom: -5px;
+        border-left-width: 8px;
+      }
+  }
+  &.top > .arrow {
+      margin-left: -6px;
+      border-bottom-width: 0;
+      border-top-width: 8px;
+      border-top-color: #c3c3c3;
+      bottom: -8px;
+      &:after {
+        margin-left: -5px;
+        border-top-width: 8px;
+      }
+  }
+  .popover.top>.arrow {
+  }
 }
