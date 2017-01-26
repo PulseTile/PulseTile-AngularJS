@@ -18,40 +18,42 @@
     <h3 class="panel-title">Images</h3>
   </div>
   <div class="panel-body">
-    <div class="inner-addon left-addon filterInput">
-        <i class="fa fa-filter"></i>
-        <input type="text" class="form-control" placeholder="Filter..." ng-model="$ctrl.query" />
-    </div>
+    <!--<div class="inner-addon left-addon filterInput">-->
+        <!--<i class="fa fa-filter"></i>-->
+        <!--<input type="text" class="form-control" placeholder="Filter..." ng-model="$ctrl.query" />-->
+    <!--</div>-->
+    <cornerstone-image imageId="example://1"></cornerstone-image>
 
-    <table class="table table-bordered table-striped table-hover rwd-table">
-      <thead>
-        <tr>
-          <th>Image Description</th>
-          <th>Date</th>
-          <th>Source</th>
-        </tr>
-      </thead>
 
-      <tbody>
-        <tr dir-paginate="image in $ctrl.images | filter:$ctrl.earch | itemsPerPage: 10 " current-page="$ctrl.currentPage" ng-click="$ctrl.go(image.studyId, image.source)" ng-class="{info: $ctrl.selected(image.studyId)}">
-          <td data-th="Image Description">{{ image.studyDescription }}</td>
-          <td data-th="Date" class="dateTime">{{ image.dateRecorded }}</td>
-          <td data-th="Source">{{ image.source }}</td>
-        </tr>
+    <!--<table class="table table-bordered table-striped table-hover rwd-table">-->
+      <!--<thead>-->
+        <!--<tr>-->
+          <!--<th>Image Description</th>-->
+          <!--<th>Date</th>-->
+          <!--<th>Source</th>-->
+        <!--</tr>-->
+      <!--</thead>-->
 
-        <tr ng-if="! $ctrl.images || ! $ctrl.images.length">
-          <td colspan="3"><span class="label label-default">No images</span></td>
-        </tr>
-      </tbody>
-    </table>
+      <!--<tbody>-->
+        <!--<tr dir-paginate="image in $ctrl.images | filter:$ctrl.earch | itemsPerPage: 10 " current-page="$ctrl.currentPage" ng-click="$ctrl.go(image.studyId, image.source)" ng-class="{info: $ctrl.selected(image.studyId)}">-->
+          <!--<td data-th="Image Description">{{ image.studyDescription }}</td>-->
+          <!--<td data-th="Date" class="dateTime">{{ image.dateRecorded }}</td>-->
+          <!--<td data-th="Source">{{ image.source }}</td>-->
+        <!--</tr>-->
 
-    <div class="row">
-      <div class="col-md-6 hidden-xs"><div class="text-right"><dir-pagination-controls on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>
-    </div>
-    <div class="row">
-      <div class="col-xs-6 hidden-sm hidden-md hidden-lg"><div class="text-right"><dir-pagination-controls on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>
-    </div>
-    <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="imagesList-spinner" spinner-start-active="true"></span>
+        <!--<tr ng-if="! $ctrl.images || ! $ctrl.images.length">-->
+          <!--<td colspan="3"><span class="label label-default">No images</span></td>-->
+        <!--</tr>-->
+      <!--</tbody>-->
+    <!--</table>-->
+
+    <!--<div class="row">-->
+      <!--<div class="col-md-6 hidden-xs"><div class="text-right"><dir-pagination-controls on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+      <!--<div class="col-xs-6 hidden-sm hidden-md hidden-lg"><div class="text-right"><dir-pagination-controls on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>-->
+    <!--</div>-->
+    <!--<span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="imagesList-spinner" spinner-start-active="true"></span>-->
   </div>
 </div>
 

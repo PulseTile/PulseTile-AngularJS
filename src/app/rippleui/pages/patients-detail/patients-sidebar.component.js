@@ -95,12 +95,12 @@ class PatientsSidebarController {
         linkDetail: 'genericMdt-detail',
         title: 'MDT'
       },
-      // {
-      //   name: 'images',
-      //   link: 'images',
-      //   linkDetail: 'images-detail',
-      //   title: 'Images'
-      // },
+      {
+        name: 'images',
+        link: 'images',
+        linkDetail: 'images-detail',
+        title: 'Images'
+      },
       {
         name: 'personalNotes',
         link: 'personalNotes',

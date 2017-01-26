@@ -16,10 +16,28 @@
 let templateImageList = require('./image-list.html');
 
 class ImageListController {
-  constructor($scope, $state, $stateParams, $ngRedux, imageActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $window, $state, $stateParams, $ngRedux, imageActions, serviceRequests, usSpinnerService, cornerstoneJS) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
+console.log('ImageListController', $window, cornerstoneJS);
 
+      // var cornerstone = cornerstoneJS;
+      // var imageId = $scope.imageId;
+      // var cornerstoneContainer = element[0];
+      // var cornerstoneElement = cornerstoneContainer.querySelector("#dicomImage");
+      // cornerstone.enable(cornerstoneElement);
+      // cornerstone.loadImage(imageId).then(function (image) {
+      //     cornerstone.displayImage(cornerstoneElement, image);
+      //     cornerstoneTools.mouseInput.enable(cornerstoneElement);
+      //     cornerstoneTools.mouseWheelInput.enable(cornerstoneElement);
+      //
+      //     // Enable all tools we want to use with this element
+      //     cornerstoneTools.wwwc.activate(cornerstoneElement, 1); // ww/wc is the default tool for left mouse button
+      //     cornerstoneTools.pan.activate(cornerstoneElement, 2); // pan is the default tool for middle mouse button
+      //     cornerstoneTools.zoom.activate(cornerstoneElement, 4); // zoom is the default tool for right mouse button
+      //     cornerstoneTools.zoomWheel.activate(cornerstoneElement); // zoom is the default tool for middle mouse wheel
+      // });
+      
     var vm = this;
 
     this.currentPage = 1;
@@ -62,25 +80,25 @@ class ImageListController {
     };
 
     this.setCurrentPageData = function (data) {
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
-      if (data.studies.data) {
-        this.images = data.studies.data;
-
-        for (var i = 0; i < this.images.length; i++) {
-          var image = this.images[i];
-          image.dateRecorded = moment(image.dateRecorded).format('DD-MMM-YYYY');
-
-          if (image.studyDescription === null || image.studyDescription === '') {
-            image.studyDescription = 'N/A';
-          }
-        }
-        usSpinnerService.stop('imagesList-spinner');
-      }
-      if (data.user.data) {
-        this.currentUser = data.user.data;
-      }
+      // if (data.patientsGet.data) {
+      //   this.currentPatient = data.patientsGet.data;
+      // }
+      // if (data.studies.data) {
+      //   this.images = data.studies.data;
+      //
+      //   for (var i = 0; i < this.images.length; i++) {
+      //     var image = this.images[i];
+      //     image.dateRecorded = moment(image.dateRecorded).format('DD-MMM-YYYY');
+      //
+      //     if (image.studyDescription === null || image.studyDescription === '') {
+      //       image.studyDescription = 'N/A';
+      //     }
+      //   }
+      //   usSpinnerService.stop('imagesList-spinner');
+      // }
+      // if (data.user.data) {
+      //   this.currentUser = data.user.data;
+      // }
     };
 
     let unsubscribe = $ngRedux.connect(state => ({
@@ -99,5 +117,5 @@ const ImageListComponent = {
   controller: ImageListController
 };
 
-ImageListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'imageActions', 'serviceRequests', 'usSpinnerService'];
+ImageListController.$inject = ['$scope', '$window', '$state', '$stateParams', '$ngRedux', 'imageActions', 'serviceRequests', 'usSpinnerService', 'cornerstoneJS'];
 export default ImageListComponent;

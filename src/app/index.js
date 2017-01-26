@@ -27,8 +27,12 @@ import 'angular-ui-calendar';
 import 'jquery';
 
 import 'morrisjs';
-// import * as d3js from "d3";
-// import "d3";
+// import * as cornerstone from './cornerstone/cornerstone';
+// let cornerstone = require('./cornerstone/cornerstone.js');
+import cornerstoneJS from './cornerstone/cornerstone';
+import cornerstoneMathJS from './cornerstone/cornerstoneMath';
+import cornerstoneToolsJS from './cornerstone/cornerstoneTools';
+// import imageLoaderJs from './cornerstone/exampleImageIdLoader';
 
 import 'angular-spinner';
 import 'jquery-timepicker-jt';
@@ -138,6 +142,9 @@ const app = angular
         'ui.timepicker',
         'angular-loading-bar'
     ])
+    .factory('cornerstoneJS', cornerstoneJS)
+    .factory('cornerstoneMathJS', cornerstoneMathJS)
+    .factory('cornerstoneToolsJS', cornerstoneToolsJS)
     .factory('httpMiddleware', httpMiddleware)
     .factory('AdvancedSearch', AdvancedSearch)
     .factory('OrdersModal', OrdersModal)
@@ -318,6 +325,41 @@ const app = angular
                 };
             }
         }
+    })
+    .directive('cornerstoneImage', function () {
+
+        return{
+            restrict: 'E',
+            template: '<div id="dicomImage" oncontextmenu="return false" unselectable="on" onselectstart="return false;" onmousedown="return false;" style="width: 512px; height: 512px;"></div>',
+            scope: {
+                imageId: '@imageid'
+            },
+            link: function(scope, element, attributes) {
+                var cornerstone = cornerstoneJS();
+                var cornerstoneTools = cornerstoneToolsJS();
+                var cornerstoneMath = cornerstoneMathJS();
+                var imgLoader = require('./cornerstone/exampleImageIdLoader.js');
+                
+                console.log('cornerstoneJS', imgLoader);
+                
+                var imageId = scope.imageId;
+                var cornerstoneContainer = element[0];
+                var cornerstoneElement = cornerstoneContainer.querySelector("#dicomImage");
+                cornerstone.enable(cornerstoneElement);
+                cornerstone.loadImage(imageId).then(function (image) {
+                    cornerstone.displayImage(cornerstoneElement, image);
+                    cornerstoneTools.mouseInput.enable(cornerstoneElement);
+                    cornerstoneTools.mouseWheelInput.enable(cornerstoneElement);
+
+                    // Enable all tools we want to use with this element
+                    cornerstoneTools.wwwc.activate(cornerstoneElement, 1); // ww/wc is the default tool for left mouse button
+                    cornerstoneTools.pan.activate(cornerstoneElement, 2); // pan is the default tool for middle mouse button
+                    cornerstoneTools.zoom.activate(cornerstoneElement, 4); // zoom is the default tool for right mouse button
+                    cornerstoneTools.zoomWheel.activate(cornerstoneElement); // zoom is the default tool for middle mouse wheel
+                });
+            }
+        };
+
     })
     .filter('formatNHSNumber', function() {
         return function(number) {
