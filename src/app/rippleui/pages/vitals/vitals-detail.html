@@ -25,7 +25,81 @@
     </div>
     <div class="panel-body">
       <div class="form">
-        
+        <div class="panel-body-inner">
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <div class="vitals-group highlighter-wrapper">
+                <span class="highlighter-danger"></span>  
+                <label class="vitals-label">Respiration Rate</label>
+                <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.respirationRate }}</div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <div class="vitals-group">
+                <span class="highlighter-warning"></span>  
+                <label class="vitals-label">Oxygen Saturation</label>
+                <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.oxygenSaturation }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <div class="vitals-group highlighter-wrapper">
+                <span class="highlighter-not-vital"></span>  
+                <label class="vitals-label">Any Supplemental Oxygen</label>
+                <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.oxygenSupplemental }}</div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <div class="vitals-group">
+                <span class="highlighter-warning"></span>  
+                <label class="vitals-label">Systolic BP</label>
+                <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.systolicBP }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <div class="vitals-group highlighter-wrapper">
+                <span class="highlighter-warning"></span>  
+                <label class="vitals-label">Distolic BP</label>
+                <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.distolicBP }}</div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <div class="vitals-group">
+                <span class="highlighter-danger"></span>  
+                <label class="vitals-label">Heart Rate</label>
+                <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.heartRate }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <div class="vitals-group highlighter-wrapper">
+                <span class="highlighter-success"></span>  
+                <label class="vitals-label">Temperature</label>
+                <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.temperature }}</div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <div class="vitals-group">
+                <span class="highlighter-not-vital"></span>  
+                <label class="vitals-label">Level of Consciousness</label>
+                <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.levelOfConsciousness }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <div class="vitals-group highlighter-wrapper">
+                <span class="highlighter-warning"></span>  
+                <label class="vitals-label">NEWS Score</label>
+                <div class="vitals-static">{{ $ctrl.vital.vitalsSigns.newsScore }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="panel-body-inner">
           <div class="form-group-wrapper">
             <div class="form-group">

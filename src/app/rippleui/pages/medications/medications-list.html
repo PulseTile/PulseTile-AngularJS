@@ -51,7 +51,11 @@
 
       <tbody>
         <tr dir-paginate="medication in $ctrl.medications| filter:$ctrl.query | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(medication.sourceId, medication.source)" ng-class="{info: $ctrl.selected(medication.sourceId)}">
-            <td data-th="Name" ng-class="$ctrl.sortClass('name');" class=" {{medication.warning ? 'highlighter-warning' : medication.danger ? 'highlighter-danger' : ''}}"><span >{{ medication.name }}</span></td>
+            <td data-th="Name" ng-class="$ctrl.sortClass('name');" class="{{medication.warning || medication.danger ? 'highlighter-wrapper' : ''}}">
+              <span class="highlighter-warning" ng-if="medication.warning"></span>
+              <span class="highlighter-danger" ng-if="medication.danger"></span>
+              <span >{{ medication.name }}</span>
+            </td>
             <td data-th="Dose" ng-class="$ctrl.sortClass('dose')">{{ medication.doseAmount }}</td>
             <td data-th="Supply" ng-class="$ctrl.sortClass('supply')">10-Nov-2016<!-- {{ medication.startDate | date:'dd-MMM-yyyy' }} --></td>
             <td class="hidden-xs-cell" ng-class="$ctrl.sortClass('source')">{{ medication.source}}</td>

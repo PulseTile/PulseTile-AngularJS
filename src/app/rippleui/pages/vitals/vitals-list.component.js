@@ -94,6 +94,9 @@ class VitalsListController {
       //   this.vitals = data.vitals.data;
       //   usSpinnerService.stop('patientSummary-spinner');
       // }
+      /*
+        Only for demo
+      */
       var date = new Date();
       this.vitals = [
         {
@@ -105,7 +108,7 @@ class VitalsListController {
           vitalsSigns: {
             respirationRate: 25,
             oxygenSaturation: 97,
-            oxygenSupplemental: null,
+            oxygenSupplemental: 'N',
             systolicBP: 90, 
             distolicBP: 60,
             heartRate: 45,
@@ -122,7 +125,7 @@ class VitalsListController {
           vitalsSigns: {
             respirationRate: 29,
             oxygenSaturation: 115,
-            oxygenSupplemental: null,
+            oxygenSupplemental: 'N',
             systolicBP: 60, 
             distolicBP: 78,
             heartRate: 99,
@@ -139,7 +142,7 @@ class VitalsListController {
           vitalsSigns: {
             respirationRate: 35,
             oxygenSaturation: 69,
-            oxygenSupplemental: null,
+            oxygenSupplemental: 'N',
             systolicBP: 92, 
             distolicBP: 69,
             heartRate: 74,
@@ -156,7 +159,7 @@ class VitalsListController {
           vitalsSigns: {
             respirationRate: 25,
             oxygenSaturation: 97,
-            oxygenSupplemental: null,
+            oxygenSupplemental: 'N',
             systolicBP: 93, 
             distolicBP: 63,
             heartRate: 45,
