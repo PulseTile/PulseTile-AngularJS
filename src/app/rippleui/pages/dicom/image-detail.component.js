@@ -16,7 +16,7 @@
 let templateImageDetail= require('./image-detail.html');
 
 class ImageDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, imageActions, ImageModal) {
+  constructor($scope, $state, $stateParams, $ngRedux, imageActions, ImageModal, usSpinnerService) {
     var seriesIdsIndex;
 
     this.openImage = function (imageId) {
@@ -27,28 +27,29 @@ class ImageDetailController {
     this.series = [];
 
     this.setCurrentPageData = function (data) {
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
-      if (data.series.dataGet) {
-        this.study = data.series.dataGet;
-
-        var seriesIds = this.study.seriesIds;
-        this.instanceIds = [];
-
-        for (var i = 0; i < seriesIds.length; i++) {
-          this.instanceIdLoad.getInstanceId($stateParams.patientId, seriesIds[i], $stateParams.source);
-          this.seriesDetailsLoad.getSeriesDetails($stateParams.patientId, seriesIds[i]);
-          seriesIdsIndex = i;
-        }
-      }
-      if (data.instance.data) {
-        this.instance = data.instance.data.parentSeries;
-        ImageModal.openModal(this.currentPatient, {title: 'View Dicom Image'}, this.imageId, this.series, this.instance);
-      }
-      if (data.user.data) {
-        this.currentUser = data.user.data;
-      }
+      usSpinnerService.stop('patientSummary-spinner');
+      // if (data.patientsGet.data) {
+      //   this.currentPatient = data.patientsGet.data;
+      // }
+      // if (data.series.dataGet) {
+      //   this.study = data.series.dataGet;
+      //
+      //   var seriesIds = this.study.seriesIds;
+      //   this.instanceIds = [];
+      //
+      //   for (var i = 0; i < seriesIds.length; i++) {
+      //     this.instanceIdLoad.getInstanceId($stateParams.patientId, seriesIds[i], $stateParams.source);
+      //     this.seriesDetailsLoad.getSeriesDetails($stateParams.patientId, seriesIds[i]);
+      //     seriesIdsIndex = i;
+      //   }
+      // }
+      // if (data.instance.data) {
+      //   this.instance = data.instance.data.parentSeries;
+      //   ImageModal.openModal(this.currentPatient, {title: 'View Dicom Image'}, this.imageId, this.series, this.instance);
+      // }
+      // if (data.user.data) {
+      //   this.currentUser = data.user.data;
+      // }
     };
 
      var findFirstInstanceId = function (result) {
@@ -73,11 +74,11 @@ class ImageDetailController {
 
     $scope.$on('$destroy', unsubscribe);
 
-    this.imageLoad = imageActions.getAllSeriesInStudy;
-    this.imageLoad($stateParams.patientId, $stateParams.studyId, $stateParams.source);
-    this.instanceLoad = imageActions.getInstance;
-    this.instanceIdLoad = imageActions.getInstanceId;
-    this.seriesDetailsLoad = imageActions.getSeriesDetails;
+    // this.imageLoad = imageActions.getAllSeriesInStudy;
+    // this.imageLoad($stateParams.patientId, $stateParams.studyId, $stateParams.source);
+    // this.instanceLoad = imageActions.getInstance;
+    // this.instanceIdLoad = imageActions.getInstanceId;
+    // this.seriesDetailsLoad = imageActions.getSeriesDetails;
   }
 }
 
@@ -86,5 +87,5 @@ const ImageDetailComponent = {
   controller: ImageDetailController
 };
 
-ImageDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'imageActions', 'ImageModal'];
+ImageDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'imageActions', 'ImageModal', 'usSpinnerService'];
 export default ImageDetailComponent;

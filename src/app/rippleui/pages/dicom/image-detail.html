@@ -13,67 +13,202 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
-<div class="transbox">
-  <div class="innerTransbox">
-    <h3><strong>Image Series</strong></h3>
+<!--<div class="transbox">-->
+  <!--<div class="innerTransbox">-->
+    <!--<h3><strong>Image Series</strong></h3>-->
 
-    <div class="form-thumbnail" ng-repeat="instanceId in $ctrl.instanceIds track by $index">
+    <!--<div class="form-thumbnail" ng-repeat="instanceId in $ctrl.instanceIds track by $index">-->
 
-      <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-        <a class="thumbnail" href="#">
-          <img class="dicomImageMini" ng-src="http://ripple-orthanc.answerappcloud.com/instances/{{instanceId}}/preview"
-               ng-click="$ctrl.openImage(instanceId)" rp-on-load="stopSpinner('imagesDetail-spinner-' + instanceId)"/>
-        </a>
-        <div class="form-horizontal text-left dicomImageMetadata">
-          <div ng-if="$ctrl.series[$index] !== undefined">
-            <div class="form-group form-group-sm">
-              <label class="control-label col-md-9">Modality:</label>
-              <div class="col-md-9">
-                <div class="form-control-static">{{ $ctrl.series[$index].modality }}</div>
-              </div>
+      <!--<div class="col-lg-3 col-md-4 col-xs-6 thumb">-->
+        <!--<a class="thumbnail" href="#">-->
+          <!--<img class="dicomImageMini" ng-src="http://ripple-orthanc.answerappcloud.com/instances/{{instanceId}}/preview"-->
+               <!--ng-click="$ctrl.openImage(instanceId)" rp-on-load="stopSpinner('imagesDetail-spinner-' + instanceId)"/>-->
+        <!--</a>-->
+        <!--<div class="form-horizontal text-left dicomImageMetadata">-->
+          <!--<div ng-if="$ctrl.series[$index] !== undefined">-->
+            <!--<div class="form-group form-group-sm">-->
+              <!--<label class="control-label col-md-9">Modality:</label>-->
+              <!--<div class="col-md-9">-->
+                <!--<div class="form-control-static">{{ $ctrl.series[$index].modality }}</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group form-group-sm">-->
+              <!--<label class="control-label col-md-9">Protocol Name:</label>-->
+              <!--<div class="col-md-9">-->
+                <!--<div class="form-control-static">{{ $ctrl.series[$index].protocolName }}</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group form-group-sm">-->
+              <!--<label class="control-label col-md-9">Station Name:</label>-->
+              <!--<div class="col-md-9">-->
+                <!--<div class="form-control-static">{{ $ctrl.series[$index].stationName }}</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group form-group-sm">-->
+              <!--<label class="control-label col-md-9">Operator Name:</label>-->
+              <!--<div class="col-md-9">-->
+                <!--<div class="form-control-static">{{ $ctrl.series[$index].operatorsName }}</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group form-group-sm">-->
+              <!--<label class="control-label col-md-9">Series Date:</label>-->
+              <!--<div class="col-md-9">-->
+                <!--<div class="form-control-static">{{ $ctrl.series[$index].seriesDate }}</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group form-group-sm">-->
+              <!--<label class="control-label col-md-9">Series Time:</label>-->
+              <!--<div class="col-md-9">-->
+                <!--<div class="form-control-static">{{ $ctrl.series[$index].seriesTime }}</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group form-group-sm">-->
+              <!--<label class="control-label col-md-9">Series No:</label>-->
+              <!--<div class="col-md-9">-->
+                <!--<div class="form-control-static">{{ $ctrl.series[$index].seriesNumber }}</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--<span class="dicomImage-spinner" us-spinner="{radius: 20, width: 8, length: 16}"-->
+              <!--spinner-key="{{'imagesDetail-spinner-' + instanceId}}" spinner-start-active="true"></span>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+<div mc-full-panel mc-accordion mc-open-panel="allergy" class="panel-group accordion">
+  <div class="panel panel-secondary" ng-if="getShowPanel('allergy') && !isEdit" ng-class="getOpenPanelClass('allergy')">
+    <div class="panel-heading">
+      <div class="control-group right">
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'allergy')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('allergy')"><i class="fa fa-chevron-up"></i></button>
+      </div>
+      <h3 class="panel-title">Image Series</h3>
+    </div>
+    <div class="panel-body">
+      <div class="panel-body-inner">
+        <div class="form">
+          <div class="form-group-wrapper">
+            <div class="form-group">
+              <label class="control-label">Cause</label>
+              <div class="form-control-static">{{ $ctrl.allergy.cause }}</div>
             </div>
-            <div class="form-group form-group-sm">
-              <label class="control-label col-md-9">Protocol Name:</label>
-              <div class="col-md-9">
-                <div class="form-control-static">{{ $ctrl.series[$index].protocolName }}</div>
-              </div>
+
+            <div class="form-group">
+              <label class="control-label">Reaction</label>
+              <div class="form-control-static">{{ $ctrl.allergy.reaction }}</div>
             </div>
-            <div class="form-group form-group-sm">
-              <label class="control-label col-md-9">Station Name:</label>
-              <div class="col-md-9">
-                <div class="form-control-static">{{ $ctrl.series[$index].stationName }}</div>
-              </div>
+
+            <div class="form-group">
+              <label class="control-label">Author</label>
+              <div class="form-control-static">{{ $ctrl.allergy.author }}</div>
             </div>
-            <div class="form-group form-group-sm">
-              <label class="control-label col-md-9">Operator Name:</label>
-              <div class="col-md-9">
-                <div class="form-control-static">{{ $ctrl.series[$index].operatorsName }}</div>
-              </div>
+
+            <div class="form-group">
+              <label class="control-label">Date</label>
+              <div class="form-control-static">{{ $ctrl.allergy.dateCreated | date:'dd-MMM-yyyy'}}</div>
             </div>
-            <div class="form-group form-group-sm">
-              <label class="control-label col-md-9">Series Date:</label>
-              <div class="col-md-9">
-                <div class="form-control-static">{{ $ctrl.series[$index].seriesDate }}</div>
-              </div>
+
+            <div class="form-group">
+              <label class="control-label">Source</label>
+              <div class="form-control-static">{{ $ctrl.allergy.source }}</div>
             </div>
-            <div class="form-group form-group-sm">
-              <label class="control-label col-md-9">Series Time:</label>
-              <div class="col-md-9">
-                <div class="form-control-static">{{ $ctrl.series[$index].seriesTime }}</div>
-              </div>
-            </div>
-            <div class="form-group form-group-sm">
-              <label class="control-label col-md-9">Series No:</label>
-              <div class="col-md-9">
-                <div class="form-control-static">{{ $ctrl.series[$index].seriesNumber }}</div>
-              </div>
-            </div>
+
           </div>
         </div>
 
-        <span class="dicomImage-spinner" us-spinner="{radius: 20, width: 8, length: 16}"
-              spinner-key="{{'imagesDetail-spinner-' + instanceId}}" spinner-start-active="true"></span>
+      </div>
+      <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
+        <div class="wrap-control-group">
+          <div class="control-group right">
+            <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.edit();"><i class="fa fa-edit"></i> Edit</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+  <div class="panel panel-secondary" ng-if="getShowPanel('metadata') && !isEditMeta" ng-class="getOpenPanelClass('metadata')">
+    <div class="panel-heading">
+      <div class="control-group right">
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'metadata')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('metadata')"><i class="fa fa-chevron-up"></i></button>
+      </div>
+      <h3 class="panel-title">Image Details</h3>
+    </div>
+    <div class="panel-body">
+      <div class="panel-body-inner">
+        <div class="form">
+          <div class="form-group-wrapper">
+            <div class="form-group">
+              <label class="control-label">Cause Code</label>
+              <div class="form-control-static">{{ $ctrl.allergy.causeCode }}</div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Terminology</label>
+              <div class="form-control-static">{{ $ctrl.allergy.causeTerminology }}</div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Terminology Code</label>
+              <div class="form-control-static">{{ $ctrl.allergy.terminologyCode }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
+        <div class="wrap-control-group">
+          <div class="control-group right">
+            <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.editMeta();"><i class="fa fa-edit"></i> Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-secondary" ng-if="getShowPanel('metadata') && isEditMeta" ng-class="getOpenPanelClass('metadata')">
+    <div class="panel-heading">
+      <div class="control-group right">
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'metadata')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('metadata')"><i class="fa fa-chevron-up"></i></button>
+      </div>
+      <h3 class="panel-title">Edit Metadata</h3>
+    </div>
+    <div class="panel-body">
+      <div class="panel-body-inner">
+        <form name="allergyFormMeta">
+          <div class="form-group-wrapper">
+            <div class="form-group">
+              <label class="control-label">Cause Code</label>
+              <div class="form-control-static">{{ $ctrl.allergy.causeCode }}</div>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': (formSubmitted || allergyFormMeta.causeTerminology.$dirty) && allergyFormMeta.causeTerminology.$invalid, 'has-success': allergyFormMeta.causeCode.$valid && allergyFormMeta.causeCode.$dirty}">
+              <label for="causeTerminology" class="control-label">Terminology</label>
+              <div class="input-holder">
+                <input type="text" class="form-control input-sm" id="causeTerminology" name="causeTerminology" ng-model="allergyEditMeta.causeTerminology" required />
+              </div>
+              <span class="help-block animate-fade" ng-show="formSubmitted && allergyFormMeta.causeTerminology.$error.required">You must enter a value.</span>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Terminology Code</label>
+              <div class="form-control-static">{{ $ctrl.allergy.terminologyCode }}</div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
+        <div class="wrap-control-group">
+          <div class="control-group right">
+            <button class="btn btn-danger" ng-click="$ctrl.cancelEditMeta()"><i class="fa fa-ban"></i> Cancel</button>
+            <button class="btn btn-success" ng-click="confirmEditMeta(allergyFormMeta, allergyEditMeta)"><i class="fa fa-check"></i> Complete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="patientSummary-spinner" spinner-start-active="true"></span>
 </div>
