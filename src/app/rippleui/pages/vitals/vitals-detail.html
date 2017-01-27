@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
   
-<div mc-full-panel mc-accordion mc-open-panel="vitals" class="panel-group accordion">
+<div mc-popover mc-full-panel mc-accordion mc-open-panel="vitals" class="panel-group accordion">
   <div class="panel panel-secondary" ng-if="getShowPanel('vitals') && !isEdit" ng-class="getOpenPanelClass('vitals')">
     <div class="panel-heading">
       <div class="control-group right">
@@ -144,10 +144,25 @@
               <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.respirationRate.value.$dirty) && vitalEdit.vitalsSigns.respirationRate.value.$invalid, 'has-success': vitalEdit.vitalsSigns.respirationRate.value.$valid && vitalEdit.vitalsSigns.respirationRate.value.$dirty}">
                 <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.respirationRate.status)"></span>  
                 <label class="vitals-label">Respiration Rate</label>
-                <div class="input-group vitals-holder {{vitalEdit.vitalsSigns.respirationRate.status}}">
+                <div class="input-group vitals-holder popover-wrap {{vitalEdit.vitalsSigns.respirationRate.status}}">
                   <input class="form-control input-sm" id="respirationRate" name="respirationRate" type="text" ng-model="vitalEdit.vitalsSigns.respirationRate.value" required />
-                  <span class="vitals-addon" uib-popover="I appeared on focus! Click away and I'll vanish..." popover-trigger="'click'">resps/min</span>
-
+                  <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">resps/min</span>
+                  <div class="popover vitals-popover fade">
+                    <div class="arrow"></div>
+                    <div class="popover-inner">
+                      <h3 class="popover-title">Respiration Rate</h3>
+                      <div class="popover-content">
+                        <div class="range-vital-labels">
+                          <div class="range-vital-label">< 8</div>
+                          <div class="range-vital-label">9-11</div>
+                          <div class="range-vital-label">12-20</div>
+                          <div class="range-vital-label">21-24</div>
+                          <div class="range-vital-label">> 25</div>
+                        </div>
+                        <img src="../../../assets/images/range-vital.jpg">
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.respirationRate.value.$error.required">You must enter a value.</span>
               </div>
@@ -156,9 +171,25 @@
               <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.oxygenSaturation.value.$dirty) && vitalEdit.vitalsSigns.oxygenSaturation.value.$invalid, 'has-success': vitalEdit.vitalsSigns.oxygenSaturation.value.$valid && vitalEdit.vitalsSigns.oxygenSaturation.value.$dirty}">
                 <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.oxygenSaturation.status)"></span>  
                 <label class="vitals-label">Oxygen Saturation</label>
-                <div class="input-group vitals-holder {{vitalEdit.vitalsSigns.oxygenSaturation.status}}">
+                <div class="input-group vitals-holder popover-wrap {{vitalEdit.vitalsSigns.oxygenSaturation.status}}">
                   <input class="form-control input-sm" id="oxygenSaturation" name="oxygenSaturation" type="text" ng-model="vitalEdit.vitalsSigns.oxygenSaturation.value" required />
-                  <span class="vitals-addon">%</span>
+                  <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">%</span>
+                  <div class="popover vitals-popover fade">
+                    <div class="arrow"></div>
+                    <div class="popover-inner">
+                      <h3 class="popover-title">Oxygen Saturation</h3>
+                      <div class="popover-content">
+                        <div class="range-vital-labels">
+                          <div class="range-vital-label">< 8</div>
+                          <div class="range-vital-label">9-11</div>
+                          <div class="range-vital-label">12-20</div>
+                          <div class="range-vital-label">21-24</div>
+                          <div class="range-vital-label">> 25</div>
+                        </div>
+                        <img src="../../../assets/images/range-vital.jpg">
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.oxygenSaturation.value.$error.required">You must enter a value.</span>
               </div>
@@ -182,9 +213,25 @@
               <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.systolicBP.value.$dirty) && vitalEdit.vitalsSigns.systolicBP.value.$invalid, 'has-success': vitalEdit.vitalsSigns.systolicBP.value.$valid && vitalEdit.vitalsSigns.systolicBP.value.$dirty}">
                 <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.systolicBP.status)"></span>  
                 <label class="vitals-label">Systolic BP</label>
-                <div class="input-group vitals-holder {{vitalEdit.vitalsSigns.systolicBP.status}}">
+                <div class="input-group vitals-holder popover-wrap {{vitalEdit.vitalsSigns.systolicBP.status}}">
                   <input class="form-control input-sm" id="systolicBP" name="systolicBP" type="text" ng-model="vitalEdit.vitalsSigns.systolicBP.value" required />
-                  <span class="vitals-addon">mmHg</span>
+                  <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">mmHg</span>
+                  <div class="popover vitals-popover fade">
+                    <div class="arrow"></div>
+                    <div class="popover-inner">
+                      <h3 class="popover-title">Systolic BP</h3>
+                      <div class="popover-content">
+                        <div class="range-vital-labels">
+                          <div class="range-vital-label">< 8</div>
+                          <div class="range-vital-label">9-11</div>
+                          <div class="range-vital-label">12-20</div>
+                          <div class="range-vital-label">21-24</div>
+                          <div class="range-vital-label">> 25</div>
+                        </div>
+                        <img src="../../../assets/images/range-vital.jpg">
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.systolicBP.value.$error.required">You must enter a value.</span>
               </div>
@@ -195,9 +242,25 @@
               <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.distolicBP.value.$dirty) && vitalEdit.vitalsSigns.distolicBP.value.$invalid, 'has-success': vitalEdit.vitalsSigns.distolicBP.value.$valid && vitalEdit.vitalsSigns.distolicBP.value.$dirty}">
                 <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.distolicBP.status)"></span>  
                 <label class="vitals-label">Distolic BP</label>
-                <div class="input-group vitals-holder {{vitalEdit.vitalsSigns.distolicBP.status}}">
+                <div class="input-group vitals-holder popover-wrap {{vitalEdit.vitalsSigns.distolicBP.status}}">
                   <input class="form-control input-sm" id="distolicBP" name="distolicBP" type="text" ng-model="vitalEdit.vitalsSigns.distolicBP.value" required />
-                  <span class="vitals-addon">mmHg</span>
+                  <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">mmHg</span>
+                  <div class="popover vitals-popover fade">
+                    <div class="arrow"></div>
+                    <div class="popover-inner">
+                      <h3 class="popover-title">Distolic BP</h3>
+                      <div class="popover-content">
+                        <div class="range-vital-labels">
+                          <div class="range-vital-label">< 8</div>
+                          <div class="range-vital-label">9-11</div>
+                          <div class="range-vital-label">12-20</div>
+                          <div class="range-vital-label">21-24</div>
+                          <div class="range-vital-label">> 25</div>
+                        </div>
+                        <img src="../../../assets/images/range-vital.jpg">
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.distolicBP.value.$error.required">You must enter a value.</span>
               </div>
@@ -206,9 +269,25 @@
               <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.heartRate.value.$dirty) && vitalEdit.vitalsSigns.heartRate.value.$invalid, 'has-success': vitalEdit.vitalsSigns.heartRate.value.$valid && vitalEdit.vitalsSigns.heartRate.value.$dirty}">
                 <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.heartRate.status)"></span>  
                 <label class="vitals-label">Heart Rate</label>
-                <div class="input-group vitals-holder {{vitalEdit.vitalsSigns.heartRate.status}}">
+                <div class="input-group vitals-holder popover-wrap {{vitalEdit.vitalsSigns.heartRate.status}}">
                   <input class="form-control input-sm" id="heartRate" name="heartRate" type="text" ng-model="vitalEdit.vitalsSigns.heartRate.value" required />
-                  <span class="vitals-addon">bpm</span>
+                  <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">bpm</span>
+                  <div class="popover vitals-popover fade">
+                    <div class="arrow"></div>
+                    <div class="popover-inner">
+                      <h3 class="popover-title">Heart Rate</h3>
+                      <div class="popover-content">
+                        <div class="range-vital-labels">
+                          <div class="range-vital-label">< 8</div>
+                          <div class="range-vital-label">9-11</div>
+                          <div class="range-vital-label">12-20</div>
+                          <div class="range-vital-label">21-24</div>
+                          <div class="range-vital-label">> 25</div>
+                        </div>
+                        <img src="../../../assets/images/range-vital.jpg">
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.heartRate.value.$error.required">You must enter a value.</span>
               </div>
@@ -219,9 +298,25 @@
               <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.temperature.value.$dirty) && vitalEdit.vitalsSigns.temperature.value.$invalid, 'has-success': vitalEdit.vitalsSigns.temperature.value.$valid && vitalEdit.vitalsSigns.temperature.value.$dirty}">
                 <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.temperature.status)"></span>  
                 <label class="vitals-label">Temperature</label>
-                <div class="input-group vitals-holder {{vitalEdit.vitalsSigns.temperature.status}}">
+                <div class="input-group vitals-holder popover-wrap {{vitalEdit.vitalsSigns.temperature.status}}">
                   <input class="form-control input-sm" id="temperature" name="temperature" type="text" ng-model="vitalEdit.vitalsSigns.temperature.value" required />
-                  <span class="vitals-addon" uib-popover-html="htmlPopover" popover-title="Temperature" popover-trigger="'click'" popover-class="vitals-popover">c</span>
+                  <span class="vitals-addon" ng-click="togglePopover($event)">c</span>
+                  <div class="popover vitals-popover fade">
+                    <div class="arrow"></div>
+                    <div class="popover-inner">
+                      <h3 class="popover-title">Temperature</h3>
+                      <div class="popover-content">
+                        <div class="range-vital-labels">
+                          <div class="range-vital-label">< 8</div>
+                          <div class="range-vital-label">9-11</div>
+                          <div class="range-vital-label">12-20</div>
+                          <div class="range-vital-label">21-24</div>
+                          <div class="range-vital-label">> 25</div>
+                        </div>
+                        <img src="../../../assets/images/range-vital.jpg">
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.temperature.value.$error.required">You must enter a value.</span>
               </div>

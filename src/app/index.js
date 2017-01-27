@@ -325,6 +325,54 @@ const app = angular
             }
         }
     })
+    .directive('mcPopover', function() {
+        return {
+            controller: ['$scope', '$element', '$window', function($scope, $element, $window) {
+                var popoverWidth = 266;
+                var page = angular.element(document);
+                
+                $scope.togglePopover = function (ev) {
+                    var placement;
+                    var popoverWrap = angular.element(ev.currentTarget.parentElement);
+                    var popover = popoverWrap.find('.popover');
+                    var pageWidth = page.width();
+                    var offsetPopoverWrap = popoverWrap.offset();
+                    var freePlaceRight = pageWidth - (offsetPopoverWrap.left + popoverWrap.width());
+                    var freePlaceLeft = offsetPopoverWrap.left;
+
+                    if (freePlaceRight > popoverWidth) {
+                        placement = 'right';
+                    } else if (freePlaceLeft > popoverWidth) {
+                        placement = 'left';
+                    } else {
+                        placement = 'top';
+                    }
+                    popover.removeClass('right left top')
+                    popover.addClass(placement);
+                    popover.toggleClass('in');
+                };
+                $window.addEventListener('resize', function () {
+                    angular.element('.popover').removeClass('in');
+                });
+                document.addEventListener('click', function (ev) {
+                    var currentPopoverWrap = angular.element(ev.target.closest('.popover-wrap'));
+                    var isOpenPopover = false;
+                    var currentPopover;
+
+                    if (currentPopoverWrap) {
+                        currentPopover = currentPopoverWrap.find('.popover');
+                        isOpenPopover = currentPopover.hasClass('in');
+                    }
+                    
+                    angular.element('.popover').removeClass('in');
+
+                    if (isOpenPopover) {
+                        currentPopover.addClass('in');
+                    }
+                });  
+            }]
+        }
+    })
     .filter('formatNHSNumber', function() {
         return function(number) {
             if (number === undefined) {

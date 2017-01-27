@@ -34,6 +34,7 @@ $vitalsInputColor: (
     border: 1px solid #c3c3c3;
     border-left: 0;
     border-radius: 0 2px 2px 0;
+    cursor: pointer;
   }
 }
 @each $vitalInput, $color in $vitalsInputColor {
@@ -58,11 +59,17 @@ $vitalsInputColor: (
 }
 
 .vitals-popover {
+  display: block;
   width: 266px;
   padding: 0;
   border: 1px solid #c3c3c3;
   box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.3);
-
+  opacity: 0;
+  visibility: hidden;
+  &.in {
+    opacity: 1;
+    visibility: visible;
+  }
   .popover-title {
     padding: 0 10px;
     font-size: 13px;
@@ -71,6 +78,21 @@ $vitalsInputColor: (
     color: #000000;
     background: #e8e8e8;
     border-bottom: 1px solid #c3c3c3;
+  }
+  .popover-content {
+    padding: 10px;
+  }
+  .range-vital-labels {
+    display: flex;
+    flex-direction: row;  
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 16px;
+    color: #000000;
+    .range-vital-label {
+    }
   }
   & > .arrow {
       border-width: 6px;
@@ -82,6 +104,23 @@ $vitalsInputColor: (
   &.left {
     top: 50% !important;
     transform: translateY(-50%);
+  }
+  &.right {
+    right: auto;
+    left: 100%;
+    margin-left: 10px;
+
+  }
+  &.left {
+    left: auto;
+    right: 100%;
+    margin-right: 10px;
+  }
+  &.top {
+    top: auto;
+    bottom: 100%;
+    left: 0;
+    transform: translateY(-8px);
   }
   &.right > .arrow
   &.left > .arrow {

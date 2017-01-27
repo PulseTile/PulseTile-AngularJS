@@ -31,7 +31,7 @@ class VitalsDetailController {
     }
     $scope.htmlPopover = $sce.trustAsHtml('<b style="color: red">I can</b> have <div class="label label-success">HTML</div> content');
     this.edit = function () {
-      $scope.isEdit = true;
+      $scope.isEdit = false;
 
       $scope.vitalEdit = Object.assign({}, this.vital);
       $scope.vitalEdit.date = new Date();
