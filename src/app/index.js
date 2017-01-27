@@ -326,6 +326,32 @@ const app = angular
             }
         }
     })
+    .directive('diCom', function () {
+        return {
+            // restrict: 'E',
+            template: require('./rippleui/pages/dicom/image-modal.html'),
+            link: function(scope, element, attrs) {
+                console.log('diCom', scope, element, attrs);
+                
+                // scope.zoomIn = function (ev) {
+                //     var viewport = cornerstone.getViewport(element);
+                //     viewport.scale += 0.25;
+                //     cornerstone.setViewport(element, viewport);
+                // };
+                // scope.zoomOut = function (ev) {
+                //     var viewport = cornerstone.getViewport(element);
+                //     viewport.scale -= 0.25;
+                //     cornerstone.setViewport(element, viewport);
+                // };
+                // scope.reset = function (ev) {
+                //     cornerstone.reset(element);
+                // };
+                // scope.close = function (ev) {
+                //     cornerstone.reset(element);
+                // };
+            }
+        }
+    })
     .directive('cornerstoneImage', function () {
 
         return{

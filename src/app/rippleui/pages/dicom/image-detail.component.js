@@ -18,9 +18,10 @@ let templateImageDetail= require('./image-detail.html');
 class ImageDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, imageActions, ImageModal, usSpinnerService) {
     var seriesIdsIndex;
-
+    this.visibleModal = 'closeModal';
     this.openImage = function (imageId) {
-      ImageModal.openModal(this.currentPatient, {title: 'View Dicom Image'}, imageId);
+      // ImageModal.openModal(this.currentPatient, {title: 'View Dicom Image'}, imageId);
+      this.visibleModal = 'openModal';
     };
 
     this.series = [];
