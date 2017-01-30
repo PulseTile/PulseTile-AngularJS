@@ -331,24 +331,26 @@ const app = angular
             // restrict: 'E',
             template: require('./rippleui/pages/dicom/image-modal.html'),
             link: function(scope, element, attrs) {
-                console.log('diCom', scope, element, attrs);
+               
+                var cornerstone = cornerstoneJS();
+                var element1 = $('#dicomImage').get(0);
                 
-                // scope.zoomIn = function (ev) {
-                //     var viewport = cornerstone.getViewport(element);
-                //     viewport.scale += 0.25;
-                //     cornerstone.setViewport(element, viewport);
-                // };
-                // scope.zoomOut = function (ev) {
-                //     var viewport = cornerstone.getViewport(element);
-                //     viewport.scale -= 0.25;
-                //     cornerstone.setViewport(element, viewport);
-                // };
-                // scope.reset = function (ev) {
-                //     cornerstone.reset(element);
-                // };
-                // scope.close = function (ev) {
-                //     cornerstone.reset(element);
-                // };
+                scope.zoomIn = function (ev) {
+                    var viewport = cornerstone.getViewport(element1);
+                    viewport.scale += 0.25;
+                    cornerstone.setViewport(element1, viewport);
+                };
+                scope.zoomOut = function (ev) {
+                    var viewport = cornerstone.getViewport(element1);
+                    viewport.scale -= 0.25;
+                    cornerstone.setViewport(element1, viewport);
+                };
+                scope.reset = function (ev) {
+                    cornerstone.reset(element1);
+                };
+                scope.close = function (ev) {
+                    cornerstone.reset(element1);
+                };
             }
         }
     })
