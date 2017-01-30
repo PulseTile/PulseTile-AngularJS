@@ -17,7 +17,7 @@ let templateVitalsDetail = require('./vitals-detail.html');
 
 class VitalsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, usSpinnerService, $sce) {
-    $scope.isEdit = true;
+    $scope.isEdit = false;
 
     /*
       TODO: Only for demo
@@ -31,7 +31,7 @@ class VitalsDetailController {
     }
     $scope.htmlPopover = $sce.trustAsHtml('<b style="color: red">I can</b> have <div class="label label-success">HTML</div> content');
     this.edit = function () {
-      $scope.isEdit = false;
+      $scope.isEdit = true;
 
       $scope.vitalEdit = Object.assign({}, this.vital);
       $scope.vitalEdit.date = new Date();

@@ -38,7 +38,8 @@ class HeaderController {
       }
     };
     this.goChart = function () {
-      if ($scope.title === 'PHR POC') return;
+      if ($scope.title.role + ' ' +  $scope.title.poc === 'PHR POC') return;
+      
       $state.go('patients-charts');
     };
     this.goPatientList = function () {

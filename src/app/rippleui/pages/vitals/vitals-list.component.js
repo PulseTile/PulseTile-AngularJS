@@ -16,7 +16,7 @@
 let templateVitalsList = require('./vitals-list.html');
 
 class VitalsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, vitalsActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, vitalsActions, serviceRequests, usSpinnerService, $window) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -297,6 +297,185 @@ class VitalsListController {
     
     // this.vitalsLoad = vitalsActions.all;
     // this.vitalsLoad($stateParams.patientId);
+
+
+
+    /*
+      Chart only for demo
+    */
+    var data = {
+        labels: [
+          "12-Jan-16 0:00", 
+          "12-Jan-16 01:00", 
+          "12-Jan-16 02:00", 
+          "12-Jan-16 03:00", 
+        ],
+        datasets: [
+          {
+              label: "DBP",
+              fill: false,
+              lineTension: 0,
+              backgroundColor: "rgba(236, 109, 28, 0.4)",
+              borderColor: "rgba(236, 109, 28, 1)",
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderJoinStyle: 'miter',
+              pointBorderColor: "rgba(236, 109, 28, 1)",
+              pointBackgroundColor: "rgba(236, 109, 28, 1)",
+              pointBorderWidth: 5,
+              pointRadius: 1,
+              pointHoverRadius: 1,
+              pointHitRadius: 8,
+              data: [ 52, 54, 61, 60 ],
+          },
+          {
+              label: "SBP",
+              fill: false,
+              lineTension: 0,
+              backgroundColor: "rgba(236, 109, 28, 0.4)",
+              borderColor: "rgba(236, 109, 28, 1)",
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderJoinStyle: 'miter',
+              pointBorderColor: "rgba(236, 109, 28, 1)",
+              pointBackgroundColor: "rgba(236, 109, 28, 1)",
+              pointBorderWidth: 5,
+              pointRadius: 1,
+              pointHoverRadius: 1,
+              pointHitRadius: 8,
+              data: [113, 85, 94, 119 ],
+          },
+          {
+              label: "Temp",
+              fill: false,
+              lineTension: 0,
+              backgroundColor: "rgba(221, 43, 8, 0.4)",
+              borderColor: "rgba(221, 43, 8, 1)",
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderJoinStyle: 'miter',
+              pointBorderColor: "rgba(221, 43, 8, 1)",
+              pointBackgroundColor: "rgba(221, 43, 8, 1)",
+              pointBorderWidth: 5,
+              pointRadius: 1,
+              pointHoverRadius: 1,
+              pointHitRadius: 8,
+              data: [36.8, 36.8, 36.2, 36.4 ],
+          },
+          {
+              label: "HR",
+              fill: false,
+              lineTension: 0,
+              backgroundColor: "rgba(70, 124, 174, 0.4)",
+              borderColor: "rgba(70, 124, 174, 1)",
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderJoinStyle: 'miter',
+              pointBorderColor: "rgba(70, 124, 174, 1)",
+              pointBackgroundColor: "rgba(70, 124, 174, 1)",
+              pointBorderWidth: 5,
+              pointRadius: 1,
+              pointHoverRadius: 1,
+              pointHitRadius: 8,
+              data: [119, 105, 111, 111 ],
+          },
+          {
+              label: "Resp",
+              fill: false,
+              lineTension: 0,
+              backgroundColor: "rgba(13, 141, 5, 0.4)",
+              borderColor: "rgba(13, 141, 5, 1)",
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderJoinStyle: 'miter',
+              pointBorderColor: "rgba(13, 141, 5, 1)",
+              pointBackgroundColor: "rgba(13, 141, 5, 1)",
+              pointBorderWidth: 5,
+              pointRadius: 1,
+              pointHoverRadius: 1,
+              pointHitRadius: 8,
+              data: [23, 22, 25, 25 ],
+          },
+          {
+              label: "SpO2",
+              fill: false,
+              lineTension: 0,
+              backgroundColor: "rgba(219, 0, 120, 0.4)",
+              borderColor: "rgba(219, 0, 120, 1)",
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderJoinStyle: 'miter',
+              pointBorderColor: "rgba(219, 0, 120, 1)",
+              pointBackgroundColor: "rgba(219, 0, 120, 1)",
+              pointBorderWidth: 5,
+              pointRadius: 1,
+              pointHoverRadius: 1,
+              pointHitRadius: 8,
+              data: [92, 94, 96, 97 ],
+          }
+        ],
+        apiCalls: ["/api/1/", "/api/2/", "/api/3/", "/api/4/"] 
+        /* apiCalls used to link each point within data array to an api call */
+    };
+
+    var options = {
+        capBezierPoints: false,
+        responsive: true,
+        maintainAspectRatio: false,
+        // scales: {
+        //   xAxes: [{
+        //     afterTickToLabelConversion: function(data){
+        //       var xLabels = data.ticks;
+
+        //       xLabels.forEach(function (labels, i) {
+        //         if (i % 2 == 1){
+        //           xLabels[i] = '';
+        //         }
+        //       });
+        //     } 
+        //   }]   
+        // },
+        tooltips: {
+          mode: 'label',
+          titleMarginBottom: 15,
+          bodySpacing: 10,
+          xPadding: 10,
+          yPadding: 10,
+          callbacks: {
+            label: function(tooltipItem, data) {
+              return '  ' + data.datasets[tooltipItem.datasetIndex].label + ' : ' + tooltipItem.yLabel;
+            }
+          },
+          onClick: function(event, legendItem) {
+            debugger
+          }
+        },
+    }
+
+    var ctx = document.getElementById("vitalNewsChart").getContext("2d");
+    var myLineChart = new $window.Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: options
+    });
+    ctx.onclick = function(evt){
+        var activePoints = myLineChart.getElementsAtEvent(evt);
+        // => activePoints is an array of points on the canvas that are at the same position as the click event.
+    };
+
+
+    // // Click Event
+    // canvas.onclick = function (evt) {
+    //     var points = chart.getPointsAtEvent(evt);
+    //     var index = chart.datasets[0].points.indexOf(points[0]);
+    //     $('#targetDiv').html( 'Go to <a href="' + data.apiCalls[index] + '" target="_blank">' + data.apiCalls[index] + '</a>' );
+    // };
   }
 }
 
@@ -305,5 +484,5 @@ const VitalsListComponent = {
   controller: VitalsListController
 };
 
-VitalsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'vitalsActions', 'serviceRequests', 'usSpinnerService'];
+VitalsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'vitalsActions', 'serviceRequests', 'usSpinnerService', '$window'];
 export default VitalsListComponent;

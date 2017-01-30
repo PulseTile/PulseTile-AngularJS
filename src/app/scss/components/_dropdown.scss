@@ -21,6 +21,19 @@
     right: 0;
   }
 }
+.dropdown.open .btn-inverse {
+  &,
+  &:focus,
+  &:active {
+    background: #fff !important;
+    &:hover,
+    &.active {
+      background: #fff !important;
+    }
+  }
+}
+
+
 .dm-panel {
   padding: 15px 10px 19px 20px;
   border-right: 4px;
@@ -43,4 +56,7 @@
   @include respond-to(sm) {
     width: 470px;
   }
+}
+.dm-tables {
+  width: 215px;
 }

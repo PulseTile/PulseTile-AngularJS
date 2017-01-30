@@ -27,8 +27,7 @@ import 'angular-ui-calendar';
 import 'jquery';
 
 import 'morrisjs';
-// import * as d3js from "d3";
-// import "d3";
+import 'chart.js';
 
 import 'angular-spinner';
 import 'jquery-timepicker-jt';

@@ -21,7 +21,13 @@
     </div>
     <div class="control-group right" >
       <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')" ng-if="$ctrl.isShowExpandBtn"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-      <!--<button class="btn btn-success btn-inverse btn-dropdown-toggle btn-table"><i class="fa fa-table"></i></button>-->
+      <div class="dropdown">
+        <button mc-dropdown class="btn btn-success btn-inverse btn-dropdown-toggle btn-table" ng-click="toggleDropdown($event);"><i class="fa fa-table"></i></button>
+        <div class="dropdown-menu dm-panel dm-right dm-tables">
+          <div class="heading">TABLES</div>
+         
+        </div>
+      </div>
     </div>
     <h3 class="panel-title">Vitals - News</h3>
     <div class="panel-filter" ng-if="$ctrl.isFilter" ng-class="{active : $ctrl.isFilter}">
@@ -68,6 +74,14 @@
     </table>
 
     <!-- <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="patientSummary-spinner" spinner-start-active="true"></span> -->
+    
+    
+    <div>
+      <canvas id="vitalNewsChart" height="441" width="600"></canvas>
+    </div>
+    
+    <div id="targetDiv">Click Event Appears Here</div>
+
 
     <div class="panel-control">
       <div class="wrap-control-group">
