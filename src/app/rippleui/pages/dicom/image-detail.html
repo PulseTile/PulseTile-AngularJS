@@ -13,67 +13,80 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
-<div class="transbox">
-  <div class="innerTransbox">
-    <h3><strong>Image Series</strong></h3>
-
-    <div class="form-thumbnail" ng-repeat="instanceId in $ctrl.instanceIds track by $index">
-
-      <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-        <a class="thumbnail" href="#">
-          <img class="dicomImageMini" ng-src="http://ripple-orthanc.answerappcloud.com/instances/{{instanceId}}/preview"
-               ng-click="$ctrl.openImage(instanceId)" rp-on-load="stopSpinner('imagesDetail-spinner-' + instanceId)"/>
-        </a>
-        <div class="form-horizontal text-left dicomImageMetadata">
-          <div ng-if="$ctrl.series[$index] !== undefined">
-            <div class="form-group form-group-sm">
-              <label class="control-label col-md-9">Modality:</label>
-              <div class="col-md-9">
-                <div class="form-control-static">{{ $ctrl.series[$index].modality }}</div>
-              </div>
-            </div>
-            <div class="form-group form-group-sm">
-              <label class="control-label col-md-9">Protocol Name:</label>
-              <div class="col-md-9">
-                <div class="form-control-static">{{ $ctrl.series[$index].protocolName }}</div>
-              </div>
-            </div>
-            <div class="form-group form-group-sm">
-              <label class="control-label col-md-9">Station Name:</label>
-              <div class="col-md-9">
-                <div class="form-control-static">{{ $ctrl.series[$index].stationName }}</div>
-              </div>
-            </div>
-            <div class="form-group form-group-sm">
-              <label class="control-label col-md-9">Operator Name:</label>
-              <div class="col-md-9">
-                <div class="form-control-static">{{ $ctrl.series[$index].operatorsName }}</div>
-              </div>
-            </div>
-            <div class="form-group form-group-sm">
-              <label class="control-label col-md-9">Series Date:</label>
-              <div class="col-md-9">
-                <div class="form-control-static">{{ $ctrl.series[$index].seriesDate }}</div>
-              </div>
-            </div>
-            <div class="form-group form-group-sm">
-              <label class="control-label col-md-9">Series Time:</label>
-              <div class="col-md-9">
-                <div class="form-control-static">{{ $ctrl.series[$index].seriesTime }}</div>
-              </div>
-            </div>
-            <div class="form-group form-group-sm">
-              <label class="control-label col-md-9">Series No:</label>
-              <div class="col-md-9">
-                <div class="form-control-static">{{ $ctrl.series[$index].seriesNumber }}</div>
+<div mc-full-panel mc-accordion mc-open-panel="series" class="panel-group accordion">
+  <div class="panel panel-secondary" ng-if="getShowPanel('series') " ng-class="getOpenPanelClass('series')">
+    <div class="panel-heading">
+      <div class="control-group right">
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'series')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('series')"><i class="fa fa-chevron-up"></i></button>
+      </div>
+      <h3 class="panel-title">Image Series</h3>
+    </div>
+    <div class="panel-body">
+      <div class="panel-body-inner">
+        <div class="form">
+          <div class="form-group-wrapper">
+            <div class="form-group" ng-repeat="item in $ctrl.instance.series_images">
+              <div class="form-control-static" ng-click="$ctrl.toggleModal({className: 'openModal'})">
+                <img src="{{item.imageLink}}" alt="item.imgName">
               </div>
             </div>
           </div>
         </div>
 
-        <span class="dicomImage-spinner" us-spinner="{radius: 20, width: 8, length: 16}"
-              spinner-key="{{'imagesDetail-spinner-' + instanceId}}" spinner-start-active="true"></span>
       </div>
     </div>
   </div>
+
+  <div class="panel panel-secondary" ng-if="getShowPanel('details')" ng-class="getOpenPanelClass('details')">
+    <div class="panel-heading">
+      <div class="control-group right">
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('series', 'details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('details')"><i class="fa fa-chevron-up"></i></button>
+      </div>
+      <h3 class="panel-title">Image Details</h3>
+    </div>
+    <div class="panel-body">
+      <div class="panel-body-inner">
+        <div class="form">
+          <div class="form-group-wrapper">
+            <div class="form-group">
+              <label class="control-label">Modality</label>
+              <div class="form-control-static">{{ $ctrl.instance.modality }}</div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Protocol Name</label>
+              <div class="form-control-static">{{ $ctrl.instance.protocol_name }}</div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Operator Name</label>
+              <div class="form-control-static">{{ $ctrl.instance.operator_name }}</div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Series Date</label>
+              <div class="form-control-static">{{ $ctrl.instance.series_date }}</div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Author</label>
+              <div class="form-control-static">{{ $ctrl.instance.author }}</div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Station Name</label>
+              <div class="form-control-static">{{ $ctrl.instance.station }}</div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Series Time</label>
+              <div class="form-control-static">{{ $ctrl.instance.time }}</div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Date</label>
+              <div class="form-control-static">{{ $ctrl.instance.date }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="patientSummary-spinner" spinner-start-active="true"></span>
 </div>
+<di-com ng-class="visibleModal"></di-com>

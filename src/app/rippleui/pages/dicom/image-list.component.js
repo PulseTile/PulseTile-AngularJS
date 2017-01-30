@@ -16,13 +16,51 @@
 let templateImageList = require('./image-list.html');
 
 class ImageListController {
-  constructor($scope, $state, $stateParams, $ngRedux, imageActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $window, $state, $stateParams, $ngRedux, imageActions, serviceRequests, usSpinnerService) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
+    this.currentPage = 1;
+    $scope.query = '';
+    this.isFilter = false;
+    this.isShowCreateBtn = $state.router.globals.$current.name !== 'images-create';
+    this.isShowExpandBtn = $state.router.globals.$current.name !== 'images';
     var vm = this;
 
-    this.currentPage = 1;
+    this.toggleFilter = function () {
+      this.isFilter = !this.isFilter;
+    };
+
+    this.sort = function (field) {
+      var reverse = this.reverse;
+      if (this.order === field) {
+          this.reverse = !reverse;
+      } else {
+          this.order = field;
+          this.reverse = false;
+      }
+    };
+    
+    this.sortClass = function (field) {
+      if (this.order === field) {
+          return this.reverse ? 'sorted desc' : 'sorted asc';
+      }
+    };
+    
+    this.order = serviceRequests.currentSort.order || 'name';
+    this.reverse = serviceRequests.currentSort.reverse || false;
+    if (serviceRequests.filter) {
+      this.query[this.queryBy] = serviceRequests.filter;
+      this.isFilter = true;
+    }  
+
+    this.create = function () {
+      $state.go('images-create', {
+          patientId: $stateParams.patientId,
+          filter: this.query,
+          page: this.currentPage
+      });
+    };
 
     this.pageChangeHandler = function (newPage) {
       this.currentPage = newPage;
@@ -62,24 +100,45 @@ class ImageListController {
     };
 
     this.setCurrentPageData = function (data) {
+      var date = new Date();
+      this.images = [
+        {
+          sourceId: '1',
+          name: 'Inactivated Poliovirus Vaccine',
+          source: 'Marand',
+          seriesNumber: 1,
+          comment: 'Hospital staff',
+          date: date.setDate(date.getDate() - 1),
+          author: 'ripple_osi',
+          dataCreate: date.setDate(date.getDate() - 1)
+        }, {
+          sourceId: '2',
+          name: 'Cell-Culture Influenza Vaccine',
+          source: 'EtherCIS',
+          seriesNumber: 2,
+          comment: 'Hospital staff',
+          date: date,
+          author: 'ripple_osi',
+          dataCreate: date
+        }, {
+          sourceId: '3',
+          name: 'Varicella Vaccine',
+          source: 'Marand',
+          seriesNumber: 3,
+          comment: 'Hospital staff',
+          date: date.setDate(date.getDate() - 4),
+          author: 'ripple_osi',
+          dataCreate: date.setDate(date.getDate() - 4)
+        }
+      ];
+      
+      usSpinnerService.stop('patientSummary-spinner');
+      
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
-      if (data.studies.data) {
-        this.images = data.studies.data;
-
-        for (var i = 0; i < this.images.length; i++) {
-          var image = this.images[i];
-          image.dateRecorded = moment(image.dateRecorded).format('DD-MMM-YYYY');
-
-          if (image.studyDescription === null || image.studyDescription === '') {
-            image.studyDescription = 'N/A';
-          }
-        }
-        usSpinnerService.stop('imagesList-spinner');
-      }
-      if (data.user.data) {
-        this.currentUser = data.user.data;
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
       }
     };
 
@@ -99,5 +158,5 @@ const ImageListComponent = {
   controller: ImageListController
 };
 
-ImageListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'imageActions', 'serviceRequests', 'usSpinnerService'];
+ImageListController.$inject = ['$scope', '$window', '$state', '$stateParams', '$ngRedux', 'imageActions', 'serviceRequests', 'usSpinnerService'];
 export default ImageListComponent;
