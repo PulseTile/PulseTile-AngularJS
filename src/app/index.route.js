@@ -27,7 +27,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
     } 
   });
   
-  $urlRouterProvider.otherwise('/charts');
+  // $urlRouterProvider.otherwise('/charts');
   
   $stateProvider
       .state('profile', {
