@@ -9,7 +9,7 @@ export function all(patientId) {
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/mdtreports/'
+      url: '/api/patients/' + patientId + '/mdtreports'
     },
 
     meta: {

@@ -29,11 +29,12 @@ class HeaderController {
 				$state.go('patients-list');
       } else {
         $state.go('patients-summary', {
-          patientId: $stateParams.patientId,
+          patientId: $stateParams.patientId
         });
       }
     };
     this.goChart = function () {
+      if ($scope.title === 'PHR POC') return;
       $state.go('patients-charts');
     };
     this.goProfile = function () {
@@ -57,10 +58,8 @@ class HeaderController {
           break;
         case 'PHR':
           //Trick for PHR user login
-          $scope.loadPatientsAll = patientsActions.loadPatients;
           $scope.loadPatient = patientsActions.getPatient;
-          $scope.loadPatientsAll();
-          $scope.loadPatient($stateParams.patientId);
+          $scope.loadPatient(currentUser.nhsNumber);
           $state.go('patients-summary', {
             patientId: currentUser.nhsNumber
           });
