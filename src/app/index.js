@@ -330,28 +330,42 @@ const app = angular
         return {
             // restrict: 'E',
             template: require('./rippleui/pages/dicom/image-modal.html'),
-            link: function(scope, element, attrs) {
+            controller: ['$scope', '$ngRedux', 'serviceRequests', function($scope, $ngRedux, serviceRequests) {
                
                 var cornerstone = cornerstoneJS();
-                var element1 = $('#dicomImage').get(0);
-                
-                scope.zoomIn = function (ev) {
-                    var viewport = cornerstone.getViewport(element1);
+                var element = $('#dicomImage').get(0);
+
+                $scope.modal = {title: 'View Image'};
+
+                $scope.zoomIn = function (ev) {
+                    var viewport = cornerstone.getViewport(element);
                     viewport.scale += 0.25;
-                    cornerstone.setViewport(element1, viewport);
+                    cornerstone.setViewport(element, viewport);
                 };
-                scope.zoomOut = function (ev) {
-                    var viewport = cornerstone.getViewport(element1);
+                $scope.zoomOut = function (ev) {
+                    var viewport = cornerstone.getViewport(element);
                     viewport.scale -= 0.25;
-                    cornerstone.setViewport(element1, viewport);
+                    cornerstone.setViewport(element, viewport);
                 };
-                scope.reset = function (ev) {
-                    cornerstone.reset(element1);
+                $scope.reset = function (ev) {
+                    cornerstone.reset(element);
                 };
-                scope.close = function (ev) {
-                    cornerstone.reset(element1);
+                $scope.close = function (ev) {
+                    serviceRequests.publisher('closeModal', {className: 'closeModal'});
                 };
-            }
+
+                this.setCurrentPageData = function (data) {
+                    if (data.patientsGet.data) {
+                        $scope.patient = data.patientsGet.data;
+                    }
+                };
+                
+                let unsubscribe = $ngRedux.connect(state => ({
+                    getStoreData: this.setCurrentPageData(state)
+                }))(this);
+
+                $scope.$on('$destroy', unsubscribe);
+            }]
         }
     })
     .directive('cornerstoneImage', function () {

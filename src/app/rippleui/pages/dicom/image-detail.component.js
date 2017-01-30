@@ -16,12 +16,13 @@
 let templateImageDetail= require('./image-detail.html');
 
 class ImageDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, imageActions, ImageModal, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, imageActions, serviceRequests, usSpinnerService) {
     var seriesIdsIndex;
-    this.visibleModal = 'closeModal';
-    this.openImage = function (imageId) {
-      // ImageModal.openModal(this.currentPatient, {title: 'View Dicom Image'}, imageId);
-      this.visibleModal = 'openModal';
+    
+    $scope.visibleModal = 'closeModal';
+    
+    this.toggleModal = function (data) {
+      $scope.visibleModal = data.className;
     };
 
     this.series = [];
@@ -30,7 +31,7 @@ class ImageDetailController {
       usSpinnerService.stop('patientSummary-spinner');
       this.instance = {
         series_images: [{
-          imageLink: 'http://www.bmrentgen.pl/wp-content/uploads/2015/05/AP_czaszki.jpg',
+          imageLink: 'https://files.slack.com/files-tmb/T06BS7UF7-F3Y66CK1R-0c6dac119e/pasted_image_at_2017_01_30_04_56_pm_480.png',
           imgName: 'screen1'
         }],
         modality: '',
@@ -69,7 +70,7 @@ class ImageDetailController {
     }))(this);
 
     $scope.$on('$destroy', unsubscribe);
-
+    serviceRequests.subscriber('closeModal', this.toggleModal);
     // this.imageLoad = imageActions.getAllSeriesInStudy;
     // this.imageLoad($stateParams.patientId, $stateParams.studyId, $stateParams.source);
     // this.instanceLoad = imageActions.getInstance;
@@ -83,5 +84,5 @@ const ImageDetailComponent = {
   controller: ImageDetailController
 };
 
-ImageDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'imageActions', 'ImageModal', 'usSpinnerService'];
+ImageDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'imageActions', 'serviceRequests', 'usSpinnerService'];
 export default ImageDetailComponent;
