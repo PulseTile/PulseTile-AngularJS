@@ -27,9 +27,9 @@ import 'angular-ui-calendar';
 import 'jquery';
 
 import 'morrisjs';
-import cornerstoneJS from './cornerstone/cornerstone';
-import cornerstoneMathJS from './cornerstone/cornerstoneMath';
-import cornerstoneToolsJS from './cornerstone/cornerstoneTools';
+import cornerstoneJS from '../cornerstone/cornerstone';
+import cornerstoneMathJS from '../cornerstone/cornerstoneMath';
+import cornerstoneToolsJS from '../cornerstone/cornerstoneTools';
 import 'chart.js';
 
 import 'angular-spinner';
@@ -246,28 +246,30 @@ const app = angular
       }
     })
     .directive('mcAccordion', function() {
-      return {
-        link: function(scope, element, attrs) {
-            scope.panelOpen = '';
+        /* istanbul ignore next  */
+        return {
+                link: function(scope, element, attrs) {
+                scope.panelOpen = '';
 
-            scope.openPanel = function (namePanel) {
-                if (scope.panelOpen === namePanel) {
-                    scope.panelOpen = '';
-                } else {
-                    scope.panelOpen = namePanel;
-                }
-            };
-            scope.getOpenPanelClass = function (namePanel, openClass) {
-                openClass = openClass ? openClass : 'open';
-                return scope.panelOpen === namePanel ? openClass : '';
-            };
-            scope.$watch(attrs.mcOpenPanel, function() {
-                scope.panelOpen = attrs.mcOpenPanel;
-            });
+                scope.openPanel = function (namePanel) {
+                    if (scope.panelOpen === namePanel) {
+                        scope.panelOpen = '';
+                    } else {
+                        scope.panelOpen = namePanel;
+                    }
+                };
+                scope.getOpenPanelClass = function (namePanel, openClass) {
+                    openClass = openClass ? openClass : 'open';
+                    return scope.panelOpen === namePanel ? openClass : '';
+                };
+                scope.$watch(attrs.mcOpenPanel, function() {
+                    scope.panelOpen = attrs.mcOpenPanel;
+                });
+            }
         }
-      }
     })
     .directive('mcFullPanel', function() {
+        /* istanbul ignore next  */
         return {
             controller: ['$scope', 'serviceRequests', function($scope, serviceRequests) {
                 $scope.showPanel = '';
@@ -288,6 +290,7 @@ const app = angular
         };
     })
     .directive('mcDropwrap', function() {
+        /* istanbul ignore next  */
         return {
             link: function(scope, element, attrs) {
                 scope.closeDropdown = function (ev) {
@@ -304,6 +307,7 @@ const app = angular
         }
     })
     .directive('mcDropdown', function() {
+        /* istanbul ignore next  */
         return {
             link: function(scope, element, attrs) {
                 scope.toggleDropdown = function (ev) {
@@ -313,6 +317,7 @@ const app = angular
         }
     })
     .directive('diCom', function () {
+        /* istanbul ignore next  */
         return {
             // restrict: 'E',
             template: require('./rippleui/pages/dicom/image-modal.html'),
@@ -355,10 +360,10 @@ const app = angular
         }
     })
     .directive('cornerstoneImage', function () {
-
+        /* istanbul ignore next  */
         return{
             restrict: 'E',
-            template: '<div id="dicomImage" oncontextmenu="return false" unselectable="on" onselectstart="return false;" onmousedown="return false;" style="width: 50%; height: 512px; margin: auto"></div>',
+            template: '<div id="dicomImage" oncontextmenu="return false" unselectable="on" onselectstart="return false;" onmousedown="return false;" style="width: 100%; height: 512px; margin: auto"></div>',
             scope: {
                 imageId: '@imageid'
             },
@@ -390,6 +395,7 @@ const app = angular
 
     })
     .directive('mcPopover', function() {
+        /* istanbul ignore next  */
         return {
             controller: ['$scope', '$element', '$window', function($scope, $element, $window) {
                 var popoverWidth = 266;
