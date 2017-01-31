@@ -36,8 +36,8 @@ export default function Patient($window) {
           return '19-30';
         case (age >= 31 && age <= 60):
           return '31-60';
-        case (age >= 60 && age <= 80):
-          return '60-80';
+        case (age >= 61 && age <= 80):
+          return '61-80';
         case (age > 80):
           return '>80';
         default:
