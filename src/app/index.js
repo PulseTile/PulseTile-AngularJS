@@ -27,12 +27,9 @@ import 'angular-ui-calendar';
 import 'jquery';
 
 import 'morrisjs';
-// import * as cornerstone from './cornerstone/cornerstone';
-// let cornerstone = require('./cornerstone/cornerstone.js');
 import cornerstoneJS from './cornerstone/cornerstone';
 import cornerstoneMathJS from './cornerstone/cornerstoneMath';
 import cornerstoneToolsJS from './cornerstone/cornerstoneTools';
-// import imageLoaderJs from './cornerstone/exampleImageIdLoader';
 
 import 'angular-spinner';
 import 'jquery-timepicker-jt';

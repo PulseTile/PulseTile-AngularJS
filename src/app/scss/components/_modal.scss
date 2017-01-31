@@ -4,3 +4,6 @@
 .closeModal {
   display: none;
 }
+.modal-open .footer{
+  z-index: 0;
+}
