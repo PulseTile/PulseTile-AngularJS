@@ -1,31 +1,31 @@
 $highlighterColor: (
   default: #ccc,
-  warning: #FFBF00,
-  danger: #FF2626
+  warning: #ffbf00,
+  danger: #ff2626,
+  success: #00cc78
 );
-
-.highlighter {
+.highlighter-wrapper {
   position: relative;
-  &:after {
-    direction: inherit;
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background-color: map-get($highlighterColor, 'default');
+  .highlighter { display: block; }
+}
+.highlighter {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  direction: inherit;
+  background-color: map-get($highlighterColor, 'default');
+}
+@each $highlighter, $color in $highlighterColor {
+  .highlighter-#{$highlighter} {
+    @extend .highlighter;
+    background-color: $color;
   }
 }
-.highlighter-warning {
+.highlighter-not-vital {
   @extend .highlighter;
-  &:after {
-    background-color: map-get($highlighterColor, 'warning');
-  }
-}
-.highlighter-danger {
-  @extend .highlighter;
-  &:after {
-    background-color: map-get($highlighterColor, 'danger');
-  }
+  width: 1px;
+  background-color: #dadada;
 }

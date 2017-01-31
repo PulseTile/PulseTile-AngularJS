@@ -27,9 +27,10 @@ import 'angular-ui-calendar';
 import 'jquery';
 
 import 'morrisjs';
-import cornerstoneJS from '../cornerstone/cornerstone';
-import cornerstoneMathJS from '../cornerstone/cornerstoneMath';
-import cornerstoneToolsJS from '../cornerstone/cornerstoneTools';
+import cornerstoneJS from './cornerstone/cornerstone';
+import cornerstoneMathJS from './cornerstone/cornerstoneMath';
+import cornerstoneToolsJS from './cornerstone/cornerstoneTools';
+import 'chart.js';
 
 import 'angular-spinner';
 import 'jquery-timepicker-jt';
@@ -72,6 +73,10 @@ import ContactsDetailComponent from './rippleui/pages/contacts/contacts-detail.c
 import VaccinationsListComponent from './rippleui/pages/vaccinations/vaccinations-list.component';
 import VaccinationsCreateComponent from './rippleui/pages/vaccinations/vaccinations-create.component';
 import VaccinationsDetailComponent from './rippleui/pages/vaccinations/vaccinations-detail.component';
+
+import VitalsListComponent from './rippleui/pages/vitals/vitals-list.component';
+import VitalsCreateComponent from './rippleui/pages/vitals/vitals-create.component';
+import VitalsDetailComponent from './rippleui/pages/vitals/vitals-detail.component';
 
 import OrdersListComponent from './rippleui/pages/orders/orders-list.component';
 import OrdersDetailComponent from './rippleui/pages/orders/orders-detail.component';
@@ -162,6 +167,10 @@ const app = angular
     .component('vaccinationsListComponent', VaccinationsListComponent)
     .component('vaccinationsCreateComponent', VaccinationsCreateComponent)
     .component('vaccinationsDetailComponent', VaccinationsDetailComponent)
+
+    .component('vitalsListComponent', VitalsListComponent)
+    .component('vitalsCreateComponent', VitalsCreateComponent)
+    .component('vitalsDetailComponent', VitalsDetailComponent)
 
     .component('ordersListComponent', OrdersListComponent)
     .component('ordersDetailComponent', OrdersDetailComponent)
@@ -349,7 +358,7 @@ const app = angular
 
         return{
             restrict: 'E',
-            template: '<div id="dicomImage" oncontextmenu="return false" unselectable="on" onselectstart="return false;" onmousedown="return false;" style="width: 512px; height: 512px;"></div>',
+            template: '<div id="dicomImage" oncontextmenu="return false" unselectable="on" onselectstart="return false;" onmousedown="return false;" style="width: 50%; height: 512px; margin: auto"></div>',
             scope: {
                 imageId: '@imageid'
             },
@@ -379,6 +388,54 @@ const app = angular
             }
         };
 
+    })
+    .directive('mcPopover', function() {
+        return {
+            controller: ['$scope', '$element', '$window', function($scope, $element, $window) {
+                var popoverWidth = 266;
+                var page = angular.element(document);
+                
+                $scope.togglePopover = function (ev) {
+                    var placement;
+                    var popoverWrap = angular.element(ev.currentTarget.parentElement);
+                    var popover = popoverWrap.find('.popover');
+                    var pageWidth = page.width();
+                    var offsetPopoverWrap = popoverWrap.offset();
+                    var freePlaceRight = pageWidth - (offsetPopoverWrap.left + popoverWrap.width());
+                    var freePlaceLeft = offsetPopoverWrap.left;
+
+                    if (freePlaceRight > popoverWidth) {
+                        placement = 'right';
+                    } else if (freePlaceLeft > popoverWidth) {
+                        placement = 'left';
+                    } else {
+                        placement = 'top';
+                    }
+                    popover.removeClass('right left top')
+                    popover.addClass(placement);
+                    popover.toggleClass('in');
+                };
+                $window.addEventListener('resize', function () {
+                    angular.element('.popover').removeClass('in');
+                });
+                document.addEventListener('click', function (ev) {
+                    var currentPopoverWrap = angular.element(ev.target.closest('.popover-wrap'));
+                    var isOpenPopover = false;
+                    var currentPopover;
+
+                    if (currentPopoverWrap) {
+                        currentPopover = currentPopoverWrap.find('.popover');
+                        isOpenPopover = currentPopover.hasClass('in');
+                    }
+                    
+                    angular.element('.popover').removeClass('in');
+
+                    if (isOpenPopover) {
+                        currentPopover.addClass('in');
+                    }
+                });  
+            }]
+        }
     })
     .filter('formatNHSNumber', function() {
         return function(number) {

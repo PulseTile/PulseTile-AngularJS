@@ -45,7 +45,8 @@ class ReferralsDetailController {
 			$scope.referralsEdit = Object.assign({}, this.referral);
 			$scope.patient = this.currentPatient;
 
-			$scope.referralsEdit.dateCreated = new Date(this.referralsEdit.dateCreated).toISOString().slice(0, 10);
+      // $scope.referralsEdit.dateCreated = new Date(this.referralsEdit.dateCreated).toISOString().slice(0, 10);
+			$scope.referralsEdit.dateCreated = new Date();
 		};
 
 		$scope.openDatepicker = function ($event, name) {

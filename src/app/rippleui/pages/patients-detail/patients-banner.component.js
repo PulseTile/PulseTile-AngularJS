@@ -24,6 +24,7 @@ class PatientsBannerController {
       }
     };
 
+
     let unsubscribe = $ngRedux.connect(state => ({
       getPatient:  this.setCurrentPageData(state)
     }))(this);

@@ -23,6 +23,11 @@ class ImageDetailController {
     
     this.toggleModal = function (data) {
       $scope.visibleModal = data.className;
+      if (data.className === 'openModal') {
+        document.body.classList.add('modal-open');
+      } else {
+        document.body.classList.remove('modal-open');
+      }
     };
 
     this.series = [];
@@ -31,7 +36,7 @@ class ImageDetailController {
       usSpinnerService.stop('patientSummary-spinner');
       this.instance = {
         series_images: [{
-          imageLink: 'https://files.slack.com/files-tmb/T06BS7UF7-F3Y66CK1R-0c6dac119e/pasted_image_at_2017_01_30_04_56_pm_480.png',
+          imageLink: 'http://i.imgur.com/cEnTIeo.png',
           imgName: 'screen1'
         }],
         modality: '',
