@@ -27,12 +27,9 @@ import 'angular-ui-calendar';
 import 'jquery';
 
 import 'morrisjs';
-// import * as cornerstone from './cornerstone/cornerstone';
-// let cornerstone = require('./cornerstone/cornerstone.js');
 import cornerstoneJS from './cornerstone/cornerstone';
 import cornerstoneMathJS from './cornerstone/cornerstoneMath';
 import cornerstoneToolsJS from './cornerstone/cornerstoneTools';
-// import imageLoaderJs from './cornerstone/exampleImageIdLoader';
 
 import 'angular-spinner';
 import 'jquery-timepicker-jt';
@@ -372,7 +369,7 @@ const app = angular
 
         return{
             restrict: 'E',
-            template: '<div id="dicomImage" oncontextmenu="return false" unselectable="on" onselectstart="return false;" onmousedown="return false;" style="width: 512px; height: 512px;"></div>',
+            template: '<div id="dicomImage" oncontextmenu="return false" unselectable="on" onselectstart="return false;" onmousedown="return false;" style="width: 505; height: 512px; margin: auto"></div>',
             scope: {
                 imageId: '@imageid'
             },

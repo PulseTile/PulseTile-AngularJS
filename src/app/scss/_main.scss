@@ -81,35 +81,7 @@ a[ui-sref] {
 
 
 
-/* Confirmation Modal */
 
-.modal-header {
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  padding-bottom: 0;
-  border-bottom: 0;
-  background-color: #007a41;
-}
-
-.modal-title {
-  padding: 4px 10px 10px;
-  font-weight: bold;
-  color: #fff;
-  background-color: #007a41;
-}
-
-.modal-footer {
-  padding-top: 0;
-  border-top: 0;
-}
-
-.modal-backdrop {
-  background-color: #ffffff;
-}
-
-.modal-body {
-  background-color: #ffffff;
-}
 
 fieldset {
   position: relative;

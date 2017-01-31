@@ -616,7 +616,17 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           banner: {template: '<patients-banner-component></patients-banner-component>'},
           actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
           main: {template: '<image-list-component></image-list-component>'}
-        }
+        },
+        breadcrumbs: [{
+          title: 'Patient Listings',
+          state: 'patients-list'
+        }, {
+          title: 'Patient Summary',
+          state: 'patients-summary'
+        }, {
+          title: 'Images',
+          state: 'images'
+        }]
       })
       .state('images-detail', {
         url: '/patients/{patientId:int}/images/{studyId}?filter&page&reportType&searchString&queryType&source',
@@ -625,7 +635,17 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
           main: {template: '<image-list-component></image-list-component>'},
           detail: {template: '<image-detail-component></image-detail-component>'}
-        }
+        },
+        breadcrumbs: [{
+          title: 'Patient Listings',
+          state: 'patients-list'
+        }, {
+          title: 'Patient Summary',
+          state: 'patients-summary'
+        }, {
+          title: 'Images',
+          state: 'images'
+        }]
       })
 
       .state('eolcareplans', {
