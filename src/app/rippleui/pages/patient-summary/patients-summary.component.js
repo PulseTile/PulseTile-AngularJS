@@ -68,6 +68,7 @@ class PatientsSummaryController {
       $state.go(state +'-detail', headerRequest);
     };
 
+    /* istanbul ignore next  */
     function fillPatientArray(arr, count) {
       for (var i = 0; i < count; i++) {
         arr.push({});

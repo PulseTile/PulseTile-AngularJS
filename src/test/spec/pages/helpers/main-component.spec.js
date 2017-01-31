@@ -26,45 +26,13 @@ describe('MainComponent', function() {
         });
     }));
     beforeEach(function() {
-        spyOn(scope, 'getState');
         spyOn(ctrl, 'getPageComponents');
 
-        scope.getState('main-search');
         ctrl.getPageComponents();
     });
 
-    beforeEach(function() {
-        foo = {
-            setBar: function(value) {
-                bar = value;
-            },
-            getBar: function() {
-                return bar;
-            }
-        };
-
-        spyOn(foo, 'getBar').and.callThrough();
-
-        foo.setBar(123);
-        fetchedBar = foo.getBar();
-    });
-
-    it("tracks that the spy was called", function() {
-        expect(foo.getBar).toHaveBeenCalled();
-    });
-
-    it("should not affect other functions", function() {
-        expect(bar).toEqual(123);
-    });
-
-    it('$scope.previousState exist', function() {
-        expect(scope.previousState).toBe('');
-    });
     it('$scope.pageHeader exist', function() {
         expect(scope.classShowSidebar).toBe('');
-    });
-    it('$scope.previousPage exist', function() {
-        expect(scope.previousPage).toBe('');
     });
     it('$scope.mainWidth exist', function() {
         expect(scope.isSidebar).toBe(false);
@@ -80,12 +48,6 @@ describe('MainComponent', function() {
     });
     it("serviceRequests exist", function() {
         expect(serviceRequests).toBeDefined();
-    });
-    it("getState was called", function() {
-        expect(scope.getState).toHaveBeenCalled();
-    });
-    it("getState was called with params", function() {
-        expect(scope.getState).toHaveBeenCalledWith('main-search');
     });
     it("getPageComponents was called", function() {
         expect(ctrl.getPageComponents).toHaveBeenCalled();

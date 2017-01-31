@@ -1,33 +1,38 @@
 /*
-  ~  Copyright 2016 Ripple Foundation C.I.C. Ltd
-  ~  
-  ~  Licensed under the Apache License, Version 2.0 (the "License");
-  ~  you may not use this file except in compliance with the License.
-  ~  You may obtain a copy of the License at
-  ~  
-  ~    http://www.apache.org/licenses/LICENSE-2.0
+ ~  Copyright 2016 Ripple Foundation C.I.C. Ltd
+ ~  
+ ~  Licensed under the Apache License, Version 2.0 (the "License");
+ ~  you may not use this file except in compliance with the License.
+ ~  You may obtain a copy of the License at
+ ~  
+ ~    http://www.apache.org/licenses/LICENSE-2.0
 
-  ~  Unless required by applicable law or agreed to in writing, software
-  ~  distributed under the License is distributed on an "AS IS" BASIS,
-  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~  See the License for the specific language governing permissions and
-  ~  limitations under the License.
-*/
+ ~  Unless required by applicable law or agreed to in writing, software
+ ~  distributed under the License is distributed on an "AS IS" BASIS,
+ ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ~  See the License for the specific language governing permissions and
+ ~  limitations under the License.
+ */
 let templateHeader = require('./header-bar.tmpl.html');
 
 class HeaderController {
-  constructor($scope, $rootScope, $state, $stateParams, $ngRedux, patientsActions, serviceRequests) {
+  constructor($rootScope, $scope, $state, $stateParams, $ngRedux, patientsActions, serviceRequests) {
 
     var self = this;
-    $scope.title = '';
-    $scope.user = [];
-    
-    this.goHome = function () {
+    $scope.title = {
+      role: '',
+      poc: ''
+    };
+
+    this.goBack = function () {
       /* istanbul ignore if  */
-			if ($state.router.globals.$current.name === 'patients-charts') {
-				$state.go('main-search');
-			} else if ($state.router.globals.$current.name === 'patients-summary') {
-				$state.go('patients-list');
+      if ($scope.title.role + ' ' +  $scope.title.poc === 'PHR POC') return;
+
+      /* istanbul ignore if  */
+      if ($state.router.globals.$current.name === 'patients-charts') {
+        $state.go('main-search');
+      } else if ($state.router.globals.$current.name === 'patients-summary') {
+        $state.go('patients-list');
       } else {
         $state.go('patients-summary', {
           patientId: $stateParams.patientId
@@ -35,27 +40,35 @@ class HeaderController {
       }
     };
     this.goChart = function () {
-      if ($scope.title === 'PHR POC') return;
+      /* istanbul ignore if  */
+      if ($scope.title.role + ' ' +  $scope.title.poc === 'PHR POC') return;
+
       $state.go('patients-charts');
     };
+    
+    this.goPatientList = function () {
+      $state.go('patients-list');
+    };
+    
     this.goProfile = function () {
       $state.go('profile');
     };
-    
-    /* istanbul ignore next */
-    function deleteCookie(name) {      
-        document.cookie = name + 
+
+    /* istanbul ignore next  */
+    function deleteCookie(name) {
+      document.cookie = name +
         '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
-    } 
+    }
     this.signout = function () {
       deleteCookie('JSESSIONID');
       location.reload();
     };
 
     $scope.switchDirectByRole = function (currentUser) {
+      /* istanbul ignore if  */
       if (!currentUser) return;
       // Direct different roles to different pages at login
-      /* istanbul ignore next */
+      /* istanbul ignore next  */
       switch (currentUser.role) {
         case 'IDCR':
           $state.go('patients-charts');
@@ -76,7 +89,10 @@ class HeaderController {
     };
 
     $scope.setTitle = function (data) {
-      $scope.title = data ? data.role + ' POC' : '';
+      if (data) {
+        $scope.title.role = data.role;
+        $scope.title.poc = 'POC';
+      }
       $scope.switchDirectByRole(data);
     };
 
@@ -93,8 +109,9 @@ class HeaderController {
     };
 
     var auth0;
-    
+
     serviceRequests.initialise().then(function (result){
+
       /* istanbul ignore if  */
       if (result.data.token) {
         // reset the JSESSIONID cookie with the new incoming cookie
@@ -114,7 +131,7 @@ class HeaderController {
         return;
 
       }
-      /* istanbul ignore if  */
+
       if (result.data.ok) {
         console.log('Cookie was for a valid session, so fetch the simulated user');
         $scope.login();
@@ -150,6 +167,7 @@ class HeaderController {
     };
 
     this.containsReportTypeString = function () {
+      /* istanbul ignore next  */
       for (var i = 0; i < this.reportTypes.length; i++) {
         if ($scope.search.searchExpression.lastIndexOf(this.reportTypes[i]) !== -1) {
           return true;
@@ -160,6 +178,7 @@ class HeaderController {
     };
 
     this.processReportTypeMode = function () {
+      /* istanbul ignore next  */
       for (var i = 0; i < this.reportTypes.length; i++) {
         if ($scope.search.searchExpression.lastIndexOf(this.reportTypes[i]) !== -1) {
           var arr = $scope.search.searchExpression.split(':');
@@ -199,7 +218,7 @@ class HeaderController {
           this.reportTypes = [
             'Diagnosis: ',
             'Orders: '
-            ];
+          ];
         }
 
         if (this.containsReportTypeString() && !this.patientMode) {
@@ -213,6 +232,7 @@ class HeaderController {
         $rootScope.settingsMode = this.containsSettingString();
         $rootScope.patientMode = this.containsPatientString();
 
+        /* istanbul ignore if  */
         if ($rootScope.reportMode) {
           if (this.containsReportTypeString) {
             this.processReportTypeMode();
@@ -231,14 +251,14 @@ class HeaderController {
     };
 
     this.searchFunction = function () {
-
+      /* istanbul ignore if  */
       if ($rootScope.reportTypeSet && $scope.search.searchExpression !== '') {
         var tempExpression = $rootScope.reportTypeString + ': ' + $scope.search.searchExpression;
         $state.go('search-report', {
           searchString: tempExpression
         });
       }
-
+      /* istanbul ignore if  */
       if ($rootScope.settingsMode && $scope.search.searchExpression !== '') {
         $state.go('patients-list-full', {
           queryType: 'Setting: ',
@@ -247,7 +267,7 @@ class HeaderController {
           pageNumber: '1'
         });
       }
-
+      /* istanbul ignore if  */
       if ($rootScope.patientMode && $scope.search.searchExpression !== '') {
         $state.go('patients-list-full', {
           queryType: 'Patient: ',
@@ -279,23 +299,24 @@ class HeaderController {
     this.changeNavTab = function(newTab){
 
       // Is tab already expanded?
+      /* istanbul ignore if  */
       if( this.currentNavTab == newTab ){
         this.currentNavTab = '';
       } else {
         this.currentNavTab = newTab;
       }
     };
-    
+
     this.activeNavTab = function(thisTab){
       if( thisTab == this.currentNavTab ){
         return 'active';
       }
     };
-    
+
     this.getPageComponents = function (data) {
       $scope.userContextViewExists = ('banner' in data.state);
     };
-    
+
     this.clickSidebarBtn = function () {
       serviceRequests.publisher('setHeightSidebar');
       serviceRequests.publisher('changeStateSidebar', {click: true});
@@ -316,7 +337,7 @@ class HeaderController {
     this.checkIsShowPreviousBtn = function () {
       $scope.isShowPreviousBtn = $state.router.globals.$current.name !== 'main-search';
     };
-    
+
     serviceRequests.subscriber('routeState', this.getPageComponents);
     serviceRequests.subscriber('populateHeaderSearch', this.getPopulateHeaderSearch);
     serviceRequests.subscriber('headerTitle', this.getPageHeader);
@@ -324,7 +345,7 @@ class HeaderController {
     angular.element(document).ready(function () {
       this.checkIsShowPreviousBtn()
     }.bind(this));
-    
+
     $rootScope.$on('$locationChangeStart', function() {
       this.checkIsShowPreviousBtn()
     }.bind(this));

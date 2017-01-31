@@ -49,13 +49,13 @@ class ImageDetailController {
       }
     };
 
-     var findFirstInstanceId = function (result) {
+    this.findFirstInstanceId = function (result) {
       if (result) {
         this.instanceIds[seriesIdsIndex] = result.data.instanceId;
       }
     };
 
-    var findSeriesMetadata = function(result) {
+    this.findSeriesMetadata = function(result) {
       if (result) {
         this.series[seriesIdsIndex] = result.data;
         this.series[seriesIdsIndex].seriesDate = moment(this.series[seriesIdsIndex].seriesDate).format('DD-MMM-YYYY');
@@ -65,8 +65,8 @@ class ImageDetailController {
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state),
-      getInstanceId: findFirstInstanceId(state.instanceId),
-      getSeriesDetails: findSeriesMetadata(state.seriesDetails)
+      getInstanceId: this.findFirstInstanceId(state.instanceId),
+      getSeriesDetails: this.findSeriesMetadata(state.seriesDetails)
     }))(this);
 
     $scope.$on('$destroy', unsubscribe);

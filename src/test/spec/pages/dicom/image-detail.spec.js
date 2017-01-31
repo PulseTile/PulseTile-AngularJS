@@ -28,14 +28,12 @@ describe('Image Details', function() {
 
   beforeEach(function() {
     spyOn(ctrl, 'setCurrentPageData');
-    spyOn(ctrl, 'seriesDetailsLoad');
-    spyOn(ctrl, 'instanceLoad');
-    spyOn(ctrl, 'imageLoad');
+    spyOn(ctrl, 'findFirstInstanceId');
+    spyOn(ctrl, 'toggleModal');
 
     ctrl.setCurrentPageData();
-    ctrl.seriesDetailsLoad();
-    ctrl.instanceLoad();
-    ctrl.imageLoad();
+    ctrl.findFirstInstanceId();
+    ctrl.toggleModal();
   });
 
   it('series is empty', function() {
@@ -50,13 +48,10 @@ describe('Image Details', function() {
   it("setCurrentPageData was called", function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
   });
-  it("seriesDetailsLoad was called", function() {
-    expect(ctrl.seriesDetailsLoad).toHaveBeenCalled();
+  it("findFirstInstanceId was called", function() {
+    expect(ctrl.findFirstInstanceId).toHaveBeenCalled();
   });
-  it("instanceLoad was called", function() {
-    expect(ctrl.instanceLoad).toHaveBeenCalled();
-  });
-  it("imageLoad was called", function() {
-    expect(ctrl.imageLoad).toHaveBeenCalled();
+  it("toggleModal was called", function() {
+    expect(ctrl.toggleModal).toHaveBeenCalled();
   });
 });

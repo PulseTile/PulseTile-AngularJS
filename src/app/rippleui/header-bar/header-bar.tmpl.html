@@ -18,10 +18,14 @@
     <div class="header-navbar">
       <a ng-click="$ctrl.goBack()" class="btn-header btn-header-prev" ng-if="isShowPreviousBtn"><i class="fa fa-arrow-left"></i></a>
       <div class="wrap-logo">
-        <a class="logo" ng-click="$ctrl.goChart()">
-          <img src="../../assets/images/ripple-icon.png" class="logo-icon" alt="{{$ctrl.title}}">
-          <img src="../../assets/images/ripple-icon-mob.png" class="logo-icon-mob" alt="{{$ctrl.title}}">
-        </a>
+        <div class="logo" >
+          <a ng-click="$ctrl.goChart()">
+            <img src="../../assets/images/ripple-icon.png" class="logo-icon" alt="{{$ctrl.title}}">
+          </a>
+          <a ng-click="$ctrl.goPatientList()">
+            <span class="logo-text">{{title.role}} <span class="logo-mobile-hidden">{{title.poc}}</span></span>
+          </a>
+        </div>
       </div>
 
       <ul class="user-panel" role="tablist">

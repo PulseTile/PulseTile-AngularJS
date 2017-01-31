@@ -10,7 +10,7 @@ cache:
 
 branches:
   only:
-    - tests-modification
+    - develop
 
 node_js:
   - "6"

@@ -33,7 +33,7 @@ describe('HeaderComponent', function() {
         spyOn(scope, 'switchDirectByRole');
         spyOn(scope, 'setLoginData');
         spyOn(scope, 'login');
-        spyOn(ctrl, 'goHome');
+        spyOn(ctrl, 'goBack');
         spyOn(ctrl, 'goChart');
         spyOn(ctrl, 'goProfile');
         spyOn(ctrl, 'signout');
@@ -61,7 +61,7 @@ describe('HeaderComponent', function() {
         scope.switchDirectByRole({role: 'PHR'});
         scope.setLoginData({data:{role: 'PHR'}});
         scope.login();
-        ctrl.goHome();
+        ctrl.goBack();
         ctrl.goChart();
         ctrl.goProfile();
         ctrl.signout();
@@ -98,9 +98,6 @@ describe('HeaderComponent', function() {
     it("$scope.title exist", function() {
         expect(scope.title).toBeDefined();
     });
-    it("$scope.user exist", function() {
-        expect(scope.user).toBeDefined();
-    });
     it("setTitle was called", function() {
         expect(scope.setTitle).toHaveBeenCalled();
     });
@@ -117,8 +114,7 @@ describe('HeaderComponent', function() {
         expect(scope.login).toHaveBeenCalled();
     });
     it("goHome was called", function() {
-        expect(scope.title).toEqual('IDCR');
-        expect(ctrl.goHome).toHaveBeenCalled();
+        expect(ctrl.goBack).toHaveBeenCalled();
     });
     it("goChart was called", function() {
         expect(ctrl.goChart).toHaveBeenCalled();

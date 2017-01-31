@@ -2,28 +2,47 @@
   float: left;
   padding: 6px 9px;
 }
+// .wrap-logo {
+//   float: left;
+//   padding: 6px 4px;
+// }
 .logo {
-  line-height: 38px;
-  font-family: 'MyriadPro';
-  font-size: 18px;
-  color: #0C662D;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  white-space: nowrap;
-  vertical-align: middle;
-  .logo-icon,
-  .logo-icon-mob {
-    display: block;
+  font-size: 0;
+  line-height: 0;
+  .logo-icon {
+    display: inline-block;
     width: auto;
-    height: 37px;
+    height: 38px;
+    margin-right: 10px;
+    vertical-align: middle;
     cursor: pointer;
   }
-  .logo-icon {display: none;}
+  span {
+    display: inline-block;
+    font-family: 'MyriadPro';
+    font-size: 23px;
+    line-height: 38px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+  .logo-text {
+    color: #0C662D;
+    &:hover {
+      color: #7cbe31;
+    }
+  }
+  .logo-mobile-hidden { display: none; }
 }
 @include respond-to(xs) {
+  .wrap-logo {
+    padding-left: 9px;
+    padding-right: 9px;
+  }
   .logo {
-    font-size: 23px;
-    .logo-icon {display: block;}
-    .logo-icon-mob {display: none;}
+    .logo-mobile-hidden {
+      display: inline-block;
+    }
   }
 }
