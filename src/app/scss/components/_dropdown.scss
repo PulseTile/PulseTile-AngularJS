@@ -35,7 +35,7 @@
 
 
 .dm-panel {
-  padding: 15px 10px 19px 20px;
+  padding: 20px 14px 14px;
   border-right: 4px;
   box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.2);
   .heading {
@@ -50,6 +50,7 @@
 }
 .dm-summery {
   width: 300px;
+  padding: 15px 10px 19px 20px;
   @include respond-to(xs) {
     width: 400px;
   }
@@ -59,4 +60,36 @@
 }
 .dm-tables {
   width: 215px;
+}
+.dm-wrap-list {
+  margin-bottom: -12px;
+}
+.dm-list {
+  margin: 0 -14px;
+  margin-bottom: 12px;
+  .dm-item {
+    padding: 0 14px;
+    font-size: 0;
+    line-height: 0;
+    cursor: pointer;
+    &:hover,
+    &.active {
+      background: #f3f3f3;
+    }
+    span, i {
+      line-height: 28px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    span {
+      font-size: 14px;
+      color: #3c3c3c;
+    }
+    i {
+      width: 20px;
+      margin-right: 12px;
+      font-size: 16px;
+      color: #0d672f;
+    }
+  }
 }

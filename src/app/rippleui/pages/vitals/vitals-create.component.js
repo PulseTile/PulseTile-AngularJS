@@ -17,9 +17,10 @@ let templateVitalsCreate = require('./vitals-create.html');
 
 class VitalsCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests) {
-    $scope.vital = {};
-    $scope.vital.dateCreated = new Date();
-    $scope.vital.source = 'Marand';
+    $scope.vitalEdit = {};
+    $scope.vitalEdit.date = new Date();
+    $scope.vitalEdit.dateCreate = new Date();
+    $scope.vitalEdit.author = 'ripple_osi';
 
     this.setCurrentPageData = function (data) {
       // if (data.vitals.dataCreate !== null) {

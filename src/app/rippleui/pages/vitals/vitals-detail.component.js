@@ -29,7 +29,6 @@ class VitalsDetailController {
 
       return 'highlighter-' + status;
     }
-    $scope.htmlPopover = $sce.trustAsHtml('<b style="color: red">I can</b> have <div class="label label-success">HTML</div> content');
     this.edit = function () {
       $scope.isEdit = true;
 
