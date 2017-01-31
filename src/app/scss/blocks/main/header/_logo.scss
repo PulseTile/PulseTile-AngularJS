@@ -16,21 +16,26 @@
     margin-right: 10px;
     vertical-align: middle;
     cursor: pointer;
+    img {
+      height: 100%;
+      width: auto;
+    }
   }
-  span {
+  .logo-text {
     display: inline-block;
     font-family: 'MyriadPro';
     font-size: 23px;
+    color: #0C662D;
     line-height: 38px;
     letter-spacing: 2px;
     text-transform: uppercase;
     white-space: nowrap;
     vertical-align: middle;
-  }
-  .logo-text {
-    color: #0C662D;
-    &:hover {
-      color: #7cbe31;
+    a {
+      color: #0C662D;
+      &:hover {
+        color: #7cbe31;
+      }
     }
   }
   .logo-mobile-hidden { display: none; }

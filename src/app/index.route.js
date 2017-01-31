@@ -76,6 +76,9 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         },
         params: { patientsList: [], advancedSearchParams: [], displayEmptyTable: false },
 				breadcrumbs: [{
+          title: 'Home',
+          state: 'main-search'
+        }, {
 					title: 'Patient Listings',
 					state: 'patients-list'
 				}]
