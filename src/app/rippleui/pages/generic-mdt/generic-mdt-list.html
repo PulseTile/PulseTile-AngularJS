@@ -34,27 +34,33 @@
     </div>
   </div>
   <div class="panel-body">
-    <table class="table table-striped table-hover table-bordered rwd-table table-sorted">
+    <table class="table table-striped table-hover table-bordered rwd-table table-sorted table-fixedcol">
+      <colgroup>
+        <col style="width: 25%;">
+        <col style="width: 28%;">
+        <col style="width: 28%;"> 
+        <col style="width: 19%;">
+      </colgroup>
       <thead>
-      <tr>
-        <th ng-click="$ctrl.sort('dateOfRequest')" ng-class="$ctrl.sortClass('dateOfRequest')">Date of Request</th>
-        <th ng-click="$ctrl.sort('serviceTeam')" ng-class="$ctrl.sortClass('serviceTeam')">Service / Team</th>
-        <th ng-click="$ctrl.sort('dateOfMeeting')" ng-class="$ctrl.sortClass('dateOfMeeting')">Date of Meeting</th>
-        <th ng-click="$ctrl.sort('source')" ng-class="$ctrl.sortClass('source')">Source</th>
-      </tr>
+        <tr>
+          <th ng-click="$ctrl.sort('dateOfRequest')" ng-class="$ctrl.sortClass('dateOfRequest')">Date of Request</th>
+          <th ng-click="$ctrl.sort('serviceTeam')" ng-class="$ctrl.sortClass('serviceTeam')">Service / Team</th>
+          <th ng-click="$ctrl.sort('dateOfMeeting')" ng-class="$ctrl.sortClass('dateOfMeeting')">Date of Meeting</th>
+          <th ng-click="$ctrl.sort('source')" ng-class="$ctrl.sortClass('source')">Source</th>
+        </tr>
       </thead>
 
       <tbody>
-      <tr dir-paginate="mdt in $ctrl.genericMdtComposition | filter: $ctrl.query | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage" ng-click="$ctrl.go(mdt.sourceId, this)" ng-class="{info: $ctrl.selected(mdt.sourceId)}">
-        <td data-th="Name" ng-class="$ctrl.sortClass('dateOfRequest');" class="sorted asc">{{ mdt.dateOfRequest }}</td>
-        <td data-th="Relationship" ng-class="$ctrl.sortClass('serviceTeam')">{{ mdt.serviceTeam }}</td>
-        <td data-th="Next of Kin" ng-class="$ctrl.sortClass('dateOfMeeting')">{{mdt.dateOfMeeting}}</td>
-        <td data-th="Source" ng-class="$ctrl.sortClass('source')">{{ mdt.source }}</td>
-      </tr>
+        <tr dir-paginate="mdt in $ctrl.genericMdtComposition | filter: $ctrl.query | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage" ng-click="$ctrl.go(mdt.sourceId, this)" ng-class="{info: $ctrl.selected(mdt.sourceId)}">
+          <td data-th="Name" ng-class="$ctrl.sortClass('dateOfRequest');" class="sorted asc">{{ mdt.dateOfRequest }}</td>
+          <td data-th="Relationship" ng-class="$ctrl.sortClass('serviceTeam')">{{ mdt.serviceTeam }}</td>
+          <td data-th="Next of Kin" ng-class="$ctrl.sortClass('dateOfMeeting')">{{mdt.dateOfMeeting}}</td>
+          <td data-th="Source" ng-class="$ctrl.sortClass('source')">{{ mdt.source }}</td>
+        </tr>
 
-      <tr ng-if="!$ctrl.genericMdtComposition.length">
-        <td colspan="4"><span class="label label-default">No MDTs</span></td>
-      </tr>
+        <tr ng-if="!$ctrl.genericMdtComposition.length">
+          <td colspan="4"><span class="label label-default">No MDTs</span></td>
+        </tr>
       </tbody>
     </table>
 

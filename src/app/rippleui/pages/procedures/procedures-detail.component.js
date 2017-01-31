@@ -16,7 +16,7 @@
 let templateProceduresDetail= require('./procedures-detail.html');
 
 class ProceduresDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, proceduresActions, ProceduresModal, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, proceduresActions, usSpinnerService) {
 
 		$scope.isEdit = false;
 
@@ -39,6 +39,13 @@ class ProceduresDetailController {
 				proceduresActions.update(this.currentPatient.id, this.procedure);
 			}
 		}.bind(this);
+    
+    $scope.openDatepicker = function ($event, name) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      $scope[name] = true;
+    };
 
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
@@ -69,5 +76,5 @@ const ProceduresDetailComponent = {
   controller: ProceduresDetailController
 };
 
-ProceduresDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'proceduresActions', 'ProceduresModal', 'usSpinnerService'];
+ProceduresDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'proceduresActions', 'usSpinnerService'];
 export default ProceduresDetailComponent;

@@ -19,9 +19,13 @@ class HeaderController {
   constructor($rootScope, $scope, $state, $stateParams, $ngRedux, patientsActions, AdvancedSearch, serviceRequests) {
 
     var self = this;
+    $scope.title = {
+      role: '',
+      poc: ''
+    }
 
     this.goBack = function () {
-      if ($scope.title === 'PHR POC') return;
+      if ($scope.title.role + ' ' +  $scope.title.poc === 'PHR POC') return;
 
 			if ($state.router.globals.$current.name === 'patients-charts') {
 				$state.go('main-search');
@@ -34,8 +38,12 @@ class HeaderController {
       }
     };
     this.goChart = function () {
-      if ($scope.title === 'PHR POC') return;
+      if ($scope.title.role + ' ' +  $scope.title.poc === 'PHR POC') return;
+      
       $state.go('patients-charts');
+    };
+    this.goPatientList = function () {
+      $state.go('patients-list');
     };
     this.goProfile = function () {
       $state.go('profile');
@@ -72,7 +80,10 @@ class HeaderController {
     };
 
     $scope.setTitle = function (data) {
-      $scope.title = data ? data.role + ' POC' : '';
+      if (data) {
+        $scope.title.role = data.role;
+        $scope.title.poc = 'POC';
+      }
       $scope.switchDirectByRole(data);
     };
 

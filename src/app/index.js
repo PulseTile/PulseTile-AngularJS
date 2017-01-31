@@ -30,6 +30,7 @@ import 'morrisjs';
 import cornerstoneJS from './cornerstone/cornerstone';
 import cornerstoneMathJS from './cornerstone/cornerstoneMath';
 import cornerstoneToolsJS from './cornerstone/cornerstoneTools';
+import 'chart.js';
 
 import 'angular-spinner';
 import 'jquery-timepicker-jt';
@@ -44,7 +45,6 @@ import Patient from './helpers/patient';
 import OrdersModal from './rippleui/pages/orders/orders-modal';
 import AppointmentsModal from './rippleui/pages/appointments/appointments-modal';
 import AppointmentConfirmModal from './rippleui/pages/appointments/appointments-confirm-modal';
-import ProceduresModal from './rippleui/pages/procedures/procedures-modal';
 import ImageModal from './rippleui/pages/dicom/image-modal';
 import EolcareplansModal from './rippleui/pages/care-plans/eolcareplans-modal';
 import LookupModal from './rippleui/pages/patients-lookup/patients-lookup-modal';
@@ -82,6 +82,10 @@ import ContactsDetailComponent from './rippleui/pages/contacts/contacts-detail.c
 import VaccinationsListComponent from './rippleui/pages/vaccinations/vaccinations-list.component';
 import VaccinationsCreateComponent from './rippleui/pages/vaccinations/vaccinations-create.component';
 import VaccinationsDetailComponent from './rippleui/pages/vaccinations/vaccinations-detail.component';
+
+import VitalsListComponent from './rippleui/pages/vitals/vitals-list.component';
+import VitalsCreateComponent from './rippleui/pages/vitals/vitals-create.component';
+import VitalsDetailComponent from './rippleui/pages/vitals/vitals-detail.component';
 
 import OrdersListComponent from './rippleui/pages/orders/orders-list.component';
 import OrdersDetailComponent from './rippleui/pages/orders/orders-detail.component';
@@ -145,7 +149,6 @@ const app = angular
     .factory('httpMiddleware', httpMiddleware)
     .factory('AdvancedSearch', AdvancedSearch)
     .factory('OrdersModal', OrdersModal)
-    .factory('ProceduresModal', ProceduresModal)
     .factory('AppointmentsModal', AppointmentsModal)
     .factory('AppointmentConfirmModal', AppointmentConfirmModal)
     .factory('ImageModal', ImageModal)
@@ -182,6 +185,10 @@ const app = angular
     .component('vaccinationsListComponent', VaccinationsListComponent)
     .component('vaccinationsCreateComponent', VaccinationsCreateComponent)
     .component('vaccinationsDetailComponent', VaccinationsDetailComponent)
+
+    .component('vitalsListComponent', VitalsListComponent)
+    .component('vitalsCreateComponent', VitalsCreateComponent)
+    .component('vitalsDetailComponent', VitalsDetailComponent)
 
     .component('ordersListComponent', OrdersListComponent)
     .component('ordersDetailComponent', OrdersDetailComponent)
@@ -399,6 +406,54 @@ const app = angular
             }
         };
 
+    })
+    .directive('mcPopover', function() {
+        return {
+            controller: ['$scope', '$element', '$window', function($scope, $element, $window) {
+                var popoverWidth = 266;
+                var page = angular.element(document);
+                
+                $scope.togglePopover = function (ev) {
+                    var placement;
+                    var popoverWrap = angular.element(ev.currentTarget.parentElement);
+                    var popover = popoverWrap.find('.popover');
+                    var pageWidth = page.width();
+                    var offsetPopoverWrap = popoverWrap.offset();
+                    var freePlaceRight = pageWidth - (offsetPopoverWrap.left + popoverWrap.width());
+                    var freePlaceLeft = offsetPopoverWrap.left;
+
+                    if (freePlaceRight > popoverWidth) {
+                        placement = 'right';
+                    } else if (freePlaceLeft > popoverWidth) {
+                        placement = 'left';
+                    } else {
+                        placement = 'top';
+                    }
+                    popover.removeClass('right left top')
+                    popover.addClass(placement);
+                    popover.toggleClass('in');
+                };
+                $window.addEventListener('resize', function () {
+                    angular.element('.popover').removeClass('in');
+                });
+                document.addEventListener('click', function (ev) {
+                    var currentPopoverWrap = angular.element(ev.target.closest('.popover-wrap'));
+                    var isOpenPopover = false;
+                    var currentPopover;
+
+                    if (currentPopoverWrap) {
+                        currentPopover = currentPopoverWrap.find('.popover');
+                        isOpenPopover = currentPopover.hasClass('in');
+                    }
+                    
+                    angular.element('.popover').removeClass('in');
+
+                    if (isOpenPopover) {
+                        currentPopover.addClass('in');
+                    }
+                });  
+            }]
+        }
     })
     .filter('formatNHSNumber', function() {
         return function(number) {

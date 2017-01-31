@@ -113,6 +113,12 @@ class PatientsSidebarController {
         linkDetail: 'vaccinations-detail',
         title: 'Vaccinations'
       },
+      {
+        name: 'vitals',
+        link: 'vitals',
+        linkDetail: 'vitals-detail',
+        title: 'Vitals - News'
+      },
       // {
       //   name: 'heightAndWeights',
       //   link: 'heightAndWeights',

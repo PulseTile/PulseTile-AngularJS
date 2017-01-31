@@ -44,7 +44,7 @@
       
       <!-- /page-wrapper -->
       <div class="page-wrapper">
-        <div class="section" ng-if="!isSecondPanel">
+        <div class="section" ng-class="getFullPanelClass()" ng-if="!isSecondPanel">
           <div class="row">
             <div class="col-xs-12">
               <div class="section-main" ui-view="main"></div>

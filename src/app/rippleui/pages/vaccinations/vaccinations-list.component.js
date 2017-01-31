@@ -102,27 +102,27 @@ class VaccinationsListController {
           source: 'Marand',
           seriesNumber: 1,
           comment: 'Hospital staff',
-          date: date.setDate(date.getDate() - 1),
+          date: Date.parse(new Date()),
           author: 'ripple_osi',
-          dataCreate: date.setDate(date.getDate() - 1)
+          dateCreate: Date.parse(new Date())
         }, {
           sourceId: '2',
           name: 'Cell-Culture Influenza Vaccine',
           source: 'EtherCIS',
           seriesNumber: 2,
           comment: 'Hospital staff',
-          date: date,
+          date: Date.parse(new Date(date.setDate(date.getDate()-1))),
           author: 'ripple_osi',
-          dataCreate: date
+          dateCreate: Date.parse(new Date(date.setDate(date.getDate()-1)))
         }, {
           sourceId: '3',
           name: 'Varicella Vaccine',
           source: 'Marand',
           seriesNumber: 3,
           comment: 'Hospital staff',
-          date: date.setDate(date.getDate() - 4),
+          date: Date.parse(new Date(date.setDate(date.getDate()-4))),
           author: 'ripple_osi',
-          dataCreate: date.setDate(date.getDate() - 4)
+          dateCreate: Date.parse(new Date(date.setDate(date.getDate()-4)))
         }
       ];
       usSpinnerService.stop('patientSummary-spinner');
