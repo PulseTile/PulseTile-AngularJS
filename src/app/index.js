@@ -369,7 +369,7 @@ const app = angular
 
         return{
             restrict: 'E',
-            template: '<div id="dicomImage" oncontextmenu="return false" unselectable="on" onselectstart="return false;" onmousedown="return false;" style="width: 512px; height: 512px;"></div>',
+            template: '<div id="dicomImage" oncontextmenu="return false" unselectable="on" onselectstart="return false;" onmousedown="return false;" style="width: 505; height: 512px; margin: auto"></div>',
             scope: {
                 imageId: '@imageid'
             },
