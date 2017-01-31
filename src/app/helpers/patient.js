@@ -18,7 +18,7 @@ export default function Patient($window) {
     var self = this;
     
     _.extend(this, attributes);
-
+    /* istanbul ignore next */
     self.age = function () {
       self.age = moment().diff(self.dateOfBirth, 'years');
       return moment().diff(self.dateOfBirth, 'years');
@@ -26,7 +26,7 @@ export default function Patient($window) {
 
     self.ageRange = (function () {
       var age = self.age();
-
+      /* istanbul ignore next */
       switch (true) {
         case (age >= 0 && age <= 10):
           return '0-10';

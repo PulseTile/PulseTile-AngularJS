@@ -16,7 +16,7 @@
 let templateReferralsDetail= require('./referrals-detail.html');
 
 class ReferralsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, referralsActions, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, referralsActions, usSpinnerService, serviceRequests) {
 
 		$scope.isEdit = false;
 
@@ -28,9 +28,9 @@ class ReferralsDetailController {
         this.referral = data.referrals.dataGet;
         usSpinnerService.stop('referralsDetail-spinner');
       }
-      if (data.user.data) {
-        this.currentUser = data.user.data;
-      }
+		if (serviceRequests.currentUserData) {
+			this.currentUser = serviceRequests.currentUserData;
+		}
     };
 
     let unsubscribe = $ngRedux.connect(state => ({
@@ -99,5 +99,5 @@ const ReferralsDetailComponent = {
   controller: ReferralsDetailController
 };
 
-ReferralsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'usSpinnerService'];
+ReferralsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'usSpinnerService', 'serviceRequests'];
 export default ReferralsDetailComponent;

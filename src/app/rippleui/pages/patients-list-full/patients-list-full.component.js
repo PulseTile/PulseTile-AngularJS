@@ -35,11 +35,11 @@ class PatientsListFullController {
     this.query = '';
     this.isFilter = false;
 
-    function getPageInfo(info) {
+    this.getPageInfo = function (info) {
       var from = (15 * info.page - 14);
       var to = 0;
       var totalPages = 0;
-
+      /* istanbul ignore if  */
       if (info.totalItems % 15 === 0) {
         totalPages = info.totalItems / 15;
       } else {
@@ -56,7 +56,8 @@ class PatientsListFullController {
       return total;
     };
 
-    function getData() {
+    this.getData = function () {
+      /* istanbul ignore if  */
       if ($stateParams.queryType === 'Setting: ') {
         $rootScope.settingsMode = true;
         $rootScope.reportMode = false;
@@ -69,6 +70,7 @@ class PatientsListFullController {
         };
         searchReport.getSettingsTable(patientListQuery);
         searchType = 'settings';
+        /* istanbul ignore if  */
       } else if ($stateParams.queryType === 'Reports: ') {
         $rootScope.reportMode = true;
         $rootScope.settingsMode = false;
@@ -110,7 +112,7 @@ class PatientsListFullController {
     };
     this.sort = function (field) {
       var reverse = this.reverse;
-      
+      /* istanbul ignore if  */
       if (this.order === field) {
         this.reverse = !reverse;
       } else {
@@ -130,6 +132,7 @@ class PatientsListFullController {
     };
 
     this.processDateFormat = function (dateString) {
+      /* istanbul ignore if  */
       if (dateString === null) {
         return 'N/A';
       }
@@ -147,6 +150,7 @@ class PatientsListFullController {
     };
 
     this.processData = function () {
+      /* istanbul ignore next  */
       for (var i = 0; i < this.patients.length; i++) {
         this.patients[i].ordersHeadline.latestEntry = this.processDateFormat(this.patients[i].ordersHeadline.latestEntry);
         this.patients[i].vitalsHeadline.latestEntry = this.processDateFormat(this.patients[i].vitalsHeadline.latestEntry);
@@ -161,10 +165,11 @@ class PatientsListFullController {
       }
       this.pagingInfo.orderType = $stateParams.orderType;
       this.pagingInfo.page = $stateParams.pageNumber;
-      this.pageInfoText = getPageInfo(this.pagingInfo);
+      this.pageInfoText = this.getPageInfo(this.pagingInfo);
     };
 
     this.setDataRequest = function (result) {
+      /* istanbul ignore if  */
       if (result.data) {
         switch (searchType) {
           case 'settings': {
@@ -240,6 +245,7 @@ class PatientsListFullController {
 
     this.clickGetItem = false;
     this.go = function (patient) {
+      /* istanbul ignore if  */
       if (!this.clickGetItem) {
         $state.go('patients-summary', {
           patientId: patient.nhsNumber,
@@ -301,7 +307,7 @@ class PatientsListFullController {
       };
 
       var toState = '';
-
+      /* istanbul ignore next  */
       switch (itemType) {
       case 'orders':
         requestHeader.orderId = itemId;
@@ -324,8 +330,7 @@ class PatientsListFullController {
     };
 
     let unsubscribe = $ngRedux.connect(state => ({
-      error: state.user.error,
-      user: state.user.data,
+      user: serviceRequests.currentUserData,
       getDataRequest: this.setDataRequest(state.search)
     }))(this);
     
@@ -345,7 +350,7 @@ class PatientsListFullController {
       this.patients = curPatients.slice();
     };
 
-    getData();
+    this.getData();
   }
 }
 

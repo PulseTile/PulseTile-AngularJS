@@ -8,6 +8,10 @@ cache:
     - node_modules
     - bower_components
 
+branches:
+  only:
+    - tests-modification
+
 node_js:
   - "6"
 
@@ -25,12 +29,12 @@ install:
   - bower install
 
 script:
-#  - npm run cover
+  - npm run test
 #  - npm run check-coverage
   - npm run build
 
 after_success:
-#  - npm run report-coverage
+  - npm run report-coverage
   - npm run semantic-release
 
 notifications:

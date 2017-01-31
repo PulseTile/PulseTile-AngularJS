@@ -55,9 +55,9 @@ class ReferralsListController {
       return referralId === $stateParams.referralId;
     };
 
-		this.toggleFilter = function () {
-			this.isFilter = !this.isFilter;
-		};
+    this.toggleFilter = function () {
+        this.isFilter = !this.isFilter;
+    };
 
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
@@ -72,8 +72,8 @@ class ReferralsListController {
           this.referrals[i].dateOfReferral = moment(this.referrals[i].dateOfReferral).format('DD-MMM-YYYY');
         }
       }
-      if (data.user.data) {
-        this.currentUser = data.user.data;
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
       }
     };
 

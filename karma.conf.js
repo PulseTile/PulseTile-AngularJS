@@ -13,7 +13,7 @@ module.exports = config => {
     ],
 
     preprocessors: {
-      'karma.entry.js': ['webpack', 'sourcemap', 'coverage']
+      'karma.entry.js': ['webpack', 'sourcemap']
     },
 
     webpack: require('./webpack.config'),
@@ -35,10 +35,13 @@ module.exports = config => {
       suite: 'unit'
     },
 
-    reporters: [ 'html', 'spec', 'coverage'],
+    reporters: ['progress', 'coverage'],
 
     coverageReporter: {
-      reporters: [{type: 'lcov'}]
+      reporters: [
+        {type: 'lcov', dir: 'coverage/', subdir: '.'},
+        {type: 'json', dir: 'coverage/', subdir: '.'},
+        {type: 'text-summary'}]
     },
 
     htmlReporter: {

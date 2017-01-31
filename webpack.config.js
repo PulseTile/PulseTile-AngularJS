@@ -211,6 +211,9 @@ if (ENV_TEST) {
   config.module.loaders.push(
       {test: /\.scss$/, loader: 'style!css!postcss!sass'}
   );
+  config.module.preLoaders = [
+    { test: /\.js$/, loader: 'isparta', include: path.join(__dirname, 'src/app') }
+  ];
 }
 
 module.exports = config;

@@ -13,13 +13,15 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
+let templateMain= require('./main.html');
+
 class MainController {
   constructor($window, $rootScope, $scope, $state, $stateParams, serviceRequests, $timeout) {
     $scope.isSidebar = false;
     $scope.isSecondPanel = false;
     $scope.fullPanelClass = '';
     $scope.classShowSidebar = '';
-    $scope.breadcrumbs;
+    $scope.breadcrumbs = [];
 
     $scope.setBreadcrumbs = function (breadcrumbs) {
       if (serviceRequests.currentUserData.role === "PHR" && breadcrumbs) {
@@ -53,15 +55,17 @@ class MainController {
       return $scope.fullPanelClass ? 'full-panel full-panel-' + $scope.fullPanelClass : '';
     };
     this.changeFullPanel = function (data) {
+      /* istanbul ignore if  */
       if ($scope.fullPanelClass === data.panelName) {
         $scope.fullPanelClass = '';
       } else {
         $scope.fullPanelClass = data.panelName;
       }
-    }
+    };
     serviceRequests.subscriber('changeFullPanel', this.changeFullPanel);
 
     this.changeClassShowSidebar = function (data) {
+      /* istanbul ignore if  */
       if (data.click) {
         if ($scope.classShowSidebar === 'showSidebar') {
           $scope.classShowSidebar = '';
@@ -78,19 +82,25 @@ class MainController {
     serviceRequests.subscriber('changeStateSidebar', this.changeClassShowSidebar);
 
     this.checkIsViews = function() {
-      if ($state.router.globals.$current.views) {
-        $scope.isSecondPanel = $state.router.globals.$current.views.detail ? true : false;
-        $scope.isSidebar = $state.router.globals.$current.views.actions ? true : false;
-      }
+      let views = $state.router.globals.$current.views;
+
+      if (!views) return;
+      
+      $scope.isSecondPanel = views.detail ? true : false;
+      $scope.isSidebar = views.actions ? true : false;
     };
 
     this.setHeightSidebarForMobile = function() {
       var page = angular.element(document);
+
+      if (!page.find('.wrapper').length) return;
+
       var wrapperHeight = page.find('.wrapper').outerHeight();
       var headerHeight = page.find('.header').outerHeight();
       var footerHeight = page.find('.footer').outerHeight();
       var sidebar = page.find('.sidebar');
-      
+
+      /* istanbul ignore if  */
       if ($scope.isSidebar) {
         if (window.innerWidth < 768) {
           sidebar.css('height', wrapperHeight - headerHeight - footerHeight + 'px');
@@ -98,7 +108,7 @@ class MainController {
           sidebar.css('height', 'auto');
         }
       }
-    }
+    };
     serviceRequests.subscriber('setHeightSidebar', this.setHeightSidebarForMobile);
     
     angular.element(document).ready(function () {
@@ -123,7 +133,7 @@ class MainController {
   }
 }
 const MainComponent = {
-  template: require('./main.html'),
+  template: templateMain,
   controller: MainController
 };
 

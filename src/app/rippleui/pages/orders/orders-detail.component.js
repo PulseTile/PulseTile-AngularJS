@@ -16,7 +16,7 @@
 let templateOrdersDetail= require('./orders-detail.html');
 
 class OrdersDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, ordersActions, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, ordersActions, usSpinnerService, serviceRequests) {
 
     this.setCurrentPageData = function (data) {
       if (data.orders.dataGet) {
@@ -26,8 +26,8 @@ class OrdersDetailController {
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
-      if (data.user.data) {
-        this.currentUser = data.user.data;
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
       }
     };
 
@@ -47,5 +47,5 @@ const OrdersDetailComponent = {
   controller: OrdersDetailController
 };
 
-OrdersDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'ordersActions', 'usSpinnerService'];
+OrdersDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'ordersActions', 'usSpinnerService', 'serviceRequests'];
 export default OrdersDetailComponent;

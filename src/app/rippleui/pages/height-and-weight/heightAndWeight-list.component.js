@@ -1,7 +1,7 @@
 let templateHeightAndWeightList = require('./heightAndWeight-list.html');
 
 class HeightAndWeightListController {
-  constructor($scope, $state, $stateParams, $ngRedux, heightAndWeightActions, serviceRequests, HeightAndWeightModal, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, heightAndWeightActions, serviceRequests, usSpinnerService) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
     var vm = this;
@@ -46,9 +46,9 @@ class HeightAndWeightListController {
       return heightAndWeightIndex === $stateParams.heightAndWeightIndex;
     };
 
-    this.create = function () {
-      HeightAndWeightModal.openModal(this.currentPatient, {title: 'Create Height And Weight'}, {}, this.currentUser);
-    };
+    // this.create = function () {
+    //   HeightAndWeightModal.openModal(this.currentPatient, {title: 'Create Height And Weight'}, {}, this.currentUser);
+    // };
 
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
@@ -63,8 +63,8 @@ class HeightAndWeightListController {
         }
         usSpinnerService.stop("patientSummary-spinner");
       }
-      if (data.user.data) {
-        this.currentUser = data.user.data;
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
       }
     };
 
@@ -84,5 +84,5 @@ const HeightAndWeightListComponent = {
   controller: HeightAndWeightListController
 };
 
-HeightAndWeightListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'heightAndWeightActions', 'serviceRequests', 'HeightAndWeightModal', 'usSpinnerService'];
+HeightAndWeightListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'heightAndWeightActions', 'serviceRequests', 'usSpinnerService'];
 export default HeightAndWeightListComponent;

@@ -16,7 +16,7 @@
 let templateAppointmentsList = require('./appointments-list.html');
 
 class AppointmentsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, appointmentsActions, serviceRequests, AppointmentsModal, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, appointmentsActions, serviceRequests, usSpinnerService) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -50,9 +50,9 @@ class AppointmentsListController {
       return appointmentIndex === $stateParams.appointmentIndex;
     };
 
-    this.create = function () {
-      AppointmentsModal.openModal(this.currentPatient, {title: 'Create Appointment'}, {}, this.currentUser);
-    };
+    // this.create = function () {
+    //   AppointmentsModal.openModal(this.currentPatient, {title: 'Create Appointment'}, {}, this.currentUser);
+    // };
 
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
@@ -76,8 +76,8 @@ class AppointmentsListController {
           }
         }
       }
-      if (data.user.data) {
-        this.currentUser = data.user.data;
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
       }
     };
 
@@ -106,5 +106,5 @@ const AppointmentsListComponent = {
   controller: AppointmentsListController
 };
 
-AppointmentsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'appointmentsActions', 'serviceRequests', 'AppointmentsModal', 'usSpinnerService'];
+AppointmentsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'appointmentsActions', 'serviceRequests', 'usSpinnerService'];
 export default AppointmentsListComponent;

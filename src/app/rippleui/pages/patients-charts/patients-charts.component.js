@@ -21,49 +21,13 @@ class PatientsChartsController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-charts'});
     // Selected chart on page load
 
-    //click on "View all Patients"
-    var openModal = function (row, chartType) {
-      $uibModal.open({
-        template: require('app/rippleui/confirmation.html'),
-        size: 'md',
-        controller: function ($scope) {
-          $scope.cancel = function () {
-            $scope.$close(true);
-          };
-
-          $scope.ok = function () {
-            $scope.$close(true);
-
-            switch (chartType) {
-              case 'all':
-                $state.go('patients-list');
-                break;
-              case 'age':
-                console.log('row.series');
-                console.log(row.series);
-                $state.go('patients-list', { ageRange: row.series });
-                break;
-              case 'summary':
-                if (row.series === 'All') {
-                  row.series = null;
-                }
-                $state.go('patients-list', { department: row.series });
-                break;
-              default:
-                $state.go('patients-list');
-                break;
-            }
-          };
-        }
-      });
-    };
-
     //click on "Spine Lookup"
     this.goToLookUp = function () {
       $state.go('patients-lookup');
     };
 
     var goToPatients = function (row, chartType) {
+      /* istanbul ignore next  */
       switch (chartType) {
         case 'all':
           $state.go('patients-list');
@@ -85,6 +49,7 @@ class PatientsChartsController {
 
 
     var ageChart = function (summaries) {
+      /* istanbul ignore next  */
       $timeout(function () {
         $window.Morris.Bar({
           element: 'chart-age',
@@ -108,6 +73,7 @@ class PatientsChartsController {
     };
 
     var departmentChart = function (summaries) {
+      /* istanbul ignore next  */
       $timeout(function () {
         $window.Morris.Bar({
           element: 'chart-department',
@@ -134,6 +100,7 @@ class PatientsChartsController {
       only for demo
     */
     var geographyChart = function (summaries) {
+      /* istanbul ignore next  */
       $timeout(function () {
         $window.Morris.Bar({
           element: 'chart-geography',
@@ -173,6 +140,7 @@ class PatientsChartsController {
 
 
     this.getPatients = function (patients) {
+      /* istanbul ignore if  */
       if (patients) {
         var summaries = {};
         var changedPatients = [];

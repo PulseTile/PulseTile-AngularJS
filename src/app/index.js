@@ -42,17 +42,7 @@ import 'angular-jquery-timepicker';
 import reducer from './redux/reducer';
 import actions from './actions';
 import httpMiddleware from './helpers/httpMiddleware';
-import AdvancedSearch from './helpers/advancedSearch';
 import Patient from './helpers/patient';
-import OrdersModal from './rippleui/pages/orders/orders-modal';
-import AppointmentsModal from './rippleui/pages/appointments/appointments-modal';
-import AppointmentConfirmModal from './rippleui/pages/appointments/appointments-confirm-modal';
-import ProceduresModal from './rippleui/pages/procedures/procedures-modal';
-import ImageModal from './rippleui/pages/dicom/image-modal';
-import EolcareplansModal from './rippleui/pages/care-plans/eolcareplans-modal';
-import LookupModal from './rippleui/pages/patients-lookup/patients-lookup-modal';
-import HeightAndWeightModal from './rippleui/pages/height-and-weight/heightAndWeight-modal';
-import TransferOfCareModal from './rippleui/pages/transfer-of-care/transfer-of-care-modal';
 
 //components 
 import ProfileComponent from './rippleui/pages/profile/profile.component';
@@ -146,17 +136,7 @@ const app = angular
     .factory('cornerstoneMathJS', cornerstoneMathJS)
     .factory('cornerstoneToolsJS', cornerstoneToolsJS)
     .factory('httpMiddleware', httpMiddleware)
-    .factory('AdvancedSearch', AdvancedSearch)
-    .factory('OrdersModal', OrdersModal)
-    .factory('ProceduresModal', ProceduresModal)
-    .factory('AppointmentsModal', AppointmentsModal)
-    .factory('AppointmentConfirmModal', AppointmentConfirmModal)
-    .factory('ImageModal', ImageModal)
-    .factory('EolcareplansModal', EolcareplansModal)
-    .factory('LookupModal', LookupModal)
     .factory('Patient', Patient)
-    .factory('HeightAndWeightModal', HeightAndWeightModal)
-    .factory('TransferOfCareModal', TransferOfCareModal)
     .service('serviceRequests', ServiceRequests)
     .component('profileComponent', ProfileComponent)
     .component('patientsComponent', PatientsComponent)

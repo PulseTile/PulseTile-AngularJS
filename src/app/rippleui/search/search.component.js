@@ -16,14 +16,12 @@
 let templateSearch = require('./search.html');
 
 class SearchController {
-  constructor($scope, serviceRequests, AdvancedSearch, $state) {
+  constructor($scope, serviceRequests, $state) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'main-search'});
     serviceRequests.publisher('headerTitle', {title: 'Welcome', isShowTitle: true});
 
     this.mainSearchEnabled = true;
     this.searchExpression = '';
-    this.isClickToAdvancedSearch = true;
-    this.openAdvancedSearch = AdvancedSearch.openAdvancedSearch;
 
     serviceRequests.publisher('populateHeaderSearch', {
       headerSearch: this.searchExpression,
@@ -38,11 +36,6 @@ class SearchController {
       });
     };
     
-    this.searchFunction = function() {
-      if(this.isClickToAdvancedSearch) {
-        this.openAdvancedSearch();
-      }
-    };
   }
 }
 
@@ -51,5 +44,5 @@ const SearchComponent = {
   controller: SearchController
 };
 
-SearchController.$inject = ['$scope', 'serviceRequests', 'AdvancedSearch', '$state'];
+SearchController.$inject = ['$scope', 'serviceRequests', '$state'];
 export default SearchComponent;

@@ -16,13 +16,14 @@
 let templateHeader = require('./header-bar.tmpl.html');
 
 class HeaderController {
-  constructor($rootScope, $scope, $state, $stateParams, $ngRedux, patientsActions, AdvancedSearch, serviceRequests) {
+  constructor($scope, $rootScope, $state, $stateParams, $ngRedux, patientsActions, serviceRequests) {
 
     var self = this;
-
-    this.goBack = function () {
-      if ($scope.title === 'PHR POC') return;
-
+    $scope.title = '';
+    $scope.user = [];
+    
+    this.goHome = function () {
+      /* istanbul ignore if  */
 			if ($state.router.globals.$current.name === 'patients-charts') {
 				$state.go('main-search');
 			} else if ($state.router.globals.$current.name === 'patients-summary') {
@@ -40,7 +41,9 @@ class HeaderController {
     this.goProfile = function () {
       $state.go('profile');
     };
-    function deleteCookie(name) {
+    
+    /* istanbul ignore next */
+    function deleteCookie(name) {      
         document.cookie = name + 
         '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
     } 
@@ -52,6 +55,7 @@ class HeaderController {
     $scope.switchDirectByRole = function (currentUser) {
       if (!currentUser) return;
       // Direct different roles to different pages at login
+      /* istanbul ignore next */
       switch (currentUser.role) {
         case 'IDCR':
           $state.go('patients-charts');
@@ -91,7 +95,7 @@ class HeaderController {
     var auth0;
     
     serviceRequests.initialise().then(function (result){
-      
+      /* istanbul ignore if  */
       if (result.data.token) {
         // reset the JSESSIONID cookie with the new incoming cookie
 
@@ -99,7 +103,7 @@ class HeaderController {
         location.reload();
         return;
       }
-
+      /* istanbul ignore if  */
       if (result.data.redirectTo === 'auth0') {
         console.log('running in UAT mode, so now login via auth0');
 
@@ -110,7 +114,7 @@ class HeaderController {
         return;
 
       }
-
+      /* istanbul ignore if  */
       if (result.data.ok) {
         console.log('Cookie was for a valid session, so fetch the simulated user');
         $scope.login();
@@ -129,7 +133,6 @@ class HeaderController {
     $rootScope.reportTypeSet = false;
     $rootScope.reportTypeString = '';
 
-    this.openAdvancedSearch = AdvancedSearch.openAdvancedSearch;
     $scope.search = {};
     $scope.search.searchExpression = $rootScope.searchExpression;
     this.searchBarEnabled = !$state.is('main-search');
@@ -190,12 +193,7 @@ class HeaderController {
 
     this.checkExpression = function (expression) {
       $scope.search.searchExpression = expression;
-
-      // if (this.autoAdvancedSearch) {
-      //   if ($scope.search.searchExpression.length >= 3) {
-      //     AdvancedSearch.openAdvancedSearch($scope.search.searchExpression);
-      //   }
-      // } else 
+      /* istanbul ignore if  */
       if ($rootScope.searchMode) {
         if ($rootScope.reportMode && !$rootScope.reportTypeSet) {
           this.reportTypes = [
@@ -233,9 +231,6 @@ class HeaderController {
     };
 
     this.searchFunction = function () {
-      // if (this.autoAdvancedSearch) {
-      //   AdvancedSearch.openAdvancedSearch();
-      // }
 
       if ($rootScope.reportTypeSet && $scope.search.searchExpression !== '') {
         var tempExpression = $rootScope.reportTypeString + ': ' + $scope.search.searchExpression;
@@ -320,7 +315,7 @@ class HeaderController {
     };
     this.checkIsShowPreviousBtn = function () {
       $scope.isShowPreviousBtn = $state.router.globals.$current.name !== 'main-search';
-		};
+    };
     
     serviceRequests.subscriber('routeState', this.getPageComponents);
     serviceRequests.subscriber('populateHeaderSearch', this.getPopulateHeaderSearch);
@@ -342,5 +337,5 @@ const HeaderComponent = {
   controller: HeaderController
 };
 
-HeaderController.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'AdvancedSearch', 'serviceRequests'];
+HeaderController.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'serviceRequests'];
 export default HeaderComponent;

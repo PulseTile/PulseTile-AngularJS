@@ -27,7 +27,7 @@ class ReportChartController {
 
     var requestBody;
     var graphData;
-    var openModal = function (row, requestBody) {
+    vm.openModal = function (row, requestBody) {
       $uibModal.open({
         template: require('app/rippleui/confirmation.html'),
         size: 'md',
@@ -66,7 +66,7 @@ class ReportChartController {
         }
       });
     };
-    var ageChart = function (graphData) {
+    vm.ageChart = function (graphData) {
       $timeout(function () {
         $window.Morris.Bar({
           element: 'age-chart',
@@ -83,11 +83,12 @@ class ReportChartController {
           xLabelAngle: 50,
           redraw: true
         }).on('click', function (i, row) {
-          openModal(row, requestBody);
+          vm.openModal(row, requestBody);
         });
       }, 200);
     };
-    var setDataRequest = function (result) {
+    vm.setDataRequest = function (result) {
+      /* istanbul ignore if  */
       if (result.chart.data && !graphData) {
         graphData = [
           {
@@ -114,8 +115,9 @@ class ReportChartController {
 
         vm.resultSize = result.chart.data.all;
 
+        /* istanbul ignore if  */
         if (vm.resultSize !== 0) {
-          ageChart(graphData);
+          vm.ageChart(graphData);
         } else {
           vm.noResults = 'There are no results that match your search criteria';
         }
@@ -124,6 +126,7 @@ class ReportChartController {
         result.chart.data = 0;
     };
 
+    /* istanbul ignore if  */
     if ($stateParams.searchString !== undefined) {
       var searchQuery = $stateParams.searchString.split(':');
       vm.reportType = searchQuery[0];
@@ -144,7 +147,7 @@ class ReportChartController {
     }
 
     let unsubscribe = $ngRedux.connect(state => ({
-      getDataRequest: setDataRequest(state)
+      getDataRequest: vm.setDataRequest(state)
     }))(this);
 
     $scope.$on('$destroy', unsubscribe);

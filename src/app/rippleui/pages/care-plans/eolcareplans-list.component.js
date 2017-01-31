@@ -16,7 +16,7 @@
 let templateEolcareplansList = require('./eolcareplans-list.html');
 
 class EolcareplansListController {
-  constructor($scope, $state, $stateParams, $ngRedux, eolcareplansActions, serviceRequests, EolcareplansModal, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, eolcareplansActions, serviceRequests, usSpinnerService) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
     var vm = this;
@@ -60,9 +60,9 @@ class EolcareplansListController {
       return eolcareplansIndex === $stateParams.eolcareplansIndex;
     };
 
-    this.create = function () {
-      EolcareplansModal.openModal(this.currentPatient, {title: 'Create End of Life Care Document'}, {}, this.currentUser);
-    };
+    // this.create = function () {
+    //   EolcareplansModal.openModal(this.currentPatient, {title: 'Create End of Life Care Document'}, {}, this.currentUser);
+    // };
 
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
@@ -78,8 +78,8 @@ class EolcareplansListController {
         }
         usSpinnerService.stop('patientSummary-spinner');
       }
-      if (data.user.data) {
-        this.currentUser = data.user.data;
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
       }
     };
 
@@ -99,5 +99,5 @@ const EolcareplansListComponent = {
   controller: EolcareplansListController
 };
 
-EolcareplansListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eolcareplansActions', 'serviceRequests', 'EolcareplansModal', 'usSpinnerService'];
+EolcareplansListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eolcareplansActions', 'serviceRequests', 'usSpinnerService'];
 export default EolcareplansListComponent;
