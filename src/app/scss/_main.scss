@@ -79,31 +79,6 @@ a[ui-sref] {
   margin-top: 2px
 }
 
-
-
-
-
-fieldset {
-  position: relative;
-  padding: 54px 10px 10px 10px;
-  border: 1px solid #ddd;
-}
-
-legend {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #eee;
-  padding: 4px 10px;
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0;
-  border-bottom: 1px solid #ddd;
-}
-
-
-
 .panel-appointment {
   position: fixed;
   bottom: 42px;
@@ -785,13 +760,7 @@ textarea#procedureNotes {
   width: 100%;
 }
 
-.orderForm .input-group {
-  width: 95%;
-}
 
-.orderForm .date-form {
-  margin-top: 5px;
-}
 
 .mdtLinkGroup {
   width: 100%;
@@ -814,13 +783,7 @@ textarea#procedureNotes {
   width: 280px;
 }
 
-.orderForm {
-  padding-right: 20px;
-}
 
-.orderForm .input-group {
-  width: 100%;
-}
 
 .elipsis-span {
   float: right;
@@ -834,30 +797,6 @@ textarea#procedureNotes {
 
 td.dateTime {
   width: 130px;
-}
-
-.orderForm table {
-  display: block;
-  position: relative;
-  font-size: 12px;
-  font-weight: 500;
-  height: 200px;
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  border: 1px solid #D8D8D8;
-}
-
-.orderForm tbody {
-  display: block;
-}
-
-.orderForm tr {
-  display: block;
-  height: 30px;
-  line-height: 30px;
-  border-bottom: 1px solid #D8D8D8;
-  padding-left: 10px;
 }
 
 tr.ng-scope.selectedItemLeft {

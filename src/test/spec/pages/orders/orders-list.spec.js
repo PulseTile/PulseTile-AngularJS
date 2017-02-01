@@ -45,7 +45,6 @@ describe('Orders List', function() {
     spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
     spyOn(ctrl, 'selected');
-    spyOn(ctrl, 'search');
     spyOn(ctrl, 'setCurrentPageData');
 
     fakeCall.callOrders({}, types.ORDERS);
@@ -53,12 +52,11 @@ describe('Orders List', function() {
     ctrl.pageChangeHandler();
     ctrl.go();
     ctrl.selected();
-    ctrl.search();
     ctrl.setCurrentPageData();
   });
 
-  it('Query', function() {
-    expect(scope.query).toBe('');
+  it('currentPage is 1', function() {
+    expect(ctrl.currentPage).toBe(1);
   });
   it('Template exist', function() {
     expect(template).toBeDefined();
@@ -80,9 +78,6 @@ describe('Orders List', function() {
   });
   it("selected was called", function() {
     expect(ctrl.selected).toHaveBeenCalled();
-  });
-  it("search was called", function() {
-    expect(ctrl.search).toHaveBeenCalled();
   });
   it("setCurrentPageData was called", function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();

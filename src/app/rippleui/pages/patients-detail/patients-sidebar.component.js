@@ -47,12 +47,12 @@ class PatientsSidebarController {
         linkDetail: 'medications-detail',
         title: 'Medications'
       },
-      // {
-      //   name: 'orders',
-      //   link: 'orders',
-      //   linkDetail: 'orders-detail',
-      //   title: 'Orders'
-      // },
+      {
+        name: 'orders',
+        link: 'orders',
+        linkDetail: 'orders-detail',
+        title: 'Orders'
+      },
       {
         name: 'results',
         link: 'results',

@@ -471,7 +471,36 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           banner: {template: '<patients-banner-component></patients-banner-component>'},
           actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
           main: {template: '<orders-list-component></orders-list-component>'}
-        }
+        },
+        breadcrumbs: [{
+          title: 'Patient Listings',
+          state: 'patients-list'
+        }, {
+          title: 'Patient Summary',
+          state: 'patients-summary'
+        }, {
+          title: 'Orders',
+          state: 'orders'
+        }]
+      })
+      .state('orders-create', {
+        url: '/patients/{patientId:int}/orders/create?reportType&searchString&queryType',
+        views: {
+          banner: {template: '<patients-banner-component></patients-banner-component>'},
+          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+          main: {template: '<orders-list-component></orders-list-component>'},
+          detail: {template: '<orders-create-component></orders-create-component>'}
+        },
+        breadcrumbs: [{
+          title: 'Patient Listings',
+          state: 'patients-list'
+        }, {
+          title: 'Patient Summary',
+          state: 'patients-summary'
+        }, {
+          title: 'Orders',
+          state: 'orders'
+        }]
       })
       .state('orders-detail', {
         url: '/patients/{patientId:int}/orders/{orderId}?filter&page&reportType&searchString&queryType&source',
@@ -480,7 +509,18 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
           main: {template: '<orders-list-component></orders-list-component>'},
           detail: {template: '<orders-detail-component></orders-detail-component>'}
-        }
+        },
+        params: { source: '{}' },
+        breadcrumbs: [{
+          title: 'Patient Listings',
+          state: 'patients-list'
+        }, {
+          title: 'Patient Summary',
+          state: 'patients-summary'
+        }, {
+          title: 'Orders',
+          state: 'orders'
+        }]
       })
 
       .state('referrals', {
