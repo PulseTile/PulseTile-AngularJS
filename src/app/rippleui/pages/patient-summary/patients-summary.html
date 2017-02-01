@@ -24,7 +24,7 @@
           <div class="col-xs-6 col-sm-4" ng-repeat="(key, dashboard) in listsDashboards">
             <div class="wrap-fcustominp">
               <div class="fcustominp">
-                <input type="checkbox" id="dashboard-{{key}}" name="dashboard-{{key}}" ng-model="dashboard.show" />
+                <input type="checkbox" id="dashboard-{{key}}" ng-change="changeDashboards()" name="dashboard-{{key}}" ng-model="dashboard.show" />
                 <label for="dashboard-{{key}}"></label>
               </div>
               <label for="dashboard-{{key}}" class="fcustominp-label">{{ dashboard.title }}</label>

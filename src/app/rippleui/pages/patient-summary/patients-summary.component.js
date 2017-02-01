@@ -21,7 +21,9 @@ class PatientsSummaryController {
     serviceRequests.publisher('headerTitle', {title: 'Patients Summary'});
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-summary'});
 
-    $scope.listsDashboards = {
+    console.log('serviceRequests.listsDashboards');
+    console.log(serviceRequests.listsDashboards);
+    $scope.listsDashboards = serviceRequests.listsDashboards || {
       problems: {
         show: true,
         title: 'Problems',
@@ -53,12 +55,27 @@ class PatientsSummaryController {
     };
     this.countPatientArr = 4;
 
+    if (serviceRequests.showListDashboards) {
+      for (var dashboard in serviceRequests.showListDashboards) {
+        $scope.listsDashboards[dashboard].show = serviceRequests.showListDashboards[dashboard];
+      }
+    }
+
     this.goToSection = function (state) {
       $state.go(state, {
         patientId: $stateParams.patientId,
         reportType: $stateParams.reportType
       });
     };
+
+    $scope.changeDashboards = function () {
+      var showListDashboards = {};
+
+      for (var dashboard in $scope.listsDashboards) {
+        showListDashboards[dashboard] = $scope.listsDashboards[dashboard].show;
+      }
+      serviceRequests.showListDashboards = showListDashboards;
+    }
 
     $scope.go = function (state, sourceId, nameIndex) {
       var headerRequest = {};
