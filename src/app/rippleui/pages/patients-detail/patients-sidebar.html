@@ -16,6 +16,6 @@
 
 <ul class="nav">
   <li class="navigation-menu" ng-repeat="link in $ctrl.linksCollection">
-    <a ng-click="$ctrl.goTo(link.link)" ng-class="myVar == link.link || myVar == link.linkDetail ? 'active' : ''">{{link.title}}</a>
+    <a ng-click="$ctrl.goTo(link.link)" ng-class="{active: isActiveItem(link.link)}">{{link.title}}</a>
   </li>
 </ul>

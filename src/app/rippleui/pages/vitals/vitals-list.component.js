@@ -138,7 +138,8 @@ class VitalsListController {
         datasetsData.oxygenSaturation.push(vitals[i].vitalsSigns.oxygenSaturation.value);
       }
 
-      dataChart.datasets = [{
+      dataChart.datasets = [
+        {
           label: "DBP",
           fill: false,
           lineTension: 0,
@@ -152,95 +153,102 @@ class VitalsListController {
           pointBackgroundColor: "rgba(236, 109, 28, 1)",
           pointBorderWidth: 5,
           pointRadius: 1,
+            pointHoverBorderWidth: 8,
           pointHoverRadius: 1,
           pointHitRadius: 8,
           data: datasetsData.distolicBP,
         }, {
-            label: "SBP",
-            fill: false,
-            lineTension: 0,
-            backgroundColor: "rgba(236, 109, 28, 0.4)",
-            borderColor: "rgba(236, 109, 28, 1)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(236, 109, 28, 1)",
-            pointBackgroundColor: "rgba(236, 109, 28, 1)",
-            pointBorderWidth: 5,
-            pointRadius: 1,
-            pointHoverRadius: 1,
-            pointHitRadius: 8,
-            data: datasetsData.systolicBP,
+          label: "SBP",
+          fill: false,
+          lineTension: 0,
+          backgroundColor: "rgba(236, 109, 28, 0.4)",
+          borderColor: "rgba(236, 109, 28, 1)",
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "rgba(236, 109, 28, 1)",
+          pointBackgroundColor: "rgba(236, 109, 28, 1)",
+          pointBorderWidth: 5,
+          pointRadius: 1,
+          pointHoverBorderWidth: 8,
+          pointHoverRadius: 1,
+          pointHitRadius: 8,
+          data: datasetsData.systolicBP,
         }, {
-            label: "Temp",
-            fill: false,
-            lineTension: 0,
-            backgroundColor: "rgba(221, 43, 8, 0.4)",
-            borderColor: "rgba(221, 43, 8, 1)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(221, 43, 8, 1)",
-            pointBackgroundColor: "rgba(221, 43, 8, 1)",
-            pointBorderWidth: 5,
-            pointRadius: 1,
-            pointHoverRadius: 1,
-            pointHitRadius: 8,
-            data: datasetsData.temperature,
+          label: "Temp",
+          fill: false,
+          lineTension: 0,
+          backgroundColor: "rgba(221, 43, 8, 0.4)",
+          borderColor: "rgba(221, 43, 8, 1)",
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "rgba(221, 43, 8, 1)",
+          pointBackgroundColor: "rgba(221, 43, 8, 1)",
+          pointBorderWidth: 5,
+          pointRadius: 1,
+          pointHoverBorderWidth: 8,
+          pointHoverRadius: 1,
+          pointHitRadius: 8,
+          data: datasetsData.temperature,
         }, {
-            label: "HR",
-            fill: false,
-            lineTension: 0,
-            backgroundColor: "rgba(70, 124, 174, 0.4)",
-            borderColor: "rgba(70, 124, 174, 1)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(70, 124, 174, 1)",
-            pointBackgroundColor: "rgba(70, 124, 174, 1)",
-            pointBorderWidth: 5,
-            pointRadius: 1,
-            pointHoverRadius: 1,
-            pointHitRadius: 8,
-            data: datasetsData.heartRate,
+          label: "HR",
+          fill: false,
+          lineTension: 0,
+          backgroundColor: "rgba(70, 124, 174, 0.4)",
+          borderColor: "rgba(70, 124, 174, 1)",
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "rgba(70, 124, 174, 1)",
+          pointBackgroundColor: "rgba(70, 124, 174, 1)",
+          pointBorderWidth: 5,
+          pointRadius: 1,
+          pointHoverBorderWidth: 8,
+          pointHoverRadius: 1,
+          pointHitRadius: 8,
+          data: datasetsData.heartRate,
         }, {
-            label: "Resp",
-            fill: false,
-            lineTension: 0,
-            backgroundColor: "rgba(13, 141, 5, 0.4)",
-            borderColor: "rgba(13, 141, 5, 1)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(13, 141, 5, 1)",
-            pointBackgroundColor: "rgba(13, 141, 5, 1)",
-            pointBorderWidth: 5,
-            pointRadius: 1,
-            pointHoverRadius: 1,
-            pointHitRadius: 8,
-            data: datasetsData.respirationRate,
+          label: "Resp",
+          fill: false,
+          lineTension: 0,
+          backgroundColor: "rgba(13, 141, 5, 0.4)",
+          borderColor: "rgba(13, 141, 5, 1)",
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "rgba(13, 141, 5, 1)",
+          pointBackgroundColor: "rgba(13, 141, 5, 1)",
+          pointBorderWidth: 5,
+          pointRadius: 1,
+          pointHoverBorderWidth: 8,
+          pointHoverRadius: 1,
+          pointHitRadius: 8,
+          data: datasetsData.respirationRate,
         }, {
-            label: "SpO2",
-            fill: false,
-            lineTension: 0,
-            backgroundColor: "rgba(219, 0, 120, 0.4)",
-            borderColor: "rgba(219, 0, 120, 1)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(219, 0, 120, 1)",
-            pointBackgroundColor: "rgba(219, 0, 120, 1)",
-            pointBorderWidth: 5,
-            pointRadius: 1,
-            pointHoverRadius: 1,
-            pointHitRadius: 8,
-            data: datasetsData.oxygenSaturation,
-        }]
+          label: "SpO2",
+          fill: false,
+          lineTension: 0,
+          backgroundColor: "rgba(219, 0, 120, 0.4)",
+          borderColor: "rgba(219, 0, 120, 1)",
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "rgba(219, 0, 120, 1)",
+          pointBackgroundColor: "rgba(219, 0, 120, 1)",
+          pointBorderWidth: 5,
+          pointRadius: 1,
+          pointHoverBorderWidth: 8,
+          pointHoverRadius: 1,
+          pointHitRadius: 8,
+          data: datasetsData.oxygenSaturation,
+        }
+      ]
 
       var options = {
           capBezierPoints: false,
@@ -258,9 +266,6 @@ class VitalsListController {
                 return '  ' + data.datasets[tooltipItem.datasetIndex].label + ' : ' + tooltipItem.yLabel;
               }
             }
-          },
-          animation: {
-            duration: 0
           }
       }
 
@@ -311,7 +316,7 @@ class VitalsListController {
               status: 'danger'
             },
             oxygenSupplemental: {
-              value: 'N'
+              value: false
             },
             systolicBP: {
               value: 90,
@@ -330,7 +335,7 @@ class VitalsListController {
               status: 'success'
             },
             levelOfConsciousness: {
-              value: 'A'
+              value: 'Alert'
             },
             newsScore: {
               value: 3,
@@ -353,7 +358,7 @@ class VitalsListController {
               status: 'success'
             },
             oxygenSupplemental: {
-              value: 'N'
+              value: false
             },
             systolicBP: {
               value: 60,
@@ -372,7 +377,7 @@ class VitalsListController {
               status: 'success'
             },
             levelOfConsciousness: {
-              value: 'B'
+              value: 'Verbal'
             },
             newsScore: {
               value: 3
@@ -394,7 +399,7 @@ class VitalsListController {
               status: 'warning'
             },
             oxygenSupplemental: {
-              value: 'N'
+              value: false
             },
             systolicBP: {
               value: 92,
@@ -413,7 +418,7 @@ class VitalsListController {
               status: 'success'
             },
             levelOfConsciousness: {
-              value: 'C'
+              value: 'Pain'
             },
             newsScore: {
               value: 2,
@@ -436,7 +441,7 @@ class VitalsListController {
               status: 'success'
             },
             oxygenSupplemental: {
-              value: 'N'
+              value: true
             },
             systolicBP: {
               value: 93,
@@ -455,7 +460,7 @@ class VitalsListController {
               status: 'success'
             },
             levelOfConsciousness: {
-              value: 'D'
+              value: 'Unresponsive'
             },
             newsScore: {
               value: 1,

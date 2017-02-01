@@ -88,68 +88,12 @@
                 <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.oxygenSupplemental.status)"></span>  
                 <label class="vitals-label">Any Supplemental Oxygen</label>
                 <div class="input-holder">
-                  <select class="form-control input-sm" class="form-control input-sm" id="route" name="route" ng-model="vitalEdit.vitalsSigns.oxygenSupplemental.value" required>
-                      <option value="N">No</option>
-                      <option value="Y">Yes</option>
-                  </select>
+                  <label class="switch">
+                    <input id="oxygenSupplemental" type="checkbox" name="oxygenSupplemental" ng-model="vitalEdit.vitalsSigns.oxygenSupplemental.value" required>
+                    <div class="slider"></div>
+                  </label>
                 </div>
                 <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.oxygenSupplemental.value.$error.required">You must enter a value.</span>
-              </div>
-            </div>
-            <div class="col-xs-12 col-md-6">
-              <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.systolicBP.value.$dirty) && vitalEdit.vitalsSigns.systolicBP.value.$invalid, 'has-success': vitalEdit.vitalsSigns.systolicBP.value.$valid && vitalEdit.vitalsSigns.systolicBP.value.$dirty}">
-                <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.systolicBP.status)"></span>  
-                <label class="vitals-label">Systolic BP</label>
-                <div class="input-group vitals-holder popover-wrap {{vitalEdit.vitalsSigns.systolicBP.status}}">
-                  <input class="form-control input-sm" id="systolicBP" name="systolicBP" type="text" ng-model="vitalEdit.vitalsSigns.systolicBP.value" required />
-                  <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">mmHg</span>
-                  <div class="popover vitals-popover fade">
-                    <div class="arrow"></div>
-                    <div class="popover-inner">
-                      <h3 class="popover-title">Systolic BP</h3>
-                      <div class="popover-content">
-                        <div class="range-vital-labels">
-                          <div class="range-vital-label">< 8</div>
-                          <div class="range-vital-label">9-11</div>
-                          <div class="range-vital-label">12-20</div>
-                          <div class="range-vital-label">21-24</div>
-                          <div class="range-vital-label">> 25</div>
-                        </div>
-                        <img src="../../../assets/images/range-vital.jpg">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.systolicBP.value.$error.required">You must enter a value.</span>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12 col-md-6">
-              <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.distolicBP.value.$dirty) && vitalEdit.vitalsSigns.distolicBP.value.$invalid, 'has-success': vitalEdit.vitalsSigns.distolicBP.value.$valid && vitalEdit.vitalsSigns.distolicBP.value.$dirty}">
-                <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.distolicBP.status)"></span>  
-                <label class="vitals-label">Distolic BP</label>
-                <div class="input-group vitals-holder popover-wrap {{vitalEdit.vitalsSigns.distolicBP.status}}">
-                  <input class="form-control input-sm" id="distolicBP" name="distolicBP" type="text" ng-model="vitalEdit.vitalsSigns.distolicBP.value" required />
-                  <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">mmHg</span>
-                  <div class="popover vitals-popover fade">
-                    <div class="arrow"></div>
-                    <div class="popover-inner">
-                      <h3 class="popover-title">Distolic BP</h3>
-                      <div class="popover-content">
-                        <div class="range-vital-labels">
-                          <div class="range-vital-label">< 8</div>
-                          <div class="range-vital-label">9-11</div>
-                          <div class="range-vital-label">12-20</div>
-                          <div class="range-vital-label">21-24</div>
-                          <div class="range-vital-label">> 25</div>
-                        </div>
-                        <img src="../../../assets/images/range-vital.jpg">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.distolicBP.value.$error.required">You must enter a value.</span>
               </div>
             </div>
             <div class="col-xs-12 col-md-6">
@@ -182,6 +126,77 @@
           </div>
           <div class="row">
             <div class="col-xs-12 col-md-6">
+              <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.systolicBP.value.$dirty) && vitalEdit.vitalsSigns.systolicBP.value.$invalid, 'has-success': vitalEdit.vitalsSigns.systolicBP.value.$valid && vitalEdit.vitalsSigns.systolicBP.value.$dirty}">
+                <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.systolicBP.status)"></span>  
+                <label class="vitals-label">Systolic BP</label>
+                <div class="input-group vitals-holder popover-wrap {{vitalEdit.vitalsSigns.systolicBP.status}}">
+                  <input class="form-control input-sm" id="systolicBP" name="systolicBP" type="text" ng-model="vitalEdit.vitalsSigns.systolicBP.value" required />
+                  <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">mmHg</span>
+                  <div class="popover vitals-popover fade">
+                    <div class="arrow"></div>
+                    <div class="popover-inner">
+                      <h3 class="popover-title">Systolic BP</h3>
+                      <div class="popover-content">
+                        <div class="range-vital-labels">
+                          <div class="range-vital-label">< 8</div>
+                          <div class="range-vital-label">9-11</div>
+                          <div class="range-vital-label">12-20</div>
+                          <div class="range-vital-label">21-24</div>
+                          <div class="range-vital-label">> 25</div>
+                        </div>
+                        <img src="../../../assets/images/range-vital.jpg">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.systolicBP.value.$error.required">You must enter a value.</span>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.distolicBP.value.$dirty) && vitalEdit.vitalsSigns.distolicBP.value.$invalid, 'has-success': vitalEdit.vitalsSigns.distolicBP.value.$valid && vitalEdit.vitalsSigns.distolicBP.value.$dirty}">
+                <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.distolicBP.status)"></span>  
+                <label class="vitals-label">Distolic BP</label>
+                <div class="input-group vitals-holder popover-wrap {{vitalEdit.vitalsSigns.distolicBP.status}}">
+                  <input class="form-control input-sm" id="distolicBP" name="distolicBP" type="text" ng-model="vitalEdit.vitalsSigns.distolicBP.value" required />
+                  <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">mmHg</span>
+                  <div class="popover vitals-popover fade">
+                    <div class="arrow"></div>
+                    <div class="popover-inner">
+                      <h3 class="popover-title">Distolic BP</h3>
+                      <div class="popover-content">
+                        <div class="range-vital-labels">
+                          <div class="range-vital-label">< 8</div>
+                          <div class="range-vital-label">9-11</div>
+                          <div class="range-vital-label">12-20</div>
+                          <div class="range-vital-label">21-24</div>
+                          <div class="range-vital-label">> 25</div>
+                        </div>
+                        <img src="../../../assets/images/range-vital.jpg">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.distolicBP.value.$error.required">You must enter a value.</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.levelOfConsciousness.value.$dirty) && vitalEdit.vitalsSigns.levelOfConsciousness.value.$invalid, 'has-success': vitalEdit.vitalsSigns.levelOfConsciousness.value.$valid && vitalEdit.vitalsSigns.levelOfConsciousness.value.$dirty}">
+                <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.levelOfConsciousness.status)"></span>  
+                <label class="vitals-label">Level of Consciousness</label>
+                <div class="input-holder">
+                  <select class="form-control input-sm" class="form-control input-sm" id="route" name="route" ng-model="vitalEdit.vitalsSigns.levelOfConsciousness.value" required>
+                      <option value="Alert">Alert</option>
+                      <option value="Verbal">Verbal</option>
+                      <option value="Pain">Pain</option>
+                      <option value="Unresponsive">Unresponsive</option>
+                  </select>
+                </div>
+                <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.levelOfConsciousness.value.$error.required">You must enter a value.</span>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
               <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.temperature.value.$dirty) && vitalEdit.vitalsSigns.temperature.value.$invalid, 'has-success': vitalEdit.vitalsSigns.temperature.value.$valid && vitalEdit.vitalsSigns.temperature.value.$dirty}">
                 <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.temperature.status)"></span>  
                 <label class="vitals-label">Temperature</label>
@@ -206,24 +221,6 @@
                   </div>
                 </div>
                 <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.temperature.value.$error.required">You must enter a value.</span>
-              </div>
-            </div>
-            <div class="col-xs-12 col-md-6">
-              <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalEdit.vitalsSigns.levelOfConsciousness.value.$dirty) && vitalEdit.vitalsSigns.levelOfConsciousness.value.$invalid, 'has-success': vitalEdit.vitalsSigns.levelOfConsciousness.value.$valid && vitalEdit.vitalsSigns.levelOfConsciousness.value.$dirty}">
-                <span ng-class="getHighlighterClass(vitalEdit.vitalsSigns.levelOfConsciousness.status)"></span>  
-                <label class="vitals-label">Level of Consciousness</label>
-                <div class="input-holder">
-                  <select class="form-control input-sm" class="form-control input-sm" id="route" name="route" ng-model="vitalEdit.vitalsSigns.levelOfConsciousness.value" required>
-                      <option value="A">Awake</option>
-                      <option value="B">Awake 1</option>
-                      <option value="C">Awake 2</option>
-                      <option value="D">Awake 3</option>
-                      <option value="A1">Awake 4</option>
-                      <option value="A2">Awake 5</option>
-                      <option value="A3">Awake 6</option>
-                  </select>
-                </div>
-                <span class="help-block animate-fade" ng-show="formSubmitted && vitalEdit.vitalsSigns.levelOfConsciousness.value.$error.required">You must enter a value.</span>
               </div>
             </div>
           </div>
