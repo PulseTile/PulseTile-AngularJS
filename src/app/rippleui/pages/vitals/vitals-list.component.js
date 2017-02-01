@@ -28,6 +28,7 @@ class VitalsListController {
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'vitals-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'vitals';
+
     
     this.toggleFilter = function () {
       this.isFilter = !this.isFilter;
@@ -51,6 +52,7 @@ class VitalsListController {
 
     this.order = serviceRequests.currentSort.order || 'id';
     this.reverse = serviceRequests.currentSort.reverse || false;
+
     if (serviceRequests.filter) {
       this.query = serviceRequests.filter;
       this.isFilter = true;
@@ -64,10 +66,12 @@ class VitalsListController {
       });
     };
 
-    this.go = function (id, vital) {
+    $scope.go = function (id, vital) {
       serviceRequests.currentSort.order = this.order;
       serviceRequests.currentSort.reverse = this.reverse;
       serviceRequests.filter = this.query || '';
+      serviceRequests.viewList = $scope.viewList;
+
       $state.go('vitals-detail', {
         // patientId: $stateParams.patientId,
         // vitalIndex: id,
@@ -254,6 +258,9 @@ class VitalsListController {
                 return '  ' + data.datasets[tooltipItem.datasetIndex].label + ' : ' + tooltipItem.yLabel;
               }
             }
+          },
+          animation: {
+            duration: 0
           }
       }
 
@@ -265,11 +272,16 @@ class VitalsListController {
           data: dataChart,
           options: options
       });
-      canvas.style.height = 441;
-      canvas.onclick = function (evt) {
-        // var points = myLineChart.getElementsAtEvent(evt);
-        // var index = myLineChart.data.datasets[0].data.indexOf(points[0]);
-      };
+     
+      canvas.onclick = function(ev){
+        var activePoint = myLineChart.getElementAtEvent(ev)[0];
+        var vital;
+
+        if (activePoint) {
+          vital = this.vitals[activePoint._index];
+          this.go(vital.sourceId, vital);
+        }
+      }.bind(this);
     }
 
     this.setCurrentPageData = function (data) {
@@ -452,7 +464,6 @@ class VitalsListController {
           }
         },
       ];
-      $scope.viewList = 'tableNews';
       
       usSpinnerService.stop('patientSummary-spinner');
       if (data.patientsGet.data) {
@@ -478,6 +489,8 @@ class VitalsListController {
         }, 0);
       }
     }
+    $scope.changeViewList(serviceRequests.viewList || 'tableNews');
+
 
     if ($stateParams.page) {
       this.currentPage = $stateParams.page;

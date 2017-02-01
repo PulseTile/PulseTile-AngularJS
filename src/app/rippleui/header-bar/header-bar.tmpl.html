@@ -19,12 +19,16 @@
       <a ng-click="$ctrl.goBack()" class="btn-header btn-header-prev" ng-if="isShowPreviousBtn"><i class="fa fa-arrow-left"></i></a>
       <div class="wrap-logo">
         <div class="logo" >
-          <a ng-click="$ctrl.goChart()">
-            <img src="../../assets/images/ripple-icon.png" class="logo-icon" alt="{{$ctrl.title}}">
-          </a>
-          <a ng-click="$ctrl.goPatientList()">
-            <span class="logo-text">{{title.role}} <span class="logo-mobile-hidden">{{title.poc}}</span></span>
-          </a>
+          <div class="logo-icon">
+            <a ng-click="$ctrl.goChart()">
+              <img src="../../assets/images/ripple-icon.png" alt="{{$ctrl.title}}">
+            </a>
+          </div>
+          <div class="logo-text">
+            <a ng-click="$ctrl.goPatientList()">
+              <span >{{title.role}}</span> <span class="logo-mobile-hidden">{{title.poc}}</span>
+            </a>
+          </div>
         </div>
       </div>
 

@@ -28,15 +28,20 @@ class HeaderController {
       /* istanbul ignore if  */
       if ($scope.title.role + ' ' +  $scope.title.poc === 'PHR POC') return;
 
-      /* istanbul ignore if  */
-      if ($state.router.globals.$current.name === 'patients-charts') {
-        $state.go('main-search');
-      } else if ($state.router.globals.$current.name === 'patients-summary') {
-        $state.go('patients-list');
-      } else {
-        $state.go('patients-summary', {
-          patientId: $stateParams.patientId
-        });
+      switch ($state.router.globals.$current.name) {
+        case 'patients-charts': 
+				  $state.go('main-search');
+          break;
+        case 'patients-summary': 
+          $state.go('patients-list');
+          break;
+        case 'patients-list': 
+          $state.go('patients-charts');
+          break;
+        default:
+          $state.go('patients-summary', {
+            patientId: $stateParams.patientId
+          });
       }
     };
     this.goChart = function () {

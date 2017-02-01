@@ -165,4 +165,15 @@ $vitalsInputColor: (
 }
 
 
-canvas { background-color : #eee; }
+.wrap-chart {
+  margin-bottom: 6px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: 1px solid #b4b4b4;
+  background-color : #eee; 
+  canvas {
+    width: 100% !important;
+    height: 441px !important;
+    background-color : #eee; 
+  }
+}
