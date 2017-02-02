@@ -14,9 +14,9 @@
   ~  limitations under the License.
 */
 
-let templateClinicalnotesList = require('./clinicalnotes-list.html');
+let templatePersonalnotesList = require('./personalnotes-list.html');
 
-class ClinicalnotesListController {
+class PersonalnotesListController {
   constructor($scope, $state, $stateParams, $ngRedux, personalnotesActions, serviceRequests, usSpinnerService) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
@@ -34,8 +34,8 @@ class ClinicalnotesListController {
       }
       if (data.personalnotes.data) {
         this.personalNotes = data.personalnotes.data;
-        // for (var i = 0; i < this.clinicalNotes.length; i++) {
-        //   this.clinicalNotes[i].dateCreated = moment(this.clinicalNotes[i].dateCreated).format('DD-MMM-YYYY');
+        // for (var i = 0; i < this.Personalnotes.length; i++) {
+        //   this.Personalnotes[i].dateCreated = moment(this.Personalnotes[i].dateCreated).format('DD-MMM-YYYY');
         // }
       }
       usSpinnerService.stop("patientSummary-spinner");
@@ -107,10 +107,10 @@ class ClinicalnotesListController {
   }
 }
 
-const ClinicalnotesListComponent = {
-  template: templateClinicalnotesList,
-  controller: ClinicalnotesListController
+const PersonalnotesListComponent = {
+  template: templatePersonalnotesList,
+  controller: PersonalnotesListController
 };
 
-ClinicalnotesListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'personalnotesActions', 'serviceRequests', 'usSpinnerService'];
-export default ClinicalnotesListComponent;
+PersonalnotesListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'personalnotesActions', 'serviceRequests', 'usSpinnerService'];
+export default PersonalnotesListComponent;

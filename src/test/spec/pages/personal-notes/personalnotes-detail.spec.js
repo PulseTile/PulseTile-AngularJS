@@ -1,8 +1,8 @@
 'use strict';
-import ClinicalnotesDetailComponent from '../../../../app/rippleui/pages/clinical-notes/clinicalnotes-detail.component.js';
+import PersonalnotesDetailComponent from '../../../../app/rippleui/pages/personal-notes/personalnotes-detail.component.js';
 import '../../../../app/index';
 
-describe('Clinicalnotes Details', function() {
+describe('Personalnotes Details', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
@@ -17,8 +17,8 @@ describe('Clinicalnotes Details', function() {
     personalnotesActions = _personalnotesActions_;
     usSpinnerService = _usSpinnerService_;
 
-    template = ClinicalnotesDetailComponent.template;
-    ctrl = controller(ClinicalnotesDetailComponent.controller, {
+    template = PersonalnotesDetailComponent.template;
+    ctrl = controller(PersonalnotesDetailComponent.controller, {
       $scope: scope,
       $state: state,
       $stateParams: stateParams,
@@ -50,7 +50,7 @@ describe('Clinicalnotes Details', function() {
   it("setCurrentPageData was called", function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
   });
-  it("clinicalnotesLoad was called", function() {
+  it("PersonalnotesLoad was called", function() {
     expect(ctrl.personalnotesLoad).toHaveBeenCalled();
   });
 });

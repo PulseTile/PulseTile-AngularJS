@@ -29,73 +29,73 @@ export default function contacts(state = INITIAL_STATE, action) {
   const {payload} = action;
 
   var actions = {
-    [types.CLINICALNOTES]: (state) => {
+    [types.PERSONALNOTES]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
         error: false
       });
     },
-    [types.CLINICALNOTES_SUCCESS]: (state) => {
+    [types.PERSONALNOTES_SUCCESS]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         data: payload.response
       });
     },
-    [types.CLINICALNOTES_ERROR]: (state) => {
+    [types.PERSONALNOTES_ERROR]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         error: payload.error
       });
     },
-    [types.CLINICALNOTES_GET]: (state) => {
+    [types.PERSONALNOTES_GET]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
         error: false
       });
     },
-    [types.CLINICALNOTES_GET_SUCCESS]: (state) => {
+    [types.PERSONALNOTES_GET_SUCCESS]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         dataGet: payload.response
       });
     },
-    [types.CLINICALNOTES_GET_ERROR]: (state) => {
+    [types.PERSONALNOTES_GET_ERROR]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         error: payload.error
       });
     },
-    [types.CLINICALNOTES_CREATE]: (state) => {
+    [types.PERSONALNOTES_CREATE]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
         error: false
       });
     },
-    [types.CLINICALNOTES_CREATE_SUCCESS]: (state) => {
+    [types.PERSONALNOTES_CREATE_SUCCESS]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         dataCreate: payload.response
       });
     },
-    [types.CLINICALNOTES_CREATE_ERROR]: (state) => {
+    [types.PERSONALNOTES_CREATE_ERROR]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         error: payload.error
       });
     },
-    [types.CLINICALNOTES_UPDATE]: (state) => {
+    [types.PERSONALNOTES_UPDATE]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
         error: false
       });
     },
-    [types.CLINICALNOTES_UPDATE_SUCCESS]: (state) => {
+    [types.PERSONALNOTES_UPDATE_SUCCESS]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         dataUpdate: payload.response
       });
     },
-    [types.CLINICALNOTES_UPDATE_ERROR]: (state) => {
+    [types.PERSONALNOTES_UPDATE_ERROR]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         error: payload.error

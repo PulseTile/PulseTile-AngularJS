@@ -103,9 +103,9 @@ import EolcareplansDetailComponent from './rippleui/pages/care-plans/eolcareplan
 import MainComponent from './helpers/main.component';
 import HomeSidebarComponent from './rippleui/pages/patients-lookup/home-sidebar.component';
 
-import ClinicalnotesListComponent from './rippleui/pages/clinical-notes/clinicalnotes-list.component';
-import ClinicalnotesCreateComponent from './rippleui/pages/clinical-notes/clinicalnotes-create.component';
-import ClinicalnotesDetailComponent from './rippleui/pages/clinical-notes/clinicalnotes-detail.component';
+import PersonalnotesListComponent from './rippleui/pages/personal-notes/personalnotes-list.component';
+import PersonalnotesCreateComponent from './rippleui/pages/personal-notes/personalnotes-create.component';
+import PersonalnotesDetailComponent from './rippleui/pages/personal-notes/personalnotes-detail.component';
 
 import HeightAndWeightListComponent from './rippleui/pages/height-and-weight/heightAndWeight-list.component';
 import HeightAndWeightDetailComponent from './rippleui/pages/height-and-weight/heightAndWeight-detail.component';
@@ -202,9 +202,9 @@ const app = angular
     .component('searchComponent', SearchComponent)
     .component('reportChartComponent', ReportChartComponent)
 
-    .component('clinicalnotesListComponent', ClinicalnotesListComponent)
-    .component('clinicalnotesCreateComponent', ClinicalnotesCreateComponent)
-    .component('clinicalnotesDetailComponent', ClinicalnotesDetailComponent)
+    .component('personalnotesListComponent', PersonalnotesListComponent)
+    .component('personalnotesCreateComponent', PersonalnotesCreateComponent)
+    .component('personalnotesDetailComponent', PersonalnotesDetailComponent)
 
     .component('heightAndWeightListComponent', HeightAndWeightListComponent)
     .component('heightAndWeightDetailComponent', HeightAndWeightDetailComponent)

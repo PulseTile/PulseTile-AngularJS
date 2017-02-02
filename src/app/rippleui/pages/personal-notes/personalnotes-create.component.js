@@ -14,9 +14,9 @@
   ~  limitations under the License.
 */
 
-let templateClinicalnotesCreate = require('./clinicalnotes-create.html');
+let templatePersonalnotesCreate = require('./personalnotes-create.html');
 
-class ClinicalnotesCreateController {
+class PersonalnotesCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, personalnotesActions, serviceRequests) {
     $scope.personalNote = {};
     $scope.personalNote.dateCreated = new Date().toISOString().slice(0, 10);
@@ -59,7 +59,7 @@ class ClinicalnotesCreateController {
 
       if (personalNoteForm.$valid) {
 
-        $scope.clinicalnotesCreate(this.currentPatient.id, toAdd);
+        $scope.personalnotesCreate(this.currentPatient.id, toAdd);
       }
     }.bind(this);
 
@@ -69,14 +69,14 @@ class ClinicalnotesCreateController {
 
     $scope.$on('$destroy', unsubscribe);
 
-    $scope.clinicalnotesCreate = personalnotesActions.create;
+    $scope.personalnotesCreate = personalnotesActions.create;
   }
 }
 
-const ClinicalnotesCreateComponent = {
-  template: templateClinicalnotesCreate,
-  controller: ClinicalnotesCreateController
+const PersonalnotesCreateComponent = {
+  template: templatePersonalnotesCreate,
+  controller: PersonalnotesCreateController
 };
 
-ClinicalnotesCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'personalnotesActions', 'serviceRequests'];
-export default ClinicalnotesCreateComponent;
+PersonalnotesCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'personalnotesActions', 'serviceRequests'];
+export default PersonalnotesCreateComponent;

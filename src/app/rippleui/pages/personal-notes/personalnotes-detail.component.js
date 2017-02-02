@@ -14,9 +14,9 @@
   ~  limitations under the License.
 */
 
-let templateClinicalnotesDetail = require('./clinicalnotes-detail.html');
+let templatePersonalnotesDetail = require('./personalnotes-detail.html');
 
-class ClinicalnotesDetailController {
+class PersonalnotesDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, personalnotesActions, serviceRequests, usSpinnerService) {
     
     this.setCurrentPageData = function (data) {
@@ -82,10 +82,10 @@ class ClinicalnotesDetailController {
   }
 }
 
-const ClinicalnotesDetailComponent = {
-  template: templateClinicalnotesDetail,
-  controller: ClinicalnotesDetailController
+const PersonalnotesDetailComponent = {
+  template: templatePersonalnotesDetail,
+  controller: PersonalnotesDetailController
 };
 
-ClinicalnotesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'personalnotesActions', 'serviceRequests', 'usSpinnerService'];
-export default ClinicalnotesDetailComponent;
+PersonalnotesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'personalnotesActions', 'serviceRequests', 'usSpinnerService'];
+export default PersonalnotesDetailComponent;
