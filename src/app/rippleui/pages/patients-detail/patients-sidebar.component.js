@@ -108,6 +108,12 @@ class PatientsSidebarController {
         title: 'Personal Notes'
       },
       {
+        name: 'clinicalNotes',
+        link: 'clinicalNotes',
+        linkDetail: 'clinicalNotes-detail',
+        title: 'Clinical Notes'
+      },
+      {
         name: 'vaccinations',
         link: 'vaccinations',
         linkDetail: 'vaccinations-detail',

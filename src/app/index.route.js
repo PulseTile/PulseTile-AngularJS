@@ -825,6 +825,64 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         }]
       })
 
+      .state('clinicalNotes', {
+        url: '/patients/{patientId:int}/clinicalNotes?reportType&searchString&queryType',
+        views: {
+          banner: {template: '<patients-banner-component></patients-banner-component>'},
+          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+          main: {template: '<personalnotes-list-component></personalnotes-list-component>'}
+        },
+        breadcrumbs: [{
+          title: 'Patient Listings',
+          state: 'patients-list'
+        }, {
+          title: 'Patient Summary',
+          state: 'patients-summary'
+        }, {
+          title: 'Clinical Notes',
+          state: 'clinicalNotes'
+        }]
+      })
+      .state('clinicalNotes-create', {
+        url: '/patients/{patientId:int}/clinicalNotes/create?reportType&searchString&queryType',
+        views: {
+          banner: {template: '<patients-banner-component></patients-banner-component>'},
+          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+          main: {template: '<personalnotes-list-component></personalnotes-list-component>'},
+          detail: {template: '<personalnotes-create-component></personalnotes-create-component>'}
+        },
+        breadcrumbs: [{
+          title: 'Patient Listings',
+          state: 'patients-list'
+        }, {
+          title: 'Patient Summary',
+          state: 'patients-summary'
+        }, {
+          title: 'Clinical Notes',
+          state: 'clinicalNotes'
+        }]
+      })
+      .state('clinicalNotes-detail', {
+        url: '/patients/{patientId:int}/clinicalNotes/{personalNoteIndex}?filter&page&reportType&searchString&queryType&source',
+        views: {
+          banner: {template: '<patients-banner-component></patients-banner-component>'},
+          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+          main: {template: '<personalnotes-list-component></personalnotes-list-component>'},
+          detail: {template: '<personalnotes-detail-component></personalnotes-detail-component>'}
+        },
+        params: { source: '{}' },
+        breadcrumbs: [{
+          title: 'Patient Listings',
+          state: 'patients-list'
+        }, {
+          title: 'Patient Summary',
+          state: 'patients-summary'
+        }, {
+          title: 'Clinical Notes',
+          state: 'clinicalNotes'
+        }]
+      })
+
       .state('heightAndWeights', {
         url: '/patients/{patientId:int}/heightAndWeights?reportType&searchString&queryType',
         views: {
