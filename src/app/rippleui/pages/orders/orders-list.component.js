@@ -20,17 +20,9 @@ class OrdersListController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.queryBy = '$';
-    this.query = {};
-    this.query[this.queryBy] = '';
     this.currentPage = 1;
-    this.isFilter = false;
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'orders-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'orders';
-
-    this.toggleFilter = function () {
-      this.isFilter = !this.isFilter;
-    };
 
     this.sort = function (field) {
       var reverse = this.reverse;
@@ -50,10 +42,6 @@ class OrdersListController {
 
     this.order = serviceRequests.currentSort.order || 'name';
     this.reverse = serviceRequests.currentSort.reverse || false;
-    if (serviceRequests.filter) {
-      this.query[this.queryBy] = serviceRequests.filter;
-      this.isFilter = true;
-    }
 
     this.pageChangeHandler = function (newPage) {
       this.currentPage = newPage;
@@ -70,23 +58,13 @@ class OrdersListController {
     this.create = function () {
       $state.go('orders-create', {
         patientId: $stateParams.patientId,
-        filter: this.query.$,
         page: this.currentPage
       });
     };
 
-    // this.search = function (row) {
-    //   return (
-    //     row.name.toLowerCase().indexOf(this.query.toLowerCase() || '') !== -1 ||
-    //     row.orderDate.toLowerCase().indexOf(this.query.toLowerCase() || '') !== -1 ||
-    //     row.source.toLowerCase().indexOf(this.query.toLowerCase() || '') !== -1
-    //   );
-    // };
-
     this.go = function (id, source) {
       serviceRequests.currentSort.order = this.order;
       serviceRequests.currentSort.reverse = this.reverse;
-      serviceRequests.filter = this.query[this.queryBy] || '';
       
       $state.go('orders-detail', {
         patientId: $stateParams.patientId,
@@ -123,10 +101,6 @@ class OrdersListController {
 
     if ($stateParams.page) {
       this.currentPage = $stateParams.page;
-    }
-
-    if ($stateParams.filter) {
-      this.query.$ = $stateParams.filter;
     }
 
     let unsubscribe = $ngRedux.connect(state => ({

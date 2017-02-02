@@ -22,13 +22,7 @@ class ResultsListController {
 
     this.currentPage = 1;
 
-    this.query = '';
-    this.isFilter = false;
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'results';
-
-    this.toggleFilter = function () {
-      this.isFilter = !this.isFilter;
-    };
 
     this.sort = function (field) {
       var reverse = this.reverse;
@@ -48,10 +42,6 @@ class ResultsListController {
 
     this.order = serviceRequests.currentSort.order || 'name';
     this.reverse = serviceRequests.currentSort.reverse || false;
-    if (serviceRequests.filter) {
-      this.query = serviceRequests.filter;
-      this.isFilter = true;
-    }
 
     this.pageChangeHandler = function (newPage) {
       this.currentPage = newPage;
@@ -64,12 +54,10 @@ class ResultsListController {
     this.go = function (id, resultSource) {
       serviceRequests.currentSort.order = this.order;
       serviceRequests.currentSort.reverse = this.reverse;
-      serviceRequests.filter = this.query || '';
 
       $state.go('results-detail', {
         patientId: $stateParams.patientId,
         resultIndex: id,
-        filter: this.query,
         page: this.currentPage,
         source: resultSource
       });
@@ -79,14 +67,14 @@ class ResultsListController {
       return resultIndex === $stateParams.resultIndex;
     };
 
-    this.search = function (row) {
-      return (
-          row.testName.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-          row.sampleTaken.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-          row.dateCreated.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-          row.source.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1
-      );
-    };
+    // this.search = function (row) {
+    //   return (
+    //       row.testName.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
+    //       row.sampleTaken.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
+    //       row.dateCreated.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
+    //       row.source.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1
+    //   );
+    // };
 
     this.setCurrentPageData = function (data) {
       if (data.results.data) {

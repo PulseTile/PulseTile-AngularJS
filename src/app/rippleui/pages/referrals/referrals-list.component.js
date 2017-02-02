@@ -21,15 +21,9 @@ class ReferralsListController {
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
     this.currentPage = 1;
-    this.query = '';
-		this.isFilter = false;
 
 		this.isShowCreateBtn = $state.router.globals.$current.name !== 'referrals-create';
 		this.isShowExpandBtn = $state.router.globals.$current.name !== 'referrals';
-
-    if ($stateParams.filter) {
-      this.query = $stateParams.filter;
-    }
 
     this.pageChangeHandler = function (newPage) {
       this.currentPage = newPage;
@@ -43,7 +37,6 @@ class ReferralsListController {
       $state.go('referrals-detail', {
         patientId: $stateParams.patientId,
         referralId: id,
-        filter: $scope.query,
         page: this.currentPage,
         reportType: $stateParams.reportType,
         searchString: $stateParams.searchString,
@@ -53,10 +46,6 @@ class ReferralsListController {
 
     this.selected = function (referralId) {
       return referralId === $stateParams.referralId;
-    };
-
-    this.toggleFilter = function () {
-        this.isFilter = !this.isFilter;
     };
 
     this.setCurrentPageData = function (data) {
@@ -80,7 +69,6 @@ class ReferralsListController {
 		this.create = function () {
 			$state.go('referrals-create', {
 				patientId: $stateParams.patientId,
-				filter: $scope.query,
 				page: this.currentPage,
 				reportType: $stateParams.reportType,
 				searchString: $stateParams.searchString,
@@ -113,10 +101,6 @@ class ReferralsListController {
 
 		this.order = serviceRequests.currentSort.order || 'dateOfReferral';
 		this.reverse = serviceRequests.currentSort.reverse || false;
-		if (serviceRequests.filter) {
-			this.query[this.queryBy] = serviceRequests.filter;
-			this.isFilter = true;
-		}
 		
 		let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)

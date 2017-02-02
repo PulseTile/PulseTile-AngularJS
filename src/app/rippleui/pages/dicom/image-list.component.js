@@ -21,15 +21,9 @@ class ImageListController {
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
     this.currentPage = 1;
-    $scope.query = '';
-    this.isFilter = false;
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'images-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'images';
     var vm = this;
-
-    this.toggleFilter = function () {
-      this.isFilter = !this.isFilter;
-    };
 
     this.sort = function (field) {
       var reverse = this.reverse;
@@ -49,15 +43,10 @@ class ImageListController {
     
     this.order = serviceRequests.currentSort.order || 'name';
     this.reverse = serviceRequests.currentSort.reverse || false;
-    if (serviceRequests.filter) {
-      this.query[this.queryBy] = serviceRequests.filter;
-      this.isFilter = true;
-    }  
 
     this.create = function () {
       $state.go('images-create', {
           patientId: $stateParams.patientId,
-          filter: this.query,
           page: this.currentPage
       });
     };
@@ -70,24 +59,19 @@ class ImageListController {
       this.currentPage = $stateParams.page;
     }
 
-    this.search = function (row) {
-      return (
-        angular.lowercase(row.studyDescription).indexOf(angular.lowercase(vm.query) || '') !== -1 ||
-        angular.lowercase(row.dateRecorded).indexOf(angular.lowercase(vm.query) || '') !== -1 ||
-        angular.lowercase(row.source).indexOf(angular.lowercase(vm.query) || '') !== -1
-      );
-    };
-
-    if ($stateParams.filter) {
-      vm.query = $stateParams.filter;
-    }
+    // this.search = function (row) {
+    //   return (
+    //     angular.lowercase(row.studyDescription).indexOf(angular.lowercase(vm.query) || '') !== -1 ||
+    //     angular.lowercase(row.dateRecorded).indexOf(angular.lowercase(vm.query) || '') !== -1 ||
+    //     angular.lowercase(row.source).indexOf(angular.lowercase(vm.query) || '') !== -1
+    //   );
+    // };
 
     this.go = function (id, source) {
       $state.go('images-detail', {
         patientId: $stateParams.patientId,
         studyId: id,
         source: source,
-        filter: vm.query,
         page: this.currentPage,
         reportType: $stateParams.reportType,
         searchString: $stateParams.searchString,

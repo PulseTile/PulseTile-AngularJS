@@ -14,22 +14,22 @@
   ~  limitations under the License.
   -->
 
-<div mc-full-panel class="panel panel-primary">
+<div mc-full-panel filtering class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
-      <button class="btn btn-success btn-inverse btn-filter" ng-click="$ctrl.toggleFilter()"><i class="fa fa-filter"></i></button>
+      <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
     </div>
     <div class="control-group right" >
       <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')" ng-if="$ctrl.isShowExpandBtn"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
       <!--<button class="btn btn-success btn-inverse btn-dropdown-toggle btn-table"><i class="fa fa-table"></i></button>-->
     </div>
     <h3 class="panel-title" >Allergies</h3>
-    <div class="panel-filter" ng-if="$ctrl.isFilter" ng-class="{active : $ctrl.isFilter}">
+    <div class="panel-filter" ng-show="isFilterOpen">
       <div class="inner-addon addon-left">
         <div class="addon">
           <i class="fa fa-filter"></i>
         </div>
-        <input type="text" class="form-control" placeholder="Filter..." ng-model="$ctrl.query" />
+        <input type="text" id="filter" class="form-control" placeholder="Filter..." ng-model="queryFilter" />
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@
       </thead>
 
       <tbody>
-        <tr dir-paginate="allergy in $ctrl.allergies | filter:$ctrl.query | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage" ng-click="$ctrl.go(allergy.sourceId, allergy.source)" ng-class="{info: $ctrl.selected(allergy.sourceId)}">
+        <tr dir-paginate="allergy in $ctrl.allergies | filter: queryFilter | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage" ng-click="$ctrl.go(allergy.sourceId, allergy.source)" ng-class="{info: $ctrl.selected(allergy.sourceId)}">
           <td data-th="Cause" ng-class="$ctrl.sortClass('cause');">{{ allergy.cause }}</td>
           <td data-th="Reaction" ng-class="$ctrl.sortClass('reaction')">{{ allergy.reaction }}</td>
           <td data-th="Source" ng-class="$ctrl.sortClass('source')">{{ allergy.source }}</td>

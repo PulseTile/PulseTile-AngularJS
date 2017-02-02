@@ -22,18 +22,12 @@ class MedicationsListController {
 
     this.currentPage = 1;
 
-    this.query = '';
-    this.isFilter = false;
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'medications-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'medications';
 
 
     this.pageChangeHandler = function (newPage) {
       this.currentPage = newPage;
-    };
-
-    this.toggleFilter = function () {
-      this.isFilter = !this.isFilter;
     };
 
     if ($stateParams.page) {
@@ -59,19 +53,13 @@ class MedicationsListController {
 
     this.order = serviceRequests.currentSort.order || 'name';
     this.reverse = serviceRequests.currentSort.reverse || false;
-    if (serviceRequests.filter) {
-      this.query = serviceRequests.filter;
-      this.isFilter = true;
-    }
 
     this.go = function (id, medicationSource) {
       serviceRequests.currentSort.order = this.order;
       serviceRequests.currentSort.reverse = this.reverse;
-      serviceRequests.filter = this.query;
       $state.go('medications-detail', {
         patientId: $stateParams.patientId,
         medicationIndex: id,
-        filter: this.query,
         page: this.currentPage,
         source: medicationSource
       });
@@ -85,7 +73,6 @@ class MedicationsListController {
     this.create = function () {
       $state.go('medications-create', {
         patientId: $stateParams.patientId,
-        filter: this.query,
         page: this.currentPage
       });
     };

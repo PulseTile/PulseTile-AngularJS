@@ -22,8 +22,6 @@ class PersonalnotesListController {
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
     this.currentPage = 1;
-    $scope.query = '';
-    this.isFilter = false;
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'personalNotes-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'personalNotes';
 
@@ -45,14 +43,9 @@ class PersonalnotesListController {
       }
     };
 
-    this.toggleFilter = function () {
-      this.isFilter = !this.isFilter;
-    };
-    
     this.create = function () {
       $state.go('personalNotes-create', {
         patientId: $stateParams.patientId,
-        filter: this.query,
         page: this.currentPage
       });
     };
@@ -61,7 +54,6 @@ class PersonalnotesListController {
       $state.go('personalNotes-detail', {
         patientId: $stateParams.patientId,
         personalNoteIndex: id,
-        filter: $scope.query,
         page: this.currentPage,
         reportType: $stateParams.reportType,
         searchString: $stateParams.searchString,
@@ -78,19 +70,14 @@ class PersonalnotesListController {
       $scope.currentPage = $stateParams.page;
     }
 
-    this.search = function (row) {
-      return (
-        row.noteType.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-        row.author.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-        row.dateCreated.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-        row.source.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1
-      );
-    };
-
-    if ($stateParams.filter) {
-      $scope.query = $stateParams.filter;
-    }
-
+    // this.search = function (row) {
+    //   return (
+    //     row.noteType.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
+    //     row.author.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
+    //     row.dateCreated.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
+    //     row.source.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1
+    //   );
+    // };
 
     this.selected = function (personalNoteIndex) {
       return personalNoteIndex === $stateParams.personalNoteIndex;

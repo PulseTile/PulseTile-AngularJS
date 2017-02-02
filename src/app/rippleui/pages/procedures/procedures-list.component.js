@@ -20,18 +20,11 @@ class ProceduresListController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-		this.queryBy = '$';
-		this.query = {};
-		this.query[this.queryBy] = '';
+
 		this.currentPage = 1;
 		this.isShowCreateBtn = true;
-		this.isFilter = false;
 		this.isShowCreateBtn = $state.router.globals.$current.name !== 'procedures-create';
 		this.isShowExpandBtn = $state.router.globals.$current.name !== 'procedures';
-
-		this.toggleFilter = function () {
-			this.isFilter = !this.isFilter;
-		};
 
 		this.sort = function (field) {
 			var reverse = this.reverse;
@@ -51,10 +44,6 @@ class ProceduresListController {
 
 		this.order = serviceRequests.currentSort.order || 'procedureName';
 		this.reverse = serviceRequests.currentSort.reverse || false;
-		if (serviceRequests.filter) {
-			this.query[this.queryBy] = serviceRequests.filter;
-			this.isFilter = true;
-		}
 
     this.pageChangeHandler = function (newPage) {
       this.currentPage = newPage;
@@ -63,7 +52,6 @@ class ProceduresListController {
 		this.create = function () {
 			$state.go('procedures-create', {
 				patientId: $stateParams.patientId,
-				filter: this.query.$,
 				page: this.currentPage
 			});
 		};
@@ -72,15 +60,10 @@ class ProceduresListController {
       this.currentPage = $stateParams.page;
     }
 
-    if ($stateParams.filter) {
-      $scope.query = $stateParams.filter;
-    }
-
     this.go = function (id, allergySource) {
       $state.go('procedures-detail', {
         patientId: $stateParams.patientId,
         procedureId: id,
-        filter: $scope.query,
         page: this.currentPage,
         reportType: $stateParams.reportType,
         searchString: $stateParams.searchString,
@@ -89,14 +72,14 @@ class ProceduresListController {
       });
     };
 
-    this.search = function (row) {
-      return (
-        row.name.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-        row.date.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-        row.time.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-        row.source.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1
-      );
-    };
+    // this.search = function (row) {
+    //   return (
+    //     row.name.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
+    //     row.date.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
+    //     row.time.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
+    //     row.source.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1
+    //   );
+    // };
 
     this.selected = function (procedureId) {
       return procedureId === $stateParams.procedureId;
@@ -105,7 +88,6 @@ class ProceduresListController {
     this.create = function () {
         $state.go('procedures-create', {
             patientId: $stateParams.patientId,
-            filter: this.query.$,
             page: this.currentPage
         });
     };

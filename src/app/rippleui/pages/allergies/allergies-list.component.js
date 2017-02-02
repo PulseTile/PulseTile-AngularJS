@@ -22,8 +22,6 @@ class AllergiesListController {
 
     this.currentPage = 1;
 
-    this.query = '';
-    this.isFilter = false;
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'allergies-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'allergies';
     
@@ -39,10 +37,6 @@ class AllergiesListController {
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
       }
-    };
-
-    this.toggleFilter = function () {
-      this.isFilter = !this.isFilter;
     };
 
     this.sort = function (field) {
@@ -63,10 +57,6 @@ class AllergiesListController {
 
     this.order = serviceRequests.currentSort.order || 'cause';
     this.reverse = serviceRequests.currentSort.reverse || false;
-    if (serviceRequests.filter) {
-      this.query = serviceRequests.filter;
-      this.isFilter = true;
-    }
 
     this.pageChangeHandler = function (newPage) {
       this.currentPage = newPage;
@@ -79,12 +69,10 @@ class AllergiesListController {
     this.go = function (id, allergySource) {
       serviceRequests.currentSort.order = this.order;
       serviceRequests.currentSort.reverse = this.reverse;
-      serviceRequests.filter = this.query || '';
 
       $state.go('allergies-detail', {
         patientId: $stateParams.patientId,
         allergyIndex: id,
-        filter: this.query,
         page: this.currentPage,
         source: allergySource
       });
@@ -97,7 +85,6 @@ class AllergiesListController {
     this.create = function () {
       $state.go('allergies-create', {
         patientId: $stateParams.patientId,
-        filter: this.query,
         page: this.currentPage
       });
     };

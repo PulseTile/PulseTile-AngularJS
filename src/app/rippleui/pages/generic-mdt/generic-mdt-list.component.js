@@ -20,17 +20,10 @@ class GenericMdtListController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.queryBy = '$';
-    this.query = {};
-    this.query[this.queryBy] = '';
     this.currentPage = 1;
-    this.isFilter = false;
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'genericMdt-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'genericMdt';
 
-    this.toggleFilter = function () {
-      this.isFilter = !this.isFilter;
-    };
 
     this.sort = function (field) {
       var reverse = this.reverse;
@@ -50,10 +43,6 @@ class GenericMdtListController {
 
     this.order = serviceRequests.currentSort.order || 'dateOfRequest';
     this.reverse = serviceRequests.currentSort.reverse || false;
-    if (serviceRequests.filter) {
-      this.query[this.queryBy] = serviceRequests.filter;
-      this.isFilter = true;
-    }
 
     this.pageChangeHandler = function (newPage) {
       this.currentPage = newPage;
@@ -63,24 +52,19 @@ class GenericMdtListController {
       this.currentPage = $stateParams.page;
     }
 
-    $scope.search = function (row) {
-      return (
-        angular.lowercase(row.dateOfRequest).indexOf(angular.lowercase(this.query) || '') !== -1 ||
-        angular.lowercase(row.serviceTeam).indexOf(angular.lowercase(this.query) || '') !== -1 ||
-        angular.lowercase(row.dateOfMeeting).indexOf(angular.lowercase(this.query) || '') !== -1 ||
-        angular.lowercase(row.source).indexOf(angular.lowercase(this.query) || '') !== -1
-      );
-    };
-
-    if ($stateParams.filter) {
-      this.query = $stateParams.filter;
-    }
+    // $scope.search = function (row) {
+    //   return (
+    //     angular.lowercase(row.dateOfRequest).indexOf(angular.lowercase(this.query) || '') !== -1 ||
+    //     angular.lowercase(row.serviceTeam).indexOf(angular.lowercase(this.query) || '') !== -1 ||
+    //     angular.lowercase(row.dateOfMeeting).indexOf(angular.lowercase(this.query) || '') !== -1 ||
+    //     angular.lowercase(row.source).indexOf(angular.lowercase(this.query) || '') !== -1
+    //   );
+    // };
 
     this.go = function (id) {
       $state.go('genericMdt-detail', {
         patientId: $stateParams.patientId,
         genericMdtIndex: id,
-        filter: this.query.$,
         page: this.currentPage,
         reportType: $stateParams.reportType,
         searchString: $stateParams.searchString,
@@ -95,7 +79,6 @@ class GenericMdtListController {
     this.create = function () {
       $state.go('genericMdt-create', {
         patientId: $stateParams.patientId,
-        filter: this.query.$,
         page: this.currentPage
       });
     };

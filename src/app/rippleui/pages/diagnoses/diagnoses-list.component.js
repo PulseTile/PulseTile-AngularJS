@@ -22,8 +22,6 @@ class DiagnosesListController {
 
     this.currentPage = 1;
 
-    this.query = '';
-    this.isFilter = false;
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'diagnoses-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'diagnoses';
 
@@ -41,11 +39,6 @@ class DiagnosesListController {
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
       }
-    };
-
-
-    this.toggleFilter = function () {
-      this.isFilter = !this.isFilter;
     };
 
     this.sort = function (field) {
@@ -66,10 +59,6 @@ class DiagnosesListController {
 
     this.order = serviceRequests.currentSort.order || 'diagnoses';
     this.reverse = serviceRequests.currentSort.reverse || false;
-    if (serviceRequests.filter) {
-      this.query = serviceRequests.filter;
-      this.isFilter = true;
-    }
     
     this.pageChangeHandler = function (newPage) {
       this.currentPage = newPage;
@@ -82,11 +71,9 @@ class DiagnosesListController {
     this.go = function (id, diagnosisSource) {
       serviceRequests.currentSort.order = this.order;
       serviceRequests.currentSort.reverse = this.reverse;
-      serviceRequests.filter = this.query || '';
       $state.go('diagnoses-detail', {
         patientId: $stateParams.patientId,
         diagnosisIndex: id,
-        filter: this.query,
         page: this.currentPage,
         source: diagnosisSource
       });
@@ -95,7 +82,6 @@ class DiagnosesListController {
     this.create = function () {
       $state.go('diagnoses-create', {
         patientId: $stateParams.patientId,
-        filter: this.query,
         page: this.currentPage
       });
     };
@@ -104,13 +90,13 @@ class DiagnosesListController {
       return diagnosisIndex === $stateParams.diagnosisIndex;
     };
 
-    this.search = function (row) {
-      return (
-          row.problem.toLowerCase().indexOf(this.query.toLowerCase() || '') !== -1 ||
-          row.dateOfOnset.toLowerCase().indexOf(this.query.toLowerCase() || '') !== -1 ||
-          row.source.toLowerCase().indexOf(this.query.toLowerCase() || '') !== -1
-      );
-    };
+    // this.search = function (row) {
+    //   return (
+    //       row.problem.toLowerCase().indexOf(this.query.toLowerCase() || '') !== -1 ||
+    //       row.dateOfOnset.toLowerCase().indexOf(this.query.toLowerCase() || '') !== -1 ||
+    //       row.source.toLowerCase().indexOf(this.query.toLowerCase() || '') !== -1
+    //   );
+    // };
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)

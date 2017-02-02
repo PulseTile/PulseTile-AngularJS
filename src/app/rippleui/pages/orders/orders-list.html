@@ -13,22 +13,22 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
-<div mc-full-panel class="panel panel-primary">
+<div mc-full-panel filtering class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
-      <button class="btn btn-success btn-inverse btn-filter" ng-click="$ctrl.toggleFilter()"><i class="fa fa-filter"></i></button>
+      <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
     </div>
-    <div class="control-group right" ng-if="!$ctrl.isFilter">
+    <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')" ng-if="$ctrl.isShowExpandBtn"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
       <button class="btn btn-success btn-inverse btn-dropdown-toggle btn-table"><i class="fa fa-table"></i></button>
     </div>
-    <h3 class="panel-title" ng-if="!$ctrl.isFilter">Orders</h3>
-    <div class="panel-filter" ng-if="$ctrl.isFilter">
+    <h3 class="panel-title">Orders</h3>
+    <div class="panel-filter" ng-show="isFilterOpen">
       <div class="inner-addon addon-left">
         <div class="addon">
           <i class="fa fa-filter"></i>
         </div>
-        <input type="text" class="form-control" placeholder="Filter..." ng-model="$ctrl.query" />
+        <input type="text" id="filter" class="form-control" placeholder="Filter..." ng-model="queryFilter" />
       </div>
     </div>
   </div>
@@ -43,7 +43,7 @@
       </thead>
 
       <tbody>
-      <tr dir-paginate="order in $ctrl.orders| filter: $ctrl.query | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(order.sourceId, order.source)" ng-class="{info: $ctrl.selected(order.sourceId)}">
+      <tr dir-paginate="order in $ctrl.orders | filter: queryFilter | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(order.sourceId, order.source)" ng-class="{info: $ctrl.selected(order.sourceId)}">
         <td data-th="Order Name" ng-class="$ctrl.sortClass('name');">{{order.name }}</td>
         <td data-th="Date" class="orderDateTime" ng-class="$ctrl.sortClass('orderDate');">{{order.orderDate}}</td>
         <td data-th="Source" ng-class="$ctrl.sortClass('source');">{{order.source}}</td>
