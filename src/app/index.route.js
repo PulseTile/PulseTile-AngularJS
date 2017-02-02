@@ -830,7 +830,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         views: {
           banner: {template: '<patients-banner-component></patients-banner-component>'},
           actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<personalnotes-list-component></personalnotes-list-component>'}
+          main: {template: '<clinicalnotes-list-component></clinicalnotes-list-component>'}
         },
         breadcrumbs: [{
           title: 'Patient Listings',
@@ -849,7 +849,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           banner: {template: '<patients-banner-component></patients-banner-component>'},
           actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
           main: {template: '<personalnotes-list-component></personalnotes-list-component>'},
-          detail: {template: '<personalnotes-create-component></personalnotes-create-component>'}
+          detail: {template: '<clinicalnotes-create-component></clinicalnotes-create-component>'}
         },
         breadcrumbs: [{
           title: 'Patient Listings',
@@ -868,7 +868,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           banner: {template: '<patients-banner-component></patients-banner-component>'},
           actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
           main: {template: '<personalnotes-list-component></personalnotes-list-component>'},
-          detail: {template: '<personalnotes-detail-component></personalnotes-detail-component>'}
+          detail: {template: '<clinicalnotes-detail-component></clinicalnotes-detail-component>'}
         },
         params: { source: '{}' },
         breadcrumbs: [{

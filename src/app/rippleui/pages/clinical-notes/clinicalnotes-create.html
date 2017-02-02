@@ -14,50 +14,50 @@
   ~  limitations under the License.
   -->
 
-<div mc-full-panel mc-accordion mc-open-panel="personalNoteCreate" class="panel-group accordion">
-  <div class="panel panel-secondary" ng-class="getOpenPanelClass('personalNoteCreate')">
+<div mc-full-panel mc-accordion mc-open-panel="clinicalNoteCreate" class="panel-group accordion">
+  <div class="panel panel-secondary" ng-class="getOpenPanelClass('clinicalNoteCreate')">
     <div class="panel-heading">
       <div class="control-group right">
         <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('personalNoteCreate')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('clinicalNoteCreate')"><i class="fa fa-chevron-up"></i></button>
       </div>
-      <h3 class="panel-title">Create Personal Note</h3>
+      <h3 class="panel-title">Create Clinical Note</h3>
     </div>
     <div class="panel-body">
       <div class="panel-body-inner">
-        <form name="personalNoteForm" class="form">
+        <form name="clinicalNoteForm" class="form">
           <div class="form-group-wrapper">
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || personalNoteForm.noteType.$dirty) && personalNoteForm.noteType.$invalid, 'has-success': personalNoteForm.noteType.$valid && personalNoteForm.noteType.$dirty}">
+            <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalNoteForm.noteType.$dirty) && clinicalNoteForm.noteType.$invalid, 'has-success': clinicalNoteForm.noteType.$valid && clinicalNoteForm.noteType.$dirty}">
               <label for="noteType" class="control-label">Type</label>
               <div class="input-holder">
-                <input class="form-control input-sm" id="noteType" name="noteType" ng-model="personalNote.noteType" required />
+                <input class="form-control input-sm" id="noteType" name="noteType" ng-model="clinicalNote.noteType" required />
               </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && personalNoteForm.type.$error.required">You must enter a value.</span>
+              <span class="help-block animate-fade" ng-show="formSubmitted && clinicalNoteForm.type.$error.required">You must enter a value.</span>
             </div>
 
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || personalNoteForm.notes.$dirty) && personalNoteForm.notes.$invalid, 'has-success': personalNoteForm.notes.$valid && personalNoteForm.notes.$dirty}">
+            <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalNoteForm.notes.$dirty) && clinicalNoteForm.notes.$invalid, 'has-success': clinicalNoteForm.notes.$valid && clinicalNoteForm.notes.$dirty}">
               <label for="notes" class="control-label">Note</label>
               <div class="input-holder">
-                <textarea class="form-control textarea-big input-sm" id="notes" name="notes" ng-model="personalNote.notes" required></textarea>
+                <textarea class="form-control textarea-big input-sm" id="notes" name="notes" ng-model="clinicalNote.notes" required></textarea>
               </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && personalNoteForm.note.$error.required">You must enter a value.</span>
+              <span class="help-block animate-fade" ng-show="formSubmitted && clinicalNoteForm.note.$error.required">You must enter a value.</span>
             </div>
 
-            <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || personalNoteForm.author.$dirty) && personalNoteForm.author.$invalid, 'has-success': personalNoteForm.author.$valid && personalNoteForm.author.$dirty}">
+            <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || clinicalNoteForm.author.$dirty) && clinicalNoteForm.author.$invalid, 'has-success': clinicalNoteForm.author.$valid && clinicalNoteForm.author.$dirty}">
               <label for="author" class="control-label">Author</label>
               <div class="input-holder">
-                <input type="text" class="form-control input-sm" id="author" name="author" ng-model="personalNote.author" required/>
+                <input type="text" class="form-control input-sm" id="author" name="author" ng-model="clinicalNote.author" required/>
               </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && personalNoteForm.author.$error.required">You must enter a value.</span>
+              <span class="help-block animate-fade" ng-show="formSubmitted && clinicalNoteForm.author.$error.required">You must enter a value.</span>
             </div>
             
-            <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || personalNoteForm.dateCreated.$dirty) && personalNoteForm.dateCreated.$invalid, 'has-success': personalNoteForm.dateCreated.$valid && personalNoteForm.dateCreated.$dirty}">
+            <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || clinicalNoteForm.dateCreated.$dirty) && clinicalNoteForm.dateCreated.$invalid, 'has-success': clinicalNoteForm.dateCreated.$valid && clinicalNoteForm.dateCreated.$dirty}">
               <label for="dateCreated" class="control-label">Date</label>
               <div class="inner-addon addon-left">
                 <div class="addon">
                   <i class="fa fa-calendar"></i>
                 </div>
-                <input type="text" class="form-control" id="dateCreated" name="dateCreated" ng-model="personalNote.dateCreated" required disabled />
+                <input type="text" class="form-control" id="dateCreated" name="dateCreated" ng-model="clinicalNote.dateCreated" required disabled />
               </div>
             </div>
           </div>
@@ -67,7 +67,7 @@
         <div class="wrap-control-group">
           <div class="control-group right">
             <button class="btn btn-danger" ng-click="$ctrl.cancel()"><i class="fa fa-ban"></i> Cancel</button>
-            <button class="btn btn-success" ng-click="create(personalNoteForm, personalNote)"><i class="fa fa-check"></i> Complete</button>
+            <button class="btn btn-success" ng-click="create(clinicalNoteForm, clinicalNote)"><i class="fa fa-check"></i> Complete</button>
           </div>
         </div>
       </div>

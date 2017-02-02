@@ -17,12 +17,12 @@
 let templateClinicalnotesCreate = require('./clinicalnotes-create.html');
 
 class ClinicalnotesCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, personalnotesActions, serviceRequests) {
-    $scope.personalNote = {};
-    $scope.personalNote.dateCreated = new Date().toISOString().slice(0, 10);
+  constructor($scope, $state, $stateParams, $ngRedux, clinicalnotesActions, serviceRequests) {
+    $scope.clinicalNote = {};
+    $scope.clinicalNote.dateCreated = new Date().toISOString().slice(0, 10);
     
     this.setCurrentPageData = function (data) {
-      if (data.personalnotes.dataCreate !== null) {
+      if (data.clinicalnotes.dataCreate !== null) {
         this.goList();
       }
       if (data.patientsGet.data) {
@@ -34,7 +34,7 @@ class ClinicalnotesCreateController {
     };
 
     this.goList = function () {
-      $state.go('personalNotes', {
+      $state.go('clinicalNotes', {
         patientId: $stateParams.patientId,
         reportType: $stateParams.reportType,
         searchString: $stateParams.searchString,
@@ -46,18 +46,18 @@ class ClinicalnotesCreateController {
       this.goList();
     };
     
-    $scope.create = function (personalNoteForm, personalNote) {
+    $scope.create = function (clinicalNoteForm, clinicalNote) {
       $scope.formSubmitted = true;
 
       let toAdd = {
-        noteType: personalNote.noteType,
-        notes: personalNote.notes,
-        dateCreated: personalNote.dateCreated,
-        author: personalNote.author,
+        noteType: clinicalNote.noteType,
+        notes: clinicalNote.notes,
+        dateCreated: clinicalNote.dateCreated,
+        author: clinicalNote.author,
         source: 'openehr'
       };
 
-      if (personalNoteForm.$valid) {
+      if (clinicalNoteForm.$valid) {
 
         $scope.clinicalnotesCreate(this.currentPatient.id, toAdd);
       }
@@ -69,7 +69,7 @@ class ClinicalnotesCreateController {
 
     $scope.$on('$destroy', unsubscribe);
 
-    $scope.clinicalnotesCreate = personalnotesActions.create;
+    $scope.clinicalnotesCreate = clinicalnotesActions.create;
   }
 }
 
@@ -78,5 +78,5 @@ const ClinicalnotesCreateComponent = {
   controller: ClinicalnotesCreateController
 };
 
-ClinicalnotesCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'personalnotesActions', 'serviceRequests'];
+ClinicalnotesCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalnotesActions', 'serviceRequests'];
 export default ClinicalnotesCreateComponent;

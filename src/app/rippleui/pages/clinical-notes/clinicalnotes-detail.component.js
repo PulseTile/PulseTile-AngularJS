@@ -17,15 +17,15 @@
 let templateClinicalnotesDetail = require('./clinicalnotes-detail.html');
 
 class ClinicalnotesDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, personalnotesActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, clinicalnotesActions, serviceRequests, usSpinnerService) {
     
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
       if (data.personalnotes.dataGet) {
-        this.personalNote = data.personalnotes.dataGet;
-        this.dateCreated = moment(this.personalNote.dateCreated).format('DD-MMM-YYYY');
+        this.clinicalNote = data.clinicalnotes.dataGet;
+        this.dateCreated = moment(this.clinicalNote.dateCreated).format('DD-MMM-YYYY');
         usSpinnerService.stop("clinicalNoteDetail-spinner");
       }
     };
@@ -36,7 +36,7 @@ class ClinicalnotesDetailController {
 
     $scope.$on('$destroy', unsubscribe);
 
-    this.clinicalnotesLoad = personalnotesActions.get;
+    this.clinicalnotesLoad = clinicalnotesActions.get;
     this.clinicalnotesLoad($stateParams.patientId, $stateParams.personalNoteIndex, $stateParams.source);
   
     //Edit Clinical Note
@@ -47,10 +47,10 @@ class ClinicalnotesDetailController {
       $scope.isEdit = true;
 
       $scope.currentUser = this.currentUser;
-      $scope.personalNoteEdit = Object.assign({}, this.personalNote);
+      $scope.clinicalNoteEdit = Object.assign({}, this.clinicalNote);
       $scope.patient = this.currentPatient;
       
-      $scope.personalNoteEdit.dateCreated = new Date(this.personalNote.dateCreated).toISOString().slice(0, 10);
+      $scope.clinicalNoteEdit.dateCreated = new Date(this.clinicalNote.dateCreated).toISOString().slice(0, 10);
     };
     this.cancelEdit = function () {
       $scope.isEdit = false;
@@ -70,7 +70,7 @@ class ClinicalnotesDetailController {
         
         this.personalNote = Object.assign(personalNote, $scope.personalNoteEdit);
         $scope.isEdit = false;
-        personalnotesActions.update($scope.patient.id, toUpdate);
+        clinicalnotesActions.update($scope.patient.id, toUpdate);
         setTimeout(function () {
           $state.go('personalNotes-detail', {
             patientId: $scope.patient.id,
@@ -87,5 +87,5 @@ const ClinicalnotesDetailComponent = {
   controller: ClinicalnotesDetailController
 };
 
-ClinicalnotesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'personalnotesActions', 'serviceRequests', 'usSpinnerService'];
+ClinicalnotesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalnotesActions', 'serviceRequests', 'usSpinnerService'];
 export default ClinicalnotesDetailComponent;

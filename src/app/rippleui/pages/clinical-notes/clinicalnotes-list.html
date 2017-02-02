@@ -45,14 +45,14 @@
       </thead>
 
       <tbody>
-        <tr dir-paginate="personalNote in $ctrl.personalNotes | filter:$ctrl.search | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(personalNote.sourceId, personalNote)" ng-class="{info: $ctrl.selected(personalNote.sourceId)}">
-          <td data-th="Type">{{ personalNote.noteType }}</td>
-          <td data-th="Author">{{ personalNote.author }}</td>
-          <td data-th="Date" class="orderDateTime">{{ personalNote.dateCreated | date:'dd-MMM-yyyy' }}</td>
-          <td data-th="Source" class="hidden-xs">{{ personalNote.source }}</td>
+        <tr dir-paginate="clinicalNote in $ctrl.clinicalNotes | filter:$ctrl.search | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(clinicalNote.sourceId, clinicalNote)" ng-class="{info: $ctrl.selected(clinicalNote.sourceId)}">
+          <td data-th="Type">{{ clinicalNote.noteType }}</td>
+          <td data-th="Author">{{ clinicalNote.author }}</td>
+          <td data-th="Date" class="orderDateTime">{{ clinicalNote.dateCreated | date:'dd-MMM-yyyy' }}</td>
+          <td data-th="Source" class="hidden-xs">{{ clinicalNote.source }}</td>
         </tr>
 
-        <tr ng-if="!$ctrl.personalNotes.length">
+        <tr ng-if="!$ctrl.clinicalNotes.length">
           <td colspan="4"><span class="label label-default">No personal notes</span></td>
         </tr>
       </tbody>

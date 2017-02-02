@@ -25,7 +25,7 @@ export function all(patientId) {
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/personalnotes'
+      url: '/api/patients/' + patientId + '/clinicalnotes'
     },
 
     meta: {
@@ -41,7 +41,7 @@ export function get(patientId, compositionId, source) {
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/personalnotes/' + compositionId + '?source=' + source
+      url: '/api/patients/' + patientId + '/clinicalnotes/' + compositionId + '?source=' + source
     },
 
     meta: {
@@ -57,7 +57,7 @@ export function create(patientId, composition) {
 
     config: {
       method: 'post',
-      url: '/api/patients/' + patientId + '/personalnotes',
+      url: '/api/patients/' + patientId + '/clinicalnotes',
       data: composition
     },
 
@@ -74,7 +74,7 @@ export function update(patientId, composition) {
 
     config: {
       method: 'put',
-      url: '/api/patients/' + patientId + '/personalnotes',
+      url: '/api/patients/' + patientId + '/clinicalnotes',
       data: composition
     },
 
@@ -84,7 +84,7 @@ export function update(patientId, composition) {
   };
 }
 
-export default function personalnotesActions($ngRedux) {
+export default function clinicalnotesActions($ngRedux) {
   let actionCreator = {
     all, get, create, update
   };
@@ -92,4 +92,4 @@ export default function personalnotesActions($ngRedux) {
   return bindActionCreators(actionCreator, $ngRedux.dispatch);
 }
 
-personalnotesActions.$inject = ['$ngRedux'];
+clinicalnotesActions.$inject = ['$ngRedux'];

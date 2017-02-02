@@ -107,6 +107,10 @@ import PersonalnotesListComponent from './rippleui/pages/personal-notes/personal
 import PersonalnotesCreateComponent from './rippleui/pages/personal-notes/personalnotes-create.component';
 import PersonalnotesDetailComponent from './rippleui/pages/personal-notes/personalnotes-detail.component';
 
+import ClinicalnotesListComponent from './rippleui/pages/clinical-notes/clinicalnotes-list.component';
+import ClinicalnotesCreateComponent from './rippleui/pages/clinical-notes/clinicalnotes-create.component';
+import ClinicalnotesDetailComponent from './rippleui/pages/clinical-notes/clinicalnotes-detail.component';
+
 import HeightAndWeightListComponent from './rippleui/pages/height-and-weight/heightAndWeight-list.component';
 import HeightAndWeightDetailComponent from './rippleui/pages/height-and-weight/heightAndWeight-detail.component';
 
@@ -205,6 +209,10 @@ const app = angular
     .component('personalnotesListComponent', PersonalnotesListComponent)
     .component('personalnotesCreateComponent', PersonalnotesCreateComponent)
     .component('personalnotesDetailComponent', PersonalnotesDetailComponent)
+
+    .component('clinicalnotesListComponent', ClinicalnotesListComponent)
+    .component('clinicalnotesCreateComponent', ClinicalnotesCreateComponent)
+    .component('clinicalnotesDetailComponent', ClinicalnotesDetailComponent)
 
     .component('heightAndWeightListComponent', HeightAndWeightListComponent)
     .component('heightAndWeightDetailComponent', HeightAndWeightDetailComponent)
