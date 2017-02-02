@@ -1,0 +1,50 @@
+.btn-order {
+  width: 30px;
+  height: 20px;
+  line-height: 18px;
+  padding: 0;
+}
+.orderForm .input-group {
+  width: 95%;
+}
+
+.orderForm .date-form {
+  margin-top: 5px;
+}
+.orderForm {
+  //padding-right: 20px;
+}
+
+.orderForm .input-group {
+  width: 100%;
+}
+.orderForm table {
+  display: block;
+  position: relative;
+  font-size: 12px;
+  font-weight: 500;
+  height: 200px;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 1px solid #D8D8D8;
+}
+
+.orderForm tbody {
+  display: block;
+}
+
+.orderForm tr {
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  border-bottom: 1px solid #D8D8D8;
+  padding-left: 10px;
+}
+.orders-btn-block {
+  padding-top: 80px;
+  text-align: center;
+}
+.switch-btn-order:nth-child(2){
+  margin-bottom: 5px;
+}

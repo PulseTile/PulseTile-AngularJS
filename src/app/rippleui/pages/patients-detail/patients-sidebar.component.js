@@ -47,12 +47,12 @@ class PatientsSidebarController {
         linkDetail: 'medications-detail',
         title: 'Medications'
       },
-      // {
-      //   name: 'orders',
-      //   link: 'orders',
-      //   linkDetail: 'orders-detail',
-      //   title: 'Orders'
-      // },
+      {
+        name: 'orders',
+        link: 'orders',
+        linkDetail: 'orders-detail',
+        title: 'Orders'
+      },
       {
         name: 'results',
         link: 'results',
@@ -106,6 +106,12 @@ class PatientsSidebarController {
         link: 'personalNotes',
         linkDetail: 'personalNotes-detail',
         title: 'Personal Notes'
+      },
+      {
+        name: 'clinicalNotes',
+        link: 'clinicalNotes',
+        linkDetail: 'clinicalNotes-detail',
+        title: 'Clinical Notes'
       },
       {
         name: 'vaccinations',

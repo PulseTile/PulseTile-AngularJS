@@ -80,6 +80,7 @@ import VitalsDetailComponent from './rippleui/pages/vitals/vitals-detail.compone
 
 import OrdersListComponent from './rippleui/pages/orders/orders-list.component';
 import OrdersDetailComponent from './rippleui/pages/orders/orders-detail.component';
+import OrdersCreateComponent from './rippleui/pages/orders/orders-create.component';
 
 import ReferralsListComponent from './rippleui/pages/referrals/referrals-list.component';
 import ReferralsDetailComponent from './rippleui/pages/referrals/referrals-detail.component';
@@ -101,6 +102,10 @@ import EolcareplansListComponent from './rippleui/pages/care-plans/eolcareplans-
 import EolcareplansDetailComponent from './rippleui/pages/care-plans/eolcareplans-detail.component';
 import MainComponent from './helpers/main.component';
 import HomeSidebarComponent from './rippleui/pages/patients-lookup/home-sidebar.component';
+
+import PersonalnotesListComponent from './rippleui/pages/personal-notes/personalnotes-list.component';
+import PersonalnotesCreateComponent from './rippleui/pages/personal-notes/personalnotes-create.component';
+import PersonalnotesDetailComponent from './rippleui/pages/personal-notes/personalnotes-detail.component';
 
 import ClinicalnotesListComponent from './rippleui/pages/clinical-notes/clinicalnotes-list.component';
 import ClinicalnotesCreateComponent from './rippleui/pages/clinical-notes/clinicalnotes-create.component';
@@ -174,6 +179,7 @@ const app = angular
 
     .component('ordersListComponent', OrdersListComponent)
     .component('ordersDetailComponent', OrdersDetailComponent)
+    .component('ordersCreateComponent', OrdersCreateComponent)
 
     .component('referralsListComponent', ReferralsListComponent)
     .component('referralsDetailComponent', ReferralsDetailComponent)
@@ -199,6 +205,10 @@ const app = angular
     .component('homeSidebarComponent', HomeSidebarComponent)
     .component('searchComponent', SearchComponent)
     .component('reportChartComponent', ReportChartComponent)
+
+    .component('personalnotesListComponent', PersonalnotesListComponent)
+    .component('personalnotesCreateComponent', PersonalnotesCreateComponent)
+    .component('personalnotesDetailComponent', PersonalnotesDetailComponent)
 
     .component('clinicalnotesListComponent', ClinicalnotesListComponent)
     .component('clinicalnotesCreateComponent', ClinicalnotesCreateComponent)
@@ -278,7 +288,7 @@ const app = angular
                     if ($scope.showPanel === '') return true;
 
                     return $scope.showPanel === panelName ? true : false;
-                }
+                };
                 $scope.changeFullPanel = function (fullPanelName, panelName) {
                     if (panelName) {
                         $scope.showPanel = $scope.showPanel === panelName ? '' : panelName;
@@ -370,10 +380,7 @@ const app = angular
             link: function(scope, element, attributes) {
                 var cornerstone = cornerstoneJS();
                 var cornerstoneTools = cornerstoneToolsJS();
-                var cornerstoneMath = cornerstoneMathJS();
                 var imgLoader = require('../cornerstone/exampleImageIdLoader.js');
-                
-                console.log('cornerstoneJS', imgLoader);
                 
                 var imageId = scope.imageId;
                 var cornerstoneContainer = element[0];
@@ -385,8 +392,8 @@ const app = angular
                     cornerstoneTools.mouseWheelInput.enable(cornerstoneElement);
 
                     // Enable all tools we want to use with this element
-                    cornerstoneTools.wwwc.activate(cornerstoneElement, 1); // ww/wc is the default tool for left mouse button
-                    cornerstoneTools.pan.activate(cornerstoneElement, 2); // pan is the default tool for middle mouse button
+                    cornerstoneTools.wwwc.activate(cornerstoneElement, 2); // ww/wc is the default tool for left mouse button
+                    cornerstoneTools.pan.activate(cornerstoneElement, 1); // pan is the default tool for middle mouse button
                     cornerstoneTools.zoom.activate(cornerstoneElement, 4); // zoom is the default tool for right mouse button
                     cornerstoneTools.zoomWheel.activate(cornerstoneElement); // zoom is the default tool for middle mouse wheel
                 });

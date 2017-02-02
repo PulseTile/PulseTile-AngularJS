@@ -1,7 +1,7 @@
-import ClinicalnotesCreateComponent from '../../../../app/rippleui/pages/clinical-notes/clinicalnotes-create.component';
+import PersonalnotesCreateComponent from '../../../../app/rippleui/pages/personal-notes/personalnotes-create.component';
 import '../../../../app/index';
 
-describe('Clinicalnotes Create', function() {
+describe('Personalnotes Create', function() {
 
     beforeEach(angular.mock.module('ripple-ui'));
 
@@ -12,8 +12,8 @@ describe('Clinicalnotes Create', function() {
         scope = $injector.get('$rootScope').$new();
         state = _$state_;
 
-        template = ClinicalnotesCreateComponent.template;
-        ctrl = controller(ClinicalnotesCreateComponent.controller, {
+        template = PersonalnotesCreateComponent.template;
+        ctrl = controller(PersonalnotesCreateComponent.controller, {
             $scope: scope,
             $state: state,
             $stateParams: _$stateParams_,
@@ -27,13 +27,13 @@ describe('Clinicalnotes Create', function() {
         spyOn(ctrl, 'setCurrentPageData');
         spyOn(ctrl, 'goList');
         spyOn(ctrl, 'cancel');
-        spyOn(scope, 'clinicalnotesCreate');
+        spyOn(scope, 'personalnotesCreate');
         spyOn(scope, 'create');
 
         ctrl.setCurrentPageData();
         ctrl.goList();
         ctrl.cancel();
-        scope.clinicalnotesCreate();
+        scope.personalnotesCreate();
         scope.create();
     });
 
@@ -49,8 +49,8 @@ describe('Clinicalnotes Create', function() {
     it("cancel was called", function() {
         expect(ctrl.cancel).toHaveBeenCalled();
     });
-    it("clinicalnotesCreate was called", function() {
-        expect(scope.clinicalnotesCreate).toHaveBeenCalled();
+    it("PersonalnotesCreate was called", function() {
+        expect(scope.personalnotesCreate).toHaveBeenCalled();
     });
     it("create was called", function() {
         expect(scope.create).toHaveBeenCalled();

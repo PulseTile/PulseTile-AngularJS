@@ -471,7 +471,36 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           banner: {template: '<patients-banner-component></patients-banner-component>'},
           actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
           main: {template: '<orders-list-component></orders-list-component>'}
-        }
+        },
+        breadcrumbs: [{
+          title: 'Patient Listings',
+          state: 'patients-list'
+        }, {
+          title: 'Patient Summary',
+          state: 'patients-summary'
+        }, {
+          title: 'Orders',
+          state: 'orders'
+        }]
+      })
+      .state('orders-create', {
+        url: '/patients/{patientId:int}/orders/create?reportType&searchString&queryType',
+        views: {
+          banner: {template: '<patients-banner-component></patients-banner-component>'},
+          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+          main: {template: '<orders-list-component></orders-list-component>'},
+          detail: {template: '<orders-create-component></orders-create-component>'}
+        },
+        breadcrumbs: [{
+          title: 'Patient Listings',
+          state: 'patients-list'
+        }, {
+          title: 'Patient Summary',
+          state: 'patients-summary'
+        }, {
+          title: 'Orders',
+          state: 'orders'
+        }]
       })
       .state('orders-detail', {
         url: '/patients/{patientId:int}/orders/{orderId}?filter&page&reportType&searchString&queryType&source',
@@ -480,7 +509,18 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
           main: {template: '<orders-list-component></orders-list-component>'},
           detail: {template: '<orders-detail-component></orders-detail-component>'}
-        }
+        },
+        params: { source: '{}' },
+        breadcrumbs: [{
+          title: 'Patient Listings',
+          state: 'patients-list'
+        }, {
+          title: 'Patient Summary',
+          state: 'patients-summary'
+        }, {
+          title: 'Orders',
+          state: 'orders'
+        }]
       })
 
       .state('referrals', {
@@ -732,7 +772,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         views: {
           banner: {template: '<patients-banner-component></patients-banner-component>'},
           actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<clinicalnotes-list-component></clinicalnotes-list-component>'}
+          main: {template: '<personalnotes-list-component></personalnotes-list-component>'}
         },
         breadcrumbs: [{
           title: 'Patient Listings',
@@ -750,8 +790,8 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         views: {
           banner: {template: '<patients-banner-component></patients-banner-component>'},
           actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<clinicalnotes-list-component></clinicalnotes-list-component>'},
-          detail: {template: '<clinicalnotes-create-component></clinicalnotes-create-component>'}
+          main: {template: '<personalnotes-list-component></personalnotes-list-component>'},
+          detail: {template: '<personalnotes-create-component></personalnotes-create-component>'}
         },
         breadcrumbs: [{
           title: 'Patient Listings',
@@ -769,8 +809,8 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         views: {
           banner: {template: '<patients-banner-component></patients-banner-component>'},
           actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<clinicalnotes-list-component></clinicalnotes-list-component>'},
-          detail: {template: '<clinicalnotes-detail-component></clinicalnotes-detail-component>'}
+          main: {template: '<personalnotes-list-component></personalnotes-list-component>'},
+          detail: {template: '<personalnotes-detail-component></personalnotes-detail-component>'}
         },
         params: { source: '{}' },
         breadcrumbs: [{
@@ -782,6 +822,64 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         }, {
           title: 'Personal Notes',
           state: 'personalNotes'
+        }]
+      })
+
+      .state('clinicalNotes', {
+        url: '/patients/{patientId:int}/clinicalNotes?reportType&searchString&queryType',
+        views: {
+          banner: {template: '<patients-banner-component></patients-banner-component>'},
+          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+          main: {template: '<clinicalnotes-list-component></clinicalnotes-list-component>'}
+        },
+        breadcrumbs: [{
+          title: 'Patient Listings',
+          state: 'patients-list'
+        }, {
+          title: 'Patient Summary',
+          state: 'patients-summary'
+        }, {
+          title: 'Clinical Notes',
+          state: 'clinicalNotes'
+        }]
+      })
+      .state('clinicalNotes-create', {
+        url: '/patients/{patientId:int}/clinicalNotes/create?reportType&searchString&queryType',
+        views: {
+          banner: {template: '<patients-banner-component></patients-banner-component>'},
+          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+          main: {template: '<personalnotes-list-component></personalnotes-list-component>'},
+          detail: {template: '<clinicalnotes-create-component></clinicalnotes-create-component>'}
+        },
+        breadcrumbs: [{
+          title: 'Patient Listings',
+          state: 'patients-list'
+        }, {
+          title: 'Patient Summary',
+          state: 'patients-summary'
+        }, {
+          title: 'Clinical Notes',
+          state: 'clinicalNotes'
+        }]
+      })
+      .state('clinicalNotes-detail', {
+        url: '/patients/{patientId:int}/clinicalNotes/{personalNoteIndex}?filter&page&reportType&searchString&queryType&source',
+        views: {
+          banner: {template: '<patients-banner-component></patients-banner-component>'},
+          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+          main: {template: '<personalnotes-list-component></personalnotes-list-component>'},
+          detail: {template: '<clinicalnotes-detail-component></clinicalnotes-detail-component>'}
+        },
+        params: { source: '{}' },
+        breadcrumbs: [{
+          title: 'Patient Listings',
+          state: 'patients-list'
+        }, {
+          title: 'Patient Summary',
+          state: 'patients-summary'
+        }, {
+          title: 'Clinical Notes',
+          state: 'clinicalNotes'
         }]
       })
 

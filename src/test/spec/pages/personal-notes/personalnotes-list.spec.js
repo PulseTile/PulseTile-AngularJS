@@ -1,11 +1,11 @@
 'use strict';
-import ClinicalnotesListComponent from '../../../../app/rippleui/pages/clinical-notes/clinicalnotes-list.component.js';
+import PersonalnotesListComponent from '../../../../app/rippleui/pages/personal-notes/personalnotes-list.component.js';
 import '../../../../app/index';
 import '../../../../app/actions/index';
 import * as types from '../../../../app/constants/ActionTypes';
-import clinicalnotes from '../../../../app/rippleui/pages/clinical-notes/clinicalnotes-reducer-all.js';
+import personalnotes from '../../../../app/rippleui/pages/personal-notes/personalnotes-reducer-all.js';
 
-describe('Clinicalnotes List', function() {
+describe('Personalnotes List', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
@@ -32,9 +32,9 @@ describe('Clinicalnotes List', function() {
     personalnotesActions = _personalnotesActions_;
     usSpinnerService = _usSpinnerService_;
 
-    template = ClinicalnotesListComponent.template;
+    template = PersonalnotesListComponent.template;
 
-    ctrl = controller(ClinicalnotesListComponent.controller, {
+    ctrl = controller(PersonalnotesListComponent.controller, {
       $scope: scope,
       $state: state,
       $stateParams: stateParams,
@@ -50,10 +50,10 @@ describe('Clinicalnotes List', function() {
 
   beforeEach(function() {
     fakeCall = {
-      callClinicalnotes: clinicalnotes
+      callPersonalnotes: personalnotes
     };
 
-    spyOn(fakeCall, 'callClinicalnotes');
+    spyOn(fakeCall, 'callPersonalnotes');
 
     spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
@@ -67,7 +67,7 @@ describe('Clinicalnotes List', function() {
     spyOn(actions, 'create');
     spyOn(actions, 'update');
 
-    fakeCall.callClinicalnotes({}, types.EOLCAREPLANS);
+    fakeCall.callPersonalnotes({}, types.EOLCAREPLANS);
 
     ctrl.pageChangeHandler();
     ctrl.go();
@@ -94,8 +94,8 @@ describe('Clinicalnotes List', function() {
   it('Include personalnotesActions in index actions file', function() {
     expect(actions).toBeDefined();
   });
-  it("Clinicalnotes reducer was called", function() {
-    expect(fakeCall.callClinicalnotes).toHaveBeenCalled();
+  it("Personalnotes reducer was called", function() {
+    expect(fakeCall.callPersonalnotes).toHaveBeenCalled();
   });
   it("personalnotesActions methods was called", function() {
     expect(actions.all).toHaveBeenCalled();
