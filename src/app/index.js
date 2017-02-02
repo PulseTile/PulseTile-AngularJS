@@ -443,6 +443,47 @@ const app = angular
             }]
         }
     })
+    .directive('filtering', function() {
+        /* istanbul ignore next  */
+        return {
+            restrict: 'A',
+            controller: ['$scope', '$element', '$timeout', 'serviceRequests', '$state', 
+                function($scope, $element, $timeout, serviceRequests, $state) {
+                    var nameState = $state.router.globals.$current.name.replace(/-(detail|create)/, '');
+
+                    $scope.isFilterOpen = false;
+                    $scope.queryFilter = '';
+
+                    if (serviceRequests.filter.state === nameState) {
+                        $scope.isFilterOpen = serviceRequests.filter.isOpen;
+                        $scope.queryFilter = serviceRequests.filter.query;
+                    } else {
+                        serviceRequests.filter.isOpen = $scope.isFilterOpen;
+                        serviceRequests.filter.query = $scope.queryFilter;
+                        serviceRequests.filter.state = nameState;
+                    }
+
+                    $scope.toggleFilter = function () {
+                        $scope.isFilterOpen = !$scope.isFilterOpen;
+
+                        if ($scope.isFilterOpen) {
+                            $timeout(function(){
+                                document.getElementById('filter').focus();
+                            }, 0);
+                        } else {
+                            $scope.queryFilter = '';
+                        }
+
+                        serviceRequests.filter.isOpen = $scope.isFilterOpen;
+                        serviceRequests.filter.query = $scope.queryFilter;
+                    };
+
+                    $scope.$watch('queryFilter', function(queryFilterValue) {
+                        serviceRequests.filter.query = queryFilterValue;
+                    });
+            }]
+        }
+    })
     .filter('formatNHSNumber', function() {
         return function(number) {
             if (number === undefined) {

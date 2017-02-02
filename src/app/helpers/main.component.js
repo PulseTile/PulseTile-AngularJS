@@ -121,7 +121,7 @@ class MainController {
       this.hideSidebarOnMobile();
     }.bind(this));
 
-    $rootScope.$on('$locationChangeStart', function() {
+    $rootScope.$on('$locationChangeStart', function(e) {
       $scope.fullPanelClass = '';
       this.hideSidebarOnMobile();
 

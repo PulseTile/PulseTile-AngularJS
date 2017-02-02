@@ -20,19 +20,15 @@ class VitalsListController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.query = '';
-    this.vitals
+    this.vitals;
     this.currentPage = 1;
-    this.isFilter = false;
     $scope.viewList;
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'vitals-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'vitals';
 
     
-    this.toggleFilter = function () {
-      this.isFilter = !this.isFilter;
-    };
+
 
     this.sort = function (field) {
       var reverse = this.reverse;
@@ -53,15 +49,10 @@ class VitalsListController {
     this.order = serviceRequests.currentSort.order || 'id';
     this.reverse = serviceRequests.currentSort.reverse || false;
 
-    if (serviceRequests.filter) {
-      this.query = serviceRequests.filter;
-      this.isFilter = true;
-    }
 
     this.create = function () {
       $state.go('vitals-create', {
         patientId: $stateParams.patientId,
-        filter: this.query,
         page: this.currentPage
       });
     };
@@ -69,13 +60,11 @@ class VitalsListController {
     $scope.go = function (id, vital) {
       serviceRequests.currentSort.order = this.order;
       serviceRequests.currentSort.reverse = this.reverse;
-      serviceRequests.filter = this.query || '';
       serviceRequests.viewList = $scope.viewList;
 
       $state.go('vitals-detail', {
         // patientId: $stateParams.patientId,
         // vitalIndex: id,
-        // filter: this.query,
         // page: this.currentPage,
         // reportType: $stateParams.reportType,
         // searchString: $stateParams.searchString,
@@ -83,7 +72,6 @@ class VitalsListController {
 
         patientId: $stateParams.patientId,
         vitalIndex: id,
-        filter: this.query,
         page: this.currentPage,
         reportType: null,
         searchString: null,
@@ -499,10 +487,6 @@ class VitalsListController {
 
     if ($stateParams.page) {
       this.currentPage = $stateParams.page;
-    }
-
-    if ($stateParams.filter) {
-      this.query.$ = $stateParams.filter;
     }
 
     let unsubscribe = $ngRedux.connect(state => ({

@@ -49,7 +49,7 @@ class ProceduresListController {
 			}
 		};
 
-		this.order = serviceRequests.currentSort.order || 'name';
+		this.order = serviceRequests.currentSort.order || 'procedureName';
 		this.reverse = serviceRequests.currentSort.reverse || false;
 		if (serviceRequests.filter) {
 			this.query[this.queryBy] = serviceRequests.filter;

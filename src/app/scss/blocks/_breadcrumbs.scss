@@ -10,8 +10,11 @@
 		display: inline-block;
 		vertical-align: middle;
 		margin-right: 8px;
-		font-size: 14px;
+		font-size: 12px;
 		line-height: 20px;
+		@include respond-to(sm) {
+			font-size: 14px;
+		}
 	}
 	span:not(.breadcrumb-separate) {
 		font-weight: 700;

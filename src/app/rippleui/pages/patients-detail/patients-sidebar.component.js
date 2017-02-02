@@ -148,7 +148,6 @@ class PatientsSidebarController {
     this.goTo = function (section) {
       serviceRequests.currentSort.order = '';
       serviceRequests.currentSort.reverse = false;
-      serviceRequests.filter = '';
       var requestHeader = {
         patientId: $stateParams.patientId,
         reportType: $stateParams.reportType,

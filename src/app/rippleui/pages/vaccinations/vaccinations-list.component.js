@@ -20,17 +20,11 @@ class VaccinationsListController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.query = '';
     this.currentPage = 1;
-    this.isFilter = false;
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'vaccinations-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'vaccinations';
     
-    this.toggleFilter = function () {
-      this.isFilter = !this.isFilter;
-    };
-
     this.sort = function (field) {
       var reverse = this.reverse;
       if (this.order === field) {
@@ -49,15 +43,10 @@ class VaccinationsListController {
 
     this.order = serviceRequests.currentSort.order || 'name';
     this.reverse = serviceRequests.currentSort.reverse || false;
-    if (serviceRequests.filter) {
-      this.query = serviceRequests.filter;
-      this.isFilter = true;
-    }
 
     this.create = function () {
       $state.go('vaccinations-create', {
         patientId: $stateParams.patientId,
-        filter: this.query,
         page: this.currentPage
       });
     };
@@ -65,11 +54,9 @@ class VaccinationsListController {
     this.go = function (id, vaccination) {
       serviceRequests.currentSort.order = this.order;
       serviceRequests.currentSort.reverse = this.reverse;
-      serviceRequests.filter = this.query || '';
       $state.go('vaccinations-detail', {
         // patientId: $stateParams.patientId,
         // vaccinationIndex: id,
-        // filter: this.query,
         // page: this.currentPage,
         // reportType: $stateParams.reportType,
         // searchString: $stateParams.searchString,
@@ -77,7 +64,6 @@ class VaccinationsListController {
 
         patientId: $stateParams.patientId,
         vaccinationIndex: id,
-        filter: this.query,
         page: this.currentPage,
         reportType: null,
         searchString: null,
@@ -140,10 +126,6 @@ class VaccinationsListController {
 
     if ($stateParams.page) {
       this.currentPage = $stateParams.page;
-    }
-
-    if ($stateParams.filter) {
-      this.query.$ = $stateParams.filter;
     }
 
     let unsubscribe = $ngRedux.connect(state => ({
