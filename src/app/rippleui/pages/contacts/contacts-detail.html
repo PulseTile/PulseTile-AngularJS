@@ -108,7 +108,24 @@
                 <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.relationship.$dirty) && contactForm.relationship.$invalid, 'has-success': contactForm.relationship.$valid && contactForm.relationship.$dirty}">
                   <label for="relationship" class="control-label">Relationship</label>
                   <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="relationship" name="relationship" ng-model="contactEdit.relationship" required />
+                    <select class="form-control input-sm" class="form-control input-sm" id="relationship" name="relationship" ng-model="contactEdit.relationship" required>
+                        <option>Husband</option>
+                        <option>Wife</option>
+                        <option>Father</option>
+                        <option>Alone</option>
+                        <option>Mother</option>
+                        <option>Daughter</option>
+                        <option>Son</option>
+                        <option>Brother</option>
+                        <option>Sister</option>
+                        <option>Friend</option>
+                        <option>Family friend</option>
+                        <option>Neighbour</option>
+                        <option>District Nurse</option>
+                        <option>Primary Care Worker</option>
+                        <option>Allocated social worker</option>
+                        <option>Care C-ordinator</option>
+                    </select>
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.relationship.$error.required">You must enter a value.</span>
                 </div>
