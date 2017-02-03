@@ -26,11 +26,6 @@ class ServiceRequests {
           order: '',
           reverse: false
         };
-        this.filter = {
-          isOpen: false,
-          query: '',
-          state: ''
-        };
     
         this.publisher = function(eventName, data) {
             if (this.debug) { console.log('PUBLISH', eventName, data); }

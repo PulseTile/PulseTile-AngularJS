@@ -122,6 +122,7 @@ import TransferOfCareListComponent from './rippleui/pages/transfer-of-care/trans
 import TransferOfCareDetailComponent from './rippleui/pages/transfer-of-care/transfer-of-care-detail.component';
 
 import ServiceRequests from './services/serviceRequests.js';
+import ServiceStateMenager from './services/serviceStateMenager.js';
 
 import routeConfig from 'app/index.route';
 import 'app/scss/core.scss';
@@ -145,6 +146,7 @@ const app = angular
     .factory('httpMiddleware', httpMiddleware)
     .factory('Patient', Patient)
     .service('serviceRequests', ServiceRequests)
+    .service('serviceStateMenager', ServiceStateMenager)
     .component('profileComponent', ProfileComponent)
     .component('patientsComponent', PatientsComponent)
     .component('headerComponent', HeaderComponent)
@@ -454,20 +456,20 @@ const app = angular
         /* istanbul ignore next  */
         return {
             restrict: 'A',
-            controller: ['$scope', '$element', '$timeout', 'serviceRequests', '$state', 
-                function($scope, $element, $timeout, serviceRequests, $state) {
+            controller: ['$scope', '$element', '$timeout', 'serviceStateMenager', '$state', 
+                function($scope, $element, $timeout, serviceStateMenager, $state) {
                     var nameState = $state.router.globals.$current.name.replace(/-(detail|create)/, '');
 
                     $scope.isFilterOpen = false;
                     $scope.queryFilter = '';
 
-                    if (serviceRequests.filter.state === nameState) {
-                        $scope.isFilterOpen = serviceRequests.filter.isOpen;
-                        $scope.queryFilter = serviceRequests.filter.query;
+                    if (serviceStateMenager.filter.state === nameState) {
+                        $scope.isFilterOpen = serviceStateMenager.filter.isOpen;
+                        $scope.queryFilter = serviceStateMenager.filter.query;
                     } else {
-                        serviceRequests.filter.isOpen = $scope.isFilterOpen;
-                        serviceRequests.filter.query = $scope.queryFilter;
-                        serviceRequests.filter.state = nameState;
+                        serviceStateMenager.filter.isOpen = $scope.isFilterOpen;
+                        serviceStateMenager.filter.query = $scope.queryFilter;
+                        serviceStateMenager.filter.state = nameState;
                     }
 
                     $scope.toggleFilter = function () {
@@ -481,12 +483,12 @@ const app = angular
                             $scope.queryFilter = '';
                         }
 
-                        serviceRequests.filter.isOpen = $scope.isFilterOpen;
-                        serviceRequests.filter.query = $scope.queryFilter;
+                        serviceStateMenager.filter.isOpen = $scope.isFilterOpen;
+                        serviceStateMenager.filter.query = $scope.queryFilter;
                     };
 
                     $scope.$watch('queryFilter', function(queryFilterValue) {
-                        serviceRequests.filter.query = queryFilterValue;
+                        serviceStateMenager.filter.query = queryFilterValue;
                     });
             }]
         }
