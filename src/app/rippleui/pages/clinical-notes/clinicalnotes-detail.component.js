@@ -20,6 +20,7 @@ class ClinicalnotesDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, clinicalnotesActions, serviceRequests, usSpinnerService) {
     
     this.setCurrentPageData = function (data) {
+      /* istanbul ignore if  */
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
@@ -42,7 +43,8 @@ class ClinicalnotesDetailController {
     //Edit Clinical Note
     
     $scope.isEdit = false;
-    
+
+    /* istanbul ignore next  */
     this.edit = function () {
       $scope.isEdit = true;
 
@@ -58,7 +60,7 @@ class ClinicalnotesDetailController {
 
     $scope.confirmEdit = function (personalNoteForm, personalNote) {
       $scope.formSubmitted = true;
-
+      /* istanbul ignore if  */
       if (personalNoteForm.$valid) {
         let toUpdate = {
           noteType: personalNote.noteType,
