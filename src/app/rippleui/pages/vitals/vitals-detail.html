@@ -194,7 +194,10 @@
                   <div class="input-holder">
                     <label class="switch">
                       <input id="oxygenSupplemental" type="checkbox" name="oxygenSupplemental" ng-model="vitalEdit.oxygenSupplemental" ng-change="changeVital(vitalEdit, 'oxygenSupplemental')">
-                      <div class="slider"></div>
+                      <div class="slider">
+                        <span class="text text-check-true">Yes</span>
+                        <span class="text text-check-false">No</span>
+                      </div>
                     </label>
                   </div>
                 </div>
@@ -264,13 +267,25 @@
                 <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalForm.levelOfConsciousness.$dirty) && vitalForm.levelOfConsciousness.$invalid, 'has-success': vitalForm.levelOfConsciousness.$valid && vitalForm.levelOfConsciousness.$dirty}">
                   <span ng-class="getHighlighterClass('levelOfConsciousness')"></span>  
                   <label for="levelOfConsciousness" class="vitals-label">Level of Consciousness</label>
-                  <div class="input-holder" ng-class="classesVitalStatus.levelOfConsciousness">
-                    <select class="form-control input-sm" id="levelOfConsciousness" name="levelOfConsciousness" ng-model="vitalEdit.levelOfConsciousness" ng-change="changeVital(vitalEdit, 'levelOfConsciousness')" required>
-                        <option value="A">Alert</option>
-                        <option value="V">Verbal</option>
-                        <option value="P">Pain</option>
-                        <option value="U">Unresponsive</option>
-                    </select>
+                  <div class="input-holder">
+                    <div class="switch-group">
+                      <label class="switch">
+                        <input id="levelOfConsciousnessA" type="radio" name="levelOfConsciousness" value="A" ng-model="vitalEdit.levelOfConsciousness" ng-change="changeVital(vitalEdit, 'levelOfConsciousness')" required>
+                        <div class="slider"><span class="text">A</span></div>
+                      </label>
+                      <label class="switch">
+                        <input id="levelOfConsciousnessV" type="radio" name="levelOfConsciousness" value="V" ng-model="vitalEdit.levelOfConsciousness" ng-change="changeVital(vitalEdit, 'levelOfConsciousness')" required>
+                        <div class="slider"><span class="text">V</span></div>
+                      </label>
+                      <label class="switch">
+                        <input id="levelOfConsciousnessP" type="radio" name="levelOfConsciousness" value="P" ng-model="vitalEdit.levelOfConsciousness" ng-change="changeVital(vitalEdit, 'levelOfConsciousness')" required>
+                        <div class="slider"><span class="text">P</span></div>
+                      </label>
+                      <label class="switch">
+                        <input id="levelOfConsciousnessU" type="radio" name="levelOfConsciousness" value="U" ng-model="vitalEdit.levelOfConsciousness" ng-change="changeVital(vitalEdit, 'levelOfConsciousness')" required>
+                        <div class="slider"><span class="text">U</span></div>
+                      </label>
+                    </div>
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && vitalForm.levelOfConsciousness.$error.required">You must enter a value.</span>
                 </div>

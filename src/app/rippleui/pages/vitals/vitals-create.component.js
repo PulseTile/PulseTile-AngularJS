@@ -19,7 +19,6 @@ class VitalsCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, serviceVitalsSigns) {
     $scope.classesVitalStatus = {};
     $scope.popoverLabels = serviceVitalsSigns.getLabels();
-    $scope.popoverLabels = serviceVitalsSigns.getLabels();
     $scope.pattern = serviceVitalsSigns.pattern;
     $scope.vitalEdit = {};
     $scope.vitalEdit.date = new Date();
