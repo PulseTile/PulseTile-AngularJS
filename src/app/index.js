@@ -123,6 +123,7 @@ import TransferOfCareDetailComponent from './rippleui/pages/transfer-of-care/tra
 
 import ServiceRequests from './services/serviceRequests.js';
 import ServiceStateMenager from './services/serviceStateMenager.js';
+import ServiceVitalsSigns from './rippleui/pages/vitals/serviceVitalsSigns.js';
 
 import routeConfig from 'app/index.route';
 import 'app/scss/core.scss';
@@ -145,8 +146,11 @@ const app = angular
     .factory('cornerstoneToolsJS', cornerstoneToolsJS)
     .factory('httpMiddleware', httpMiddleware)
     .factory('Patient', Patient)
+
     .service('serviceRequests', ServiceRequests)
     .service('serviceStateMenager', ServiceStateMenager)
+    .service('serviceVitalsSigns', ServiceVitalsSigns)
+
     .component('profileComponent', ProfileComponent)
     .component('patientsComponent', PatientsComponent)
     .component('headerComponent', HeaderComponent)

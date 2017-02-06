@@ -107,7 +107,7 @@ class VitalsListController {
         labels: []
       }
       var datasetsData = {
-        distolicBP: [],
+        diastolicBP: [],
         systolicBP: [],
         temperature: [],
         heartRate: [],
@@ -118,12 +118,12 @@ class VitalsListController {
       for (var i = 0; i < vitals.length; i++) {
         dataChart.labels.push(formatDate(new Date(vitals[i].dateCreate)));
 
-        datasetsData.distolicBP.push(vitals[i].vitalsSigns.distolicBP.value);
-        datasetsData.systolicBP.push(vitals[i].vitalsSigns.systolicBP.value);
-        datasetsData.temperature.push(vitals[i].vitalsSigns.temperature.value);
-        datasetsData.heartRate.push(vitals[i].vitalsSigns.heartRate.value);
-        datasetsData.respirationRate.push(vitals[i].vitalsSigns.respirationRate.value);
-        datasetsData.oxygenSaturation.push(vitals[i].vitalsSigns.oxygenSaturation.value);
+        datasetsData.diastolicBP.push(vitals[i].diastolicBP);
+        datasetsData.systolicBP.push(vitals[i].systolicBP);
+        datasetsData.temperature.push(vitals[i].temperature);
+        datasetsData.heartRate.push(vitals[i].heartRate);
+        datasetsData.respirationRate.push(vitals[i].respirationRate);
+        datasetsData.oxygenSaturation.push(vitals[i].oxygenSaturation);
       }
 
       dataChart.datasets = [
@@ -131,20 +131,20 @@ class VitalsListController {
           label: "DBP",
           fill: false,
           lineTension: 0,
-          backgroundColor: "rgba(236, 109, 28, 0.4)",
-          borderColor: "rgba(236, 109, 28, 1)",
+          backgroundColor: "rgba(5, 186, 195, 0.4)",
+          borderColor: "rgba(5, 186, 195, 1)",
           borderCapStyle: 'butt',
           borderDash: [],
           borderDashOffset: 0.0,
           borderJoinStyle: 'miter',
-          pointBorderColor: "rgba(236, 109, 28, 1)",
-          pointBackgroundColor: "rgba(236, 109, 28, 1)",
+          pointBorderColor: "rgba(5, 186, 195, 1)",
+          pointBackgroundColor: "rgba(5, 186, 195, 1)",
           pointBorderWidth: 5,
           pointRadius: 1,
-            pointHoverBorderWidth: 8,
+          pointHoverBorderWidth: 8,
           pointHoverRadius: 1,
           pointHitRadius: 8,
-          data: datasetsData.distolicBP,
+          data: datasetsData.diastolicBP,
         }, {
           label: "SBP",
           fill: false,
@@ -289,172 +289,61 @@ class VitalsListController {
       var date = new Date();
       $scope.vitals = [
         {
-          sourceId: '1',
-          seriesNumber: 1,
+          sourceId: '1',  
           source: 'Marand',
           author: 'ripple_osi',
           dateCreate: Date.parse(new Date()),
-          vitalsSigns: {
-            respirationRate: {
-              value: 25,
-              status: 'warning'
-            },
-            oxygenSaturation: {
-              value: 97,
-              status: 'danger'
-            },
-            oxygenSupplemental: {
-              value: false
-            },
-            systolicBP: {
-              value: 90,
-              status: 'danger'
-            }, 
-            distolicBP: {
-              value: 60,
-              status: 'danger'
-            },
-            heartRate: {
-              value: 45,
-              status: 'success'
-            },
-            temperature: {
-              value: 35.4,
-              status: 'success'
-            },
-            levelOfConsciousness: {
-              value: 'Alert'
-            },
-            newsScore: {
-              value: 3,
-              status: 'danger'
-            }
-          }
+          respirationRate: 25,
+          oxygenSaturation: 97,
+          oxygenSupplemental: false,
+          systolicBP: 90,
+          diastolicBP: 60,
+          heartRate: 45,
+          temperature: 35.4,
+          levelOfConsciousness: 'A',
+          newsScore: 3
         }, {
           sourceId: '2',
-          seriesNumber: 2,
           source: 'EtherCIS',
           author: 'ripple_osi',
           dateCreate: Date.parse(new Date(date.setDate(date.getDate()-1))),
-          vitalsSigns: {
-            respirationRate: {
-              value: 29,
-              status: 'warning'
-            },
-            oxygenSaturation: {
-              value: 115,
-              status: 'success'
-            },
-            oxygenSupplemental: {
-              value: false
-            },
-            systolicBP: {
-              value: 60,
-              status: 'warning'
-            }, 
-            distolicBP: {
-              value: 78,
-              status: 'warning'
-            },
-            heartRate: {
-              value: 99,
-              status: 'danger'
-            },
-            temperature: {
-              value: 36.6,
-              status: 'success'
-            },
-            levelOfConsciousness: {
-              value: 'Verbal'
-            },
-            newsScore: {
-              value: 3
-            }
-          }
+          respirationRate: 29,
+          oxygenSaturation: 115,
+          oxygenSupplemental: false,
+          systolicBP: 60,
+          diastolicBP: 78,
+          heartRate: 99,
+          temperature: 36.6,
+          levelOfConsciousness: 'V',
+          newsScore: 3
         }, {
           sourceId: '3',
-          seriesNumber: 3,
           source: 'Marand',
           author: 'ripple_osi',
           dateCreate: Date.parse(new Date(date.setDate(date.getDate()-4))),
-          vitalsSigns: {
-            respirationRate: {
-              value: 35,
-              status: 'danger'
-            },
-            oxygenSaturation: {
-              value: 69,
-              status: 'warning'
-            },
-            oxygenSupplemental: {
-              value: false
-            },
-            systolicBP: {
-              value: 92,
-              status: 'warning'
-            }, 
-            distolicBP: {
-              value: 69,
-              status: 'warning'
-            },
-            heartRate: {
-              value: 74,
-              status: 'danger'
-            },
-            temperature: {
-              value: 39.9,
-              status: 'success'
-            },
-            levelOfConsciousness: {
-              value: 'Pain'
-            },
-            newsScore: {
-              value: 2,
-              status: 'warning'
-            }
-          }
+          respirationRate: 35,
+          oxygenSaturation: 69,
+          oxygenSupplemental: false,
+          systolicBP: 92,
+          diastolicBP: 69,
+          heartRate: 74,
+          temperature: 39.9,
+          levelOfConsciousness: 'P',
+          newsScore: 2
         }, {
           sourceId: '4',
-          seriesNumber: 4,
           source: 'EtherCIS',
           author: 'ripple_osi',
           dateCreate: Date.parse(new Date(date.setDate(date.getDate()-5))),
-          vitalsSigns: {
-            respirationRate: {
-              value: 25,
-              status: 'success'
-            },
-            oxygenSaturation: {
-              value: 97,
-              status: 'success'
-            },
-            oxygenSupplemental: {
-              value: true
-            },
-            systolicBP: {
-              value: 93,
-              status: 'success'
-            }, 
-            distolicBP: {
-              value: 63,
-              status: 'success'
-            },
-            heartRate: {
-              value: 45,
-              status: 'success'
-            },
-            temperature: {
-              value: 40.0,
-              status: 'success'
-            },
-            levelOfConsciousness: {
-              value: 'Unresponsive'
-            },
-            newsScore: {
-              value: 1,
-              status: 'success'
-            }
-          }
+          respirationRate: 25,
+          oxygenSaturation: 97,
+          oxygenSupplemental: true,
+          systolicBP: 93,
+          diastolicBP: 63,
+          heartRate: 45,
+          temperature: 40.0,
+          levelOfConsciousness: 'U',
+          newsScore: 1
         },
       ];
       

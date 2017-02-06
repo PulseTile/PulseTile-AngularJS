@@ -54,8 +54,8 @@
         <tr dir-paginate="contact in $ctrl.contacts | filter: queryFilter | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage" ng-click="$ctrl.go(contact.sourceId, this)" ng-class="{info: $ctrl.selected(contact.sourceId)}">
           <td data-th="Name" ng-class="$ctrl.sortClass('name');">{{ contact.name }}</td>
           <td data-th="Relationship" ng-class="$ctrl.sortClass('relationship')">{{ contact.relationship }}</td>
-          <td data-th="Next of Kin" ng-class="$ctrl.sortClass('next')"><span class="table-icon"><i class="fa fa-fw fa-check" ng-if="contact.nextOfKin"></i><i class="fa fa-fw fa-minus" ng-if="!contact.nextOfKin"></i></span></td>
-          <td data-th="Source" ng-class="$ctrl.sortClass('source')">{{ contact.source }}</td>
+          <td data-th="Next of Kin" ng-class="$ctrl.sortClass('next')"><span ng-if="contact.nextOfKin">Yes</span><span ng-if="!contact.nextOfKin">No</span></td>
+          <td data-th="Source" class="hidden-xs-cell" ng-class="$ctrl.sortClass('source')">{{ contact.source }}</td>
         </tr>
 
         <tr ng-if="!$ctrl.contacts.length">

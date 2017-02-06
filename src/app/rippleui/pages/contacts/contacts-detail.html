@@ -48,7 +48,7 @@
 
             <div class="form-group">
               <label class="control-label">Next of Kin</label>
-              <div class="form-control-static"><span class="table-icon"><i class="fa fa-fw fa-check" ng-if="$ctrl.contact.nextOfKin"></i><i class="fa fa-fw fa-minus" ng-if="!$ctrl.contact.nextOfKin"></i></span></div>
+              <div class="form-control-static"><span ng-if="$ctrl.contact.nextOfKin">Yes</span><span ng-if="!$ctrl.contact.nextOfKin">No</span></div>
             </div>
 
             <div class="form-group">

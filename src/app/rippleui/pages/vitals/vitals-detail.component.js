@@ -16,19 +16,22 @@
 let templateVitalsDetail = require('./vitals-detail.html');
 
 class VitalsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, usSpinnerService, $sce) {
+  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, usSpinnerService, serviceVitalsSigns) {
     $scope.isEdit = false;
+    $scope.classesVitalStatus = {};
+    $scope.popoverLabels = serviceVitalsSigns.getLabels();
+    $scope.pattern = serviceVitalsSigns.pattern;
+    console.log('$scope.pattern');
+    console.log($scope.pattern);
+    this.vital = {};
 
-    /*
-      TODO: Only for demo
-    */
-    this.vital = $stateParams.source;
-
-    $scope.getHighlighterClass = function (status) {
-      if (!status) return 'highlighter-not-vital';
-
-      return 'highlighter-' + status;
+    $scope.getHighlighterClass = function (vitalName) {
+      return 'highlighter-' + ($scope.classesVitalStatus[vitalName] || 'not-vital');
     }
+    $scope.changeVital = function (vital, vitalName) {
+      $scope.classesVitalStatus[vitalName] = serviceVitalsSigns.getClassOnValue(vital[vitalName], vitalName);
+    }
+
     this.edit = function () {
       $scope.isEdit = true;
 
@@ -38,9 +41,13 @@ class VitalsDetailController {
     };
     this.cancelEdit = function () {
       $scope.isEdit = false;
+      $scope.classesVitalStatus = serviceVitalsSigns.setClassesVitalStatus(this.vital);
+
     };
     $scope.confirmEdit = function (vitalForm, vital) {
       $scope.formSubmitted = true;
+      console.dir('vitalForm');
+      console.dir(vitalForm);
       if (vitalForm.$valid) {
         $scope.isEdit = false;
         this.vital = Object.assign(this.vital, $scope.vitalEdit);
@@ -55,6 +62,9 @@ class VitalsDetailController {
     };
 
     this.setCurrentPageData = function (data) {
+        this.vital = $stateParams.source;
+        $scope.classesVitalStatus = serviceVitalsSigns.setClassesVitalStatus(this.vital);
+
       // if (data.vitals.dataGet) {
       //   this.vital = data.vitals.dataGet;
       //   usSpinnerService.stop('vitalDetail-spinner');
@@ -94,5 +104,5 @@ const VitalsDetailComponent = {
   controller: VitalsDetailController
 };
 
-VitalsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vitalsActions', 'serviceRequests', 'usSpinnerService', '$sce'];
+VitalsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vitalsActions', 'serviceRequests', 'usSpinnerService', 'serviceVitalsSigns'];
 export default VitalsDetailComponent;
