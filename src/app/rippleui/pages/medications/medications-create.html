@@ -87,7 +87,7 @@
             <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.route.$dirty) && medicationForm.route.$invalid, 'has-success': medicationForm.route.$valid && medicationForm.route.$dirty}">
                 <label for="route" class="control-label">Route</label>
                 <div class="input-holder">
-                    <select class="form-control input-sm" class="form-control input-sm" id="route" name="route" ng-model="medication.route" required>
+                    <select class="form-control input-sm" id="route" name="route" ng-model="medication.route" required>
                         <option value="">-- Route --</option>
                         <option>Po Per Oral</option>
                         <option>IV Intra Venous</option>

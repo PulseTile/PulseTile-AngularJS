@@ -151,7 +151,7 @@
               <div class="col-xs-12 col-md-6">
                 <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalForm.levelOfConsciousness.$dirty) && vitalForm.levelOfConsciousness.$invalid, 'has-success': vitalForm.levelOfConsciousness.$valid && vitalForm.levelOfConsciousness.$dirty}">
                   <span ng-class="getHighlighterClass('levelOfConsciousness')"></span>  
-                  <label class="vitals-label">Level of Consciousness</label>
+                  <label for="levelOfConsciousness" class="vitals-label">Level of Consciousness</label>
                   <div class="input-holder" ng-class="classesVitalStatus.levelOfConsciousness">
                     <select class="form-control input-sm" id="levelOfConsciousness" name="levelOfConsciousness" ng-model="vitalEdit.levelOfConsciousness" ng-change="changeVital(vitalEdit, 'levelOfConsciousness')" required>
                         <option value="">Select</option>
