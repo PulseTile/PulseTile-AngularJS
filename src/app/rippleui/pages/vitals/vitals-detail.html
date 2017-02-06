@@ -159,7 +159,7 @@
                       </div>
                     </div>
                   </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.respirationRate.$error.required || vitalForm.respirationRate.$invalid)">You must enter correct a value.</span>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.respirationRate.$error.required || vitalForm.respirationRate.$invalid)">You must enter a correct value.</span>
                 </div>
               </div>
               <div class="col-xs-12 col-md-6">
@@ -182,7 +182,7 @@
                       </div>
                     </div>
                   </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.oxygenSaturation.$error.required || vitalForm.oxygenSaturation.$invalid)">You must enter correct a value.</span>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.oxygenSaturation.$error.required || vitalForm.oxygenSaturation.$invalid)">You must enter a correct value.</span>
                 </div>
               </div>
             </div>
@@ -219,7 +219,7 @@
                       </div>
                     </div>
                   </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.heartRate.$error.required || vitalForm.heartRate.$invalid)">You must enter correct a value.</span>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.heartRate.$error.required || vitalForm.heartRate.$invalid)">You must enter a correct value.</span>
                 </div>
               </div>
             </div>
@@ -244,7 +244,7 @@
                       </div>
                     </div>
                   </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.systolicBP.$error.required || vitalForm.systolicBP.$invalid)">You must enter correct a value.</span>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.systolicBP.$error.required || vitalForm.systolicBP.$invalid)">You must enter a correct value.</span>
                 </div>
               </div>
               <div class="col-xs-12 col-md-6">
@@ -255,7 +255,7 @@
                     <input class="form-control input-sm" id="diastolicBP" name="diastolicBP" type="text" ng-model="vitalEdit.diastolicBP" ng-pattern="pattern.number" required/>
                     <span class="vitals-addon">mmHg</span>
                   </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.diastolicBP.$error.required || vitalForm.diastolicBP.$invalid)">You must enter correct a value.</span>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.diastolicBP.$error.required || vitalForm.diastolicBP.$invalid)">You must enter a correct value.</span>
                 </div>
               </div>
             </div>
@@ -265,14 +265,14 @@
                   <span ng-class="getHighlighterClass('levelOfConsciousness')"></span>  
                   <label class="vitals-label">Level of Consciousness</label>
                   <div class="input-holder" ng-class="classesVitalStatus.levelOfConsciousness">
-                    <select class="form-control input-sm" class="form-control input-sm" id="route" name="route" ng-model="vitalEdit.levelOfConsciousness" ng-change="changeVital(vitalEdit, 'levelOfConsciousness')" required>
+                    <select class="form-control input-sm" id="levelOfConsciousness" name="levelOfConsciousness" ng-model="vitalEdit.levelOfConsciousness" ng-change="changeVital(vitalEdit, 'levelOfConsciousness')" required>
                         <option value="A">Alert</option>
                         <option value="V">Verbal</option>
                         <option value="P">Pain</option>
                         <option value="U">Unresponsive</option>
                     </select>
                   </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.levelOfConsciousness.$error.required || vitalForm.levelOfConsciousness.$invalid)">You must enter correct a value.</span>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && vitalForm.levelOfConsciousness.$error.required">You must enter a value.</span>
                 </div>
               </div>
               <div class="col-xs-12 col-md-6">
@@ -295,7 +295,7 @@
                       </div>
                     </div>
                   </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.temperature.$error.required || vitalForm.temperature.$invalid)">You must enter correct a value.</span>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.temperature.$error.required || vitalForm.temperature.$invalid)">You must enter a correct value.</span>
                 </div>
               </div>
             </div>
@@ -305,7 +305,7 @@
                   <span ng-class="getHighlighterClass('newsScore')"></span>  
                   <label class="vitals-label">NEWS Score</label>
                   <div class="input-holder vitals-holder" ng-class="classesVitalStatus.newsScore">
-                    <input class="form-control input-sm" id="newsScore" name="newsScore" type="text" ng-model="vitalEdit.newsScore" required disabled/>
+                    <input class="form-control input-sm" id="newsScore" name="newsScore" type="text" ng-model="vitalEdit.newsScore" disabled/>
                   </div>
                 </div>
               </div>
@@ -319,7 +319,7 @@
               <div class="input-holder">
                 <input type="text" class="form-control input-sm" id="author" name="author" ng-model="vitalEdit.author" required disabled/>
               </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.author.$error.required || vitalForm.author.$invalid)">You must enter correct a value.</span>
+              <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.author.$error.required || vitalForm.author.$invalid)">You must enter a correct value.</span>
             </div>
            
             <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || vitalForm.dateCreate.$dirty) && vitalForm.dateCreate.$invalid, 'has-success': vitalForm.dateCreate.$valid && vitalForm.dateCreate.$dirty}">

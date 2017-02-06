@@ -21,8 +21,6 @@ class VitalsDetailController {
     $scope.classesVitalStatus = {};
     $scope.popoverLabels = serviceVitalsSigns.getLabels();
     $scope.pattern = serviceVitalsSigns.pattern;
-    console.log('$scope.pattern');
-    console.log($scope.pattern);
     this.vital = {};
 
     $scope.getHighlighterClass = function (vitalName) {

@@ -16,7 +16,11 @@
 let templateVitalsCreate = require('./vitals-create.html');
 
 class VitalsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests) {
+  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, serviceVitalsSigns) {
+    $scope.classesVitalStatus = {};
+    $scope.popoverLabels = serviceVitalsSigns.getLabels();
+    $scope.popoverLabels = serviceVitalsSigns.getLabels();
+    $scope.pattern = serviceVitalsSigns.pattern;
     $scope.vitalEdit = {};
     $scope.vitalEdit.date = new Date();
     $scope.vitalEdit.dateCreate = new Date();
@@ -32,7 +36,16 @@ class VitalsCreateController {
       if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;
       }
+      
+      $scope.classesVitalStatus = serviceVitalsSigns.setClassesVitalStatus($scope.vitalEdit);
     };
+
+    $scope.getHighlighterClass = function (vitalName) {
+      return 'highlighter-' + ($scope.classesVitalStatus[vitalName] || 'not-vital');
+    }
+    $scope.changeVital = function (vital, vitalName) {
+      $scope.classesVitalStatus[vitalName] = serviceVitalsSigns.getClassOnValue(vital[vitalName], vitalName);
+    }
 
     this.goList = function () {
       $state.go('vitals', {
@@ -58,7 +71,6 @@ class VitalsCreateController {
       };
 
       if (vitalForm.$valid) {
-
         $scope.vitalsCreate(this.currentPatient.id, toAdd);
       }
     }.bind(this);
@@ -85,5 +97,5 @@ const VitalsCreateComponent = {
   controller: VitalsCreateController
 };
 
-VitalsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vitalsActions', 'serviceRequests'];
+VitalsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vitalsActions', 'serviceRequests', 'serviceVitalsSigns'];
 export default VitalsCreateComponent;
