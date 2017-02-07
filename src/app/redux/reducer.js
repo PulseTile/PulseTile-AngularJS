@@ -43,6 +43,7 @@ import clinicalnotes from '../rippleui/pages/clinical-notes/clinicalnotes-reduce
 import personalnotes from '../rippleui/pages/personal-notes/personalnotes-reducer-all';
 import genericmdt from '../rippleui/pages/generic-mdt/generic-mdt-reducer-all';
 import transferOfCare from '../rippleui/pages/transfer-of-care/transfer-of-care-reducer-all';
+import vitals from '../rippleui/pages/vitals/vitals-reducer-all';
 
 export default combineReducers({
   patients,
@@ -72,5 +73,6 @@ export default combineReducers({
   personalnotes,
   clinicalnotes,
   genericmdt,
-  transferOfCare
+  transferOfCare,
+  vitals
 });
