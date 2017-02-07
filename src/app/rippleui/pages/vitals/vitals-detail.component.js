@@ -25,10 +25,10 @@ class VitalsDetailController {
 
     $scope.getHighlighterClass = function (vitalName) {
       return 'highlighter-' + ($scope.classesVitalStatus[vitalName] || 'not-vital');
-    }
+    };
     $scope.changeVital = function (vital, vitalName) {
       $scope.classesVitalStatus[vitalName] = serviceVitalsSigns.getClassOnValue(vital[vitalName], vitalName);
-    }
+    };
 
     this.edit = function () {
       $scope.isEdit = true;
@@ -60,6 +60,7 @@ class VitalsDetailController {
     };
 
     this.setCurrentPageData = function (data) {
+      if (!$stateParams.source) return;
         this.vital = $stateParams.source;
         $scope.classesVitalStatus = serviceVitalsSigns.setClassesVitalStatus(this.vital);
 

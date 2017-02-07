@@ -60,7 +60,6 @@ describe('Clinicalnotes List', function() {
     spyOn(ctrl, 'selected');
     spyOn(ctrl, 'create');
     spyOn(ctrl, 'setCurrentPageData');
-    spyOn(ctrl, 'search');
     spyOn(ctrl, 'clinicalnotesLoad');
     spyOn(actions, 'all');
     spyOn(actions, 'get');
@@ -74,7 +73,6 @@ describe('Clinicalnotes List', function() {
     ctrl.selected();
     ctrl.create();
     ctrl.setCurrentPageData();
-    ctrl.search();
     ctrl.clinicalnotesLoad();
     actions.all();
     actions.get();
@@ -82,9 +80,6 @@ describe('Clinicalnotes List', function() {
     actions.update();
   });
   
-  it('Query is empty', function() {
-    expect(scope.query).toBe('');
-  });
   it('Template exist', function() {
     expect(template).toBeDefined();
   });
@@ -117,9 +112,6 @@ describe('Clinicalnotes List', function() {
   });
   it("setCurrentPageData was called", function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
-  });
-  it("search was called", function() {
-    expect(ctrl.search).toHaveBeenCalled();
   });
   it("personalnotesLoad was called", function() {
     expect(ctrl.clinicalnotesLoad).toHaveBeenCalled();

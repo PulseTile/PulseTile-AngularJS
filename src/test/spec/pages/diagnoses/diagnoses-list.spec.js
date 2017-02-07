@@ -71,9 +71,6 @@ describe('Diagnoses List', function() {
     ctrl.diagnosesLoad();
   });
 
-  it('Query is empty', function() {
-    expect(ctrl.query).toBe('');
-  });
   it('Template exist', function() {
     expect(template).toBeDefined();
   });

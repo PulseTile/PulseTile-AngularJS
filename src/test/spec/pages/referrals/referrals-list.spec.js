@@ -43,7 +43,6 @@ describe('Referrals List', function() {
     spyOn(fakeCall, 'callReferrals');
 
     spyOn(ctrl, 'pageChangeHandler');
-    spyOn(ctrl, 'toggleFilter');
     spyOn(ctrl, 'go');
     spyOn(ctrl, 'selected');
     spyOn(ctrl, 'create');
@@ -52,16 +51,12 @@ describe('Referrals List', function() {
     fakeCall.callReferrals({}, types.REFERRALS);
 
     ctrl.pageChangeHandler();
-    ctrl.toggleFilter();
     ctrl.go();
     ctrl.selected();
     ctrl.create();
     ctrl.setCurrentPageData();
   });
 
-  it('Query', function() {
-    expect(ctrl.query).toBe('');
-  });
   it('Template exist', function() {
     expect(template).toBeDefined();
   });
@@ -76,9 +71,6 @@ describe('Referrals List', function() {
   });
   it("pageChangeHandler was called", function() {
     expect(ctrl.pageChangeHandler).toHaveBeenCalled();
-  });
-  it("search was called", function() {
-    expect(ctrl.toggleFilter).toHaveBeenCalled();
   });
   it("route go was called", function() {
     expect(ctrl.go).toHaveBeenCalled();

@@ -8,7 +8,7 @@ describe('VitalsDetailComponent', function() {
 
   let scope, ctrl, controller, template, stateParams, state, ngRedux, referralsActions, usSpinnerService;
   
-  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _patientsActions_, _vitalsActions_, _serviceRequests_, _usSpinnerService_, _$sce_) => {
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _patientsActions_, _vitalsActions_, _serviceRequests_, _usSpinnerService_, _serviceVitalsSigns_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
     state = _$state_;
@@ -22,12 +22,13 @@ describe('VitalsDetailComponent', function() {
       patientsActions: _patientsActions_,
       vitalsActions: _vitalsActions_,
       serviceRequests: _serviceRequests_,
-      usSpinnerService: _usSpinnerService_
+      usSpinnerService: _usSpinnerService_,
+      serviceVitalsSigns: _serviceVitalsSigns_
     });
   }));
 
 
-  it('Template exist', function() {
-    expect(template).toBeDefined();
+  it('ctrl exist', function() {
+    expect(ctrl).toBeDefined();
   });
 });

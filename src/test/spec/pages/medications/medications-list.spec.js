@@ -57,9 +57,6 @@ describe('Medications List', function() {
     ctrl.setCurrentPageData();
   });
 
-  it('Query', function() {
-    expect(ctrl.query).toBe('');
-  });
   it('Template exist', function() {
     expect(template).toBeDefined();
   });

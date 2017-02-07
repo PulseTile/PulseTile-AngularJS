@@ -45,7 +45,6 @@ describe('Results List', function() {
     spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
     spyOn(ctrl, 'selected');
-    spyOn(ctrl, 'search');
     spyOn(ctrl, 'setCurrentPageData');
     spyOn(ctrl, 'resultsLoad');
 
@@ -54,14 +53,10 @@ describe('Results List', function() {
     ctrl.pageChangeHandler();
     ctrl.go();
     ctrl.selected();
-    ctrl.search();
     ctrl.setCurrentPageData();
     ctrl.resultsLoad();
   });
 
-  it('Query is empty', function() {
-    expect(ctrl.query).toBe('');
-  });
   it('Template exist', function() {
     expect(template).toBeDefined();
   });
@@ -82,9 +77,6 @@ describe('Results List', function() {
   });
   it("selected was called", function() {
     expect(ctrl.selected).toHaveBeenCalled();
-  });
-  it("search was called", function() {
-    expect(ctrl.search).toHaveBeenCalled();
   });
   it("setCurrentPageData was called", function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();

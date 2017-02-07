@@ -45,7 +45,6 @@ describe('Procedures List', function() {
     spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
     spyOn(ctrl, 'selected');
-    spyOn(ctrl, 'search');
     spyOn(ctrl, 'create');
     spyOn(ctrl, 'setCurrentPageData');
 
@@ -54,7 +53,6 @@ describe('Procedures List', function() {
     ctrl.pageChangeHandler();
     ctrl.go();
     ctrl.selected();
-    ctrl.search();
     ctrl.create();
     ctrl.setCurrentPageData();
   });
@@ -85,9 +83,6 @@ describe('Procedures List', function() {
   });
   it("create was called", function() {
     expect(ctrl.create).toHaveBeenCalled();
-  });
-  it("search was called", function() {
-    expect(ctrl.search).toHaveBeenCalled();
   });
   it("setCurrentPageData was called", function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
