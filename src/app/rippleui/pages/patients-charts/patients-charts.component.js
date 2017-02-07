@@ -16,13 +16,50 @@
 let templatePatientsCharts = require('./patients-charts.html');
 
 class PatientsChartsController {
-  constructor($scope, $state, $window, patientsActions, $ngRedux, $uibModal, serviceRequests, $timeout, Patient) {
+  constructor($scope, $state, $window, patientsActions, $ngRedux, serviceRequests, $timeout, Patient) {
     serviceRequests.publisher('headerTitle', {title: 'System Dashboard', isShowTitle: true});
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-charts'});
    
     //click on "Spine Lookup"
     this.goToLookUp = function () {
       $state.go('patients-lookup');
+    };
+    var getOption = function (borderColor, bagroundColor) {
+      return {
+          capBezierPoints: false,
+          responsive: true,
+          maintainAspectRatio: false,
+          legend: {
+            display: false,
+          },
+          elements: {
+            rectangle: {
+              backgroundColor: bagroundColor,
+              borderColor: borderColor,
+              borderWidth: 1,
+            }
+          },
+          tooltips: {
+            mode: 'label',
+            titleMarginBottom: 15,
+            bodySpacing: 10,
+            xPadding: 10,
+            yPadding: 10,
+            callbacks: {
+              label: function(tooltipItem) {
+                return '  Patients : ' + tooltipItem.yLabel;
+              }
+            }
+          },
+          scales: {
+              xAxes: [{
+                  stacked: true
+              }],
+              yAxes: [{
+                  stacked: true
+              }]
+          }
+      }
     };
 
     var goToPatients = function (row, chartType) {
@@ -95,40 +132,39 @@ class PatientsChartsController {
       }, 200);
     };
 
-    /*
-      only for demo
-    */
-    var geographyChart = function (summaries) {
+    var createChart = function (options) {
       /* istanbul ignore next  */
-      $timeout(function () {
-        $window.Morris.Bar({
-          element: 'chart-geography',
-          resize: true,
-          data: summaries.age,
-          ykeys: ['value'],
-          xkey: 'series',
-          labels: ['Patients'],
-          hideHover: true,
-          barColors: ['#ff6666'],
-          ymin: 0,
-          ymax: 40,
-          barGap: 4,
-          barSizeRatio: 0.55,
-          xLabelAngle: 50,
-          redraw: true
-        }).on('click', function (i, row) {
-          goToPatients(row, 'age');
-        });
-      }, 200);
+      if (options && options.id && options.data) {
+        var canvas, ctx, barChart;
+        var labels = [];
+        var datasets = [];
+
+        if (options.data) {
+          for (var i = 0; i < options.data.length; i++) {
+            labels.push(options.data[i].series);
+            datasets.push(options.data[i].value);
+          }
+        }
+
+        $timeout(function () {
+          canvas = document.getElementById(options.id);
+          ctx = canvas.getContext("2d");
+          barChart = new $window.Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: labels,
+                datasets: [{data: datasets}]
+              },
+              options: getOption(options.borderColor, options.bagroundColor)
+          });
+          if (options.onClick) {
+            canvas.onclick = options.onClick(barChart);
+          }
+        }, 0);
+      }
     };
 
     var self = this;
-
-    var swapArrayElements = function (arr, indexA, indexB) {
-      var temp = arr[indexA];
-      arr[indexA] = arr[indexB];
-      arr[indexB] = temp;
-    };
 
     let _ = require('underscore');
 
@@ -143,12 +179,15 @@ class PatientsChartsController {
       if (patients) {
         var summaries = {};
         var changedPatients = [];
+        var chartAge;
+        var chartDepartment;
+        var chartDepartment2;
 
         angular.forEach(patients, function (patient) {
           var curPatient = new Patient.patient(patient);
           changedPatients.push(curPatient);
         });
-
+        
         summaries.age = _.chain(changedPatients)
           .filter(function (patient) {
             return !!patient.age;
@@ -162,10 +201,10 @@ class PatientsChartsController {
               value: value
             };
           })
-          .reverse()
-            .value();
-
-        swapArrayElements(summaries.age, 3, 4);
+          .sortBy(function (value) {
+            return value.series
+          })
+          .value();
 
         summaries.department = _.chain(changedPatients)
           .filter(function (patient) {
@@ -181,13 +220,35 @@ class PatientsChartsController {
             };
           })
           .sortBy(function (value) {
-            return value.department;
+            return value.series;
           })
           .value();
 
-        ageChart(summaries);
-        departmentChart(summaries);
-        geographyChart(summaries);
+        chartAge = createChart({
+          id: "chart-age", 
+          data: summaries.age, 
+          borderColor: 'rgba(126, 41, 205,1)',
+          bagroundColor: 'rgba(126, 41, 205,0.3)',
+          onClick: function (chart) {
+            return function (ev) {
+              var activePoint = chart.getElementAtEvent(ev)[0];
+              console.log('activePoint');
+              console.log(activePoint);
+            }
+          }
+        });
+        createChart({
+          id: "chart-department", 
+          data: summaries.department, 
+          borderColor: 'rgba(36, 161, 116,1)',
+          bagroundColor: 'rgba(36, 161, 116,0.3)'
+        });
+        createChart({
+          id: "chart-geography", 
+          data: summaries.department, 
+          borderColor: 'rgba(255,99,132,1)',
+          bagroundColor: 'rgba(255,99,132,0.3)'
+        });
 
         return summaries;
       } else {
@@ -197,18 +258,19 @@ class PatientsChartsController {
 
     // Clear previous chart
     this.toggleChart = function () {
-      angular.element(document.querySelector('#chart-age')).empty();
-      angular.element(document.querySelector('#chart-department')).empty();
-      angular.element(document.querySelector('#chart-geography')).empty();
-      angular.element(document.querySelector('#chart-age')).off('click');
-      angular.element(document.querySelector('#chart-department')).off('click');
-      angular.element(document.querySelector('#chart-geography')).off('click');
+      // angular.element(document.querySelector('#chart-age')).empty();
+      // angular.element(document.querySelector('#chart-department')).empty();
+      // angular.element(document.querySelector('#chart-geography')).empty();
+      // angular.element(document.querySelector('#chart-age')).off('click');
+      // angular.element(document.querySelector('#chart-department')).off('click');
+      // angular.element(document.querySelector('#chart-geography')).off('click');
 
       let unsubscribe = $ngRedux.connect(state => ({
         setPatients: self.getPatients(state.patients.data)
       }))(this);
 
       $scope.$on('$destroy', unsubscribe);
+
       this.loadPatientsList = patientsActions.loadPatients;
       this.loadPatientsList();
     };
@@ -222,5 +284,5 @@ const PatientsChartsComponent = {
   controller: PatientsChartsController
 };
 
-PatientsChartsController.$inject = ['$scope', '$state', '$window', 'patientsActions', '$ngRedux', '$uibModal', 'serviceRequests', '$timeout', 'Patient'];
+PatientsChartsController.$inject = ['$scope', '$state', '$window', 'patientsActions', '$ngRedux', 'serviceRequests', '$timeout', 'Patient'];
 export default PatientsChartsComponent;

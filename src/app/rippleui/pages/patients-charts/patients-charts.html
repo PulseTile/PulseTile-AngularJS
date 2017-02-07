@@ -22,12 +22,14 @@
       </div>
       <div class="panel-body">
         <div class="panel-body-inner">
-          <div class="chart" ng-class="{hoverChart: hoverSettings}" ng-mouseenter="hoverSettings = true" ng-mouseleave="hoverSettings = false">
+          <div class="chart-block" ng-class="{hoverChart: hoverSettings}" ng-mouseenter="hoverSettings = true" ng-mouseleave="hoverSettings = false">
             <div class="chart-title-group">
               <h2 class="chart-title">Patients By Setting</h2>
               <p class="chart-subtitle">This is a brief description of patients by setting.</p>
             </div>
-            <div id="chart-department" class="chart-wrapper"></div>
+            <div class="wrap-chart chart-dashboard">
+              <canvas id="chart-department" height="350" width="600"></canvas>
+            </div>
           </div>
         </div>
       </div>
@@ -41,12 +43,14 @@
       </div>
       <div class="panel-body">
         <div class="panel-body-inner">
-          <div class="chart" ng-class="{hoverChart: hoverAge}" ng-mouseenter="hoverAge = true" ng-mouseleave="hoverAge = false">
+          <div class="chart-block" ng-class="{hoverChart: hoverAge}" ng-mouseenter="hoverAge = true" ng-mouseleave="hoverAge = false">
             <div class="chart-title-group">
               <h2 class="chart-title">Patients By Age</h2>
               <p class="chart-subtitle">This is a brief description of patients by age.</p>
             </div>
-            <div id="chart-age" class="chart-wrapper"></div>
+            <div class="wrap-chart chart-dashboard">
+              <canvas id="chart-age" height="350" width="600"></canvas>
+            </div>
           </div>
         </div>
       </div>
@@ -67,7 +71,9 @@
               <h2 class="chart-title">Patients By Geography</h2>
               <p class="chart-subtitle">This is a brief description of patients by geography.</p>
             </div>
-            <div id="chart-geography" class="chart-wrapper"></div>
+            <div class="wrap-chart chart-dashboard">
+              <canvas id="chart-geography" height="350" width="600"></canvas>
+            </div>
           </div>
         </div>
       </div>
