@@ -226,4 +226,45 @@ angular.module('ripple-ui.directives', [])
         });
       }]
     }
+  })
+  .directive('filtering', function() {
+      /* istanbul ignore next  */
+      return {
+          restrict: 'A',
+          controller: ['$scope', '$element', '$timeout', 'serviceStateMenager', '$state', 
+              function($scope, $element, $timeout, serviceStateMenager, $state) {
+                  var nameState = $state.router.globals.$current.name.replace(/-(detail|create)/, '');
+
+                  $scope.isFilterOpen = false;
+                  $scope.queryFilter = '';
+
+                  if (serviceStateMenager.filter.state === nameState) {
+                      $scope.isFilterOpen = serviceStateMenager.filter.isOpen;
+                      $scope.queryFilter = serviceStateMenager.filter.query;
+                  } else {
+                      serviceStateMenager.filter.isOpen = $scope.isFilterOpen;
+                      serviceStateMenager.filter.query = $scope.queryFilter;
+                      serviceStateMenager.filter.state = nameState;
+                  }
+
+                  $scope.toggleFilter = function () {
+                      $scope.isFilterOpen = !$scope.isFilterOpen;
+
+                      if ($scope.isFilterOpen) {
+                          $timeout(function(){
+                              document.getElementById('filter').focus();
+                          }, 0);
+                      } else {
+                          $scope.queryFilter = '';
+                      }
+
+                      serviceStateMenager.filter.isOpen = $scope.isFilterOpen;
+                      serviceStateMenager.filter.query = $scope.queryFilter;
+                  };
+
+                  $scope.$watch('queryFilter', function(queryFilterValue) {
+                      serviceStateMenager.filter.query = queryFilterValue;
+                  });
+          }]
+      }
   });
