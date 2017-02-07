@@ -48,7 +48,7 @@ import PatientsSidebarComponent from './rippleui/pages/patients-detail/patients-
 import PatientsBannerComponent from './rippleui/pages/patients-detail/patients-banner.component';
 import SearchComponent from './rippleui/search/search.component';
 import ReportChartComponent from './rippleui/search/report-chart.component';
-import MainComponent from './helpers/main.component';
+import MainComponent from './rippleui/main-component/main.component';
 import HomeSidebarComponent from './rippleui/pages/patients-lookup/home-sidebar.component';
 import ServiceRequests from './services/serviceRequests.js';
 import routeConfig from 'app/index.route';
