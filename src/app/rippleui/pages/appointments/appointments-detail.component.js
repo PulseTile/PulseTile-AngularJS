@@ -17,13 +17,6 @@ let templateAppointmentsDetail= require('./appointments-detail.html');
 
 class AppointmentsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, appointmentsActions, usSpinnerService, serviceRequests) {
-    // this.edit = function () {
-    //   AppointmentsModal.openModal(this.currentPatient, {title: 'Edit Appointment'}, this.appointment, this.currentUser);
-    // };
-
-    $scope.UnlockedSources = [
-      'handi.ehrscape.com'
-    ];
 
     $scope.formDisabled = true;
 

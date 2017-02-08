@@ -88,10 +88,6 @@ class AllergiesDetailController {
       }
     }.bind(this);
 
-    $scope.UnlockedSources = [
-      'handi.ehrscape.com'
-    ];
-
     $scope.formDisabled = true;
 
     let unsubscribe = $ngRedux.connect(state => ({

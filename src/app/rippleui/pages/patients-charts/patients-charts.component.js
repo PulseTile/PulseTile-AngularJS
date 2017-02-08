@@ -16,10 +16,11 @@
 let templatePatientsCharts = require('./patients-charts.html');
 
 class PatientsChartsController {
-  constructor($scope, $state, $window, patientsActions, $ngRedux, $uibModal, serviceRequests, $timeout, Patient) {
+  constructor($scope, $state, $window, patientsActions, $ngRedux, serviceReduxStates, serviceRequests, $timeout, Patient) {
     serviceRequests.publisher('headerTitle', {title: 'System Dashboard', isShowTitle: true});
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-charts'});
    
+    console.log('serviceReduxStates', serviceReduxStates.getStateData());
     //click on "Spine Lookup"
     this.goToLookUp = function () {
       $state.go('patients-lookup');
@@ -204,9 +205,14 @@ class PatientsChartsController {
       angular.element(document.querySelector('#chart-department')).off('click');
       angular.element(document.querySelector('#chart-geography')).off('click');
 
+      this.cb = function (data) {
+       console.log('------ ', data);
+      };
+
+
       let unsubscribe = $ngRedux.connect(state => ({
         setPatients: self.getPatients(state.patients.data)
-      }))(this);
+      }), this.cb)(this);
 
       $scope.$on('$destroy', unsubscribe);
       this.loadPatientsList = patientsActions.loadPatients;
@@ -222,5 +228,5 @@ const PatientsChartsComponent = {
   controller: PatientsChartsController
 };
 
-PatientsChartsController.$inject = ['$scope', '$state', '$window', 'patientsActions', '$ngRedux', '$uibModal', 'serviceRequests', '$timeout', 'Patient'];
+PatientsChartsController.$inject = ['$scope', '$state', '$window', 'patientsActions', '$ngRedux', 'serviceReduxStates', 'serviceRequests', '$timeout', 'Patient'];
 export default PatientsChartsComponent;

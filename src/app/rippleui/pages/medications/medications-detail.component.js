@@ -17,9 +17,6 @@ let templateMedicationsDetail= require('./medications-detail.html');
 
 class MedicationsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, usSpinnerService, serviceRequests) {
-    $scope.UnlockedSources = [
-      'handi.ehrscape.com'
-    ];
 
     $scope.formDisabled = true;
     $scope.isShowSchedule = true;

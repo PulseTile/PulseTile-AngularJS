@@ -20,7 +20,6 @@ class AllergiesCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, allergiesActions, serviceRequests) {
     $scope.allergy = {};
     $scope.allergy.dateCreated = new Date();
-    // $scope.allergy.dateCreated = new Date().toISOString().slice(0, 10);
     $scope.allergy.causeCode = '1239085';
     $scope.allergy.terminologyCode = '12393890';  
 
@@ -71,10 +70,6 @@ class AllergiesCreateController {
         $scope.allergiesCreate(this.currentPatient.id, toAdd);
       }
     }.bind(this);
-
-    $scope.UnlockedSources = [
-      'handi.ehrscape.com'
-    ];
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)

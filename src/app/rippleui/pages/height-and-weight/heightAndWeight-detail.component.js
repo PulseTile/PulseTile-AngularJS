@@ -17,13 +17,6 @@ let templateHeightAndWeightDetail= require('./heightAndWeight-detail.html');
 
 class HeightAndWeightDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, heightAndWeightActions, usSpinnerService, serviceRequests) {
-    // this.edit = function () {
-    //   HeightAndWeightModal.openModal(this.currentPatient, {title: 'Edit Height And Weight'}, this.heightAndWeight, this.currentUser);
-    // };
-
-    $scope.UnlockedSources = [
-      'handi.ehrscape.com'
-    ];
 
     $scope.formDisabled = true;
 
