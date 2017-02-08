@@ -202,18 +202,44 @@ class ServiceVitalsSigns {
             {
               label: 'A',
               condition: function (value) {
-                return value == 'A'
+                return value == 'Alert'
               },
               column: 4
             }, {
               label: 'V,P or U',
               condition: function (value) {
-                return value == 'V' || value == 'P' || value == 'U'
+                return value == 'Verbal' || value == 'Pain' || value == 'Unresponsive'
               },
               column: 7
             }
           ],
-          newsScore: []
+          newsScore: [
+            {
+              label: '0',
+              condition: function (value) {
+                return value == 0
+              },
+              column: 4
+            }, {
+              label: '1-4',
+              condition: function (value) {
+                return value > 0 && value < 5
+              },
+              column: 5
+            }, {
+              label: '5-6',
+              condition: function (value) {
+                return value == 5 || value == 6
+              },
+              column: 6
+            }, {
+              label: '> 7',
+              condition: function (value) {
+                return value > 6
+              },
+              column: 7
+            }
+          ]
           
         }
         this.pattern = {
