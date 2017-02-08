@@ -25,7 +25,6 @@ import 'fullcalendar';
 import 'angular-ui-calendar';
 import 'jquery';
 
-import 'morrisjs';
 import 'chart.js';
 
 import 'angular-spinner';
