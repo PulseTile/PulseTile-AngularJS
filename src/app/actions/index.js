@@ -36,8 +36,9 @@ import personalnotesActions from '../rippleui/pages/clinical-notes/clinicalnotes
 import heightAndWeightActions from '../rippleui/pages/height-and-weight/heightAndWeight-actions';
 import genericmdtActions from '../rippleui/pages/generic-mdt/generic-mdt-actions';
 import transferOfCareActions from '../rippleui/pages/transfer-of-care/transfer-of-care-actions';
+import plugins from '../plugins';
 
-export default angular
+let app = angular
     .module('app.actions', [])
     .factory('patientsActions', patientsActions)
     .factory('searchActions', searchActions)
@@ -60,4 +61,12 @@ export default angular
     .factory('heightAndWeightActions', heightAndWeightActions)
     .factory('genericmdtActions', genericmdtActions)
     .factory('transferOfCareActions', transferOfCareActions)
-    .name;
+    
+
+plugins.forEach((plugin)=>{
+  Object.keys(plugin.actions).forEach((name)=>{
+    app = app.factory(name, plugin.actions[name]);
+  })
+});
+
+export default app.name;

@@ -13,6 +13,8 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
+import plugins from './plugins';
+
 routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 function routeConfig($stateProvider, $urlRouterProvider) {
@@ -917,6 +919,10 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           detail: {template: '<transfer-of-care--detail-component></transfer-of-care--detail-component>'}
         }
       });
+
+  plugins.forEach((plugin)=>{
+    plugin.routes($stateProvider);
+  })
 }
 
 export default routeConfig;

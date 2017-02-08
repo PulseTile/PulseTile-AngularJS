@@ -121,8 +121,10 @@ import ServiceRequests from './services/serviceRequests.js';
 
 import routeConfig from 'app/index.route';
 import 'app/scss/core.scss';
+import plugins from './plugins';
 
-const app = angular
+
+let app = angular
     .module('ripple-ui', [
         uiRouter,
         ngAnimate,
@@ -140,7 +142,15 @@ const app = angular
     .factory('cornerstoneToolsJS', cornerstoneToolsJS)
     .factory('httpMiddleware', httpMiddleware)
     .factory('Patient', Patient)
-    .service('serviceRequests', ServiceRequests)
+    .service('serviceRequests', ServiceRequests);
+
+plugins.forEach((plugin)=>{
+  Object.keys(plugin.components).forEach((name)=>{
+    app = app.component(name, plugin.components[name]);
+  })
+});
+
+app
     .component('profileComponent', ProfileComponent)
     .component('patientsComponent', PatientsComponent)
     .component('headerComponent', HeaderComponent)
