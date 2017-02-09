@@ -295,30 +295,32 @@ class ServiceVitalsSigns {
           return labels;
         };
 
-        this.getClassOnValue = function (value, key) {
-          var cache = this.getClassOnValue.cache;
-          var column, status;
+        this.getStatusOnValue = function (value, key) {
+          var cache = this.getStatusOnValue.cache;
+          var range, status;
 
           if (typeof cache[key] === 'undefined') cache[key] = {};
           if (typeof cache[key][value] != 'undefined') {
             return cache[key][value];
           }
 
-          column = this.determineColumnWithRangeOfValue(value, key);
-          status = ''
+          range = this.determineRangeOnValue(value, key);
+          status = {
+            point: range.point
+          }
 
-          switch (column) {
+          switch (range.column) {
             case 1:
             case 7: 
-              status = 'danger';
+              status.type = 'danger';
               break;
             case 2:
             case 6: 
-              status = 'warning';
+              status.type = 'warning';
               break;
             case 3: 
             case 5: 
-              status = 'success';
+              status.type = 'success';
               break;
           }
 
@@ -326,16 +328,18 @@ class ServiceVitalsSigns {
 
           return status;
         };
+        this.getStatusOnValue.cache = {};
 
-        this.getClassOnValue.cache = {};
-
-        this.determineColumnWithRangeOfValue = function (value, key) {
+        this.determineRangeOnValue = function (value, key) {
           var vitalRanges = this.vitalsConfig[key];
 
           if (vitalRanges) {
             for (var i = 0; i < vitalRanges.length; i++) {
               if (vitalRanges[i].condition(value)) {
-                return vitalRanges[i].column;
+                return {
+                  column: vitalRanges[i].column,
+                  point: vitalRanges[i].point
+                };
               }
             }
           }
@@ -343,14 +347,14 @@ class ServiceVitalsSigns {
           return false;
         };
 
-        this.setClassesVitalStatus = function (vital) {
-          var classesStatus = {};
+        this.setVitalStatuses = function (vital) {
+          var vitalStatuses = {};
 
           for (var vitalConfig in this.vitalsConfig) {
-            classesStatus[vitalConfig] = this.getClassOnValue(vital[vitalConfig], vitalConfig);
+            vitalStatuses[vitalConfig] = this.getStatusOnValue(vital[vitalConfig], vitalConfig);
           }
 
-          return classesStatus;
+          return vitalStatuses;
         };
 
         this.modificateVitalsArr = function (arr) {
@@ -378,6 +382,23 @@ class ServiceVitalsSigns {
           vital.oxygenSupplemental = vital.oxygenSupplemental === "true";
 
           return vital;
+        };
+
+        this.countNewsScore = function (statuses) {
+          var newsScore = 0;
+          for (var status in statuses) {
+            if (status !== 'newsScore' && statuses[status].point) {
+              newsScore += statuses[status].point;
+            }
+          }
+
+          return newsScore;
+        };
+
+        this.getHighlighterClass = function (status) {
+          if (typeof status === 'undefined') return 'highlighter-not-vital;'
+
+          return 'highlighter-' + (status.type || 'not-vital');
         };
     }
 }

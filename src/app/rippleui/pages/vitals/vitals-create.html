@@ -31,7 +31,7 @@
                 <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalForm.respirationRate.$dirty) && vitalForm.respirationRate.$invalid, 'has-success': vitalForm.respirationRate.$valid && vitalForm.respirationRate.$dirty}">
                   <span ng-class="getHighlighterClass('respirationRate')"></span>  
                   <label class="vitals-label">Respiration Rate</label>
-                  <div class="input-group vitals-holder popover-wrap" ng-class="classesVitalStatus.respirationRate">
+                  <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.respirationRate.type">
                     <input class="form-control input-sm" id="respirationRate" name="respirationRate" type="text" ng-model="vitalEdit.respirationRate" ng-change="changeVital(vitalEdit, 'respirationRate')" ng-pattern="pattern.number" required/>
                     <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">resps/min</span>
                     <div class="popover vitals-popover fade">
@@ -54,7 +54,7 @@
                 <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalForm.oxygenSaturation.$dirty) && vitalForm.oxygenSaturation.$invalid, 'has-success': vitalForm.oxygenSaturation.$valid && vitalForm.oxygenSaturation.$dirty}">
                   <span ng-class="getHighlighterClass('oxygenSaturation')"></span>  
                   <label class="vitals-label">Oxygen Saturation</label>
-                  <div class="input-group vitals-holder popover-wrap" ng-class="classesVitalStatus.oxygenSaturation">
+                  <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.oxygenSaturation.type">
                     <input class="form-control input-sm" id="oxygenSaturation" name="oxygenSaturation" type="text" ng-model="vitalEdit.oxygenSaturation" ng-change="changeVital(vitalEdit, 'oxygenSaturation')" ng-pattern="pattern.numberPersent" required/>
                     <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">%</span>
                     <div class="popover vitals-popover fade">
@@ -94,7 +94,7 @@
                 <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalForm.heartRate.$dirty) && vitalForm.heartRate.$invalid, 'has-success': vitalForm.heartRate.$valid && vitalForm.heartRate.$dirty}">
                   <span ng-class="getHighlighterClass('heartRate')"></span>  
                   <label class="vitals-label">Heart Rate</label>
-                  <div class="input-group vitals-holder popover-wrap" ng-class="classesVitalStatus.heartRate">
+                  <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.heartRate.type">
                     <input class="form-control input-sm" id="heartRate" name="heartRate" type="text" ng-model="vitalEdit.heartRate" ng-change="changeVital(vitalEdit, 'heartRate')" ng-pattern="pattern.number" required/>
                     <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">bpm</span>
                     <div class="popover vitals-popover fade">
@@ -119,7 +119,7 @@
                 <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalForm.systolicBP.$dirty) && vitalForm.systolicBP.$invalid, 'has-success': vitalForm.systolicBP.$valid && vitalForm.systolicBP.$dirty}">
                   <span ng-class="getHighlighterClass('systolicBP')"></span>  
                   <label class="vitals-label">Systolic BP</label>
-                  <div class="input-group vitals-holder popover-wrap" ng-class="classesVitalStatus.systolicBP">
+                  <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.systolicBP.type">
                     <input class="form-control input-sm" id="systolicBP" name="systolicBP" type="text" ng-model="vitalEdit.systolicBP" ng-change="changeVital(vitalEdit, 'systolicBP')" ng-pattern="pattern.number" required/>
                     <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">mmHg</span>
                     <div class="popover vitals-popover fade">
@@ -182,7 +182,7 @@
                 <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalForm.temperature.$dirty) && vitalForm.temperature.$invalid, 'has-success': vitalForm.temperature.$valid && vitalForm.temperature.$dirty}">
                   <span ng-class="getHighlighterClass('temperature')"></span>  
                   <label class="vitals-label">Temperature</label>
-                  <div class="input-group vitals-holder popover-wrap" ng-class="classesVitalStatus.temperature">
+                  <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.temperature.type">
                     <input class="form-control input-sm" id="temperature" name="temperature" type="text" ng-model="vitalEdit.temperature" ng-change="changeVital(vitalEdit, 'temperature')" ng-pattern="pattern.numberPoint" required/>
                     <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">c</span>
                     <div class="popover vitals-popover fade">
@@ -207,7 +207,7 @@
                 <div class="vitals-group highlighter-wrapper">
                   <span ng-class="getHighlighterClass('newsScore')"></span>  
                   <label class="vitals-label">NEWS Score</label>
-                  <div class="input-holder vitals-holder" ng-class="classesVitalStatus.newsScore">
+                  <div class="input-holder vitals-holder" ng-class="vitalStatuses.newsScore.type">
                     <input class="form-control input-sm" id="newsScore" name="newsScore" type="text" ng-model="vitalEdit.newsScore" disabled/>
                   </div>
                 </div>

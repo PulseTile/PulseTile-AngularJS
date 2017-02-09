@@ -21,8 +21,6 @@ class PatientsSummaryController {
     serviceRequests.publisher('headerTitle', {title: 'Patients Summary'});
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-summary'});
 
-    console.log('serviceRequests.listsDashboards');
-    console.log(serviceRequests.listsDashboards);
     $scope.listsDashboards = serviceRequests.listsDashboards || {
       problems: {
         show: true,
