@@ -64,7 +64,8 @@ class VitalsDetailController {
 
     this.setCurrentPageData = function (data) {
       if (data.vitals.dataGet) {
-        this.vital = data.vitals.dataGet;
+        this.vital = serviceVitalsSigns.convertVitalCharacteristics(data.vitals.dataGet);
+
         $scope.classesVitalStatus = serviceVitalsSigns.setClassesVitalStatus(this.vital);
 
         usSpinnerService.stop('vitalDetail-spinner');

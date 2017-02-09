@@ -16,7 +16,7 @@
 let templateVitalsList = require('./vitals-list.html');
 
 class VitalsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, vitalsActions, serviceRequests, usSpinnerService, $window, $timeout) {
+  constructor($scope, $state, $stateParams, $ngRedux, vitalsActions, serviceRequests, usSpinnerService, $window, $timeout, serviceVitalsSigns) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -225,13 +225,6 @@ class VitalsListController {
       }.bind(this);
     };
 
-    this.modificateVitalsArr = function (arr) {
-      for (var i = 0; i < arr.length; i++) {
-        arr[i].id = i + 1;
-        arr[i].oxygenSupplemental = arr[i].oxygenSupplemental === "true";
-      }
-    };
-
     this.selected = function (vitalIndex) {
       return vitalIndex === $stateParams.vitalIndex;
     };
@@ -258,13 +251,7 @@ class VitalsListController {
 
     this.setCurrentPageData = function (data) {
       if (data.vitals.data) {
-        let _ = require('underscore');
-        
-        $scope.vitals = _.sortBy(data.vitals.data, function (value) {
-          return value.dateCreate;
-        });
-
-        this.modificateVitalsArr($scope.vitals);
+        $scope.vitals = serviceVitalsSigns.modificateVitalsArr(data.vitals.data);
 
         usSpinnerService.stop('patientSummary-spinner');
 
@@ -302,5 +289,5 @@ const VitalsListComponent = {
   controller: VitalsListController
 };
 
-VitalsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'vitalsActions', 'serviceRequests', 'usSpinnerService', '$window', '$timeout'];
+VitalsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'vitalsActions', 'serviceRequests', 'usSpinnerService', '$window', '$timeout', 'serviceVitalsSigns'];
 export default VitalsListComponent;
