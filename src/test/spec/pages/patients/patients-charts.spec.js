@@ -38,12 +38,10 @@ describe('Patients Charts', function() {
     spyOn(ctrl, 'goToPatientsList');
     spyOn(ctrl, 'goToLookUp');
     spyOn(ctrl, 'getPatients');
-    spyOn(ctrl, 'toggleChart');
     
     ctrl.goToPatientsList();
     ctrl.goToLookUp();
     ctrl.getPatients();
-    ctrl.toggleChart();
 
   });  
   
@@ -61,8 +59,5 @@ describe('Patients Charts', function() {
   });
   it("getPatients was called", function() {
     expect(ctrl.getPatients).toHaveBeenCalled();
-  });
-  it("toggleChart was called", function() {
-    expect(ctrl.toggleChart).toHaveBeenCalled();
   });
 });
