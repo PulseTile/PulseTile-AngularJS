@@ -1,0 +1,20 @@
+.wrap-chart {
+  width: 100% !important;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  user-select: none;
+  &.bordered {
+    border: 1px solid #b4b4b4;
+  }
+  &.chart-vitals {
+    margin-bottom: 6px;
+    background-color : #eee; 
+    canvas {
+      height: 441px !important;
+      background-color : #eee; 
+    }
+  }
+  &.chart-dashboard canvas {
+    height: 350px !important;
+  }
+}

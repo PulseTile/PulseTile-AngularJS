@@ -68,23 +68,26 @@ class ReportChartController {
     };
     vm.ageChart = function (graphData) {
       $timeout(function () {
-        $window.Morris.Bar({
-          element: 'age-chart',
-          resize: true,
-          data: graphData,
-          ykeys: ['value'],
-          xkey: 'series',
-          labels: ['Patients'],
-          barColors: ['#7E28CD'],
-          ymin: 0,
-          ymax: 46,
-          barGap: 4,
-          barSizeRatio: 0.55,
-          xLabelAngle: 50,
-          redraw: true
-        }).on('click', function (i, row) {
-          vm.openModal(row, requestBody);
-        });
+        /*
+          Todo: change MorrisJS on ChartJS
+        */
+        // $window.Morris.Bar({
+        //   element: 'age-chart',
+        //   resize: true,
+        //   data: graphData,
+        //   ykeys: ['value'],
+        //   xkey: 'series',
+        //   labels: ['Patients'],
+        //   barColors: ['#7E28CD'],
+        //   ymin: 0,
+        //   ymax: 46,
+        //   barGap: 4,
+        //   barSizeRatio: 0.55,
+        //   xLabelAngle: 50,
+        //   redraw: true
+        // }).on('click', function (i, row) {
+        //   vm.openModal(row, requestBody);
+        // });
       }, 200);
     };
     vm.setDataRequest = function (result) {
