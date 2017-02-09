@@ -279,8 +279,6 @@ class VitalsListController {
     
     this.vitalsLoad = vitalsActions.all;
     this.vitalsLoad($stateParams.patientId);
-
-   
   }
 }
 
