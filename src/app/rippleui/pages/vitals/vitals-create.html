@@ -32,7 +32,7 @@
                   <span ng-class="getHighlighterClass('respirationRate')"></span>  
                   <label class="vitals-label">Respiration Rate</label>
                   <div class="input-group vitals-holder popover-wrap" ng-class="classesVitalStatus.respirationRate">
-                    <input class="form-control input-sm" id="respirationRate" name="respirationRate" type="text" ng-model="vitalEdit.respirationRate" ng-change="changeVital(vitalEdit, 'respirationRate')" ng-pattern="pattern.number" required/>
+                    <input class="form-control input-sm" id="respirationRate" name="respirationRate" type="text" ng-model="vitalEdit.respirationRate" ng-change="changeVital(vitalEdit, 'respirationRate')" ng-pattern="pattern.numberPoint" required/>
                     <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">resps/min</span>
                     <div class="popover vitals-popover fade">
                       <div class="arrow"></div>
@@ -55,7 +55,7 @@
                   <span ng-class="getHighlighterClass('oxygenSaturation')"></span>  
                   <label class="vitals-label">Oxygen Saturation</label>
                   <div class="input-group vitals-holder popover-wrap" ng-class="classesVitalStatus.oxygenSaturation">
-                    <input class="form-control input-sm" id="oxygenSaturation" name="oxygenSaturation" type="text" ng-model="vitalEdit.oxygenSaturation" ng-change="changeVital(vitalEdit, 'oxygenSaturation')" ng-pattern="pattern.number" required/>
+                    <input class="form-control input-sm" id="oxygenSaturation" name="oxygenSaturation" type="text" ng-model="vitalEdit.oxygenSaturation" ng-change="changeVital(vitalEdit, 'oxygenSaturation')" ng-pattern="pattern.numberPoint" required/>
                     <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">%</span>
                     <div class="popover vitals-popover fade">
                       <div class="arrow"></div>
@@ -95,7 +95,7 @@
                   <span ng-class="getHighlighterClass('heartRate')"></span>  
                   <label class="vitals-label">Heart Rate</label>
                   <div class="input-group vitals-holder popover-wrap" ng-class="classesVitalStatus.heartRate">
-                    <input class="form-control input-sm" id="heartRate" name="heartRate" type="text" ng-model="vitalEdit.heartRate" ng-change="changeVital(vitalEdit, 'heartRate')" ng-pattern="pattern.number" required/>
+                    <input class="form-control input-sm" id="heartRate" name="heartRate" type="text" ng-model="vitalEdit.heartRate" ng-change="changeVital(vitalEdit, 'heartRate')" ng-pattern="pattern.numberPoint" required/>
                     <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">bpm</span>
                     <div class="popover vitals-popover fade">
                       <div class="arrow"></div>
@@ -120,7 +120,7 @@
                   <span ng-class="getHighlighterClass('systolicBP')"></span>  
                   <label class="vitals-label">Systolic BP</label>
                   <div class="input-group vitals-holder popover-wrap" ng-class="classesVitalStatus.systolicBP">
-                    <input class="form-control input-sm" id="systolicBP" name="systolicBP" type="text" ng-model="vitalEdit.systolicBP" ng-change="changeVital(vitalEdit, 'systolicBP')" ng-pattern="pattern.number" required/>
+                    <input class="form-control input-sm" id="systolicBP" name="systolicBP" type="text" ng-model="vitalEdit.systolicBP" ng-change="changeVital(vitalEdit, 'systolicBP')" ng-pattern="pattern.numberPoint" required/>
                     <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">mmHg</span>
                     <div class="popover vitals-popover fade">
                       <div class="arrow"></div>
@@ -141,9 +141,9 @@
               <div class="col-xs-12 col-md-6">
                 <div class="vitals-group highlighter-wrapper" ng-class="{'has-error': (formSubmitted || vitalForm.diastolicBP.$dirty) && vitalForm.diastolicBP.$invalid, 'has-success': vitalForm.diastolicBP.$valid && vitalForm.diastolicBP.$dirty}">
                   <span class="highlighter-not-vital"></span>  
-                  <label class="vitals-label">Daistolic BP</label>
+                  <label class="vitals-label">Diastolic BP</label>
                   <div class="input-group vitals-holder">
-                    <input class="form-control input-sm" id="diastolicBP" name="diastolicBP" type="text" ng-model="vitalEdit.diastolicBP" ng-pattern="pattern.number" required/>
+                    <input class="form-control input-sm" id="diastolicBP" name="diastolicBP" type="text" ng-model="vitalEdit.diastolicBP" ng-pattern="pattern.numberPoint" required/>
                     <span class="vitals-addon">mmHg</span>
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.diastolicBP.$error.required || vitalForm.diastolicBP.$invalid)">You must enter a correct value.</span>
@@ -158,19 +158,19 @@
                   <div class="input-holder">
                     <div class="switch-group">
                       <label class="switch">
-                        <input id="levelOfConsciousnessA" type="radio" name="levelOfConsciousness" value="A" ng-model="vitalEdit.levelOfConsciousness" ng-change="changeVital(vitalEdit, 'levelOfConsciousness')" required>
+                        <input id="levelOfConsciousnessA" type="radio" name="levelOfConsciousness" value="Alert" ng-model="vitalEdit.levelOfConsciousness" ng-change="changeVital(vitalEdit, 'levelOfConsciousness')" required>
                         <div class="slider"><span class="text">A</span></div>
                       </label>
                       <label class="switch">
-                        <input id="levelOfConsciousnessV" type="radio" name="levelOfConsciousness" value="V" ng-model="vitalEdit.levelOfConsciousness" ng-change="changeVital(vitalEdit, 'levelOfConsciousness')" required>
+                        <input id="levelOfConsciousnessV" type="radio" name="levelOfConsciousness" value="Verbal" ng-model="vitalEdit.levelOfConsciousness" ng-change="changeVital(vitalEdit, 'levelOfConsciousness')" required>
                         <div class="slider"><span class="text">V</span></div>
                       </label>
                       <label class="switch">
-                        <input id="levelOfConsciousnessP" type="radio" name="levelOfConsciousness" value="P" ng-model="vitalEdit.levelOfConsciousness" ng-change="changeVital(vitalEdit, 'levelOfConsciousness')" required>
+                        <input id="levelOfConsciousnessP" type="radio" name="levelOfConsciousness" value="Pain" ng-model="vitalEdit.levelOfConsciousness" ng-change="changeVital(vitalEdit, 'levelOfConsciousness')" required>
                         <div class="slider"><span class="text">P</span></div>
                       </label>
                       <label class="switch">
-                        <input id="levelOfConsciousnessU" type="radio" name="levelOfConsciousness" value="U" ng-model="vitalEdit.levelOfConsciousness" ng-change="changeVital(vitalEdit, 'levelOfConsciousness')" required>
+                        <input id="levelOfConsciousnessU" type="radio" name="levelOfConsciousness" value="Unresponsive" ng-model="vitalEdit.levelOfConsciousness" ng-change="changeVital(vitalEdit, 'levelOfConsciousness')" required>
                         <div class="slider"><span class="text">U</span></div>
                       </label>
                     </div>

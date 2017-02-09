@@ -26,9 +26,9 @@ class VitalsCreateController {
     $scope.vitalEdit.author = 'ripple_osi';
 
     this.setCurrentPageData = function (data) {
-      // if (data.vitals.dataCreate !== null) {
-      //   this.goList();
-      // }
+      if (data.vitals.dataCreate !== null) {
+        this.goList();
+      }
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
