@@ -26,6 +26,7 @@ class VitalsDetailController {
     $scope.getHighlighterClass = function (vitalName) {
       return 'highlighter-' + ($scope.classesVitalStatus[vitalName] || 'not-vital');
     };
+
     $scope.changeVital = function (vital, vitalName) {
       $scope.classesVitalStatus[vitalName] = serviceVitalsSigns.getClassOnValue(vital[vitalName], vitalName);
     };
@@ -37,21 +38,23 @@ class VitalsDetailController {
       $scope.vitalEdit.date = new Date();
       $scope.vitalEdit.dateCreated = new Date();
     };
+
     this.cancelEdit = function () {
       $scope.isEdit = false;
       $scope.classesVitalStatus = serviceVitalsSigns.setClassesVitalStatus(this.vital);
 
     };
+
     $scope.confirmEdit = function (vitalForm, vital) {
       $scope.formSubmitted = true;
-      console.dir('vitalForm');
-      console.dir(vitalForm);
+  
       if (vitalForm.$valid) {
         $scope.isEdit = false;
         this.vital = Object.assign(this.vital, $scope.vitalEdit);
-        $scope.vitalsUpdate($scope.patient.id, $scope.vital);
+        $scope.vitalsUpdate(this.currentPatient.id, $scope.vital);
       }
     }.bind(this);
+
     $scope.openDatepicker = function ($event, name) {
       $event.preventDefault();
       $event.stopPropagation();
@@ -60,27 +63,17 @@ class VitalsDetailController {
     };
 
     this.setCurrentPageData = function (data) {
-      if (!$stateParams.source) return;
-        this.vital = $stateParams.source;
+      if (data.vitals.dataGet) {
+        this.vital = data.vitals.dataGet;
         $scope.classesVitalStatus = serviceVitalsSigns.setClassesVitalStatus(this.vital);
 
-      // if (data.vitals.dataGet) {
-      //   this.vital = data.vitals.dataGet;
-      //   usSpinnerService.stop('vitalDetail-spinner');
-      // }
-      // this.vital = {
-      //   name: 'Influenza',
-      //   date: new Date(),
-      //   seriesNumber: 1,
-      //   source: 'EtherCIS',
-      //   comment: 'Hospital staff',
-      //   author: 'ripple_osi',
-      //   dateCreated: new Date()
-      // };
-      usSpinnerService.stop('vitalDetail-spinner');
-      // if (data.patientsGet.data) {
-      //   this.currentPatient = data.patientsGet.data;
-      // }
+        usSpinnerService.stop('vitalDetail-spinner');
+      }
+  
+      if (data.patientsGet.data) {
+        this.currentPatient = data.patientsGet.data;
+      }
+
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
       }
@@ -92,9 +85,9 @@ class VitalsDetailController {
 
     $scope.$on('$destroy', unsubscribe);
 
-    // this.vitalsLoad = vitalsActions.get;
-    // this.vitalsLoad($stateParams.patientId, $stateParams.vitalIndex);
-    // $scope.vitalsUpdate = vitalsActions.update;
+    this.vitalsLoad = vitalsActions.get;
+    this.vitalsLoad($stateParams.patientId, $stateParams.vitalIndex);
+    $scope.vitalsUpdate = vitalsActions.update;
   }
 }
 
