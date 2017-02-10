@@ -34,18 +34,7 @@
                   <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.respirationRate.type">
                     <input class="form-control input-sm" id="respirationRate" name="respirationRate" type="text" ng-model="vitalEdit.respirationRate" ng-change="changeVital(vitalEdit, 'respirationRate')" ng-pattern="pattern.number" required/>
                     <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">resps/min</span>
-                    <div class="popover vitals-popover fade">
-                      <div class="arrow"></div>
-                      <div class="popover-inner">
-                        <h3 class="popover-title">Respiration Rate</h3>
-                        <div class="popover-content">
-                          <div class="range-vital-labels">
-                            <div class="range-vital-label place-{{popoverLabel.place}}" ng-repeat="popoverLabel in popoverLabels.respirationRate">{{popoverLabel.text}}</div>
-                            <img src="../../../assets/images/range-vital.jpg">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <mc-popover-vital title="Respiration Rate" labels="{{popoverLabels.respirationRate}}"></mc-popover-vital>
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.respirationRate.$error.required || vitalForm.respirationRate.$invalid)">You must enter a correct value.</span>
                 </div>
@@ -57,18 +46,7 @@
                   <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.oxygenSaturation.type">
                     <input class="form-control input-sm" id="oxygenSaturation" name="oxygenSaturation" type="text" ng-model="vitalEdit.oxygenSaturation" ng-change="changeVital(vitalEdit, 'oxygenSaturation')" ng-pattern="pattern.numberPersent" required/>
                     <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">%</span>
-                    <div class="popover vitals-popover fade">
-                      <div class="arrow"></div>
-                      <div class="popover-inner">
-                        <h3 class="popover-title">Oxygen Saturation</h3>
-                        <div class="popover-content">
-                          <div class="range-vital-labels">
-                            <div class="range-vital-label place-{{popoverLabel.place}}" ng-repeat="popoverLabel in popoverLabels.oxygenSaturation">{{popoverLabel.text}}</div>
-                            <img src="../../../assets/images/range-vital.jpg">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <mc-popover-vital title="Oxygen Saturation" labels="{{popoverLabels.oxygenSaturation}}"></mc-popover-vital>
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.oxygenSaturation.$error.required || vitalForm.oxygenSaturation.$invalid)">You must enter a correct value from 0 to 100.</span>
                 </div>
@@ -97,18 +75,7 @@
                   <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.heartRate.type">
                     <input class="form-control input-sm" id="heartRate" name="heartRate" type="text" ng-model="vitalEdit.heartRate" ng-change="changeVital(vitalEdit, 'heartRate')" ng-pattern="pattern.number" required/>
                     <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">bpm</span>
-                    <div class="popover vitals-popover fade">
-                      <div class="arrow"></div>
-                      <div class="popover-inner">
-                        <h3 class="popover-title">Heart Rate</h3>
-                        <div class="popover-content">
-                          <div class="range-vital-labels">
-                            <div class="range-vital-label place-{{popoverLabel.place}}" ng-repeat="popoverLabel in popoverLabels.heartRate">{{popoverLabel.text}}</div>
-                            <img src="../../../assets/images/range-vital.jpg">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <mc-popover-vital title="Heart Rate" labels="{{popoverLabels.heartRate}}"></mc-popover-vital>
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.heartRate.$error.required || vitalForm.heartRate.$invalid)">You must enter a correct value.</span>
                 </div>
@@ -122,18 +89,7 @@
                   <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.systolicBP.type">
                     <input class="form-control input-sm" id="systolicBP" name="systolicBP" type="text" ng-model="vitalEdit.systolicBP" ng-change="changeVital(vitalEdit, 'systolicBP')" ng-pattern="pattern.number" required/>
                     <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">mmHg</span>
-                    <div class="popover vitals-popover fade">
-                      <div class="arrow"></div>
-                      <div class="popover-inner">
-                        <h3 class="popover-title">Systolic BP</h3>
-                        <div class="popover-content">
-                          <div class="range-vital-labels">
-                            <div class="range-vital-label place-{{popoverLabel.place}}" ng-repeat="popoverLabel in popoverLabels.systolicBP">{{popoverLabel.text}}</div>
-                            <img src="../../../assets/images/range-vital.jpg">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <mc-popover-vital title="Systolic BP" labels="{{popoverLabels.systolicBP}}"></mc-popover-vital>
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.systolicBP.$error.required || vitalForm.systolicBP.$invalid)">You must enter a correct value.</span>
                 </div>
@@ -185,18 +141,7 @@
                   <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.temperature.type">
                     <input class="form-control input-sm" id="temperature" name="temperature" type="text" ng-model="vitalEdit.temperature" ng-change="changeVital(vitalEdit, 'temperature')" ng-pattern="pattern.numberPoint" required/>
                     <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">c</span>
-                    <div class="popover vitals-popover fade">
-                      <div class="arrow"></div>
-                      <div class="popover-inner">
-                        <h3 class="popover-title">Temperature</h3>
-                        <div class="popover-content">
-                          <div class="range-vital-labels">
-                            <div class="range-vital-label place-{{popoverLabel.place}}" ng-repeat="popoverLabel in popoverLabels.temperature">{{popoverLabel.text}}</div>
-                            <img src="../../../assets/images/range-vital.jpg">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <mc-popover-vital title="Temperature" labels="{{popoverLabels.temperature}}"></mc-popover-vital>
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.temperature.$error.required || vitalForm.temperature.$invalid)">You must enter a correct value.</span>
                 </div>

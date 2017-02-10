@@ -20,9 +20,7 @@
       <button class="btn btn-success btn-inverse btn-filter" ng-click="$ctrl.toggleFilter()"><i class="fa fa-filter"></i></button>
     </div>
     <h3 class="panel-title">
-      Patient Info
-      <span ng-if="$ctrl.filters.ageRange">. Age range: {{$ctrl.filters.ageRange}}</span>
-      <span ng-if="$ctrl.filters.department">. Setting: {{$ctrl.filters.department}}</span>
+      Patient Info<span ng-if="$ctrl.filters.ageRange">. Age range: {{$ctrl.filters.ageRange}}</span><span ng-if="$ctrl.filters.department">. Setting: {{$ctrl.filters.department}}</span>
     </h3>
     <div class="panel-filter" ng-if="$ctrl.isFilter" ng-class="{active : $ctrl.isFilter}">
       <div class="inner-addon addon-left">
