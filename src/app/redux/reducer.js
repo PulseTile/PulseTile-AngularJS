@@ -45,10 +45,12 @@ import genericmdt from '../rippleui/pages/generic-mdt/generic-mdt-reducer-all';
 import transferOfCare from '../rippleui/pages/transfer-of-care/transfer-of-care-reducer-all';
 import vitals from '../rippleui/pages/vitals/vitals-reducer-all';
 
-export default combineReducers({
+import plugins from '../plugins';
+
+let reducers = {
   patients,
   patientsGet,
-  search, 
+  search,
   diagnoses,
   allergies,
   medication,
@@ -75,4 +77,10 @@ export default combineReducers({
   genericmdt,
   transferOfCare,
   vitals
+};
+
+plugins.forEach((plugin)=>{
+  reducers[plugin.name] = plugin.reducer;
 });
+
+export default combineReducers(reducers);

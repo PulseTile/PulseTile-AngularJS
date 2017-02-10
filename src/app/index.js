@@ -61,7 +61,6 @@ import 'app/rippleui/pages/personal-notes/index.js';
 import 'app/rippleui/pages/allergies/index.js';
 import 'app/rippleui/pages/appointments/index.js';
 import 'app/rippleui/pages/care-plans/index.js';
-import 'app/rippleui/pages/clinical-notes/index.js';
 import 'app/rippleui/pages/contacts/index.js';
 import 'app/rippleui/pages/diagnoses/index.js';
 import 'app/rippleui/pages/dicom/index.js';
@@ -77,8 +76,9 @@ import 'app/rippleui/pages/results/index.js';
 import 'app/rippleui/pages/transfer-of-care/index.js';
 import 'app/rippleui/pages/vaccinations/index.js';
 import 'app/rippleui/pages/vitals/index.js';
+import plugins from './plugins';
 
-const app = angular
+let app = angular
     .module('ripple-ui', [
         uiRouter,
         ngAnimate,
@@ -90,7 +90,6 @@ const app = angular
         'ripple-ui.allergies',
         'ripple-ui.appointments',
         'ripple-ui.care-plans',
-        'ripple-ui.clinicalnotes',
         'ripple-ui.contacts',
         'ripple-ui.diagnoses',
         'ripple-ui.dicom',
@@ -117,8 +116,15 @@ const app = angular
     .factory('Patient', Patient)
 
     .service('serviceRequests', ServiceRequests)
-    .service('serviceStateMenager', ServiceStateMenager)
+    .service('serviceStateMenager', ServiceStateMenager);
 
+  plugins.forEach((plugin)=>{
+    Object.keys(plugin.components).forEach((name)=>{
+      app = app.component(name, plugin.components[name]);
+    })
+  });
+
+  app  
     .component('profileComponent', ProfileComponent)
     .component('headerComponent', HeaderComponent)
     .component('patientsChartsComponent', PatientsChartsComponent)

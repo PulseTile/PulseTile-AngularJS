@@ -13,6 +13,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
+import plugins from './plugins';
 routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 function routeConfig($stateProvider, $urlRouterProvider) {
@@ -825,64 +826,6 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         }]
       })
 
-      .state('clinicalNotes', {
-        url: '/patients/{patientId:int}/clinicalNotes?reportType&searchString&queryType',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<clinicalnotes-list-component></clinicalnotes-list-component>'}
-        },
-        breadcrumbs: [{
-          title: 'Patient Listings',
-          state: 'patients-list'
-        }, {
-          title: 'Patient Summary',
-          state: 'patients-summary'
-        }, {
-          title: 'Clinical Notes',
-          state: 'clinicalNotes'
-        }]
-      })
-      .state('clinicalNotes-create', {
-        url: '/patients/{patientId:int}/clinicalNotes/create?reportType&searchString&queryType',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<clinicalnotes-list-component></clinicalnotes-list-component>'},
-          detail: {template: '<clinicalnotes-create-component></clinicalnotes-create-component>'}
-        },
-        breadcrumbs: [{
-          title: 'Patient Listings',
-          state: 'patients-list'
-        }, {
-          title: 'Patient Summary',
-          state: 'patients-summary'
-        }, {
-          title: 'Clinical Notes',
-          state: 'clinicalNotes'
-        }]
-      })
-      .state('clinicalNotes-detail', {
-        url: '/patients/{patientId:int}/clinicalNotes/{personalNoteIndex}?filter&page&reportType&searchString&queryType&source',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<clinicalnotes-list-component></clinicalnotes-list-component>'},
-          detail: {template: '<clinicalnotes-detail-component></clinicalnotes-detail-component>'}
-        },
-        params: { source: '{}' },
-        breadcrumbs: [{
-          title: 'Patient Listings',
-          state: 'patients-list'
-        }, {
-          title: 'Patient Summary',
-          state: 'patients-summary'
-        }, {
-          title: 'Clinical Notes',
-          state: 'clinicalNotes'
-        }]
-      })
-
       .state('heightAndWeights', {
         url: '/patients/{patientId:int}/heightAndWeights?reportType&searchString&queryType',
         views: {
@@ -975,6 +918,9 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           detail: {template: '<transfer-of-care--detail-component></transfer-of-care--detail-component>'}
         }
       });
+  plugins.forEach((plugin)=>{
+    plugin.routes($stateProvider);
+  })
 }
 
 export default routeConfig;

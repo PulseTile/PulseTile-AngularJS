@@ -37,29 +37,37 @@ import clinicalnotesActions from '../rippleui/pages/clinical-notes/clinicalnotes
 import heightAndWeightActions from '../rippleui/pages/height-and-weight/heightAndWeight-actions';
 import genericmdtActions from '../rippleui/pages/generic-mdt/generic-mdt-actions';
 import transferOfCareActions from '../rippleui/pages/transfer-of-care/transfer-of-care-actions';
+import plugins from '../plugins';
 
-export default angular
-    .module('app.actions', [])
-    .factory('patientsActions', patientsActions)
-    .factory('searchActions', searchActions)
-    .factory('searchReport', searchReport)
-    .factory('diagnosesActions', diagnosesActions)
-    .factory('allergiesActions', allergiesActions)
-    .factory('medicationsActions', medicationsActions)
-    .factory('contactsActions', contactsActions)
-    .factory('vaccinationsActions', vaccinationsActions)
-    .factory('vitalsActions', vitalsActions)
-    .factory('ordersActions', ordersActions)
-    .factory('resultsActions', resultsActions)
-    .factory('referralsActions', referralsActions)
-    .factory('proceduresActions', proceduresActions)
-    .factory('documentsActions', documentsActions)
-    .factory('appointmentsActions', appointmentsActions)
-    .factory('imageActions', imageActions)
-    .factory('eolcareplansActions', eolcareplansActions)
-    .factory('personalnotesActions', personalnotesActions)
-    .factory('clinicalnotesActions', clinicalnotesActions)
-    .factory('heightAndWeightActions', heightAndWeightActions)
-    .factory('genericmdtActions', genericmdtActions)
-    .factory('transferOfCareActions', transferOfCareActions)
-    .name;
+let app = angular
+  .module('app.actions', [])
+  .factory('patientsActions', patientsActions)
+  .factory('searchActions', searchActions)
+  .factory('searchReport', searchReport)
+  .factory('diagnosesActions', diagnosesActions)
+  .factory('allergiesActions', allergiesActions)
+  .factory('medicationsActions', medicationsActions)
+  .factory('contactsActions', contactsActions)
+  .factory('vaccinationsActions', vaccinationsActions)
+  .factory('vitalsActions', vitalsActions)
+  .factory('ordersActions', ordersActions)
+  .factory('resultsActions', resultsActions)
+  .factory('referralsActions', referralsActions)
+  .factory('proceduresActions', proceduresActions)
+  .factory('documentsActions', documentsActions)
+  .factory('appointmentsActions', appointmentsActions)
+  .factory('imageActions', imageActions)
+  .factory('eolcareplansActions', eolcareplansActions)
+  .factory('personalnotesActions', personalnotesActions)
+  .factory('clinicalnotesActions', clinicalnotesActions)
+  .factory('heightAndWeightActions', heightAndWeightActions)
+  .factory('genericmdtActions', genericmdtActions)
+  .factory('transferOfCareActions', transferOfCareActions)
+
+plugins.forEach((plugin)=>{
+  Object.keys(plugin.actions).forEach((name)=>{
+    app = app.factory(name, plugin.actions[name]);
+  })
+});
+
+export default app.name;
