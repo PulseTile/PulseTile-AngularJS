@@ -46,6 +46,7 @@ import PatientsListFullComponent from './rippleui/pages/patients-list-full/patie
 import PatientsSidebarComponent from './rippleui/pages/patients-detail/patients-sidebar.component';
 import PatientsBannerComponent from './rippleui/pages/patients-detail/patients-banner.component';
 import SearchComponent from './rippleui/search/search.component';
+import SearchAdvancedComponent from './rippleui/search/search-advanced.component';
 import ReportChartComponent from './rippleui/search/report-chart.component';
 import MainComponent from './rippleui/main-component/main.component';
 import HomeSidebarComponent from './rippleui/pages/patients-lookup/home-sidebar.component';
@@ -129,6 +130,7 @@ const app = angular
     .component('mainComponent', MainComponent)
     .component('homeSidebarComponent', HomeSidebarComponent)
     .component('searchComponent', SearchComponent)
+    .component('searchAdvancedComponent', SearchAdvancedComponent)
     .component('reportChartComponent', ReportChartComponent)
     
     .config(routeConfig)
