@@ -367,8 +367,10 @@ class ServiceVitalsSigns {
           for (var i = 0; i < arr.length; i++) {
             arr[i].id = i + 1;
             this.convertVitalCharacteristics(arr[i]);
+            arr[i].statusNewsScore = this.getStatusOnValue(arr[i].newsScore, 'newsScore').type;
           }
-
+          console.log('arr');
+          console.log(arr);
           return arr;
         };
 
