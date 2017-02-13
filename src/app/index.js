@@ -51,23 +51,14 @@ import MainComponent from './rippleui/main-component/main.component';
 import HomeSidebarComponent from './rippleui/pages/patients-lookup/home-sidebar.component';
 import ServiceRequests from './services/serviceRequests.js';
 import ServiceStateMenager from './services/serviceStateMenager.js';
+import ServiceVitalsSigns from './rippleui/pages/vitals/serviceVitalsSigns.js';
 
 import routeConfig from 'app/index.route';
 import 'app/scss/core.scss';
 
 import 'app/directives/index.js';
 import 'app/filters/index.js';
-import 'app/rippleui/pages/personal-notes/index.js';
-import 'app/rippleui/pages/height-and-weight/index.js';
-import 'app/rippleui/pages/medications/index.js';
-import 'app/rippleui/pages/orders/index.js';
 import 'app/rippleui/pages/patients-list/index.js';
-import 'app/rippleui/pages/procedures/index.js';
-import 'app/rippleui/pages/referrals/index.js';
-import 'app/rippleui/pages/results/index.js';
-import 'app/rippleui/pages/transfer-of-care/index.js';
-import 'app/rippleui/pages/vaccinations/index.js';
-import 'app/rippleui/pages/vitals/index.js';
 
 import plugins from './plugins';
 
@@ -79,17 +70,7 @@ let app = angular
         ngRedux,
         actions,
         dirPagination,
-        'ripple-ui.personal',
-        'ripple-ui.height-and-weight',
-        'ripple-ui.medications',
-        'ripple-ui.orders',
         'ripple-ui.patients',
-        'ripple-ui.procedures',
-        'ripple-ui.referrals',
-        'ripple-ui.results',
-        'ripple-ui.transfer-of-care',
-        'ripple-ui.vaccinations',
-        'ripple-ui.vitals',
         'ripple-ui.directives',
         'ripple-ui.filters',
         'angularSpinner',
@@ -101,7 +82,8 @@ let app = angular
     .factory('Patient', Patient)
 
     .service('serviceRequests', ServiceRequests)
-    .service('serviceStateMenager', ServiceStateMenager);
+    .service('serviceStateMenager', ServiceStateMenager)
+    .service('serviceVitalsSigns', ServiceVitalsSigns);
 
   plugins.forEach((plugin)=>{
     Object.keys(plugin.components).forEach((name)=>{

@@ -13,11 +13,22 @@
  ~  See the License for the specific language governing permissions and
  ~  limitations under the License.
  */
-import ProceduresListComponent from './procedures-list.component';
-import ProceduresDetailComponent from './procedures-detail.component';
-import ProceduresCreateComponent from './procedures-create.component';
-
-angular.module('ripple-ui.procedures', [])
-  .component('proceduresListComponent', ProceduresListComponent)
-  .component('proceduresDetailComponent', ProceduresDetailComponent)
-  .component('proceduresCreateComponent', ProceduresCreateComponent);
+import routes from "./index.route";
+import reducer from "./procedures-reducer-all";
+import proceduresListComponent from './procedures-list.component';
+import proceduresDetailComponent from './procedures-detail.component';
+import proceduresCreateComponent from './procedures-create.component';
+import proceduresActions from './procedures-actions';
+export default {
+  "name": 'procedures',
+  "routes": routes,
+  "reducer": reducer,
+  "components": {
+    proceduresListComponent,
+    proceduresCreateComponent,
+    proceduresDetailComponent
+  },
+  "actions": {
+    proceduresActions
+  }
+}

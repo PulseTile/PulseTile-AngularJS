@@ -13,9 +13,20 @@
  ~  See the License for the specific language governing permissions and
  ~  limitations under the License.
  */
-import TransferOfCareListComponent from './transfer-of-care-list.component';
-import TransferOfCareDetailComponent from './transfer-of-care-detail.component';
-
-angular.module('ripple-ui.transfer-of-care', [])
-  .component('transferOfCareListComponent', TransferOfCareListComponent)
-  .component('transferOfCareDetailComponent', TransferOfCareDetailComponent);
+import routes from "./index.route";
+import reducer from "./transfer-of-care-reducer-all";
+import transferOfCareListComponent from './transfer-of-care-list.component';
+import transferOfCareDetailComponent from './transfer-of-care-detail.component';
+import transferOfCareActions from './transfer-of-care-actions';
+export default {
+  "name": 'transferOfCare',
+  "routes": routes,
+  "reducer": reducer,
+  "components": {
+    transferOfCareListComponent,
+    transferOfCareDetailComponent
+  },
+  "actions": {
+    transferOfCareActions
+  }
+}

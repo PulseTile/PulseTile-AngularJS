@@ -22,6 +22,16 @@ import diagnoses from './rippleui/pages/diagnoses/index';
 import dicom from './rippleui/pages/dicom/index';
 import documents from './rippleui/pages/documents/index';
 import genericmdt from './rippleui/pages/generic-mdt/index';
+import heightAndWeight from './rippleui/pages/height-and-weight/index';
+import medication from './rippleui/pages/medications/index';
+import orders from './rippleui/pages/orders/index';
+import personalnotes from './rippleui/pages/personal-notes/index';
+import procedures from './rippleui/pages/procedures/index';
+import referrals from './rippleui/pages/referrals/index';
+import results from './rippleui/pages/results/index';
+import transferOfCare from './rippleui/pages/transfer-of-care/index';
+import vaccinations from './rippleui/pages/vaccinations/index';
+import vitals from './rippleui/pages/vitals/index';
 
 export default [
   clinicalnotes,
@@ -32,5 +42,15 @@ export default [
   diagnoses,
   dicom,
   documents,
-  genericmdt
+  genericmdt,
+  heightAndWeight,
+  medication,
+  orders,
+  personalnotes,
+  procedures,
+  referrals,
+  results,
+  transferOfCare,
+  vaccinations,
+  vitals
 ]

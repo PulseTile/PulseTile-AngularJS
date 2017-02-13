@@ -13,11 +13,22 @@
  ~  See the License for the specific language governing permissions and
  ~  limitations under the License.
  */
-import MedicationsListComponent from './medications-list.component';
-import MedicationsCreateComponent from './medications-create.component';
-import MedicationsDetailComponent from './medications-detail.component';
-
-angular.module('ripple-ui.medications', [])
-  .component('medicationsListComponent', MedicationsListComponent)
-  .component('medicationsCreateComponent', MedicationsCreateComponent)
-  .component('medicationsDetailComponent', MedicationsDetailComponent);
+import routes from "./index.route";
+import reducer from "./medication-reducer-all";
+import medicationsListComponent from './medications-list.component';
+import medicationsCreateComponent from './medications-create.component';
+import medicationsDetailComponent from './medications-detail.component';
+import medicationsActions from './medications-actions';
+export default {
+  "name": 'medication',
+  "routes": routes,
+  "reducer": reducer,
+  "components": {
+    medicationsListComponent,
+    medicationsCreateComponent,
+    medicationsDetailComponent
+  },
+  "actions": {
+    medicationsActions
+  }
+}

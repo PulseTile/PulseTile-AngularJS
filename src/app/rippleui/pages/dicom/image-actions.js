@@ -97,7 +97,7 @@ export function getInstance(patientId, instanceId, source) {
   };
 }
 
-export default function imagesActions($ngRedux) {
+export default function imageActions($ngRedux) {
   let actionCreator = {
     allStudies, getAllSeriesInStudy, getSeriesDetails, getInstanceId, getInstance
   };
@@ -105,4 +105,4 @@ export default function imagesActions($ngRedux) {
   return bindActionCreators(actionCreator, $ngRedux.dispatch);
 }
 
-imagesActions.$inject = ['$ngRedux'];
+imageActions.$inject = ['$ngRedux'];

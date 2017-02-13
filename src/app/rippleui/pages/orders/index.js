@@ -13,11 +13,22 @@
  ~  See the License for the specific language governing permissions and
  ~  limitations under the License.
  */
-import OrdersListComponent from './orders-list.component';
-import OrdersDetailComponent from './orders-detail.component';
-import OrdersCreateComponent from './orders-create.component';
-
-angular.module('ripple-ui.orders', [])
-  .component('ordersListComponent', OrdersListComponent)
-  .component('ordersDetailComponent', OrdersDetailComponent)
-  .component('ordersCreateComponent', OrdersCreateComponent);
+import routes from "./index.route";
+import reducer from "./orders-reducer-all";
+import ordersListComponent from './orders-list.component';
+import ordersDetailComponent from './orders-detail.component';
+import ordersCreateComponent from './orders-create.component';
+import ordersActions from './orders-actions';
+export default {
+  "name": 'orders',
+  "routes": routes,
+  "reducer": reducer,
+  "components": {
+    ordersListComponent,
+    ordersCreateComponent,
+    ordersDetailComponent
+  },
+  "actions": {
+    ordersActions
+  }
+}

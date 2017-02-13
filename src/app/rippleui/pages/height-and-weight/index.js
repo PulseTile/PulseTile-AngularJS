@@ -13,9 +13,20 @@
  ~  See the License for the specific language governing permissions and
  ~  limitations under the License.
  */
-import HeightAndWeightListComponent from './heightAndWeight-list.component';
-import HeightAndWeightDetailComponent from './heightAndWeight-detail.component';
-
-angular.module('ripple-ui.height-and-weight', [])
-  .component('heightAndWeightListComponent', HeightAndWeightListComponent)
-  .component('heightAndWeightDetailComponent', HeightAndWeightDetailComponent);
+import routes from "./index.route";
+import reducer from "./heightAndWeight-reducer-all";
+import heightAndWeightListComponent from './heightAndWeight-list.component';
+import heightAndWeightDetailComponent from './heightAndWeight-detail.component';
+import heightAndWeightActions from './heightAndWeight-actions';
+export default {
+  "name": 'heightAndWeight',
+  "routes": routes,
+  "reducer": reducer,
+  "components": {
+    heightAndWeightListComponent,
+    heightAndWeightDetailComponent
+  },
+  "actions": {
+    heightAndWeightActions
+  }
+}
