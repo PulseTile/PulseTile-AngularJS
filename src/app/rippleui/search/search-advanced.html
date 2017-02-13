@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
 
-<div class="panel panel-secondary" ng-class="getOpenPanelClass('medication')">
+<div class="panel panel-secondary">
   <div class="panel-heading">
     <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="$ctrl.cancel()"><i class="fa fa-chevron-up"></i></button>
@@ -66,7 +66,7 @@
                 ng-class="{'has-error': detailsFocused && advancedSearchForm.dateOfBirth.$invalid && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber),
                 'has-success': detailsFocused && advancedSearchForm.dateOfBirth.$valid && advancedSearchForm.dateOfBirth.$dirty && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)}">
                   <label for="dateOfBirth" class="control-label">Date of Birth</label>
-                  <div class="inner-addon addon-left">
+                  <div class="inner-addon addon-left wrap-datepicker-top">
                     <div class="addon">
                       <i class="fa fa-calendar"></i>
                     </div>
@@ -78,17 +78,17 @@
             </div>
           </div>
           <div class="row">
+
             <div class="col-xs-12 col-sm-6">
               <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.route.$dirty) && medicationForm.route.$invalid, 'has-success': medicationForm.route.$valid && medicationForm.route.$dirty}">
                   <label for="gender" class="control-label">Gender</label>
                   <div class="input-holder">
-                      <select class="form-control input-sm" tabindex="5" id="gender" name="gender" ng-model="searchParams.gender" required>
-                        <option value="">-- Gender --</option>
-                        <option>Male</option>
-                        <option>Female</option>
-                      </select>
+                    <select class="form-control input-sm" tabindex="5" id="gender" name="gender" ng-model="searchParams.gender">
+                      <option value="">-- Gender --</option>
+                      <option>Male</option>
+                      <option>Female</option>
+                    </select>
                   </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.gender.$error.required">You must enter a value.</span>
               </div>
             </div>
           </div>
@@ -103,7 +103,7 @@
         </div>
         <div class="control-group with-indent right">
           <button class="btn btn-danger" ng-click="$ctrl.cancel()"><i class="fa fa-ban"></i> Cancel</button>
-          <button class="btn btn-success" ng-click="confirm(medicationForm, medicationEdit)"><i class="fa fa-check"></i> Complete</button>
+          <button class="btn btn-success" ng-click="ok(advancedSearchForm)"><i class="fa fa-check"></i> Complete</button>
         </div>
       </div>
     </div>

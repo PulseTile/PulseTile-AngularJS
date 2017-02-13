@@ -16,7 +16,7 @@
 let templateSearch = require('./search-advanced.html');
 
 class SearchAdvancedController {
-  constructor($scope, $http, $ngRedux, serviceRequests, searchActions) {
+  constructor($scope, $http, $ngRedux, serviceRequests, searchActions, $state) {
     // serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'main-search'});
     // serviceRequests.publisher('headerTitle', {title: 'Welcome', isShowTitle: true});
 
@@ -24,178 +24,134 @@ class SearchAdvancedController {
       serviceRequests.publisher('toggleAdvancedSearch', {});
     };
 
-    // var openAdvancedSearch = function(expression) {
-    //   if (isModalClosed) {
-    //     isModalClosed = false;
+    var changeState = function () {
+      $scope.formSubmitted = true;
 
-    //     var modalInstance = $uibModal.open({
-    //       template: require('../rippleui/search/advanced-search-modal.html'),
-    //       size: 'lg',
-    //       controller: function ($scope, $state, modal, searchParams, AdvancedSearch, $uibModalInstance) {
-    //         var changeState = function () {
-    //           $scope.formSubmitted = true;
-    //           $uibModalInstance.close();
+      if ($scope.patients.constructor === Array && $scope.patients.length == 1) {
+        $state.go('patients-summary', {
+          patientId: $scope.patients[0].nhsNumber
+        });
+      } else if ($scope.patients.constructor === Array && $scope.patients.length > 1) {
+        $state.go('patients-list', {
+          patientsList: $scope.patients,
+          advancedSearchParams: $scope.searchParams
+        });
+      } else {
+        $state.go('patients-list', {
+          patientsList: $scope.patients,
+          advancedSearchParams: $scope.searchParams,
+          displayEmptyTable: true
+        });
+      }
+    };
 
-    //           if ($scope.patients.length == 1) {
-    //             $state.go('patients-summary', {
-    //               patientId: $scope.patients[0].nhsNumber
-    //             });
-    //           } else if ($scope.patients.length > 1) {
-    //             $state.go('patients-list', {
-    //               patientsList: $scope.patients,
-    //               advancedSearchParams: $scope.searchParams
-    //             });
-    //           } else {
-    //             $state.go('patients-list', {
-    //               patientsList: $scope.patients,
-    //               advancedSearchParams: $scope.searchParams,
-    //               displayEmptyTable: true
-    //             });
-    //           }
-    //         };
+    $scope.formSubmitted = false;
+    $scope.detailsFocused = false;
+    $scope.searchParams = {};
 
-    //         $scope.modal = modal;
-    //         $scope.searchParams = searchParams;
-    //         $scope.formSubmitted = false;
-    //         $scope.detailsFocused = false;
-    //         $scope.modalReopened = false;
+    if ($scope.searchParams.surname) {
+      $scope.surnameFocus = true;
+    }
+    else {
+      $scope.nhsNumberFocus = true;
+    }
 
-    //         if ($scope.searchParams.nhsNumber) {
-    //           $scope.nhsNumberFocus = true;
-    //         }
-    //         else if ($scope.searchParams.surname) {
-    //           $scope.surnameFocus = true;
-    //         }
-    //         else {
-    //           $scope.nhsNumberFocus = true;
-    //         }
+    if ($scope.searchParams.dateOfBirth) {
+      $scope.searchParams.dateOfBirth = new Date($scope.searchParams.dateOfBirth).toISOString().slice(0, 10);
+      $scope.detailsFocused = true;
+    }
 
-    //         if ($scope.searchParams.dateOfBirth) {
-    //           $scope.searchParams.dateOfBirth = new Date($scope.searchParams.dateOfBirth).toISOString().slice(0, 10);
-    //           $scope.detailsFocused = true;
-    //           $scope.modalReopened = true;
-    //         }
+    $scope.getResult = function (result) {
+      $scope.patients = result.data;
 
-    //         $scope.cancel = function () {
-    //           $uibModalInstance.dismiss('cancel');
-    //         };
+      if ($scope.patients) {
+        changeState();
+      }
+    };
 
-    //         $scope.getResult = function (result) {
-    //           $scope.patients = result.data;
+    $scope.ok = function (searchForm) {
+      if ($scope.searchParams.nhsNumber) {
+        $scope.searchParams.nhsNumber = $scope.searchParams.nhsNumber.replace(/\s+/g, '');
+      }
 
-    //           if ($scope.patients) {
-    //             changeState();
-    //           }
-    //         };
+      if (searchForm.$valid) {
+        $scope.searchByDetails($scope.searchParams);
 
-    //         $scope.ok = function (searchForm) {
-    //           if ($scope.searchParams.nhsNumber) {
-    //             $scope.searchParams.nhsNumber = $scope.searchParams.nhsNumber.replace(/\s+/g, '');
-    //           }
+        let unsubscribe = $ngRedux.connect(state => ({
+          setResult: $scope.getResult(state.search)
+        }))(this);
 
-    //           if (searchForm.$valid) {
-    //             AdvancedSearch.searchByDetails($scope.searchParams);
+        $scope.$on('$destroy', unsubscribe);
+      }
+    };
 
-    //             let unsubscribe = $ngRedux.connect(state => ({
-    //               setResult: $scope.getResult(state.search)
-    //             }))(this);
+    $scope.openDatePicker = function ($event, name) {
+      $event.preventDefault();
+      $event.stopPropagation();
 
-    //             $scope.$on('$destroy', unsubscribe);
-    //           }
-    //         };
+      $scope[name] = true;
+    };
 
-    //         $scope.openDatePicker = function ($event, name) {
-    //           $event.preventDefault();
-    //           $event.stopPropagation();
+    $scope.isNhsNumberRequired = function (advancedSearchForm) {
+      var nhsNumber = $scope.advancedSearchForm.nhsNumber.$viewValue;
+      var areDetailsFieldsClean = $scope.areDetailsFieldsClean(advancedSearchForm);
 
-    //           $scope[name] = true;
-    //         };
+      if (nhsNumber === undefined && areDetailsFieldsClean) {
+        return true;
+      }
 
-    //         $scope.isNhsNumberRequired = function (advancedSearchForm) {
-    //           var nhsNumber = $scope.advancedSearchForm.nhsNumber.$viewValue;
+      nhsNumber = nhsNumber.replace(/\s+/g, '');
 
-    //           if (nhsNumber === undefined && $scope.areDetailsFieldsClean(advancedSearchForm)) {
-    //             return true;
-    //           }
+      var nhsNumberInvalid = isNaN(nhsNumber) || (advancedSearchForm.nhsNumber.$invalid && nhsNumber.length === 0);
 
-    //           nhsNumber = nhsNumber.replace(/\s+/g, '');
+      return nhsNumberInvalid && areDetailsFieldsClean;
+    };
 
-    //           var nhsNumberInvalid = isNaN(nhsNumber) || (advancedSearchForm.nhsNumber.$invalid && nhsNumber.length === 0);
+    $scope.isNhsNumberTooShort = function (value) {
+      if (value === undefined) {
+        return false;
+      }
 
-    //           return nhsNumberInvalid && $scope.areDetailsFieldsClean(advancedSearchForm);
-    //         };
+      var nhsNumber = value.replace(/\s+/g, '');
 
-    //         $scope.isNhsNumberTooShort = function (value) {
-    //           if (value === undefined) {
-    //             return false;
-    //           }
+      return !isNaN(nhsNumber) && nhsNumber.length > 0 && nhsNumber.length < 10;
+    };
 
-    //           var nhsNumber = value.replace(/\s+/g, '');
+    $scope.isNhsNumberTooLong = function (value) {
+      if (value === undefined) {
+        return false;
+      }
 
-    //           return !isNaN(nhsNumber) && nhsNumber.length > 0 && nhsNumber.length < 10;
-    //         };
+      var nhsNumber = value.replace(/\s+/g, '');
 
-    //         $scope.isNhsNumberTooLong = function (value) {
-    //           if (value === undefined) {
-    //             return false;
-    //           }
+      return !isNaN(nhsNumber) && nhsNumber.length > 10;
+    };
 
-    //           var nhsNumber = value.replace(/\s+/g, '');
+    $scope.isNhsNumberFieldInvalid = function (nhsNumberField) {
+      return nhsNumberField.$invalid || nhsNumberField.$pristine;
+    };
 
-    //           return !isNaN(nhsNumber) && nhsNumber.length > 10;
-    //         };
+    $scope.areDetailsFieldsClean = function (advancedSearchForm) {
+      var surname = advancedSearchForm.surname;
+      var forename = advancedSearchForm.forename;
+      var dateOfBirth = advancedSearchForm.dateOfBirth;
 
-    //         $scope.isNhsNumberFieldInvalid = function (nhsNumberField) {
-    //           return nhsNumberField.$invalid || nhsNumberField.$pristine;
-    //         };
+      var surnameClean = surname.$invalid || !$scope.searchParams.surname || $scope.searchParams.surname === '';
+      var forenameClean = forename.$invalid || !$scope.searchParams.forename || $scope.searchParams.forename === '';
+      var dateOfBirthClean = dateOfBirth.$invalid || !$scope.searchParams.dateOfBirth || $scope.searchParams.dateOfBirth === '';
 
-    //         $scope.areDetailsFieldsClean = function (advancedSearchForm) {
-    //           var surname = advancedSearchForm.surname;
-    //           var forename = advancedSearchForm.forename;
-    //           var dateOfBirth = advancedSearchForm.dateOfBirth;
+      return surnameClean && forenameClean && dateOfBirthClean;
+    };
 
-    //           var surnameClean = surname.$invalid || !$scope.searchParams.surname || $scope.searchParams.surname === '';
-    //           var forenameClean = forename.$invalid || !$scope.searchParams.forename || $scope.searchParams.forename === '';
-    //           var dateOfBirthClean = dateOfBirth.$invalid || !$scope.searchParams.dateOfBirth || $scope.searchParams.dateOfBirth === '';
-
-    //           return surnameClean && forenameClean && dateOfBirthClean;
-    //         };
-    //       },
-    //       resolve: {
-    //         modal: function() {
-    //           return {
-    //             title: 'Advanced Search'
-    //           };
-    //         },
-    //         searchParams: function() {
-    //           var params = {};
-    //           if (!isNaN(expression)) {
-    //             params.nhsNumber = expression;
-    //           } else {
-    //             params.surname = expression;
-    //           }
-
-    //           return params;
-    //         }
-    //       }
-    //     });
-    // };
-
-    // var searchByDetails = function (queryParams) {
-    //   if (queryParams.dateOfBirth) {
-    //     queryParams.dateOfBirth = new Date(queryParams.dateOfBirth.getTime() - (60000 * queryParams.dateOfBirth.getTimezoneOffset()));
-    //   }
-    //   this.searchResult = searchActions.advancedSearch;
-    //   this.searchResult(queryParams);
-    // };
-
-    // var isModalClosed = true;
-
-    // modalInstance.result.then(function() {
-    //   isModalClosed = true;
-    // }, function() {
-    //   isModalClosed = true;
-    // });
+    $scope.searchByDetails = function (queryParams) {
+      if (queryParams.dateOfBirth) {
+        queryParams.dateOfBirth = new Date(queryParams.dateOfBirth.getTime() - (60000 * queryParams.dateOfBirth.getTimezoneOffset()));
+      }
+      this.searchResult = searchActions.advancedSearch;
+      console.log('queryParams');
+      console.log(queryParams);
+      this.searchResult(queryParams);
+    };
   }
 }
 
@@ -204,5 +160,5 @@ const SearchAdvancedComponent = {
   controller: SearchAdvancedController
 };
 
-SearchAdvancedController.$inject = ['$scope', '$http', '$ngRedux', 'serviceRequests', 'searchActions'];
+SearchAdvancedController.$inject = ['$scope', '$http', '$ngRedux', 'serviceRequests', 'searchActions', '$state'];
 export default SearchAdvancedComponent;
