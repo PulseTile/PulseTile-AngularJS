@@ -13,11 +13,22 @@
  ~  See the License for the specific language governing permissions and
  ~  limitations under the License.
  */
-import DiagnosesListComponent from './diagnoses-list.component';
-import DiagnosesCreateComponent from './diagnoses-create.component';
-import DiagnosesDetailComponent from './diagnoses-detail.component';
-
-angular.module('ripple-ui.diagnoses', [])
-  .component('diagnosesListComponent', DiagnosesListComponent)
-  .component('diagnosesCreateComponent', DiagnosesCreateComponent)
-  .component('diagnosesDetailComponent', DiagnosesDetailComponent);
+import routes from "./index.route";
+import reducer from "./diagnoses-reducer-all";
+import diagnosesListComponent from './diagnoses-list.component';
+import diagnosesCreateComponent from './diagnoses-create.component';
+import diagnosesDetailComponent from './diagnoses-detail.component';
+import diagnosesActions from './diagnoses-actions';
+export default {
+  "name": 'diagnoses',
+  "routes": routes,
+  "reducer": reducer,
+  "components": {
+    diagnosesListComponent,
+    diagnosesCreateComponent,
+    diagnosesDetailComponent
+  },
+  "actions": {
+    diagnosesActions
+  }
+}

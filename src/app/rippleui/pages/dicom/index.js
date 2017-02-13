@@ -13,9 +13,20 @@
  ~  See the License for the specific language governing permissions and
  ~  limitations under the License.
  */
-import ImageListComponent from './image-list.component';
-import ImageDetailComponent from './image-detail.component';
-
-angular.module('ripple-ui.dicom', [])
-  .component('imageListComponent', ImageListComponent)
-  .component('imageDetailComponent', ImageDetailComponent);
+import routes from "./index.route";
+import reducer from "./studies-reducer-all";
+import imageListComponent from './image-list.component';
+import imageDetailComponent from './image-detail.component';
+import imagesActions from './image-actions';
+export default {
+  "name": 'dicom',
+  "routes": routes,
+  "reducer": reducer,
+  "components": {
+    imageListComponent,
+    imageDetailComponent
+  },
+  "actions": {
+    imagesActions
+  }
+}

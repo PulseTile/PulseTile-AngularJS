@@ -69,6 +69,7 @@ class ContactsListController {
     };
 
     this.setCurrentPageData = function (data) {
+      console.log('setCurrentPageData', data);
       if (data.contacts.data) {
         this.contacts = data.contacts.data;
         usSpinnerService.stop('patientSummary-spinner');

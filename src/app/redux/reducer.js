@@ -18,9 +18,7 @@ import { combineReducers } from 'redux';
 import patients from '../rippleui/pages/patients-list/patients-reducer-all';
 import patientsGet from '../rippleui/pages/patients-list/patients-reducer-get';
 import search from '../rippleui/search/search-reducer-all';
-import diagnoses from '../rippleui/pages/diagnoses/diagnoses-reducer-all';
 import medication from '../rippleui/pages/medications/medication-reducer-all';
-import contacts from '../rippleui/pages/contacts/contacts-reducer-all';
 import orders from '../rippleui/pages/orders/orders-reducer-all';
 import referrals from '../rippleui/pages/referrals/referrals-reducer-all';
 import procedures from '../rippleui/pages/procedures/procedures-reducer-all';
@@ -35,9 +33,7 @@ import studies from '../rippleui/pages/dicom/studies-reducer-all';
 import series from '../rippleui/pages/dicom/series-reducer-all';
 import instanceGet from '../rippleui/pages/dicom/instance-reducer-get';
 import instanceIdGet from '../rippleui/pages/dicom/instance-id-reducer-get';
-import eolcareplans from '../rippleui/pages/care-plans/eolcareplans-reducer-all';
 import heightAndWeight from '../rippleui/pages/height-and-weight/heightAndWeight-reducer-all';
-import clinicalnotes from '../rippleui/pages/clinical-notes/clinicalnotes-reducer-all';
 import personalnotes from '../rippleui/pages/personal-notes/personalnotes-reducer-all';
 import genericmdt from '../rippleui/pages/generic-mdt/generic-mdt-reducer-all';
 import transferOfCare from '../rippleui/pages/transfer-of-care/transfer-of-care-reducer-all';
@@ -49,9 +45,7 @@ let reducers = {
   patients,
   patientsGet,
   search,
-  diagnoses,
   medication,
-  contacts,
   orders,
   referrals,
   procedures,
@@ -66,10 +60,8 @@ let reducers = {
   series,
   instanceGet,
   instanceIdGet,
-  eolcareplans,
   heightAndWeight,
   personalnotes,
-  clinicalnotes,
   genericmdt,
   transferOfCare,
   vitals

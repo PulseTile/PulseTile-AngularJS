@@ -20,7 +20,7 @@ import clinicalnotesCreateComponent from './clinicalnotes-create.component';
 import clinicalnotesDetailComponent from './clinicalnotes-detail.component';
 import clinicalnotesActions from './clinicalnotes-actions';
 export default {
-  "name": 'clinicalNotes',
+  "name": 'clinicalnotes',
   "routes": routes,
   "reducer": reducer,
   "components": {

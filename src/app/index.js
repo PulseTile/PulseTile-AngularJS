@@ -58,12 +58,6 @@ import 'app/scss/core.scss';
 import 'app/directives/index.js';
 import 'app/filters/index.js';
 import 'app/rippleui/pages/personal-notes/index.js';
-import 'app/rippleui/pages/care-plans/index.js';
-import 'app/rippleui/pages/contacts/index.js';
-import 'app/rippleui/pages/diagnoses/index.js';
-import 'app/rippleui/pages/dicom/index.js';
-import 'app/rippleui/pages/documents/index.js';
-import 'app/rippleui/pages/generic-mdt/index.js';
 import 'app/rippleui/pages/height-and-weight/index.js';
 import 'app/rippleui/pages/medications/index.js';
 import 'app/rippleui/pages/orders/index.js';
@@ -74,6 +68,7 @@ import 'app/rippleui/pages/results/index.js';
 import 'app/rippleui/pages/transfer-of-care/index.js';
 import 'app/rippleui/pages/vaccinations/index.js';
 import 'app/rippleui/pages/vitals/index.js';
+
 import plugins from './plugins';
 
 let app = angular
@@ -85,12 +80,6 @@ let app = angular
         actions,
         dirPagination,
         'ripple-ui.personal',
-        'ripple-ui.care-plans',
-        'ripple-ui.contacts',
-        'ripple-ui.diagnoses',
-        'ripple-ui.dicom',
-        'ripple-ui.documents',
-        'ripple-ui.generic-mdt',
         'ripple-ui.height-and-weight',
         'ripple-ui.medications',
         'ripple-ui.orders',

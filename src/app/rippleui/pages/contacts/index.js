@@ -13,11 +13,22 @@
  ~  See the License for the specific language governing permissions and
  ~  limitations under the License.
  */
-import ContactsListComponent from './contacts-list.component';
-import ContactsCreateComponent from './contacts-create.component';
-import ContactsDetailComponent from './contacts-detail.component';
-
-angular.module('ripple-ui.contacts', [])
-  .component('contactsListComponent', ContactsListComponent)
-  .component('contactsCreateComponent', ContactsCreateComponent)
-  .component('contactsDetailComponent', ContactsDetailComponent);
+import routes from "./index.route";
+import reducer from "./contacts-reducer-all";
+import contactsListComponent from './contacts-list.component';
+import contactsCreateComponent from './contacts-create.component';
+import contactsDetailComponent from './contacts-detail.component';
+import contactsActions from './contacts-actions';
+export default {
+  "name": 'contacts',
+  "routes": routes,
+  "reducer": reducer,
+  "components": {
+    contactsListComponent,
+    contactsCreateComponent,
+    contactsDetailComponent
+  },
+  "actions": {
+    contactsActions
+  }
+}

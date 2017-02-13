@@ -21,7 +21,7 @@ export function all(patientId) {
   return {
     types: [types.CLINICALNOTES, types.CLINICALNOTES_SUCCESS, types.CLINICALNOTES_ERROR],
 
-    shouldCallAPI: (state) => !state.contacts.response,
+    shouldCallAPI: (state) => !state.clinicalnotes.response,
 
     config: {
       method: 'get',
@@ -37,7 +37,7 @@ export function get(patientId, compositionId, source) {
   return {
     types: [types.CLINICALNOTES_GET, types.CLINICALNOTES_GET_SUCCESS, types.CLINICALNOTES_GET_ERROR],
 
-    shouldCallAPI: (state) => !state.contacts.response,
+    shouldCallAPI: (state) => !state.clinicalnotes.response,
 
     config: {
       method: 'get',
@@ -53,7 +53,7 @@ export function create(patientId, composition) {
   return {
     types: [types.CLINICALNOTES_CREATE, types.CLINICALNOTES_CREATE_SUCCESS, types.CLINICALNOTES_CREATE_ERROR],
 
-    shouldCallAPI: (state) => !state.contacts.response,
+    shouldCallAPI: (state) => !state.clinicalnotes.response,
 
     config: {
       method: 'post',
@@ -70,7 +70,7 @@ export function update(patientId, composition) {
   return {
     types: [types.CLINICALNOTES_UPDATE, types.CLINICALNOTES_UPDATE_SUCCESS, types.CLINICALNOTES_UPDATE_ERROR],
 
-    shouldCallAPI: (state) => !state.contacts.response,
+    shouldCallAPI: (state) => !state.clinicalnotes.response,
 
     config: {
       method: 'put',

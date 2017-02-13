@@ -113,66 +113,6 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         }
       })
 
-      .state('diagnoses', {
-        url: '/patients/{patientId:int}/diagnoses?reportType&searchString&queryType',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<diagnoses-list-component></diagnoses-list-component>'}
-        },
-        params: {patientId: null, reportType: null},
-        breadcrumbs: [{
-          title: 'Patient Listings',
-          state: 'patients-list'
-        }, {
-          title: 'Patient Summary',
-          state: 'patients-summary'
-        }, {
-          title: 'Problems / Diagnoses',
-          state: 'diagnoses'
-        }]
-      })
-      .state('diagnoses-create', {
-        url: '/patients/{patientId:int}/diagnoses/create?reportType&searchString&queryType',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<diagnoses-list-component></diagnoses-list-component>'},
-          detail: {template: '<diagnoses-create-component></diagnoses-create-component>'}
-        },
-        params: {patientId: null, reportType: null},
-        breadcrumbs: [{
-          title: 'Patient Listings',
-          state: 'patients-list'
-        }, {
-          title: 'Patient Summary',
-          state: 'patients-summary'
-        }, {
-          title: 'Problems / Diagnoses',
-          state: 'diagnoses'
-        }]
-      })
-      .state('diagnoses-detail', {
-        url: '/patients/{patientId:int}/diagnoses/{diagnosisIndex}?filter&page&reportType&searchString&queryType&source',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<diagnoses-list-component></diagnoses-list-component>'},
-          detail: {template: '<diagnoses-detail-component></diagnoses-detail-component>'}
-        },
-        params: {patientId: null, reportType: null, diagnosisIndex: null},
-        breadcrumbs: [{
-          title: 'Patient Listings',
-          state: 'patients-list'
-        }, {
-          title: 'Patient Summary',
-          state: 'patients-summary'
-        }, {
-          title: 'Problems / Diagnoses',
-          state: 'diagnoses'
-        }]
-      })      
-
       .state('medications', {
         url: '/patients/{patientId:int}/medications?reportType&searchString&queryType',
         views: {
@@ -230,63 +170,6 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         }, {
           title: 'Medications',
           state: 'medications'
-        }]
-      })
-      
-      .state('contacts', {
-        url: '/patients/{patientId:int}/contacts?reportType&searchString&queryType',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<contacts-list-component></contacts-list-component>'}
-        },
-        breadcrumbs: [{
-          title: 'Patient Listings',
-          state: 'patients-list'
-        }, {
-          title: 'Patient Summary',
-          state: 'patients-summary'
-        }, {
-          title: 'Contacts',
-          state: 'contacts'
-        }]
-      })
-      .state('contacts-create', {
-        url: '/patients/{patientId:int}/contacts/create?reportType&searchString&queryType',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<contacts-list-component></contacts-list-component>'},
-          detail: {template: '<contacts-create-component></contacts-create-component>'}
-        },
-        breadcrumbs: [{
-          title: 'Patient Listings',
-          state: 'patients-list'
-        }, {
-          title: 'Patient Summary',
-          state: 'patients-summary'
-        }, {
-          title: 'Contacts',
-          state: 'contacts'
-        }]
-      })
-      .state('contacts-detail', {
-        url: '/patients/{patientId:int}/contacts/{contactIndex}?filter&page&reportType&searchString&queryType',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<contacts-list-component></contacts-list-component>'},
-          detail: {template: '<contacts-detail-component></contacts-detail-component>'}
-        },
-        breadcrumbs: [{
-          title: 'Patient Listings',
-          state: 'patients-list'
-        }, {
-          title: 'Patient Summary',
-          state: 'patients-summary'
-        }, {
-          title: 'Contacts',
-          state: 'contacts'
         }]
       })
       
@@ -616,62 +499,6 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         }]
       })
 
-      .state('documents', {
-        url: '/patients/{patientId:int}/documents?reportType&searchString&queryType',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<documents-list-component></documents-list-component>'}
-        }
-      })
-      .state('documents-detail', {
-        url: '/patients/{patientId:int}/documents/{documentIndex}?filter&page&reportType&searchString&queryType&documentType&source',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<documents-list-component></documents-list-component>'},
-          detail: {template: '<documents-detail-component></documents-detail-component>'}
-        }
-      })      
-
-      .state('images', {
-        url: '/patients/{patientId:int}/images?filter&page&reportType&searchString&queryType',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<image-list-component></image-list-component>'}
-        },
-        breadcrumbs: [{
-          title: 'Patient Listings',
-          state: 'patients-list'
-        }, {
-          title: 'Patient Summary',
-          state: 'patients-summary'
-        }, {
-          title: 'Images',
-          state: 'images'
-        }]
-      })
-      .state('images-detail', {
-        url: '/patients/{patientId:int}/images/{studyId}?filter&page&reportType&searchString&queryType&source',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<image-list-component></image-list-component>'},
-          detail: {template: '<image-detail-component></image-detail-component>'}
-        },
-        breadcrumbs: [{
-          title: 'Patient Listings',
-          state: 'patients-list'
-        }, {
-          title: 'Patient Summary',
-          state: 'patients-summary'
-        }, {
-          title: 'Images',
-          state: 'images'
-        }]
-      })    
-
       .state('personalNotes', {
         url: '/patients/{patientId:int}/personalNotes?reportType&searchString&queryType',
         views: {
@@ -748,63 +575,6 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         }
       })
 
-      .state('genericMdt', {
-        url: '/patients/{patientId:int}/generic-mdt-list?reportType&searchString&queryType',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<generic-mdt-list-component></generic-mdt-list-component>'}
-        },
-        breadcrumbs: [{
-          title: 'Patient Listings',
-          state: 'patients-list'
-        }, {
-          title: 'Patient Summary',
-          state: 'patients-summary'
-        }, {
-          title: 'MDT',
-          state: 'genericMdt'
-        }]
-      })
-      .state('genericMdt-detail', {
-        url: '/patients/{patientId:int}/generic-mdt-detail/{genericMdtIndex}?filter&page&reportType&searchString&queryType',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<generic-mdt-list-component></generic-mdt-list-component>'},
-          detail: {template: '<generic-mdt-detail-component></generic-mdt-detail-component>'}
-        },
-        params: { source: '{}' },
-        breadcrumbs: [{
-          title: 'Patient Listings',
-          state: 'patients-list'
-        }, {
-          title: 'Patient Summary',
-          state: 'patients-summary'
-        }, {
-          title: 'MDT',
-          state: 'genericMdt'
-        }]
-      })
-      .state('genericMdt-create', {
-        url: '/patients/{patientId:int}/generic-mdt/create?reportType&searchString&queryType',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<generic-mdt-list-component></generic-mdt-list-component>'},
-          detail: {template: '<generic-mdt-create-component></generic-mdt-create-component>'}
-        },
-        breadcrumbs: [{
-          title: 'Patient Listings',
-          state: 'patients-list'
-        }, {
-          title: 'Patient Summary',
-          state: 'patients-summary'
-        }, {
-          title: 'MDT',
-          state: 'genericMdt'
-        }]
-      })
       .state('transferOfCare', {
         url: '/patients/{patientId:int}/transfer-of-care-list?reportType&searchString&queryType',
         views: {
