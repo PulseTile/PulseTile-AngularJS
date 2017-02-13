@@ -18,30 +18,36 @@ let templateVitalsDetail = require('./vitals-detail.html');
 class VitalsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, usSpinnerService, serviceVitalsSigns) {
     $scope.isEdit = false;
-    $scope.classesVitalStatus = {};
+    $scope.vitalStatuses = {};
     $scope.popoverLabels = serviceVitalsSigns.getLabels();
     $scope.pattern = serviceVitalsSigns.pattern;
     this.vital = {};
 
     $scope.getHighlighterClass = function (vitalName) {
-      return 'highlighter-' + ($scope.classesVitalStatus[vitalName] || 'not-vital');
+      return serviceVitalsSigns.getHighlighterClass($scope.vitalStatuses[vitalName]);
     };
 
     $scope.changeVital = function (vital, vitalName) {
-      $scope.classesVitalStatus[vitalName] = serviceVitalsSigns.getClassOnValue(vital[vitalName], vitalName);
+      $scope.vitalStatuses[vitalName] = serviceVitalsSigns.getStatusOnValue(vital[vitalName], vitalName);
+      $scope.changeNewScore(vital);
+    };
+    $scope.changeNewScore = function (vital) {
+      vital.newsScore = serviceVitalsSigns.countNewsScore($scope.vitalStatuses);
+      $scope.vitalStatuses.newsScore = serviceVitalsSigns.getStatusOnValue(vital.newsScore, 'newsScore');
     };
 
     this.edit = function () {
       $scope.isEdit = true;
 
       $scope.vitalEdit = Object.assign({}, this.vital);
-      $scope.vitalEdit.date = new Date();
-      $scope.vitalEdit.dateCreated = new Date();
+      $scope.vitalEdit.dateCreate = Date.parse(new Date());
+
+      $scope.changeNewScore($scope.vitalEdit);
     };
 
     this.cancelEdit = function () {
       $scope.isEdit = false;
-      $scope.classesVitalStatus = serviceVitalsSigns.setClassesVitalStatus(this.vital);
+      $scope.vitalStatuses = serviceVitalsSigns.setVitalStatuses(this.vital);
 
     };
 
@@ -50,8 +56,11 @@ class VitalsDetailController {
   
       if (vitalForm.$valid) {
         $scope.isEdit = false;
+        
         this.vital = Object.assign(this.vital, $scope.vitalEdit);
-        $scope.vitalsUpdate(this.currentPatient.id, $scope.vital);
+        $scope.changeNewScore(this.vital);
+
+        $scope.vitalsUpdate(this.currentPatient.id, this.vital);
       }
     }.bind(this);
 
@@ -64,8 +73,9 @@ class VitalsDetailController {
 
     this.setCurrentPageData = function (data) {
       if (data.vitals.dataGet) {
-        this.vital = data.vitals.dataGet;
-        $scope.classesVitalStatus = serviceVitalsSigns.setClassesVitalStatus(this.vital);
+        this.vital = serviceVitalsSigns.convertVitalCharacteristics(data.vitals.dataGet);
+
+        $scope.vitalStatuses = serviceVitalsSigns.setVitalStatuses(this.vital);
 
         usSpinnerService.stop('vitalDetail-spinner');
       }

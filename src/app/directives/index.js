@@ -227,6 +227,25 @@ angular.module('ripple-ui.directives', [])
       }]
     }
   })
+  .directive('mcPopoverVital', function() {
+    /* istanbul ignore next  */
+    return {
+      require: '^^mcPopover',
+      restrict: 'E',
+      scope: {
+        popoverLabels: '@'
+      },
+      template: require('./../rippleui/pages/vitals/vitals-popover.html'),
+      link: function(scope, element, attrs) {
+        scope.title = attrs.title;
+        scope.popoverLabels = [];
+
+        scope.$watch(attrs.labels, function(value) {
+          scope.popoverLabels = value;
+        });
+      }
+    }
+  })
   .directive('filtering', function() {
       /* istanbul ignore next  */
       return {
