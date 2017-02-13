@@ -13,9 +13,20 @@
  ~  See the License for the specific language governing permissions and
  ~  limitations under the License.
  */
-import DocumentsListComponent from './documents-list.component';
-import DocumentsDetailComponent from './documents-detail.component';
-
-angular.module('ripple-ui.documents', [])
-  .component('documentsListComponent', DocumentsListComponent)
-  .component('documentsDetailComponent', DocumentsDetailComponent);
+import routes from "./index.route";
+import reducer from "./documents-reducer-all";
+import documentsListComponent from './documents-list.component';
+import documentsDetailComponent from './documents-detail.component';
+import documentsActions from './documents-actions';
+export default {
+  "name": 'documents',
+  "routes": routes,
+  "reducer": reducer,
+  "components": {
+    documentsListComponent,
+    documentsDetailComponent
+  },
+  "actions": {
+    documentsActions
+  }
+}

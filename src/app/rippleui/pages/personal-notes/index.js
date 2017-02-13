@@ -13,12 +13,22 @@
  ~  See the License for the specific language governing permissions and
  ~  limitations under the License.
  */
-
-import PersonalnotesListComponent from './personalnotes-list.component';
-import PersonalnotesCreateComponent from './personalnotes-create.component';
-import PersonalnotesDetailComponent from './personalnotes-detail.component';
-
-angular.module('ripple-ui.personal', [])
-  .component('personalnotesListComponent', PersonalnotesListComponent)
-  .component('personalnotesCreateComponent', PersonalnotesCreateComponent)
-  .component('personalnotesDetailComponent', PersonalnotesDetailComponent);
+import routes from "./index.route";
+import reducer from "./personalnotes-reducer-all";
+import personalnotesListComponent from './personalnotes-list.component';
+import personalnotesCreateComponent from './personalnotes-create.component';
+import personalnotesDetailComponent from './personalnotes-detail.component';
+import personalnotesActions from './personalnotes-actions';
+export default {
+  "name": 'personalnotes',
+  "routes": routes,
+  "reducer": reducer,
+  "components": {
+    personalnotesListComponent,
+    personalnotesCreateComponent,
+    personalnotesDetailComponent
+  },
+  "actions": {
+    personalnotesActions
+  }
+}

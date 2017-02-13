@@ -13,9 +13,20 @@
  ~  See the License for the specific language governing permissions and
  ~  limitations under the License.
  */
-import ResultsListComponent from './results-list.component';
-import ResultsDetailComponent from './results-detail.component';
-
-angular.module('ripple-ui.results', [])
-  .component('resultsListComponent', ResultsListComponent)
-  .component('resultsDetailComponent', ResultsDetailComponent);
+import routes from "./index.route";
+import reducer from "./results-reducer-all";
+import resultsListComponent from './results-list.component';
+import resultsDetailComponent from './results-detail.component';
+import resultsActions from './results-actions';
+export default {
+  "name": 'results',
+  "routes": routes,
+  "reducer": reducer,
+  "components": {
+    resultsListComponent,
+    resultsDetailComponent
+  },
+  "actions": {
+    resultsActions
+  }
+}

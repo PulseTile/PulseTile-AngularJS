@@ -13,11 +13,22 @@
  ~  See the License for the specific language governing permissions and
  ~  limitations under the License.
  */
-import ReferralsListComponent from './referrals-list.component';
-import ReferralsDetailComponent from './referrals-detail.component';
-import ReferralsCreateComponent from './referrals-create.component';
-
-angular.module('ripple-ui.referrals', [])
-  .component('referralsListComponent', ReferralsListComponent)
-  .component('referralsDetailComponent', ReferralsDetailComponent)
-  .component('referralsCreateComponent', ReferralsCreateComponent);
+import routes from "./index.route";
+import reducer from "./referrals-reducer-all";
+import referralsListComponent from './referrals-list.component';
+import referralsDetailComponent from './referrals-detail.component';
+import referralsCreateComponent from './referrals-create.component';
+import referralsActions from './referrals-actions';
+export default {
+  "name": 'referrals',
+  "routes": routes,
+  "reducer": reducer,
+  "components": {
+    referralsListComponent,
+    referralsCreateComponent,
+    referralsDetailComponent
+  },
+  "actions": {
+    referralsActions
+  }
+}

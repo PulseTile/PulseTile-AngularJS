@@ -13,13 +13,22 @@
  ~  See the License for the specific language governing permissions and
  ~  limitations under the License.
  */
-import VitalsListComponent from './vitals-list.component';
-import VitalsCreateComponent from './vitals-create.component';
-import VitalsDetailComponent from './vitals-detail.component';
-import ServiceVitalsSigns from './serviceVitalsSigns.js';
-
-angular.module('ripple-ui.vitals', [])
-  .component('vitalsListComponent', VitalsListComponent)
-  .component('vitalsCreateComponent', VitalsCreateComponent)
-  .component('vitalsDetailComponent', VitalsDetailComponent)
-  .service('serviceVitalsSigns', ServiceVitalsSigns);
+import routes from "./index.route";
+import reducer from "./vitals-reducer-all";
+import vitalsListComponent from './vitals-list.component';
+import vitalsCreateComponent from './vitals-create.component';
+import vitalsDetailComponent from './vitals-detail.component';
+import vitalsActions from './vitals-actions';
+export default {
+  "name": 'vitals',
+  "routes": routes,
+  "reducer": reducer,
+  "components": {
+    vitalsListComponent,
+    vitalsCreateComponent,
+    vitalsDetailComponent
+  },
+  "actions": {
+    vitalsActions
+  }
+}

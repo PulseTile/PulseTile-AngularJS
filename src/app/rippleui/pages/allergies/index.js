@@ -13,11 +13,22 @@
  ~  See the License for the specific language governing permissions and
  ~  limitations under the License.
  */
-import AllergiesListComponent from './allergies-list.component';
-import AllergiesCreateComponent from './allergies-create.component';
-import AllergiesDetailComponent from './allergies-detail.component';
-
-angular.module('ripple-ui.allergies', [])
-  .component('allergiesListComponent', AllergiesListComponent)
-  .component('allergiesCreateComponent', AllergiesCreateComponent)
-  .component('allergiesDetailComponent', AllergiesDetailComponent);
+import routes from "./index.route";
+import reducer from "./allergies-reducer-all";
+import allergiesListComponent from './allergies-list.component';
+import allergiesCreateComponent from './allergies-create.component';
+import allergiesDetailComponent from './allergies-detail.component';
+import allergiesActions from './allergies-actions';
+export default {
+  "name": 'allergies',
+  "routes": routes,
+  "reducer": reducer,
+  "components": {
+    allergiesListComponent,
+    allergiesCreateComponent,
+    allergiesDetailComponent
+  },
+  "actions": {
+    allergiesActions
+  }
+}

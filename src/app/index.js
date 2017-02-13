@@ -51,34 +51,18 @@ import MainComponent from './rippleui/main-component/main.component';
 import HomeSidebarComponent from './rippleui/pages/patients-lookup/home-sidebar.component';
 import ServiceRequests from './services/serviceRequests.js';
 import ServiceStateMenager from './services/serviceStateMenager.js';
+import ServiceVitalsSigns from './rippleui/pages/vitals/serviceVitalsSigns.js';
 
 import routeConfig from 'app/index.route';
 import 'app/scss/core.scss';
 
 import 'app/directives/index.js';
 import 'app/filters/index.js';
-import 'app/rippleui/pages/personal-notes/index.js';
-import 'app/rippleui/pages/allergies/index.js';
-import 'app/rippleui/pages/appointments/index.js';
-import 'app/rippleui/pages/care-plans/index.js';
-import 'app/rippleui/pages/clinical-notes/index.js';
-import 'app/rippleui/pages/contacts/index.js';
-import 'app/rippleui/pages/diagnoses/index.js';
-import 'app/rippleui/pages/dicom/index.js';
-import 'app/rippleui/pages/documents/index.js';
-import 'app/rippleui/pages/generic-mdt/index.js';
-import 'app/rippleui/pages/height-and-weight/index.js';
-import 'app/rippleui/pages/medications/index.js';
-import 'app/rippleui/pages/orders/index.js';
 import 'app/rippleui/pages/patients-list/index.js';
-import 'app/rippleui/pages/procedures/index.js';
-import 'app/rippleui/pages/referrals/index.js';
-import 'app/rippleui/pages/results/index.js';
-import 'app/rippleui/pages/transfer-of-care/index.js';
-import 'app/rippleui/pages/vaccinations/index.js';
-import 'app/rippleui/pages/vitals/index.js';
 
-const app = angular
+import plugins from './plugins';
+
+let app = angular
     .module('ripple-ui', [
         uiRouter,
         ngAnimate,
@@ -86,26 +70,7 @@ const app = angular
         ngRedux,
         actions,
         dirPagination,
-        'ripple-ui.personal',
-        'ripple-ui.allergies',
-        'ripple-ui.appointments',
-        'ripple-ui.care-plans',
-        'ripple-ui.clinicalnotes',
-        'ripple-ui.contacts',
-        'ripple-ui.diagnoses',
-        'ripple-ui.dicom',
-        'ripple-ui.documents',
-        'ripple-ui.generic-mdt',
-        'ripple-ui.height-and-weight',
-        'ripple-ui.medications',
-        'ripple-ui.orders',
         'ripple-ui.patients',
-        'ripple-ui.procedures',
-        'ripple-ui.referrals',
-        'ripple-ui.results',
-        'ripple-ui.transfer-of-care',
-        'ripple-ui.vaccinations',
-        'ripple-ui.vitals',
         'ripple-ui.directives',
         'ripple-ui.filters',
         'angularSpinner',
@@ -118,7 +83,15 @@ const app = angular
 
     .service('serviceRequests', ServiceRequests)
     .service('serviceStateMenager', ServiceStateMenager)
+    .service('serviceVitalsSigns', ServiceVitalsSigns);
 
+  plugins.forEach((plugin)=>{
+    Object.keys(plugin.components).forEach((name)=>{
+      app = app.component(name, plugin.components[name]);
+    })
+  });
+
+  app  
     .component('profileComponent', ProfileComponent)
     .component('headerComponent', HeaderComponent)
     .component('patientsChartsComponent', PatientsChartsComponent)

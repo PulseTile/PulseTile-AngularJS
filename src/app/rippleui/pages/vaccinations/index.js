@@ -13,11 +13,22 @@
  ~  See the License for the specific language governing permissions and
  ~  limitations under the License.
  */
-import VaccinationsListComponent from './vaccinations-list.component';
-import VaccinationsCreateComponent from './vaccinations-create.component';
-import VaccinationsDetailComponent from './vaccinations-detail.component';
-
-angular.module('ripple-ui.vaccinations', [])
-  .component('vaccinationsListComponent', VaccinationsListComponent)
-  .component('vaccinationsCreateComponent', VaccinationsCreateComponent)
-  .component('vaccinationsDetailComponent', VaccinationsDetailComponent);
+import routes from "./index.route";
+import reducer from "./vaccinations-reducer-all";
+import vaccinationsListComponent from './vaccinations-list.component';
+import vaccinationsCreateComponent from './vaccinations-create.component';
+import vaccinationsDetailComponent from './vaccinations-detail.component';
+import vaccinationsActions from './vaccinations-actions';
+export default {
+  "name": 'vaccinations',
+  "routes": routes,
+  "reducer": reducer,
+  "components": {
+    vaccinationsListComponent,
+    vaccinationsCreateComponent,
+    vaccinationsDetailComponent
+  },
+  "actions": {
+    vaccinationsActions
+  }
+}
