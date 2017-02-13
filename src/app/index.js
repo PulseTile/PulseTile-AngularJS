@@ -58,8 +58,6 @@ import 'app/scss/core.scss';
 import 'app/directives/index.js';
 import 'app/filters/index.js';
 import 'app/rippleui/pages/personal-notes/index.js';
-import 'app/rippleui/pages/allergies/index.js';
-import 'app/rippleui/pages/appointments/index.js';
 import 'app/rippleui/pages/care-plans/index.js';
 import 'app/rippleui/pages/contacts/index.js';
 import 'app/rippleui/pages/diagnoses/index.js';
@@ -87,8 +85,6 @@ let app = angular
         actions,
         dirPagination,
         'ripple-ui.personal',
-        'ripple-ui.allergies',
-        'ripple-ui.appointments',
         'ripple-ui.care-plans',
         'ripple-ui.contacts',
         'ripple-ui.diagnoses',

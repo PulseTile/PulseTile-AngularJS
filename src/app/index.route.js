@@ -171,67 +171,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           title: 'Problems / Diagnoses',
           state: 'diagnoses'
         }]
-      })
-
-      .state('allergies', {
-        url: '/patients/{patientId:int}/allergies?reportType&searchString&queryType',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<allergies-list-component></allergies-list-component>'}
-        },
-        params: {patientId: null, reportType: null},
-        breadcrumbs: [{
-          title: 'Patient Listings',
-          state: 'patients-list'
-        }, {
-          title: 'Patient Summary',
-          state: 'patients-summary'
-        }, {
-          title: 'Allergies',
-          state: 'allergies'
-        }]
-      })
-      .state('allergies-create', {
-        url: '/patients/{patientId:int}/allergies/create?reportType&searchString&queryType',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<allergies-list-component></allergies-list-component>'},
-          detail: {template: '<allergies-create-component></allergies-create-component>'}
-        },
-        params: {patientId: null, reportType: null},
-        breadcrumbs: [{
-          title: 'Patient Listings',
-          state: 'patients-list'
-        }, {
-          title: 'Patient Summary',
-          state: 'patients-summary'
-        }, {
-          title: 'Allergies',
-          state: 'allergies'
-        }]
-      })
-      .state('allergies-detail', {
-        url: '/patients/{patientId:int}/allergies/{allergyIndex}?filter&page&reportType&searchString&queryType&source',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<allergies-list-component></allergies-list-component>'},
-          detail: {template: '<allergies-detail-component></allergies-detail-component>'}
-        },
-        params: {patientId: null, reportType: null, allergyIndex: null},
-        breadcrumbs: [{
-          title: 'Patient Listings',
-          state: 'patients-list'
-        }, {
-          title: 'Patient Summary',
-          state: 'patients-summary'
-        }, {
-          title: 'Allergies',
-          state: 'allergies'
-        }]
-      })
+      })      
 
       .state('medications', {
         url: '/patients/{patientId:int}/medications?reportType&searchString&queryType',
@@ -692,25 +632,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           main: {template: '<documents-list-component></documents-list-component>'},
           detail: {template: '<documents-detail-component></documents-detail-component>'}
         }
-      })
-
-      .state('appointments', {
-        url: '/patients/{patientId:int}/appointments?reportType&searchString&queryType',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<appointments-list-component></appointments-list-component>'}
-        }
-      })
-      .state('appointments-detail', {
-        url: '/patients/{patientId:int}/appointments/{appointmentIndex}?filter&page&reportType&searchString&queryType',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<appointments-list-component></appointments-list-component>'},
-          detail: {template: '<appointments-detail-component></appointments-detail-component>'}
-        }
-      })
+      })      
 
       .state('images', {
         url: '/patients/{patientId:int}/images?filter&page&reportType&searchString&queryType',
@@ -748,25 +670,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           title: 'Images',
           state: 'images'
         }]
-      })
-
-      .state('eolcareplans', {
-        url: '/patients/{patientId:int}/eolcareplans?reportType&searchString&queryType',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<eolcareplans-list-component></eolcareplans-list-component>'}
-        }
-      })
-      .state('eolcareplans-detail', {
-        url: '/patients/{patientId:int}/eolcareplans/{eolcareplansIndex}?filter&page&reportType&searchString&queryType',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<eolcareplans-list-component></eolcareplans-list-component>'},
-          detail: {template: '<eolcareplans-detail-component></eolcareplans-detail-component>'}
-        }
-      })
+      })    
 
       .state('personalNotes', {
         url: '/patients/{patientId:int}/personalNotes?reportType&searchString&queryType',

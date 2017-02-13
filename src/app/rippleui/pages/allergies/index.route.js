@@ -18,13 +18,14 @@ routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 function routeConfig($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-    .state('clinicalNotes', {
-      url: '/patients/{patientId:int}/clinicalNotes?reportType&searchString&queryType',
+    .state('allergies', {
+      url: '/patients/{patientId:int}/allergies?reportType&searchString&queryType',
       views: {
         banner: {template: '<patients-banner-component></patients-banner-component>'},
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-        main: {template: '<clinicalnotes-list-component></clinicalnotes-list-component>'}
+        main: {template: '<allergies-list-component></allergies-list-component>'}
       },
+      params: {patientId: null, reportType: null},
       breadcrumbs: [{
         title: 'Patient Listings',
         state: 'patients-list'
@@ -32,18 +33,19 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         title: 'Patient Summary',
         state: 'patients-summary'
       }, {
-        title: 'Clinical Notes',
-        state: 'clinicalNotes'
+        title: 'Allergies',
+        state: 'allergies'
       }]
     })
-    .state('clinicalNotes-create', {
-      url: '/patients/{patientId:int}/clinicalNotes/create?reportType&searchString&queryType',
+    .state('allergies-create', {
+      url: '/patients/{patientId:int}/allergies/create?reportType&searchString&queryType',
       views: {
         banner: {template: '<patients-banner-component></patients-banner-component>'},
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-        main: {template: '<clinicalnotes-list-component></clinicalnotes-list-component>'},
-        detail: {template: '<clinicalnotes-create-component></clinicalnotes-create-component>'}
+        main: {template: '<allergies-list-component></allergies-list-component>'},
+        detail: {template: '<allergies-create-component></allergies-create-component>'}
       },
+      params: {patientId: null, reportType: null},
       breadcrumbs: [{
         title: 'Patient Listings',
         state: 'patients-list'
@@ -51,19 +53,19 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         title: 'Patient Summary',
         state: 'patients-summary'
       }, {
-        title: 'Clinical Notes',
-        state: 'clinicalNotes'
+        title: 'Allergies',
+        state: 'allergies'
       }]
     })
-    .state('clinicalNotes-detail', {
-      url: '/patients/{patientId:int}/clinicalNotes/{personalNoteIndex}?filter&page&reportType&searchString&queryType&source',
+    .state('allergies-detail', {
+      url: '/patients/{patientId:int}/allergies/{allergyIndex}?filter&page&reportType&searchString&queryType&source',
       views: {
         banner: {template: '<patients-banner-component></patients-banner-component>'},
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-        main: {template: '<clinicalnotes-list-component></clinicalnotes-list-component>'},
-        detail: {template: '<clinicalnotes-detail-component></clinicalnotes-detail-component>'}
+        main: {template: '<allergies-list-component></allergies-list-component>'},
+        detail: {template: '<allergies-detail-component></allergies-detail-component>'}
       },
-      params: { source: '{}' },
+      params: {patientId: null, reportType: null, allergyIndex: null},
       breadcrumbs: [{
         title: 'Patient Listings',
         state: 'patients-list'
@@ -71,8 +73,8 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         title: 'Patient Summary',
         state: 'patients-summary'
       }, {
-        title: 'Clinical Notes',
-        state: 'clinicalNotes'
+        title: 'Allergies',
+        state: 'allergies'
       }]
     })
 

@@ -19,7 +19,6 @@ import patients from '../rippleui/pages/patients-list/patients-reducer-all';
 import patientsGet from '../rippleui/pages/patients-list/patients-reducer-get';
 import search from '../rippleui/search/search-reducer-all';
 import diagnoses from '../rippleui/pages/diagnoses/diagnoses-reducer-all';
-import allergies from '../rippleui/pages/allergies/allergies-reducer-all';
 import medication from '../rippleui/pages/medications/medication-reducer-all';
 import contacts from '../rippleui/pages/contacts/contacts-reducer-all';
 import orders from '../rippleui/pages/orders/orders-reducer-all';
@@ -32,7 +31,6 @@ import documentsFindDischarge from '../rippleui/pages/documents/documents-reduce
 import documentsFindReferral from '../rippleui/pages/documents/documents-reducer-find-referral';
 import documentsUploadDischarge from '../rippleui/pages/documents/documents-reducer-upload-discharge';
 import documentsUploadReferral from '../rippleui/pages/documents/documents-reducer-upload-referral';
-import appointments from '../rippleui/pages/appointments/appointments-reducer-all';
 import studies from '../rippleui/pages/dicom/studies-reducer-all';
 import series from '../rippleui/pages/dicom/series-reducer-all';
 import instanceGet from '../rippleui/pages/dicom/instance-reducer-get';
@@ -52,7 +50,6 @@ let reducers = {
   patientsGet,
   search,
   diagnoses,
-  allergies,
   medication,
   contacts,
   orders,
@@ -65,7 +62,6 @@ let reducers = {
   documentsFindReferral,
   documentsUploadDischarge,
   documentsUploadReferral,
-  appointments,
   studies,
   series,
   instanceGet,

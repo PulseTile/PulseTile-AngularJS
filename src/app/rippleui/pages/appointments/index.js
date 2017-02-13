@@ -13,9 +13,20 @@
  ~  See the License for the specific language governing permissions and
  ~  limitations under the License.
  */
-import AppointmentsListComponent from './appointments-list.component';
-import AppointmentsDetailComponent from './appointments-detail.component';
-
-angular.module('ripple-ui.appointments', [])
-  .component('appointmentsListComponent', AppointmentsListComponent)
-  .component('appointmentsDetailComponent', AppointmentsDetailComponent);
+import routes from "./index.route";
+import reducer from "./appointments-reducer-all";
+import appointmentsListComponent from './appointments-list.component';
+import appointmentsDetailComponent from './appointments-detail.component';
+import appointmentsActions from './appointments-actions';
+export default {
+  "name": 'appointments',
+  "routes": routes,
+  "reducer": reducer,
+  "components": {
+    appointmentsListComponent,
+    appointmentsDetailComponent
+  },
+  "actions": {
+    appointmentsActions
+  }
+}

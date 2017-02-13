@@ -19,7 +19,6 @@ import patientsActions from '../rippleui/pages/patients-list/patients-actions';
 import searchActions from '../rippleui/search/search-actions';
 import searchReport from '../rippleui/search/search-report-actions';
 import diagnosesActions from '../rippleui/pages/diagnoses/diagnoses-actions';
-import allergiesActions from '../rippleui/pages/allergies/allergies-actions';
 import medicationsActions from '../rippleui/pages/medications/medications-actions';
 import contactsActions from '../rippleui/pages/contacts/contacts-actions';
 import vaccinationsActions from '../rippleui/pages/vaccinations/vaccinations-actions';
@@ -29,7 +28,6 @@ import resultsActions from '../rippleui/pages/results/results-actions';
 import referralsActions from '../rippleui/pages/referrals/referrals-actions';
 import proceduresActions from '../rippleui/pages/procedures/procedures-actions';
 import documentsActions from '../rippleui/pages/documents/documents-actions.js';
-import appointmentsActions from '../rippleui/pages/appointments/appointments-actions';
 import imageActions from '../rippleui/pages/dicom/image-actions';
 import eolcareplansActions from '../rippleui/pages/care-plans/eolcareplans-actions';
 import personalnotesActions from '../rippleui/pages/personal-notes/personalnotes-actions';
@@ -45,7 +43,6 @@ let app = angular
   .factory('searchActions', searchActions)
   .factory('searchReport', searchReport)
   .factory('diagnosesActions', diagnosesActions)
-  .factory('allergiesActions', allergiesActions)
   .factory('medicationsActions', medicationsActions)
   .factory('contactsActions', contactsActions)
   .factory('vaccinationsActions', vaccinationsActions)
@@ -55,7 +52,6 @@ let app = angular
   .factory('referralsActions', referralsActions)
   .factory('proceduresActions', proceduresActions)
   .factory('documentsActions', documentsActions)
-  .factory('appointmentsActions', appointmentsActions)
   .factory('imageActions', imageActions)
   .factory('eolcareplansActions', eolcareplansActions)
   .factory('personalnotesActions', personalnotesActions)
