@@ -21,10 +21,10 @@ class DocumentsDetailController {
     $scope.documentType = $stateParams.documentType;
 
     this.setCurrentPageData = function (data) {
-      if (data.documentsFindDischarge.data) {
+      if (data.documents.data) {
         this.clinicalDocument = data.documentsFindDischarge.data;
       }
-      if (data.documentsFindReferral.data) {
+      if (data.documents.data) {
         this.clinicalDocument = data.documentsFindReferral.data;
       }
     };
