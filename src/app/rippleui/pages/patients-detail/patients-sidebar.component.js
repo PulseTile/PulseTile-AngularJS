@@ -71,12 +71,12 @@ class PatientsSidebarController {
         linkDetail: 'referrals-detail',
         title: 'Referrals'
       },
-      // {
-      //   name: 'appointments',
-      //   link: 'appointments',
-      //   linkDetail: 'appointments-detail',
-      //   title: 'Appointments'
-      // },
+      {
+        name: 'appointments',
+        link: 'appointments',
+        linkDetail: 'appointments-detail',
+        title: 'Appointments'
+      },
       // {
       //   name: 'transfers',
       //   link: 'transferOfCare',
