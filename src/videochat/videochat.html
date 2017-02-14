@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>WebRTC Chat</title>
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="css/bootstrap.css" />
+  <link rel="stylesheet" href="css/font-awesome.css" />
+  <link rel="stylesheet" href="css/morris.css" />
+  <link rel="stylesheet" href="css/loading-bar.css" />
+  <link rel="stylesheet" href="css/jquery.timepicker.css" />
+  <link rel="stylesheet" href="css/fullcalendar.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="css/sb-admin-2.css"/>
+  <link rel="stylesheet" href="css/main.css">
+  <!-- endbuild -->
+</head>
+
+<body>
+<div id="chat">
+  <div class="panel panel-default panel-chat">
+    <div class="panel-heading">
+      <h4 class="panel-title ng-binding" id="patientName"></h4>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-xs-4"><span>DOB:</span> <strong id="patientDob"></strong></div>
+        <div class="col-xs-4"><span>Gender:</span> <strong id="patientGender"></strong></div>
+        <div class="col-xs-4"><span>NHS No.:</span> <strong id="patientNhs"></strong></div>
+      </div>
+    </div>
+  </div>
+  <div class="header-chat">
+    <p class="title-chat">Video Call</p>
+  </div>
+  <div class="chat-wrapper">
+    <div class="container">
+      <div class="col-xs-12 col-sm-7 col-sm-push-5 video-chat-wrapper">
+        <div class="video-wrapper">
+          <video id="remoteVideo" class="inactive" autoplay></video>
+          <video id="localVideo" class="inactive" autoplay muted></video>
+          <div class="video-controller">
+            <i class="fa fa-round fa-microphone" aria-hidden="true" id="muteAudio"></i>
+            <!--<i class="fa fa-round fa-video-camera" aria-hidden="true"id="muteVideo"></i>-->
+            <i class="fa fa-round fa-video-camera-2" aria-hidden="true" id="muteVideo"></i>
+          </div>
+          <i class="fa fa-volume-off fa-2x" aria-hidden="true" id="noSound" title="No sound"></i>
+
+        </div>
+        <div class="video-chat-controller">
+          <!--<p>Please press End Call to close this appointment when you are finished</p>-->
+          <button class="btn btn-danger" id="endCall">End Call</button>
+          <button class="btn btn-danger" style="display: none;" id="closeWindow"><i class="fa fa-times-circle" aria-hidden="true"></i> Close Window</button>
+          <button class="btn btn-success" style="display: none;" id="restartCall">Restart the call</button>
+          <span id="callDuration">Connected - <span id="timer">00:00:00</span></span>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-5 col-sm-pull-7 messages-wrapper">
+        <div class="info">
+          <div class="row">
+            <div class="col-xs-5">Care Service Team</div>
+            <div class="col-xs-7" id="appointmentCst"></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-5">Location</div>
+            <div class="col-xs-7" id="appointmentLocation"></div>
+          </div>
+        </div>
+        <ul class="list-unstyled list-messages">
+        </ul>
+        <form action="" id="sendMessage">
+          <textarea name="iMessage" id="iMessage" rows="3"></textarea>
+          <button class="btn btn-info"><i class="fa fa-pencil"></i> Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="endCallModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Confirmation</h3>
+        </div>
+        <div class="modal-body" style="text-align: center">
+          <h3>Click <span style="color: #ef5350">End Call</span> to close an appointment.</h3>
+        </div>
+
+        <div class="modal-footer">
+          <a class="btn btn-success" id="endCallModal-cancel">Cancel</a>
+          <a class="btn btn-danger" id="endCallModal-submit">End Call</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hidden" id="notificationSound"></div>
+
+<!-- build:js(.) scripts/appointment_vendor.js -->
+<script src="lib/jquery.js"></script>
+<script src="lib/moment.js"></script>
+<script src="lib/socket.io.js"></script>
+<script src="lib/adapter.js"></script>
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/appointment_main.js -->
+<script src="videochat.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>
+
