@@ -28,9 +28,12 @@
         </button>
         <div class="dropdown-menu dm-panel dm-right dm-tables">
           <div class="heading">TABLES</div>
+          <div class="dm-list">
+            <div class="dm-item" ng-class="{active: isViewList('tableNews')}" ng-click="changeViewList('tableNews')"><i class="fa fa-table"></i><span>Vitals - NEWS</span></div>
+          </div>
+          <div class="heading">CHARTS</div>
           <div class="dm-wrap-list">
             <div class="dm-list">
-              <div class="dm-item" ng-class="{active: isViewList('tableNews')}" ng-click="changeViewList('tableNews')"><i class="fa fa-table"></i><span>Vitals - NEWS</span></div>
               <div class="dm-item" ng-class="{active: isViewList('chartNews')}" ng-click="changeViewList('chartNews')"><i class="fa fa-area-chart"></i><span>Vitals - NEWS</span></div>
             </div>
           </div>
@@ -68,7 +71,7 @@
 
         <tbody>
           <tr dir-paginate="vital in vitals | filter: queryFilter | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage" ng-click="go(vital.sourceId, vital)" ng-class="{info: $ctrl.selected(vital.sourceId)}">
-            <td data-th="Id" ng-class="$ctrl.sortClass('id');">{{ vital.id }}</td>
+            <td data-th="#" ng-class="$ctrl.sortClass('id');">{{ vital.id }}</td>
             <td data-th="Date" ng-class="$ctrl.sortClass('date')">{{ vital.dateCreate | date:'dd-MMM-yyyy' }}</td>
             <td data-th="NEWS Score" ng-class="$ctrl.sortClass('news')" class="highlighter-wrapper">
               <span ng-if="vital.statusNewsScore" ng-class="'highlighter-' + vital.statusNewsScore"></span>

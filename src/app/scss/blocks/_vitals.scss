@@ -13,9 +13,19 @@ $vitalsInputColor: (
   position: relative;
   margin-bottom: 23px;
   padding-left: 12px;
+  margin-left: -11px;
+  .highlighter { width: 5px; }
+  .highlighter-not-vital {width: 2px;}
   .input-holder,
   .input-group {
     padding-bottom: 3px;
+  }
+}
+@include respond-to(xs) {
+  .vitals-group {
+    margin-left: 0;
+    .highlighter { width: 4px; }
+    .highlighter-not-vital { width: 1px; }
   }
 }
 .vitals-holder {
@@ -23,6 +33,7 @@ $vitalsInputColor: (
   .form-control {
     background-color: #fff;
     width: 51px;
+    color: #000000;
   }
   .vitals-addon {
     display: block;

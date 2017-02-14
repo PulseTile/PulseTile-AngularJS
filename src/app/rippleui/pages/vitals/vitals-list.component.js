@@ -203,6 +203,19 @@ class VitalsListController {
                 return '  ' + data.datasets[tooltipItem.datasetIndex].label + ' : ' + tooltipItem.yLabel;
               }
             }
+          },
+          scales: {
+            yAxes: [{
+                ticks: {
+                    stepSize: 5
+                }
+            }],
+            xAxes: [{
+              ticks: {
+                  maxRotation: 90,
+                  minRotation: 90
+              }
+            }]
           }
       };
 

@@ -36,6 +36,7 @@ import reducer from './redux/reducer';
 import actions from './actions';
 import httpMiddleware from './helpers/httpMiddleware';
 import Patient from './helpers/patient';
+import './helpers/polyfills';
 
 //components 
 import ProfileComponent from './rippleui/pages/profile/profile.component';
