@@ -70,6 +70,7 @@ class SearchAdvancedController {
     };
 
     $scope.ok = function (searchForm) {
+      /* istanbul ignore if */
       if ($scope.searchParams.nhsNumber) {
         $scope.searchParams.nhsNumber = $scope.searchParams.nhsNumber.replace(/\s+/g, '');
       }
@@ -144,6 +145,7 @@ class SearchAdvancedController {
     };
 
     $scope.searchByDetails = function (queryParams) {
+      /* istanbul ignore if */
       if (queryParams.dateOfBirth) {
         queryParams.dateOfBirth = new Date(queryParams.dateOfBirth.getTime() - (60000 * queryParams.dateOfBirth.getTimezoneOffset()));
       }
