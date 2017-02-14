@@ -102,8 +102,9 @@ label:focus,
 .main {
   position: relative;
   z-index: 1;
-  overflow: hidden;
+  // overflow: hidden;
 }
+.sidebar + .main {overflow: hidden;}
 
 #page-wrapper {
   padding: 0;

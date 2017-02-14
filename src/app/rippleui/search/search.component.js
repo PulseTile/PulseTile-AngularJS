@@ -21,6 +21,7 @@ class SearchController {
     serviceRequests.publisher('headerTitle', {title: 'Welcome', isShowTitle: true});
 
     this.mainSearchEnabled = true;
+    this.showAdvancedSearch = false;
     this.searchExpression = '';
 
     serviceRequests.publisher('populateHeaderSearch', {
@@ -35,7 +36,12 @@ class SearchController {
         headerSearchEnabled: true
       });
     };
-    
+
+    this.toggleAdvancedSearch = function() {
+      this.showAdvancedSearch = !this.showAdvancedSearch;
+    }.bind(this);
+    serviceRequests.subscriber('toggleAdvancedSearch', this.toggleAdvancedSearch);
+
   }
 }
 
