@@ -15,11 +15,12 @@
 */
 
 class ServiceStateMenager {
-
     constructor () {
-        this.currentSort = {
+        this.tableSettings = {
           order: '',
-          reverse: false
+          reverse: false,
+          state: '',
+          currentPage: 1
         };
         this.filter = {
           isOpen: false,

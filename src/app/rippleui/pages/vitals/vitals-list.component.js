@@ -21,53 +21,27 @@ class VitalsListController {
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
     $scope.vitals;
-    this.currentPage = 1;
     $scope.viewList;
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'vitals-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'vitals';
-    this.order = serviceRequests.currentSort.order || 'id';
-    this.reverse = serviceRequests.currentSort.reverse || false;
-
-    this.sort = function (field) {
-      var reverse = this.reverse;
-      if (this.order === field) {
-        this.reverse = !reverse;
-      } else {
-        this.order = field;
-        this.reverse = false;
-      }
-    };
-
-    this.sortClass = function (field) {
-      if (this.order === field) {
-        return this.reverse ? 'sorted desc' : 'sorted asc';
-      }
-    };
 
     this.create = function () {
       $state.go('vitals-create', {
-        patientId: $stateParams.patientId,
-        page: this.currentPage
+        patientId: $stateParams.patientId
       });
     };
 
     $scope.go = function (id, vital) {
-      serviceRequests.currentSort.order = this.order;
-      serviceRequests.currentSort.reverse = this.reverse;
       serviceRequests.viewList = $scope.viewList;
 
       $state.go('vitals-detail', {
         patientId: $stateParams.patientId,
-        vitalIndex: id,
-        page: this.currentPage,
+        detailsIndex: id,
+        page: $scope.currentPage || 1,
         source: vital
       });
     }.bind(this);
-
-    this.pageChangeHandler = function (newPage) {
-      this.currentPage = newPage;
-    };
 
     function formatDate(date) {
       var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
@@ -238,10 +212,6 @@ class VitalsListController {
       }.bind(this);
     };
 
-    this.selected = function (vitalIndex) {
-      return vitalIndex === $stateParams.vitalIndex;
-    };
-
     $scope.isViewList = function (viewName) {
       return $scope.viewList === viewName;
     };
@@ -279,10 +249,6 @@ class VitalsListController {
         this.currentUser = serviceRequests.currentUserData;
       }
     };
-
-    if ($stateParams.page) {
-      this.currentPage = $stateParams.page;
-    }
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)

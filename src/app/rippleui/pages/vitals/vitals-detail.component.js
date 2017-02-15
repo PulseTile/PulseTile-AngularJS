@@ -96,7 +96,7 @@ class VitalsDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     $scope.vitalsLoad = vitalsActions.get;
-    $scope.vitalsLoad($stateParams.patientId, $stateParams.vitalIndex);
+    $scope.vitalsLoad($stateParams.patientId, $stateParams.detailsIndex);
     $scope.vitalsUpdate = vitalsActions.update;
   }
 }

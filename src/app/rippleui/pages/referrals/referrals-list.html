@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
 
-<div mc-full-panel filtering class="panel panel-primary">
+<div mc-full-panel table-settings order="dateOfReferral" filtering class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
@@ -43,22 +43,19 @@
       </colgroup>
       <thead>
         <tr>
-          <th ng-click="$ctrl.sort('dateOfReferral')" ng-class="$ctrl.sortClass('dateOfReferral')" >Date of Referral</th>
-          <th ng-click="$ctrl.sort('referralFrom')" ng-class="$ctrl.sortClass('referralFrom')" >Referral From</th>
-          <th ng-click="$ctrl.sort('referralTo')" ng-class="$ctrl.sortClass('referralTo')" >Referral To</th>
-          <th ng-click="$ctrl.sort('source')" ng-class="$ctrl.sortClass('source')">Source</th>
+          <th ng-click="sort('dateOfReferral')" ng-class="sortClass('dateOfReferral')" >Date of Referral</th>
+          <th ng-click="sort('referralFrom')" ng-class="sortClass('referralFrom')" >Referral From</th>
+          <th ng-click="sort('referralTo')" ng-class="sortClass('referralTo')" >Referral To</th>
+          <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
         </tr>
       </thead>
 
       <tbody>
-        <!--
-  			clinicalNote.source - It should actually transmitted
-  			<tr dir-paginate="clinicalNote in $ctrl.clinicalNotes | filter:$ctrl.search | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(clinicalNote.sourceId, clinicalNote.source)" ng-class="{info: $ctrl.selected(clinicalNote.sourceId)}"> -->
-        <tr dir-paginate="referral in $ctrl.referrals | filter: queryFilter | orderBy:[$ctrl.order] : $ctrl.reverse  | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(referral.sourceId)" ng-class="{info: $ctrl.selected(referral.sourceId)}">
-          <td data-th="Date of Referral" ng-class="$ctrl.sortClass('dateOfReferral')" class="dateTime">{{ referral.dateOfReferral}}</td>
-          <td data-th="Referral From" ng-class="$ctrl.sortClass('referralFrom')" >{{ referral.referralFrom }}</td>
-          <td data-th="Referral To" ng-class="$ctrl.sortClass('referralTo')" >{{ referral.referralTo }}</td>
-          <td data-th="Source" ng-class="$ctrl.sortClass('source')" >{{ referral.source }}</td>
+        <tr dir-paginate="referral in $ctrl.referrals | filter: queryFilter | orderBy:[order] : reverse  | itemsPerPage: 10" current-page="currentPage"  ng-click="$ctrl.go(referral.sourceId)" ng-class="{info: selectedRow(referral.sourceId)}">
+          <td data-th="Date of Referral" ng-class="sortClass('dateOfReferral')" class="dateTime">{{ referral.dateOfReferral}}</td>
+          <td data-th="Referral From" ng-class="sortClass('referralFrom')" >{{ referral.referralFrom }}</td>
+          <td data-th="Referral To" ng-class="sortClass('referralTo')" >{{ referral.referralTo }}</td>
+          <td data-th="Source" ng-class="sortClass('source')" >{{ referral.source }}</td>
         </tr>
 
         <tr ng-if="!$ctrl.referrals.length">
@@ -72,7 +69,7 @@
     <div class="panel-control">
       <div class="wrap-control-group">
         <div class="control-group with-indent left">
-          <dir-pagination-controls max-size="5" on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
+          <dir-pagination-controls max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
         </div>
         <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1 && $ctrl.isShowCreateBtn">
           <button class="btn btn-success btn-inverse btn-create" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> <span>Create</span></button>

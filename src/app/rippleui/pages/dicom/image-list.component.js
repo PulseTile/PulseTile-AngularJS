@@ -20,44 +20,24 @@ class ImageListController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.currentPage = 1;
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'images-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'images';
     var vm = this;
 
-    this.sort = function (field) {
-      var reverse = this.reverse;
-      if (this.order === field) {
-          this.reverse = !reverse;
-      } else {
-          this.order = field;
-          this.reverse = false;
-      }
-    };
-    
-    this.sortClass = function (field) {
-      if (this.order === field) {
-          return this.reverse ? 'sorted desc' : 'sorted asc';
-      }
-    };
-    
-    this.order = serviceRequests.currentSort.order || 'name';
-    this.reverse = serviceRequests.currentSort.reverse || false;
-
-    this.create = function () {
-      $state.go('images-create', {
-          patientId: $stateParams.patientId,
-          page: this.currentPage
+    this.go = function (id, source) {
+      $state.go('images-detail', {
+        patientId: $stateParams.patientId,
+        detailsIndex: id,
+        page: $scope.currentPage || 1,
+        source: source
       });
     };
-
-    this.pageChangeHandler = function (newPage) {
-      this.currentPage = newPage;
+    
+    this.create = function () {
+      $state.go('images-create', {
+          patientId: $stateParams.patientId
+      });
     };
-
-    if ($stateParams.page) {
-      this.currentPage = $stateParams.page;
-    }
 
     // this.search = function (row) {
     //   return (
@@ -66,22 +46,6 @@ class ImageListController {
     //     angular.lowercase(row.source).indexOf(angular.lowercase(vm.query) || '') !== -1
     //   );
     // };
-
-    this.go = function (id, source) {
-      $state.go('images-detail', {
-        patientId: $stateParams.patientId,
-        studyId: id,
-        source: source,
-        page: this.currentPage,
-        reportType: $stateParams.reportType,
-        searchString: $stateParams.searchString,
-        queryType: $stateParams.queryType
-      });
-    };
-
-    this.selected = function (imageIndex) {
-      return imageIndex === $stateParams.studyId;
-    };
 
     this.setCurrentPageData = function (data) {
       var date = new Date();

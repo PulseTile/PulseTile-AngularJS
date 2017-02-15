@@ -58,14 +58,14 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       }]
     })
     .state('medications-detail', {
-      url: '/patients/{patientId:int}/medications/{medicationIndex}?filter&page&reportType&searchString&queryType&source',
+      url: '/patients/{patientId:int}/medications/{detailsIndex}?page&reportType&searchString&queryType&source',
       views: {
         banner: {template: '<patients-banner-component></patients-banner-component>'},
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
         main: {template: '<medications-list-component></medications-list-component>'},
         detail: {template: '<medications-detail-component></medications-detail-component>'}
       },
-      params: {patientId: null, reportType: null, medicationIndex: null},
+      params: {patientId: null, reportType: null, detailsIndex: null, source: null},
       breadcrumbs: [{
         title: 'Patient Listings',
         state: 'patients-list'

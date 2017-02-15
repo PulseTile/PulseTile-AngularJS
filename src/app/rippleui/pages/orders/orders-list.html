@@ -13,7 +13,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
-<div mc-full-panel filtering class="panel panel-primary">
+<div mc-full-panel table-settings order="name" filtering class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
@@ -36,17 +36,17 @@
     <table class="table table-striped table-hover table-bordered rwd-table table-sorted">
       <thead>
       <tr>
-        <th ng-click="$ctrl.sort('name')" ng-class="$ctrl.sortClass('name')" class="sorted asc">Order Name</th>
-        <th ng-click="$ctrl.sort('orderDate')" ng-class="$ctrl.sortClass('orderDate')">Date</th>
-        <th ng-click="$ctrl.sort('source')" ng-class="$ctrl.sortClass('source')">Source</th>
+        <th ng-click="sort('name')" ng-class="sortClass('name')">Order Name</th>
+        <th ng-click="sort('orderDate')" ng-class="sortClass('orderDate')">Date</th>
+        <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
       </tr>
       </thead>
 
       <tbody>
-      <tr dir-paginate="order in $ctrl.orders | filter: queryFilter | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(order.sourceId, order.source)" ng-class="{info: $ctrl.selected(order.sourceId)}">
-        <td data-th="Order Name" ng-class="$ctrl.sortClass('name');">{{order.name }}</td>
-        <td data-th="Date" class="orderDateTime" ng-class="$ctrl.sortClass('orderDate');">{{order.orderDate}}</td>
-        <td data-th="Source" ng-class="$ctrl.sortClass('source');">{{order.source}}</td>
+      <tr dir-paginate="orderItem in $ctrl.orders | filter: queryFilter | orderBy:[orderItem] : reverse | itemsPerPage: 10" current-page="currentPage"  ng-click="$ctrl.go(orderItem.sourceId, orderItem.source)" ng-class="{info: selectedRow(orderItem.sourceId)}">
+        <td data-th="Order Name" ng-class="sortClass('name');">{{orderItem.name }}</td>
+        <td data-th="Date" class="orderDateTime" ng-class="sortClass('orderDate');">{{orderItem.orderDate}}</td>
+        <td data-th="Source" ng-class="sortClass('source');">{{orderItem.source}}</td>
       </tr>
 
       <tr ng-if="!$ctrl.orders.length">
@@ -60,7 +60,7 @@
     <div class="panel-control">
       <div class="wrap-control-group">
         <div class="control-group with-indent left">
-          <dir-pagination-controls max-size="5" on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
+          <dir-pagination-controls max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
         </div>
         <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1 && $ctrl.isShowCreateBtn">
           <button class="btn btn-success btn-inverse btn-create" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> <span>Create</span></button>

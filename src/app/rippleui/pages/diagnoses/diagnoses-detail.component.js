@@ -98,7 +98,7 @@ class DiagnosesDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     this.diagnosesLoad = diagnosesActions.get;
-    this.diagnosesLoad($stateParams.patientId, $stateParams.diagnosisIndex, $stateParams.source);
+    this.diagnosesLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
     $scope.diagnosesUpdate = diagnosesActions.update;
   }
 }

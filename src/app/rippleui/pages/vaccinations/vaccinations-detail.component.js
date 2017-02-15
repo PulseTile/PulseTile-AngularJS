@@ -79,7 +79,7 @@ class VaccinationsDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     // this.vaccinationsLoad = vaccinationsActions.get;
-    // this.vaccinationsLoad($stateParams.patientId, $stateParams.vaccinationIndex);
+    // this.vaccinationsLoad($stateParams.patientId, $stateParams.detailsIndex);
     // $scope.vaccinationsUpdate = vaccinationsActions.update;
   }
 }
