@@ -53,6 +53,7 @@ import HomeSidebarComponent from './rippleui/pages/patients-lookup/home-sidebar.
 import ServiceRequests from './services/serviceRequests.js';
 import ServiceStateMenager from './services/serviceStateMenager.js';
 import ServiceVitalsSigns from './rippleui/pages/vitals/serviceVitalsSigns.js';
+import ServiceFormatted from './services/serviceFormatted.js';
 
 import routeConfig from 'app/index.route';
 import 'app/scss/core.scss';
@@ -82,6 +83,7 @@ let app = angular
     .factory('httpMiddleware', httpMiddleware)
     .factory('Patient', Patient)
 
+    .service('serviceFormatted', ServiceFormatted)
     .service('serviceRequests', ServiceRequests)
     .service('serviceStateMenager', ServiceStateMenager)
     .service('serviceVitalsSigns', ServiceVitalsSigns);
