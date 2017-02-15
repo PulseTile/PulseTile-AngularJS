@@ -1,5 +1,5 @@
-# Ripple OSI
-Ripple is a clinically led team working with you to build an integrated digital care record platform for today and the future. Open source, open standards and underpinned by an open architecture that can be used worldwide.
+# PulseTile
+PulseTile is a clinically led UX UI framework for healthcare.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -10,7 +10,6 @@ To develop and run the application locally you must have the following installed
 
 ```
  - NodeJS
- - A running version of The Ripple Middleware listening on port 19191
 ```
 ### Installing
 
@@ -23,7 +22,7 @@ bower install
 
 ## Building & Deployment
 
-Org-Ripple-UI uses Webpack to build and launch the development environment. After you have installed all dependencies, you may run the app. Running `npm start` will bundle the app with `webpack`, launch a development server, and watch all files. The port will be displayed in the terminal.
+PulseTile uses Webpack to build and launch the development environment. After you have installed all dependencies, you may run the app. Running `npm start` will bundle the app with `webpack`, launch a development server, and watch all files. The port will be displayed in the terminal.
 
 Just simply run `npm start` - this will also watch changes.
 
@@ -40,7 +39,7 @@ Here's a list of available scripts:
 
 ## Built With
 
-Org-Ripple-UI uses Webpack together for its build system.
+PulseTile uses Webpack together for its build system.
 
 `Webpack` handles all file-related concerns:
 * Transpiling from ES6 to ES5 with `Babel`
