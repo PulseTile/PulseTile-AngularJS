@@ -40,6 +40,7 @@ class VitalsListController {
     };
 
     this.sortClass = function (field) {
+      /* istanbul ignore if  */
       if (this.order === field) {
         return this.reverse ? 'sorted desc' : 'sorted asc';
       }
@@ -69,6 +70,7 @@ class VitalsListController {
       this.currentPage = newPage;
     };
 
+    /* istanbul ignore next  */
     function formatDate(date) {
       var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
       
@@ -97,7 +99,7 @@ class VitalsListController {
       var lastDate = '';
       var dataChart = {
         labels: []
-      }
+      };
       var datasetsData = {
         diastolicBP: [],
         systolicBP: [],
@@ -105,8 +107,9 @@ class VitalsListController {
         heartRate: [],
         respirationRate: [],
         oxygenSaturation: []
-      }
-     
+      };
+
+      /* istanbul ignore next  */
       for (var i = 0; i < vitals.length; i++) {
         tempDate = formatDate(new Date(vitals[i].dateCreate));
 
@@ -233,6 +236,7 @@ class VitalsListController {
       return $scope.viewList === viewName;
     };
 
+    /* istanbul ignore next  */
     $scope.changeViewList = function (viewName) {
       var currentPage = this.currentPage || 1;
       var vitalsForChart;

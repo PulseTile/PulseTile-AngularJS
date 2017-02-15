@@ -16,7 +16,7 @@
 let templateResultsList = require('./results-list.html');
 
 class ResultsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, resultsActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, resultsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -104,5 +104,5 @@ const ResultsListComponent = {
   controller: ResultsListController
 };
 
-ResultsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'resultsActions', 'serviceRequests', 'usSpinnerService'];
+ResultsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'resultsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default ResultsListComponent;
