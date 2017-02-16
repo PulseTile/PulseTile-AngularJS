@@ -14,7 +14,7 @@
   ~  limitations under the License.
 */
 
-class ServiceStateMenager {
+class ServiceStateManager {
     constructor () {
         this.tableSettings = {
           order: '',
@@ -31,4 +31,4 @@ class ServiceStateMenager {
     }
 }
 
-export default ServiceStateMenager;
+export default ServiceStateManager;

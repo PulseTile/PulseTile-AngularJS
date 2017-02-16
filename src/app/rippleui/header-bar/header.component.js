@@ -103,8 +103,6 @@ class HeaderController {
 
     $scope.setLoginData = function (loginResult) {
       $scope.user = loginResult.data;
-      console.log('$scope.user');
-      console.log($scope.user);
       $scope.setTitle(loginResult.data);
     };
 

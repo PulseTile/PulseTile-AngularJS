@@ -255,20 +255,20 @@ angular.module('ripple-ui.directives', [])
       /* istanbul ignore next  */
       return {
           restrict: 'A',
-          controller: ['$scope', '$element', '$timeout', 'serviceStateMenager', '$state', 
-              function($scope, $element, $timeout, serviceStateMenager, $state) {
+          controller: ['$scope', '$element', '$timeout', 'serviceStateManager', '$state', 
+              function($scope, $element, $timeout, serviceStateManager, $state) {
                   var nameState = $state.router.globals.$current.name.replace(/-(detail|create)/, '');
 
                   $scope.isFilterOpen = false;
                   $scope.queryFilter = '';
 
-                  if (serviceStateMenager.filter.state === nameState) {
-                      $scope.isFilterOpen = serviceStateMenager.filter.isOpen;
-                      $scope.queryFilter = serviceStateMenager.filter.query;
+                  if (serviceStateManager.filter.state === nameState) {
+                      $scope.isFilterOpen = serviceStateManager.filter.isOpen;
+                      $scope.queryFilter = serviceStateManager.filter.query;
                   } else {
-                      serviceStateMenager.filter.isOpen = $scope.isFilterOpen;
-                      serviceStateMenager.filter.query = $scope.queryFilter;
-                      serviceStateMenager.filter.state = nameState;
+                      serviceStateManager.filter.isOpen = $scope.isFilterOpen;
+                      serviceStateManager.filter.query = $scope.queryFilter;
+                      serviceStateManager.filter.state = nameState;
                   }
 
                   $scope.toggleFilter = function () {
@@ -282,12 +282,12 @@ angular.module('ripple-ui.directives', [])
                           $scope.queryFilter = '';
                       }
 
-                      serviceStateMenager.filter.isOpen = $scope.isFilterOpen;
-                      serviceStateMenager.filter.query = $scope.queryFilter;
+                      serviceStateManager.filter.isOpen = $scope.isFilterOpen;
+                      serviceStateManager.filter.query = $scope.queryFilter;
                   };
 
                   $scope.$watch('queryFilter', function(queryFilterValue) {
-                      serviceStateMenager.filter.query = queryFilterValue;
+                      serviceStateManager.filter.query = queryFilterValue;
                   });
           }]
       }
@@ -296,28 +296,28 @@ angular.module('ripple-ui.directives', [])
       /* istanbul ignore next  */
       return {
           restrict: 'A',
-          controller: ['$scope', '$element','$attrs', '$stateParams', 'serviceStateMenager', '$state', 
-              function($scope, $element, $attrs, $stateParams, serviceStateMenager, $state) {
+          controller: ['$scope', '$element','$attrs', '$stateParams', 'serviceStateManager', '$state', 
+              function($scope, $element, $attrs, $stateParams, serviceStateManager, $state) {
                   var nameState = $state.router.globals.$current.name.replace(/-(detail|create)/, '');
 
                   $scope.order = '';
                   $scope.reverse = false;
                   $scope.currentPage = 1;
 
-                  if (serviceStateMenager.tableSettings.state === nameState) {
-                      $scope.order = serviceStateMenager.tableSettings.order;
-                      $scope.reverse = serviceStateMenager.tableSettings.reverse;
-                      $scope.currentPage = serviceStateMenager.tableSettings.currentPage;
+                  if (serviceStateManager.tableSettings.state === nameState) {
+                      $scope.order = serviceStateManager.tableSettings.order;
+                      $scope.reverse = serviceStateManager.tableSettings.reverse;
+                      $scope.currentPage = serviceStateManager.tableSettings.currentPage;
                   } else {
-                      serviceStateMenager.tableSettings.order = $scope.order;
-                      serviceStateMenager.tableSettings.reverse = $scope.reverse;
-                      serviceStateMenager.tableSettings.currentPage = $scope.currentPage;
-                      serviceStateMenager.tableSettings.state = nameState;
+                      serviceStateManager.tableSettings.order = $scope.order;
+                      serviceStateManager.tableSettings.reverse = $scope.reverse;
+                      serviceStateManager.tableSettings.currentPage = $scope.currentPage;
+                      serviceStateManager.tableSettings.state = nameState;
                   }
 
                   $scope.pageChangeHandler = function (newPage) {
                     $scope.currentPage = newPage;
-                    serviceStateMenager.tableSettings.currentPage = newPage;
+                    serviceStateManager.tableSettings.currentPage = newPage;
                   };
 
                   $scope.sort = function (field) {
@@ -329,8 +329,8 @@ angular.module('ripple-ui.directives', [])
                       $scope.reverse = false;
                     }
 
-                    serviceStateMenager.tableSettings.order   = $scope.order;
-                    serviceStateMenager.tableSettings.reverse = $scope.reverse;
+                    serviceStateManager.tableSettings.order   = $scope.order;
+                    serviceStateManager.tableSettings.reverse = $scope.reverse;
                   };
 
                   $scope.sortClass = function (field) {
@@ -346,7 +346,7 @@ angular.module('ripple-ui.directives', [])
                   $scope.$watch($attrs.order, function() {
                     if ($scope.order === '') {
                       $scope.order = $attrs.order;
-                      serviceStateMenager.tableSettings.order = $attrs.order;
+                      serviceStateManager.tableSettings.order = $attrs.order;
                     }
                   });
           }]
