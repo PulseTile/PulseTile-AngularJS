@@ -25,6 +25,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
         main: {template: '<contacts-list-component></contacts-list-component>'}
       },
+      params: {patientId: null, reportType: null},
       breadcrumbs: [{
         title: 'Patient Listings',
         state: 'patients-list'
@@ -44,6 +45,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         main: {template: '<contacts-list-component></contacts-list-component>'},
         detail: {template: '<contacts-create-component></contacts-create-component>'}
       },
+      params: {patientId: null, reportType: null},
       breadcrumbs: [{
         title: 'Patient Listings',
         state: 'patients-list'
@@ -56,13 +58,14 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       }]
     })
     .state('contacts-detail', {
-      url: '/patients/{patientId:int}/contacts/{contactIndex}?filter&page&reportType&searchString&queryType',
+      url: '/patients/{patientId:int}/contacts/{detailsIndex}?page&reportType&searchString&queryType',
       views: {
         banner: {template: '<patients-banner-component></patients-banner-component>'},
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
         main: {template: '<contacts-list-component></contacts-list-component>'},
         detail: {template: '<contacts-detail-component></contacts-detail-component>'}
       },
+      params: {patientId: null, reportType: null, detailsIndex: null},
       breadcrumbs: [{
         title: 'Patient Listings',
         state: 'patients-list'

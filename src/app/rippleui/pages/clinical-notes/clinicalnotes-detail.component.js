@@ -24,7 +24,7 @@ class ClinicalnotesDetailController {
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
-      if (data.personalnotes.dataGet) {
+      if (data.clinicalnotes.dataGet) {
         this.clinicalNote = data.clinicalnotes.dataGet;
         this.dateCreated = moment(this.clinicalNote.dateCreated).format('DD-MMM-YYYY');
         usSpinnerService.stop("clinicalNoteDetail-spinner");
@@ -38,7 +38,7 @@ class ClinicalnotesDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     this.clinicalnotesLoad = clinicalnotesActions.get;
-    this.clinicalnotesLoad($stateParams.patientId, $stateParams.personalNoteIndex, $stateParams.source);
+    this.clinicalnotesLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
   
     //Edit Clinical Note
     
@@ -58,25 +58,25 @@ class ClinicalnotesDetailController {
       $scope.isEdit = false;
     };
 
-    $scope.confirmEdit = function (personalNoteForm, personalNote) {
+    $scope.confirmEdit = function (clinicalNoteForm, clinicalNote) {
       $scope.formSubmitted = true;
       /* istanbul ignore if  */
-      if (personalNoteForm.$valid) {
+      if (clinicalNoteForm.$valid) {
         let toUpdate = {
-          noteType: personalNote.noteType,
-          notes: personalNote.notes,
-          author: personalNote.author,
-          source: personalNote.source,
-          sourceId: personalNote.sourceId
+          noteType: clinicalNote.clinicalNotesType,
+          notes: clinicalNote.note,
+          author: clinicalNote.author,
+          source: clinicalNote.source,
+          sourceId: clinicalNote.sourceId
         };
         
-        this.personalNote = Object.assign(personalNote, $scope.personalNoteEdit);
+        this.clinicalNote = Object.assign(clinicalNote, $scope.clinicalNoteEdit);
         $scope.isEdit = false;
         clinicalnotesActions.update($scope.patient.id, toUpdate);
         setTimeout(function () {
-          $state.go('personalNotes-detail', {
+          $state.go('clinicalNotes-detail', {
             patientId: $scope.patient.id,
-            personalNoteIndex: personalNote.sourceId
+            clinicalNoteIndex: clinicalNote.sourceId
           });
         }, 1000);
       }

@@ -38,7 +38,7 @@ class OrdersDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     this.ordersLoad = ordersActions.get;
-    this.ordersLoad($stateParams.patientId, $stateParams.orderId, $stateParams.source);
+    this.ordersLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
   }
 }
 

@@ -20,8 +20,6 @@ class AllergiesListController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.currentPage = 1;
-
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'allergies-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'allergies';
     
@@ -39,53 +37,18 @@ class AllergiesListController {
       }
     };
 
-    this.sort = function (field) {
-      var reverse = this.reverse;
-      if (this.order === field) {
-        this.reverse = !reverse;
-      } else {
-        this.order = field;
-        this.reverse = false;
-      }
-    };
-
-    this.sortClass = function (field) {
-      if (this.order === field) {
-        return this.reverse ? 'sorted desc' : 'sorted asc';
-      }
-    };
-
-    this.order = serviceRequests.currentSort.order || 'cause';
-    this.reverse = serviceRequests.currentSort.reverse || false;
-
-    this.pageChangeHandler = function (newPage) {
-      this.currentPage = newPage;
-    };
-
-    if ($stateParams.page) {
-      this.currentPage = $stateParams.page;
-    }
-
     this.go = function (id, allergySource) {
-      serviceRequests.currentSort.order = this.order;
-      serviceRequests.currentSort.reverse = this.reverse;
-
       $state.go('allergies-detail', {
         patientId: $stateParams.patientId,
-        allergyIndex: id,
-        page: this.currentPage,
+        detailsIndex: id,
+        page: $scope.currentPage || 1,
         source: allergySource
       });
     };
 
-    this.selected = function ($index) {
-      return $index === $stateParams.allergyIndex;
-    };
-
     this.create = function () {
       $state.go('allergies-create', {
-        patientId: $stateParams.patientId,
-        page: this.currentPage
+        patientId: $stateParams.patientId
       });
     };
 

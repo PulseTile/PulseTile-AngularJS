@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
 
-<div mc-full-panel filtering class="panel panel-primary">
+<div mc-full-panel table-settings order="id" filtering class="panel panel-primary">
   <div class="panel-heading">
     <div ng-if="isViewList('tableNews')" class="control-group right">
       <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
@@ -28,9 +28,12 @@
         </button>
         <div class="dropdown-menu dm-panel dm-right dm-tables">
           <div class="heading">TABLES</div>
+          <div class="dm-list">
+            <div class="dm-item" ng-class="{active: isViewList('tableNews')}" ng-click="changeViewList('tableNews')"><i class="fa fa-table"></i><span>Vitals - NEWS</span></div>
+          </div>
+          <div class="heading">CHARTS</div>
           <div class="dm-wrap-list">
             <div class="dm-list">
-              <div class="dm-item" ng-class="{active: isViewList('tableNews')}" ng-click="changeViewList('tableNews')"><i class="fa fa-table"></i><span>Vitals - NEWS</span></div>
               <div class="dm-item" ng-class="{active: isViewList('chartNews')}" ng-click="changeViewList('chartNews')"><i class="fa fa-area-chart"></i><span>Vitals - NEWS</span></div>
             </div>
           </div>
@@ -59,22 +62,22 @@
         </colgroup>
         <thead>
           <tr>
-              <th ng-click="$ctrl.sort('id')" ng-class="$ctrl.sortClass('id')">#</th>
-              <th ng-click="$ctrl.sort('date')" ng-class="$ctrl.sortClass('date')">Date</th>
-              <th ng-click="$ctrl.sort('news')" ng-class="$ctrl.sortClass('news')">NEWS Score</th>
-              <th ng-click="$ctrl.sort('source')" ng-class="$ctrl.sortClass('source')">Source</th>
+              <th ng-click="sort('id')" ng-class="sortClass('id')">#</th>
+              <th ng-click="sort('date')" ng-class="sortClass('date')">Date</th>
+              <th ng-click="sort('news')" ng-class="sortClass('news')">NEWS Score</th>
+              <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr dir-paginate="vital in vitals | filter: queryFilter | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage" ng-click="go(vital.sourceId, vital)" ng-class="{info: $ctrl.selected(vital.sourceId)}">
-            <td data-th="Id" ng-class="$ctrl.sortClass('id');">{{ vital.id }}</td>
-            <td data-th="Date" ng-class="$ctrl.sortClass('date')">{{ vital.dateCreate | date:'dd-MMM-yyyy' }}</td>
-            <td data-th="NEWS Score" ng-class="$ctrl.sortClass('news')" class="highlighter-wrapper">
+          <tr dir-paginate="vital in vitals | filter: queryFilter | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="go(vital.sourceId, vital)" ng-class="{info: selectedRow(vital.sourceId)}">
+            <td data-th="#" ng-class="sortClass('id');">{{ vital.id }}</td>
+            <td data-th="Date" ng-class="sortClass('date')">{{ vital.dateCreate | date:'dd-MMM-yyyy' }}</td>
+            <td data-th="NEWS Score" ng-class="sortClass('news')" class="highlighter-wrapper">
               <span ng-if="vital.statusNewsScore" ng-class="'highlighter-' + vital.statusNewsScore"></span>
               <span>{{ vital.newsScore }}</span>
             </td>
-            <td data-th="Source" ng-class="$ctrl.sortClass('source')">{{ vital.source }}</td>
+            <td data-th="Source" ng-class="sortClass('source')">{{ vital.source }}</td>
           </tr>
 
           <tr ng-if="!vitals.length">
@@ -93,7 +96,7 @@
     <div class="panel-control">
       <div class="wrap-control-group">
         <div class="control-group with-indent left" ng-if="isViewList('tableNews')">
-          <dir-pagination-controls max-size="5" on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
+          <dir-pagination-controls max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
         </div>
         <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1 && $ctrl.isShowCreateBtn">
           <button class="btn btn-success btn-inverse btn-create" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> <span>Create</span></button>

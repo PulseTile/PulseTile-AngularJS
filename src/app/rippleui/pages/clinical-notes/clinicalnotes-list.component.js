@@ -21,10 +21,8 @@ class ClinicalnotesListController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.currentPage = 1;
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'clinicalNotes-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'clinicalNotes';
-
 
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
@@ -45,30 +43,18 @@ class ClinicalnotesListController {
 
     this.create = function () {
       $state.go('clinicalNotes-create', {
-        patientId: $stateParams.patientId,
-        page: this.currentPage
+        patientId: $stateParams.patientId
       });
     };
     
-    this.go = function (id, personalNoteSource) {
+    this.go = function (id, source) {
       $state.go('clinicalNotes-detail', {
         patientId: $stateParams.patientId,
-        personalNoteIndex: id,
-        page: this.currentPage,
-        reportType: $stateParams.reportType,
-        searchString: $stateParams.searchString,
-        queryType: $stateParams.queryType,
-        source: JSON.stringify(personalNoteSource)
+        detailsIndex: id,
+        page: $scope.currentPage || 1,
+        source: source
       });
     };
-
-    this.pageChangeHandler = function (newPage) {
-      $scope.currentPage = newPage;
-    };
-
-    if ($stateParams.page) {
-      $scope.currentPage = $stateParams.page;
-    }
 
     // this.search = function (row) {
     //   return (
@@ -78,11 +64,6 @@ class ClinicalnotesListController {
     //     row.source.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1
     //   );
     // };
-
-
-    this.selected = function (personalNoteIndex) {
-      return personalNoteIndex === $stateParams.personalNoteIndex;
-    };
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)

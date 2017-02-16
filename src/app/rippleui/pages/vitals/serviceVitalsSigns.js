@@ -20,7 +20,7 @@ class ServiceVitalsSigns {
         this.vitalsConfig = {
           respirationRate: [
             {
-              label: '< 8',
+              label: '≤ 8',
               condition: function (value) {
                 return value < 9
               },
@@ -48,7 +48,7 @@ class ServiceVitalsSigns {
               column: 6,
               point: 2
             }, {
-              label: '> 25',
+              label: '≥ 25',
               condition: function (value) {
                 return value > 24
               },
@@ -58,7 +58,7 @@ class ServiceVitalsSigns {
           ],
           oxygenSaturation: [
             {
-              label: '< 91',
+              label: '≤ 91',
               condition: function (value) {
                 return value < 92
               },
@@ -79,7 +79,7 @@ class ServiceVitalsSigns {
               column: 3,
               point: 1
             }, {
-              label: '> 96',
+              label: '≥ 96',
               condition: function (value) {
                 return value > 95
               },
@@ -106,7 +106,7 @@ class ServiceVitalsSigns {
           ],
           temperature: [
             {
-              label: '< 35.0',
+              label: '≤ 35.0',
               condition: function (value) {
                 return value <= 35
               },
@@ -134,7 +134,7 @@ class ServiceVitalsSigns {
               column: 5,
               point: 1
             }, {
-              label: '> 39.1',
+              label: '≥ 39.1',
               condition: function (value) {
                 return value > 39
               },
@@ -144,7 +144,7 @@ class ServiceVitalsSigns {
           ],
           systolicBP: [
             {
-              label: '< 90',
+              label: '≤ 90',
               condition: function (value) {
                 return value < 91
               },
@@ -172,7 +172,7 @@ class ServiceVitalsSigns {
               column: 4,
               point: 0
             }, {
-              label: '> 219',
+              label: '≥ 220',
               condition: function (value) {
                 return value > 219
               },
@@ -182,7 +182,7 @@ class ServiceVitalsSigns {
           ],
           heartRate: [
             {
-              label: '< 40',
+              label: '≤ 40',
               condition: function (value) {
                 return value < 41
               },
@@ -217,7 +217,7 @@ class ServiceVitalsSigns {
               column: 6,
               point: 2
             }, {
-              label: '> 131',
+              label: '≥ 131',
               condition: function (value) {
                 return value > 130
               },
@@ -369,8 +369,6 @@ class ServiceVitalsSigns {
             this.convertVitalCharacteristics(arr[i]);
             arr[i].statusNewsScore = this.getStatusOnValue(arr[i].newsScore, 'newsScore').type;
           }
-          console.log('arr');
-          console.log(arr);
           return arr;
         };
 
@@ -381,7 +379,7 @@ class ServiceVitalsSigns {
           vital.temperature = +vital.temperature;
           vital.systolicBP = +vital.systolicBP;
           vital.heartRate = +vital.heartRate; 
-          vital.oxygenSupplemental = vital.oxygenSupplemental === "true";
+          vital.oxygenSupplemental = vital.oxygenSupplemental == 'true' || vital.oxygenSupplemental == true;
 
           return vital;
         };

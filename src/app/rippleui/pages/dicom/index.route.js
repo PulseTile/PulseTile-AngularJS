@@ -37,7 +37,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       }]
     })
     .state('images-detail', {
-      url: '/patients/{patientId:int}/images/{studyId}?filter&page&reportType&searchString&queryType&source',
+      url: '/patients/{patientId:int}/images/{detailsIndex}?page&reportType&searchString&queryType&source',
       views: {
         banner: {template: '<patients-banner-component></patients-banner-component>'},
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},

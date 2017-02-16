@@ -38,7 +38,7 @@ class PersonalnotesDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     this.personalnotesLoad = personalnotesActions.get;
-    this.personalnotesLoad($stateParams.patientId, $stateParams.personalNoteIndex, $stateParams.source);
+    this.personalnotesLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
   
     //Edit Clinical Note
     

@@ -29,12 +29,12 @@
 
             <div class="form-group">
               <label class="control-label">Type</label>
-              <div class="form-control-static">{{ $ctrl.clinicalNote.noteType }}</div>
+              <div class="form-control-static">{{ $ctrl.clinicalNote.clinicalNotesType }}</div>
             </div>
 
             <div class="form-group">
               <label class="control-label">Note</label>
-              <div class="form-control-static">{{ $ctrl.clinicalNote.notes }}</div>
+              <div class="form-control-static">{{ $ctrl.clinicalNote.note }}</div>
             </div>
 
             <div class="form-group">
@@ -76,18 +76,18 @@
       <div class="panel-body-inner">
         <form name="clinicalNoteForm" class="form">
           <div class="form-group-wrapper">
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalNoteForm.noteType.$dirty) && clinicalNoteForm.noteType.$invalid, 'has-success': clinicalNoteForm.noteType.$valid && clinicalNoteForm.noteType.$dirty}">
-              <label for="noteType" class="control-label">Type</label>
+            <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalNoteForm.clinicalNotesType.$dirty) && clinicalNoteForm.clinicalNotesType.$invalid, 'has-success': clinicalNoteForm.clinicalNotesType.$valid && clinicalNoteForm.clinicalNotesType.$dirty}">
+              <label for="clinicalNotesType" class="control-label">Type</label>
               <div class="input-holder">
-                <input class="form-control input-sm" id="noteType" name="noteType" ng-model="clinicalNoteEdit.noteType" required />
+                <input class="form-control input-sm" id="clinicalNotesType" name="clinicalNotesType" ng-model="clinicalNoteEdit.clinicalNotesType" required />
               </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && clinicalNoteForm.noteType.$error.required">You must enter a value.</span>
+              <span class="help-block animate-fade" ng-show="formSubmitted && clinicalNoteForm.clinicalNotesType.$error.required">You must enter a value.</span>
             </div>
 
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalNoteForm.notes.$dirty) && clinicalNoteForm.notes.$invalid, 'has-success': clinicalNoteForm.notes.$valid && clinicalNoteForm.notes.$dirty}">
-              <label for="notes" class="control-label">Note</label>
+            <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalNoteForm.note.$dirty) && clinicalNoteForm.note.$invalid, 'has-success': clinicalNoteForm.note.$valid && clinicalNoteForm.note.$dirty}">
+              <label for="note" class="control-label">Note</label>
               <div class="input-holder">
-                <textarea class="form-control textarea-big input-sm" id="notes" name="notes" ng-model="clinicalNoteEdit.notes" required></textarea>
+                <textarea class="form-control textarea-big input-sm" id="note" name="note" ng-model="clinicalNoteEdit.note" required></textarea>
               </div>
               <span class="help-block animate-fade" ng-show="formSubmitted && clinicalNoteForm.note.$error.required">You must enter a value.</span>
             </div>

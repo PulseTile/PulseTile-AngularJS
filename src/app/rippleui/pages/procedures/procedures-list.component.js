@@ -20,55 +20,22 @@ class ProceduresListController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-
-		this.currentPage = 1;
-		this.isShowCreateBtn = true;
 		this.isShowCreateBtn = $state.router.globals.$current.name !== 'procedures-create';
 		this.isShowExpandBtn = $state.router.globals.$current.name !== 'procedures';
 
-		this.sort = function (field) {
-			var reverse = this.reverse;
-			if (this.order === field) {
-				this.reverse = !reverse;
-			} else {
-				this.order = field;
-				this.reverse = false;
-			}
-		};
-
-		this.sortClass = function (field) {
-			if (this.order === field) {
-				return this.reverse ? 'sorted desc' : 'sorted asc';
-			}
-		};
-
-		this.order = serviceRequests.currentSort.order || 'procedureName';
-		this.reverse = serviceRequests.currentSort.reverse || false;
-
-    this.pageChangeHandler = function (newPage) {
-      this.currentPage = newPage;
-    };
 
 		this.create = function () {
 			$state.go('procedures-create', {
-				patientId: $stateParams.patientId,
-				page: this.currentPage
+				patientId: $stateParams.patientId
 			});
 		};
 
-    if ($stateParams.page) {
-      this.currentPage = $stateParams.page;
-    }
-
-    this.go = function (id, allergySource) {
+    this.go = function (id, source) {
       $state.go('procedures-detail', {
         patientId: $stateParams.patientId,
-        procedureId: id,
-        page: this.currentPage,
-        reportType: $stateParams.reportType,
-        searchString: $stateParams.searchString,
-        queryType: $stateParams.queryType,
-        source: allergySource
+        detailsIndex: id,
+        page: $scope.currentPage || 1,
+        source: source
       });
     };
 
@@ -80,17 +47,6 @@ class ProceduresListController {
     //     row.source.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1
     //   );
     // };
-
-    this.selected = function (procedureId) {
-      return procedureId === $stateParams.procedureId;
-    };
-
-    this.create = function () {
-        $state.go('procedures-create', {
-            patientId: $stateParams.patientId,
-            page: this.currentPage
-        });
-    };
 
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
