@@ -76,7 +76,10 @@ class MainController {
     };
     this.hideSidebarOnMobile = function () {
       if (window.innerWidth < 768) {
-        $scope.classShowSidebar = '';
+        $timeout(function() {
+          $scope.classShowSidebar = '';
+          angular.element(document).find('.wrapper').removeClass('showSidebar');
+        }, 0);
       }
     };
     serviceRequests.subscriber('changeStateSidebar', this.changeClassShowSidebar);

@@ -43,6 +43,9 @@ angular.module('ripple-ui.directives', [])
             scope.panelOpen = '';
           } else {
             scope.panelOpen = namePanel;
+            if (scope.showPanel && scope.showPanel.length) {
+              scope.showPanel = namePanel;
+            }
           }
         };
         scope.getOpenPanelClass = function (namePanel, openClass) {
@@ -60,7 +63,7 @@ angular.module('ripple-ui.directives', [])
     return {
       controller: ['$scope', 'serviceRequests', function($scope, serviceRequests) {
         $scope.showPanel = '';
-        $scope.panelOpen = '';
+
         $scope.getShowPanel = function (panelName) {
           if ($scope.showPanel === '') return true;
 
@@ -69,7 +72,9 @@ angular.module('ripple-ui.directives', [])
         $scope.changeFullPanel = function (fullPanelName, panelName) {
           if (panelName) {
             $scope.showPanel = $scope.showPanel === panelName ? '' : panelName;
-            $scope.panelOpen = panelName;
+            if (typeof $scope.panelOpen !== 'undefined') {
+              $scope.panelOpen = panelName;
+            }
           }
           serviceRequests.publisher('changeFullPanel', {panelName: fullPanelName});
         };

@@ -60,6 +60,7 @@ label.control-label {
 .non-edit-value {
   min-height: 30px;
   line-height: 30px;
+  .btn + span {margin-left: 5px;}
 }
 .input-group {
   width: 100%;
