@@ -25,26 +25,22 @@ class PatientsSummaryController {
       problems: {
         show: true,
         title: 'Problems',
-        toState: 'diagnoses',
-        goNameIndex: 'diagnosisIndex'
+        toState: 'diagnoses'
       },
       contacts: {
         show: true,
         title: 'Contacts',
-        toState: 'contacts',
-        goNameIndex: 'contactIndex'
+        toState: 'contacts'
       },
       allergies: {
         show: true,
         title: 'Allergies',
-        toState: 'allergies',
-        goNameIndex: 'allergyIndex'
+        toState: 'allergies'
       },
       medications: {
         show: true,
         title: 'Medications',
-        toState: 'medications',
-        goNameIndex: 'medicationIndex'
+        toState: 'medications'
       }
       // transfers: {
       //   title: 'Transfer',
@@ -75,10 +71,10 @@ class PatientsSummaryController {
       serviceRequests.showListDashboards = showListDashboards;
     }
 
-    $scope.go = function (state, sourceId, nameIndex) {
+    $scope.go = function (state, sourceId) {
       var headerRequest = {};
       headerRequest.patientId = $stateParams.patientId;
-      headerRequest[nameIndex] = sourceId;
+      headerRequest.detailsIndex = sourceId;
 
       $state.go(state +'-detail', headerRequest);
     };
