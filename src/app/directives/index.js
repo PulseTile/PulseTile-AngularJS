@@ -286,4 +286,64 @@ angular.module('ripple-ui.directives', [])
                   });
           }]
       }
+  })
+  .directive('tableSettings', function() {
+      /* istanbul ignore next  */
+      return {
+          restrict: 'A',
+          controller: ['$scope', '$element','$attrs', '$stateParams', 'serviceStateMenager', '$state', 
+              function($scope, $element, $attrs, $stateParams, serviceStateMenager, $state) {
+                  var nameState = $state.router.globals.$current.name.replace(/-(detail|create)/, '');
+
+                  $scope.order = '';
+                  $scope.reverse = false;
+                  $scope.currentPage = 1;
+
+                  if (serviceStateMenager.tableSettings.state === nameState) {
+                      $scope.order = serviceStateMenager.tableSettings.order;
+                      $scope.reverse = serviceStateMenager.tableSettings.reverse;
+                      $scope.currentPage = serviceStateMenager.tableSettings.currentPage;
+                  } else {
+                      serviceStateMenager.tableSettings.order = $scope.order;
+                      serviceStateMenager.tableSettings.reverse = $scope.reverse;
+                      serviceStateMenager.tableSettings.currentPage = $scope.currentPage;
+                      serviceStateMenager.tableSettings.state = nameState;
+                  }
+
+                  $scope.pageChangeHandler = function (newPage) {
+                    $scope.currentPage = newPage;
+                    serviceStateMenager.tableSettings.currentPage = newPage;
+                  };
+
+                  $scope.sort = function (field) {
+                    var reverse = $scope.reverse;
+                    if ($scope.order === field) {
+                      $scope.reverse = !reverse;
+                    } else {
+                      $scope.order = field;
+                      $scope.reverse = false;
+                    }
+
+                    serviceStateMenager.tableSettings.order   = $scope.order;
+                    serviceStateMenager.tableSettings.reverse = $scope.reverse;
+                  };
+
+                  $scope.sortClass = function (field) {
+                    if ($scope.order === field) {
+                      return $scope.reverse ? 'sorted desc' : 'sorted asc';
+                    }
+                  };
+
+                  $scope.selectedRow = function (detailsIndex) {
+                    return detailsIndex === $stateParams.detailsIndex;
+                  };
+
+                  $scope.$watch($attrs.order, function() {
+                    if ($scope.order === '') {
+                      $scope.order = $attrs.order;
+                      serviceStateMenager.tableSettings.order = $attrs.order;
+                    }
+                  });
+          }]
+      }
   });

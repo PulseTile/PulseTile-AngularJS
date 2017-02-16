@@ -56,7 +56,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       }]
     })
     .state('personalNotes-detail', {
-      url: '/patients/{patientId:int}/personalNotes/{personalNoteIndex}?filter&page&reportType&searchString&queryType&source',
+      url: '/patients/{patientId:int}/personalNotes/{detailsIndex}?page&reportType&searchString&queryType&source',
       views: {
         banner: {template: '<patients-banner-component></patients-banner-component>'},
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},

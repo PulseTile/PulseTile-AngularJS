@@ -67,7 +67,7 @@ class ProceduresDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     this.proceduresLoad = proceduresActions.get;
-    this.proceduresLoad($stateParams.patientId, $stateParams.procedureId, $stateParams.source);
+    this.proceduresLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
   }
 }
 

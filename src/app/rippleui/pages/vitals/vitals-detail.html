@@ -20,7 +20,7 @@
       <div class="control-group right">
         <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'vitals')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
       </div>
-      <h3 class="panel-title">Vital</h3>
+      <h3 class="panel-title">Vitals</h3>
     </div>
     <div class="panel-body">
       <div class="form">
@@ -32,7 +32,7 @@
                   <span ng-class="getHighlighterClass('respirationRate')"></span>  
                   <label class="vitals-label">Respiration Rate</label>
                   <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.respirationRate.type">
-                    <div class="form-control input-sm">{{$ctrl.vital.respirationRate}}</div>
+                    <div class="form-control input-sm">{{vital.respirationRate}}</div>
                     <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">resps/min</span>
                     <mc-popover-vital title="Respiration Rate" labels="{{popoverLabels.respirationRate}}"></mc-popover-vital>
                   </div>
@@ -43,7 +43,7 @@
                   <span ng-class="getHighlighterClass('oxygenSaturation')"></span>  
                   <label class="vitals-label">Oxygen Saturation</label>
                   <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.oxygenSaturation.type">
-                    <div class="form-control input-sm">{{$ctrl.vital.oxygenSaturation}}</div>
+                    <div class="form-control input-sm">{{vital.oxygenSaturation}}</div>
                     <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">%</span>
                     <mc-popover-vital title="Oxygen Saturation" labels="{{popoverLabels.oxygenSaturation}}"></mc-popover-vital>
                   </div>
@@ -57,7 +57,7 @@
                   <label class="vitals-label">Any Supplemental Oxygen</label>
                   <div class="input-holder">
                     <label class="switch">
-                      <input type="checkbox" name="oxygenSupplemental" ng-model="$ctrl.vital.oxygenSupplemental" disabled>
+                      <input type="checkbox" name="oxygenSupplemental" ng-model="vital.oxygenSupplemental" disabled>
                       <div class="slider disabled">
                         <span class="text text-check-true">Yes</span>
                         <span class="text text-check-false">No</span>
@@ -71,7 +71,7 @@
                   <span ng-class="getHighlighterClass('heartRate')"></span>  
                   <label class="vitals-label">Heart Rate</label>
                   <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.heartRate.type">
-                    <div class="form-control input-sm">{{$ctrl.vital.heartRate}}</div>
+                    <div class="form-control input-sm">{{vital.heartRate}}</div>
                     <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">bpm</span>
                     <mc-popover-vital title="Heart Rate" labels="{{popoverLabels.heartRate}}"></mc-popover-vital>
                   </div>
@@ -84,7 +84,7 @@
                   <span ng-class="getHighlighterClass('systolicBP')"></span>  
                   <label class="vitals-label">Systolic BP</label>
                   <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.systolicBP.type">
-                    <div class="form-control input-sm">{{$ctrl.vital.systolicBP}}</div>
+                    <div class="form-control input-sm">{{vital.systolicBP}}</div>
                     <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">mmHg</span>
                     <mc-popover-vital title="Systolic BP" labels="{{popoverLabels.systolicBP}}"></mc-popover-vital>
                   </div>
@@ -95,7 +95,7 @@
                   <span class="highlighter-not-vital"></span>  
                   <label class="vitals-label">Diastolic BP</label>
                   <div class="input-group vitals-holder">
-                    <div class="form-control input-sm">{{$ctrl.vital.diastolicBP}}</div>
+                    <div class="form-control input-sm">{{vital.diastolicBP}}</div>
                     <span class="vitals-addon">mmHg</span>
                   </div>
                 </div>
@@ -109,19 +109,19 @@
                   <div class="input-holder">
                     <div class="switch-group">
                       <label class="switch">
-                        <input id="levelOfConsciousnessA" type="radio" name="levelOfConsciousness" value="Alert" ng-model="$ctrl.vital.levelOfConsciousness" disabled>
+                        <input id="levelOfConsciousnessA" type="radio" name="levelOfConsciousness" value="Alert" ng-model="vital.levelOfConsciousness" disabled>
                         <div class="slider disabled"><span class="text">A</span></div>
                       </label>
                       <label class="switch">
-                        <input id="levelOfConsciousnessV" type="radio" name="levelOfConsciousness" value="Verbal" ng-model="$ctrl.vital.levelOfConsciousness" disabled>
+                        <input id="levelOfConsciousnessV" type="radio" name="levelOfConsciousness" value="Verbal" ng-model="vital.levelOfConsciousness" disabled>
                         <div class="slider disabled"><span class="text">V</span></div>
                       </label>
                       <label class="switch">
-                        <input id="levelOfConsciousnessP" type="radio" name="levelOfConsciousness" value="Pain" ng-model="$ctrl.vital.levelOfConsciousness" disabled>
+                        <input id="levelOfConsciousnessP" type="radio" name="levelOfConsciousness" value="Pain" ng-model="vital.levelOfConsciousness" disabled>
                         <div class="slider disabled"><span class="text">P</span></div>
                       </label>
                       <label class="switch">
-                        <input id="levelOfConsciousnessU" type="radio" name="levelOfConsciousness" value="Unresponsive" ng-model="$ctrl.vital.levelOfConsciousness" disabled>
+                        <input id="levelOfConsciousnessU" type="radio" name="levelOfConsciousness" value="Unresponsive" ng-model="vital.levelOfConsciousness" disabled>
                         <div class="slider disabled"><span class="text">U</span></div>
                       </label>
                     </div>
@@ -134,7 +134,7 @@
                   <span ng-class="getHighlighterClass('temperature')"></span>  
                   <label class="vitals-label">Temperature</label>
                   <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.temperature.type">
-                    <div class="form-control input-sm">{{$ctrl.vital.temperature}}</div>
+                    <div class="form-control input-sm">{{vital.temperature}}</div>
                     <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">c</span>
                     <mc-popover-vital title="Temperature" labels="{{popoverLabels.temperature}}"></mc-popover-vital>
                   </div>
@@ -148,7 +148,7 @@
                   <span ng-class="getHighlighterClass('newsScore')"></span>  
                   <label class="vitals-label">NEWS Score</label>
                   <div class="input-holder vitals-holder" ng-class="vitalStatuses.newsScore.type">
-                    <div class="form-control input-sm">{{$ctrl.vital.newsScore}}</div>
+                    <div class="form-control input-sm">{{vital.newsScore}}</div>
                   </div>
                 </div>
               </div>
@@ -159,12 +159,12 @@
           <div class="form-group-wrapper">
             <div class="form-group">
               <label class="control-label">Author</label>
-              <div class="form-control-static">{{ $ctrl.vital.author}}</div>
+              <div class="form-control-static">{{ vital.author}}</div>
             </div>
 
             <div class="form-group">
               <label class="control-label">Date</label>
-              <div class="form-control-static">{{ $ctrl.vital.dateCreate| date:'dd-MMM-yyyy'}}</div>
+              <div class="form-control-static">{{ vital.dateCreate| date:'dd-MMM-yyyy'}}</div>
             </div>
           </div>
           
@@ -186,7 +186,7 @@
       <div class="control-group right">
         <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'vitals')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
       </div>
-      <h3 class="panel-title">Edit Vital</h3>
+      <h3 class="panel-title">Edit Vitals</h3>
     </div>
     <div class="panel-body">
       <form name="vitalForm" class="form">

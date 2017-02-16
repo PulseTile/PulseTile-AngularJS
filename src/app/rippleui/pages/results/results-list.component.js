@@ -16,55 +16,19 @@
 let templateResultsList = require('./results-list.html');
 
 class ResultsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, resultsActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, resultsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.currentPage = 1;
-
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'results';
 
-    this.sort = function (field) {
-      var reverse = this.reverse;
-      if (this.order === field) {
-        this.reverse = !reverse;
-      } else {
-        this.order = field;
-        this.reverse = false;
-      }
-    };
-
-    this.sortClass = function (field) {
-      if (this.order === field) {
-        return this.reverse ? 'sorted desc' : 'sorted asc';
-      }
-    };
-
-    this.order = serviceRequests.currentSort.order || 'name';
-    this.reverse = serviceRequests.currentSort.reverse || false;
-
-    this.pageChangeHandler = function (newPage) {
-      this.currentPage = newPage;
-    };
-
-    if ($stateParams.page) {
-      this.currentPage = $stateParams.page;
-    }
-
-    this.go = function (id, resultSource) {
-      serviceRequests.currentSort.order = this.order;
-      serviceRequests.currentSort.reverse = this.reverse;
-
+    this.go = function (id, source) {
       $state.go('results-detail', {
         patientId: $stateParams.patientId,
-        resultIndex: id,
-        page: this.currentPage,
-        source: resultSource
+        detailsIndex: id,
+        page: $scope.currentPage || 1,
+        source: source
       });
-    };
-
-    this.selected = function (resultIndex) {
-      return resultIndex === $stateParams.resultIndex;
     };
 
     // this.search = function (row) {
@@ -104,5 +68,5 @@ const ResultsListComponent = {
   controller: ResultsListController
 };
 
-ResultsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'resultsActions', 'serviceRequests', 'usSpinnerService'];
+ResultsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'resultsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default ResultsListComponent;

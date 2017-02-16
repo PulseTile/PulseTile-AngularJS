@@ -37,7 +37,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       }]
     })
     .state('genericMdt-detail', {
-      url: '/patients/{patientId:int}/generic-mdt-detail/{genericMdtIndex}?filter&page&reportType&searchString&queryType',
+      url: '/patients/{patientId:int}/generic-mdt-detail/{detailsIndex}?page&reportType&searchString&queryType',
       views: {
         banner: {template: '<patients-banner-component></patients-banner-component>'},
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},

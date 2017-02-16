@@ -66,7 +66,7 @@ class GenericMdtDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     this.genericmdtLoad = genericmdtActions.get;
-    this.genericmdtLoad($stateParams.patientId, $stateParams.genericMdtIndex);
+    this.genericmdtLoad($stateParams.patientId, $stateParams.detailsIndex);
     $scope.genericmdtUpdate = genericmdtActions.update;
   }
 }

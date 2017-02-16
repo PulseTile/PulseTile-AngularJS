@@ -44,7 +44,7 @@ class MedicationsDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     this.medicationsLoad = medicationsActions.get;
-    this.medicationsLoad($stateParams.patientId, $stateParams.medicationIndex, $stateParams.source);
+    this.medicationsLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
 
     //Edit Medication
 

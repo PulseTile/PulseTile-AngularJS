@@ -26,9 +26,36 @@ describe('Vitals List', function() {
       $timeout: _$timeout_
     });
   }));
+  
+  beforeEach(function() {
 
+    spyOn(scope, 'chartLoad');
+    spyOn(scope, 'go');
+    spyOn(ctrl, 'create');
+    spyOn(ctrl, 'setCurrentPageData');
+
+    scope.chartLoad();
+    scope.go();
+    ctrl.create();
+    ctrl.setCurrentPageData();
+  });
 
   it('Template exist', function() {
     expect(template).toBeDefined();
+  });
+  it('ctrl exist', function() {
+    expect(ctrl).toBeDefined();
+  });
+  it("chartLoad was called", function() {
+    expect(scope.chartLoad).toHaveBeenCalled();
+  });
+  it("go was called", function() {
+    expect(scope.go).toHaveBeenCalled();
+  });
+  it("create was called", function() {
+    expect(ctrl.create).toHaveBeenCalled();
+  });
+  it("setCurrentPageData was called", function() {
+    expect(ctrl.setCurrentPageData).toHaveBeenCalled();
   });
 });

@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
 
-<div mc-full-panel filtering class="panel panel-primary">
+<div mc-full-panel table-settings order="name" filtering class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
@@ -43,19 +43,19 @@
       </colgroup>
       <thead>
         <tr>
-          <th ng-click="$ctrl.sort('procedureName')" ng-class="$ctrl.sortClass('procedureName')">Procedure Name</th>
-          <th ng-click="$ctrl.sort('procedureDate')" ng-class="$ctrl.sortClass('procedureDate')">Procedure Date</th>
-          <th ng-click="$ctrl.sort('time')" ng-class="$ctrl.sortClass('time')">Time</th>
-          <th ng-click="$ctrl.sort('source')" ng-class="$ctrl.sortClass('source')">Source</th>
+          <th ng-click="sort('name')" ng-class="sortClass('name')">Procedure Name</th>
+          <th ng-click="sort('date')" ng-class="sortClass('date')">Procedure Date</th>
+          <th ng-click="sort('time')" ng-class="sortClass('time')">Time</th>
+          <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr dir-paginate="procedure in $ctrl.procedures | filter: queryFilter | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage" ng-click="$ctrl.go(procedure.sourceId,procedure.source)" ng-class="{info: $ctrl.selected(procedure.sourceId)}">
-          <td data-th="Name" ng-class="$ctrl.sortClass('procedureName');">{{procedure.name}}</td>
-          <td data-th="Date" class="dateTime" ng-class="$ctrl.sortClass('procedureDate');">{{procedure.date}}</td>
-          <td data-th="Time" ng-class="$ctrl.sortClass('time');">{{procedure.time}}</td>
-          <td data-th="Source" ng-class="$ctrl.sortClass('source');">{{procedure.source}}</td>
+        <tr dir-paginate="procedure in $ctrl.procedures | filter: queryFilter | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(procedure.sourceId,procedure.source)" ng-class="{info: selectedRow(procedure.sourceId)}">
+          <td data-th="Name" ng-class="sortClass('name');">{{procedure.name}}</td>
+          <td data-th="Date" class="dateTime" ng-class="sortClass('date');">{{procedure.date}}</td>
+          <td data-th="Time" ng-class="sortClass('time');">{{procedure.time}}</td>
+          <td data-th="Source" ng-class="sortClass('source');">{{procedure.source}}</td>
         </tr>
 
         <tr ng-if="!$ctrl.procedures.length">
@@ -69,7 +69,7 @@
     <div class="panel-control">
       <div class="wrap-control-group">
         <div class="control-group with-indent left">
-          <dir-pagination-controls max-size="5" on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
+          <dir-pagination-controls max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
         </div>
         <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1 && $ctrl.isShowCreateBtn">
           <button class="btn btn-success btn-inverse btn-create" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> <span>Create</span></button>

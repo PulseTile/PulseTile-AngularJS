@@ -37,7 +37,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       }]
     })
     .state('procedures-detail', {
-      url: '/patients/{patientId:int}/procedures/{procedureId}?filter&page&reportType&searchString&queryType&source',
+      url: '/patients/{patientId:int}/procedures/{detailsIndex}?page&reportType&searchString&queryType&source',
       views: {
         banner: {template: '<patients-banner-component></patients-banner-component>'},
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
@@ -56,7 +56,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       }]
     })
     .state('procedures-create', {
-      url: '/patients/{patientId:int}/procedures/create?filter&page&reportType&searchString&queryType&source',
+      url: '/patients/{patientId:int}/procedures/create?reportType&searchString&queryType',
       views: {
         banner: {template: '<patients-banner-component></patients-banner-component>'},
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},

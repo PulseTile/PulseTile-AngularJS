@@ -77,7 +77,7 @@ class ImageDetailController {
     $scope.$on('$destroy', unsubscribe);
     serviceRequests.subscriber('closeModal', this.toggleModal);
     // this.imageLoad = imageActions.getAllSeriesInStudy;
-    // this.imageLoad($stateParams.patientId, $stateParams.studyId, $stateParams.source);
+    // this.imageLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
     // this.instanceLoad = imageActions.getInstance;
     // this.instanceIdLoad = imageActions.getInstanceId;
     // this.seriesDetailsLoad = imageActions.getSeriesDetails;

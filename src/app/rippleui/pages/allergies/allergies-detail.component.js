@@ -97,7 +97,7 @@ class AllergiesDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     this.allergiesLoad = allergiesActions.get;
-    this.allergiesLoad($stateParams.patientId, $stateParams.allergyIndex, $stateParams.source);
+    this.allergiesLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
     $scope.allergiesUpdate = allergiesActions.update;
   }
 }

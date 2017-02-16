@@ -91,7 +91,7 @@ class ReferralsDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     this.referralsLoad = referralsActions.get;
-    this.referralsLoad($stateParams.patientId, $stateParams.referralId);
+    this.referralsLoad($stateParams.patientId, $stateParams.detailsIndex);
   }
 }
 
