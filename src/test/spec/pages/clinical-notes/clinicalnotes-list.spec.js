@@ -55,9 +55,7 @@ describe('Clinicalnotes List', function() {
 
     spyOn(fakeCall, 'callClinicalnotes');
 
-    spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
-    spyOn(ctrl, 'selected');
     spyOn(ctrl, 'create');
     spyOn(ctrl, 'setCurrentPageData');
     spyOn(ctrl, 'clinicalnotesLoad');
@@ -68,9 +66,7 @@ describe('Clinicalnotes List', function() {
 
     fakeCall.callClinicalnotes({}, types.EOLCAREPLANS);
 
-    ctrl.pageChangeHandler();
     ctrl.go();
-    ctrl.selected();
     ctrl.create();
     ctrl.setCurrentPageData();
     ctrl.clinicalnotesLoad();
@@ -98,14 +94,8 @@ describe('Clinicalnotes List', function() {
     expect(actions.create).toHaveBeenCalled();
     expect(actions.update).toHaveBeenCalled();
   });
-  it("pageChangeHandler was called", function() {
-    expect(ctrl.pageChangeHandler).toHaveBeenCalled();
-  });
   it("route go was called", function() {
     expect(ctrl.go).toHaveBeenCalled();
-  });
-  it("selected was called", function() {
-    expect(ctrl.selected).toHaveBeenCalled();
   });
   it("create was called", function() {
     expect(ctrl.create).toHaveBeenCalled();

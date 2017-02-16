@@ -42,17 +42,13 @@ describe('Referrals List', function() {
 
     spyOn(fakeCall, 'callReferrals');
 
-    spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
-    spyOn(ctrl, 'selected');
     spyOn(ctrl, 'create');
     spyOn(ctrl, 'setCurrentPageData');
 
     fakeCall.callReferrals({}, types.REFERRALS);
 
-    ctrl.pageChangeHandler();
     ctrl.go();
-    ctrl.selected();
     ctrl.create();
     ctrl.setCurrentPageData();
   });
@@ -69,14 +65,8 @@ describe('Referrals List', function() {
   it("Referrals reducer was called", function() {
     expect(fakeCall.callReferrals).toHaveBeenCalled();
   });
-  it("pageChangeHandler was called", function() {
-    expect(ctrl.pageChangeHandler).toHaveBeenCalled();
-  });
   it("route go was called", function() {
     expect(ctrl.go).toHaveBeenCalled();
-  });
-  it("selected was called", function() {
-    expect(ctrl.selected).toHaveBeenCalled();
   });
   it("create was called", function() {
     expect(ctrl.create).toHaveBeenCalled();

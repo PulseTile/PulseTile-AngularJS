@@ -38,15 +38,11 @@ describe('Results List', function() {
 
   beforeEach(function() {
 
-    spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
-    spyOn(ctrl, 'selected');
     spyOn(ctrl, 'setCurrentPageData');
     spyOn(ctrl, 'resultsLoad');
 
-    ctrl.pageChangeHandler();
     ctrl.go();
-    ctrl.selected();
     ctrl.setCurrentPageData();
     ctrl.resultsLoad();
   });
@@ -66,14 +62,8 @@ describe('Results List', function() {
   it("resultsLoad was called", function() {
     expect(ctrl.resultsLoad).toHaveBeenCalled();
   });
-  it("pageChangeHandler was called", function() {
-    expect(ctrl.pageChangeHandler).toHaveBeenCalled();
-  });
   it("route go was called", function() {
     expect(ctrl.go).toHaveBeenCalled();
-  });
-  it("selected was called", function() {
-    expect(ctrl.selected).toHaveBeenCalled();
   });
   it("setCurrentPageData was called", function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
