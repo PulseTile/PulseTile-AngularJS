@@ -250,8 +250,8 @@ angular.module('ripple-ui.directives', [])
       /* istanbul ignore next  */
       return {
           restrict: 'A',
-          controller: ['$scope', '$element', '$timeout', 'serviceStateMenager', '$state', 
-              function($scope, $element, $timeout, serviceStateMenager, $state) {
+          controller: ['$scope', '$element', '$timeout', 'serviceStateMenager', '$state', 'serviceFormatted',
+              function($scope, $element, $timeout, serviceStateMenager, $state, serviceFormatted) {
                   var nameState = $state.router.globals.$current.name.replace(/-(detail|create)/, '');
 
                   $scope.isFilterOpen = false;
