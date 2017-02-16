@@ -31,13 +31,18 @@ class ServiceFormatted {
       return collection;
     };
 
-    this.formattedSearching = function(collection, dateArgs) {
-      // return (
-          // row.testName.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-          // row.sampleTaken.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-          // row.dateCreated.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-          // row.source.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1
-      // );
+    this.formattedSearching = function(row, query) {
+      delete row.sourceId;
+      var str = '';
+      var farmatedStr;
+      Object.keys(row).map((key, index)=>{
+        if (typeof row[key] !== 'string') {
+          row[key] += '';
+        }
+        str += ' ' + row[key].toLowerCase();
+        farmatedStr = str.indexOf(query.toLowerCase() || '') !== -1;
+      });
+      return farmatedStr;
     };
       
   };

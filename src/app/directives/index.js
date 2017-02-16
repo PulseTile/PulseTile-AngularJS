@@ -281,9 +281,12 @@ angular.module('ripple-ui.directives', [])
                       serviceStateMenager.filter.query = $scope.queryFilter;
                   };
 
-                  $scope.$watch('queryFilter', function(queryFilterValue) {
-                      serviceStateMenager.filter.query = queryFilterValue;
-                  });
+                  $scope.queryFiltering = function (row) {
+                    return serviceFormatted.formattedSearching(row, $scope.queryFilter);
+                  };
+                  // $scope.$watch('queryFilter', function(queryFilterValue) {
+                  //     serviceStateMenager.filter.query = queryFilterValue;
+                  // });
           }]
       }
   })
