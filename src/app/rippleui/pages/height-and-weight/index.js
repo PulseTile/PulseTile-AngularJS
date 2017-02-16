@@ -18,6 +18,7 @@ import reducer from "./heightAndWeight-reducer-all";
 import heightAndWeightListComponent from './heightAndWeight-list.component';
 import heightAndWeightDetailComponent from './heightAndWeight-detail.component';
 import heightAndWeightActions from './heightAndWeight-actions';
+
 export default {
   "name": 'heightAndWeight',
   "routes": routes,
@@ -28,5 +29,11 @@ export default {
   },
   "actions": {
     heightAndWeightActions
+  },
+  "sidebarInfo": {
+    // name: 'heightAndWeights',
+    // link: 'heightAndWeights',
+    // linkDetail: 'heightAndWeights-detail',
+    // title: 'Height & Weight'
   }
 }

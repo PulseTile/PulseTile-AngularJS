@@ -19,6 +19,7 @@ import clinicalnotesListComponent from './clinicalnotes-list.component';
 import clinicalnotesCreateComponent from './clinicalnotes-create.component';
 import clinicalnotesDetailComponent from './clinicalnotes-detail.component';
 import clinicalnotesActions from './clinicalnotes-actions';
+
 export default {
   "name": 'clinicalnotes',
   "routes": routes,
@@ -30,5 +31,11 @@ export default {
   },
   "actions": {
     clinicalnotesActions
+  },
+  "sidebarInfo": {
+    name: 'clinicalNotes',
+    link: 'clinicalNotes',
+    linkDetail: 'clinicalNotes-detail',
+    title: 'Clinical Notes'
   }
 }

@@ -18,6 +18,7 @@ import reducer from "./documents-reducer-all";
 import documentsListComponent from './documents-list.component';
 import documentsDetailComponent from './documents-detail.component';
 import documentsActions from './documents-actions';
+
 export default {
   "name": 'documents',
   "routes": routes,
@@ -28,5 +29,11 @@ export default {
   },
   "actions": {
     documentsActions
+  },
+  "sidebarInfo": {
+    // name: 'documents',
+    // link: 'documents',
+    // linkDetail: 'documents-detail',
+    // title: 'Documents'
   }
 }

@@ -30,5 +30,11 @@ export default {
   },
   "actions": {
     medicationsActions
+  },
+  "sidebarInfo": {
+    name: 'medications',
+    link: 'medications',
+    linkDetail: 'medications-detail',
+    title: 'Medications'
   }
 }
