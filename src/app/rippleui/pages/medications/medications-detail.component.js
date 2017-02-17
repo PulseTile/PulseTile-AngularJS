@@ -74,7 +74,7 @@ class MedicationsDetailController {
     $scope.isPrescriptionEdit = false;
     this.editPrescription = function () {
       $scope.isPrescriptionEdit = true;
-      $scope.prescriptionForm = {
+      $scope.prescriptionEdit = {
         pStartDateTime: new Date(),
         finishCancelled: true,
         doseInterval: '',

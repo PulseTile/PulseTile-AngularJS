@@ -48,7 +48,7 @@
           <div class="board-body">
             <ul class="board-list">
               <li class="board-list-item" ng-repeat="dashboardItem in dashboard.array">
-                <span class="board-list-link" ng-if="dashboardItem.text" ng-click="go(dashboard.toState, dashboardItem.sourceId, dashboard.goNameIndex)">{{ dashboardItem.text }}</span>
+                <span class="board-list-link" ng-if="dashboardItem.text" ng-click="go(dashboard.toState, dashboardItem.sourceId)">{{ dashboardItem.text }}</span>
               </li>
             </ul>
           </div>

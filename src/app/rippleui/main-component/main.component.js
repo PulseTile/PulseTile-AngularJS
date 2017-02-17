@@ -13,7 +13,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-let templateMain= require('./main.html');
+let templateMain = require('./main.html');
 
 class MainController {
   constructor($window, $rootScope, $scope, $state, $stateParams, serviceRequests, $timeout) {
@@ -76,7 +76,10 @@ class MainController {
     };
     this.hideSidebarOnMobile = function () {
       if (window.innerWidth < 768) {
-        $scope.classShowSidebar = '';
+        $timeout(function() {
+          $scope.classShowSidebar = '';
+          angular.element(document).find('.wrapper').removeClass('showSidebar');
+        }, 0);
       }
     };
     serviceRequests.subscriber('changeStateSidebar', this.changeClassShowSidebar);

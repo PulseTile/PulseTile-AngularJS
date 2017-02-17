@@ -1,4 +1,4 @@
-# Ripple OSI
+# PulseTile
 
 [![travis build](https://img.shields.io/travis/PulseTile/PulseTile.svg?style=flat-square)](https://travis-ci.org/PulseTile/PulseTile)
 [![Codecov](https://img.shields.io/codecov/c/github/PulseTile/PulseTile/develop.svg?style=flat-square)](https://codecov.io/gh/PulseTile/PulseTile)
@@ -6,7 +6,7 @@
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)](http://commitizen.github.io/cz-cli/)
 
-Ripple is a clinically led team working with you to build an integrated digital care record platform for today and the future. Open source, open standards and underpinned by an open architecture that can be used worldwide.
+PulseTile is a clinically led UX UI framework for healthcare.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
