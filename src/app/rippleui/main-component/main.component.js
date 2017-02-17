@@ -13,7 +13,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-let templateMain= require('./main.html');
+let templateMain = require('./main.html');
 
 class MainController {
   constructor($window, $rootScope, $scope, $state, $stateParams, serviceRequests, $timeout) {

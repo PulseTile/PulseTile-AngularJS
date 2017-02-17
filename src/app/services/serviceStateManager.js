@@ -15,20 +15,81 @@
 */
 
 class ServiceStateManager {
-    constructor () {
+    constructor (serviceRequests, $rootScope, $state) {
+        this.state = '';
+
         this.tableSettings = {
           order: '',
           reverse: false,
-          state: '',
           currentPage: 1
         };
         this.filter = {
           isOpen: false,
-          query: '',
-          state: ''
+          query: ''
         };
-    
+
+        this.getFilter = function () {
+          this.checkChangeState();
+
+          return this.filter;
+        };
+
+        this.setFilter = function (filter) {
+          if (typeof filter === "undefined") return;
+
+          if (filter.isOpen) {
+            this.filter.isOpen = filter.isOpen;
+          }
+          if (filter.query) {
+            this.filter.query = filter.query;
+          }
+        };
+
+        this.getTableSettings = function () {
+          this.checkChangeState();
+
+          return this.tableSettings;
+        };
+
+        this.setTableSettings = function (tableSettings) {
+          if (typeof tableSettings === "undefined") return;
+
+          if (tableSettings.order) {
+            this.tableSettings.order = tableSettings.order;
+          }
+          if (tableSettings.reverse) {
+            this.tableSettings.reverse = tableSettings.reverse;
+          }
+          if (tableSettings.currentPage) {
+            this.tableSettings.currentPage = tableSettings.currentPage;
+          }
+        };
+
+        this.clearData = function () {
+          this.tableSettings = {
+            order: '',
+            reverse: false,
+            currentPage: 1
+          };
+          this.filter = {
+            isOpen: false,
+            query: ''
+          };
+        };
+
+        this.checkChangeState = function () {
+          var nameState = $state.router.globals.$current.name.replace(/-(detail|create)/, '');
+          if (this.state !== nameState) {
+            this.state = nameState;
+            this.clearData();
+          }
+        };
+
+        $rootScope.$on('$locationChangeStart', function(e) {
+          this.checkChangeState();
+        }.bind(this));
     }
 }
 
+ServiceStateManager.$inject = ['serviceRequests','$rootScope', '$state'];
 export default ServiceStateManager;
