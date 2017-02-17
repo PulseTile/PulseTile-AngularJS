@@ -1,8 +1,8 @@
 'use strict';
-import ServiceStateMenager from '../../../../app/services/serviceStateMenager.js';
+import ServiceStateManager from '../../../../app/services/serviceStateManager.js';
 import '../../../../app/index';
 
-describe('ServiceStateMenager', function() {
+describe('ServiceStateManager', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
@@ -13,7 +13,7 @@ describe('ServiceStateMenager', function() {
 
   beforeEach(inject(($injector, $controller) => {
     controller = $controller;
-    ctrl = controller(ServiceStateMenager, {
+    ctrl = controller(ServiceStateManager, {
     });
   }));
 
