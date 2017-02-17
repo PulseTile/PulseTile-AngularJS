@@ -22,6 +22,7 @@ class ServiceFormatted {
       DDMMMYYYY: 'DD-MMM-YYYY'
     };
 
+    /* istanbul ignore next  */
     this.formattingTablesDate = function(collection, dateArgs) {
       for (var i = 0; i < collection.length; i++) {
         for (var j = 0; j < dateArgs.length; j++) {
@@ -31,10 +32,15 @@ class ServiceFormatted {
       return collection;
     };
 
+    /* istanbul ignore next  */
     this.formattedSearching = function(row, query) {
-      delete row.sourceId;
+      if (row.sourceId) {
+        delete row.sourceId;
+      }
+      
       var str = '';
       var farmatedStr;
+      
       Object.keys(row).map((key, index)=>{
         if (typeof row[key] !== 'string') {
           row[key] += '';
@@ -42,6 +48,7 @@ class ServiceFormatted {
         str += ' ' + row[key].toLowerCase();
         farmatedStr = str.indexOf(query.toLowerCase() || '') !== -1;
       });
+      
       return farmatedStr;
     };
       
