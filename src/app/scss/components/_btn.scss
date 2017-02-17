@@ -161,6 +161,7 @@
 .btn-square {
   padding: 0;
   width: 36px;
+  &.btn-sm {width: 30px;}
 }
 
 .btn-expand-panel {

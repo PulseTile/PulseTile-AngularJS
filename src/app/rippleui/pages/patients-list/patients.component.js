@@ -22,31 +22,6 @@ class PatientsController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-list'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Lists', isShowTitle: true});
     
-    vm.query = '';
-    vm.isFilter = false;
-    
-    vm.toggleFilter = function () {
-      vm.isFilter = !vm.isFilter;
-    };
-
-    vm.sort = function (field) {
-      var reverse = vm.reverse;
-      
-      if (vm.order === field) {
-        vm.reverse = !reverse;
-      } else {
-        vm.order = field;
-        vm.reverse = false;
-      }
-    };
-
-    vm.sortClass = function (field) {
-      if (vm.order === field) {
-        return vm.reverse ? 'sorted desc' : 'sorted asc';
-      }
-    };
-
-
     vm.go = function (patient) {
       $state.go('patients-summary', {
         patientId: patient.id,
@@ -78,8 +53,6 @@ class PatientsController {
     };
 
     if ($stateParams.patientsList.length === 0 && !$stateParams.displayEmptyTable) {
-      vm.order = $stateParams.order || 'name';
-      vm.reverse = $stateParams.reverse === 'true';
       vm.filters = {
         department: $stateParams.department,
         ageRange: $stateParams.ageRange

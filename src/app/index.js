@@ -52,7 +52,7 @@ import ReportChartComponent from './rippleui/search/report-chart.component';
 import MainComponent from './rippleui/main-component/main.component';
 import HomeSidebarComponent from './rippleui/pages/patients-lookup/home-sidebar.component';
 import ServiceRequests from './services/serviceRequests.js';
-import ServiceStateMenager from './services/serviceStateMenager.js';
+import ServiceStateManager from './services/serviceStateManager.js';
 import ServiceVitalsSigns from './rippleui/pages/vitals/serviceVitalsSigns.js';
 import ServiceFormatted from './services/serviceFormatted.js';
 
@@ -86,7 +86,7 @@ let app = angular
 
     .service('serviceFormatted', ServiceFormatted)
     .service('serviceRequests', ServiceRequests)
-    .service('serviceStateMenager', ServiceStateMenager)
+    .service('serviceStateManager', ServiceStateManager)
     .service('serviceVitalsSigns', ServiceVitalsSigns);
 
   plugins.forEach((plugin)=>{
