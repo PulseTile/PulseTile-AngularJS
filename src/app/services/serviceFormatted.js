@@ -18,15 +18,16 @@ let _ = require('lodash');
 class ServiceFormatted {
 
   constructor () {
-    this.farmatCollection = {
+    this.formatCollection = {
       DDMMMYYYY: 'DD-MMM-YYYY'
     };
+    this.filteringKeys = [];
 
     /* istanbul ignore next  */
     this.formattingTablesDate = function(collection, dateArgs) {
       for (var i = 0; i < collection.length; i++) {
         for (var j = 0; j < dateArgs.length; j++) {
-          collection[i][dateArgs[j]] = moment(collection[i][dateArgs[j]]).format(this.farmatCollection.DDMMMYYYY);
+          collection[i][dateArgs[j]] = moment(collection[i][dateArgs[j]]).format(this.formatCollection.DDMMMYYYY);
         }
       }
       return collection;
@@ -34,10 +35,6 @@ class ServiceFormatted {
 
     /* istanbul ignore next  */
     this.formattedSearching = function(row, query) {
-      if (row.sourceId) {
-        delete row.sourceId;
-      }
-      
       var str = '';
       var farmatedStr;
       
@@ -45,7 +42,9 @@ class ServiceFormatted {
         if (typeof row[key] !== 'string') {
           row[key] += '';
         }
-        str += ' ' + row[key].toLowerCase();
+        if (this.filteringKeys.indexOf(key) !== -1) {
+          str += ' ' + row[key].toLowerCase();
+        }
         farmatedStr = str.indexOf(query.toLowerCase() || '') !== -1;
       });
       

@@ -255,8 +255,8 @@ angular.module('ripple-ui.directives', [])
       /* istanbul ignore next  */
       return {
           restrict: 'A',
-          controller: ['$scope', '$element', '$timeout', 'serviceRequests', 'serviceStateManager', '$state', 
-              function($scope, $element, $timeout, serviceRequests, serviceStateManager, $state) {
+          controller: ['$scope', '$element', '$timeout', 'serviceFormatted', 'serviceStateManager', '$state', 
+              function($scope, $element, $timeout, serviceFormatted, serviceStateManager, $state) {
                   var filterData = serviceStateManager.getFilter();
 
                   $scope.isFilterOpen = filterData.isOpen;
@@ -284,10 +284,9 @@ angular.module('ripple-ui.directives', [])
                         query: queryFilterValue
                       });
                   });
-                  // $scope.queryFiltering = function (row) {
-                  //   serviceStateManager.filter.query = $scope.queryFilter;
-                  //   return serviceFormatted.formattedSearching(row, $scope.queryFilter);
-                  // };
+                  $scope.queryFiltering = function (row) {
+                    return serviceFormatted.formattedSearching(row, $scope.queryFilter);
+                  };
           }]
       }
   })

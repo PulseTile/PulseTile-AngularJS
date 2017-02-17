@@ -51,7 +51,7 @@
       </thead>
 
       <tbody>
-        <tr dir-paginate="personalNote in $ctrl.personalNotes | filter: queryFilter | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage"  ng-click="$ctrl.go(personalNote.sourceId, personalNote.source)" ng-class="{info: selectedRow(personalNote.sourceId)}">
+        <tr dir-paginate="personalNote in $ctrl.personalNotes | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage"  ng-click="$ctrl.go(personalNote.sourceId, personalNote.source)" ng-class="{info: selectedRow(personalNote.sourceId)}">
           <td data-th="Type" ng-class="sortClass('type')">{{ personalNote.noteType }}</td>
           <td data-th="Author" ng-class="sortClass('author')">{{ personalNote.author }}</td>
           <td data-th="Date" ng-class="sortClass('date')">{{ personalNote.dateCreated | date:'dd-MMM-yyyy' }}</td>

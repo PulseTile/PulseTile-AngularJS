@@ -51,7 +51,7 @@
       </thead>
 
       <tbody>
-        <tr dir-paginate="patient in $ctrl.patients | filter:queryFilter | filter: $ctrl.patientFilter | orderBy:[order] : reverse | itemsPerPage: 10" ng-click="$ctrl.go(patient)">
+        <tr dir-paginate="patient in $ctrl.patients | filter:queryFiltering | filter: $ctrl.patientFilter | orderBy:[order] : reverse | itemsPerPage: 10" ng-click="$ctrl.go(patient)">
             <td data-th="Name" ng-class="sortClass('name')">{{ patient.name }}</td>
             <td data-th="Address" ng-class="sortClass('address')" class="cell-truncate">{{ patient.address }}</td>
             <td data-th="Date of Birth" ng-class="sortClass('dateOfBirth')" class="dateTime">{{ patient.dateOfBirth | date:'dd-MMM-yyyy' }}</td>

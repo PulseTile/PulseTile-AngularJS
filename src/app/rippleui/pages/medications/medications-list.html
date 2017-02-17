@@ -50,7 +50,7 @@
       </thead>
 
       <tbody>
-        <tr dir-paginate="medication in $ctrl.medications| filter: queryFilter | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage"  ng-click="$ctrl.go(medication.sourceId, medication.source)" ng-class="{info: selectedRow(medication.sourceId)}">
+        <tr dir-paginate="medication in $ctrl.medications| filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage"  ng-click="$ctrl.go(medication.sourceId, medication.source)" ng-class="{info: selectedRow(medication.sourceId)}">
             <td data-th="Name" ng-class="sortClass('name');" class="{{medication.warning || medication.danger ? 'highlighter-wrapper' : ''}}">
               <span class="highlighter-warning" ng-if="medication.warning"></span>
               <span class="highlighter-danger" ng-if="medication.danger"></span>
