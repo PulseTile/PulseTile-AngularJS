@@ -279,15 +279,15 @@ angular.module('ripple-ui.directives', [])
                       });
                   };
 
-                  // $scope.$watch('queryFilter', function(queryFilterValue) {
-                  //     serviceStateManager.setFilter({
-                  //       query: queryFilterValue
-                  //     });
-                  // });
-                  $scope.queryFiltering = function (row) {
-                    serviceStateMenager.filter.query = $scope.queryFilter;
-                    return serviceFormatted.formattedSearching(row, $scope.queryFilter);
-                  };
+                  $scope.$watch('queryFilter', function(queryFilterValue) {
+                      serviceStateManager.setFilter({
+                        query: queryFilterValue
+                      });
+                  });
+                  // $scope.queryFiltering = function (row) {
+                  //   serviceStateManager.filter.query = $scope.queryFilter;
+                  //   return serviceFormatted.formattedSearching(row, $scope.queryFilter);
+                  // };
           }]
       }
   })
