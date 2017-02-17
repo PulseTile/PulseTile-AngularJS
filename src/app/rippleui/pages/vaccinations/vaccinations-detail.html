@@ -100,7 +100,7 @@
                         <div class="addon">
                           <i class="fa fa-calendar"></i>
                         </div>
-                        <input type="text" class="form-control" id="date" name="date" ng-model="vaccinationEdit.startDate" ng-click="openDatepicker($event, 'date')" uib-datepicker-popup="dd-MMM-yyyy" is-open="date" required />
+                        <input type="text" class="form-control" id="date" name="date" ng-model="vaccinationEdit.date" ng-click="openDatepicker($event, 'date')" uib-datepicker-popup="dd-MMM-yyyy" is-open="date" required />
                     </div>
                     <span class="help-block animate-fade" ng-show="formSubmitted && vaccinationForm.date.$error.required">You must enter a valid date.</span>
                 </div>

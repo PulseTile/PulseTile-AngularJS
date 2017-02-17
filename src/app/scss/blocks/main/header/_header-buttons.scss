@@ -30,7 +30,7 @@
   .count {
     position: absolute;
     top: 9px;
-    right: 1px;
+    right: 0px;
     font-size: 10px;
     font-family: arial;
     background-color: $icon-chevron-color;
@@ -57,7 +57,9 @@
 }
 .btn-notification {
   font-size: 18px;
+  padding-right: 2px;
   @include respond-to(xs) {
     font-size: 19px;
+    padding-right: 0;
   }
 }

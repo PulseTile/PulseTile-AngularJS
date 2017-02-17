@@ -255,8 +255,8 @@ angular.module('ripple-ui.directives', [])
       /* istanbul ignore next  */
       return {
           restrict: 'A',
-          controller: ['$scope', '$element', '$timeout', 'serviceRequests', 'serviceStateManager', '$state', 
-              function($scope, $element, $timeout, serviceRequests, serviceStateManager, $state) {
+          controller: ['$scope', '$element', '$timeout', 'serviceStateManager', '$state', 
+              function($scope, $element, $timeout, serviceStateManager, $state) {
                   var filterData = serviceStateManager.getFilter();
 
                   $scope.isFilterOpen = filterData.isOpen;
