@@ -238,7 +238,7 @@ class VitalsListController {
       if (data.vitals.data) {
         $scope.vitals = serviceVitalsSigns.modificateVitalsArr(data.vitals.data);
         
-        serviceFormatted.formattingTablesDate($scope.vitals, ['dateCreate']);
+        serviceFormatted.formattingTablesDate($scope.vitals, ['dateCreate'], serviceFormatted.formatCollection.DDMMMYYYY);
         serviceFormatted.filteringKeys = ['id', 'dateCreate', 'newsScore', 'source'];
         
         usSpinnerService.stop('patientSummary-spinner');

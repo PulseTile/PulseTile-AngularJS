@@ -19,15 +19,16 @@ class ServiceFormatted {
 
   constructor () {
     this.formatCollection = {
-      DDMMMYYYY: 'DD-MMM-YYYY'
+      DDMMMYYYY: 'DD-MMM-YYYY',
+      HHmm: 'HH:mm'
     };
     this.filteringKeys = [];
 
     /* istanbul ignore next  */
-    this.formattingTablesDate = function(collection, dateArgs) {
+    this.formattingTablesDate = function(collection, dateArgs, format) {
       for (var i = 0; i < collection.length; i++) {
         for (var j = 0; j < dateArgs.length; j++) {
-          collection[i][dateArgs[j]] = moment(collection[i][dateArgs[j]]).format(this.formatCollection.DDMMMYYYY);
+          collection[i][dateArgs[j]] = moment(collection[i][dateArgs[j]]).format(format);
         }
       }
       return collection;
@@ -37,7 +38,7 @@ class ServiceFormatted {
     this.formattedSearching = function(row, query) {
       var str = '';
       var farmatedStr;
-      
+      // console.log('formattedSearching --> ', this.filteringKeys, row);
       Object.keys(row).map((key, index)=>{
         if (typeof row[key] !== 'string') {
           row[key] += '';
