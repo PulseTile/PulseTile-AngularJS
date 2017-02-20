@@ -31,7 +31,7 @@
     text-transform: uppercase;
     white-space: nowrap;
     vertical-align: middle;
-    a { color: #0C662D; }
+    a, a:hover { color: #0C662D; }
   }
   .logo-mobile-hidden { display: none; }
 }

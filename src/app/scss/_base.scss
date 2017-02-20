@@ -31,7 +31,9 @@ textarea {
   resize: vertical;
 }
 
-a {
+a,
+a:hover,
+a:focus {
   color: #000000;
   text-decoration: none;
   cursor: pointer;
