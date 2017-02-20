@@ -42,15 +42,13 @@
       }
     }
   }
-  .view {
-    min-width: 93px;
-    .btn-dropdown-toggle:hover {
-      background-color: #7dbe31;
-      border-color: #7dbe31;
-      & > li > a:hover {
-        background-color: #d0e8af;
-      }
-    }
+  .view { min-width: 93px; }
+}
+.is-not-touch-device .table .view .btn-dropdown-toggle:hover {
+  background-color: #7dbe31;
+  border-color: #7dbe31;
+  & > li > a:hover {
+    background-color: #d0e8af;
   }
 }
 @include respond-to(xs) {
@@ -101,14 +99,14 @@ tr[ng-click],
 td[ng-click] {
   cursor: pointer;
 }
-.table-hover > tbody > tr > td.info:hover,
-.table-hover > tbody > tr > th.info:hover,
-.table-hover > tbody > tr.info:hover > td,
-.table-hover > tbody > tr:hover > .info,
-.table-hover > tbody > tr.info:hover > th,
-.table-hover > tbody > tr[ng-click]:hover > td,
-.table-hover > tbody > tr:hover > td[ng-click],
-.table-hover > tbody > tr[ng-click]:hover {
+.is-not-touch-device .table-hover > tbody > tr > td.info:hover,
+.is-not-touch-device .table-hover > tbody > tr > th.info:hover,
+.is-not-touch-device .table-hover > tbody > tr.info:hover > td,
+.is-not-touch-device .table-hover > tbody > tr:hover > .info,
+.is-not-touch-device .table-hover > tbody > tr.info:hover > th,
+.is-not-touch-device .table-hover > tbody > tr[ng-click]:hover > td,
+.is-not-touch-device .table-hover > tbody > tr:hover > td[ng-click],
+.is-not-touch-device .table-hover > tbody > tr[ng-click]:hover {
   background-color: $table-row-background-hover;
 }
 

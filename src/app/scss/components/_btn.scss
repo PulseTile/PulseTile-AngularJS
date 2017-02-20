@@ -22,21 +22,21 @@
 
 @each $button, $color in $colored-buttons {
   .btn-#{$button},
+  .btn-#{$button}:hover,
   .btn-#{$button}:focus,
   .btn-#{$button}:active {
     background-color: $color !important;
     border-color: $color !important;
-    &:hover {
-      background-color: $color !important;
-      border-color: $color !important;
-      @include respond-to(sm) {
-        background-color: darken($color, 10%) !important;
-        border-color: darken($color, 10%) !important;
-      }
-    }
     &.active {
       background-color: $color !important;
       border-color: $color !important;
+    }
+  }
+  .is-not-touch-device {
+   .btn-#{$button}:hover,
+   .btn-#{$button}:focus {
+      background-color: darken($color, 10%) !important;
+      border-color: darken($color, 10%) !important;
     }
   }
 }
@@ -72,24 +72,23 @@
   border: 1px solid #ccc !important;
   @each $button, $color in $colored-buttons {
     &.btn-#{$button},
+    &.btn-#{$button}:hover,
     &.btn-#{$button}:focus,
     &.btn-#{$button}:active {
       color: $color !important;
       border-color: $color !important;
       background: transparent !important;
-      &:hover {
-        color: $color !important;
-        border-color: $color !important;
-        background: transparent !important;
-        @include respond-to(sm) {
-          color: darken($color, 10%) !important;
-          border-color: darken($color, 10%) !important;
-        }
-      }
       &.active {
         color: darken($color, 10%) !important;
         border-color: darken($color, 10%) !important;
         background: transparent !important;
+      }
+    }
+    .is-not-touch-device {
+     .btn-#{$button}:hover,
+     .btn-#{$button}:focus {
+        color: darken($color, 10%) !important;
+        border-color: darken($color, 10%) !important;
       }
     }
   }

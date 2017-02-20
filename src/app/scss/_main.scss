@@ -265,7 +265,7 @@ a[ui-sref] {
   color: #000000;
 }
 
-.main-nav a.button:hover {
+.is-not-touch-device .main-nav a.button:hover {
   background-color: $button-sidebar-background-hover;
   text-decoration: none;
 }
@@ -298,21 +298,21 @@ a[ui-sref] {
 /* User Profile Menu */
 
 .nav .open > a,
-.nav .open > a:hover,
-.nav .open > a:focus {
+.is-not-touch-device .nav .open > a:hover,
+.is-not-touch-device .nav .open > a:focus {
   background-color: #eee;
   border-color: transparent;
 }
 
-.nav > li > a:hover,
-.nav > li > a:focus {
+.is-not-touch-device .nav > li > a:hover,
+.is-not-touch-device .nav > li > a:focus {
   text-decoration: none;
   background-color: transparent;
 }
 
 .nav .open > a,
-.nav .open > a:hover,
-.nav .open > a:focus {
+.is-not-touch-device .nav .open > a:hover,
+.is-not-touch-device .nav .open > a:focus {
   background-color: transparent;
   border-color: transparent;
 }
@@ -805,7 +805,7 @@ tr.ng-scope.selectedItemLeft {
   margin-top: 108px;
 }
 
-#switchImg:hover {
+.is-not-touch-device #switchImg:hover {
   cursor: pointer;
 }
 
@@ -825,7 +825,7 @@ tr.ng-scope.selectedItemLeft {
   margin-right: 180px;
 }
 
-.fa-times-circle:hover {
+.is-not-touch-device .fa-times-circle:hover {
   cursor: pointer;
 }
 
@@ -836,7 +836,7 @@ tr.ng-scope.selectedItemLeft {
   line-height: 10px;
 }
 
-.fa.fa-times:hover {
+.is-not-touch-device .fa.fa-times:hover {
   cursor: pointer;
 }
 
@@ -922,7 +922,7 @@ i.fa.cancel-reportType.fa-times {
   margin-top: 5px;
 }
 
-.patientFilterOptions:hover {
+.is-not-touch-device .patientFilterOptions:hover {
   text-decoration: overline;
   cursor: pointer !important;
 }

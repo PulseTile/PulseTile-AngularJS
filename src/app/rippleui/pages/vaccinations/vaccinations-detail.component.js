@@ -28,8 +28,7 @@ class VaccinationsDetailController {
       $scope.isEdit = true;
 
       $scope.vaccinationEdit = Object.assign({}, this.vaccination);
-      $scope.vaccinationEdit.date = new Date();
-      $scope.vaccinationEdit.dateCreated = new Date();
+      $scope.vaccinationEdit.dateCreate = new Date();
     };
     this.cancelEdit = function () {
       $scope.isEdit = false;

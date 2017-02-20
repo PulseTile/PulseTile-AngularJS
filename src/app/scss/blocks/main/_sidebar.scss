@@ -44,13 +44,13 @@
   }
 }
 .showSidebar .btn-toggle-sidebar,
-.showSidebar .btn-toggle-sidebar:focus {
+.is-not-touch-device .showSidebar .btn-toggle-sidebar:focus {
   color: $secondary-color;
   background: #fff;
 }
 @include respond-to(xs) {
   .btn-toggle-sidebar,
-  .btn-toggle-sidebar:focus, {
+  .is-not-touch-device .btn-toggle-sidebar:focus, {
     margin-right: 18px;
     padding: 6px 14px 6px 11px;
     i {margin-right: 9px;}
@@ -59,14 +59,14 @@
 }
 @include respond-to(sm) {
   .btn-toggle-sidebar,
-  .btn-toggle-sidebar:focus, {
+  .is-not-touch-device .btn-toggle-sidebar:focus, {
     position: absolute;
     top: 50%;
     left: 0;
     transform: translateY(-50%);
     margin-right: 0;
   }
-  .btn-toggle-sidebar:hover {
+  .is-not-touch-device .btn-toggle-sidebar:hover {
     color: $secondary-color;
     background: #fff;
   }
@@ -83,11 +83,14 @@
       font-weight: 500;
       line-height: 19px;
       color: #0C662E;
-      &:hover,
       &.active {
         color: #fff;
         background-color: $secondary-color;
       }
     }
   }
+}
+.is-not-touch-device .sidebar-nav ul li a &:hover {
+  color: #fff;
+  background-color: $secondary-color;
 }
