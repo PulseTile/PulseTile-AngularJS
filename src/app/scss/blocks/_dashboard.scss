@@ -81,6 +81,6 @@
   line-height: 20px;
   cursor: pointer;
 }
-.notouchdevice .board-list-link:hover {
+.is-not-touch-device .board-list-link:hover {
   background: $table-row-background-hover;
 }

@@ -32,7 +32,7 @@
       border-color: $color !important;
     }
   }
-  .notouchdevice {
+  .is-not-touch-device {
    .btn-#{$button}:hover,
    .btn-#{$button}:focus {
       background-color: darken($color, 10%) !important;
@@ -84,7 +84,7 @@
         background: transparent !important;
       }
     }
-    .notouchdevice {
+    .is-not-touch-device {
      .btn-#{$button}:hover,
      .btn-#{$button}:focus {
         color: darken($color, 10%) !important;

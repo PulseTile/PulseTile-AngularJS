@@ -35,7 +35,7 @@
   }
   .logo-mobile-hidden { display: none; }
 }
-.notouchdevice .logo .logo-text a:hover { color: #7cbe31; }
+.is-not-touch-device .logo .logo-text a:hover { color: #7cbe31; }
 
 @include respond-to(xs) {
   .wrap-logo {

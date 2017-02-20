@@ -40,7 +40,7 @@
     }
   }
 }
-.notouchdevice .pagination-block {
+.is-not-touch-device .pagination-block {
   li {
     &:not(.disabled):hover { z-index: 2; }
     & a:hover,

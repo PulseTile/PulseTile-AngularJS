@@ -37,8 +37,8 @@ a {
   cursor: pointer;
 }
 
-.notouchdevice a:hover,
-.notouchdevice a:focus, {
+.is-not-touch-device a:hover,
+.is-not-touch-device a:focus, {
   color: $link-color-hover;
   text-decoration: none;
 }

@@ -44,7 +44,7 @@
   }
   .view { min-width: 93px; }
 }
-.notouchdevice .table .view .btn-dropdown-toggle:hover {
+.is-not-touch-device .table .view .btn-dropdown-toggle:hover {
   background-color: #7dbe31;
   border-color: #7dbe31;
   & > li > a:hover {
@@ -99,14 +99,14 @@ tr[ng-click],
 td[ng-click] {
   cursor: pointer;
 }
-.notouchdevice .table-hover > tbody > tr > td.info:hover,
-.notouchdevice .table-hover > tbody > tr > th.info:hover,
-.notouchdevice .table-hover > tbody > tr.info:hover > td,
-.notouchdevice .table-hover > tbody > tr:hover > .info,
-.notouchdevice .table-hover > tbody > tr.info:hover > th,
-.notouchdevice .table-hover > tbody > tr[ng-click]:hover > td,
-.notouchdevice .table-hover > tbody > tr:hover > td[ng-click],
-.notouchdevice .table-hover > tbody > tr[ng-click]:hover {
+.is-not-touch-device .table-hover > tbody > tr > td.info:hover,
+.is-not-touch-device .table-hover > tbody > tr > th.info:hover,
+.is-not-touch-device .table-hover > tbody > tr.info:hover > td,
+.is-not-touch-device .table-hover > tbody > tr:hover > .info,
+.is-not-touch-device .table-hover > tbody > tr.info:hover > th,
+.is-not-touch-device .table-hover > tbody > tr[ng-click]:hover > td,
+.is-not-touch-device .table-hover > tbody > tr:hover > td[ng-click],
+.is-not-touch-device .table-hover > tbody > tr[ng-click]:hover {
   background-color: $table-row-background-hover;
 }
 
