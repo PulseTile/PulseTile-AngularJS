@@ -44,13 +44,15 @@
   }
 }
 .showSidebar .btn-toggle-sidebar,
-.is-not-touch-device .showSidebar .btn-toggle-sidebar:focus {
+.showSidebar .btn-toggle-sidebar:focus,
+.showSidebar .btn-toggle-sidebar:hover {
   color: $secondary-color;
   background: #fff;
 }
 @include respond-to(xs) {
   .btn-toggle-sidebar,
-  .is-not-touch-device .btn-toggle-sidebar:focus, {
+  .btn-toggle-sidebar:focus,
+  .btn-toggle-sidebar:hover, {
     margin-right: 18px;
     padding: 6px 14px 6px 11px;
     i {margin-right: 9px;}
@@ -59,7 +61,8 @@
 }
 @include respond-to(sm) {
   .btn-toggle-sidebar,
-  .is-not-touch-device .btn-toggle-sidebar:focus, {
+  .btn-toggle-sidebar:focus,
+  .btn-toggle-sidebar:hover, {
     position: absolute;
     top: 50%;
     left: 0;
@@ -77,16 +80,16 @@
   padding-top: 1px;
   ul li {
     border-bottom: 1px solid #E7E7E7;
-    a {
+    a, a:hover {
       padding: 10px 15px;
       font-size: 14px;
       font-weight: 500;
       line-height: 19px;
       color: #0C662E;
-      &.active {
-        color: #fff;
-        background-color: $secondary-color;
-      }
+    }
+    a.active {
+      color: #fff;
+      background-color: $secondary-color;
     }
   }
 }

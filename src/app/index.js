@@ -36,8 +36,8 @@ import reducer from './redux/reducer';
 import actions from './actions';
 import httpMiddleware from './helpers/httpMiddleware';
 import Patient from './helpers/patient';
+import deviceDetector from './helpers/deviceDetector';
 import './helpers/polyfills';
-import deviceDetect from './helpers/deviceDetector';
 
 //components 
 import ProfileComponent from './rippleui/pages/profile/profile.component';
@@ -83,6 +83,7 @@ let app = angular
     ])
     .factory('httpMiddleware', httpMiddleware)
     .factory('Patient', Patient)
+    .factory('deviceDetector', deviceDetector)
 
     .service('serviceRequests', ServiceRequests)
     .service('serviceStateManager', ServiceStateManager)

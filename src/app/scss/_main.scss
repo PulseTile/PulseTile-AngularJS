@@ -253,7 +253,8 @@ a[ui-sref] {
 
 
 
-.main-nav a.button {
+.main-nav a.button,
+.main-nav a.button:hover {
   display: block;
   width: 100%;
   border: 1px solid #bdbdbd;
@@ -298,8 +299,8 @@ a[ui-sref] {
 /* User Profile Menu */
 
 .nav .open > a,
-.is-not-touch-device .nav .open > a:hover,
-.is-not-touch-device .nav .open > a:focus {
+.nav .open > a:hover,
+.nav .open > a:focus {
   background-color: #eee;
   border-color: transparent;
 }
@@ -311,8 +312,8 @@ a[ui-sref] {
 }
 
 .nav .open > a,
-.is-not-touch-device .nav .open > a:hover,
-.is-not-touch-device .nav .open > a:focus {
+.nav .open > a:hover,
+.nav .open > a:focus {
   background-color: transparent;
   border-color: transparent;
 }
