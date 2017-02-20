@@ -150,8 +150,6 @@ class SearchAdvancedController {
         queryParams.dateOfBirth = new Date(queryParams.dateOfBirth.getTime() - (60000 * queryParams.dateOfBirth.getTimezoneOffset()));
       }
       this.searchResult = searchActions.advancedSearch;
-      console.log('queryParams');
-      console.log(queryParams);
       this.searchResult(queryParams);
     };
   }

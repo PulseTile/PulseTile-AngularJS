@@ -169,6 +169,8 @@ class PatientsListFullController {
     };
 
     this.setDataRequest = function (result) {
+      console.log('result');
+      console.log(result);
       /* istanbul ignore if  */
       if (result.data) {
         switch (searchType) {
