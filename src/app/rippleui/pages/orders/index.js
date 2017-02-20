@@ -30,5 +30,11 @@ export default {
   },
   "actions": {
     ordersActions
+  },
+  "sidebarInfo": {
+    name: 'orders',
+    link: 'orders',
+    linkDetail: 'orders-detail',
+    title: 'Orders'
   }
 }

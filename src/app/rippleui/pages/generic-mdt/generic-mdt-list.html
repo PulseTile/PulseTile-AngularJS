@@ -51,7 +51,7 @@
       </thead>
 
       <tbody>
-        <tr dir-paginate="mdt in $ctrl.genericMdtComposition | filter: queryFilter | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(mdt.sourceId)" ng-class="{info: selectedRow(mdt.sourceId)}">
+        <tr dir-paginate="mdt in $ctrl.genericMdtComposition | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(mdt.sourceId)" ng-class="{info: selectedRow(mdt.sourceId)}">
           <td data-th="Name" ng-class="sortClass('dateOfRequest');" class="sorted asc">{{ mdt.dateOfRequest }}</td>
           <td data-th="Relationship" ng-class="sortClass('serviceTeam')">{{ mdt.serviceTeam }}</td>
           <td data-th="Next of Kin" ng-class="sortClass('dateOfMeeting')">{{mdt.dateOfMeeting}}</td>

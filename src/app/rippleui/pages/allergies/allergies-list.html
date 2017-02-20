@@ -49,7 +49,7 @@
       </thead>
 
       <tbody>
-        <tr dir-paginate="allergy in $ctrl.allergies | filter: queryFilter | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(allergy.sourceId, allergy.source)" ng-class="{info: selectedRow(allergy.sourceId)}">
+        <tr dir-paginate="allergy in $ctrl.allergies | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(allergy.sourceId, allergy.source)" ng-class="{info: selectedRow(allergy.sourceId)}">
           <td data-th="Cause" ng-class="sortClass('cause');">{{ allergy.cause }}</td>
           <td data-th="Reaction" ng-class="sortClass('reaction')">{{ allergy.reaction }}</td>
           <td data-th="Source" ng-class="sortClass('source')">{{ allergy.source }}</td>

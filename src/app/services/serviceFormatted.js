@@ -18,17 +18,38 @@ let _ = require('lodash');
 class ServiceFormatted {
 
   constructor () {
-    this.farmatCollection = {
-      DDMMMYYYY: 'DD-MMM-YYYY'
+    this.formatCollection = {
+      DDMMMYYYY: 'DD-MMM-YYYY',
+      HHmm: 'HH:mm'
     };
+    this.filteringKeys = [];
 
-    this.formattingTablesDate = function(collection, dateArgs) {
+    /* istanbul ignore next  */
+    this.formattingTablesDate = function(collection, dateArgs, format) {
       for (var i = 0; i < collection.length; i++) {
         for (var j = 0; j < dateArgs.length; j++) {
-          collection[i][dateArgs[j]] = moment(collection[i][dateArgs[j]]).format(this.farmatCollection.DDMMMYYYY);
+          collection[i][dateArgs[j]] = moment(collection[i][dateArgs[j]]).format(format);
         }
       }
       return collection;
+    };
+
+    /* istanbul ignore next  */
+    this.formattedSearching = function(row, query) {
+      var str = '';
+      var farmatedStr;
+      // console.log('formattedSearching --> ', this.filteringKeys, row);
+      Object.keys(row).map((key, index)=>{
+        if (typeof row[key] !== 'string') {
+          row[key] += '';
+        }
+        if (this.filteringKeys.indexOf(key) !== -1) {
+          str += ' ' + row[key].toLowerCase();
+        }
+        farmatedStr = str.indexOf(query.toLowerCase() || '') !== -1;
+      });
+      
+      return farmatedStr;
     };
       
   };

@@ -16,7 +16,7 @@
 let templateOrdersList = require('./orders-list.html');
 
 class OrdersListController {
-  constructor($scope, $state, $stateParams, $ngRedux, ordersActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, ordersActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -42,9 +42,8 @@ class OrdersListController {
       if (data.orders.data) {
         this.orders = data.orders.data;
 
-        for (var i = 0; i < this.orders.length; i++) {
-          this.orders[i].orderDate = moment(this.orders[i].orderDate).format('DD-MMM-YYYY h:mm a');
-        }
+        serviceFormatted.formattingTablesDate(this.orders, ['orderDate'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['name', 'orderDate', 'source'];
       }
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
@@ -71,5 +70,5 @@ const OrdersListComponent = {
   controller: OrdersListController
 };
 
-OrdersListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'ordersActions', 'serviceRequests', 'usSpinnerService'];
+OrdersListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'ordersActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default OrdersListComponent;

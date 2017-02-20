@@ -18,6 +18,7 @@ import reducer from "./transfer-of-care-reducer-all";
 import transferOfCareListComponent from './transfer-of-care-list.component';
 import transferOfCareDetailComponent from './transfer-of-care-detail.component';
 import transferOfCareActions from './transfer-of-care-actions';
+
 export default {
   "name": 'transferOfCare',
   "routes": routes,
@@ -28,5 +29,11 @@ export default {
   },
   "actions": {
     transferOfCareActions
+  },
+  "sidebarInfo": {
+    // name: 'transfers',
+    // link: 'transferOfCare',
+    // linkDetail: 'transferOfCare-detail',
+    // title: 'Transfer of Care'
   }
 }

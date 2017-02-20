@@ -16,7 +16,7 @@
 let templateImageList = require('./image-list.html');
 
 class ImageListController {
-  constructor($scope, $window, $state, $stateParams, $ngRedux, imageActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $window, $state, $stateParams, $ngRedux, imageActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -38,14 +38,6 @@ class ImageListController {
           patientId: $stateParams.patientId
       });
     };
-
-    // this.search = function (row) {
-    //   return (
-    //     angular.lowercase(row.studyDescription).indexOf(angular.lowercase(vm.query) || '') !== -1 ||
-    //     angular.lowercase(row.dateRecorded).indexOf(angular.lowercase(vm.query) || '') !== -1 ||
-    //     angular.lowercase(row.source).indexOf(angular.lowercase(vm.query) || '') !== -1
-    //   );
-    // };
 
     this.setCurrentPageData = function (data) {
       var date = new Date();
@@ -79,7 +71,9 @@ class ImageListController {
           dataCreate: date.setDate(date.getDate() - 4)
         }
       ];
-      
+
+      serviceFormatted.formattingTablesDate(this.images, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
+      serviceFormatted.filteringKeys = ['name', 'date', 'source'];
       usSpinnerService.stop('patientSummary-spinner');
       
       if (data.patientsGet.data) {
@@ -106,5 +100,5 @@ const ImageListComponent = {
   controller: ImageListController
 };
 
-ImageListController.$inject = ['$scope', '$window', '$state', '$stateParams', '$ngRedux', 'imageActions', 'serviceRequests', 'usSpinnerService'];
+ImageListController.$inject = ['$scope', '$window', '$state', '$stateParams', '$ngRedux', 'imageActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default ImageListComponent;

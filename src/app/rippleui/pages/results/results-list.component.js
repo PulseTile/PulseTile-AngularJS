@@ -31,23 +31,13 @@ class ResultsListController {
       });
     };
 
-    // this.search = function (row) {
-    //   return (
-    //       row.testName.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-    //       row.sampleTaken.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-    //       row.dateCreated.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-    //       row.source.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1
-    //   );
-    // };
-
     this.setCurrentPageData = function (data) {
       if (data.results.data) {
         this.results = data.results.data;
 
-        for (var i = 0; i < this.results.length; i++) {
-          this.results[i].sampleTaken = moment(this.results[i].sampleTaken).format('DD-MMM-YYYY');
-          this.results[i].dateCreated = moment(this.results[i].dateCreated).format('DD-MMM-YYYY');
-        }
+        serviceFormatted.formattingTablesDate(this.results, ['dateCreated', 'sampleTaken'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['sampleTaken', 'testName', 'dateCreated', 'source'];
+        
         usSpinnerService.stop('resultsSummary-spinner');
       }
     };

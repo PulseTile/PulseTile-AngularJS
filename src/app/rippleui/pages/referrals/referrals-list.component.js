@@ -16,7 +16,7 @@
 let templateReferralsList = require('./referrals-list.html');
 
 class ReferralsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, referralsActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, referralsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -46,9 +46,8 @@ class ReferralsListController {
       if (data.referrals.data) {
         this.referrals = data.referrals.data;
 
-        for (var i = 0; i < this.referrals.length; i++) {
-          this.referrals[i].dateOfReferral = moment(this.referrals[i].dateOfReferral).format('DD-MMM-YYYY');
-        }
+        serviceFormatted.formattingTablesDate(this.referrals, ['dateOfReferral'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['dateOfReferral', 'referralFrom', 'referralTo', 'source'];
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
@@ -71,5 +70,5 @@ const ReferralsListComponent = {
   controller: ReferralsListController
 };
 
-ReferralsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'serviceRequests', 'usSpinnerService'];
+ReferralsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default ReferralsListComponent;
