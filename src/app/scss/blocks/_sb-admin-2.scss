@@ -122,11 +122,11 @@
   color: #d9534f;
 }
 
-.btn-primary.btn-outline:hover,
-.btn-success.btn-outline:hover,
-.btn-info.btn-outline:hover,
-.btn-warning.btn-outline:hover,
-.btn-danger.btn-outline:hover {
+.notouchdevice .btn-primary.btn-outline:hover,
+.notouchdevice .btn-success.btn-outline:hover,
+.notouchdevice .btn-info.btn-outline:hover,
+.notouchdevice .btn-warning.btn-outline:hover,
+.notouchdevice .btn-danger.btn-outline:hover {
   color: #fff;
 }
 
@@ -262,7 +262,7 @@ table.dataTable thead .sorting:after {
   color: #5cb85c;
 }
 
-.panel-green a:hover {
+.notouchdevice .panel-green a:hover {
   color: #3d8b3d;
 }
 
@@ -280,7 +280,7 @@ table.dataTable thead .sorting:after {
   color: #d9534f;
 }
 
-.panel-red a:hover {
+.notouchdevice .panel-red a:hover {
   color: #b52b27;
 }
 
@@ -298,7 +298,7 @@ table.dataTable thead .sorting:after {
   color: #f0ad4e;
 }
 
-.panel-yellow a:hover {
+.notouchdevice .panel-yellow a:hover {
   color: #df8a13;
 }
 

@@ -72,10 +72,7 @@
     font-size: 0;
     line-height: 0;
     cursor: pointer;
-    &:hover,
-    &.active {
-      background: #f3f3f3;
-    }
+    &.active { background: #f3f3f3; } 
     span, i {
       line-height: 28px;
       display: inline-block;
@@ -93,3 +90,4 @@
     }
   }
 }
+.notouchdevice .dm-list .dm-item:hover { background: #f3f3f3; }

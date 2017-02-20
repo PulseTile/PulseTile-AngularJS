@@ -80,9 +80,7 @@
   font-size: 14px;
   line-height: 20px;
   cursor: pointer;
-  &:hover {
-    background: $table-row-background-hover;
-  }
 }
- .board-list-link {
+.notouchdevice .board-list-link:hover {
+  background: $table-row-background-hover;
 }

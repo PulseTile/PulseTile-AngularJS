@@ -31,20 +31,14 @@ textarea {
   resize: vertical;
 }
 
-a,
-a:hover,
-a:focus,
-a:active {
-  color: #283536;
-  cursor: pointer;
-}
-
 a {
   color: #000000;
   text-decoration: none;
+  cursor: pointer;
 }
 
-a:hover {
+.notouchdevice a:hover,
+.notouchdevice a:focus, {
   color: $link-color-hover;
   text-decoration: none;
 }

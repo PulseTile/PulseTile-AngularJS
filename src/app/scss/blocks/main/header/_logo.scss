@@ -31,23 +31,16 @@
     text-transform: uppercase;
     white-space: nowrap;
     vertical-align: middle;
-    a {
-      color: #0C662D;
-      &:hover {
-        color: #7cbe31;
-      }
-    }
+    a { color: #0C662D; }
   }
   .logo-mobile-hidden { display: none; }
 }
+.notouchdevice .logo .logo-text a:hover { color: #7cbe31; }
+
 @include respond-to(xs) {
   .wrap-logo {
     padding-left: 9px;
     padding-right: 9px;
   }
-  .logo {
-    .logo-mobile-hidden {
-      display: inline;
-    }
-  }
+  .logo .logo-mobile-hidden { display: inline; }
 }
