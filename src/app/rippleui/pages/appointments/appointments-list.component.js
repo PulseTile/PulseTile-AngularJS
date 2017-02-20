@@ -20,22 +20,6 @@ class AppointmentsListController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.currentPage = 1;
-
-    $scope.query = '';
-
-    this.pageChangeHandler = function (newPage) {
-      this.currentPage = newPage;
-    };
-
-    if ($stateParams.page) {
-      this.currentPage = $stateParams.page;
-    }
-
-    if ($stateParams.filter) {
-      $scope.query = $stateParams.filter;
-    }
-
     this.go = function (id, appointmentSource) {
       $state.go('appointments-detail', {
         patientId: $stateParams.patientId,
@@ -45,14 +29,6 @@ class AppointmentsListController {
         source: appointmentSource
       });
     };
-
-    this.selected = function (appointmentIndex) {
-      return appointmentIndex === $stateParams.appointmentIndex;
-    };
-
-    // this.create = function () {
-    //   AppointmentsModal.openModal(this.currentPatient, {title: 'Create Appointment'}, {}, this.currentUser);
-    // };
 
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {

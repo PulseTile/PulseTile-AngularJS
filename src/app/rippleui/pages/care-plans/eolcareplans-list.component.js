@@ -19,21 +19,6 @@ class EolcareplansListController {
   constructor($scope, $state, $stateParams, $ngRedux, eolcareplansActions, serviceRequests, usSpinnerService) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
-    var vm = this;
-
-    this.currentPage = 1;
-
-    this.pageChangeHandler = function (newPage) {
-      this.currentPage = newPage;
-    };
-
-    if ($stateParams.page) {
-      this.currentPage = $stateParams.page;
-    }
-
-    if ($stateParams.filter) {
-      vm.query = $stateParams.filter;
-    }
 
     this.go = function (id) {
       $state.go('eolcareplans-detail', {
@@ -45,10 +30,6 @@ class EolcareplansListController {
         searchString: $stateParams.searchString,
         queryType: $stateParams.queryType
       });
-    };
-
-    this.selected = function (eolcareplansIndex) {
-      return eolcareplansIndex === $stateParams.eolcareplansIndex;
     };
 
     this.setCurrentPageData = function (data) {
