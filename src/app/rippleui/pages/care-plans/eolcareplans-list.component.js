@@ -35,15 +35,6 @@ class EolcareplansListController {
       vm.query = $stateParams.filter;
     }
 
-    this.search = function (row) {
-      return (
-        angular.lowercase(row.name).indexOf(angular.lowercase(vm.query) || '') !== -1 ||
-        angular.lowercase(row.type).indexOf(angular.lowercase(vm.query) || '') !== -1 ||
-        angular.lowercase(row.date).indexOf(angular.lowercase(vm.query) || '') !== -1 ||
-        angular.lowercase(row.source).indexOf(angular.lowercase(vm.query) || '') !== -1
-      );
-    };
-
     this.go = function (id) {
       $state.go('eolcareplans-detail', {
         patientId: $stateParams.patientId,
@@ -59,10 +50,6 @@ class EolcareplansListController {
     this.selected = function (eolcareplansIndex) {
       return eolcareplansIndex === $stateParams.eolcareplansIndex;
     };
-
-    // this.create = function () {
-    //   EolcareplansModal.openModal(this.currentPatient, {title: 'Create End of Life Care Document'}, {}, this.currentUser);
-    // };
 
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {

@@ -16,7 +16,7 @@
 let templateProceduresList = require('./procedures-list.html');
 
 class ProceduresListController {
-  constructor($scope, $state, $stateParams, $ngRedux, proceduresActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, proceduresActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -39,15 +39,6 @@ class ProceduresListController {
       });
     };
 
-    // this.search = function (row) {
-    //   return (
-    //     row.name.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-    //     row.date.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-    //     row.time.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-    //     row.source.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1
-    //   );
-    // };
-
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
@@ -56,19 +47,9 @@ class ProceduresListController {
       if (data.procedures.data) {
         this.procedures = data.procedures.data;
 
-        for (var i = 0; i < this.procedures.length; i++) {
-          if (angular.isNumber(this.procedures[i].date)) {
-            this.procedures[i].date = moment(this.procedures[i].date).format('DD-MMM-YYYY');
-          } else if (this.procedures[i].date === null) {
-            this.procedures[i].date = '';
-          }
-
-          if (angular.isNumber(this.procedures[i].time)) {
-            this.procedures[i].time = moment(this.procedures[i].time).format('HH:mm');
-          } else if (this.procedures[i].time === null) {
-            this.procedures[i].time = '';
-          }
-        }
+        serviceFormatted.formattingTablesDate(this.procedures, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.formattingTablesDate(this.procedures, ['time'], serviceFormatted.formatCollection.HHmm);
+        serviceFormatted.filteringKeys = ['date', 'name', 'time', 'source'];
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
@@ -91,5 +72,5 @@ const ProceduresListComponent = {
   controller: ProceduresListController
 };
 
-ProceduresListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'proceduresActions', 'serviceRequests', 'usSpinnerService'];
+ProceduresListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'proceduresActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default ProceduresListComponent;

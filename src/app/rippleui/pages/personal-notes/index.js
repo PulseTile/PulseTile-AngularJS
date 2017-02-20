@@ -19,6 +19,7 @@ import personalnotesListComponent from './personalnotes-list.component';
 import personalnotesCreateComponent from './personalnotes-create.component';
 import personalnotesDetailComponent from './personalnotes-detail.component';
 import personalnotesActions from './personalnotes-actions';
+
 export default {
   "name": 'personalnotes',
   "routes": routes,
@@ -30,5 +31,11 @@ export default {
   },
   "actions": {
     personalnotesActions
+  },
+  "sidebarInfo": {
+    name: 'personalNotes',
+    link: 'personalNotes',
+    linkDetail: 'personalNotes-detail',
+    title: 'Personal Notes'
   }
 }

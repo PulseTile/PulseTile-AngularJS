@@ -17,7 +17,7 @@
 let templateClinicalnotesList = require('./clinicalnotes-list.html');
 
 class ClinicalnotesListController {
-  constructor($scope, $state, $stateParams, $ngRedux, clinicalnotesActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, clinicalnotesActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -30,9 +30,9 @@ class ClinicalnotesListController {
       }
       if (data.clinicalnotes.data) {
         this.clinicalNotes = data.clinicalnotes.data;
-        // for (var i = 0; i < this.clinicalNotes.length; i++) {
-        //   this.clinicalNotes[i].dateCreated = moment(this.clinicalNotes[i].dateCreated).format('DD-MMM-YYYY');
-        // }
+
+        serviceFormatted.formattingTablesDate(this.clinicalNotes, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['noteType', 'author', 'dateCreated', 'source'];
       }
       usSpinnerService.stop("patientSummary-spinner");
 
@@ -56,15 +56,6 @@ class ClinicalnotesListController {
       });
     };
 
-    // this.search = function (row) {
-    //   return (
-    //     row.noteType.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-    //     row.author.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-    //     row.dateCreated.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-    //     row.source.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1
-    //   );
-    // };
-
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
@@ -81,5 +72,5 @@ const ClinicalnotesListComponent = {
   controller: ClinicalnotesListController
 };
 
-ClinicalnotesListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalnotesActions', 'serviceRequests', 'usSpinnerService'];
+ClinicalnotesListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalnotesActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default ClinicalnotesListComponent;

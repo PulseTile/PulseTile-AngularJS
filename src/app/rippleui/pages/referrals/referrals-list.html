@@ -51,7 +51,7 @@
       </thead>
 
       <tbody>
-        <tr dir-paginate="referral in $ctrl.referrals | filter: queryFilter | orderBy:[order] : reverse  | itemsPerPage: 10" current-page="currentPage"  ng-click="$ctrl.go(referral.sourceId)" ng-class="{info: selectedRow(referral.sourceId)}">
+        <tr dir-paginate="referral in $ctrl.referrals | filter: queryFiltering | orderBy:[order] : reverse  | itemsPerPage: 10" current-page="currentPage"  ng-click="$ctrl.go(referral.sourceId)" ng-class="{info: selectedRow(referral.sourceId)}">
           <td data-th="Date of Referral" ng-class="sortClass('dateOfReferral')" class="dateTime">{{ referral.dateOfReferral}}</td>
           <td data-th="Referral From" ng-class="sortClass('referralFrom')" >{{ referral.referralFrom }}</td>
           <td data-th="Referral To" ng-class="sortClass('referralTo')" >{{ referral.referralTo }}</td>

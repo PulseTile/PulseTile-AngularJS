@@ -30,5 +30,11 @@ export default {
   },
   "actions": {
     contactsActions
+  },
+  "sidebarInfo": {
+    name: 'contacts',
+    link: 'contacts',
+    linkDetail: 'contacts-detail',
+    title: 'Contacts'
   }
 }

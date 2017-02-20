@@ -19,6 +19,7 @@ import genericMdtListComponent from './generic-mdt-list.component';
 import genericMdtDetailComponent from './generic-mdt-detail.component';
 import genericMdtCreateComponent from './generic-mdt-create.component';
 import genericmdtActions from './generic-mdt-actions';
+
 export default {
   "name": 'genericmdt',
   "routes": routes,
@@ -30,5 +31,11 @@ export default {
   },
   "actions": {
     genericmdtActions
+  },
+  "sidebarInfo": {
+    name: 'mdt',
+    link: 'genericMdt',
+    linkDetail: 'genericMdt-detail',
+    title: 'MDT'
   }
 }

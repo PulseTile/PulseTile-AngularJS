@@ -55,6 +55,7 @@ import HomeSidebarComponent from './rippleui/pages/patients-lookup/home-sidebar.
 import ServiceRequests from './services/serviceRequests.js';
 import ServiceStateManager from './services/serviceStateManager.js';
 import ServiceVitalsSigns from './rippleui/pages/vitals/serviceVitalsSigns.js';
+import ServiceFormatted from './services/serviceFormatted.js';
 
 import routeConfig from 'app/index.route';
 import 'app/scss/core.scss';
@@ -85,6 +86,7 @@ let app = angular
     .factory('Patient', Patient)
     .factory('deviceDetector', deviceDetector)
 
+    .service('serviceFormatted', ServiceFormatted)
     .service('serviceRequests', ServiceRequests)
     .service('serviceStateManager', ServiceStateManager)
     .service('serviceVitalsSigns', ServiceVitalsSigns);

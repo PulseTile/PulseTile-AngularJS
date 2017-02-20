@@ -17,7 +17,7 @@
 let templatePersonalnotesList = require('./personalnotes-list.html');
 
 class PersonalnotesListController {
-  constructor($scope, $state, $stateParams, $ngRedux, personalnotesActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, personalnotesActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -30,9 +30,8 @@ class PersonalnotesListController {
       }
       if (data.personalnotes.data) {
         this.personalNotes = data.personalnotes.data;
-        // for (var i = 0; i < this.Personalnotes.length; i++) {
-        //   this.Personalnotes[i].dateCreated = moment(this.Personalnotes[i].dateCreated).format('DD-MMM-YYYY');
-        // }
+        serviceFormatted.formattingTablesDate(this.personalNotes, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['noteType', 'author', 'dateCreated', 'source'];
       }
       usSpinnerService.stop("patientSummary-spinner");
 
@@ -56,15 +55,6 @@ class PersonalnotesListController {
       });
     };
 
-    // this.search = function (row) {
-    //   return (
-    //     row.noteType.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-    //     row.author.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-    //     row.dateCreated.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-    //     row.source.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1
-    //   );
-    // };
-
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
@@ -81,5 +71,5 @@ const PersonalnotesListComponent = {
   controller: PersonalnotesListController
 };
 
-PersonalnotesListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'personalnotesActions', 'serviceRequests', 'usSpinnerService'];
+PersonalnotesListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'personalnotesActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default PersonalnotesListComponent;

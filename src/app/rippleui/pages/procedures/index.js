@@ -19,6 +19,7 @@ import proceduresListComponent from './procedures-list.component';
 import proceduresDetailComponent from './procedures-detail.component';
 import proceduresCreateComponent from './procedures-create.component';
 import proceduresActions from './procedures-actions';
+
 export default {
   "name": 'procedures',
   "routes": routes,
@@ -30,5 +31,11 @@ export default {
   },
   "actions": {
     proceduresActions
+  },
+  "sidebarInfo": {
+    name: 'procedures',
+    link: 'procedures',
+    linkDetail: 'procedures-detail',
+    title: 'Procedures'
   }
 }

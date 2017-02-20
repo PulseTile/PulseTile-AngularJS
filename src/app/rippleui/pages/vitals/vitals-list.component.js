@@ -16,7 +16,7 @@
 let templateVitalsList = require('./vitals-list.html');
 
 class VitalsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, vitalsActions, serviceRequests, usSpinnerService, $window, $timeout, serviceVitalsSigns) {
+  constructor($scope, $state, $stateParams, $ngRedux, vitalsActions, serviceRequests, usSpinnerService, $window, $timeout, serviceVitalsSigns, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -44,7 +44,7 @@ class VitalsListController {
     }.bind(this);
 
     function formatDate(date) {
-      var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+      var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
       
       var dd = date.getDate();
       if (dd < 10) dd = '0' + dd;
@@ -71,7 +71,7 @@ class VitalsListController {
       var lastDate = '';
       var dataChart = {
         labels: []
-      }
+      };
       var datasetsData = {
         diastolicBP: [],
         systolicBP: [],
@@ -79,8 +79,9 @@ class VitalsListController {
         heartRate: [],
         respirationRate: [],
         oxygenSaturation: []
-      }
-     
+      };
+
+      /* istanbul ignore next  */
       for (var i = 0; i < vitals.length; i++) {
         tempDate = formatDate(new Date(vitals[i].dateCreate));
 
@@ -216,6 +217,7 @@ class VitalsListController {
       return $scope.viewList === viewName;
     };
 
+    /* istanbul ignore next  */
     $scope.changeViewList = function (viewName) {
       var currentPage = this.currentPage || 1;
       var vitalsForChart;
@@ -235,7 +237,10 @@ class VitalsListController {
     this.setCurrentPageData = function (data) {
       if (data.vitals.data) {
         $scope.vitals = serviceVitalsSigns.modificateVitalsArr(data.vitals.data);
-
+        
+        serviceFormatted.formattingTablesDate($scope.vitals, ['dateCreate'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['id', 'dateCreate', 'newsScore', 'source'];
+        
         usSpinnerService.stop('patientSummary-spinner');
 
         $scope.changeViewList(serviceRequests.viewList || 'tableNews');
@@ -266,5 +271,5 @@ const VitalsListComponent = {
   controller: VitalsListController
 };
 
-VitalsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'vitalsActions', 'serviceRequests', 'usSpinnerService', '$window', '$timeout', 'serviceVitalsSigns'];
+VitalsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'vitalsActions', 'serviceRequests', 'usSpinnerService', '$window', '$timeout', 'serviceVitalsSigns', 'serviceFormatted'];
 export default VitalsListComponent;

@@ -16,21 +16,12 @@
 let templateGenericMdtList = require('./generic-mdt-list.html');
 
 class GenericMdtListController {
-  constructor($scope, $state, $stateParams, $ngRedux, genericmdtActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, genericmdtActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'genericMdt-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'genericMdt';
-
-    // $scope.search = function (row) {
-    //   return (
-    //     angular.lowercase(row.dateOfRequest).indexOf(angular.lowercase(this.query) || '') !== -1 ||
-    //     angular.lowercase(row.serviceTeam).indexOf(angular.lowercase(this.query) || '') !== -1 ||
-    //     angular.lowercase(row.dateOfMeeting).indexOf(angular.lowercase(this.query) || '') !== -1 ||
-    //     angular.lowercase(row.source).indexOf(angular.lowercase(this.query) || '') !== -1
-    //   );
-    // };
 
     this.go = function (id) {
       $state.go('genericMdt-detail', {
@@ -54,10 +45,8 @@ class GenericMdtListController {
       if (data.genericmdt.data) {
         this.genericMdtComposition = data.genericmdt.data;
 
-        for (var i = 0; i < this.genericMdtComposition.length; i++) {
-          this.genericMdtComposition[i].dateOfRequest = moment(this.genericMdtComposition[i].dateOfRequest).format('DD-MMM-YYYY');
-          this.genericMdtComposition[i].dateOfMeeting = moment(this.genericMdtComposition[i].dateOfMeeting).format('DD-MMM-YYYY');
-        }
+        serviceFormatted.formattingTablesDate(this.genericMdtComposition, ['dateOfRequest', 'dateOfMeeting'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['serviceTeam', 'dateOfRequest', 'dateOfMeeting', 'source'];
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
@@ -80,5 +69,5 @@ const GenericMdtListComponent = {
   controller: GenericMdtListController
 };
 
-GenericMdtListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'genericmdtActions', 'serviceRequests', 'usSpinnerService'];
+GenericMdtListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'genericmdtActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default GenericMdtListComponent;

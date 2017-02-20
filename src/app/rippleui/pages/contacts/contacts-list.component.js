@@ -16,7 +16,7 @@
 let templateContactsList = require('./contacts-list.html');
 
 class ContactsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, contactsActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, contactsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -40,6 +40,9 @@ class ContactsListController {
     this.setCurrentPageData = function (data) {
       if (data.contacts.data) {
         this.contacts = data.contacts.data;
+        
+        serviceFormatted.filteringKeys = ['name', 'relationship', 'nextOfKin', 'source'];
+        
         usSpinnerService.stop('patientSummary-spinner');
       }
       if (data.patientsGet.data) {
@@ -66,5 +69,5 @@ const ContactsListComponent = {
   controller: ContactsListController
 };
 
-ContactsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'contactsActions', 'serviceRequests', 'usSpinnerService'];
+ContactsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'contactsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default ContactsListComponent;

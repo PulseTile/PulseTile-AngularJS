@@ -50,7 +50,7 @@
       </thead>
 
       <tbody>
-        <tr dir-paginate="result in $ctrl.results | filter: queryFilter | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(result.sourceId, result.source)" ng-class="{info: selectedRow(result.sourceId)}">
+        <tr dir-paginate="result in $ctrl.results | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(result.sourceId, result.source)" ng-class="{info: selectedRow(result.sourceId)}">
           <td data-th="Test Name" ng-class="sortClass('name');">{{ result.testName }}</td>
           <td data-th="Sample Taken" ng-class="sortClass('taken')">{{ result.sampleTaken }}</td>
           <td data-th="Date" ng-class="sortClass('date')">{{ result.dateCreated }}</td>

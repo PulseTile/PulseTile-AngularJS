@@ -16,7 +16,7 @@
 let templateMedicationsList = require('./medications-list.html');
 
 class MedicationsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -45,9 +45,9 @@ class MedicationsListController {
       }
       if (data.medication.data) {
         this.medications = data.medication.data;
-        // for (var i = 0; i < this.medications.length; i++) {
-        //   this.medications[i].startDate = moment(this.medications[i].startDate).format('DD-MMM-YYYY');
-        // }
+        
+        serviceFormatted.formattingTablesDate(this.medications, ['startDate'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['name', 'doseAmount', 'startDate', 'source'];
         /*
           TODO: Remove. Only for demo
         */
@@ -79,5 +79,5 @@ const MedicationsListComponent = {
   controller: MedicationsListController
 };
 
-MedicationsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'medicationsActions', 'serviceRequests', 'usSpinnerService'];
+MedicationsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'medicationsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default MedicationsListComponent;

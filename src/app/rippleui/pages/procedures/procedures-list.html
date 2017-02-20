@@ -51,7 +51,7 @@
       </thead>
 
       <tbody>
-        <tr dir-paginate="procedure in $ctrl.procedures | filter: queryFilter | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(procedure.sourceId,procedure.source)" ng-class="{info: selectedRow(procedure.sourceId)}">
+        <tr dir-paginate="procedure in $ctrl.procedures | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(procedure.sourceId,procedure.source)" ng-class="{info: selectedRow(procedure.sourceId)}">
           <td data-th="Name" ng-class="sortClass('name');">{{procedure.name}}</td>
           <td data-th="Date" class="dateTime" ng-class="sortClass('date');">{{procedure.date}}</td>
           <td data-th="Time" ng-class="sortClass('time');">{{procedure.time}}</td>

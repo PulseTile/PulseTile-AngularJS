@@ -13,18 +13,12 @@
  ~  See the License for the specific language governing permissions and
  ~  limitations under the License.
  */
-import EolcareplansListComponent from './eolcareplans-list.component';
-import EolcareplansDetailComponent from './eolcareplans-detail.component';
-
-angular.module('ripple-ui.care-plans', [])
-  .component('eolcareplansListComponent', EolcareplansListComponent)
-  .component('eolcareplansDetailComponent', EolcareplansDetailComponent);
-
 import routes from "./index.route";
 import reducer from "./eolcareplans-reducer-all";
 import eolcareplansListComponent from './eolcareplans-list.component';
 import eolcareplansDetailComponent from './eolcareplans-detail.component';
 import eolcareplansActions from './eolcareplans-actions';
+
 export default {
   "name": 'eolcareplans',
   "routes": routes,
@@ -35,5 +29,11 @@ export default {
   },
   "actions": {
     eolcareplansActions
+  },
+  "sidebarInfo": {
+    // name: 'careplans',
+    // link: 'eolcareplans',
+    // linkDetail: 'eolcareplans-detail',
+    // title: 'Care Plans'
   }
 }

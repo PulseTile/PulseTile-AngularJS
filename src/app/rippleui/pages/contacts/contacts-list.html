@@ -51,7 +51,7 @@
       </thead>
 
       <tbody>
-        <tr dir-paginate="contact in $ctrl.contacts | filter: queryFilter | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(contact.sourceId, this)" ng-class="{info: selectedRow(contact.sourceId)}">
+        <tr dir-paginate="contact in $ctrl.contacts | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(contact.sourceId, this)" ng-class="{info: selectedRow(contact.sourceId)}">
           <td data-th="Name" ng-class="sortClass('name')">{{ contact.name }}</td>
           <td data-th="Relationship" ng-class="sortClass('relationship')">{{ contact.relationship }}</td>
           <td data-th="Next of Kin" ng-class="sortClass('next')"><span ng-if="contact.nextOfKin">Yes</span><span ng-if="!contact.nextOfKin">No</span></td>

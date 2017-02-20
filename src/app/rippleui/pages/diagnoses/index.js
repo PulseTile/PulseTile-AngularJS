@@ -30,5 +30,11 @@ export default {
   },
   "actions": {
     diagnosesActions
+  },
+  "sidebarInfo": {
+    name: 'diagnosis',
+    link: 'diagnoses',
+    linkDetail: 'diagnoses-detail',
+    title: 'Problems / Diagnosis'
   }
 }
