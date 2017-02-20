@@ -59,7 +59,6 @@ describe('Care Plans List', function() {
     spyOn(ctrl, 'go');
     spyOn(ctrl, 'selected');
     spyOn(ctrl, 'setCurrentPageData');
-    spyOn(ctrl, 'search');
     spyOn(ctrl, 'eolcareplansLoad');
 
     fakeCall.callCareplans({}, types.EOLCAREPLANS);
@@ -68,7 +67,6 @@ describe('Care Plans List', function() {
     ctrl.go();
     ctrl.selected();
     ctrl.setCurrentPageData();
-    ctrl.search();
     ctrl.eolcareplansLoad();
   });
 
@@ -98,9 +96,6 @@ describe('Care Plans List', function() {
   });
   it("setCurrentPageData was called", function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
-  });
-  it("search was called", function() {
-    expect(ctrl.search).toHaveBeenCalled();
   });
   it("appointmentsLoad was called", function() {
     expect(ctrl.eolcareplansLoad).toHaveBeenCalled();
