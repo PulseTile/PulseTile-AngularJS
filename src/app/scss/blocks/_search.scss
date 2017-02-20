@@ -65,6 +65,7 @@
 .wrap-search-mobile {
   width: 100%;
   padding: 5px;
+  overflow: hidden;
   @include respond-to(sm) {
     display: none !important;
     .header-search {padding: 5px 0;}

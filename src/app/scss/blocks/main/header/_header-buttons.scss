@@ -1,5 +1,4 @@
-.btn-header,
-.btn-header:hover {
+.btn-header {
   position: relative;
   display: block;
   width: 45px;
@@ -42,10 +41,10 @@
       right: 3px;
     }
   }
-}
-.is-not-touch-device .btn-header:hover {
-  color: #7cbe31;
-}
+}  
+.btn-header:hover { color: $icon-chevron-color; }
+.is-not-touch-device .btn-header:hover { color: #7cbe31; }
+
 .btn-header-prev {
   float: left;
   width: 52px;
