@@ -16,7 +16,7 @@
 let templateAllergiesList = require('./allergies-list.html');
 
 class AllergiesListController {
-  constructor($scope, $state, $stateParams, $ngRedux, allergiesActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, allergiesActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -31,6 +31,8 @@ class AllergiesListController {
       }
       if (data.allergies.data) {
         this.allergies = data.allergies.data;
+
+        serviceFormatted.filteringKeys = ['cause', 'reaction', 'source'];
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
@@ -68,5 +70,5 @@ const AllergiesListComponent = {
   controller: AllergiesListController
 };
 
-AllergiesListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions', 'serviceRequests', 'usSpinnerService'];
+AllergiesListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default AllergiesListComponent;

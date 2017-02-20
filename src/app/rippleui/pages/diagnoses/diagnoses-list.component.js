@@ -16,7 +16,7 @@
 let templateDiagnosesList = require('./diagnoses-list.html');
 
 class DiagnosesListController {
-  constructor($scope, $state, $stateParams, $ngRedux, diagnosesActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, diagnosesActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -28,12 +28,14 @@ class DiagnosesListController {
         this.currentPatient = data.patientsGet.data;
         usSpinnerService.stop('patientSummary-spinner');
       }
+      
       if (data.diagnoses.data) {
         this.diagnoses = data.diagnoses.data;
-        for (var i = 0; i < this.diagnoses.length; i++) {
-          this.diagnoses[i].dateOfOnset = moment(this.diagnoses[i].dateOfOnset).format('DD-MMM-YYYY');
-        }
+        
+        serviceFormatted.formattingTablesDate(this.diagnoses, ['dateOfOnset'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['problem', 'dateOfOnset', 'source'];
       }
+      
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
       }
@@ -54,14 +56,6 @@ class DiagnosesListController {
       });
     };
 
-    // this.search = function (row) {
-    //   return (
-    //       row.problem.toLowerCase().indexOf(this.query.toLowerCase() || '') !== -1 ||
-    //       row.dateOfOnset.toLowerCase().indexOf(this.query.toLowerCase() || '') !== -1 ||
-    //       row.source.toLowerCase().indexOf(this.query.toLowerCase() || '') !== -1
-    //   );
-    // };
-
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
@@ -78,5 +72,5 @@ const DiagnosesListComponent = {
   controller: DiagnosesListController
 };
 
-DiagnosesListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'diagnosesActions', 'serviceRequests', 'usSpinnerService'];
+DiagnosesListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'diagnosesActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default DiagnosesListComponent;

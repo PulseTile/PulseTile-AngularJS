@@ -57,7 +57,7 @@
               <span >{{ medication.name }}</span>
             </td>
             <td data-th="Dose" ng-class="sortClass('dose')">{{ medication.doseAmount }}</td>
-            <td data-th="Supply" ng-class="sortClass('supply')">10-Nov-2016<!-- {{ medication.startDate | date:'dd-MMM-yyyy' }} --></td>
+            <td data-th="Supply" ng-class="sortClass('supply')">{{ medication.startDate }}</td>
             <td class="hidden-xs-cell" ng-class="sortClass('source')">{{ medication.source}}</td>
         </tr>
 
