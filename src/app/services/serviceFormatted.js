@@ -38,7 +38,7 @@ class ServiceFormatted {
     this.formattedSearching = function(row, query) {
       var str = '';
       var farmatedStr;
-      // console.log('formattedSearching --> ', this.filteringKeys, row);
+      
       Object.keys(row).map((key, index)=>{
         if (typeof row[key] !== 'string') {
           row[key] += '';

@@ -19,6 +19,9 @@ let templateMedicationsCreate = require('./medications-create.html');
 class MedicationsCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, serviceRequests, usSpinnerService) {
 
+    $scope.medication = {};
+    $scope.medication.startDate = new Date();
+    
     this.setCurrentPageData = function (data) {
       if (data.medication.dataCreate !== null) {
         this.goList();

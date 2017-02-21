@@ -14,12 +14,6 @@
   @include respond-to(xs) {
     width: 52px;
   }
-  &:hover {
-    color: $icon-chevron-color;
-    @include respond-to(sm) {
-      color: #7cbe31;
-    }
-  }
   &.inverse {
     background: #fff;
   }
@@ -30,7 +24,7 @@
   .count {
     position: absolute;
     top: 9px;
-    right: 1px;
+    right: 0px;
     font-size: 10px;
     font-family: arial;
     background-color: $icon-chevron-color;
@@ -47,7 +41,10 @@
       right: 3px;
     }
   }
-}
+}  
+.btn-header:hover { color: $icon-chevron-color; }
+.is-not-touch-device .btn-header:hover { color: #7cbe31; }
+
 .btn-header-prev {
   float: left;
   width: 52px;
@@ -57,7 +54,9 @@
 }
 .btn-notification {
   font-size: 18px;
+  padding-right: 2px;
   @include respond-to(xs) {
     font-size: 19px;
+    padding-right: 0;
   }
 }

@@ -16,11 +16,12 @@
 let templateMain = require('./main.html');
 
 class MainController {
-  constructor($window, $rootScope, $scope, $state, $stateParams, serviceRequests, $timeout) {
+  constructor($window, $rootScope, $scope, $state, $stateParams, serviceRequests, $timeout, deviceDetector) {
+    $scope.isTouchDevice = deviceDetector.detectDevice();
     $scope.isSidebar = false;
     $scope.isSecondPanel = false;
     $scope.fullPanelClass = '';
-    $scope.classShowSidebar = '';
+    $scope.isClassShowSidebar = false;
     $scope.breadcrumbs = [];
 
     $scope.setBreadcrumbs = function (breadcrumbs) {
@@ -31,9 +32,6 @@ class MainController {
     };
 
     this.goBreadcrumb = function (state) {
-      serviceRequests.currentSort.order = '';
-      serviceRequests.currentSort.reverse = false;
-      serviceRequests.filter = '';
       var requestHeader = {
         patientId: $stateParams.patientId,
         reportType: $stateParams.reportType,
@@ -64,25 +62,31 @@ class MainController {
     };
     serviceRequests.subscriber('changeFullPanel', this.changeFullPanel);
 
-    this.changeClassShowSidebar = function (data) {
+    $scope.detectDevice = function () {
+      return  $scope.isTouchDevice ? 'touch-device' : 'is-not-touch-device';
+    };
+
+    $scope.getClasses = function () {
+      var classTouchDevice = $scope.isTouchDevice ? 'touch-device' : 'is-not-touch-device';
+      var classShowSidebar = $scope.isClassShowSidebar ? 'showSidebar' : '';
+      return  classTouchDevice + ' ' + classShowSidebar;
+    };
+
+    this.changeisClassShowSidebar = function (data) {
       /* istanbul ignore if  */
       if (data.click) {
-        if ($scope.classShowSidebar === 'showSidebar') {
-          $scope.classShowSidebar = '';
-        } else {
-          $scope.classShowSidebar = 'showSidebar';
-        }
+        $scope.isClassShowSidebar = !$scope.isClassShowSidebar;
       }
     };
     this.hideSidebarOnMobile = function () {
       if (window.innerWidth < 768) {
         $timeout(function() {
-          $scope.classShowSidebar = '';
+          $scope.isClassShowSidebar = false;
           angular.element(document).find('.wrapper').removeClass('showSidebar');
         }, 0);
       }
     };
-    serviceRequests.subscriber('changeStateSidebar', this.changeClassShowSidebar);
+    serviceRequests.subscriber('changeStateSidebar', this.changeisClassShowSidebar);
 
     this.checkIsViews = function() {
       let views = $state.router.globals.$current.views;
@@ -100,13 +104,12 @@ class MainController {
 
       var wrapperHeight = page.find('.wrapper').outerHeight();
       var headerHeight = page.find('.header').outerHeight();
-      var footerHeight = page.find('.footer').outerHeight();
       var sidebar = page.find('.sidebar');
 
       /* istanbul ignore if  */
       if ($scope.isSidebar) {
         if (window.innerWidth < 768) {
-          sidebar.css('height', wrapperHeight - headerHeight - footerHeight + 'px');
+          sidebar.css('height', wrapperHeight - headerHeight + 'px');
         } else {
           sidebar.css('height', 'auto');
         }
@@ -140,5 +143,5 @@ const MainComponent = {
   controller: MainController
 };
 
-MainController.$inject = ['$window', '$rootScope', '$scope',  '$state', '$stateParams', 'serviceRequests', '$timeout'];
+MainController.$inject = ['$window', '$rootScope', '$scope',  '$state', '$stateParams', 'serviceRequests', '$timeout', 'deviceDetector'];
 export default MainComponent;
