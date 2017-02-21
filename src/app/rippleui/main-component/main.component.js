@@ -32,9 +32,6 @@ class MainController {
     };
 
     this.goBreadcrumb = function (state) {
-      serviceRequests.currentSort.order = '';
-      serviceRequests.currentSort.reverse = false;
-      serviceRequests.filter = '';
       var requestHeader = {
         patientId: $stateParams.patientId,
         reportType: $stateParams.reportType,
@@ -107,13 +104,12 @@ class MainController {
 
       var wrapperHeight = page.find('.wrapper').outerHeight();
       var headerHeight = page.find('.header').outerHeight();
-      var footerHeight = page.find('.footer').outerHeight();
       var sidebar = page.find('.sidebar');
 
       /* istanbul ignore if  */
       if ($scope.isSidebar) {
         if (window.innerWidth < 768) {
-          sidebar.css('height', wrapperHeight - headerHeight - footerHeight + 'px');
+          sidebar.css('height', wrapperHeight - headerHeight + 'px');
         } else {
           sidebar.css('height', 'auto');
         }
