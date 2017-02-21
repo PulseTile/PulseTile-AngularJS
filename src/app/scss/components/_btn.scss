@@ -25,6 +25,7 @@
   .btn-#{$button}:hover,
   .btn-#{$button}:focus,
   .btn-#{$button}:active {
+    color: #ffffff !important;
     background-color: $color !important;
     border-color: $color !important;
     &.active {
@@ -32,6 +33,11 @@
       border-color: $color !important;
     }
   }
+  .btn-default,
+  .btn-default:hover,
+  .btn-default:focus,
+  .btn-default:active { color: #333333 !important; }
+  
   .is-not-touch-device {
    .btn-#{$button}:hover,
    .btn-#{$button}:focus {
