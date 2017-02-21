@@ -13,15 +13,12 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-let templateProceduresCreate= require('./procedures-create.html');
+let templateProceduresCreate = require('./procedures-create.html');
 
 class ProceduresCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, patientsActions, proceduresActions, serviceRequests) {
-    $scope.contact = {};
-    $scope.contact.dateSubmitted = new Date();
-    // $scope.contact.dateSubmitted = new Date().toISOString().slice(0, 10);
-    $scope.contact.relationshipCode = 'at0039';
-    $scope.contact.relationshipTerminology = 'local';
+    $scope.procedure = {};
+    $scope.procedure.dateSubmitted = new Date();
 
     this.setCurrentPageData = function (data) {
       if (data.procedures.dataCreate !== null) {
@@ -46,6 +43,13 @@ class ProceduresCreateController {
 
     this.cancel = function () {
       this.goList();
+    };
+
+    $scope.openDatepicker = function ($event, name) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      $scope[name] = true;
     };
 
     $scope.create = function (procedureForm, procedure) {
