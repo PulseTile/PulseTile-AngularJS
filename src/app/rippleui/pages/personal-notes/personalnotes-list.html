@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
 
-<div mc-full-panel filtering class="panel panel-primary">
+<div mc-full-panel table-settings order="type" filtering class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
@@ -43,19 +43,19 @@
       </colgroup>
       <thead>
         <tr>
-          <th class="sorted asc">Type</th>
-          <th>Author</th>
-          <th>Date Created</th>
-          <th>Source</th>
+          <th ng-click="sort('type')" ng-class="sortClass('type')">Type</th>
+          <th ng-click="sort('author')" ng-class="sortClass('author')">Author</th>
+          <th ng-click="sort('date')" ng-class="sortClass('date')">Date Created</th>
+          <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr dir-paginate="personalNote in $ctrl.personalNotes | filter: queryFilter | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(personalNote.sourceId, personalNote)" ng-class="{info: $ctrl.selected(personalNote.sourceId)}">
-          <td data-th="Type">{{ personalNote.noteType }}</td>
-          <td data-th="Author">{{ personalNote.author }}</td>
-          <td data-th="Date" class="orderDateTime">{{ personalNote.dateCreated | date:'dd-MMM-yyyy' }}</td>
-          <td data-th="Source" class="hidden-xs-cell">{{ personalNote.source }}</td>
+        <tr dir-paginate="personalNote in $ctrl.personalNotes | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage"  ng-click="$ctrl.go(personalNote.sourceId, personalNote.source)" ng-class="{info: selectedRow(personalNote.sourceId)}">
+          <td data-th="Type" ng-class="sortClass('type')">{{ personalNote.noteType }}</td>
+          <td data-th="Author" ng-class="sortClass('author')">{{ personalNote.author }}</td>
+          <td data-th="Date" ng-class="sortClass('date')">{{ personalNote.dateCreated }}</td>
+          <td data-th="Source" ng-class="sortClass('source')" class="hidden-xs-cell">{{ personalNote.source }}</td>
         </tr>
 
         <tr ng-if="!$ctrl.personalNotes.length">
@@ -69,7 +69,7 @@
     <div class="panel-control">
       <div class="wrap-control-group">
         <div class="control-group with-indent left">
-          <dir-pagination-controls max-size="5" on-page-change="$ctrl.pageChangeHandler($ctrl.newPageNumber)" boundary-links="false"></dir-pagination-controls>
+          <dir-pagination-controls max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
         </div>
         <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1 && $ctrl.isShowCreateBtn">
           <button class="btn btn-success btn-inverse btn-create" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> <span>Create</span></button>

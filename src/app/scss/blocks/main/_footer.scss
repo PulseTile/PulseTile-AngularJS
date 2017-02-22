@@ -1,11 +1,13 @@
 /**
   * FOOTER
   */
-.wrapper {padding-bottom: 56px;}
+.wrapper {
+  padding-bottom: 15px;
+  @include respond-to(sm) {
+    padding-bottom: 56px;
+  }
+}
 .footer {
-  position: fixed;
-  bottom: 0;
-  z-index: 1000;
   width: 100%;
   height: 56px;
   min-width: $min-width;
@@ -14,6 +16,11 @@
   line-height: 29px;
   color: #757584;
   background-color: #EEEEEE;
+  @include respond-to(sm) {
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
+  }
   .footer-povered {
     float: right;
     margin-left: 10px;

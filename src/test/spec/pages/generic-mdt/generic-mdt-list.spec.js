@@ -54,18 +54,14 @@ describe('GenericMdt List', function() {
 
     spyOn(fakeCall, 'callGenericmdt');
 
-    spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
-    spyOn(ctrl, 'selected');
     spyOn(ctrl, 'create');
     spyOn(ctrl, 'setCurrentPageData');
     spyOn(ctrl, 'genericmdtLoad');
 
     fakeCall.callGenericmdt({}, types.GENERICMDT);
 
-    ctrl.pageChangeHandler();
     ctrl.go();
-    ctrl.selected();
     ctrl.create();
     ctrl.setCurrentPageData();
     ctrl.genericmdtLoad();
@@ -83,14 +79,8 @@ describe('GenericMdt List', function() {
   it("Genericmdt reducer was called", function() {
     expect(fakeCall.callGenericmdt).toHaveBeenCalled();
   });
-  it("pageChangeHandler was called", function() {
-    expect(ctrl.pageChangeHandler).toHaveBeenCalled();
-  });
   it("route go was called", function() {
     expect(ctrl.go).toHaveBeenCalled();
-  });
-  it("selected was called", function() {
-    expect(ctrl.selected).toHaveBeenCalled();
   });
   it("create was called", function() {
     expect(ctrl.create).toHaveBeenCalled();

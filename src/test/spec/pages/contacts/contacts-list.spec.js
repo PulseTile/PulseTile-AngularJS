@@ -55,26 +55,19 @@ describe('Contacts List', function() {
 
     spyOn(fakeCall, 'callContacts');
 
-    spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
-    spyOn(ctrl, 'selected');
     spyOn(ctrl, 'create');
     spyOn(ctrl, 'setCurrentPageData');
     spyOn(ctrl, 'contactsLoad');
 
     fakeCall.callContacts({}, types.CONTACTS);
 
-    ctrl.pageChangeHandler();
     ctrl.go();
-    ctrl.selected();
     ctrl.create();
     ctrl.setCurrentPageData();
     ctrl.contactsLoad();
   });
 
-  it('currentPage is 1', function() {
-    expect(ctrl.currentPage).toBe(1);
-  });
   it('Template exist', function() {
     expect(template).toBeDefined();
   });
@@ -87,14 +80,8 @@ describe('Contacts List', function() {
   it("Contacts reducer was called", function() {
     expect(fakeCall.callContacts).toHaveBeenCalled();
   });
-  it("pageChangeHandler was called", function() {
-    expect(ctrl.pageChangeHandler).toHaveBeenCalled();
-  });
   it("route go was called", function() {
     expect(ctrl.go).toHaveBeenCalled();
-  });
-  it("selected was called", function() {
-    expect(ctrl.selected).toHaveBeenCalled();
   });
   it("create was called", function() {
     expect(ctrl.create).toHaveBeenCalled();

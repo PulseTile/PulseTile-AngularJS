@@ -13,7 +13,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
-<div mc-full-panel filtering class="panel panel-primary">
+<div mc-full-panel table-settings order="name" filtering class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
@@ -42,19 +42,19 @@
       </colgroup>
       <thead>
         <tr>
-            <th ng-click="$ctrl.sort('name')" ng-class="$ctrl.sortClass('name')">Test Name</th>
-            <th ng-click="$ctrl.sort('taken')" ng-class="$ctrl.sortClass('taken')">Sample Taken</th>
-            <th ng-click="$ctrl.sort('date')" ng-class="$ctrl.sortClass('date')">Date Created</th>
-            <th ng-click="$ctrl.sort('source')" ng-class="$ctrl.sortClass('source')">Source</th>
+            <th ng-click="sort('name')" ng-class="sortClass('name')">Test Name</th>
+            <th ng-click="sort('taken')" ng-class="sortClass('taken')">Sample Taken</th>
+            <th ng-click="sort('date')" ng-class="sortClass('date')">Date Created</th>
+            <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr dir-paginate="result in $ctrl.results | filter: queryFilter | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage" ng-click="$ctrl.go(result.sourceId, result.source)" ng-class="{info: $ctrl.selected(result.sourceId)}">
-          <td data-th="Test Name" ng-class="$ctrl.sortClass('name');">{{ result.testName }}</td>
-          <td data-th="Sample Taken" ng-class="$ctrl.sortClass('taken')">{{ result.sampleTaken }}</td>
-          <td data-th="Date Created" ng-class="$ctrl.sortClass('date')">{{ result.dateCreated }}</td>
-          <td data-th="Source" ng-class="$ctrl.sortClass('source')">{{ result.source }}</td>
+        <tr dir-paginate="result in $ctrl.results | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(result.sourceId, result.source)" ng-class="{info: selectedRow(result.sourceId)}">
+          <td data-th="Test Name" ng-class="sortClass('name');">{{ result.testName }}</td>
+          <td data-th="Sample Taken" ng-class="sortClass('taken')">{{ result.sampleTaken }}</td>
+          <td data-th="Date" ng-class="sortClass('date')">{{ result.dateCreated }}</td>
+          <td data-th="Source" ng-class="sortClass('source')" class="hidden-xs-cell">{{ result.source }}</td>
         </tr>
 
         <tr ng-if="!$ctrl.results.length">
@@ -68,7 +68,7 @@
     <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
       <div class="wrap-control-group">
         <div class="control-group with-indent left">
-          <dir-pagination-controls max-size="5" on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
+          <dir-pagination-controls max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
         </div>
       </div>
     </div>

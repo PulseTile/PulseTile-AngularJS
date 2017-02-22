@@ -31,9 +31,6 @@ describe('MainComponent', function() {
         ctrl.getPageComponents();
     });
 
-    it('$scope.pageHeader exist', function() {
-        expect(scope.classShowSidebar).toBe('');
-    });
     it('$scope.mainWidth exist', function() {
         expect(scope.isSidebar).toBe(false);
     });

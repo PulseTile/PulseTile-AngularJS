@@ -33,18 +33,14 @@ textarea {
 
 a,
 a:hover,
-a:focus,
-a:active {
-  color: #283536;
+a:focus {
+  color: #000000;
+  text-decoration: none;
   cursor: pointer;
 }
 
-a {
-  color: #000000;
-  text-decoration: none;
-}
-
-a:hover {
+.is-not-touch-device a:hover,
+.is-not-touch-device a:focus, {
   color: $link-color-hover;
   text-decoration: none;
 }
@@ -102,8 +98,9 @@ label:focus,
 .main {
   position: relative;
   z-index: 1;
-  overflow: hidden;
+  // overflow: hidden;
 }
+.sidebar + .main {overflow: hidden;}
 
 #page-wrapper {
   padding: 0;

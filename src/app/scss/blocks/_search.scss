@@ -65,6 +65,7 @@
 .wrap-search-mobile {
   width: 100%;
   padding: 5px;
+  overflow: hidden;
   @include respond-to(sm) {
     display: none !important;
     .header-search {padding: 5px 0;}
@@ -141,4 +142,8 @@
 
 .wrap-search input.moveRight {
   padding-left: 115px!important;
+}
+.wrap-datepicker-top .dropdown-menu {
+  top: 0 !important;
+  transform: translateY(-100%);
 }

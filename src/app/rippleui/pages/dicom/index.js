@@ -18,6 +18,7 @@ import reducer from "./studies-reducer-all";
 import imageListComponent from './image-list.component';
 import imageDetailComponent from './image-detail.component';
 import imageActions from './image-actions';
+
 export default {
   "name": 'dicom',
   "routes": routes,
@@ -28,5 +29,11 @@ export default {
   },
   "actions": {
     imageActions
+  },
+  "sidebarInfo": {
+    name: 'images',
+    link: 'images',
+    linkDetail: 'images-detail',
+    title: 'Images'
   }
 }

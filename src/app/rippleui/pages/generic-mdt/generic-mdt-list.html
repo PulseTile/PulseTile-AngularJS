@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
 
-<div mc-full-panel filtering class="panel panel-primary">
+<div mc-full-panel table-settings order="dateOfRequest" filtering class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
@@ -43,19 +43,19 @@
       </colgroup>
       <thead>
         <tr>
-          <th ng-click="$ctrl.sort('dateOfRequest')" ng-class="$ctrl.sortClass('dateOfRequest')">Date of Request</th>
-          <th ng-click="$ctrl.sort('serviceTeam')" ng-class="$ctrl.sortClass('serviceTeam')">Service / Team</th>
-          <th ng-click="$ctrl.sort('dateOfMeeting')" ng-class="$ctrl.sortClass('dateOfMeeting')">Date of Meeting</th>
-          <th ng-click="$ctrl.sort('source')" ng-class="$ctrl.sortClass('source')">Source</th>
+          <th ng-click="sort('dateOfRequest')" ng-class="sortClass('dateOfRequest')">Date of Request</th>
+          <th ng-click="sort('serviceTeam')" ng-class="sortClass('serviceTeam')">Service / Team</th>
+          <th ng-click="sort('dateOfMeeting')" ng-class="sortClass('dateOfMeeting')">Date of Meeting</th>
+          <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr dir-paginate="mdt in $ctrl.genericMdtComposition | filter: queryFilter | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage" ng-click="$ctrl.go(mdt.sourceId, this)" ng-class="{info: $ctrl.selected(mdt.sourceId)}">
-          <td data-th="Name" ng-class="$ctrl.sortClass('dateOfRequest');" class="sorted asc">{{ mdt.dateOfRequest }}</td>
-          <td data-th="Relationship" ng-class="$ctrl.sortClass('serviceTeam')">{{ mdt.serviceTeam }}</td>
-          <td data-th="Next of Kin" ng-class="$ctrl.sortClass('dateOfMeeting')">{{mdt.dateOfMeeting}}</td>
-          <td data-th="Source" ng-class="$ctrl.sortClass('source')">{{ mdt.source }}</td>
+        <tr dir-paginate="mdt in $ctrl.genericMdtComposition | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(mdt.sourceId)" ng-class="{info: selectedRow(mdt.sourceId)}">
+          <td data-th="Name" ng-class="sortClass('dateOfRequest');" class="sorted asc">{{ mdt.dateOfRequest }}</td>
+          <td data-th="Relationship" ng-class="sortClass('serviceTeam')">{{ mdt.serviceTeam }}</td>
+          <td data-th="Next of Kin" ng-class="sortClass('dateOfMeeting')">{{mdt.dateOfMeeting}}</td>
+          <td data-th="Source" ng-class="sortClass('source')">{{ mdt.source }}</td>
         </tr>
 
         <tr ng-if="!$ctrl.genericMdtComposition.length">
@@ -69,7 +69,7 @@
     <div class="panel-control">
       <div class="wrap-control-group">
         <div class="control-group with-indent left">
-          <dir-pagination-controls max-size="5" on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
+          <dir-pagination-controls max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
         </div>
         <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1 && $ctrl.isShowCreateBtn">
           <button class="btn btn-success btn-inverse btn-create" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> <span>Create</span></button>

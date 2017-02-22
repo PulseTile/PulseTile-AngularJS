@@ -16,61 +16,35 @@
 let templateVitalsList = require('./vitals-list.html');
 
 class VitalsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, vitalsActions, serviceRequests, usSpinnerService, $window, $timeout, serviceVitalsSigns) {
+  constructor($scope, $state, $stateParams, $ngRedux, vitalsActions, serviceRequests, usSpinnerService, $window, $timeout, serviceVitalsSigns, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
     $scope.vitals;
-    this.currentPage = 1;
     $scope.viewList;
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'vitals-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'vitals';
-    this.order = serviceRequests.currentSort.order || 'id';
-    this.reverse = serviceRequests.currentSort.reverse || false;
-
-    this.sort = function (field) {
-      var reverse = this.reverse;
-      if (this.order === field) {
-        this.reverse = !reverse;
-      } else {
-        this.order = field;
-        this.reverse = false;
-      }
-    };
-
-    this.sortClass = function (field) {
-      if (this.order === field) {
-        return this.reverse ? 'sorted desc' : 'sorted asc';
-      }
-    };
 
     this.create = function () {
       $state.go('vitals-create', {
-        patientId: $stateParams.patientId,
-        page: this.currentPage
+        patientId: $stateParams.patientId
       });
     };
 
     $scope.go = function (id, vital) {
-      serviceRequests.currentSort.order = this.order;
-      serviceRequests.currentSort.reverse = this.reverse;
       serviceRequests.viewList = $scope.viewList;
 
       $state.go('vitals-detail', {
         patientId: $stateParams.patientId,
-        vitalIndex: id,
-        page: this.currentPage,
+        detailsIndex: id,
+        page: $scope.currentPage || 1,
         source: vital
       });
     }.bind(this);
 
-    this.pageChangeHandler = function (newPage) {
-      this.currentPage = newPage;
-    };
-
     function formatDate(date) {
-      var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+      var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
       
       var dd = date.getDate();
       if (dd < 10) dd = '0' + dd;
@@ -97,7 +71,7 @@ class VitalsListController {
       var lastDate = '';
       var dataChart = {
         labels: []
-      }
+      };
       var datasetsData = {
         diastolicBP: [],
         systolicBP: [],
@@ -105,8 +79,9 @@ class VitalsListController {
         heartRate: [],
         respirationRate: [],
         oxygenSaturation: []
-      }
-     
+      };
+
+      /* istanbul ignore next  */
       for (var i = 0; i < vitals.length; i++) {
         tempDate = formatDate(new Date(vitals[i].dateCreate));
 
@@ -203,6 +178,19 @@ class VitalsListController {
                 return '  ' + data.datasets[tooltipItem.datasetIndex].label + ' : ' + tooltipItem.yLabel;
               }
             }
+          },
+          scales: {
+            yAxes: [{
+                ticks: {
+                    stepSize: 5
+                }
+            }],
+            xAxes: [{
+              ticks: {
+                  maxRotation: 90,
+                  minRotation: 90
+              }
+            }]
           }
       };
 
@@ -225,14 +213,11 @@ class VitalsListController {
       }.bind(this);
     };
 
-    this.selected = function (vitalIndex) {
-      return vitalIndex === $stateParams.vitalIndex;
-    };
-
     $scope.isViewList = function (viewName) {
       return $scope.viewList === viewName;
     };
 
+    /* istanbul ignore next  */
     $scope.changeViewList = function (viewName) {
       var currentPage = this.currentPage || 1;
       var vitalsForChart;
@@ -252,7 +237,10 @@ class VitalsListController {
     this.setCurrentPageData = function (data) {
       if (data.vitals.data) {
         $scope.vitals = serviceVitalsSigns.modificateVitalsArr(data.vitals.data);
-
+        
+        serviceFormatted.formattingTablesDate($scope.vitals, ['dateCreate'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['id', 'dateCreate', 'newsScore', 'source'];
+        
         usSpinnerService.stop('patientSummary-spinner');
 
         $scope.changeViewList(serviceRequests.viewList || 'tableNews');
@@ -266,10 +254,6 @@ class VitalsListController {
         this.currentUser = serviceRequests.currentUserData;
       }
     };
-
-    if ($stateParams.page) {
-      this.currentPage = $stateParams.page;
-    }
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
@@ -287,5 +271,5 @@ const VitalsListComponent = {
   controller: VitalsListController
 };
 
-VitalsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'vitalsActions', 'serviceRequests', 'usSpinnerService', '$window', '$timeout', 'serviceVitalsSigns'];
+VitalsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'vitalsActions', 'serviceRequests', 'usSpinnerService', '$window', '$timeout', 'serviceVitalsSigns', 'serviceFormatted'];
 export default VitalsListComponent;

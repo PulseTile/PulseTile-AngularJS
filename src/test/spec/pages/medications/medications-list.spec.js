@@ -42,17 +42,13 @@ describe('Medications List', function() {
 
     spyOn(fakeCall, 'callMedications');
 
-    spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
-    spyOn(ctrl, 'selected');
     spyOn(ctrl, 'create');
     spyOn(ctrl, 'setCurrentPageData');
 
     fakeCall.callMedications({}, types.MEDICATIONS);
 
-    ctrl.pageChangeHandler();
     ctrl.go();
-    ctrl.selected();
     ctrl.create();
     ctrl.setCurrentPageData();
   });
@@ -69,14 +65,8 @@ describe('Medications List', function() {
   it("Medications reducer was called", function() {
     expect(fakeCall.callMedications).toHaveBeenCalled();
   });
-  it("pageChangeHandler was called", function() {
-    expect(ctrl.pageChangeHandler).toHaveBeenCalled();
-  });
   it("route go was called", function() {
     expect(ctrl.go).toHaveBeenCalled();
-  });
-  it("selected was called", function() {
-    expect(ctrl.selected).toHaveBeenCalled();
   });
   it("create was called", function() {
     expect(ctrl.create).toHaveBeenCalled();

@@ -44,7 +44,7 @@ class MedicationsDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     this.medicationsLoad = medicationsActions.get;
-    this.medicationsLoad($stateParams.patientId, $stateParams.medicationIndex, $stateParams.source);
+    this.medicationsLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
 
     //Edit Medication
 
@@ -74,7 +74,7 @@ class MedicationsDetailController {
     $scope.isPrescriptionEdit = false;
     this.editPrescription = function () {
       $scope.isPrescriptionEdit = true;
-      $scope.prescriptionForm = {
+      $scope.prescriptionEdit = {
         pStartDateTime: new Date(),
         finishCancelled: true,
         doseInterval: '',

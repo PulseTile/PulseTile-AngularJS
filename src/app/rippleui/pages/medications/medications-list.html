@@ -13,7 +13,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
-<div mc-full-panel filtering class="panel panel-primary">
+<div mc-full-panel table-settings order="name" filtering class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
@@ -42,23 +42,23 @@
       </colgroup>
       <thead>
         <tr>
-            <th ng-click="$ctrl.sort('name')" ng-class="$ctrl.sortClass('name')">Name</th>
-            <th ng-click="$ctrl.sort('dose')" ng-class="$ctrl.sortClass('dose')">Dose</th>
-            <th ng-click="$ctrl.sort('supply')" ng-class="$ctrl.sortClass('supply')">Supply</th>
-            <th ng-click="$ctrl.sort('source')" ng-class="$ctrl.sortClass('source')">Source</th>
+            <th ng-click="sort('name')" ng-class="sortClass('name')">Name</th>
+            <th ng-click="sort('dose')" ng-class="sortClass('dose')">Dose</th>
+            <th ng-click="sort('supply')" ng-class="sortClass('supply')">Supply</th>
+            <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr dir-paginate="medication in $ctrl.medications| filter: queryFilter | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(medication.sourceId, medication.source)" ng-class="{info: $ctrl.selected(medication.sourceId)}">
-            <td data-th="Name" ng-class="$ctrl.sortClass('name');" class="{{medication.warning || medication.danger ? 'highlighter-wrapper' : ''}}">
+        <tr dir-paginate="medication in $ctrl.medications| filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage"  ng-click="$ctrl.go(medication.sourceId, medication.source)" ng-class="{info: selectedRow(medication.sourceId)}">
+            <td data-th="Name" ng-class="sortClass('name');" class="{{medication.warning || medication.danger ? 'highlighter-wrapper' : ''}}">
               <span class="highlighter-warning" ng-if="medication.warning"></span>
               <span class="highlighter-danger" ng-if="medication.danger"></span>
               <span >{{ medication.name }}</span>
             </td>
-            <td data-th="Dose" ng-class="$ctrl.sortClass('dose')">{{ medication.doseAmount }}</td>
-            <td data-th="Supply" ng-class="$ctrl.sortClass('supply')">10-Nov-2016<!-- {{ medication.startDate | date:'dd-MMM-yyyy' }} --></td>
-            <td class="hidden-xs-cell" ng-class="$ctrl.sortClass('source')">{{ medication.source}}</td>
+            <td data-th="Dose" ng-class="sortClass('dose')">{{ medication.doseAmount }}</td>
+            <td data-th="Supply" ng-class="sortClass('supply')">{{ medication.startDate }}</td>
+            <td class="hidden-xs-cell" ng-class="sortClass('source')">{{ medication.source}}</td>
         </tr>
 
         <tr ng-if="!$ctrl.medications.length">
@@ -72,7 +72,7 @@
     <div class="panel-control">
       <div class="wrap-control-group">
         <div class="control-group with-indent left">
-          <dir-pagination-controls max-size="5" on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
+          <dir-pagination-controls max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
         </div>
         <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1 && $ctrl.isShowCreateBtn">
           <button class="btn btn-success btn-inverse btn-create" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> <span>Create</span></button>

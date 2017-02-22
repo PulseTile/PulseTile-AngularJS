@@ -16,64 +16,24 @@
 let templateOrdersList = require('./orders-list.html');
 
 class OrdersListController {
-  constructor($scope, $state, $stateParams, $ngRedux, ordersActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, ordersActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.currentPage = 1;
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'orders-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'orders';
 
-    this.sort = function (field) {
-      var reverse = this.reverse;
-      if (this.order === field) {
-        this.reverse = !reverse;
-      } else {
-        this.order = field;
-        this.reverse = false;
-      }
-    };
-
-    this.sortClass = function (field) {
-      if (this.order === field) {
-        return this.reverse ? 'sorted desc' : 'sorted asc';
-      }
-    };
-
-    this.order = serviceRequests.currentSort.order || 'name';
-    this.reverse = serviceRequests.currentSort.reverse || false;
-
-    this.pageChangeHandler = function (newPage) {
-      this.currentPage = newPage;
-    };
-
-    if ($stateParams.page) {
-      this.currentPage = $stateParams.page;
-    }
-
-    if ($stateParams.filter) {
-      $scope.query = $stateParams.filter;
-    }
-
     this.create = function () {
       $state.go('orders-create', {
-        patientId: $stateParams.patientId,
-        page: this.currentPage
+        patientId: $stateParams.patientId
       });
     };
 
     this.go = function (id, source) {
-      serviceRequests.currentSort.order = this.order;
-      serviceRequests.currentSort.reverse = this.reverse;
-      
       $state.go('orders-detail', {
         patientId: $stateParams.patientId,
-        orderId: id,
-        filter: $scope.query,
-        page: this.currentPage,
-        reportType: $stateParams.reportType,
-        searchString: $stateParams.searchString,
-        queryType: $stateParams.queryType,
+        detailsIndex: id,
+        page: $scope.currentPage || 1,
         source: source
       });
     };
@@ -82,9 +42,8 @@ class OrdersListController {
       if (data.orders.data) {
         this.orders = data.orders.data;
 
-        for (var i = 0; i < this.orders.length; i++) {
-          this.orders[i].orderDate = moment(this.orders[i].orderDate).format('DD-MMM-YYYY h:mm a');
-        }
+        serviceFormatted.formattingTablesDate(this.orders, ['orderDate'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['name', 'orderDate', 'source'];
       }
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
@@ -94,14 +53,6 @@ class OrdersListController {
         this.currentUser = serviceRequests.currentUserData;
       }
     };
-
-    this.selected = function (orderId) {
-      return orderId === $stateParams.orderId;
-    };
-
-    if ($stateParams.page) {
-      this.currentPage = $stateParams.page;
-    }
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
@@ -119,5 +70,5 @@ const OrdersListComponent = {
   controller: OrdersListController
 };
 
-OrdersListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'ordersActions', 'serviceRequests', 'usSpinnerService'];
+OrdersListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'ordersActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default OrdersListComponent;

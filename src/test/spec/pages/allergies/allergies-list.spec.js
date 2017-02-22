@@ -42,9 +42,7 @@ describe('Allergies List', function() {
 
     spyOn(fakeCall, 'callAllergies');
 
-    spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
-    spyOn(ctrl, 'selected');
     spyOn(ctrl, 'create');
     spyOn(ctrl, 'setCurrentPageData');
     spyOn(actions, 'all');
@@ -54,9 +52,7 @@ describe('Allergies List', function() {
 
     fakeCall.callAllergies({}, types.ALLERGIES);
 
-    ctrl.pageChangeHandler();
     ctrl.go();
-    ctrl.selected();
     ctrl.create();
     ctrl.setCurrentPageData();
     actions.all();
@@ -80,14 +76,8 @@ describe('Allergies List', function() {
   it("Allergies reducer was called", function() {
     expect(fakeCall.callAllergies).toHaveBeenCalled();
   });
-  it("pageChangeHandler was called", function() {
-    expect(ctrl.pageChangeHandler).toHaveBeenCalled();
-  });
   it("route go was called", function() {
     expect(ctrl.go).toHaveBeenCalled();
-  });
-  it("selected was called", function() {
-    expect(ctrl.selected).toHaveBeenCalled();
   });
   it("create was called", function() {
     expect(ctrl.create).toHaveBeenCalled();

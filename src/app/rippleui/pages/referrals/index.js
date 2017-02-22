@@ -19,6 +19,7 @@ import referralsListComponent from './referrals-list.component';
 import referralsDetailComponent from './referrals-detail.component';
 import referralsCreateComponent from './referrals-create.component';
 import referralsActions from './referrals-actions';
+
 export default {
   "name": 'referrals',
   "routes": routes,
@@ -30,5 +31,11 @@ export default {
   },
   "actions": {
     referralsActions
+  },
+  "sidebarInfo": {
+    name: 'referrals',
+    link: 'referrals',
+    linkDetail: 'referrals-detail',
+    title: 'Referrals'
   }
 }

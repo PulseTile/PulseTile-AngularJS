@@ -34,7 +34,7 @@ class ResultsDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     this.resultsLoad = resultsActions.get;
-    this.resultsLoad($stateParams.patientId, $stateParams.resultIndex, $stateParams.source);
+    this.resultsLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
   }
 }
 

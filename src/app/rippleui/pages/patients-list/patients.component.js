@@ -16,37 +16,12 @@
 let templatePatients = require('./patients-list.html');
 
 class PatientsController {
-  constructor($scope, $state, $stateParams, $location, $ngRedux, patientsActions, serviceRequests, Patient) {
+  constructor($scope, $state, $stateParams, $location, $ngRedux, patientsActions, serviceRequests, Patient, serviceFormatted) {
     let vm = this;
 
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-list'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Lists', isShowTitle: true});
     
-    vm.query = '';
-    vm.isFilter = false;
-    
-    vm.toggleFilter = function () {
-      vm.isFilter = !vm.isFilter;
-    };
-
-    vm.sort = function (field) {
-      var reverse = vm.reverse;
-      
-      if (vm.order === field) {
-        vm.reverse = !reverse;
-      } else {
-        vm.order = field;
-        vm.reverse = false;
-      }
-    };
-
-    vm.sortClass = function (field) {
-      if (vm.order === field) {
-        return vm.reverse ? 'sorted desc' : 'sorted asc';
-      }
-    };
-
-
     vm.go = function (patient) {
       $state.go('patients-summary', {
         patientId: patient.id,
@@ -75,11 +50,11 @@ class PatientsController {
       });
 
       vm.patients = curPatients.slice();
+      serviceFormatted.formattingTablesDate(vm.patients, ['dateOfBirth'], serviceFormatted.formatCollection.DDMMMYYYY);
+      serviceFormatted.filteringKeys = ['name', 'address', 'dateOfBirth', 'gender', 'nhsNumber'];
     };
 
     if ($stateParams.patientsList.length === 0 && !$stateParams.displayEmptyTable) {
-      vm.order = $stateParams.order || 'name';
-      vm.reverse = $stateParams.reverse === 'true';
       vm.filters = {
         department: $stateParams.department,
         ageRange: $stateParams.ageRange
@@ -114,5 +89,5 @@ const PatientsComponent = {
   controller: PatientsController
 };
 
-PatientsController.$inject = ['$scope', '$state', '$stateParams', '$location', '$ngRedux', 'patientsActions', 'serviceRequests', 'Patient'];
+PatientsController.$inject = ['$scope', '$state', '$stateParams', '$location', '$ngRedux', 'patientsActions', 'serviceRequests', 'Patient', 'serviceFormatted'];
 export default PatientsComponent;

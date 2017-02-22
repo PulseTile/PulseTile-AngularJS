@@ -36,6 +36,8 @@ import reducer from './redux/reducer';
 import actions from './actions';
 import httpMiddleware from './helpers/httpMiddleware';
 import Patient from './helpers/patient';
+import deviceDetector from './helpers/deviceDetector';
+import './helpers/polyfills';
 
 //components 
 import ProfileComponent from './rippleui/pages/profile/profile.component';
@@ -46,12 +48,14 @@ import PatientsListFullComponent from './rippleui/pages/patients-list-full/patie
 import PatientsSidebarComponent from './rippleui/pages/patients-detail/patients-sidebar.component';
 import PatientsBannerComponent from './rippleui/pages/patients-detail/patients-banner.component';
 import SearchComponent from './rippleui/search/search.component';
+import SearchAdvancedComponent from './rippleui/search/search-advanced.component';
 import ReportChartComponent from './rippleui/search/report-chart.component';
 import MainComponent from './rippleui/main-component/main.component';
 import HomeSidebarComponent from './rippleui/pages/patients-lookup/home-sidebar.component';
 import ServiceRequests from './services/serviceRequests.js';
-import ServiceStateMenager from './services/serviceStateMenager.js';
+import ServiceStateManager from './services/serviceStateManager.js';
 import ServiceVitalsSigns from './rippleui/pages/vitals/serviceVitalsSigns.js';
+import ServiceFormatted from './services/serviceFormatted.js';
 
 import routeConfig from 'app/index.route';
 import 'app/scss/core.scss';
@@ -80,9 +84,11 @@ let app = angular
     ])
     .factory('httpMiddleware', httpMiddleware)
     .factory('Patient', Patient)
+    .factory('deviceDetector', deviceDetector)
 
+    .service('serviceFormatted', ServiceFormatted)
     .service('serviceRequests', ServiceRequests)
-    .service('serviceStateMenager', ServiceStateMenager)
+    .service('serviceStateManager', ServiceStateManager)
     .service('serviceVitalsSigns', ServiceVitalsSigns);
 
   plugins.forEach((plugin)=>{
@@ -102,6 +108,7 @@ let app = angular
     .component('mainComponent', MainComponent)
     .component('homeSidebarComponent', HomeSidebarComponent)
     .component('searchComponent', SearchComponent)
+    .component('searchAdvancedComponent', SearchAdvancedComponent)
     .component('reportChartComponent', ReportChartComponent)
     
     .config(routeConfig)

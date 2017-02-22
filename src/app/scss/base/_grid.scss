@@ -54,4 +54,21 @@
     .col-panel-main {display: none;}
     .col-panel-details  {width: 100%;}
   }
+
+  .full-panel {
+    .row-expand {
+      @include clearfix;
+    }
+    .col-expand-left {
+      float: left; 
+      width: 50%;
+      padding-right: 4.42%;
+    }
+    .col-expand-right {
+      float: right; 
+      width: 50%;
+      padding-left: 4.42%;
+    }
+  }
+
 }

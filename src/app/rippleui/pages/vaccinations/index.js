@@ -19,6 +19,7 @@ import vaccinationsListComponent from './vaccinations-list.component';
 import vaccinationsCreateComponent from './vaccinations-create.component';
 import vaccinationsDetailComponent from './vaccinations-detail.component';
 import vaccinationsActions from './vaccinations-actions';
+
 export default {
   "name": 'vaccinations',
   "routes": routes,
@@ -30,5 +31,11 @@ export default {
   },
   "actions": {
     vaccinationsActions
+  },
+  "sidebarInfo": {
+    name: 'vaccinations',
+    link: 'vaccinations',
+    linkDetail: 'vaccinations-detail',
+    title: 'Vaccinations'
   }
 }

@@ -26,48 +26,62 @@
       <div class="panel-body-inner">
         <div class="form">
           <div class="form-group-wrapper">
-            <div class="form-group">
-              <label class="control-label">Name</label>
-              <div class="form-control-static">{{ $ctrl.medication.name }}</div>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Name</label>
+                  <div class="form-control-static">{{ $ctrl.medication.name }}</div>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group">
+                  <label class="control-label">Dose Amount</label>
+                  <div class="form-control-static">{{ $ctrl.medication.doseAmount }}</div>
+                </div>
+              </div>
             </div>
+            
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Dose Timing</label>
+                  <div class="form-control-static">{{ $ctrl.medication.doseTiming }}</div>
+                </div>
 
-            <div class="form-group">
-              <label class="control-label">Dose Amount</label>
-              <div class="form-control-static">{{ $ctrl.medication.doseAmount }}</div>
+                <div class="form-group">
+                  <div class="wrap-control-group">
+                    <div class="control-group left">
+                      <button type="button" class="btn btn-info btn-inverse" ng-click="openPanel('prescription')">Prescription</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label">Dose Directions</label>
+                  <div class="form-control-static">{{ $ctrl.medication.doseDirections }}</div>
+                </div>
+              </div>
             </div>
-
-            <div class="form-group">
-              <label class="control-label">Dose Timing</label>
-              <div class="form-control-static">{{ $ctrl.medication.doseTiming }}</div>
-            </div>
-
-            <div class="form-group">
-              <div class="wrap-control-group">
-                <div class="control-group left">
-                  <button type="button" class="btn btn-info btn-inverse" ng-click="openPanel('prescription')">Prescription</button>
+            
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Author</label>
+                  <div class="form-control-static">{{ $ctrl.medication.author }}</div>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group">
+                  <label class="control-label">Date</label>
+                  <div class="form-control-static">{{ $ctrl.medication.startDate | date:'dd-MMM-yyyy' }}</div>
                 </div>
               </div>
             </div>
 
-            <div class="form-group">
-              <label class="control-label">Dose Directions</label>
-              <div class="form-control-static">{{ $ctrl.medication.doseDirections }}</div>
-            </div>
-            
-            <div class="form-group">
-              <label class="control-label">Author</label>
-              <div class="form-control-static">{{ $ctrl.medication.author }}</div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label">Date</label>
-              <div class="form-control-static">{{ $ctrl.medication.startDate | date:'dd-MMM-yyyy' }}</div>
-            </div>
-
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label class="control-label">Time</label>
               <div class="form-control-static">{{ $ctrl.medication.startTime | date:'hh:mm a' }}</div>
-            </div>
+            </div> -->
 
             <!-- <div class="form-group">
               <label class="control-label">Route</label>
@@ -113,123 +127,114 @@
       <div class="panel-body-inner">
         <form name="medicationForm" class="form">
           <div class="form-group-wrapper">
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.name.$dirty) && medicationForm.name.$invalid, 'has-success': medicationForm.name.$valid && medicationForm.name.$dirty}">
-                <label for="name" class="control-label">Name</label>
-                <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="name" name="name" ng-model="medicationEdit.name" required>
-                </div>
-                <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.name.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="row">
-              <div class="col-xs-12 col-md-6">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.doseAmount.$dirty) && medicationForm.doseAmount.$invalid, 'has-success': medicationForm.doseAmount.$valid && medicationForm.doseAmount.$dirty}">
-                    <label for="doseAmount" class="control-label">Dose Amount</label>
+            
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.name.$dirty) && medicationForm.name.$invalid, 'has-success': medicationForm.name.$valid && medicationForm.name.$dirty}">
+                    <label for="name" class="control-label">Name</label>
                     <div class="input-holder">
-                        <input type="text" class="form-control input-sm" id="doseAmount" name="doseAmount" ng-model="medicationEdit.doseAmount" required />
+                        <input type="text" class="form-control input-sm" id="name" name="name" ng-model="medicationEdit.name" required>
                     </div>
-                    <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.doseAmount.$error.required">You must enter a value.</span>
+                    <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.name.$error.required">You must enter a value.</span>
                 </div>
               </div>
-              <div class="col-xs-12 col-md-6">
-                <div class="form-group">
-                  <label class="control-label"></label>
-                  <div class="input-holder">
-                    <div class="wrap-fcustominp">
-                      <div class="fcustominp">
-                        <input type="checkbox" id="doseAmountVariable" name="doseAmountVariable" ng-model="medicationForm.doseAmountVariable" />
-                        <label for="doseAmountVariable"></label>
+              
+              <div class="col-expand-right">
+                <div class="row">
+                  <div class="col-xs-12 col-md-6">
+                    <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.doseAmount.$dirty) && medicationForm.doseAmount.$invalid, 'has-success': medicationForm.doseAmount.$valid && medicationForm.doseAmount.$dirty}">
+                        <label for="doseAmount" class="control-label">Dose Amount</label>
+                        <div class="input-holder">
+                            <input type="text" class="form-control input-sm" id="doseAmount" name="doseAmount" ng-model="medicationEdit.doseAmount" required />
+                        </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.doseAmount.$error.required">You must enter a value.</span>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                      <label class="control-label"></label>
+                      <div class="input-holder">
+                        <div class="wrap-fcustominp">
+                          <div class="fcustominp">
+                            <input type="checkbox" id="doseAmountVariable" name="doseAmountVariable" ng-model="medicationForm.doseAmountVariable" />
+                            <label for="doseAmountVariable"></label>
+                          </div>
+                          <label for="doseAmountVariable" class="fcustominp-label">Variable</label>
+                        </div>
                       </div>
-                      <label for="doseAmountVariable" class="fcustominp-label">Variable</label>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.doseTiming.$dirty) && medicationForm.doseTiming.$invalid, 'has-success': medicationForm.doseTiming.$valid && medicationForm.doseTiming.$dirty}">
-                <label for="doseTiming" class="control-label">Dose Timing</label>
-                <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="doseTiming" name="doseTiming" ng-model="medicationEdit.doseTiming" required />
+            
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Dose Timing</label>
+                  <div class="form-control-static">{{ medicationEdit.doseTiming }}</div>
                 </div>
-                <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.doseTiming.$error.required">You must enter a value.</span>
-            </div>
 
-            <div class="form-group">
-              <div class="wrap-control-group">
-                <div class="control-group left">
-                  <button type="button" class="btn btn-info btn-inverse" ng-click="openPanel('prescription')">Prescription</button>
+                <div class="form-group">
+                  <div class="wrap-control-group">
+                    <div class="control-group left">
+                      <button type="button" class="btn btn-info btn-inverse" ng-click="openPanel('prescription')">Prescription</button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.doseDirections.$dirty) && medicationForm.doseDirections.$invalid, 'has-success': medicationForm.doseDirections.$valid && medicationForm.doseDirections.$dirty}">
+                    <label for="doseDirections" class="control-label">Dose Directions</label>
+                    <div class="input-holder">
+                        <textarea type="text" class="form-control textarea-big input-sm" id="doseDirections" name="doseDirections" ng-model="medicationEdit.doseDirections" required></textarea>
+                    </div>
+                    <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.doseDirections.$error.required">You must enter a value.</span>
                 </div>
               </div>
             </div>
 
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.doseDirections.$dirty) && medicationForm.doseDirections.$invalid, 'has-success': medicationForm.doseDirections.$valid && medicationForm.doseDirections.$dirty}">
-                <label for="doseDirections" class="control-label">Dose Directions</label>
-                <div class="input-holder">
-                    <textarea type="text" class="form-control textarea-big input-sm" id="doseDirections" name="doseDirections" ng-model="medicationEdit.doseDirections" required></textarea>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || medicationForm.author.$dirty) && medicationForm.author.$invalid, 'has-success': medicationForm.author.$valid && medicationForm.author.$dirty}">
+                    <label for="author" class="control-label">Author</label>
+                    <div class="input-holder">
+                        <input type="text" value="{{currentUser.email}}" placeholder="{{currentUser.email}}" class="form-control input-sm" id="author" name="author" ng-model="medicationEdit.author" disabled />
+                    </div>
+                    <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.author.$error.required">You must enter a value.</span>
                 </div>
-                <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.doseDirections.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.route.$dirty) && medicationForm.route.$invalid, 'has-success': medicationForm.route.$valid && medicationForm.route.$dirty}">
-                <label for="route" class="control-label">Route</label>
-                <div class="input-holder">
-                    <select class="form-control input-sm" id="route" name="route" ng-model="medicationEdit.route" required>
-                        <option value="">-- Route --</option>
-                        <option>Po Per Oral</option>
-                        <option>IV Intra Venous</option>
-                        <option>IM Intra Muscular</option>
-                        <option>PN Per Nasal</option>
-                        <option>PR Per Rectum</option>
-                        <option>SL Sub Lingual</option>
-                        <option>SC Sub Cutaneous</option>
-                    </select>
-                </div>
-                <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.route.$error.required">You must enter a value.</span>
+              </div>
+              <div class="col-expand-right">
+                  <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || medicationForm.startDateTime.$dirty) && medicationForm.startDateTime.$invalid, 'has-success': medicationForm.startDateTime.$valid && medicationForm.startDateTime.$dirty}">
+                      <label for="startDateTime" class="control-label">Date</label>
+                      <div class="inner-addon addon-left">
+                        <div class="addon">
+                          <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" class="form-control" id="startDateTime" name="startDateTime" ng-model="medicationEdit.startDate" ng-click="openDatepicker($event, 'startDateTime')" uib-datepicker-popup="dd-MMM-yyyy" is-open="startDateTime" required disabled/>
+                      </div>
+                      <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.startDateTime.$error.required">You must enter a valid date.</span>
+                  </div>
+              </div>
             </div>
             
-            <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || medicationForm.author.$dirty) && medicationForm.author.$invalid, 'has-success': medicationForm.author.$valid && medicationForm.author.$dirty}">
-                <label for="author" class="control-label">Author</label>
-                <div class="input-holder">
-                    <input type="text" value="{{currentUser.email}}" placeholder="{{currentUser.email}}" class="form-control input-sm" id="author" name="author" ng-model="medicationEdit.author" disabled />
+            <!-- <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || medicationForm.time.$dirty) && medicationForm.time.$invalid, 'has-success': medicationForm.time.$valid && medicationForm.time.$dirty}">
+                <label for="time" class="control-label">Time</label>
+                <div class="inner-addon addon-left">
+                  <div class="addon">
+                    <i class="fa fa-clock-o"></i>
+                  </div>
+                  <input class="form-control" id="time" name="time" ui-timepicker ng-model="medicationEdit.startTime" required/>
                 </div>
-                <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.author.$error.required">You must enter a value.</span>
-            </div>
-            
-            <div class="row">
-              <div class="col-sm-8">
-                <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || medicationForm.startDateTime.$dirty) && medicationForm.startDateTime.$invalid, 'has-success': medicationForm.startDateTime.$valid && medicationForm.startDateTime.$dirty}">
-                    <label for="startDateTime" class="control-label">Date</label>
-                    <div class="inner-addon addon-left">
-                      <div class="addon">
-                        <i class="fa fa-calendar"></i>
-                      </div>
-                      <input type="text" class="form-control" id="startDateTime" name="startDateTime" ng-model="medicationEdit.startDate" ng-click="openDatepicker($event, 'startDateTime')" uib-datepicker-popup="dd-MMM-yyyy" is-open="startDateTime" required />
-                    </div>
-                    <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.startDateTime.$error.required">You must enter a valid date.</span>
-                </div>
-              </div>
-              <div class="col-sm-4">
-                <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || medicationForm.time.$dirty) && medicationForm.time.$invalid, 'has-success': medicationForm.time.$valid && medicationForm.time.$dirty}">
-                    <label for="time" class="control-label">Time</label>
-                    <div class="inner-addon addon-left">
-                      <div class="addon">
-                        <i class="fa fa-clock-o"></i>
-                      </div>
-                      <input class="form-control" id="time" name="time" ui-timepicker ng-model="medicationEdit.startTime" required/>
-                    </div>
-                </div>
-              </div>
-            </div>
+            </div> -->
 
 
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.terminology.$dirty) && medicationForm.terminology.$invalid, 'has-success': medicationForm.terminology.$valid && medicationForm.terminology.$dirty}">
+            <!-- <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.terminology.$dirty) && medicationForm.terminology.$invalid, 'has-success': medicationForm.terminology.$valid && medicationForm.terminology.$dirty}">
                 <label for="terminology" class="control-label">Terminology</label>
                 <div class="input-holder">
                     <input type="text" class="form-control input-sm" id="terminology" name="terminology" ng-model="medicationEdit.medicationTerminology" required />
                 </div>
                 <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.terminology.$error.required">You must enter a value.</span>
-            </div>
+            </div> -->
 
           </div>
         </form>
@@ -357,7 +362,7 @@
     </div>
     <div class="panel-body">
       <div class="panel-body-inner">
-        <div class="form">
+        <form name="prescriptionForm" class="form">
           <div class="panel-body-section">
             <div class="form-group">
               <label class="control-label">Name</label>
@@ -377,21 +382,21 @@
                 <div class="wrap-fcustominps-inline">
                   <div class="wrap-fcustominp">
                     <div class="fcustominp">
-                      <input type="radio" id="doseIntervalMorning" name="doseInterval" value="morning" ng-model="prescriptionForm.doseInterval"/>
+                      <input type="radio" id="doseIntervalMorning" name="doseInterval" value="morning" ng-model="prescriptionEdit.doseInterval"/>
                       <label for="doseIntervalMorning"></label>
                     </div>
                     <label for="doseIntervalMorning" class="fcustominp-label">Morning</label>
                   </div>
                   <div class="wrap-fcustominp">
                     <div class="fcustominp">
-                      <input type="radio" id="doseIntervalEvening" name="doseInterval" value="evening" ng-model="prescriptionForm.doseInterval"/>
+                      <input type="radio" id="doseIntervalEvening" name="doseInterval" value="evening" ng-model="prescriptionEdit.doseInterval"/>
                       <label for="doseIntervalEvening"></label>
                     </div>
                     <label for="doseIntervalEvening" class="fcustominp-label">Evening</label>
                   </div>
                   <div class="wrap-fcustominp">
                     <div class="fcustominp">
-                      <input type="radio" id="doseIntervalSpecific" name="doseInterval" value="specific" ng-model="prescriptionForm.doseInterval"/>
+                      <input type="radio" id="doseIntervalSpecific" name="doseInterval" value="specific" ng-model="prescriptionEdit.doseInterval"/>
                       <label for="doseIntervalSpecific"></label>
                     </div>
                     <label for="doseIntervalSpecific" class="fcustominp-label">Specific</label>
@@ -406,35 +411,35 @@
                 <div class="wrap-fcustominps-inline">
                   <div class="wrap-fcustominp">
                     <div class="fcustominp">
-                      <input type="radio" id="doseQuantity1x" name="doseQuantity" value="1x" ng-model="prescriptionForm.doseQuantity"/>
+                      <input type="radio" id="doseQuantity1x" name="doseQuantity" value="1x" ng-model="prescriptionEdit.doseQuantity"/>
                       <label for="doseQuantity1x"></label>
                     </div>
                     <label for="doseQuantity1x" class="fcustominp-label">1X</label>
                   </div>
                   <div class="wrap-fcustominp">
                     <div class="fcustominp">
-                      <input type="radio" id="doseQuantity2x" name="doseQuantity" value="2x" ng-model="prescriptionForm.doseQuantity"/>
+                      <input type="radio" id="doseQuantity2x" name="doseQuantity" value="2x" ng-model="prescriptionEdit.doseQuantity"/>
                       <label for="doseQuantity2x"></label>
                     </div>
                     <label for="doseQuantity2x" class="fcustominp-label">2X</label>
                   </div>
                   <div class="wrap-fcustominp">
                     <div class="fcustominp">
-                      <input type="radio" id="doseQuantity3x" name="doseQuantity" value="3x" ng-model="prescriptionForm.doseQuantity"/>
+                      <input type="radio" id="doseQuantity3x" name="doseQuantity" value="3x" ng-model="prescriptionEdit.doseQuantity"/>
                       <label for="doseQuantity3x"></label>
                     </div>
                     <label for="doseQuantity3x" class="fcustominp-label">3X</label>
                   </div>
                   <div class="wrap-fcustominp">
                     <div class="fcustominp">
-                      <input type="radio" id="doseQuantity4x" name="doseQuantity" value="4x" ng-model="prescriptionForm.doseQuantity"/>
+                      <input type="radio" id="doseQuantity4x" name="doseQuantity" value="4x" ng-model="prescriptionEdit.doseQuantity"/>
                       <label for="doseQuantity4x"></label>
                     </div>
                     <label for="doseQuantity4x" class="fcustominp-label">4X</label>
                   </div>
                   <div class="wrap-fcustominp">
                     <div class="fcustominp">
-                      <input type="radio" id="doseQuantityOther" name="doseQuantity" value="other" ng-model="prescriptionForm.doseQuantity"/>
+                      <input type="radio" id="doseQuantityOther" name="doseQuantity" value="other" ng-model="prescriptionEdit.doseQuantity"/>
                       <label for="doseQuantityOther"></label>
                     </div>
                     <label for="doseQuantityOther" class="fcustominp-label">Other</label>
@@ -444,23 +449,24 @@
               </div>
             </div>
             
-            <div class="form-group">
-              <label class="control-label">Route of Administration</label>
-              <div class="input-holder">
-                <select class="form-control input-sm" id="route" name="route" ng-model="medicationEdit.route" required>
-                    <option value="">-- Route --</option>
-                    <option>Po Per Oral</option>
-                    <option>IV Intra Venous</option>
-                    <option>IM Intra Muscular</option>
-                    <option>PN Per Nasal</option>
-                    <option>PR Per Rectum</option>
-                    <option>SL Sub Lingual</option>
-                    <option>SC Sub Cutaneous</option>
-                </select>
-              </div>
+            <div class="form-group" ng-class="{'has-error': (formSubmitted || prescriptionForm.route.$dirty) && prescriptionForm.route.$invalid, 'has-success': prescriptionForm.route.$valid && prescriptionForm.route.$dirty}">
+                <label for="route" class="control-label">Route</label>
+                <div class="input-holder">
+                    <select class="form-control input-sm" id="route" name="route" ng-model="prescriptionEdit.route" required>
+                        <option value="">-- Route --</option>
+                        <option>Po Per Oral</option>
+                        <option>IV Intra Venous</option>
+                        <option>IM Intra Muscular</option>
+                        <option>PN Per Nasal</option>
+                        <option>PR Per Rectum</option>
+                        <option>SL Sub Lingual</option>
+                        <option>SC Sub Cutaneous</option>
+                    </select>
+                </div>
+                <span class="help-block animate-fade" ng-show="formSubmitted && prescriptionForm.route.$error.required">You must enter a value.</span>
             </div>
             
-            <div ng-if="prescriptionForm.doseQuantity && prescriptionForm.doseInterval">
+            <div ng-if="prescriptionEdit.doseQuantity && prescriptionEdit.doseInterval">
               <div class="row">
                 <div class="col-xs-12 col-md-6">
                   <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || prescriptionForm.pStartDateTime.$dirty) && prescriptionForm.pStartDateTime.$invalid, 'has-success': prescriptionForm.pStartDateTime.$valid && prescriptionForm.pStartDateTime.$dirty}">
@@ -469,18 +475,18 @@
                         <div class="addon">
                           <i class="fa fa-calendar"></i>
                         </div>
-                        <input type="text" class="form-control" id="pStartDateTime" name="pStartDateTime" ng-model="prescriptionForm.pStartDateTime" ng-click="openDatepicker($event, 'pStartDateTime')" uib-datepicker-popup="dd-MMM-yyyy" is-open="pStartDateTime" required />
+                        <input type="text" class="form-control" id="pStartDateTime" name="pStartDateTime" ng-model="prescriptionEdit.pStartDateTime" ng-click="openDatepicker($event, 'pStartDateTime')" uib-datepicker-popup="dd-MMM-yyyy" is-open="pStartDateTime" required />
                       </div>
                       <span class="help-block animate-fade" ng-show="formSubmitted && prescriptionForm.pStartDateTime.$error.required">You must enter a valid date.</span>
                   </div>
                 </div>
                 <div class="col-xs-12 col-md-6">
                   <div class="form-group">
-                    <label class="control-label"></label>
+                    <label class="control-label hidden-sm"></label>
                     <div class="input-holder">
                       <div class="wrap-fcustominp">
                         <div class="fcustominp">
-                          <input type="checkbox" id="finishCancelled" name="finishCancelled" ng-model="prescriptionForm.finishCancelled"/>
+                          <input type="checkbox" id="finishCancelled" name="finishCancelled" ng-model="prescriptionEdit.finishCancelled"/>
                           <label for="finishCancelled"></label>
                         </div>
                         <label for="finishCancelled" class="fcustominp-label">Until Cancelled</label>
@@ -495,12 +501,34 @@
                     <div class="addon">
                       <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control" id="pFinishDateTime" name="pFinishDateTime" ng-model="prescriptionForm.pFinishDateTime" ng-click="openDatepicker($event, 'pFinishDateTime')" uib-datepicker-popup="dd-MMM-yyyy" is-open="pFinishDateTime" required />
+                    <input type="text" class="form-control" id="pFinishDateTime" name="pFinishDateTime" ng-model="prescriptionEdit.pFinishDateTime" ng-click="openDatepicker($event, 'pFinishDateTime')" uib-datepicker-popup="dd-MMM-yyyy" is-open="pFinishDateTime" required />
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && prescriptionForm.pFinishDateTime.$error.required">You must enter a valid date.</span>
               </div>
             </div>
-
+            
+            <div ng-if="prescriptionEdit.doseQuantity && prescriptionEdit.doseInterval && prescriptionEdit.route && prescriptionEdit.pStartDateTime && (prescriptionEdit.finishCancelled || prescriptionEdit.pFinishDateTime)" class="form-group">
+              <div class="wrap-control-group">
+                <div class="control-group left">
+                  <button type="button" class="btn btn-success btn-icon-normal" ng-click="">
+                    <i class="fa fa-plus"></i>
+                    <span>Add Dosage</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="panel-body-section">
+            <div class="form-group">
+              <label class="control-label">Dose Timing:</label>
+              <div class="non-edit-value">
+                <button type="button" class="btn btn-danger btn-sm btn-icon-normal btn-square" ng-click="">
+                  <i class="fa fa-ban"></i>
+                </button>
+                <span>2X each morning {{ $ctrl.medication.timing }}</span>
+              </div>
+            </div>
             <div class="form-group">
               <div class="schedule-block">
                 <div class="wrap-control-group">
@@ -562,7 +590,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
       <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
         <div class="wrap-control-group">

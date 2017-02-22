@@ -19,6 +19,7 @@ import allergiesListComponent from './allergies-list.component';
 import allergiesCreateComponent from './allergies-create.component';
 import allergiesDetailComponent from './allergies-detail.component';
 import allergiesActions from './allergies-actions';
+
 export default {
   "name": 'allergies',
   "routes": routes,
@@ -30,5 +31,11 @@ export default {
   },
   "actions": {
     allergiesActions
+  },
+  "sidebarInfo": {
+    name: 'allergies',
+    link: 'allergies',
+    linkDetail: 'allergies-detail',
+    title: 'Allergies'
   }
 }

@@ -19,6 +19,7 @@ import vitalsListComponent from './vitals-list.component';
 import vitalsCreateComponent from './vitals-create.component';
 import vitalsDetailComponent from './vitals-detail.component';
 import vitalsActions from './vitals-actions';
+
 export default {
   "name": 'vitals',
   "routes": routes,
@@ -30,5 +31,11 @@ export default {
   },
   "actions": {
     vitalsActions
+  },
+  "sidebarInfo": {
+    name: 'vitals',
+    link: 'vitals',
+    linkDetail: 'vitals-detail',
+    title: 'Vitals - News'
   }
 }

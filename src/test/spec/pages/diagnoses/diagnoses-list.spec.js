@@ -54,18 +54,14 @@ describe('Diagnoses List', function() {
 
     spyOn(fakeCall, 'callDiagnoses');
 
-    spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
-    spyOn(ctrl, 'selected');
     spyOn(ctrl, 'create');
     spyOn(ctrl, 'setCurrentPageData');
     spyOn(ctrl, 'diagnosesLoad');
 
     fakeCall.callDiagnoses({}, types.DIAGNOSES);
 
-    ctrl.pageChangeHandler();
     ctrl.go();
-    ctrl.selected();
     ctrl.create();
     ctrl.setCurrentPageData();
     ctrl.diagnosesLoad();
@@ -83,14 +79,8 @@ describe('Diagnoses List', function() {
   it("Diagnoses reducer was called", function() {
     expect(fakeCall.callDiagnoses).toHaveBeenCalled();
   });
-  it("pageChangeHandler was called", function() {
-    expect(ctrl.pageChangeHandler).toHaveBeenCalled();
-  });
   it("route go was called", function() {
     expect(ctrl.go).toHaveBeenCalled();
-  });
-  it("selected was called", function() {
-    expect(ctrl.selected).toHaveBeenCalled();
   });
   it("create was called", function() {
     expect(ctrl.create).toHaveBeenCalled();

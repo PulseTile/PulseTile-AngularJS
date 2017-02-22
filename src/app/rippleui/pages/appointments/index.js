@@ -18,6 +18,7 @@ import reducer from "./appointments-reducer-all";
 import appointmentsListComponent from './appointments-list.component';
 import appointmentsDetailComponent from './appointments-detail.component';
 import appointmentsActions from './appointments-actions';
+
 export default {
   "name": 'appointments',
   "routes": routes,
@@ -28,5 +29,11 @@ export default {
   },
   "actions": {
     appointmentsActions
+  },
+  "sidebarInfo": {
+    // name: 'appointments',
+    // link: 'appointments',
+    // linkDetail: 'appointments-detail',
+    // title: 'Appointments'
   }
 }

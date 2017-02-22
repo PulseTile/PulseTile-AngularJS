@@ -56,7 +56,7 @@ class ContactsDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     this.contactsLoad = contactsActions.get;
-    this.contactsLoad($stateParams.patientId, $stateParams.contactIndex);
+    this.contactsLoad($stateParams.patientId, $stateParams.detailsIndex);
     $scope.contactsUpdate = contactsActions.update;
   }
 }

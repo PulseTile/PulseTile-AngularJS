@@ -16,61 +16,33 @@
 let templateContactsList = require('./contacts-list.html');
 
 class ContactsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, contactsActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, contactsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.currentPage = 1;
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'contacts-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'contacts';
-
-    this.sort = function (field) {
-      var reverse = this.reverse;
-      if (this.order === field) {
-        this.reverse = !reverse;
-      } else {
-        this.order = field;
-        this.reverse = false;
-      }
-    };
-
-    this.sortClass = function (field) {
-      if (this.order === field) {
-        return this.reverse ? 'sorted desc' : 'sorted asc';
-      }
-    };
-
-    this.order = serviceRequests.currentSort.order || 'name';
-    this.reverse = serviceRequests.currentSort.reverse || false;
 
     this.create = function () {
       $state.go('contacts-create', {
         patientId: $stateParams.patientId,
-        page: this.currentPage
       });
     };
 
     this.go = function (id) {
-      serviceRequests.currentSort.order = this.order;
-      serviceRequests.currentSort.reverse = this.reverse;
-
       $state.go('contacts-detail', {
         patientId: $stateParams.patientId,
-        contactIndex: id,
-        page: this.currentPage,
-        reportType: $stateParams.reportType,
-        searchString: $stateParams.searchString,
-        queryType: $stateParams.queryType
+        detailsIndex: id,
+        page: $scope.currentPage || 1
       });
-    };
-
-    this.pageChangeHandler = function (newPage) {
-      this.currentPage = newPage;
     };
 
     this.setCurrentPageData = function (data) {
       if (data.contacts.data) {
         this.contacts = data.contacts.data;
+        
+        serviceFormatted.filteringKeys = ['name', 'relationship', 'nextOfKin', 'source'];
+        
         usSpinnerService.stop('patientSummary-spinner');
       }
       if (data.patientsGet.data) {
@@ -80,14 +52,6 @@ class ContactsListController {
         this.currentUser = serviceRequests.currentUserData;
       }
     };
-
-    this.selected = function (contactIndex) {
-      return contactIndex === $stateParams.contactIndex;
-    };
-
-    if ($stateParams.page) {
-      this.currentPage = $stateParams.page;
-    }
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
@@ -105,5 +69,5 @@ const ContactsListComponent = {
   controller: ContactsListController
 };
 
-ContactsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'contactsActions', 'serviceRequests', 'usSpinnerService'];
+ContactsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'contactsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default ContactsListComponent;
