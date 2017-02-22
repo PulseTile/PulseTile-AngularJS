@@ -1,12 +1,11 @@
 /*
  ~  Copyright 2016 Ripple Foundation C.I.C. Ltd
- ~  
+ ~
  ~  Licensed under the Apache License, Version 2.0 (the "License");
  ~  you may not use this file except in compliance with the License.
  ~  You may obtain a copy of the License at
- ~  
+ ~
  ~    http://www.apache.org/licenses/LICENSE-2.0
-
  ~  Unless required by applicable law or agreed to in writing, software
  ~  distributed under the License is distributed on an "AS IS" BASIS,
  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,6 +17,8 @@ const io = require('socket.io-client');
 
 class AppointmentsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, appointmentsActions, usSpinnerService, serviceRequests) {
+    // var socket = io.connect('wss://' + window.location.hostname + ':' + 8082);
+
     $scope.UnlockedSources = [
       'handi.ehrscape.com'
     ];
@@ -25,7 +26,7 @@ class AppointmentsDetailController {
     $scope.currentUser = this.currentUser;
     console.log('currentUser: ', this.currentUser);
     $scope.formDisabled = true;
-    $scope.messagesHistory = [];
+    $scope.messages = [];
 
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
@@ -35,6 +36,8 @@ class AppointmentsDetailController {
         this.appointment = data.appointments.dataGet;
         $scope.appt = this.appointment;
         usSpinnerService.stop('appointmentsDetail-spinner');
+
+        // socket.emit('appointment:messages', {appointmentId: this.appointment.sourceId});
       }
       // if (data.user.data) {
       //   this.currentUser = serviceRequests.currentUserData;
@@ -90,15 +93,6 @@ class AppointmentsDetailController {
       name: currentUser.given_name
     });
 
-    socket.on('call:text:messages:history', function (data) {
-      var role = isDoctor(user) ? 'doctor' : 'patient';
-      var opponent = data.appointment[(isDoctor(user) ? 'patient' : 'doctor')];
-      console.log('call:text:message:history ', data);
-      for (var i = 0; i < data.messages.length; i++) {
-        addTextMessage(data.messages[i].timestamp, (data.messages[i].author) ? ((role == data.messages[i].author) ? 'You' : opponent) : null, data.messages[i].message, true);
-      }
-    });
-
     socket.on('appointment:init', function(data) {
       $scope.showJoinAppointment = data.appointmentId;
       console.log('ON appointment:init', $scope.showJoinAppointment);
@@ -108,24 +102,30 @@ class AppointmentsDetailController {
       return user && user.role == ROLE_DOCTOR;
     }
 
-    function addTextMessage(timestamp, author, message, prepend) {
-      var msg = {};
-      msg.timestamp = moment.utc(timestamp).local().format('HH:mm');
-      msg.author = ( (author !== null) ? (author + ': ') : '');
-      msg.message = message;
-      $scope.messagesHistory.push(msg);
-    }
-
     $scope.patient =  this.currentPatient;
     $scope.appt =  this.appointment;
 
     $scope.canStartAppointment = function () {
+      if (!$scope.isDoctor())
+        return false;
+
       return !$scope.isClosed && !$scope.showJoinAppointment;
     }
 
+    $scope.isDoctor = function () {
+      return currentUser && currentUser.role === 'IDCR';
+    }
+
     $scope.canJoinAppointment = function () {
+      if (!$scope.isPatient())
+        return false;
+
       var canJoin = $scope.showJoinAppointment;
       return !$scope.isClosed && Boolean(canJoin) && canJoin == $scope.appt.sourceId;
+    }
+
+    $scope.isPatient = function () {
+      return !$scope.isDoctor();
     }
 
 
@@ -152,7 +152,7 @@ class AppointmentsDetailController {
       var options = center + ',resizable=yes,scrollbars=yes,status=yes,minimizable=yes,location=no';
       if (window.windowObjectReference == null || window.windowObjectReference.closed) {
         window.windowObjectReference = window.open(window.location.origin + '/videochat/videochat.html?appointmentId=' + id,
-          'Video Chat', options);
+            'Video Chat', options);
         window.windowObjectReference.focus();
       } else {
         window.windowObjectReference.focus();
@@ -190,8 +190,8 @@ class AppointmentsDetailController {
         if (!message.author) {
           message.author = '';
         } else {
-          var role = ($scope.currentUser.permissions.indexOf('WRITE') == -1) ? 'patient' : 'doctor';
-          var opponent = ($scope.currentUser.permissions.indexOf('WRITE') == -1) ? 'doctor' : 'patient';
+          var role = $scope.isDoctor(currentUser) ?  'doctor' : 'patient';
+          var opponent = $scope.isPatient(currentUser) ?  'doctor' : 'patient';
           if (message.author == role) {
             message.author = 'You: ';
           } else {

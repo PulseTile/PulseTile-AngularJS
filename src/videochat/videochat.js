@@ -23,22 +23,51 @@ $(document).ready(function () {
   var timer;
   var notifications = [];
   var restartCallTimer = null;
-  var constraints = {
-    audio: true,
-    video: true
-  };
+  var constraintsList = [
+    {
+      audio: true,
+      video: true
+    },
+    {
+      audio: true,
+      video: false
+    }
+  ];
 
   getNotificationPermission();
 
-  if (navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia(constraints).then(setLocalStream).catch(errorHandler);
-  } else {
-    navigator.getUserMedia(constraints).then(setLocalStream).catch(errorHandler);
-  }
+  findUserMediaStream(constraintsList)
+      .then(setLocalStream)
+      .catch(errorHandler);
+
 
   /**
    * WebRTC
    */
+
+  function findUserMediaStream(constraintsList) {
+    return new Promise(function (resolve, reject) {
+      getAnyUserMediaStream(constraintsList, 0, resolve, reject);
+    });
+  }
+
+  function getAnyUserMediaStream(constraintsList, index, resolve, reject) {
+    var constraints = constraintsList[index];
+
+    if (!constraints)
+      return reject(new Error('Cannot cam+mic or only mic devices stream'));
+
+    getUserMediaStream(constraints)
+        .then(resolve)
+        .catch(function() {
+          getAnyUserMediaStream(constraintsList, index + 1, resolve, reject);
+        });
+  }
+
+  function getUserMediaStream(constraints) {
+    return navigator.mediaDevices.getUserMedia(constraints)
+  }
+
   function cretePeerConnection() {
     gotStream(localStream);
   }
@@ -97,8 +126,8 @@ $(document).ready(function () {
       }
     };
     pc.createOffer(options)
-      .then(gotLocalDescription)
-      .catch(errorHandler);
+        .then(gotLocalDescription)
+        .catch(errorHandler);
   }
 
   function createAnswer() {
@@ -109,8 +138,8 @@ $(document).ready(function () {
       }
     };
     pc.createAnswer(options)
-      .then(gotLocalDescription)
-      .catch(errorHandler);
+        .then(gotLocalDescription)
+        .catch(errorHandler);
   }
 
 
@@ -494,10 +523,10 @@ $(document).ready(function () {
 
   function playSound(filename) {
     $('#notificationSound').empty().html('<audio autoplay="autoplay">' +
-      '<source src="sounds/' + filename + '.mp3" type="audio/mpeg" />' +
-      '<source src="sounds/' + filename + '.ogg" type="audio/ogg" />' +
-      '<embed hidden="true" autostart="true" loop="false" src="sounds/' + filename + '.mp3" />' +
-      '</audio>');
+        '<source src="sounds/' + filename + '.mp3" type="audio/mpeg" />' +
+        '<source src="sounds/' + filename + '.ogg" type="audio/ogg" />' +
+        '<embed hidden="true" autostart="true" loop="false" src="sounds/' + filename + '.mp3" />' +
+        '</audio>');
   }
 
   function isDoctor(user) {
@@ -513,14 +542,13 @@ $(document).ready(function () {
 
   function getDiffTime(from, to, withoutHours) {
     return ((withoutHours) ?
-      [
-        ('0' + (Math.abs(moment.utc(from).diff(to, 'minutes')) % 60)).slice(-2),
-        ('0' + (Math.abs(moment.utc(from).diff(to, 'seconds')) % 60)).slice(-2)] :
-      [
-        ('0' + Math.abs(moment.utc(from).diff(to, 'hours'))).slice(-2),
-        ('0' + (Math.abs(moment.utc(from).diff(to, 'minutes')) % 60)).slice(-2),
-        ('0' + (Math.abs(moment.utc(from).diff(to, 'seconds')) % 60)).slice(-2)
-      ]).join(':');
+        [
+          ('0' + (Math.abs(moment.utc(from).diff(to, 'minutes')) % 60)).slice(-2),
+          ('0' + (Math.abs(moment.utc(from).diff(to, 'seconds')) % 60)).slice(-2)] :
+        [
+          ('0' + Math.abs(moment.utc(from).diff(to, 'hours'))).slice(-2),
+          ('0' + (Math.abs(moment.utc(from).diff(to, 'minutes')) % 60)).slice(-2),
+          ('0' + (Math.abs(moment.utc(from).diff(to, 'seconds')) % 60)).slice(-2)
+        ]).join(':');
   }
 });
-

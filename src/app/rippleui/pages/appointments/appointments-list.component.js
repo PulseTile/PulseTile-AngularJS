@@ -50,9 +50,11 @@ class AppointmentsListController {
       return appointmentIndex === $stateParams.appointmentIndex;
     };
 
-    // this.create = function () {
-    //   AppointmentsModal.openModal(this.currentPatient, {title: 'Create Appointment'}, {}, this.currentUser);
-    // };
+    this.create = function () {
+      $state.go('appointments-create', {
+        patientId: $stateParams.patientId
+      });
+    };
 
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
