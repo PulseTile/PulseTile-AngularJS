@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
 
-<div class="panel panel-secondary">
+<div mc-datepicker class="panel panel-secondary">
   <div class="panel-heading">
     <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="$ctrl.cancel()"><i class="fa fa-chevron-up"></i></button>
@@ -65,12 +65,12 @@
               <div class="form-group form-group-sm"
                 ng-class="{'has-error': detailsFocused && advancedSearchForm.dateOfBirth.$invalid && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber),
                 'has-success': detailsFocused && advancedSearchForm.dateOfBirth.$valid && advancedSearchForm.dateOfBirth.$dirty && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)}">
-                  <label for="dateOfBirth" class="control-label">Date of Birth</label>
+                  <label for="" class="control-label">Date of Birth</label>
                   <div class="inner-addon addon-left wrap-datepicker-top">
                     <div class="addon">
                       <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" tabindex="4" class="form-control popupinputs" id="dateOfBirth" name="dateOfBirth" ng-model="searchParams.dateOfBirth" uib-datepicker-popup="dd-MMM-yyyy" is-open="dateOfBirth" ng-focus="detailsFocused=true" ng-click="openDatePicker($event, 'dateOfBirth')" ui-date-format ng-required='detailsFocused'/>
+                    <input type="text" tabindex="4" class="form-control popupinputs" id="dateOfBirth" name="dateOfBirth" ng-model="searchParams.dateOfBirth" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.dateOfBirth" ng-focus="detailsFocused=true" ng-click="openDatepicker($event, 'dateOfBirth')" ui-date-format ng-required='detailsFocused' placeholder="03-Aug-1970"/>
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.dateOfBirth.$error.required && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)">You must enter a value.</span>
                   <span class="required-label" ng-show="detailsFocused && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) && (advancedSearchForm.surname.$invalid || advancedSearchForm.surname.$invalid || advancedSearchForm.dateOfBirth.$invalid)">*Required</span>
@@ -99,7 +99,7 @@
     <div class="panel-control">
       <div class="wrap-control-group hide-indent-bottom">
         <div class="control-group with-indent left">
-          <button class="btn btn-success btn-inverse" ng-click="$ctrl.cancel()">Basic Search</button>
+          <button class="btn btn-success btn-inverse hidden-xs" ng-click="$ctrl.cancel()">Basic Search</button>
         </div>
         <div class="control-group with-indent right">
           <button class="btn btn-danger" ng-click="$ctrl.cancel()"><i class="fa fa-ban"></i> Cancel</button>

@@ -13,7 +13,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 -->
-<div mc-full-panel class="panel-group">
+<div mc-full-panel mc-datepicker class="panel-group">
   <div class="panel panel-secondary">
     <div class="panel-heading">
       <div class="control-group right">
@@ -37,12 +37,12 @@
               </div>
               <div class="col-expand-right">
                 <div class="form-group" ng-class="{'has-error': (formSubmitted || mdtForm.dateOfRequest.$dirty) && mdtForm.dateOfRequest.$invalid, 'has-success': mdtForm.dateOfRequest.$valid && mdtForm.dateOfRequest.$dirty}">
-                  <label for="dateOfRequest" class="control-label">Date of Request</label>
+                  <label for="" class="control-label">Date of Request</label>
                   <div class="inner-addon addon-left">
                     <div class="addon">
                       <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control" id="dateOfRequest" name="dateOfRequest" ng-model="genericMdt.dateOfRequest" ng-click="openDatepicker($event, 'dateOfRequest')" uib-datepicker-popup="dd-MMM-y" is-open="dateOfRequest" required />
+                    <input type="text" class="form-control" id="dateOfRequest" name="dateOfRequest" ng-model="genericMdt.dateOfRequest" ng-click="openDatepicker($event, 'dateOfRequest')" uib-datepicker-popup="dd-MMM-y" is-open="datepickers.dateOfRequest" required />
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && mdtForm.dateOfRequest.$error.required">You must enter a value.</span>
                 </div>
@@ -52,12 +52,12 @@
             <div class="row-expand">
               <div class="col-expand-left">
                 <div class="form-group" ng-class="{'has-error': (formSubmitted || mdtForm.dateOfMeeting.$dirty) && mdtForm.dateOfMeeting.$invalid, 'has-success': mdtForm.dateOfMeeting.$valid && mdtForm.dateOfMeeting.$dirty}">
-                  <label for="dateOfMeeting" class="control-label">Date of Meeting</label>
+                  <label for="" class="control-label">Date of Meeting</label>
                   <div class="inner-addon addon-left">
                     <div class="addon">
                       <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control" id="dateOfMeeting" name="dateOfMeeting" ng-model="genericMdt.dateOfMeeting" ng-click="openDatepicker($event, 'dateOfMeeting')" uib-datepicker-popup="dd-MMM-y" is-open="dateOfMeeting" required />
+                    <input type="text" class="form-control" id="dateOfMeeting" name="dateOfMeeting" ng-model="genericMdt.dateOfMeeting" ng-click="openDatepicker($event, 'dateOfMeeting')" uib-datepicker-popup="dd-MMM-y" is-open="datepickers.dateOfMeeting" required />
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && mdtForm.dateOfMeeting.$error.required">You must enter a value.</span>
                 </div>

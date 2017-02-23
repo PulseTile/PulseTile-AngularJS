@@ -127,6 +127,15 @@ td[ng-click] {
     }
   }
 }
+.table-schedule {
+  thead tr th,
+  tbody tr td {
+    border-left: 1px solid #B4B5B4;
+    &:first-child {
+      border: none;
+    }
+  }
+}
 @media (max-width: map-get($breakpoints, 'xs') - 1) {
   .table-bordered {
     border-left: 0;

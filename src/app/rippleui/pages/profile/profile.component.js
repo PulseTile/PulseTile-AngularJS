@@ -50,13 +50,6 @@ class ProfileController {
       }
     }.bind(this);
 
-    $scope.openDatepicker = function ($event, name) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope[name] = true;
-    };
-
     this.setProfileData = function () {
       let tempProfileData = serviceRequests.currentUserData;
 

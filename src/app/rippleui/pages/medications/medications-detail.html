@@ -13,7 +13,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 -->
-<div mc-full-panel mc-accordion mc-open-panel="medication" class="panel-group accordion">
+<div mc-full-panel mc-datepicker mc-accordion mc-open-panel="medication" class="panel-group accordion">
   <div class="panel panel-secondary" ng-if="getShowPanel('medication') && !isMedicationEdit" ng-class="getOpenPanelClass('medication');">
     <div class="panel-heading">
       <div class="control-group right">
@@ -205,12 +205,12 @@
               </div>
               <div class="col-expand-right">
                   <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || medicationForm.startDateTime.$dirty) && medicationForm.startDateTime.$invalid, 'has-success': medicationForm.startDateTime.$valid && medicationForm.startDateTime.$dirty}">
-                      <label for="startDateTime" class="control-label">Date</label>
+                      <label for="" class="control-label">Date</label>
                       <div class="inner-addon addon-left">
                         <div class="addon">
                           <i class="fa fa-calendar"></i>
                         </div>
-                        <input type="text" class="form-control" id="startDateTime" name="startDateTime" ng-model="medicationEdit.startDate" ng-click="openDatepicker($event, 'startDateTime')" uib-datepicker-popup="dd-MMM-yyyy" is-open="startDateTime" required disabled/>
+                        <input type="text" class="form-control" id="startDateTime" name="startDateTime" ng-model="medicationEdit.startDate" ng-click="openDatepicker($event, 'startDateTime')" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.startDateTime" required disabled/>
                       </div>
                       <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.startDateTime.$error.required">You must enter a valid date.</span>
                   </div>
@@ -470,12 +470,12 @@
               <div class="row">
                 <div class="col-xs-12 col-md-6">
                   <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || prescriptionForm.pStartDateTime.$dirty) && prescriptionForm.pStartDateTime.$invalid, 'has-success': prescriptionForm.pStartDateTime.$valid && prescriptionForm.pStartDateTime.$dirty}">
-                      <label for="pStartDateTime" class="control-label">Start</label>
+                      <label for="" class="control-label">Start</label>
                       <div class="inner-addon addon-left">
                         <div class="addon">
                           <i class="fa fa-calendar"></i>
                         </div>
-                        <input type="text" class="form-control" id="pStartDateTime" name="pStartDateTime" ng-model="prescriptionEdit.pStartDateTime" ng-click="openDatepicker($event, 'pStartDateTime')" uib-datepicker-popup="dd-MMM-yyyy" is-open="pStartDateTime" required />
+                        <input type="text" class="form-control" id="pStartDateTime" name="pStartDateTime" ng-model="prescriptionEdit.pStartDateTime" ng-click="openDatepicker($event, 'pStartDateTime')" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.pStartDateTime" required />
                       </div>
                       <span class="help-block animate-fade" ng-show="formSubmitted && prescriptionForm.pStartDateTime.$error.required">You must enter a valid date.</span>
                   </div>
@@ -496,12 +496,12 @@
                 </div>
               </div>
               <div class="form-group form-group-sm" ng-show="!prescriptionForm.finishCancelled" ng-class="{'has-error': (formSubmitted || prescriptionForm.pFinishDateTime.$dirty) && prescriptionForm.pFinishDateTime.$invalid, 'has-success': prescriptionForm.pFinishDateTime.$valid && prescriptionForm.pFinishDateTime.$dirty}">
-                  <label for="pFinishDateTime" class="control-label">Finish</label>
+                  <label for="" class="control-label">Finish</label>
                   <div class="inner-addon addon-left">
                     <div class="addon">
                       <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control" id="pFinishDateTime" name="pFinishDateTime" ng-model="prescriptionEdit.pFinishDateTime" ng-click="openDatepicker($event, 'pFinishDateTime')" uib-datepicker-popup="dd-MMM-yyyy" is-open="pFinishDateTime" required />
+                    <input type="text" class="form-control" id="pFinishDateTime" name="pFinishDateTime" ng-model="prescriptionEdit.pFinishDateTime" ng-click="openDatepicker($event, 'pFinishDateTime')" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.pFinishDateTime" required />
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && prescriptionForm.pFinishDateTime.$error.required">You must enter a valid date.</span>
               </div>

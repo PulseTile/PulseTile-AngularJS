@@ -45,13 +45,6 @@ class ProceduresCreateController {
       this.goList();
     };
 
-    $scope.openDatepicker = function ($event, name) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope[name] = true;
-    };
-
     $scope.create = function (procedureForm, procedure) {
       $scope.formSubmitted = true;
 

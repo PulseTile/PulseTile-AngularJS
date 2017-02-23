@@ -72,13 +72,6 @@ class VitalsCreateController {
         $scope.vitalsCreate(this.currentPatient.id, vital);
       }
     }.bind(this);
-   
-    $scope.openDatepicker = function ($event, name) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope[name] = true;
-    };
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
