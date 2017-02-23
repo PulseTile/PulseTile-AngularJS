@@ -55,26 +55,17 @@ describe('Appointments List', function() {
 
     spyOn(fakeCall, 'callAppointments');
 
-    spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
-    spyOn(ctrl, 'selected');
     spyOn(ctrl, 'setCurrentPageData');
-    spyOn(ctrl, 'search');
     spyOn(ctrl, 'appointmentsLoad');
 
     fakeCall.callAppointments({}, types.APPOINTMENTS);
 
-    ctrl.pageChangeHandler();
     ctrl.go();
-    ctrl.selected();
     ctrl.setCurrentPageData();
-    ctrl.search();
     ctrl.appointmentsLoad();
   });
 
-  it('query', function() {
-    expect(scope.query).toBe('');
-  });
   it('Template exist', function() {
     expect(template).toBeDefined();
   });
@@ -84,20 +75,11 @@ describe('Appointments List', function() {
   it("Appointments reducer was called", function() {
     expect(fakeCall.callAppointments).toHaveBeenCalled();
   });
-  it("pageChangeHandler was called", function() {
-    expect(ctrl.pageChangeHandler).toHaveBeenCalled();
-  });
   it("route go was called", function() {
     expect(ctrl.go).toHaveBeenCalled();
   });
-  it("selected was called", function() {
-    expect(ctrl.selected).toHaveBeenCalled();
-  });
   it("setCurrentPageData was called", function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
-  });
-  it("search was called", function() {
-    expect(ctrl.search).toHaveBeenCalled();
   });
   it("appointmentsLoad was called", function() {
     expect(ctrl.appointmentsLoad).toHaveBeenCalled();
