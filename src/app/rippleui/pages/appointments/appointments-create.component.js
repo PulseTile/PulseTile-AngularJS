@@ -23,7 +23,7 @@ class AppointmentsCreateController {
             dateOfAppointment: "2017-02-10",
             location: "Leeds General",
             status: "Scheduled",
-            timeOfAppointment: "2017-02-10T10:00:00.000Z"
+            timeOfAppointment: "2017-02-10T14:00:00.000Z"
         };
 
         this.goList = function () {
