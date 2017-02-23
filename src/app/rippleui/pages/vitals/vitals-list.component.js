@@ -83,7 +83,7 @@ class VitalsListController {
 
       /* istanbul ignore next  */
       for (var i = 0; i < vitals.length; i++) {
-        tempDate = formatDate(new Date(vitals[i].dateCreate));
+        tempDate = formatDate(new Date(+vitals[i].dateCreate));
 
         if (lastDate === tempDate.date) {
           dataChart.labels.push(tempDate.time);
@@ -223,9 +223,9 @@ class VitalsListController {
       var vitalsForChart;
       $scope.viewList = viewName;
 
-      if ($scope.vitals) {
+      if ($scope.dateForChart) {
         if (viewName === 'chartNews') {
-          vitalsForChart = $scope.vitals.slice((currentPage - 1) * 10, currentPage * 10);
+          vitalsForChart = $scope.dateForChart.slice((currentPage - 1) * 10, currentPage * 10);
 
           $timeout(function(){
             $scope.chartLoad(vitalsForChart);
@@ -236,7 +236,8 @@ class VitalsListController {
 
     this.setCurrentPageData = function (data) {
       if (data.vitals.data) {
-        $scope.vitals = serviceVitalsSigns.modificateVitalsArr(data.vitals.data);
+        $scope.dateForChart = serviceVitalsSigns.modificateVitalsArr(data.vitals.data);
+        $scope.vitals = angular.copy(data.vitals.data);
         
         serviceFormatted.formattingTablesDate($scope.vitals, ['dateCreate'], serviceFormatted.formatCollection.DDMMMYYYY);
         serviceFormatted.filteringKeys = ['id', 'dateCreate', 'newsScore', 'source'];
