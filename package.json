@@ -1,6 +1,6 @@
 {
   "name": "PulseTile",
-  "version": "0.8.5",
+  "version": "0.9.0",
   "description": "Ripple OSI App UI built using Angular 1.5 and Redux",
   "homepage": "http://demo.rippleosi.org/",
   "main": "index.js",
