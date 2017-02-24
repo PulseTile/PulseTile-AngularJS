@@ -15,14 +15,14 @@
   border-top-right-radius: 6px;
   padding-bottom: 0;
   border-bottom: 0;
-  background-color: #007a41;
+  background-color: $base-color;
 }
 
 .modal-title {
   padding: 0px 10px 10px;
   font-weight: bold;
-  color: #fff;
-  background-color: #007a41;
+  color: $text-on-base-color;
+  background-color: $base-color;
 }
 
 .modal-footer {

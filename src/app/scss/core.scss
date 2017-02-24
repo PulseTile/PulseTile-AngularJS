@@ -1,12 +1,19 @@
+@import 'themes/user';
+// @import 'themes/yellow';
+// @import 'themes/blue';
+@import 'themes/green';
+@import 'themes/index';
+
+@import 'abstracts/variables';
 @import 'abstracts/colors';
 @import 'abstracts/config';
 @import 'abstracts/functions';
 @import 'abstracts/mixins';
-@import 'abstracts/variables';
 
 @import 'base/fonts';
 @import 'base/typography';
 @import 'base/grid';
+
 
 // @import 'components/';
 @import 'components/btn';
@@ -21,7 +28,7 @@
 @import 'components/datepicker';
 
 @import 'base';
-@import 'main';
+// @import 'main';
 
 @import 'blocks/main/header/index';
 @import 'blocks/main/sidebar';

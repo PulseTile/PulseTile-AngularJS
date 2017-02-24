@@ -34,14 +34,14 @@ textarea {
 a,
 a:hover,
 a:focus {
-  color: #000000;
+  color: $text-color;
   text-decoration: none;
   cursor: pointer;
 }
 
 .is-not-touch-device a:hover,
 .is-not-touch-device a:focus, {
-  color: $link-color-hover;
+  color: $auxiliary-color;
   text-decoration: none;
 }
 

@@ -26,13 +26,13 @@
       line-height: 20px;
     }
     &.active a {
-      color: #fff;
-      border-color: $secondary-color;
-      background-color: $secondary-color;
+      color: $text-on-base-color;
+      border-color: $base-color;
+      background-color: $base-color;
       text-decoration: none;
     }
     &.disabled a {
-      color: #313131;
+      color: #303030;
       text-decoration: none;
       background-color: #F4F3F3;
       border-color: #ddd;
@@ -45,13 +45,13 @@
     &:not(.disabled):hover { z-index: 2; }
     & a:hover,
     &.active a:hover {
-      color: #fff;
-      border-color: $secondary-color;
-      background-color: $secondary-color;
+      color: $text-on-base-color;
+      border-color: $base-color;
+      background-color: $base-color;
       text-decoration: none;
     }
     &.disabled a:hover {
-      color: #313131;
+      color: $text-color;
       text-decoration: none;
       background-color: #F4F3F3;
       border-color: #ddd;

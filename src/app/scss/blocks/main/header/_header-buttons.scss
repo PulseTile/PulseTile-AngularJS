@@ -6,9 +6,8 @@
   background: #F7F7F7;
   text-align: center;
   line-height: 52px;
-  color: #0D672F;
   font-size: 19px;
-  color: $icon-chevron-color;
+  color: $base-color;
   border: none;
   outline: none;
   @include respond-to(xs) {
@@ -18,8 +17,8 @@
     background: #fff;
   }
   &.secondary {
-    background: $secondary-color;
-    color: #fff;
+    background: $base-color;
+    color: $text-on-base-color;
   }
   .count {
     position: absolute;
@@ -27,8 +26,8 @@
     right: 0px;
     font-size: 10px;
     font-family: arial;
-    background-color: $icon-chevron-color;
-    color: #fff;
+    background-color: $base-color;
+    color: $text-on-base-color;
     display: block;
     padding: 0;
     width: 16px;
@@ -43,8 +42,8 @@
   }
 }  
 .touch-device .btn-header .count { line-height: 17px; }
-.btn-header:hover { color: $icon-chevron-color; }
-.is-not-touch-device .btn-header:hover { color: #7cbe31; }
+.btn-header:hover { color: $base-color; }
+.is-not-touch-device .btn-header:hover { color: $auxiliary-color; }
 
 .btn-header-prev {
   float: left;

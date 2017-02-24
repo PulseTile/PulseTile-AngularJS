@@ -25,17 +25,17 @@
     display: inline-block;
     font-family: 'MyriadPro';
     font-size: 23px;
-    color: #0C662D;
+    color: $base-color;
     line-height: 38px;
     letter-spacing: 2px;
     text-transform: uppercase;
     white-space: nowrap;
     vertical-align: middle;
-    a, a:hover { color: #0C662D; }
+    a, a:hover { color: $base-color; }
   }
   .logo-mobile-hidden { display: none; }
 }
-.is-not-touch-device .logo .logo-text a:hover { color: #7cbe31; }
+.is-not-touch-device .logo .logo-text a:hover { color: $auxiliary-color; }
 
 @include respond-to(xs) {
   .wrap-logo {
