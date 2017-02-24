@@ -141,7 +141,7 @@
                     <div class="addon">
                       <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control" id="dateOfReferral" name="dateOfReferral" ng-model="referralsEdit.dateOfReferral" ui-date ng-click="openDatepicker($event, 'dateOfReferral')" uib-datepicker-popup="dd-MMM-y" is-open="datepickers.dateOfReferral" required />
+                    <input type="text" class="form-control" id="dateOfReferral" name="dateOfReferral" ng-model="referralsEdit.dateOfReferral" ui-date ng-click="openDatepicker($event, 'dateOfReferral')" uib-datepicker-popup="dd-MMM-y" is-open="datepickers.dateOfReferral" required readonly/>
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.dateOfReferral.$error.required">You must enter a value.</span>
                 </div>

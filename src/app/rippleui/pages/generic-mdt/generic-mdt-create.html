@@ -42,7 +42,7 @@
                     <div class="addon">
                       <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control" id="dateOfRequest" name="dateOfRequest" ng-model="genericMdt.dateOfRequest" ng-click="openDatepicker($event, 'dateOfRequest')" uib-datepicker-popup="dd-MMM-y" is-open="datepickers.dateOfRequest" required />
+                    <input type="text" class="form-control" id="dateOfRequest" name="dateOfRequest" ng-model="genericMdt.dateOfRequest" ng-click="openDatepicker($event, 'dateOfRequest')" uib-datepicker-popup="dd-MMM-y" is-open="datepickers.dateOfRequest" required readonly/>
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && mdtForm.dateOfRequest.$error.required">You must enter a value.</span>
                 </div>
@@ -57,7 +57,7 @@
                     <div class="addon">
                       <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control" id="dateOfMeeting" name="dateOfMeeting" ng-model="genericMdt.dateOfMeeting" ng-click="openDatepicker($event, 'dateOfMeeting')" uib-datepicker-popup="dd-MMM-y" is-open="datepickers.dateOfMeeting" required />
+                    <input type="text" class="form-control" id="dateOfMeeting" name="dateOfMeeting" ng-model="genericMdt.dateOfMeeting" ng-click="openDatepicker($event, 'dateOfMeeting')" uib-datepicker-popup="dd-MMM-y" is-open="datepickers.dateOfMeeting" required readonly/>
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && mdtForm.dateOfMeeting.$error.required">You must enter a value.</span>
                 </div>

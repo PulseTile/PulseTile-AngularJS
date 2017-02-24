@@ -50,9 +50,10 @@
 .btn.disabled,
 .btn[disabled] {
   opacity: 1;
-  background-color: #C3C3C3 !important;
-  border-color: #C3C3C3 !important;
+  background-color: #c3c3c3 !important;
+  border-color: #c3c3c3 !important;
 }
+
 .btn-dropdown-toggle {
   position: relative;
   padding-right: 32px;
@@ -101,9 +102,9 @@
 
   .btn.disabled,
   .btn[disabled] {
-    color: #C3C3C3 !important;
+    color: #c3c3c3 !important;
     background-color: transparent !important;
-    border-color: #C3C3C3 !important;
+    border-color: #c3c3c3 !important;
   }
 }
 
@@ -152,10 +153,10 @@
 .btn-success.btn-create:focus,
 .btn-success.btn-create:active {
   font-weight: 600;
-  background: #fff !important;
+  background: #ffffff !important;
   &:hover,
   &.active {
-    background: #fff !important;
+    background: #ffffff !important;
   }
   i {
     font-size: 17px;

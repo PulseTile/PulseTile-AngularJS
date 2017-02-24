@@ -133,7 +133,7 @@
                             <div class="addon">
                               <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" class="form-control" id="birthday" name="birthday" ng-model="medicationEdit.startDate" ng-click="openDatepicker($event, 'birthday')" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.birthday" required />
+                            <input type="text" class="form-control" id="birthday" name="birthday" ng-model="medicationEdit.startDate" ng-click="openDatepicker($event, 'birthday')" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.birthday" required readonly/>
                           </div>
                           <span class="help-block animate-fade" ng-show="formSubmitted && personalForm.birthday.$error.required">You must enter a valid date.</span>
                       </div>

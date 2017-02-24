@@ -70,7 +70,7 @@
                     <div class="addon">
                       <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" tabindex="4" class="form-control popupinputs" id="dateOfBirth" name="dateOfBirth" ng-model="searchParams.dateOfBirth" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.dateOfBirth" ng-focus="detailsFocused=true" ng-click="openDatepicker($event, 'dateOfBirth')" ui-date-format ng-required='detailsFocused' placeholder="03-Aug-1970"/>
+                    <input type="text" tabindex="4" class="form-control popupinputs" id="dateOfBirth" name="dateOfBirth" ng-model="searchParams.dateOfBirth" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.dateOfBirth" ng-focus="detailsFocused=true" ng-click="openDatepicker($event, 'dateOfBirth')" ui-date-format ng-required='detailsFocused' placeholder="03-Aug-1970" readonly readonly/>
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.dateOfBirth.$error.required && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)">You must enter a value.</span>
                   <span class="required-label" ng-show="detailsFocused && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) && (advancedSearchForm.surname.$invalid || advancedSearchForm.surname.$invalid || advancedSearchForm.dateOfBirth.$invalid)">*Required</span>

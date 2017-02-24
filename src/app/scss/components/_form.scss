@@ -34,6 +34,12 @@ label.control-label {
   border-radius: 2px;
   box-shadow: 0 0 0 #fff !important;
 }
+
+.form-control.readonly,
+.form-control[readonly] {
+  opacity: 1;
+  background-color: #ffffff !important;
+}
 .form-control-static  {
   min-height: 18px;
   padding: 0;
