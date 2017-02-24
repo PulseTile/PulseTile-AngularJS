@@ -147,7 +147,6 @@ class HeaderController {
       $scope.login();
     });
 
-    $rootScope.searchExpression = '';
     $rootScope.searchMode = false;
     $rootScope.reportMode = false;
     $rootScope.settingsMode = false;
@@ -156,7 +155,8 @@ class HeaderController {
     $rootScope.reportTypeString = '';
 
     $scope.search = {};
-    $scope.search.searchExpression = $rootScope.searchExpression;
+    $scope.search.searchExpression = '';
+
     this.searchBarEnabled = !$state.is('main-search');
 
     this.containsReportString = function () {
@@ -168,6 +168,8 @@ class HeaderController {
     };
 
     this.containsPatientString = function () {
+      console.log('$scope.search');
+      console.log($scope.search);
       return $scope.search.searchExpression.lastIndexOf('pt ') === 0;
     };
 
@@ -216,7 +218,7 @@ class HeaderController {
     };
 
     this.checkExpression = function (expression) {
-      $scope.search.searchExpression = expression;
+      $scope.search.searchExpression = expression.toLowerCase();
       /* istanbul ignore if  */
       if ($rootScope.searchMode) {
         if ($rootScope.reportMode && !$rootScope.reportTypeSet) {
@@ -328,7 +330,7 @@ class HeaderController {
     };
 
     this.getPopulateHeaderSearch = function (expression) {
-      $scope.search.searchExpression = expression.headerSearch;
+      $scope.search.searchExpression = expression.headerSearch.toLowerCase();;
       $scope.searchFocused = true;
       self.searchBarEnabled = expression.headerSearchEnabled;
       $scope.searchBar = expression.headerSearchEnabled;

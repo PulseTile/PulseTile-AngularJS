@@ -95,6 +95,7 @@ class MainController {
       
       $scope.isSecondPanel = views.detail ? true : false;
       $scope.isSidebar = views.actions ? true : false;
+
     };
 
     this.setHeightSidebarForMobile = function() {
@@ -124,7 +125,6 @@ class MainController {
     
     $window.addEventListener('resize', function () {
       this.setHeightSidebarForMobile();
-      this.hideSidebarOnMobile();
     }.bind(this));
 
     $rootScope.$on('$locationChangeStart', function(e) {
