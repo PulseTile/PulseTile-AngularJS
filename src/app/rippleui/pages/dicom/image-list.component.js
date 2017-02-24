@@ -22,7 +22,6 @@ class ImageListController {
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'images-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'images';
-    var vm = this;
 
     this.go = function (id, source) {
       $state.go('images-detail', {
@@ -40,42 +39,13 @@ class ImageListController {
     };
 
     this.setCurrentPageData = function (data) {
-      var date = new Date();
-      this.images = [
-        {
-          sourceId: '1',
-          name: 'Inactivated Poliovirus Vaccine',
-          source: 'Marand',
-          seriesNumber: 1,
-          comment: 'Hospital staff',
-          date: date.setDate(date.getDate() - 1),
-          author: 'ripple_osi',
-          dataCreate: date.setDate(date.getDate() - 1)
-        }, {
-          sourceId: '2',
-          name: 'Cell-Culture Influenza Vaccine',
-          source: 'orthanc',
-          studyId: "55a9fcd2-e8197ca2-1af7a8e2-0e1ab147-841c65ba",
-          seriesNumber: 2,
-          comment: 'Hospital staff',
-          date: date,
-          author: 'ripple_osi',
-          dataCreate: date
-        }, {
-          sourceId: '3',
-          name: 'Varicella Vaccine',
-          source: 'Marand',
-          seriesNumber: 3,
-          comment: 'Hospital staff',
-          date: date.setDate(date.getDate() - 4),
-          author: 'ripple_osi',
-          dataCreate: date.setDate(date.getDate() - 4)
-        }
-      ];
-
-      // serviceFormatted.formattingTablesDate(this.images, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
-      // serviceFormatted.filteringKeys = ['name', 'date', 'source'];
-      usSpinnerService.stop('patientSummary-spinner');
+      if (data.studies.data) {
+        this.images = data.studies.data;
+      
+        serviceFormatted.formattingTablesDate(this.images, ['dateRecorded'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['studyDescription', 'dateRecorded', 'source'];
+        usSpinnerService.stop('patientSummary-spinner');
+      }
       
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;

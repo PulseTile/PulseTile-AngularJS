@@ -27,7 +27,7 @@
         <div class="form">
           <div class="form-group-wrapper">
             <div class="form-group" ng-repeat="item in instanceIds track by $index">
-              <div class="form-control-static" ng-click="$ctrl.toggleModal({className: 'openModal'})">
+              <div class="form-control-static">
                 <img src="http://ripple-orthanc.answerappcloud.com/instances/{{item}}/preview" alt="item.imgName">
               </div>
             </div>
@@ -50,38 +50,38 @@
       <div class="panel-body-inner">
         <div class="form">
           <div class="form-group-wrapper">
-            <!--<div class="form-group">-->
-              <!--<label class="control-label">Modality</label>-->
-              <!--<div class="form-control-static">{{ series[$index].modality }}</div>-->
-            <!--</div>-->
+            <div class="form-group">
+              <label class="control-label">Modality</label>
+              <div class="form-control-static">{{ series[0].modality }}</div>
+            </div>
             <div class="form-group">
               <label class="control-label">Protocol Name</label>
-              <div class="form-control-static">{{ series[$index].Status }}</div>
+              <div class="form-control-static">{{ series[0].protocolName }}</div>
             </div>
             <div class="form-group">
               <label class="control-label">Operator Name</label>
-              <div class="form-control-static">{{ series[$index].Type }}</div>
+              <div class="form-control-static">{{ series[0].operatorsName }}</div>
             </div>
             <div class="form-group">
               <label class="control-label">Series Date</label>
-              <div class="form-control-static">{{ series[$index].seriesDate }}</div>
+              <div class="form-control-static">{{ series[0].seriesDate }}</div>
             </div>
             <div class="form-group">
               <label class="control-label">Author</label>
-              <div class="form-control-static">{{ series[$index].author }}</div>
+              <div class="form-control-static">{{ series[0].author }}</div>
             </div>
             <div class="form-group">
               <label class="control-label">Station Name</label>
-              <div class="form-control-static">{{ series[$index].station }}</div>
+              <div class="form-control-static">{{ series[0].stationName }}</div>
             </div>
             <div class="form-group">
               <label class="control-label">Series Time</label>
-              <div class="form-control-static">{{ series[$index].seriesTime }}</div>
+              <div class="form-control-static">{{ series[0].seriesTime }}</div>
             </div>
-            <!--<div class="form-group">-->
-              <!--<label class="control-label">Series No:</label>-->
-              <!--<div class="form-control-static">{{ series[$index].date }}</div>-->
-            <!--</div>-->
+            <div class="form-group">
+              <label class="control-label">Series No:</label>
+              <div class="form-control-static">{{ series[0].seriesNumber }}</div>
+            </div>
           </div>
         </div>
       </div>
