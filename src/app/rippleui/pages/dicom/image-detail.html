@@ -50,37 +50,67 @@
       <div class="panel-body-inner">
         <div class="form">
           <div class="form-group-wrapper">
-            <div class="form-group">
-              <label class="control-label">Modality</label>
-              <div class="form-control-static">{{ $ctrl.instance.modality }}</div>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Modality</label>
+                  <div class="form-control-static">{{ $ctrl.instance.modality }}</div>
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-              <label class="control-label">Protocol Name</label>
-              <div class="form-control-static">{{ $ctrl.instance.protocol_name }}</div>
+
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Protocol Name</label>
+                  <div class="form-control-static">{{ $ctrl.instance.protocol_name }}</div>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group">
+                  <label class="control-label">Station Name</label>
+                  <div class="form-control-static">{{ $ctrl.instance.station }}</div>
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-              <label class="control-label">Operator Name</label>
-              <div class="form-control-static">{{ $ctrl.instance.operator_name }}</div>
+
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Operator Name</label>
+                  <div class="form-control-static">{{ $ctrl.instance.operator_name }}</div>
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-              <label class="control-label">Series Date</label>
-              <div class="form-control-static">{{ $ctrl.instance.series_date }}</div>
+
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Series Date</label>
+                  <div class="form-control-static">{{ $ctrl.instance.series_date }}</div>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group">
+                  <label class="control-label">Series Time</label>
+                  <div class="form-control-static">{{ $ctrl.instance.time }}</div>
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-              <label class="control-label">Author</label>
-              <div class="form-control-static">{{ $ctrl.instance.author }}</div>
-            </div>
-            <div class="form-group">
-              <label class="control-label">Station Name</label>
-              <div class="form-control-static">{{ $ctrl.instance.station }}</div>
-            </div>
-            <div class="form-group">
-              <label class="control-label">Series Time</label>
-              <div class="form-control-static">{{ $ctrl.instance.time }}</div>
-            </div>
-            <div class="form-group">
-              <label class="control-label">Date</label>
-              <div class="form-control-static">{{ $ctrl.instance.date }}</div>
+
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Author</label>
+                  <div class="form-control-static">{{ $ctrl.instance.author }}</div>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group">
+                  <label class="control-label">Date</label>
+                  <div class="form-control-static">{{ $ctrl.instance.date }}</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

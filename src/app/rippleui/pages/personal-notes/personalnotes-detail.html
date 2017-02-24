@@ -13,12 +13,11 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 -->
-<div mc-full-panel mc-accordion mc-open-panel="personalNote" class="panel-group accordion">
-  <div class="panel panel-secondary" ng-if="getShowPanel('personalNote') && !isEdit" ng-class="getOpenPanelClass('personalNote')">
+<div mc-full-panel class="panel-group">
+  <div class="panel panel-secondary" ng-if="!isEdit">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'personalNote')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('personalNote')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
       </div>
       <h3 class="panel-title">Personal Note</h3>
     </div>
@@ -26,30 +25,46 @@
       <div class="panel-body-inner">
         <div class="form">
           <div class="form-group-wrapper">
-
-            <div class="form-group">
-              <label class="control-label">Type</label>
-              <div class="form-control-static">{{ $ctrl.personalNote.noteType }}</div>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Type</label>
+                  <div class="form-control-static">{{ $ctrl.personalNote.noteType }}</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Note</label>
+                  <div class="form-control-static">{{ $ctrl.personalNote.notes }}</div>
+                </div>
+              </div>
             </div>
 
-            <div class="form-group">
-              <label class="control-label">Note</label>
-              <div class="form-control-static">{{ $ctrl.personalNote.notes }}</div>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Author</label>
+                  <div class="form-control-static">{{ $ctrl.personalNote.author }}</div>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group">
+                  <label class="control-label">Date</label>
+                  <div class="form-control-static">{{ $ctrl.personalNote.dateCreated | date:'dd-MMM-yyyy' }}</div>
+                </div>
+              </div>
             </div>
 
-            <div class="form-group">
-              <label class="control-label">Author</label>
-              <div class="form-control-static">{{ $ctrl.personalNote.author }}</div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label">Date</label>
-              <div class="form-control-static">{{ $ctrl.personalNote.dateCreated | date:'dd-MMM-yyyy' }}</div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label">Source</label>
-              <div class="form-control-static">{{ $ctrl.personalNote.source }}</div>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Source</label>
+                  <div class="form-control-static">{{ $ctrl.personalNote.source }}</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -64,11 +79,10 @@
     </div>
   </div>
 
-  <div class="panel panel-secondary" ng-if="getShowPanel('personalNote') && isEdit" ng-class="getOpenPanelClass('personalNote')">
+  <div class="panel panel-secondary" ng-if="isEdit">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'personalNote')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('personalNote')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
       </div>
       <h3 class="panel-title">Edit Personal Note</h3>
     </div>
@@ -76,41 +90,55 @@
       <div class="panel-body-inner">
         <form name="personalNoteForm" class="form">
           <div class="form-group-wrapper">
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || personalNoteForm.noteType.$dirty) && personalNoteForm.noteType.$invalid, 'has-success': personalNoteForm.noteType.$valid && personalNoteForm.noteType.$dirty}">
-              <label for="noteType" class="control-label">Type</label>
-              <div class="input-holder">
-                <input class="form-control input-sm" id="noteType" name="noteType" ng-model="personalNoteEdit.noteType" required />
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && personalNoteForm.noteType.$error.required">You must enter a value.</span>
-            </div>
 
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalNoteForm.notes.$dirty) && clinicalNoteForm.notes.$invalid, 'has-success': personalNoteForm.notes.$valid && personalNoteForm.notes.$dirty}">
-              <label for="notes" class="control-label">Note</label>
-              <div class="input-holder">
-                <textarea class="form-control textarea-big input-sm" id="notes" name="notes" ng-model="personalNoteEdit.notes" required></textarea>
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && personalNoteForm.note.$error.required">You must enter a value.</span>
-            </div>
-            <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || personalNoteForm.author.$dirty) && personalNoteForm.author.$invalid, 'has-success': personalNoteForm.author.$valid && personalNoteForm.author.$dirty}">
-              <label for="author" class="control-label">Author</label>
-              <div class="input-holder">
-                <input type="text" class="form-control input-sm" id="author" name="author" ng-model="personalNoteEdit.author" required/>
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && personalNoteForm.author.$error.required">You must enter a value.</span>
-            </div>
-            <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || personalNoteForm.dateCreated.$dirty) && personalNoteForm.dateCreated.$invalid, 'has-success': personalNoteForm.dateCreated.$valid && personalNoteForm.dateCreated.$dirty}">
-              <label for="dateCreated" class="control-label">Date</label>
-              <div class="inner-addon addon-left">
-                <div class="addon">
-                  <i class="fa fa-calendar"></i>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || personalNoteForm.noteType.$dirty) && personalNoteForm.noteType.$invalid, 'has-success': personalNoteForm.noteType.$valid && personalNoteForm.noteType.$dirty}">
+                  <label for="noteType" class="control-label">Type</label>
+                  <div class="input-holder">
+                    <input class="form-control input-sm" id="noteType" name="noteType" ng-model="personalNoteEdit.noteType" required />
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && personalNoteForm.noteType.$error.required">You must enter a value.</span>
                 </div>
-                <input type="text" class="form-control" id="dateCreated" name="dateCreated" ng-model="$ctrl.dateCreated" required disabled />
+              </div>
+            </div>
+            
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalNoteForm.notes.$dirty) && clinicalNoteForm.notes.$invalid, 'has-success': personalNoteForm.notes.$valid && personalNoteForm.notes.$dirty}">
+                  <label for="notes" class="control-label">Note</label>
+                  <div class="input-holder">
+                    <textarea class="form-control textarea-big input-sm" id="notes" name="notes" ng-model="personalNoteEdit.notes" required></textarea>
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && personalNoteForm.note.$error.required">You must enter a value.</span>
+                </div>
               </div>
             </div>
 
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || personalNoteForm.author.$dirty) && personalNoteForm.author.$invalid, 'has-success': personalNoteForm.author.$valid && personalNoteForm.author.$dirty}">
+                  <label for="author" class="control-label">Author</label>
+                  <div class="input-holder">
+                    <input type="text" class="form-control input-sm" id="author" name="author" ng-model="personalNoteEdit.author" required/>
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && personalNoteForm.author.$error.required">You must enter a value.</span>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || personalNoteForm.dateCreated.$dirty) && personalNoteForm.dateCreated.$invalid, 'has-success': personalNoteForm.dateCreated.$valid && personalNoteForm.dateCreated.$dirty}">
+                  <label for="dateCreated" class="control-label">Date</label>
+                  <div class="inner-addon addon-left">
+                    <div class="addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control" id="dateCreated" name="dateCreated" ng-model="$ctrl.dateCreated" required disabled />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </form>
-        
       </div>
       <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
         <div class="wrap-control-group">

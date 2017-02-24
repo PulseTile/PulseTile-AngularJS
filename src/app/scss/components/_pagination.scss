@@ -7,7 +7,7 @@
     margin-right: -1px;
     z-index: 1;
     &.active  { z-index: 2; }
-    a {
+    a, a:focus {
       display: block;
       min-width: 28px;
       height: 34px;

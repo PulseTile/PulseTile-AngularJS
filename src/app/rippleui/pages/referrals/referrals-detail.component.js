@@ -49,13 +49,6 @@ class ReferralsDetailController {
 			$scope.referralsEdit.dateCreated = new Date();
 		};
 
-		$scope.openDatepicker = function ($event, name) {
-			$event.preventDefault();
-			$event.stopPropagation();
-
-			$scope[name] = true;
-		};
-
 		this.cancelEdit = function () {
 			$scope.isEdit = false;
 		};

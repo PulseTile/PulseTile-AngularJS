@@ -34,6 +34,12 @@ label.control-label {
   border-radius: 2px;
   box-shadow: 0 0 0 #fff !important;
 }
+
+.form-control.readonly,
+.form-control[readonly] {
+  opacity: 1;
+  background-color: #ffffff !important;
+}
 .form-control-static  {
   min-height: 18px;
   padding: 0;
@@ -45,7 +51,7 @@ label.control-label {
   }
   a {
     color: #000000;
-    font-weight: 600;
+    // font-weight: 600;
     text-decoration: underline;
     &:hover {text-decoration: none;}
   }
