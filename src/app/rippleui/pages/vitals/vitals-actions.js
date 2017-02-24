@@ -24,7 +24,7 @@ export function all(patientId) {
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/vitalsigns/'
+      url: '/api/patients/' + patientId + '/vitalsigns'
     },
 
     meta: {

@@ -54,7 +54,8 @@ class ImageListController {
         }, {
           sourceId: '2',
           name: 'Cell-Culture Influenza Vaccine',
-          source: 'EtherCIS',
+          source: 'orthanc',
+          studyId: "55a9fcd2-e8197ca2-1af7a8e2-0e1ab147-841c65ba",
           seriesNumber: 2,
           comment: 'Hospital staff',
           date: date,
@@ -72,8 +73,8 @@ class ImageListController {
         }
       ];
 
-      serviceFormatted.formattingTablesDate(this.images, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
-      serviceFormatted.filteringKeys = ['name', 'date', 'source'];
+      // serviceFormatted.formattingTablesDate(this.images, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
+      // serviceFormatted.filteringKeys = ['name', 'date', 'source'];
       usSpinnerService.stop('patientSummary-spinner');
       
       if (data.patientsGet.data) {

@@ -43,7 +43,7 @@
       </thead>
 
       <tbody>
-      <tr dir-paginate="image in $ctrl.images | filter: queryFilter | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(image.sourceId, image.source)" ng-class="{info: selectedRow(image.sourceId)}">
+      <tr dir-paginate="image in $ctrl.images | filter: queryFilter | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(image.studyId, image.source)" ng-class="{info: selectedRow(image.sourceId)}">
         <td data-th="Name" ng-class="sortClass('name');">{{image.name}}</td>
         <td data-th="Date" class="dateTime" ng-class="sortClass('date');">{{image.date | date:'dd-MMM-yyyy'}}</td>
         <td data-th="Source" ng-class="sortClass('source');">{{image.source}}</td>

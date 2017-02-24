@@ -68,7 +68,7 @@ export function getInstanceId(patientId, seriesId, source) {
   return {
     types: [types.INSTANCE_ID_GET, types.INSTANCE_ID_GET_SUCCESS, types.INSTANCE_ID_GET_ERROR],
 
-    shouldCallAPI: (state) => !state.instanceId.response,
+    shouldCallAPI: (state) => !state.instanceIdGet.response,
 
     config: {
       method: 'get',

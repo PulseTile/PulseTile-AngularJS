@@ -55,6 +55,7 @@ import HomeSidebarComponent from './rippleui/pages/patients-lookup/home-sidebar.
 import ServiceRequests from './services/serviceRequests.js';
 import ServiceStateManager from './services/serviceStateManager.js';
 import ServiceVitalsSigns from './rippleui/pages/vitals/serviceVitalsSigns.js';
+import ServiceActions from './rippleui/pages/dicom/serviceActions.js';
 import ServiceFormatted from './services/serviceFormatted.js';
 
 import routeConfig from 'app/index.route';
@@ -89,7 +90,8 @@ let app = angular
     .service('serviceFormatted', ServiceFormatted)
     .service('serviceRequests', ServiceRequests)
     .service('serviceStateManager', ServiceStateManager)
-    .service('serviceVitalsSigns', ServiceVitalsSigns);
+    .service('serviceVitalsSigns', ServiceVitalsSigns)
+    .service('serviceActions', ServiceActions);
 
   plugins.forEach((plugin)=>{
     Object.keys(plugin.components).forEach((name)=>{
