@@ -19,14 +19,11 @@ class HeaderController {
   constructor($rootScope, $scope, $state, $stateParams, $ngRedux, patientsActions, serviceRequests) {
 
     var self = this;
-    $scope.title = {
-      role: '',
-      poc: ''
-    };
+    $scope.title = '';
 
     this.goBack = function () {
       /* istanbul ignore if  */
-      if ($scope.title.role + ' ' +  $scope.title.poc === 'PHR POC') return;
+      if ($scope.title === 'PHR') return;
 
       switch ($state.router.globals.$current.name) {
         case 'patients-charts': 
@@ -46,7 +43,7 @@ class HeaderController {
     };
     this.goChart = function () {
       /* istanbul ignore if  */
-      if ($scope.title.role + ' ' +  $scope.title.poc === 'PHR POC') return;
+      if ($scope.title === 'PHR') return;
 
       $state.go('patients-charts');
     };
@@ -95,8 +92,7 @@ class HeaderController {
 
     $scope.setTitle = function (data) {
       if (data) {
-        $scope.title.role = data.role;
-        $scope.title.poc = 'POC';
+        $scope.title = data.role;
       }
       $scope.switchDirectByRole(data);
     };

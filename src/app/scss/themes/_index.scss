@@ -1,8 +1,0 @@
-$user-palette: false !default;
-$base-color-palette: false !default;
-
-@if ($user-palette) {
-  $base-color-palette: $user-palette;
-} @else {
-  $base-color-palette: $green-palette;
-}

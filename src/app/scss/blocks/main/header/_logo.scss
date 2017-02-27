@@ -2,13 +2,10 @@
   float: left;
   padding: 6px 9px;
 }
-// .wrap-logo {
-//   float: left;
-//   padding: 6px 4px;
-// }
 .logo {
   font-size: 0;
   line-height: 0;
+  user-select: none;
   .logo-icon {
     display: inline-block;
     width: auto;
@@ -16,9 +13,12 @@
     margin-right: 10px;
     vertical-align: middle;
     cursor: pointer;
-    img {
-      height: 100%;
-      width: auto;
+    .img {
+      display: block;
+      height: 38px;
+      width: 35px;
+      background: url(map-get($config-site, "logo-icon")) no-repeat center center;
+      background-size: contain;
     }
   }
   .logo-text {
@@ -42,5 +42,11 @@
     padding-left: 9px;
     padding-right: 9px;
   }
-  .logo .logo-mobile-hidden { display: inline; }
+  .logo .logo-mobile-hidden { 
+    display: inline; 
+    &:before {
+      display: inline; 
+      content: map-get($config-site, "logo-text");
+    }
+  }
 }
