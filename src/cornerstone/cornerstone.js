@@ -520,10 +520,12 @@ if(typeof cornerstone === 'undefined'){
         }
 
         var cacheInfo = cornerstone.imageCache.getCacheInfo();
+        console.log('purgeCacheIfNecessary ---> ', cacheInfo);
         $(cornerstone).trigger('CornerstoneImageCacheFull', cacheInfo);
     }
 
     function putImagePromise(imageId, imagePromise) {
+        console.log('putImagePromise111 ', imageId, imagePromise);
         if (imageId === undefined) {
             throw "getImagePromise: imageId must not be undefined";
         }
@@ -546,8 +548,9 @@ if(typeof cornerstone === 'undefined'){
 
         imageCache[imageId] = cachedImage;
         cachedImages.push(cachedImage);
-
+        console.log('putImagePromise222 ', cachedImages);
         imagePromise.then(function(image) {
+            console.log('putImagePromise imagePromise.then ', image);
             cachedImage.loaded = true;
 
             if (image.sizeInBytes === undefined) {
@@ -582,6 +585,7 @@ if(typeof cornerstone === 'undefined'){
             throw "getImagePromise: imageId must not be undefined";
         }
         var cachedImage = imageCache[imageId];
+        console.log('getImagePromise ', imageId, cachedImage, imageCache);
         if (cachedImage === undefined) {
             return undefined;
         }
@@ -690,6 +694,7 @@ if(typeof cornerstone === 'undefined'){
         var scheme = imageId.substring(0, colonIndex);
         var loader = imageLoaders[scheme];
         var imagePromise;
+        console.log('loadImageFromImageLoader ', imageId, colonIndex, scheme, imageLoaders, loader);
         if(loader === undefined || loader === null) {
             if(unknownImageLoader !== undefined) {
                 imagePromise = unknownImageLoader(imageId);
@@ -742,22 +747,25 @@ if(typeof cornerstone === 'undefined'){
     // to the loaded image object or fail if an error occurred.  The image is
     // stored in the cache
     function loadAndCacheImage(imageId) {
+        console.log('loadAndCacheImage111 ', imageId);
         if(imageId === undefined) {
             throw "loadAndCacheImage: parameter imageId must not be undefined";
         }
 
         var imagePromise = cornerstone.imageCache.getImagePromise(imageId);
+        console.log('loadAndCacheImage222 ', imagePromise);
         if(imagePromise !== undefined) {
             return imagePromise;
         }
 
         imagePromise = loadImageFromImageLoader(imageId);
+        console.log('loadAndCacheImage333 ', imagePromise);
         if(imagePromise === undefined) {
             throw "loadAndCacheImage: no image loader for imageId";
         }
 
         cornerstone.imageCache.putImagePromise(imageId, imagePromise);
-
+        console.log('loadAndCacheImage444 ', imagePromise);
         return imagePromise;
     }
 
