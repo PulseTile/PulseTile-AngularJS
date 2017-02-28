@@ -699,6 +699,13 @@ if(typeof cornerstone === 'undefined'){
                 return undefined;
             }
         }
+        // if(converter !== undefined) {
+        //     convertPromise = converter(imageId);
+        //     convertPromise.then(function(image) {
+        //         console.log('converter.then 555 ', image);
+        //         imagePromise = loader(imageId);
+        //     });
+        // }
         imagePromise = loader(imageId);
 
         // broadcast an image loaded event once the image is loaded

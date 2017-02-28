@@ -14,6 +14,7 @@
   ~  limitations under the License.
 */
 let templateImageDetail= require('./image-detail.html');
+import cornerstoneJS from '../../../../cornerstone/cornerstone';
 
 class ImageDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, serviceActions, serviceRequests, usSpinnerService) {
@@ -29,21 +30,23 @@ class ImageDetailController {
         document.body.classList.remove('modal-open');
       }
     };
-    
-    serviceActions.getAllSeriesInStudy($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source).then(function (result) {
-      $scope.study = result.data;
 
-      var seriesIds = $scope.study.seriesIds;
-      $scope.instanceIds = [];
-      for (var i = 0; i < seriesIds.length; i++) {
-        findSeriesMetadata(seriesIds[i], i);
-        findFirstInstanceId(seriesIds[i], i);
-      }
+    var cornerstone = cornerstoneJS();
+      var element;
+    serviceActions.getAllSeriesInStudy($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source).then(function (result) {
+       $scope.study = result.data;
+        var seriesIds = $scope.study.seriesIds;
+        $scope.instanceIds = [];
+        for (var i = 0; i < seriesIds.length; i++) {
+            findSeriesMetadata(seriesIds[i], i);
+            findFirstInstanceId(seriesIds[i], i);
+        }
     });
 
     var findFirstInstanceId = function (seriesId, index) {
       serviceActions.getInstanceId($stateParams.patientId, seriesId, $stateParams.source).then(function (result) {
         $scope.instanceIds[index] = result.data.instanceId;
+        element = $('#dicomImage');
       });
     };
 
@@ -53,6 +56,21 @@ class ImageDetailController {
         $scope.series[index].seriesDate = moment($scope.series[index].seriesDate).format('DD-MMM-YYYY');
         $scope.series[index].seriesTime = moment($scope.series[index].seriesTime).format('h:mma');
       });
+    };
+
+      
+    $scope.zoomIn = function (ev) {
+      var viewport = cornerstone.getViewport(element);
+      viewport.scale += 0.25;
+      cornerstone.setViewport(element, viewport);
+    };
+    $scope.zoomOut = function (ev) {
+      var viewport = cornerstone.getViewport(element);
+      viewport.scale -= 0.25;
+      cornerstone.setViewport(element, viewport);
+    };
+    $scope.reset = function (ev) {
+      cornerstone.reset(element);
     };
 
   }
