@@ -17,23 +17,43 @@
 let templateClinicalstatementsList = require('./clinicalstatements-list.html');
 
 class ClinicalstatementsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'clinicalStatements-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.currentPage = 1;
-    $scope.query = '';
-    this.isFilter = false;
-    this.isShowCreateBtn = $state.router.globals.$current.name !== 'clinicalStatements-create';
-    this.isShowExpandBtn = $state.router.globals.$current.name !== 'clinicalStatements';
+    this.isShowCreateBtn = $state.router.globals.$current.name !== 'clinicalstatements-create';
+    this.isShowExpandBtn = $state.router.globals.$current.name !== 'clinicalstatements';
 
 
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
-      if (data.clinicalStatements.data) {
-        this.clinicalStatements = data.clinicalStatements.data;
+      if (data.clinicalstatements.data) {
+        // this.clinicalStatements = data.clinicalstatements.data;
+        var date = new Date();
+        this.clinicalStatements = [
+          {
+            sourceId: '1',
+            author: 'ripple_osi author 1',
+            dateCreate: Date.parse(new Date()),
+            source: 'Marand'
+          }, {
+            sourceId: '2',
+            author: 'ripple_osi author 2',
+            dateCreate: Date.parse(new Date(date.setDate(date.getDate()-1))),
+            source: 'EtherCIS'
+          }, {
+            sourceId: '3',
+            author: 'ripple_osi author 3',
+            dateCreate: Date.parse(new Date(date.setDate(date.getDate()-4))),
+            source: 'Marand'
+          }
+
+        ];
+
+        serviceFormatted.formattingTablesDate(this.clinicalStatements, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['author', 'dateCreate', 'source'];
       }
       usSpinnerService.stop("patientSummary-spinner");
 
@@ -42,54 +62,20 @@ class ClinicalstatementsListController {
       }
     };
 
-    this.toggleFilter = function () {
-      this.isFilter = !this.isFilter;
-    };
-    
     this.create = function () {
-      $state.go('clinicalStatements-create', {
+      $state.go('clinicalstatements-create', {
         patientId: $stateParams.patientId,
-        filter: this.query,
         page: this.currentPage
       });
     };
     
-    this.go = function (id, clinicalStatementSource) {
-      $state.go('clinicalStatements-detail', {
+    this.go = function (id, source) {
+      $state.go('clinicalstatements-detail', {
         patientId: $stateParams.patientId,
-        clinicalStatementIndex: id,
-        filter: $scope.query,
-        page: this.currentPage,
-        reportType: $stateParams.reportType,
-        searchString: $stateParams.searchString,
-        queryType: $stateParams.queryType,
-        source: JSON.stringify(clinicalStatementSource)
+        detailsIndex: id,
+        page: $scope.currentPage || 1,
+        source: source
       });
-    };
-
-    this.pageChangeHandler = function (newPage) {
-      $scope.currentPage = newPage;
-    };
-
-    if ($stateParams.page) {
-      $scope.currentPage = $stateParams.page;
-    }
-
-    this.search = function (row) {
-      return (
-        row.author.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-        row.dateCreated.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-        row.source.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1
-      );
-    };
-
-    if ($stateParams.filter) {
-      $scope.query = $stateParams.filter;
-    }
-
-
-    this.selected = function (clinicalStatementIndex) {
-      return clinicalStatementIndex === $stateParams.clinicalStatementIndex;
     };
 
     let unsubscribe = $ngRedux.connect(state => ({
@@ -108,5 +94,5 @@ const ClinicalstatementsListComponent = {
   controller: ClinicalstatementsListController
 };
 
-ClinicalstatementsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalstatementsActions', 'serviceRequests', 'usSpinnerService'];
+ClinicalstatementsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalstatementsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default ClinicalstatementsListComponent;

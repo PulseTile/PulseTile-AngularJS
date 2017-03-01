@@ -16,6 +16,17 @@
 routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 function routeConfig($stateProvider, $urlRouterProvider) {
+  var breadcrumbs = [{
+          title: 'Patient Listings',
+          state: 'patients-list'
+        }, {
+          title: 'Patient Summary',
+          state: 'patients-summary'
+        }, {
+          title: 'Clinical Statements',
+          state: 'clinicalstatements'
+        }];
+
   $stateProvider
 
       .state('clinicalstatements', {
@@ -24,16 +35,29 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           banner: {template: '<patients-banner-component></patients-banner-component>'},
           actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
           main: {template: '<clinicalstatements-list-component></clinicalstatements-list-component>'}
-        }
+        },
+        breadcrumbs: breadcrumbs
+      })
+      .state('clinicalstatements-create', {
+        url: '/patients/{patientId:int}/clinicalstatements/create?reportType&searchString&queryType',
+        views: {
+          banner: {template: '<patients-banner-component></patients-banner-component>'},
+          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+          main: {template: '<clinicalstatements-list-component></clinicalstatements-list-component>'},
+          detail: {template: '<clinicalstatements-create-component></clinicalstatements-create-component>'}
+        },
+        breadcrumbs: breadcrumbs
       })
       .state('clinicalstatements-detail', {
-        url: '/patients/{patientId:int}/clinicalStatements/{clinicalStatementIndex}?filter&page&reportType&searchString&queryType&source',
+        url: '/patients/{patientId:int}/clinicalStatements/{detailsIndex}?page&reportType&searchString&queryType',
         views: {
           banner: {template: '<patients-banner-component></patients-banner-component>'},
           actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
           main: {template: '<clinicalstatements-list-component></clinicalstatements-list-component>'},
           detail: {template: '<clinicalstatements-detail-component></clinicalstatements-detail-component>'}
-        }
+        },
+        params: { source: '{}' },
+        breadcrumbs: breadcrumbs
       });
 }
 

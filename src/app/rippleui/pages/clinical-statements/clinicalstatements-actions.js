@@ -91,7 +91,7 @@ export function query(prefix='', tag='') {
     
     config: {
       method: 'get',
-      url: '/api-clinicalContent/phrases?' + queryString.join('&')
+      url: '/api/contentStore/rob/phrases?' + queryString.join('&')
     },
 
     meta: {
