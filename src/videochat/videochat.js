@@ -98,7 +98,7 @@ $(document).ready(function () {
       "iceServers": [
         {url: 'stun:stun.xten.com'},
         {
-          url: 'turn:139.59.163.92:3478',
+          url: 'turn:138.68.134.7:3478',
           username: 'idcr',
           credential: 'E3rtvo6fkghFrt6'
         }]
