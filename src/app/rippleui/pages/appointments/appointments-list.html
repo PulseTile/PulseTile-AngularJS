@@ -31,7 +31,7 @@
   </thead>
 
   <tbody>
-    <tr dir-paginate="appointment in $ctrl.appointments | filter:$ctrl.search | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(appointment.sourceId)" ng-class="{info: $ctrl.selected(appointment.sourceId)}">
+    <tr dir-paginate="appointment in $ctrl.appointments | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(appointment.sourceId)" ng-class="{info: $ctrl.selected(appointment.sourceId)}">
       <td data-th="Date of App" class="dateTime">{{ appointment.dateOfAppointment}}</td>
       <td data-th="Time">{{ appointment.timeOfAppointment}} - {{appointment.timeOfAppointmentTo}}</td>
       <td data-th="Care Service Team">{{ appointment.serviceTeam}}</td>

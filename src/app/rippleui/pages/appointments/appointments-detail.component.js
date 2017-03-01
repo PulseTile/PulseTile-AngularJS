@@ -74,7 +74,7 @@ class AppointmentsDetailController {
 
 
     //var socket = socketService.socket;
-    var socket = io.connect('wss://' + window.location.hostname + ':' + 8070);
+    var socket = io.connect('wss://' + window.location.hostname + ':' + 3478);
     // var socket = io.connect('https://139.59.187.100:8082');
     var appointmentId = $stateParams.appointmentIndex;
     var user = serviceRequests.currentUserData;

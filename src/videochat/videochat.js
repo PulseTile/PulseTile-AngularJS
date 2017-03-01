@@ -10,7 +10,7 @@ $(document).ready(function () {
   });
   var appointmentId = window.location.search.split('?appointmentId=').pop();
   var ROLE_DOCTOR = 'IDCR';
-  var socket = io.connect('wss://' + window.location.hostname + ':' + 8070);
+  var socket = io.connect('wss://' + window.location.hostname + ':' + 3478);
   var user;
 
   var PeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
