@@ -82,12 +82,6 @@ class MedicationsDetailController {
       };
     };
 
-    $scope.openDatepicker = function ($event, name) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope[name] = true;
-    };
     this.cancelEditMedication = function () {
       $scope.isMedicationEdit = false;
     };

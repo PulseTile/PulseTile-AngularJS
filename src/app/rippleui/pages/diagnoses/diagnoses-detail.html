@@ -13,7 +13,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
-<div mc-full-panel class="panel-group">
+<div mc-full-panel mc-datepicker class="panel-group">
   <div class="panel panel-secondary" ng-if="!isEdit">
     <div class="panel-heading">
       <div class="control-group right">
@@ -133,12 +133,12 @@
               </div>
               <div class="col-expand-right">
                 <div class="form-group" ng-class="{'has-error': (formSubmitted || diagnosisForm.dateOfOnset.$dirty) && diagnosisForm.dateOfOnset.$invalid, 'has-success': diagnosisForm.dateOfOnset.$valid && diagnosisForm.dateOfOnset.$dirty}">
-                  <label for="dateOfOnset" class="control-label rightColumnLabel">Date of Onset</label>
+                  <label for="" class="control-label rightColumnLabel">Date of Onset</label>
                   <div class="inner-addon addon-left">
                     <div class="addon">
                       <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control" id="dateOfOnset" name="dateOfOnset" ng-model="diagnosisEdit.dateOfOnset" ng-click="openDatepicker($event, 'dateOfOnsetOpen')" uib-datepicker-popup="dd-MMM-y" is-open="dateOfOnsetOpen" required />
+                    <input type="text" class="form-control" id="dateOfOnset" name="dateOfOnset" ng-model="diagnosisEdit.dateOfOnset" ng-click="openDatepicker($event, 'dateOfOnsetOpen')" uib-datepicker-popup="dd-MMM-y" is-open="datepickers.dateOfOnsetOpen" required readonly/>
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && diagnosisForm.dateOfOnset.$error.required">You must enter a valid date.</span>
                 </div>

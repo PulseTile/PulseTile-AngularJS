@@ -1,11 +1,3 @@
-// .patient-dashboard {
-//   width: 98%;
-// }
-
-// .button-icons:before {
-//   color: #82BE36;
-//   font-size: 70px;
-// }
 .dashboard {
   padding-top: 8px;
   font-size: 0;
@@ -46,7 +38,7 @@
 
 .board {
   width: 100%;
-  color: #303030;
+  color: map-get($colored-table, 'text');
   border: 1px solid #B4B5B4;
   @media (max-width: map-get($breakpoints, 'xs') - 1) {
     border-left: 0;
@@ -56,7 +48,7 @@
 .board-header {
   @include clearfix;
   padding: 5px;
-  background-color: $table-header-background;
+  background-color: map-get($colored-table, 'header-background');
 }
 .board-title {
   @include text-truncate;
@@ -68,9 +60,10 @@
 
 .board-list-item {
   min-height: 40px;
-  background: #fff;
+  background: map-get($colored-table, 'row-odd-background');
   &:nth-of-type(even) {
-    background: #f3f3f3;
+
+    background:  map-get($colored-table, 'background');
   }
 }
 .board-list-link {
@@ -82,5 +75,5 @@
   cursor: pointer;
 }
 .is-not-touch-device .board-list-link:hover {
-  background: $table-row-background-hover;
+  background: map-get($colored-table, 'row-background-hover');
 }

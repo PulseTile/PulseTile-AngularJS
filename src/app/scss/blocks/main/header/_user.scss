@@ -9,7 +9,7 @@
     margin: 0 10px 0 0;
     font-size: 60px;
     line-height: 80px;
-    color: #82BE36;
+    color: $auxiliary-color;
     text-align: center;
     border-radius: 4px;
     background-color: #eef8e7;
@@ -33,7 +33,7 @@
     overflow: hidden;
     font-size: 14px;
     line-height: 18px;
-    color: #3c3c3c;
+    color: $text-color;
   }
   .name {
     margin-bottom: 2px;
@@ -48,7 +48,7 @@
       margin-bottom: 2px;
       line-height: 20px;
     }
-    .gray {color: #9c9c9c;}
+    .gray {color: lighten($text-color, 40%);}//#9c9c9c
   }
   .btn-signout i {
     margin-left: 10px;

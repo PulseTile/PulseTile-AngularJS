@@ -13,7 +13,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-let templateOrdersDetail= require('./orders-detail.html');
+let templateOrdersDetail = require('./orders-detail.html');
 
 class OrdersDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, ordersActions, usSpinnerService, serviceRequests) {

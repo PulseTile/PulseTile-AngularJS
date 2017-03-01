@@ -15,7 +15,7 @@ $vitalsInputColor: (
   padding-left: 12px;
   margin-left: -11px;
   .highlighter { width: 5px; }
-  .highlighter-not-vital {width: 2px;}
+  .highlighter-not-vital {width: 3px;}
   .input-holder,
   .input-group {
     padding-bottom: 3px;
@@ -32,7 +32,7 @@ $vitalsInputColor: (
   width: 150px;
   .form-control {
     background-color: #fff;
-    width: 51px;
+    width: 55px;
     color: #000000;
   }
   .vitals-addon {
@@ -71,7 +71,7 @@ $vitalsInputColor: (
   font-size: 14px;
   line-height: 18px;
   font-weight: 400;
-  color: #303030;
+  color: $text-color;
 }
 
 .vitals-popover {

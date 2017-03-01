@@ -219,7 +219,7 @@ class VitalsListController {
 
     /* istanbul ignore next  */
     $scope.changeViewList = function (viewName) {
-      var currentPage = this.currentPage || 1;
+      var currentPage = $scope.currentPage || 1;
       var vitalsForChart;
       $scope.viewList = viewName;
 

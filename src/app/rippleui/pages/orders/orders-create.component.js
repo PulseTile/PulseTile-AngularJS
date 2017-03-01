@@ -143,13 +143,6 @@ class OrdersCreateController {
             $scope.firstPage = true;
         };
 
-        $scope.openDatepicker = function ($event, name) {
-            $event.preventDefault();
-            $event.stopPropagation();
-
-            $scope[name] = true;
-        };
-
         let unsubscribe = $ngRedux.connect(state => ({
             getStoreData: this.setCurrentPageData(state)
         }))($scope);

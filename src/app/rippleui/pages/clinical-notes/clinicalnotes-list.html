@@ -55,7 +55,7 @@
           <td data-th="Type"  ng-class="sortClass('type')">{{ clinicalNote.noteType }}</td>
           <td data-th="Author"ng-class="sortClass('author')">{{ clinicalNote.author }}</td>
           <td data-th="Date"  ng-class="sortClass('date')">{{ clinicalNote.dateCreated }}</td>
-          <td data-th="Source" ng-class="sortClass('source')" class="hidden-xs">{{ clinicalNote.source }}</td>
+          <td data-th="Source" ng-class="sortClass('source')" class="hidden-xs-cell">{{ clinicalNote.source }}</td>
         </tr>
 
         <tr ng-if="!$ctrl.clinicalNotes.length">

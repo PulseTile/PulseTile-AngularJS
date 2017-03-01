@@ -1,12 +1,15 @@
+@import 'config';
+
+@import 'abstracts/variables';
 @import 'abstracts/colors';
-@import 'abstracts/config';
+@import 'abstracts/settings';
 @import 'abstracts/functions';
 @import 'abstracts/mixins';
-@import 'abstracts/variables';
 
 @import 'base/fonts';
 @import 'base/typography';
 @import 'base/grid';
+
 
 // @import 'components/';
 @import 'components/btn';
@@ -18,9 +21,10 @@
 @import 'components/modal';
 @import 'components/switch';
 @import 'components/fieldset';
+@import 'components/datepicker';
 
 @import 'base';
-@import 'main';
+// @import 'main';
 
 @import 'blocks/main/header/index';
 @import 'blocks/main/sidebar';

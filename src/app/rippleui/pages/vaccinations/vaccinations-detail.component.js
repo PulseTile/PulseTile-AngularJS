@@ -28,11 +28,14 @@ class VaccinationsDetailController {
       $scope.isEdit = true;
 
       $scope.vaccinationEdit = Object.assign({}, this.vaccination);
+      $scope.vaccinationEdit.date = new Date(+$scope.vaccinationEdit.date);
       $scope.vaccinationEdit.dateCreate = new Date();
     };
+
     this.cancelEdit = function () {
       $scope.isEdit = false;
     };
+    
     $scope.confirmEdit = function (vaccinationForm, vaccination) {
       $scope.formSubmitted = true;
       if (vaccinationForm.$valid) {
@@ -41,12 +44,6 @@ class VaccinationsDetailController {
         $scope.vaccinationsUpdate($scope.patient.id, $scope.vaccination);
       }
     }.bind(this);
-    $scope.openDatepicker = function ($event, name) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope[name] = true;
-    };
 
     this.setCurrentPageData = function (data) {
       // if (data.vaccinations.dataGet) {

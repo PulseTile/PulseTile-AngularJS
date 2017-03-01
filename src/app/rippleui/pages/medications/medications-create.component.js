@@ -52,12 +52,6 @@ class MedicationsCreateController {
       'IM Intra Muscular'
     ];
 
-    $scope.openDatepicker = function ($event, name) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope[name] = true;
-    };
     $scope.patient = $scope.currentPatient;
     this.goList = function () {
       $state.go('medications', {

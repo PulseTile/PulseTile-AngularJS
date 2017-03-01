@@ -67,11 +67,8 @@ describe('Patients List', function() {
         spyOn(fakeCall, 'callPatients');
         fakeCall.callPatients({}, types.PATIENTS);
 
-        spyOn(ctrl, 'sort');
-        spyOn(ctrl, 'sortClass');
         spyOn(ctrl, 'go');
         spyOn(ctrl, 'setPatients');
-        spyOn(ctrl, 'toggleFilter');
         spyOn(ctrl, 'processCounts');
         spyOn(ctrl, 'processDateFormat');
         spyOn(ctrl, 'processData');
@@ -82,11 +79,8 @@ describe('Patients List', function() {
         spyOn(ctrl, 'goToSection');
         spyOn(ctrl, 'getItem');
 
-        ctrl.sort();
-        ctrl.sortClass();
         ctrl.go();
         ctrl.setPatients();
-        ctrl.toggleFilter();
         ctrl.processCounts();
         ctrl.processDateFormat();
         ctrl.processData();
@@ -110,20 +104,11 @@ describe('Patients List', function() {
     it("Patients reducer was called", function() {
         expect(fakeCall.callPatients).toHaveBeenCalled();
     });
-    it("sort was called", function() {
-        expect(ctrl.sort).toHaveBeenCalled();
-    });
-    it("sortClass was called", function() {
-        expect(ctrl.sortClass).toHaveBeenCalled();
-    });
     it("route go was called", function() {
         expect(ctrl.go).toHaveBeenCalled();
     });
     it("setPatients was called", function() {
         expect(ctrl.setPatients).toHaveBeenCalled();
-    });
-    it("toggleFilter was called", function() {
-        expect(ctrl.toggleFilter).toHaveBeenCalled();
     });
     it("processCounts was called", function() {
         expect(ctrl.processCounts).toHaveBeenCalled();

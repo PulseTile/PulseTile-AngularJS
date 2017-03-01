@@ -64,13 +64,6 @@ class VitalsDetailController {
       }
     }.bind(this);
 
-    $scope.openDatepicker = function ($event, name) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope[name] = true;
-    };
-
     this.setCurrentPageData = function (data) {
       if (data.vitals.dataGet) {
         $scope.vital = serviceVitalsSigns.convertVitalCharacteristics(data.vitals.dataGet);

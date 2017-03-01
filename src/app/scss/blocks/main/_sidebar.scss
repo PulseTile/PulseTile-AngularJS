@@ -26,8 +26,8 @@
   height: 34px;
   margin: 0 10px 0 0;
   padding: 6px 8px;
-  color: #fff;
-  border: 1px solid #fff;
+  color: $text-on-base-color;
+  border: 1px solid $text-on-base-color;
   background: transparent;
   cursor: pointer;
   outline: none;
@@ -46,8 +46,8 @@
 .showSidebar .btn-toggle-sidebar,
 .showSidebar .btn-toggle-sidebar:focus,
 .showSidebar .btn-toggle-sidebar:hover {
-  color: $secondary-color;
-  background: #fff;
+  color: $base-color;
+  background: $text-on-base-color;
 }
 @include respond-to(xs) {
   .btn-toggle-sidebar,
@@ -70,8 +70,8 @@
     margin-right: 0;
   }
   .is-not-touch-device .btn-toggle-sidebar:hover {
-    color: $secondary-color;
-    background: #fff;
+    color: $base-color;
+    background: $text-on-base-color;
   }
 }
 
@@ -85,15 +85,15 @@
       font-size: 14px;
       font-weight: 500;
       line-height: 19px;
-      color: #0C662E;
+      color: $base-color;
     }
     a.active {
-      color: #fff;
-      background-color: $secondary-color;
+      color: $text-on-base-color;
+      background-color: $base-color;
     }
   }
 }
 .is-not-touch-device .sidebar-nav ul li a:hover {
-  color: #fff;
-  background-color: $secondary-color;
+  color: $text-on-base-color;
+  background-color: $base-color;
 }

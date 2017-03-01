@@ -32,8 +32,6 @@ class PatientsListFullController {
     this.tabName = 'Patient Info';
     this.patients = [];
     $rootScope.searchMode = true;
-    this.query = '';
-    this.isFilter = false;
 
     this.getPageInfo = function (info) {
       var from = (15 * info.page - 14);
@@ -106,26 +104,6 @@ class PatientsListFullController {
         searchType = 'patient';
       }
     }
-
-    this.toggleFilter = function () {
-      this.isFilter = !this.isFilter;
-    };
-    this.sort = function (field) {
-      var reverse = this.reverse;
-      /* istanbul ignore if  */
-      if (this.order === field) {
-        this.reverse = !reverse;
-      } else {
-        this.order = field;
-        this.reverse = false;
-      }
-    };
-
-    this.sortClass = function (field) {
-      if (this.order === field) {
-        return this.reverse ? 'sorted desc' : 'sorted asc';
-      }
-    };
 
     this.processCounts = function (countString) {
       return countString === null ? 0 : countString;
