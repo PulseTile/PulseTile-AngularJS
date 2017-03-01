@@ -42,24 +42,15 @@ describe('HeightAndWeight List', function() {
 
     spyOn(fakeCall, 'callHeightAndWeight');
 
-    spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
-    spyOn(ctrl, 'selected');
-    spyOn(ctrl, 'search');
     spyOn(ctrl, 'setCurrentPageData');
 
     fakeCall.callHeightAndWeight({}, types.HEIGHTANDWEIGHT);
 
-    ctrl.pageChangeHandler();
     ctrl.go();
-    ctrl.selected();
-    ctrl.search();
     ctrl.setCurrentPageData();
   });
 
-  it('currentPage', function() {
-    expect(ctrl.currentPage).toBe(1);
-  });
   it('Template exist', function() {
     expect(template).toBeDefined();
   });
@@ -72,17 +63,8 @@ describe('HeightAndWeight List', function() {
   it("HeightAndWeight reducer was called", function() {
     expect(fakeCall.callHeightAndWeight).toHaveBeenCalled();
   });
-  it("pageChangeHandler was called", function() {
-    expect(ctrl.pageChangeHandler).toHaveBeenCalled();
-  });
   it("route go was called", function() {
     expect(ctrl.go).toHaveBeenCalled();
-  });
-  it("selected was called", function() {
-    expect(ctrl.selected).toHaveBeenCalled();
-  });
-  it("search was called", function() {
-    expect(ctrl.search).toHaveBeenCalled();
   });
   it("setCurrentPageData was called", function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();

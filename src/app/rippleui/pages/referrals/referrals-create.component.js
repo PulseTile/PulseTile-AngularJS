@@ -69,13 +69,6 @@ class ReferralsCreateController {
 			$scope.isEdit = false;
 		};
 
-		$scope.openDatepicker = function ($event, name) {
-			$event.preventDefault();
-			$event.stopPropagation();
-
-			$scope[name] = true;
-		};
-
 		$scope.create = function (referralForm, referral) {
 			$scope.formSubmitted = true;
 

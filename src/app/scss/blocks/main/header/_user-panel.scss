@@ -5,7 +5,7 @@
     &.open .btn-header,
     &.active .btn-header {
       background: #fff;
-      color: #7cbe31;
+      color: $auxiliary-color;
       .count {display: none;}
     }
   }

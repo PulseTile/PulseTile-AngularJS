@@ -20,18 +20,6 @@ class TransferOfCareListController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.currentPage = 1;
-
-    this.query = '';
-
-    this.pageChangeHandler = function (newPage) {
-      this.currentPage = newPage;
-    };
-
-    if ($stateParams.page) {
-      this.currentPage = $stateParams.page;
-    }
-
     this.go = function (id, transferfCareSource) {
       $state.go('transferOfCare-detail', {
         patientId: $stateParams.patientId,
@@ -40,14 +28,6 @@ class TransferOfCareListController {
         page: this.currentPage,
         source: transferfCareSource
       });
-    };
-
-    // this.create = function () {
-      // TransferOfCareModal.openModal(this.currentPatient, {title: ''}, {}, this.currentUser);
-    // };
-
-    this.selected = function (transferOfCareIndex) {
-      return transferOfCareIndex === $stateParams.transferOfCareIndex;
     };
 
     this.setCurrentPageData = function (data) {

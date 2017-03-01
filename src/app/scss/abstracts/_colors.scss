@@ -1,46 +1,52 @@
 /**
-  * BASE COLORS
+  * CONFIG
   */
-  $white: #ffffff;
-  $jewel: #0D672F;
-  $atlantis: #7cbe31;
-  $fun-green: #007a41;
-  $deco: #C5E29F;
-  $astral: #337AB7;
-  $boston-blue: #347BB7;
-  $roman: #DA534F;
-  $sandy-brown: #F0AD4E;
+  $user-palette: false !default;
+  $blue-palette: false !default;
+  $red-palette: false !default;
+  $yellow-palette: false !default;
+  $base-color-palette: false !default;
+
+  @if ($user-palette) {
+    $base-color-palette: $user-palette;
+  } @else if ($blue-palette) {
+    $base-color-palette: $blue-palette;
+  } @else if ($red-palette) {
+    $base-color-palette: $red-palette;
+  } @else if ($yellow-palette) {
+    $base-color-palette: $yellow-palette;
+  } @else {
+    $base-color-palette: $green-palette;
+  } 
+
 
 /**
   * COLORS for use across the site
   */
-  $secondary-color: $jewel;
+  $base-color: map-get($base-color-palette, 'base-color');
+  $auxiliary-color: map-get($base-color-palette, 'light-color');
   
-  $toolbar-background: $jewel;
-  $tab-background: $jewel;
-  $header-color: $jewel;
-
-  $icon-chevron-color: $jewel;
-  $icon-user-color: #82BE36;
-  $icon-sidebar-color: $atlantis;
-  $icon-patient-landing-color: $deco;
+  $table-color: map-get($base-color-palette, 'lighter-color');
+  $colored-table: (
+    background: #F3F3F3,
+    header-background: lighten(saturate(adjust-hue($table-color, -10.5516), 9.6510), 6.2745),
+    row-odd-background: #FDFDFD,
+    row-background-hover: lighten(desaturate(adjust-hue($table-color, -9.8551), 7.9490), 20.9804),
+    selected-background: $table-color,
+    sorted-background: lighten(desaturate(adjust-hue($table-color, -9.8551), 7.9490), 20.9804),
+    sorted-background-odd: lighten(saturate(adjust-hue($table-color, -9.8551), 8.9921), 24.1176)
+  );
+  
+  $text-color: #303030;
+  $text-on-base-color: #ffffff;
 
   $colored-buttons: (
-    default: $white,
-    primary: $astral,
-    success: $fun-green,
-    info: $boston-blue,
-    warning: $sandy-brown,
-    danger: $roman
+    default: #ffffff,
+    primary: #337AB7,
+    success: lighten(saturate(adjust-hue($base-color, 9.3005), 22.4138), 1.1765),
+    info: #347BB7,
+    warning: #F0AD4E,
+    danger: #DA534F
   );
+    // success: #007a41,
 
-  $button-sidebar-background-hover: #f4f8ec;
-
-  $table-background: #F3F3F3;
-  $table-header-background: $deco;
-  $table-row-odd-background: #FDFDFD;
-  $table-row-background-hover: #E7EFDD;
-
-  $panel-background: $fun-green;
-  $link-color-hover: $atlantis;
-  $rounded-connected-background: $deco;

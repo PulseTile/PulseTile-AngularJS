@@ -1,11 +1,11 @@
 .wrap-header-title {
-  background: $secondary-color;
+  background: $base-color;
 }
 .header-title {
   padding: 15px 0;
   font-size: 15px;
   line-height: 22px;
-  color: #fff;
+  color: $text-on-base-color;
   text-align: center;
 }
 @include respond-to(xs) {

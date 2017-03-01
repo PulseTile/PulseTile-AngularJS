@@ -29,11 +29,12 @@
   }
   i.clearAll {
     position: absolute;
-    color: #da534f;
+    color: map-get($colored-buttons, 'danger');
     right: 10px;
     top: 50%;
     font-size: 16px;
     transform: translateY(-50%);
+    cursor: pointer;
   }
 }
 
@@ -120,9 +121,9 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 32px;
-  color: #fefefe;
+  color: $text-on-base-color;
   border-radius: 2px;
-  background-color: $secondary-color;
+  background-color: $base-color;
   i {
     position: absolute;
     top: 50%;
@@ -130,6 +131,7 @@
     margin-top: -1px;
     font-size: 14px;
     transform: translateY(-50%);
+    cursor: pointer;
   }
 }
 

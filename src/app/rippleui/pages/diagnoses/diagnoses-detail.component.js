@@ -59,13 +59,6 @@ class DiagnosesDetailController {
         $scope.diagnosesUpdate($scope.patient.id, toAdd);
       }
     }.bind(this);
-
-    $scope.openDatepicker = function ($event, name) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope[name] = true;
-    };
     
     $scope.UnlockedSources = [
       'handi.ehrscape.com'

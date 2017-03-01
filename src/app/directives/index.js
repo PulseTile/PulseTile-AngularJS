@@ -344,4 +344,27 @@ angular.module('ripple-ui.directives', [])
                   });
           }]
       }
+  })
+  .directive('mcDatepicker', function() {
+      /* istanbul ignore next  */
+      return {
+          restrict: 'A',
+          controller: ['$scope', function($scope) {
+                $scope.datepickers = {};
+
+                $scope.openDatepicker = function ($event, name) {
+                  $event.preventDefault();
+                  $event.stopPropagation();
+                  
+                  if ($scope.datepickers[name]) {
+                    $scope.datepickers[name] = false;
+                  } else {
+                    $scope.datepickers = {};
+                    $scope.datepickers[name] = true;
+                  }
+
+                  return false;
+                };
+          }]
+      }
   });

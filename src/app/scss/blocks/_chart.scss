@@ -12,10 +12,10 @@
   overflow: hidden;
   margin-bottom: 5px;
   padding-top: 5px;
-  color: #313131;
+  color: $text-color;
 }
 .chart-title {
-  color: #313131;
+  color: $text-color;
   font-size: 24px;
   line-height: 26px;
   margin-bottom: 7px;
@@ -23,6 +23,6 @@
 .chart-subtitle {
   font-size: 16px;
   line-height: 20px;
-  color: #767676;
+  color: lighten($text-color, 30%);
   margin-bottom: 3px;
 }

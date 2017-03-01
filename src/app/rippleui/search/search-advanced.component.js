@@ -86,13 +86,6 @@ class SearchAdvancedController {
       }
     };
 
-    $scope.openDatePicker = function ($event, name) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope[name] = true;
-    };
-
     $scope.isNhsNumberRequired = function (advancedSearchForm) {
       var nhsNumber = $scope.advancedSearchForm.nhsNumber.$viewValue;
       var areDetailsFieldsClean = $scope.areDetailsFieldsClean(advancedSearchForm);

@@ -1,5 +1,5 @@
 .wrap-header-toolbar {
-  background: $secondary-color;
+  background: $base-color;
 }
 
 .header-toolbar {
@@ -8,7 +8,7 @@
   padding: 7px 0 10px;
   font-size: 15px;
   line-height: 20px;
-  color: #fff;
+  color: $text-on-base-color;
   @include respond-to(xs) {
     min-height: 56px;
     padding: 11px 0;

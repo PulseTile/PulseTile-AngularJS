@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
 
-  <div mc-full-panel mc-accordion mc-open-panel="personal" class="panel-group accordion">
+  <div mc-full-panel mc-datepicker mc-accordion mc-open-panel="personal" class="panel-group accordion">
     <div class="panel panel-secondary" ng-if="getShowPanel('personal') && !isPersonalEdit" ng-class="getOpenPanelClass('personal')">
       <div class="panel-heading">
         <div class="control-group right">
@@ -128,12 +128,12 @@
                   <div class="row">
                     <div class="col-md-11 col-md-offset-1">
                       <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || personalForm.birthday.$dirty) && personalForm.birthday.$invalid, 'has-success': personalForm.birthday.$valid && personalForm.birthday.$dirty}">
-                          <label for="birthday" class="control-label">Date of Birth</label>
+                          <label for="" class="control-label">Date of Birth</label>
                           <div class="inner-addon addon-left">
                             <div class="addon">
                               <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" class="form-control" id="birthday" name="birthday" ng-model="medicationEdit.startDate" ng-click="openDatepicker($event, 'birthday')" uib-datepicker-popup="dd-MMM-yyyy" is-open="birthday" required />
+                            <input type="text" class="form-control" id="birthday" name="birthday" ng-model="medicationEdit.startDate" ng-click="openDatepicker($event, 'birthday')" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.birthday" required readonly/>
                           </div>
                           <span class="help-block animate-fade" ng-show="formSubmitted && personalForm.birthday.$error.required">You must enter a valid date.</span>
                       </div>

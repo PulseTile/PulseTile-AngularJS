@@ -30,14 +30,12 @@ describe('Profile', function() {
         spyOn(ctrl, 'cancelPersonalEdit');
         spyOn(ctrl, 'cancelContactEdit');
         spyOn(scope, 'confirmPersonalEdit');
-        spyOn(scope, 'openDatepicker');
 
         ctrl.personalEdit();
         ctrl.contactEdit();
         ctrl.cancelPersonalEdit();
         ctrl.cancelContactEdit();
         scope.confirmPersonalEdit();
-        scope.openDatepicker();
     });
 
     it('Template exist', function() {
@@ -60,8 +58,5 @@ describe('Profile', function() {
     });
     it("confirmPersonalEdit was called", function() {
         expect(scope.confirmPersonalEdit).toHaveBeenCalled();
-    });
-    it("openDatepicker was called", function() {
-        expect(scope.openDatepicker).toHaveBeenCalled();
     });
 });

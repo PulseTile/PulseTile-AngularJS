@@ -61,13 +61,6 @@ class VaccinationsCreateController {
         $scope.vaccinationsCreate(this.currentPatient.id, toAdd);
       }
     }.bind(this);
-   
-    $scope.openDatepicker = function ($event, name) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope[name] = true;
-    };
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)

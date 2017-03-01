@@ -19,14 +19,11 @@ class HeaderController {
   constructor($rootScope, $scope, $state, $stateParams, $ngRedux, patientsActions, serviceRequests) {
 
     var self = this;
-    $scope.title = {
-      role: '',
-      poc: ''
-    };
+    $scope.title = '';
 
     this.goBack = function () {
       /* istanbul ignore if  */
-      if ($scope.title.role + ' ' +  $scope.title.poc === 'PHR POC') return;
+      if ($scope.title === 'PHR') return;
 
       switch ($state.router.globals.$current.name) {
         case 'patients-charts': 
@@ -46,7 +43,7 @@ class HeaderController {
     };
     this.goChart = function () {
       /* istanbul ignore if  */
-      if ($scope.title.role + ' ' +  $scope.title.poc === 'PHR POC') return;
+      if ($scope.title === 'PHR') return;
 
       $state.go('patients-charts');
     };
@@ -95,8 +92,7 @@ class HeaderController {
 
     $scope.setTitle = function (data) {
       if (data) {
-        $scope.title.role = data.role;
-        $scope.title.poc = 'POC';
+        $scope.title = data.role;
       }
       $scope.switchDirectByRole(data);
     };
@@ -147,7 +143,6 @@ class HeaderController {
       $scope.login();
     });
 
-    $rootScope.searchExpression = '';
     $rootScope.searchMode = false;
     $rootScope.reportMode = false;
     $rootScope.settingsMode = false;
@@ -156,7 +151,8 @@ class HeaderController {
     $rootScope.reportTypeString = '';
 
     $scope.search = {};
-    $scope.search.searchExpression = $rootScope.searchExpression;
+    $scope.search.searchExpression = '';
+
     this.searchBarEnabled = !$state.is('main-search');
 
     this.containsReportString = function () {
@@ -168,6 +164,8 @@ class HeaderController {
     };
 
     this.containsPatientString = function () {
+      console.log('$scope.search');
+      console.log($scope.search);
       return $scope.search.searchExpression.lastIndexOf('pt ') === 0;
     };
 
@@ -216,7 +214,7 @@ class HeaderController {
     };
 
     this.checkExpression = function (expression) {
-      $scope.search.searchExpression = expression;
+      $scope.search.searchExpression = expression.toLowerCase();
       /* istanbul ignore if  */
       if ($rootScope.searchMode) {
         if ($rootScope.reportMode && !$rootScope.reportTypeSet) {
@@ -328,7 +326,7 @@ class HeaderController {
     };
 
     this.getPopulateHeaderSearch = function (expression) {
-      $scope.search.searchExpression = expression.headerSearch;
+      $scope.search.searchExpression = expression.headerSearch.toLowerCase();;
       $scope.searchFocused = true;
       self.searchBarEnabled = expression.headerSearchEnabled;
       $scope.searchBar = expression.headerSearchEnabled;

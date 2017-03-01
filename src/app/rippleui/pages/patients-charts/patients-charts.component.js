@@ -16,15 +16,16 @@
 let templatePatientsCharts = require('./patients-charts.html');
 
 class PatientsChartsController {
-  constructor($scope, $state, $window, patientsActions, $ngRedux, serviceRequests, $timeout, Patient) {
+  constructor($scope, $state, $window, patientsActions, $ngRedux, serviceRequests, $timeout, Patient, deviceDetector) {
     serviceRequests.publisher('headerTitle', {title: 'System Dashboard', isShowTitle: true});
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-charts'});
-   
+    $scope.isTouchDevice = deviceDetector.detectDevice();
     //click on "Spine Lookup"
     this.goToLookUp = function () {
       $state.go('patients-lookup');
     };
     var getOption = function (borderColor, bagroundColor) {
+      var enabledTooltips = !$scope.isTouchDevice;
       return {
           capBezierPoints: false,
           responsive: true,
@@ -40,6 +41,7 @@ class PatientsChartsController {
             }
           },
           tooltips: {
+            enabled: enabledTooltips,
             mode: 'label',
             titleMarginBottom: 15,
             bodySpacing: 10,
@@ -242,5 +244,5 @@ const PatientsChartsComponent = {
   controller: PatientsChartsController
 };
 
-PatientsChartsController.$inject = ['$scope', '$state', '$window', 'patientsActions', '$ngRedux', 'serviceRequests', '$timeout', 'Patient'];
+PatientsChartsController.$inject = ['$scope', '$state', '$window', 'patientsActions', '$ngRedux', 'serviceRequests', '$timeout', 'Patient', 'deviceDetector'];
 export default PatientsChartsComponent;

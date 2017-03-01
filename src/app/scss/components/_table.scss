@@ -3,12 +3,13 @@
   margin-bottom: 5px;
   font-size: 11px;
   line-height: 20px;
-  color: #303030;
+  color: map-get($colored-table, 'text');
   border: none;
   border-radius: 0;
-  background: #ffffff;
+  background: map-get($colored-table, 'row-odd-background');
   thead {
-    background-color: $table-header-background;
+    background-color: map-get($colored-table, 'header-background');
+  ;
     font-weight: 700;
     i {
       margin-left: 5px;
@@ -23,7 +24,7 @@
     }
   }
   thead tr th.selected {
-    background: #A9D38E;
+    background: map-get($colored-table, 'selected-background');
   }
   tbody tr td.selected {
     color: #ffffff;
@@ -67,7 +68,7 @@
 .table > tbody > tr.info > th,
 .table > tfoot > tr.info > th,
 .table > tbody > tr.info {
-  background-color: $table-row-background-hover !important;
+  background-color: map-get($colored-table, 'row-background-hover') !important;
 }
 .wrap-table-scrollX {
   width: 100%;
@@ -82,15 +83,15 @@
   table-layout: fixed;
 }
 .table-striped {
-  background-color: $table-background;
+  background-color: map-get($colored-table, 'background');
   tbody {
     tr {
       &[ng-click]:hover td,
       &:hover td[ng-click] {
-        background-color: $table-row-background-hover;
+        background-color: map-get($colored-table, 'row-background-hover');
       }
       &:nth-of-type(odd) {
-        background-color: $table-row-odd-background;
+        background-color: map-get($colored-table, 'row-odd-background');
       }
     }
   }
@@ -107,7 +108,7 @@ td[ng-click] {
 .is-not-touch-device .table-hover > tbody > tr[ng-click]:hover > td,
 .is-not-touch-device .table-hover > tbody > tr:hover > td[ng-click],
 .is-not-touch-device .table-hover > tbody > tr[ng-click]:hover {
-  background-color: $table-row-background-hover;
+  background-color: map-get($colored-table, 'row-background-hover');
 }
 
 .table-bordered {
@@ -124,6 +125,15 @@ td[ng-click] {
       &:first-child {
         border: none;
       }
+    }
+  }
+}
+.table-schedule {
+  thead tr th,
+  tbody tr td {
+    border-left: 1px solid #B4B5B4;
+    &:first-child {
+      border: none;
     }
   }
 }
@@ -208,7 +218,7 @@ td[ng-click] {
       cursor: pointer;
       &.sorted {
         position: relative;
-        background: #A9D38E;
+        background: map-get($colored-table, 'selected-background');
         &.asc,
         &.desc {padding-right: 22px;}
         &.asc:after,
@@ -231,16 +241,16 @@ td[ng-click] {
       }
     }
     tbody tr td.sorted {
-      background: #E7EFDD;
+      background: map-get($colored-table, 'sorted-background');
     }
     &.table-striped {
       tbody {
         tr {
           &:nth-of-type(odd) td.sorted {
-            background-color: #EFF7E5;
+            background-color: map-get($colored-table, 'sorted-background-odd');
           }
           &:hover td.sorted {
-            background-color: $table-row-background-hover;
+            background-color: map-get($colored-table, 'row-background-hover');
           }
         }
       }

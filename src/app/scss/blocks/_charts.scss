@@ -11,7 +11,10 @@
     background-color : #eee; 
     canvas {
       height: 441px !important;
-      background-color : #eee; 
+      background-color: #eee;
+      @include respond-to(md) {
+         height: 525px !important;
+      } 
     }
   }
   &.chart-dashboard canvas {

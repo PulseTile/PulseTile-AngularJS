@@ -55,24 +55,17 @@ describe('Care Plans List', function() {
 
     spyOn(fakeCall, 'callCareplans');
 
-    spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
-    spyOn(ctrl, 'selected');
     spyOn(ctrl, 'setCurrentPageData');
     spyOn(ctrl, 'eolcareplansLoad');
 
     fakeCall.callCareplans({}, types.EOLCAREPLANS);
 
-    ctrl.pageChangeHandler();
     ctrl.go();
-    ctrl.selected();
     ctrl.setCurrentPageData();
     ctrl.eolcareplansLoad();
   });
 
-  it('currentPage is 1', function() {
-    expect(ctrl.currentPage).toBe(1);
-  });
   it('Template exist', function() {
     expect(template).toBeDefined();
   });
@@ -85,14 +78,8 @@ describe('Care Plans List', function() {
   it("Appointments reducer was called", function() {
     expect(fakeCall.callCareplans).toHaveBeenCalled();
   });
-  it("pageChangeHandler was called", function() {
-    expect(ctrl.pageChangeHandler).toHaveBeenCalled();
-  });
   it("route go was called", function() {
     expect(ctrl.go).toHaveBeenCalled();
-  });
-  it("selected was called", function() {
-    expect(ctrl.selected).toHaveBeenCalled();
   });
   it("setCurrentPageData was called", function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
