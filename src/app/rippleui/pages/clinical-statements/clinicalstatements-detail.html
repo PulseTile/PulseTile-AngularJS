@@ -1,0 +1,58 @@
+<!--
+  ~  Copyright 2016 Ripple Foundation C.I.C. Ltd
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  -->
+<div mc-full-panel mc-accordion mc-open-panel="clinicalStatements" class="panel-group accordion">
+  <div class="panel panel-secondary" ng-if="getShowPanel('clinicalStatements') && !isEdit" ng-class="getOpenPanelClass('clinicalStatements')">
+    <div class="panel-heading">
+      <div class="control-group right">
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'clinicalStatements')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('clinicalStatements')"><i class="fa fa-chevron-up"></i></button>
+      </div>
+      <h3 class="panel-title">Clinical Statement</h3>
+    </div>
+    <div class="panel-body">
+      <div class="panel-body-inner">
+        <div class="form">
+          <div class="form-group-wrapper">
+
+            <div class="form-group">
+              <label class="control-label">Statements</label>
+              <div class="form-control-static">
+                <ul ng-repeat="statement in $ctrl.statementsText track by $index">
+                  <li>{{ statement }}</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Author</label>
+              <div class="form-control-static">{{ $ctrl.clinicalStatements.author }}</div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Date</label>
+              <div class="form-control-static">{{ $ctrl.clinicalStatements.dateCreated }}</div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Source</label>
+              <div class="form-control-static">{{ $ctrl.clinicalStatements.source }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

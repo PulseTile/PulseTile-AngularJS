@@ -1,0 +1,117 @@
+<!--
+  ~  Copyright 2016 Ripple Foundation C.I.C. Ltd
+  ~  
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~  
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  -->
+
+<div mc-full-panel mc-accordion mc-open-panel="clinicalStatementCreate" class="panel-group accordion">
+  <div class="panel panel-secondary" ng-class="getOpenPanelClass('clinicalStatementCreate')">
+    <div class="panel-heading">
+      <div class="control-group right">
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('clinicalStatementCreate')"><i class="fa fa-chevron-up"></i></button>
+      </div>
+      <h3 class="panel-title">Create Clinical Statement</h3>
+    </div>
+    <div class="panel-body">
+      <div class="panel-body-inner">
+        <form name="clinicalStatementForm" class="form">
+          <div class="form-group-wrapper">
+            <div class="row">
+
+              <div class="col-xs-6">
+                <div class="form-group">
+                  <label for="statements" class="control-label">Search</label>
+                  <div class="wrap-search wrap-header-search">
+                    <div class="holder">
+                      <div class="search-left-inner-addon" ng-show="clinicalStatement.tag" ng-cloak>
+                        <span>{{clinicalStatement.tag}}&nbsp;</span>
+                        <i ng-click="$ctrl.removeTag()" class="fa fa-times"></i>
+                      </div>
+                      <input class="form-control input-sm" ng-class="{'moveRight': clinicalStatement.tag}" ng-change="$ctrl.checkExpression(clinicalStatement.query)" ng-model="clinicalStatement.query" ng-trim="false" placeholder="Search" type="text"/>
+                    </div>
+                  </div>
+                  <table class="table table-bordered table-striped table-hover" ng-show="$ctrl.searchResults">
+                    <tbody>
+                      <tr pagination-id="clinicalStatementSearch" dir-paginate="result in $ctrl.searchResults | itemsPerPage: 5" current-page="$ctrl.currentPage" ng-click="$ctrl.addStatement(result)">
+                        <td>{{result.phrase}}</td>
+                      </tr>
+
+                      <tr ng-if="!$ctrl.searchResults.length">
+                        <td colspan="4"><span class="label label-default">No results found</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <dir-pagination-controls pagination-id="clinicalStatementSearch" boundary-links="false"></dir-pagination-controls>
+                </div>
+              </div>
+
+              <div class="col-xs-6">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted) && !clinicalStatement.statements.length, 'has-success': clinicalStatement.statements.length}">
+                  <label for="statements" class="control-label">Statements</label>
+                  <input type="text" class="form-control" placeholder="Add a custom statement" ng-keydown="$ctrl.keyDownCustomStatement($event)" ng-model="clinicalStatement.customStatement">
+
+                  <table class="table table-bordered table-striped table-hover" ng-show="clinicalStatement.statements.length">
+                    <tbody>
+                      <tr ng-repeat="statement in clinicalStatement.statements track by $index">
+                        <td class="form-inline">
+                          <!-- Remove Statement button -->
+                          <i ng-click="$ctrl.removeStatement($index)" class="fa fa-times-circle"></i>
+                          
+                          <!-- Custom clinical statement input -->
+                          <input ng-if="isString(statement)" class="form-control" ng-model="clinicalStatement.statements[$index]" type="text" style="width: 90%;"/>
+                          <!-- Templated clinical statement input -->
+                          <span ng-if="isObject(statement)" ng-repeat="part in statement.parsed track by $index">
+                            <span ng-if="isString(part)">{{part}}</span>
+                            <input ng-if="isObject(part)" ng-model="part.value" class="form-control" style="width: 16%;">
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table> 
+                  <span class="help-block animate-fade" ng-show="formSubmitted && !clinicalStatement.statements.length">You must enter a statement.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.author.$dirty) && clinicalStatementForm.author.$invalid, 'has-success': clinicalStatementForm.author.$valid && clinicalStatementForm.author.$dirty}">
+              <label for="author" class="control-label">Author</label>
+              <div class="input-holder">
+                <input type="text" class="form-control input-sm" id="author" name="author" ng-model="clinicalStatement.author" required/>
+              </div>
+              <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.author.$error.required">You must enter a value.</span>
+            </div>
+            
+            <div class="form-group form-group-sm">
+              <label for="dateCreated" class="control-label">Date</label>
+              <div class="inner-addon addon-left">
+                <div class="addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" class="form-control" id="dateCreated" name="dateCreated" ng-model="clinicalStatement.dateCreated" required disabled />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="panel-control">
+        <div class="wrap-control-group">
+          <div class="control-group right">
+            <button class="btn btn-danger" ng-click="$ctrl.cancel()"><i class="fa fa-ban"></i> Cancel</button>
+            <button class="btn btn-success" ng-click="create(clinicalStatementForm, clinicalStatement)"><i class="fa fa-check"></i> Complete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
