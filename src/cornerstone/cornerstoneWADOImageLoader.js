@@ -1132,7 +1132,6 @@ if(typeof cornerstoneWADOImageLoader === 'undefined'){
 
   }
 
-console.log('cornerstone ', cornerstone, cornerstone.metaData);
   cornerstoneTools.metaData.addProvider(metaDataProvider);
 
   // module exports

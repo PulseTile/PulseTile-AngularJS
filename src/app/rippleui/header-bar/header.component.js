@@ -164,8 +164,6 @@ class HeaderController {
     };
 
     this.containsPatientString = function () {
-      console.log('$scope.search');
-      console.log($scope.search);
       return $scope.search.searchExpression.lastIndexOf('pt ') === 0;
     };
 
