@@ -29,11 +29,9 @@ describe('Image Details', function() {
   beforeEach(function() {
     spyOn(ctrl, 'setCurrentPageData');
     spyOn(ctrl, 'findFirstInstanceId');
-    spyOn(ctrl, 'toggleModal');
 
     ctrl.setCurrentPageData();
     ctrl.findFirstInstanceId();
-    ctrl.toggleModal();
   });
 
   it('series is empty', function() {
@@ -50,8 +48,5 @@ describe('Image Details', function() {
   });
   it("findFirstInstanceId was called", function() {
     expect(ctrl.findFirstInstanceId).toHaveBeenCalled();
-  });
-  it("toggleModal was called", function() {
-    expect(ctrl.toggleModal).toHaveBeenCalled();
   });
 });

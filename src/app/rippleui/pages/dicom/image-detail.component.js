@@ -19,34 +19,24 @@ import cornerstoneJS from '../../../../cornerstone/cornerstone';
 class ImageDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, serviceActions, serviceRequests, usSpinnerService) {
     
-    $scope.visibleModal = 'closeModal';
     $scope.series = [];
     
-    this.toggleModal = function (data) {
-      $scope.visibleModal = data.className;
-      if (data.className === 'openModal') {
-        document.body.classList.add('modal-open');
-      } else {
-        document.body.classList.remove('modal-open');
-      }
-    };
-
     var cornerstone = cornerstoneJS();
-      var element;
+    
     serviceActions.getAllSeriesInStudy($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source).then(function (result) {
-       $scope.study = result.data;
-        var seriesIds = $scope.study.seriesIds;
-        $scope.instanceIds = [];
-        for (var i = 0; i < seriesIds.length; i++) {
-            findSeriesMetadata(seriesIds[i], i);
-            findFirstInstanceId(seriesIds[i], i);
-        }
+      $scope.study = result.data;
+      var seriesIds = $scope.study.seriesIds;
+      $scope.instanceIds = [];
+      for (var i = 0; i < seriesIds.length; i++) {
+          findSeriesMetadata(seriesIds[i], i);
+          findFirstInstanceId(seriesIds[i], i);
+      }
+      usSpinnerService.stop('patientSummary-spinner');
     });
 
     var findFirstInstanceId = function (seriesId, index) {
       serviceActions.getInstanceId($stateParams.patientId, seriesId, $stateParams.source).then(function (result) {
         $scope.instanceIds[index] = result.data.instanceId;
-        element = $('#dicomImage');
       });
     };
 
