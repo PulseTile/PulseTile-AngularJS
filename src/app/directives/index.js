@@ -14,7 +14,7 @@
  ~  limitations under the License.
  */
 import cornerstoneJS from '../../cornerstone/cornerstone';
-import cornerstoneWADOImageLoaderJS from '../../cornerstone/cornerstoneWADOImageLoader';
+import cornerstoneWebImageLoaderJS from '../../cornerstone/cornerstoneWebImageLoader';
 import cornerstoneToolsJS from '../../cornerstone/cornerstoneTools';
 
 angular.module('ripple-ui.directives', [])
@@ -163,29 +163,25 @@ angular.module('ripple-ui.directives', [])
         
         var cornerstone = cornerstoneJS();
         var cornerstoneTools = cornerstoneToolsJS();
-        var cornerstoneWADOImageLoader = cornerstoneWADOImageLoaderJS();
+        var cornerstoneWebImageLoader = cornerstoneWebImageLoaderJS();
         var imgLoader = require('../../cornerstone/exampleImageIdLoader.js');
 
         var imageId = scope.imageId;
-        var url = "wadouri:" + imageId;
         
-        var cornerstoneContainer = element[0];
-        var cornerstoneElement = cornerstoneContainer.querySelector("#dicomImage");
-        cornerstone.enable(cornerstoneElement);
-        cornerstone.loadAndCacheImage(url).then(function(image) {
-          console.log('cornerstoneImage dir ', image);
-          var viewport = cornerstone.getDefaultViewportForImage(element, image);
-          cornerstone.displayImage(element, image, viewport);
-        // cornerstone.loadImage(imageId).then(function (image) {
-        //   cornerstone.displayImage(cornerstoneElement, image);
-        //   cornerstoneTools.mouseInput.enable(cornerstoneElement);
-        //   cornerstoneTools.mouseWheelInput.enable(cornerstoneElement);
-        //
-        //   // Enable all tools we want to use with this element
-        //   cornerstoneTools.wwwc.activate(cornerstoneElement, 2); // ww/wc is the default tool for left mouse button
-        //   cornerstoneTools.pan.activate(cornerstoneElement, 1); // pan is the default tool for middle mouse button
-        //   cornerstoneTools.zoom.activate(cornerstoneElement, 4); // zoom is the default tool for right mouse button
-        //   cornerstoneTools.zoomWheel.activate(cornerstoneElement); // zoom is the default tool for middle mouse wheel
+        var element = $('#dicomImage').get(0);
+        
+        cornerstone.enable(element);
+        
+        cornerstone.loadImage(imageId).then(function(image) {
+          cornerstone.displayImage(element, image);
+          cornerstoneTools.mouseInput.enable(element);
+          cornerstoneTools.mouseWheelInput.enable(element);
+          
+          // Enable all tools we want to use with this element
+          cornerstoneTools.wwwc.activate(element, 2); // ww/wc is the default tool for left mouse button
+          cornerstoneTools.pan.activate(element, 1); // pan is the default tool for middle mouse button
+          cornerstoneTools.zoom.activate(element, 4); // zoom is the default tool for right mouse button
+          cornerstoneTools.zoomWheel.activate(element); // zoom is the default tool for middle mouse wheel
         });
       }
     };
