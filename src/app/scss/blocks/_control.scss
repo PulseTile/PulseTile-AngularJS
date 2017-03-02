@@ -29,4 +29,11 @@
     text-align: center;
   }
   &.with-indent > * {margin-bottom: 5px;}
+  .control-separate {
+    display: inline-block;
+    vertical-align: top;
+    width: 1px;
+    height: 30px;
+    background: #ccc;
+  }
 }
