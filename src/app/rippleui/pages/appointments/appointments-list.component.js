@@ -20,6 +20,8 @@ class AppointmentsListController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
+    this.currentPage = 1;
+    
     this.go = function (id, appointmentSource) {
       $state.go('appointments-detail', {
         patientId: $stateParams.patientId,
@@ -27,6 +29,16 @@ class AppointmentsListController {
         filter: $scope.query,
         page: this.currentPage,
         source: appointmentSource
+      });
+    };
+
+    this.selected = function (appointmentIndex) {
+      return appointmentIndex === $stateParams.appointmentIndex;
+    };
+
+    this.create = function () {
+      $state.go('appointments-create', {
+        patientId: $stateParams.patientId
       });
     };
 

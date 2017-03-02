@@ -35,6 +35,16 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         detail: {template: '<appointments-detail-component></appointments-detail-component>'}
       }
     })
+    .state('appointments-create', {
+      url: '/patients/{patientId:int}/appointments/create?reportType&searchString&queryType',
+      views: {
+        banner: {template: '<patients-banner-component></patients-banner-component>'},
+        actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+        main: {template: '<appointments-list-component></appointments-list-component>'},
+        detail: {template: '<appointments-create-component></appointments-create-component>'}
+      },
+      params: {patientId: null, reportType: null}
+    })
 }
 
 export default routeConfig;
