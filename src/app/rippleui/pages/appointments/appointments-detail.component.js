@@ -13,7 +13,6 @@
  ~  limitations under the License.
  */
 let templateAppointmentsDetail= require('./appointments-detail.html');
-const io = require('socket.io-client');
 
 class AppointmentsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, appointmentsActions, usSpinnerService, serviceRequests) {
