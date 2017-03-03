@@ -80,8 +80,10 @@ select.input-sm {line-height: 20px;}
 .input-holder {
   position: relative;
 }
+textarea.textarea-big,
 .textarea-big {
   height: 101px;
+  overflow-y: auto;
 }
 
 .uib-daypicker:focus {outline: none !important;}
