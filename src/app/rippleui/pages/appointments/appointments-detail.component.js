@@ -18,9 +18,8 @@ const io = require('socket.io-client');
 class AppointmentsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, appointmentsActions, usSpinnerService, serviceRequests) {
 
-    $scope.UnlockedSources = [
-      'handi.ehrscape.com'
-    ];
+    var socket = io.connect('wss://' + window.location.hostname + ':' + 8070);
+
     this.currentUser = serviceRequests.currentUserData;
     $scope.currentUser = this.currentUser;
     console.log('currentUser: ', this.currentUser);
@@ -36,7 +35,7 @@ class AppointmentsDetailController {
         $scope.appt = this.appointment;
         usSpinnerService.stop('appointmentsDetail-spinner');
 
-        // socket.emit('appointment:messages', {appointmentId: this.appointment.sourceId});
+        socket.emit('appointment:messages', {appointmentId: this.appointment.sourceId});
       }
       // if (data.user.data) {
       //   this.currentUser = serviceRequests.currentUserData;
@@ -74,8 +73,6 @@ class AppointmentsDetailController {
 
 
     //var socket = socketService.socket;
-    var socket = io.connect('wss://' + window.location.hostname + ':' + 3478);
-    // var socket = io.connect('https://139.59.187.100:8082');
     var appointmentId = $stateParams.appointmentIndex;
     var user = serviceRequests.currentUserData;
     var ROLE_DOCTOR = 'IDCR';
