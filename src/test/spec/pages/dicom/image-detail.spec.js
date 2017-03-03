@@ -26,27 +26,14 @@ describe('Image Details', function() {
     });
   }));
 
-  beforeEach(function() {
-    spyOn(ctrl, 'setCurrentPageData');
-    spyOn(ctrl, 'findFirstInstanceId');
-
-    ctrl.setCurrentPageData();
-    ctrl.findFirstInstanceId();
-  });
 
   it('series is empty', function() {
-    expect(ctrl.series).toEqual([]);
+    expect(scope.series).toEqual([]);
   });
   it('Template exist', function() {
     expect(template).toBeDefined();
   });
   it('Controller exist', function() {
     expect(ctrl).toBeDefined();
-  });
-  it("setCurrentPageData was called", function() {
-    expect(ctrl.setCurrentPageData).toHaveBeenCalled();
-  });
-  it("findFirstInstanceId was called", function() {
-    expect(ctrl.findFirstInstanceId).toHaveBeenCalled();
   });
 });

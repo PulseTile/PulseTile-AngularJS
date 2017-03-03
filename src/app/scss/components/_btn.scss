@@ -6,6 +6,7 @@
   border-radius: 0;
   padding-left: 10px;
   padding-right: 10px;
+  vertical-align: top;
   i {font-weight: 700;}
 }
 .btn-rounded {
@@ -92,6 +93,10 @@
       }
     }
   }
+  &.btn-none-border {
+    border-color: transparent !important;
+    &:hover {border-color: transparent !important;}
+  }
   .btn.disabled,
   .btn[disabled] {
     color: #c3c3c3 !important;
@@ -106,6 +111,10 @@
       color: darken($color, 10%) !important;
       border-color: darken($color, 10%) !important;
     }
+  }
+  &.btn-none-border {
+    border-color: transparent !important;
+    &:hover {border-color: transparent !important;}
   }
 }
 

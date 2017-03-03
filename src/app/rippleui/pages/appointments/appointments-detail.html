@@ -79,17 +79,26 @@
           <div class="form-control-static">{{$ctrl.appointment.source}}</div>
         </div>
       </div>
-      <div class="form-group" ng-if="$ctrl.messages.length">
+      <div class="form-group" ng-if="messagesHistory.length" >
         <label class="control-label col-md-3">Chat History:</label>
         <div class="col-md-9">
           <ul class="list-unstyled list-messages">
-            <li ng-repeat="message in $ctrl.messages">{{message.timestamp}} - {{message.author}}{{message.message}}</li>
+            <li ng-repeat="message in messagesHistory">{{message.timestamp}} - {{message.author}}: {{message.message}}</li>
           </ul>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="form-group text-right" ng-if="currentUser.permissions.indexOf('WRITE') !== -1">
+<!--<div class="form-group text-right" ng-if="currentUser.permissions.indexOf('WRITE') !== -1">-->
+<!--<button class="btn btn-info" ng-click="$ctrl.edit();"><i class="fa fa-pencil"></i> Edit</button>-->
+<!--</div>-->
+<div class="form-group form-group-sm text-right" ng-if="currentUser.permissions.indexOf('WRITE') !== -1">
+  <button class="btn btn-primary ng-cloak" ng-cloak ng-click="startAppointment();" ng-show="canStartAppointment();">Start Appointment</button>
+  <button class="btn btn-primary ng-cloak" ng-cloak ng-click="joinAppointment();" ng-show="canJoinAppointment();">Join Appointment</button>
   <button class="btn btn-info" ng-click="$ctrl.edit();"><i class="fa fa-pencil"></i> Edit</button>
 </div>
+<div class="form-group form-group-sm text-right" ng-if="currentUser.permissions.indexOf('WRITE') === -1">
+  <button class="btn btn-primary ng-cloak" ng-cloak ng-click="joinAppointment();" ng-if="$root.socketData.showJoinAppointment == appointment.sourceId">Join Appointment</button>
+</div>
+
