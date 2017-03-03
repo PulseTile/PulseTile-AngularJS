@@ -82,9 +82,12 @@ export function toText(statement) {
   if(!statement.id) {
     return statement.subject;
   }
-
+  console.log('statement.phrase');
+  console.log(statement.phrase);
   let parsed = parsePhrase(statement.phrase);
-  return _.map(parsed,(p)=>{
+  console.log('parsed');
+  console.log(parsed);
+  return _.map(parsed,(p) => {
     return (_.isObject(p)) ? statement[p.type] : p;
   }).join('');
 }
