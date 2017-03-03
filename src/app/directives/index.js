@@ -108,49 +108,6 @@ angular.module('ripple-ui.directives', [])
       }
     }
   })
-  .directive('diCom', function () {
-    /* istanbul ignore next  */
-    return {
-      // restrict: 'E',
-      template: require('../rippleui/pages/dicom/image-modal.html'),
-      controller: ['$scope', '$ngRedux', 'serviceRequests', function($scope, $ngRedux, serviceRequests) {
-
-        var cornerstone = cornerstoneJS();
-        var element = $('#dicomImage').get(0);
-
-        $scope.modal = {title: 'View Image'};
-
-        $scope.zoomIn = function (ev) {
-          var viewport = cornerstone.getViewport(element);
-          viewport.scale += 0.25;
-          cornerstone.setViewport(element, viewport);
-        };
-        $scope.zoomOut = function (ev) {
-          var viewport = cornerstone.getViewport(element);
-          viewport.scale -= 0.25;
-          cornerstone.setViewport(element, viewport);
-        };
-        $scope.reset = function (ev) {
-          cornerstone.reset(element);
-        };
-        $scope.close = function (ev) {
-          serviceRequests.publisher('closeModal', {className: 'closeModal'});
-        };
-
-        this.setCurrentPageData = function (data) {
-          if (data.patientsGet.data) {
-            $scope.patient = data.patientsGet.data;
-          }
-        };
-
-        let unsubscribe = $ngRedux.connect(state => ({
-          getStoreData: this.setCurrentPageData(state)
-        }))(this);
-
-        $scope.$on('$destroy', unsubscribe);
-      }]
-    }
-  })
   .directive('cornerstoneImage', function () {
     /* istanbul ignore next  */
     return{
@@ -210,7 +167,7 @@ angular.module('ripple-ui.directives', [])
           } else {
             placement = 'top';
           }
-          popover.removeClass('right left top')
+          popover.removeClass('right left top');
           popover.addClass(placement);
           popover.toggleClass('in');
         };
