@@ -91,7 +91,8 @@ export function query(prefix='', tag='') {
     
     config: {
       method: 'get',
-      url: '/api/contentStore/rob/phrases?' + queryString.join('&')
+      // url: '/api/contentStore/ts/phrases?' + queryString.join('&')
+      url: '/api/contentStore/ts/phrases?search=s&'
     },
 
     meta: {

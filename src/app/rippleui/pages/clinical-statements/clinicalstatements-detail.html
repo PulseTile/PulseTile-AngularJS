@@ -71,10 +71,7 @@
     </div>
     <div class="panel-body">
       <div class="panel-body-inner">
-        <div class="popover-wrapper">
-          <a editable-text="user.name">{{user.name}}</a>
-        </div>
-        <form name="clinicalStatementForm" novalidate class="form">
+        <form name="clinicalStatementForm" class="form" editable-form>
           <div class="form-group-wrapper">
             <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.name.$dirty) && clinicalStatementForm.name.$invalid, 'has-success': clinicalStatementForm.name.$valid && clinicalStatementForm.name.$dirty}">
               <label for="search" class="control-label">Search</label>
@@ -86,20 +83,13 @@
               </div>
               <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.name.$error.required">You must enter a value.</span>
             </div>
-            
 
-            <div class="popover-wrapper">
-              <a editable-text="user.type">{{user.type}}</a>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.clinicalNote.$dirty) && medicationForm.clinicalNote.$invalid, 'has-success': medicationForm.clinicalNote.$valid && medicationForm.clinicalNote.$dirty}">
+            <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.clinicalNote.$dirty) && clinicalStatementForm.clinicalNote.$invalid, 'has-success': clinicalStatementForm.clinicalNote.$valid && clinicalStatementForm.clinicalNote.$dirty}">
                 <label for="clinicalNote" class="control-label">Clinical Note</label>
                 <div class="input-holder">
-                    <div class="form-control textarea-big input-sm" contenteditable="true" id="clinicalNote" name="clinicalNote" ng-html="medicationEdit.clinicalNote" required></div>
-                    <!-- data-structured="structured-data-json"
-                    data-plain="plain-data" -->
+                    <div class="form-control textarea-big input-sm" contenteditable="true" id="clinicalNote" name="clinicalNote" ng-html="clinicalStatementEdit.clinicalNote" required></div>
                 </div>
-                <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.clinicalNote.$error.required">You must enter a value.</span>
+                <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.clinicalNote.$error.required">You must enter a value.</span>
             </div>
 
             <div class="row-expand">

@@ -15,7 +15,7 @@
   -->
 
 <div mc-full-panel mc-accordion mc-open-panel="clinicalStatementCreate" class="panel-group accordion">
-  <div class="panel panel-secondary" ng-class="getOpenPanelClass('clinicalStatementCreate')">
+  <div class="panel panel-secondary" ng-if="getShowPanel('clinicalStatementCreate')" ng-class="getOpenPanelClass('clinicalStatementCreate')">
     <div class="panel-heading">
       <div class="control-group right">
         <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
@@ -28,18 +28,15 @@
         <form name="clinicalStatementForm" class="form">
           <div class="form-group-wrapper">
             <div class="row">
-
-              <div class="col-xs-6">
+              <div class="col-xs-12 col-md-6">
                 <div class="form-group">
                   <label for="statements" class="control-label">Search</label>
-                  <div class="wrap-search wrap-header-search">
-                    <div class="holder">
-                      <div class="search-left-inner-addon" ng-show="clinicalStatement.tag" ng-cloak>
-                        <span>{{clinicalStatement.tag}}&nbsp;</span>
-                        <i ng-click="$ctrl.removeTag()" class="fa fa-times"></i>
-                      </div>
-                      <input class="form-control input-sm" ng-class="{'moveRight': clinicalStatement.tag}" ng-change="$ctrl.checkExpression(clinicalStatement.query)" ng-model="clinicalStatement.query" ng-trim="false" placeholder="Search" type="text"/>
+                  <div class="holder">
+                    <div class="search-left-inner-addon" ng-show="clinicalStatement.tag" ng-cloak>
+                      <span>{{clinicalStatement.tag}}&nbsp;</span>
+                      <i ng-click="$ctrl.removeTag()" class="fa fa-times"></i>
                     </div>
+                    <input class="form-control input-sm" ng-class="{'moveRight': clinicalStatement.tag}" ng-change="$ctrl.checkExpression(clinicalStatement.query)" ng-model="clinicalStatement.query" ng-trim="false" placeholder="Search" type="text"/>
                   </div>
                   <table class="table table-bordered table-striped table-hover" ng-show="$ctrl.searchResults">
                     <tbody>
@@ -52,11 +49,15 @@
                       </tr>
                     </tbody>
                   </table>
-                  <dir-pagination-controls pagination-id="clinicalStatementSearch" boundary-links="false"></dir-pagination-controls>
+                  <div class="wrap-control-group">
+                    <div class="control-group with-indent left">
+                      <dir-pagination-controls pagination-id="clinicalStatementSearch" boundary-links="false"></dir-pagination-controls>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div class="col-xs-6">
+              <div class="col-xs-12 col-md-6">
                 <div class="form-group" ng-class="{'has-error': (formSubmitted) && !clinicalStatement.statements.length, 'has-success': clinicalStatement.statements.length}">
                   <label for="statements" class="control-label">Statements</label>
                   <input type="text" class="form-control" placeholder="Add a custom statement" ng-keydown="$ctrl.keyDownCustomStatement($event)" ng-model="clinicalStatement.customStatement">
@@ -73,7 +74,7 @@
                           <!-- Templated clinical statement input -->
                           <span ng-if="isObject(statement)" ng-repeat="part in statement.parsed track by $index">
                             <span ng-if="isString(part)">{{part}}</span>
-                            <input ng-if="isObject(part)" ng-model="part.value" class="form-control" style="width: 16%;">
+                            <input ng-if="isObject(part)" ng-model="part.value" class="form-control" style="width: 55px;">
                           </span>
                         </td>
                       </tr>
@@ -83,6 +84,7 @@
                 </div>
               </div>
             </div>
+
 
             <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.author.$dirty) && clinicalStatementForm.author.$invalid, 'has-success': clinicalStatementForm.author.$valid && clinicalStatementForm.author.$dirty}">
               <label for="author" class="control-label">Author</label>

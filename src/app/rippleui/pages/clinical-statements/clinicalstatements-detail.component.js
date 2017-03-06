@@ -22,11 +22,7 @@ let _ = require('underscore');
 class ClinicalstatementsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, serviceRequests, usSpinnerService) {
     
-    $scope.user = {
-      name: 'lalal',
-      type: 'tttttype'
-    }
-    $scope.isEdit = true;
+    $scope.isEdit = false;
     /*
       TODO: Only for demo
     */
