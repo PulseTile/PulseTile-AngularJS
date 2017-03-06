@@ -21,7 +21,7 @@ const ENV_PRODUCTION_EXTENSION = NODE_ENV === 'extension';
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 9000;
 
-const API_URL =  'http://138.68.134.7:8086';
+const API_URL =  'http://138.68.134.7';
 // const API_URL =  'http://139.59.187.100';
 
 
