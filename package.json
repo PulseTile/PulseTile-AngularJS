@@ -123,6 +123,7 @@
     "raphael": "^2.2.6",
     "redux": "^3.5.2",
     "semantic-release": "^6.3.2",
+    "socket.io-client": "^1.7.3",
     "underscore": "^1.8.3"
   },
   "release": {

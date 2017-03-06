@@ -69,7 +69,8 @@ const config = {
       "window.jQuery": "jquery",
       jQuery: "jquery",
       "moment": "moment",
-      Raphael: 'raphael'
+      Raphael: 'raphael',
+      io: 'socket.io-client'
     })
   ],
 
