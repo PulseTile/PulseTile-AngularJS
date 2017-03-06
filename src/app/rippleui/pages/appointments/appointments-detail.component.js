@@ -22,7 +22,7 @@ class AppointmentsDetailController {
 
     this.currentUser = serviceRequests.currentUserData;
     $scope.currentUser = this.currentUser;
-    console.log('currentUser: ', this.currentUser);
+    
     $scope.formDisabled = true;
     $scope.messages = [];
 
@@ -87,6 +87,12 @@ class AppointmentsDetailController {
       role: currentUser.role,
       surname: currentUser.family_name,
       name: currentUser.given_name
+    });
+
+    socket.on('user:init', function(data) {
+      if (data.ok) {
+        console.log('user:init response22 - ', data);
+      }
     });
 
     socket.on('appointment:init', function(data) {
