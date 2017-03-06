@@ -26,7 +26,7 @@ class ClinicalstatementsDetailController {
       name: 'lalal',
       type: 'tttttype'
     }
-    $scope.isEdit = true;
+    $scope.isEdit = false;
     /*
       TODO: Only for demo
     */

@@ -31,10 +31,10 @@ class ClinicalstatementsCreateController {
     $scope.isObject = angular.isObject
     $scope.clinicalStatement.dateCreated = new Date().toISOString().slice(0, 10);
     
-    this.currentPage = 1;
+    this.currentPage = 1; 
 
     this.setCurrentPageData = function (data) {
-      this.searchResults = data.clinicalStatements.searchData;
+      this.searchResults = data.clinicalstatements.searchData;
 
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
@@ -55,8 +55,7 @@ class ClinicalstatementsCreateController {
     this.addStatement = function(result) {
       if(angular.isString(result)) {
         $scope.clinicalStatement.statements.push(result);
-      }
-      else {
+      } else {
         $scope.clinicalStatement.statements.push({
           parsed: helper.parsePhrase(result.phrase),
           id:     result.id
@@ -77,14 +76,13 @@ class ClinicalstatementsCreateController {
       if(!$scope.clinicalStatement.tag) {
         let tag = _.find(TAG_NAMES, t => input.startsWith(t + ' '));
         let query = (tag) ? input.substring(tag.length + 1) : input;
-
         Object.assign($scope.clinicalStatement, {query, tag});
       }
     };
 
     this.performClinicalSearch = function() {
       let {query, tag} = $scope.clinicalStatement;
-      $scope.clinicalstatementsQuery(query,tag);
+      $scope.clinicalstatementsQuery(query, tag);
     }
 
     /**

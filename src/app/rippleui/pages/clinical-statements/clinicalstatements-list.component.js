@@ -66,7 +66,7 @@ class ClinicalstatementsListController {
     this.create = function () {
       $state.go('clinicalstatements-create', {
         patientId: $stateParams.patientId,
-        page: this.currentPage
+        page: $scope.currentPage || 1
       });
     };
     
