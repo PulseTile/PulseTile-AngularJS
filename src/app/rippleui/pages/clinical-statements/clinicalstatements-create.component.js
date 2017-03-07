@@ -93,7 +93,7 @@ class ClinicalstatementsCreateController {
     };
 
     this.goList = function () {
-      $state.go('clinicalStatements', {
+      $state.go('clinicalstatements', {
         patientId: $stateParams.patientId,
         searchString: $stateParams.searchString,
         queryType: $stateParams.queryType
