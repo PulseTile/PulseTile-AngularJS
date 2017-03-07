@@ -1,5 +1,12 @@
-# Ripple OSI
-Ripple is a clinically led team working with you to build an integrated digital care record platform for today and the future. Open source, open standards and underpinned by an open architecture that can be used worldwide.
+# PulseTile
+PulseTile is a clinically led team working with you to build an integrated digital care record platform for today and the future. Open source, open standards and underpinned by an open architecture that can be used worldwide.
+
+## Table of Contents
+
+- [Getting Started](# Getting Started)
+- [Prerequisites](#prerequisites)
+- [Installing](# installing)
+- [About](#about)
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
