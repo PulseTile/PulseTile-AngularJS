@@ -30,6 +30,7 @@ import 'chart.js';
 import 'angular-spinner';
 import 'jquery-timepicker-jt';
 import 'angular-jquery-timepicker';
+import 'angular-xeditable';
 
 //commons
 import reducer from './redux/reducer';
@@ -82,7 +83,8 @@ let app = angular
         'angularSpinner',
         'ui.calendar',
         'ui.timepicker',
-        'angular-loading-bar'
+        'angular-loading-bar',
+        'xeditable'
     ])
     .factory('httpMiddleware', httpMiddleware)
     .factory('Patient', Patient)
@@ -133,5 +135,10 @@ let app = angular
     }])
     .config(['cfpLoadingBarProvider', cfpLoadingBarProvider => {
         cfpLoadingBarProvider.includeSpinner = false;
-    }]);    
+    }]);
+    app.run(function(editableOptions, editableThemes) {
+      editableOptions.theme = 'bs3'; // bootstrap3 theme
+      editableThemes.bs3.inputClass = 'input-sm';
+      editableThemes.bs3.buttonsClass = 'btn-sm';
+    });
 console.log('app start');

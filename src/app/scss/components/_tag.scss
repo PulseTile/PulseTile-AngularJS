@@ -1,0 +1,31 @@
+.tag {
+  background: #fff;
+  padding: 3px 5px;
+  border-radius: 2px;
+  margin: 0 3px;
+  display: inline-block;
+  border-bottom: 1px solid #aaa;
+}
+
+  .tag:hover {
+    background: #ddd;
+    border-bottom: 1px solid #fff;
+  }
+
+  .tag .remove {
+    cursor: pointer;
+  }
+
+  .tag .remove i {
+    color: #0E682F;
+    margin-left: 5px;
+  }
+  
+  .tag .editable {
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .tag > .editable {
+    border-bottom: none;
+  }

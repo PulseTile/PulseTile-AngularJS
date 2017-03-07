@@ -1,0 +1,560 @@
+[33mcommit 8d85b268d05f2350b1657548ff146a26e5229c35[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Fri Mar 3 19:53:57 2017 +0200
+
+    Add angular-xeditable
+
+[33mcommit 7781a9d186f3b86c8a412187eabff37de479e1da[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Wed Mar 1 20:09:43 2017 +0200
+
+    Change views clinical-statements
+
+[33mcommit 6b9d990346ef4f720865fb3502e7d9ef3d9cdda8[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Wed Mar 1 12:10:24 2017 +0200
+
+    add Clinicalstatements files
+
+[33mcommit f686d5693be40f7ac30134221a38b14aeb4d77c8[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Tue Feb 28 12:22:20 2017 +0200
+
+     update archives
+
+[33mcommit f2b7d1bfc7b34c1a9747c319dba7d010412e878c[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Mon Feb 27 17:45:08 2017 +0200
+
+    It has Finished creating themes
+
+[33mcommit 402aeced83774b6aa2b55bed37c56787681d1d1a[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Fri Feb 24 20:27:05 2017 +0200
+
+    Added themes
+
+[33mcommit ea74ac45fe26c57053a44f2028f0c5f0a7297426[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Fri Feb 24 15:45:19 2017 +0200
+
+    Fixed bugs
+
+[33mcommit de4e02466b4e604a54875f5c41276dc38fec1d31[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Fri Feb 24 11:43:32 2017 +0200
+
+    fix tests after merge
+
+[33mcommit 238159d1102ef143530ef97fe5e9fbc3837b282b[m
+Merge: d3b5547 c35673a
+Author: vadimivanov <Vjcrdf0508>
+Date:   Fri Feb 24 11:28:42 2017 +0200
+
+    Merge branch 'fix-bugs' of https://github.com/PulseTile/PulseTile into develop
+
+[33mcommit c35673a6afc6a5c5d16f0c8ee2d8b5dd3f7a98d8[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Fri Feb 24 11:27:31 2017 +0200
+
+    Fixed bugs
+
+[33mcommit d3b55472f2be20d2b72cfe2e67dbef362f38f342[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Thu Feb 23 18:16:31 2017 +0200
+
+    update archives
+
+[33mcommit b5c5f6446d658cb54d7bb99faee7b05cfa98c901[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Thu Feb 23 18:05:24 2017 +0200
+
+    Fixed datePicker
+
+[33mcommit 646fadfbe5048ad7445695e5f804a173c8c563dc[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Thu Feb 23 17:07:48 2017 +0200
+
+    fix tests after merge
+
+[33mcommit e17125d7663a373be764306ae6231f91bebfe62b[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Thu Feb 23 15:35:07 2017 +0200
+
+    fix vitals chart
+
+[33mcommit 01457672fa5635ea57d957276025ee1ec0cc418e[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Tue Feb 21 20:43:18 2017 +0200
+
+    Implemetaion expand grid on others pages
+
+[33mcommit 2735e89474a8ecefb855aa08dc6f201fec75fd23[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Tue Feb 21 12:32:06 2017 +0200
+
+    Implemetaion expand grid on orders, procedures and results pages
+
+[33mcommit 512e00697c5199601dde8814056c05bf3a3480f9[m
+Merge: b22785a b5e9fe3
+Author: vadimivanov <Vjcrdf0508>
+Date:   Tue Feb 21 11:56:31 2017 +0200
+
+    Merge branch 'develop' of https://github.com/PulseTile/PulseTile into refactor-of-codebase
+
+[33mcommit b5e9fe34683117d8d146273d82b912f47f7e20af[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Tue Feb 21 11:41:20 2017 +0200
+
+    fix after merge. update archives
+
+[33mcommit 764c7725063ad6f1bab7a54c365967de6a0aebfc[m
+Merge: b769336 4fdc682
+Author: vadimivanov <Vjcrdf0508>
+Date:   Tue Feb 21 09:56:25 2017 +0200
+
+    Merge branch 'fix-bugs' of https://github.com/PulseTile/PulseTile into develop
+
+[33mcommit 4fdc682c055a8cd528d4ea79150e188262d1d243[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Mon Feb 20 20:28:36 2017 +0200
+
+    Added expand grid for block of details
+
+[33mcommit 78cd5be88915b6741663c8a98cfd3aed72937a72[m
+Merge: f4455e7 4c66a17
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Mon Feb 20 17:23:18 2017 +0200
+
+    Merge branch 'develop' into fix-bugs
+
+[33mcommit f4455e72bd87cbe79c600c04d9218a0e53e58887[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Mon Feb 20 17:17:08 2017 +0200
+
+    Fixed Header
+
+[33mcommit b22785a2f578867e17b2a62c083a992e72b4c755[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Mon Feb 20 17:14:52 2017 +0200
+
+    removed unused functions
+
+[33mcommit b7693360c39d415d3e2610501151b20b972629bf[m
+Merge: 4c66a17 84f235e
+Author: vadimivanov <Vjcrdf0508>
+Date:   Mon Feb 20 16:12:45 2017 +0200
+
+    Merge branch 'fix-bugs' of https://github.com/PulseTile/PulseTile into develop
+
+[33mcommit 84f235e53dada43204c694f6496dd37cc8512a1a[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Mon Feb 20 16:11:54 2017 +0200
+
+    Fixed deviceDetector
+
+[33mcommit 4c66a17e5e0087b96f462e2d98d5fe22077c1579[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Mon Feb 20 15:08:48 2017 +0200
+
+    fix after merge. add archive
+
+[33mcommit 0a8fadb6ec6c7dc0dbfcd5b49c5971178ab5d076[m
+Merge: b146d27 139a78b
+Author: vadimivanov <Vjcrdf0508>
+Date:   Mon Feb 20 14:54:31 2017 +0200
+
+    Merge branch 'refactor-of-codebase' of https://github.com/PulseTile/PulseTile into develop
+    
+    # Conflicts:
+    #       src/app/directives/index.js
+    #       src/app/rippleui/pages/clinical-notes/clinicalnotes-list.html
+
+[33mcommit b146d271b6ccfe974c9225fcca129042dde5aa40[m
+Merge: ce6ab44 c783dde
+Author: vadimivanov <Vjcrdf0508>
+Date:   Mon Feb 20 14:47:29 2017 +0200
+
+    Merge branch 'fix-bugs' of https://github.com/PulseTile/PulseTile into develop
+
+[33mcommit c783dde941fab89d0b1daab33383f5c16aea7f99[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Mon Feb 20 14:00:37 2017 +0200
+
+    Changed name of class from notouchdevice to is-not-touch-device
+
+[33mcommit 298132e8b602e9fe79c59d11a4530fe85a4774c9[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Mon Feb 20 13:44:48 2017 +0200
+
+    Added detect touch device  functionality
+
+[33mcommit 139a78b616db5a1c44263c953ddd869ae979be80[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Mon Feb 20 13:03:01 2017 +0200
+
+    inject serviceFormatted to modules. fix clinical notes page
+
+[33mcommit af3ac6e44bca6ee19c8edac85e9f835e7f96ba4c[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Mon Feb 20 10:54:55 2017 +0200
+
+    add new date/time format
+
+[33mcommit 3d27f5bc9bc460b51fe95910c199f3ebb85a078f[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Fri Feb 17 18:55:05 2017 +0200
+
+    Vaccinations page
+
+[33mcommit 2a44b8a16205851ee398aeb166cde89d15caeffd[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Fri Feb 17 18:21:01 2017 +0200
+
+    add filter
+
+[33mcommit 27203d926ea8c6b44327f2d17eb4fdaf5608f901[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Fri Feb 17 17:02:02 2017 +0200
+
+    fix after merge
+
+[33mcommit bf1892b78748dca598c2903e44cbd63fb473b387[m
+Merge: 9505101 ce6ab44
+Author: vadimivanov <Vjcrdf0508>
+Date:   Fri Feb 17 17:01:39 2017 +0200
+
+    Merge branch 'develop' of https://github.com/PulseTile/PulseTile into refactor-of-codebase
+    
+    # Conflicts:
+    #       src/app/directives/index.js
+
+[33mcommit ce6ab446b4c254d2af4c103b50fb3eda2ddd944a[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Fri Feb 17 16:54:45 2017 +0200
+
+    fix after merge
+
+[33mcommit 7a704f62432fe9c4e04fba9bc867c27511574048[m
+Merge: 2732905 910d8d4
+Author: vadimivanov <Vjcrdf0508>
+Date:   Fri Feb 17 16:39:51 2017 +0200
+
+    Merge branch 'fix-bugs' of https://github.com/PulseTile/PulseTile into develop
+
+[33mcommit 910d8d4f83aefa04d3b55ed4d54945cc6a427072[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Fri Feb 17 16:37:55 2017 +0200
+
+    Fixed serviceStateManager
+
+[33mcommit 273290517fb21b966a79ff2fa4275204c22a85ee[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Fri Feb 17 16:33:04 2017 +0200
+
+    add tests for services
+
+[33mcommit d5cde337226a1c710ea1b0d22ff10b563e2d9823[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Fri Feb 17 14:24:28 2017 +0200
+
+    fix readme
+
+[33mcommit 95051018d89549e4dfa5acfc66a0ed6da76e3241[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Fri Feb 17 10:58:56 2017 +0200
+
+    fix search format and tests
+
+[33mcommit 8d78799e327fbffebcf8b53cc4b7241049235a5d[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Thu Feb 16 19:07:13 2017 +0200
+
+    Rename Menager to Manager
+
+[33mcommit 08392f13fbd799297a927ae410a25db32599bea9[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Thu Feb 16 19:03:35 2017 +0200
+
+    Fixed transition Patient Summary
+
+[33mcommit 8a2b97cf6b410034a1b432325688109025dbfa3f[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Thu Feb 16 18:59:23 2017 +0200
+
+    Fixed bugs
+
+[33mcommit 5b5e93afd2f0018dd375c1fbbcf59a66c00639a9[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Thu Feb 16 17:57:39 2017 +0200
+
+    add formation for search
+
+[33mcommit d7dfd7a10a9c617d85f668f6e01aab6ffa70716f[m
+Merge: 44bce79 ff96e5b
+Author: vadimivanov <Vjcrdf0508>
+Date:   Thu Feb 16 13:30:21 2017 +0200
+
+    Merge branch 'develop' of https://github.com/PulseTile/PulseTile into refactor-of-codebase
+
+[33mcommit 44bce79451e977b791fc79082797fa80a49cb915[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Thu Feb 16 13:13:52 2017 +0200
+
+    refactor sidebar config
+
+[33mcommit ff96e5b37af0ac711a3f1bec5bb0fa702bbf5fa5[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Thu Feb 16 12:04:06 2017 +0200
+
+    fix tests after merge
+
+[33mcommit 37f4a0436968a0eca1c19f720a9bb1d7103edb7b[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Thu Feb 16 11:32:20 2017 +0200
+
+    add archives
+
+[33mcommit d6e51d8af76a489f1bf5eb245a7be21ead4bb4ae[m
+Merge: 7f81a3a 6f1c107
+Author: vadimivanov <Vjcrdf0508>
+Date:   Thu Feb 16 11:21:40 2017 +0200
+
+    Merge branch 'fix-bugs' of https://github.com/PulseTile/PulseTile into develop
+    
+    # Conflicts:
+    #       src/app/rippleui/pages/vitals/vitals-list.component.js
+
+[33mcommit 9ba08723e54cd1e723c2676548a66d1e0a61eb7a[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Thu Feb 16 11:04:36 2017 +0200
+
+    add search format
+
+[33mcommit 6f1c10792e46f50669892c53597b47dd4979d6b3[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Wed Feb 15 19:24:12 2017 +0200
+
+    Setting endpoint for Clinical Notes
+
+[33mcommit 8cea179764a0eb4aa18acc4612efec470737de15[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Wed Feb 15 19:13:23 2017 +0200
+
+    Added tableSettings directive
+
+[33mcommit 7f81a3a33e82a84abeb86f5fef0d50a1163e35f4[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Wed Feb 15 17:28:59 2017 +0200
+
+    add vitals tests
+
+[33mcommit f64e08f93b51c3c94ab345b57af2ca79b8da00d9[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Wed Feb 15 16:13:59 2017 +0200
+
+    add service for date formatted
+
+[33mcommit c8759a548fbd717424d94b15870adfbd66be139b[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Wed Feb 15 12:24:16 2017 +0200
+
+    fix readme
+
+[33mcommit 8331632c3507dd50d9883d877f42e33662e4d1e5[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Tue Feb 14 18:01:05 2017 +0200
+
+    Fixed vitals
+
+[33mcommit 146bb61f220e57928b3b3f31b98de5de6bab3ab4[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Tue Feb 14 11:39:27 2017 +0200
+
+    fix github bage
+
+[33mcommit 1d6d014eeccb0057357e245cd940e225ffe127ee[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Tue Feb 14 11:22:54 2017 +0200
+
+    add search tests
+
+[33mcommit 7589cfd5fe93e0227a04b94542adcdd882eb5ca0[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Tue Feb 14 10:42:23 2017 +0200
+
+    add semantic bages
+
+[33mcommit bc67daf06535d76ac56c24c4da1cf9b6ada21b67[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Tue Feb 14 10:24:32 2017 +0200
+
+    add archive
+
+[33mcommit bf03bd8772d4079fea5903d77212429281976a0a[m
+Merge: 8bebff4 5952f95
+Author: vadimivanov <Vjcrdf0508>
+Date:   Tue Feb 14 10:08:24 2017 +0200
+
+    Merge branch 'feature/advanced-search' of https://github.com/PulseTile/PulseTile into develop
+
+[33mcommit 5952f956873f1827ff5c1ef127910e2cf1c43514[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Mon Feb 13 19:18:09 2017 +0200
+
+    Search Implementation
+
+[33mcommit 8bebff487392a8a85f13f16bdeb4d01b21e44509[m
+Merge: 1cd28bc 0ee72e0
+Author: vadimivanov <Vjcrdf0508>
+Date:   Mon Feb 13 16:49:36 2017 +0200
+
+    Merge branch 'refactor-of-codebase' of https://github.com/PulseTile/PulseTile into develop
+
+[33mcommit 0ee72e0d63b58250e5e9a60ba4de8192fa7ebb46[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Mon Feb 13 16:29:05 2017 +0200
+
+    fix documents
+
+[33mcommit 7c06a420b6feea00316b0f8c607a0089f62d3cc1[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Mon Feb 13 16:20:56 2017 +0200
+
+    add route for new structure
+
+[33mcommit 927e7144e5a1c7cdfba124bad6dccf6ac6ea8258[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Mon Feb 13 13:42:37 2017 +0200
+
+    add new structure for core modules
+
+[33mcommit 727876e35f69b6895dadac8308a4b3817617d094[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Mon Feb 13 12:06:11 2017 +0200
+
+    add new plugin's structure for core modules
+
+[33mcommit 1cd28bcee2a5241a8e4c34ca02ef2286df73a338[m
+Merge: e028c3f 3b1b4f9
+Author: vadimivanov <Vjcrdf0508>
+Date:   Mon Feb 13 11:01:17 2017 +0200
+
+    Merge branch 'feature/vitals' of https://github.com/PulseTile/PulseTile into develop
+
+[33mcommit 88720b37d8bcb45d672f633aae3f98323c168943[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Fri Feb 10 19:07:18 2017 +0200
+
+    Advanced Search addition
+
+[33mcommit 3b1b4f9771a73112aa50ae29fb03225fc18a5e16[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Fri Feb 10 15:24:49 2017 +0200
+
+    Change newsScore field from vitals table
+
+[33mcommit e583b90785829a3e3e67a0125328826367bd4762[m
+Author: AlexGoncharov <ahoncharov@sliceart.com.ua>
+Date:   Fri Feb 10 14:48:13 2017 +0200
+
+    Change vital popover
+
+[33mcommit 5001f20605f08de024be96cb68376a7f6fb703af[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Fri Feb 10 14:27:30 2017 +0200
+
+    implement new plugin's structure
+
+[33mcommit f54de829affc9f9cff5122f82e246716518a1662[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Thu Feb 9 22:47:24 2017 +0200
+
+    Changed mapping details Vital
+
+[33mcommit 901e5e14aba58602cc6053ca6753820b197bf051[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Thu Feb 9 22:13:05 2017 +0200
+
+    Calculating news Score
+
+[33mcommit 792d3f2fad16dad641059097b41f690890b7b6b7[m
+Author: AlexGoncharov <aloshka2012@yandex.ru>
+Date:   Thu Feb 9 20:08:42 2017 +0200
+
+    Modification validate vitals form
+
+[33mcommit e028c3f471b48994e3728fe22b487297fe7f79d4[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Thu Feb 9 13:39:10 2017 +0200
+
+    remove order-form scss file
+
+[33mcommit 270e2eaf3cd4bfe52e88421cc0034f6def2cece6[m
+Merge: 20f7216 ca45c37
+Author: vadimivanov <Vjcrdf0508>
+Date:   Thu Feb 9 13:34:45 2017 +0200
+
+    Merge branch 'develop' of https://github.com/PulseTile/PulseTile into refactor-of-codebase
+    
+    # Conflicts:
+    #       src/app/rippleui/pages/patients-charts/patients-charts.component.js
+
+[33mcommit 20f72168017f5ff724d9fbf5a592674902142a98[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Thu Feb 9 13:31:07 2017 +0200
+
+    fix order-form
+
+[33mcommit ca45c37c5fa26e7e8dac25a71168625aa4d0b2ec[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Thu Feb 9 11:18:50 2017 +0200
+
+    fix chart test
+
+[33mcommit b1159f8e19dc40eac1875e338c52f61a8bce734f[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Thu Feb 9 10:50:43 2017 +0200
+
+    fix clinical route
+
+[33mcommit 5839a65fe040af1d4c4e0f989937cbfba76138df[m
+Merge: ddc4fe9 42a1110
+Author: vadimivanov <Vjcrdf0508>
+Date:   Thu Feb 9 10:48:40 2017 +0200
+
+    Merge branch 'feature/charts' of https://github.com/PulseTile/PulseTile into develop
+
+[33mcommit ddc4fe938c4cc115c48e137e3cf8e9595d05dd23[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Thu Feb 9 09:43:10 2017 +0200
+
+    add archive
+
+[33mcommit 1def3e69136fb3022c5b73e74e107ba66285b559[m
+Merge: 4553dc3 48c0cfd
+Author: vadimivanov <Vjcrdf0508>
+Date:   Thu Feb 9 09:40:26 2017 +0200
+
+    Merge branch 'feature/vitals' of https://github.com/PulseTile/PulseTile into develop
+    
+    # Conflicts:
+    #       src/app/rippleui/pages/vitals/vitals-detail.component.js
+
+[33mcommit 48c0cfd1a0927427e24e3d0be1b38cb4e798ed1e[m
+Author: AlexGoncharov <ahoncharov@sliceart.com.ua>
+Date:   Wed Feb 8 21:04:58 2017 +0200
+
+    Linking Vitals page with endpoint
+
+[33mcommit ecc68b7e6917d0c833b9f0875f04b7a657be73e7[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Wed Feb 8 15:54:51 2017 +0200
+
+    add encodeURI for httpMiddleware
+
+[33mcommit 3f8a2790513388ea96bf85c764fe2d193f915163[m
+Author: vadimivanov <Vjcrdf0508>
+Date:   Wed Feb 8 13:35:54 2017 +0200
+
+    remove unused parts

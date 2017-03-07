@@ -22,6 +22,7 @@
 @import 'components/switch';
 @import 'components/fieldset';
 @import 'components/datepicker';
+@import 'components/tag';
 
 @import 'base';
 // @import 'main';
@@ -54,3 +55,4 @@
 @import '~angular-loading-bar/src/loading-bar.css';
 @import '~fullcalendar/dist/fullcalendar.min.css';
 @import '../../../bower_components/jquery-timepicker-jt/jquery.timepicker.css';
+@import '~angular-xeditable/dist/css/xeditable.min.css';
