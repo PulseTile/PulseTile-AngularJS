@@ -60,11 +60,11 @@
       </thead>
       <tbody>
         <tr dir-paginate="patient in $ctrl.patients | filter:queryFiltering | orderBy: [order] : reverse | itemsPerPage: 10" ng-click="$ctrl.go(patient)">
-            <td data-th="Name" ng-class="sortClass('name')">{{ patient.name }}</td>
-            <td data-th="Address" ng-class="sortClass('address')" class="cell-truncate">{{ patient.address }}</td>
-            <td data-th="Date of Birth" ng-class="sortClass('dateOfBirth')">{{ patient.dateOfBirth | date:'dd-MMM-yyyy' }}</td>
-            <td data-th="Gender" ng-class="sortClass('gender')">{{ patient.gender }}</td>
-            <td data-th="NHS No" ng-class="sortClass('nhsNumber')">{{ patient.nhsNumber | formatNHSNumber }}</td>
+            <td data-th="Name" ng-class="sortClass('name')"><span>{{ patient.name }}</span></td>
+            <td data-th="Address" ng-class="sortClass('address')" class="cell-truncate"><span>{{ patient.address }}</span></td>
+            <td data-th="Date of Birth" ng-class="sortClass('dateOfBirth')"><span>{{ patient.dateOfBirth | date:'dd-MMM-yyyy' }}</span></td>
+            <td data-th="Gender" ng-class="sortClass('gender')"><span>{{ patient.gender }}</span></td>
+            <td data-th="NHS No" ng-class="sortClass('nhsNumber')"><span>{{ patient.nhsNumber | formatNHSNumber }}</span></td>
         </tr>
 
         <tr ng-if="!$ctrl.patients.length">
@@ -86,24 +86,24 @@
       </thead>
       <tbody ng-if="$ctrl.tab == 'dateTime'">
         <tr ng-repeat="patient in $ctrl.patients" ng-click="$ctrl.go(patient)">
-          <td data-th="Name">{{ patient.name }}</td>
-          <td data-th="DOB">{{ patient.dateOfBirth | date:'dd-MMM-yyyy' }}</td>
-          <td data-th="Vitals">{{ patient.vitalsHeadline.latestEntry }}</td>
-          <td data-th="Orders" ng-click="$ctrl.getItem('orders', patient.nhsNumber, patient.ordersHeadline.sourceId)"><a>{{ patient.ordersHeadline.latestEntry }}</a></td>
-          <td data-th="Results" ng-click="$ctrl.getItem('results', patient.nhsNumber, patient.resultsHeadline.sourceId)"><a>{{ patient.resultsHeadline.latestEntry }}</a></td>
-          <td data-th="Treatments" ng-click="$ctrl.getItem('procedures', patient.nhsNumber, patient.treatmentsHeadline.sourceId)"><a>{{ patient.treatmentsHeadline.latestEntry }}</a></td>
-          <td data-th="Medications" ng-click="$ctrl.getItem('medications', patient.nhsNumber, patient.medsHeadline.sourceId)"><a>{{ patient.medsHeadline.latestEntry }}</a></td>
+          <td data-th="Name"><span>{{ patient.name }}</span></td>
+          <td data-th="DOB"><span>{{ patient.dateOfBirth | date:'dd-MMM-yyyy' }}</span></td>
+          <td data-th="Vitals"><span>{{ patient.vitalsHeadline.latestEntry }}</span></td>
+          <td data-th="Orders" ng-click="$ctrl.getItem('orders', patient.nhsNumber, patient.ordersHeadline.sourceId)"><span><a>{{ patient.ordersHeadline.latestEntry }}</a></span></td>
+          <td data-th="Results" ng-click="$ctrl.getItem('results', patient.nhsNumber, patient.resultsHeadline.sourceId)"><span><a>{{ patient.resultsHeadline.latestEntry }}</a></span></td>
+          <td data-th="Treatments" ng-click="$ctrl.getItem('procedures', patient.nhsNumber, patient.treatmentsHeadline.sourceId)"><span><a>{{ patient.treatmentsHeadline.latestEntry }}</a></span></td>
+          <td data-th="Medications" ng-click="$ctrl.getItem('medications', patient.nhsNumber, patient.medsHeadline.sourceId)"><span><a>{{ patient.medsHeadline.latestEntry }}</a></span></td>
         </tr>
       </tbody>
       <tbody ng-if="$ctrl.tab == 'counts'">
         <tr ng-repeat="patient in $ctrl.patients" ng-click="$ctrl.go(patient)">
-          <td data-th="Name">{{ patient.name }}</td>
-          <td data-th="DOB">{{ patient.dateOfBirth | date:'dd-MMM-yyyy' }}</td>
-          <td data-th="Vitals">{{ patient.vitalsHeadline.totalEntries }}</td>
-          <td data-th="Orders" ng-click="$ctrl.goToSection('orders', patient.nhsNumber)"><a>{{ patient.ordersHeadline.totalEntries }}</a></td>
-          <td data-th="Results" ng-click="$ctrl.goToSection('results', patient.nhsNumber)"><a>{{ patient.resultsHeadline.totalEntries }}</a></td>
-          <td data-th="Treatments" ng-click="$ctrl.goToSection('procedures', patient.nhsNumber)"><a>{{ patient.treatmentsHeadline.totalEntries }}</a></td>
-          <td data-th="Medications" ng-click="$ctrl.goToSection('medications', patient.nhsNumber)"><a>{{ patient.medsHeadline.totalEntries }}</a></td>
+          <td data-th="Name"><span>{{ patient.name }}</span></td>
+          <td data-th="DOB"><span>{{ patient.dateOfBirth | date:'dd-MMM-yyyy' }}</span></td>
+          <td data-th="Vitals"><span>{{ patient.vitalsHeadline.totalEntries }}</span></td>
+          <td data-th="Orders" ng-click="$ctrl.goToSection('orders', patient.nhsNumber)"><span><a>{{ patient.ordersHeadline.totalEntries }}</a></span></td>
+          <td data-th="Results" ng-click="$ctrl.goToSection('results', patient.nhsNumber)"><span><a>{{ patient.resultsHeadline.totalEntries }}</a></span></td>
+          <td data-th="Treatments" ng-click="$ctrl.goToSection('procedures', patient.nhsNumber)"><span><a>{{ patient.treatmentsHeadline.totalEntries }}</a></span></td>
+          <td data-th="Medications" ng-click="$ctrl.goToSection('medications', patient.nhsNumber)"><span><a>{{ patient.medsHeadline.totalEntries }}</a></span></td>
         </tr>
       </tbody>
     </table>

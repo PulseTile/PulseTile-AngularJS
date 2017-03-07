@@ -49,9 +49,9 @@
 
       <tbody>
         <tr dir-paginate="diagnosis in $ctrl.diagnoses | filter:queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(diagnosis.sourceId, diagnosis.source)" ng-class="{info: selectedRow(diagnosis.sourceId)}">
-          <td data-th="Problems / Diagnoses" ng-class="sortClass('diagnoses');">{{ diagnosis.problem }}</td>
-          <td data-th="Date" ng-class="sortClass('date')">{{ diagnosis.dateOfOnset }}</td>
-          <td data-th="Source" ng-class="sortClass('source')">{{ diagnosis.source }}</td>
+          <td data-th="Problems / Diagnoses" ng-class="sortClass('diagnoses');"><span>{{ diagnosis.problem }}</span></td>
+          <td data-th="Date" ng-class="sortClass('date')"><span>{{ diagnosis.dateOfOnset }}</span></td>
+          <td data-th="Source" ng-class="sortClass('source')"><span>{{ diagnosis.source }}</span></td>
         </tr>
 
         <tr ng-if="! $ctrl.diagnoses || ! $ctrl.diagnoses.length">

@@ -52,10 +52,10 @@
 
       <tbody>
         <tr dir-paginate="mdt in $ctrl.genericMdtComposition | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(mdt.sourceId)" ng-class="{info: selectedRow(mdt.sourceId)}">
-          <td data-th="Name" ng-class="sortClass('dateOfRequest');" class="sorted asc">{{ mdt.dateOfRequest }}</td>
-          <td data-th="Relationship" ng-class="sortClass('serviceTeam')">{{ mdt.serviceTeam }}</td>
-          <td data-th="Next of Kin" ng-class="sortClass('dateOfMeeting')">{{mdt.dateOfMeeting}}</td>
-          <td data-th="Source" ng-class="sortClass('source')">{{ mdt.source }}</td>
+          <td data-th="Name" ng-class="sortClass('dateOfRequest');" class="sorted asc"><span>{{ mdt.dateOfRequest }}</span></td>
+          <td data-th="Relationship" ng-class="sortClass('serviceTeam')"><span>{{ mdt.serviceTeam }}</span></td>
+          <td data-th="Next of Kin" ng-class="sortClass('dateOfMeeting')"><span>{{mdt.dateOfMeeting}}</span></td>
+          <td data-th="Source" ng-class="sortClass('source')"><span>{{ mdt.source }}</span></td>
         </tr>
 
         <tr ng-if="!$ctrl.genericMdtComposition.length">

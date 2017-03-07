@@ -52,10 +52,10 @@
 
       <tbody>
         <tr dir-paginate="personalNote in $ctrl.personalNotes | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage"  ng-click="$ctrl.go(personalNote.sourceId, personalNote.source)" ng-class="{info: selectedRow(personalNote.sourceId)}">
-          <td data-th="Type" ng-class="sortClass('type')">{{ personalNote.noteType }}</td>
-          <td data-th="Author" ng-class="sortClass('author')">{{ personalNote.author }}</td>
-          <td data-th="Date" ng-class="sortClass('date')">{{ personalNote.dateCreated }}</td>
-          <td data-th="Source" ng-class="sortClass('source')" class="hidden-xs-cell">{{ personalNote.source }}</td>
+          <td data-th="Type" ng-class="sortClass('type')"><span>{{ personalNote.noteType }}</span></td>
+          <td data-th="Author" ng-class="sortClass('author')"><span>{{ personalNote.author }}</span></td>
+          <td data-th="Date" ng-class="sortClass('date')"><span>{{ personalNote.dateCreated }}</span></td>
+          <td data-th="Source" ng-class="sortClass('source')" class="hidden-xs-cell"><span>{{ personalNote.source }}</span></td>
         </tr>
 
         <tr ng-if="!$ctrl.personalNotes.length">

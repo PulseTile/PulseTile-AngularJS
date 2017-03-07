@@ -50,9 +50,9 @@
 
       <tbody>
         <tr dir-paginate="vaccination in $ctrl.vaccinations | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(vaccination.sourceId, vaccination)" ng-class="{info: selectedRow(vaccination.sourceId)}">
-          <td data-th="Name" ng-class="sortClass('name');">{{ vaccination.name }}</td>
-          <td data-th="Source" ng-class="sortClass('source')">{{ vaccination.source }}</td>
-          <td data-th="Date" ng-class="sortClass('date')">{{ vaccination.dateCreate | date:'dd-MMM-yyyy' }}</td>
+          <td data-th="Name" ng-class="sortClass('name');"><span>{{ vaccination.name }}</span></td>
+          <td data-th="Source" ng-class="sortClass('source')"><span>{{ vaccination.source }}</span></td>
+          <td data-th="Date" ng-class="sortClass('date')"><span>{{ vaccination.dateCreate | date:'dd-MMM-yyyy' }}</span></td>
         </tr>
 
         <tr ng-if="!$ctrl.vaccinations.length">

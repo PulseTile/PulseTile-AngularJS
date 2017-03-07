@@ -50,9 +50,9 @@
 
       <tbody>
         <tr dir-paginate="allergy in $ctrl.allergies | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(allergy.sourceId, allergy.source)" ng-class="{info: selectedRow(allergy.sourceId)}">
-          <td data-th="Cause" ng-class="sortClass('cause');">{{ allergy.cause }}</td>
-          <td data-th="Reaction" ng-class="sortClass('reaction')">{{ allergy.reaction }}</td>
-          <td data-th="Source" ng-class="sortClass('source')">{{ allergy.source }}</td>
+          <td data-th="Cause" ng-class="sortClass('cause');"><span>{{ allergy.cause }}</span></td>
+          <td data-th="Reaction" ng-class="sortClass('reaction')"><span>{{ allergy.reaction }}</span></td>
+          <td data-th="Source" ng-class="sortClass('source')"><span>{{ allergy.source }}</span></td>
         </tr>
 
         <tr ng-if="!$ctrl.allergies || !$ctrl.allergies.length">

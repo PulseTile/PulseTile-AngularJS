@@ -52,11 +52,11 @@
 
       <tbody>
         <tr dir-paginate="patient in $ctrl.patients | filter:queryFiltering | filter: $ctrl.patientFilter | orderBy:[order] : reverse | itemsPerPage: 10" ng-click="$ctrl.go(patient)">
-            <td data-th="Name" ng-class="sortClass('name')">{{ patient.name }}</td>
-            <td data-th="Address" ng-class="sortClass('address')" class="cell-truncate">{{ patient.address }}</td>
-            <td data-th="Date of Birth" ng-class="sortClass('dateOfBirth')" class="dateTime">{{ patient.dateOfBirth }}</td>
-            <td data-th="Gender" ng-class="sortClass('gender')">{{ patient.gender }}</td>
-            <td data-th="NHS No" ng-class="sortClass('nhsNumber')">{{ patient.nhsNumber | formatNHSNumber }}</td>
+            <td data-th="Name" ng-class="sortClass('name')"><span>{{ patient.name }}</span></td>
+            <td data-th="Address" ng-class="sortClass('address')" class="cell-truncate"><span>{{ patient.address }}</span></td>
+            <td data-th="Date of Birth" ng-class="sortClass('dateOfBirth')" class="dateTime"><span>{{ patient.dateOfBirth }}</span></td>
+            <td data-th="Gender" ng-class="sortClass('gender')"><span>{{ patient.gender }}</span></td>
+            <td data-th="NHS No" ng-class="sortClass('nhsNumber')"><span>{{ patient.nhsNumber | formatNHSNumber }}</span></td>
         </tr>
 
         <tr ng-if="!$ctrl.patients.length">

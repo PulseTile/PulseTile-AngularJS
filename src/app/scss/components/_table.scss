@@ -19,6 +19,7 @@
   tbody tr td {
     padding: 10px 5px;
     vertical-align: middle;
+    word-wrap: break-word;
     @include respond-to(sm) {
       padding: 10px;
     }
@@ -163,8 +164,13 @@ td[ng-click] {
         display: block;
         padding: 0 10px;
         line-height: 20px;
+        overflow: hidden;
         &.cell-truncate {
           @include text-truncate;
+        }
+        & > span {
+          display: block;
+          overflow: hidden;
         }
         &:before {
           content: attr(data-th)": "; // who knew you could do this? The internet, that's who.
@@ -172,7 +178,8 @@ td[ng-click] {
 
           // optional stuff to make it look nicer
           width: 100px;
-          display: inline-block;
+          display: block;
+          float: left;
           padding-right: 10px;
           // end options
           @include respond-to(xs) {

@@ -44,9 +44,9 @@
 
       <tbody>
       <tr dir-paginate="image in $ctrl.images | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(image.studyId, image.source)" ng-class="{info: selectedRow(image.studyId)}">
-        <td data-th="Name" ng-class="sortClass('studyDescription');">{{image.studyDescription}}</td>
-        <td data-th="Date" ng-class="sortClass('dateRecorded');">{{image.dateRecorded}}</td>
-        <td data-th="Source" ng-class="sortClass('source');">{{image.source}}</td>
+        <td data-th="Name" ng-class="sortClass('studyDescription');"><span>{{image.studyDescription}}</span></td>
+        <td data-th="Date" ng-class="sortClass('dateRecorded');"><span>{{image.dateRecorded}}</span></td>
+        <td data-th="Source" ng-class="sortClass('source');"><span>{{image.source}}</span></td>
       </tr>
 
       <tr ng-if="!$ctrl.images.length">

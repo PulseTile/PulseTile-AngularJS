@@ -52,10 +52,10 @@
 
       <tbody>
         <tr dir-paginate="procedure in $ctrl.procedures | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(procedure.sourceId,procedure.source)" ng-class="{info: selectedRow(procedure.sourceId)}">
-          <td data-th="Name" ng-class="sortClass('name');">{{procedure.name}}</td>
-          <td data-th="Date" class="dateTime" ng-class="sortClass('date');">{{procedure.date}}</td>
-          <td data-th="Time" ng-class="sortClass('time');">{{procedure.time}}</td>
-          <td data-th="Source" ng-class="sortClass('source');">{{procedure.source}}</td>
+          <td data-th="Name" ng-class="sortClass('name');"><span>{{procedure.name}}</span></td>
+          <td data-th="Date" class="dateTime" ng-class="sortClass('date');"><span>{{procedure.date}}</span></td>
+          <td data-th="Time" ng-class="sortClass('time');"><span>{{procedure.time}}</span></td>
+          <td data-th="Source" ng-class="sortClass('source');"><span>{{procedure.source}}</span></td>
         </tr>
 
         <tr ng-if="!$ctrl.procedures.length">
@@ -78,51 +78,3 @@
     </div>
   </div>
 </div>
-
-<!--
-
-<h3><strong>Procedures</strong></h3>
-
-<div class="inner-addon left-addon filterInput">
-  <i class="fa fa-filter"></i>
-  <input type="text" class="form-control" placeholder="Filter..." ng-model="query" />
-</div>
-
-
-<table class="table table-bordered table-striped table-hover rwd-table">
-  <thead>
-    <tr>
-      <th>Procedure Name</th>
-      <th>Procedure Date</th>
-      <th>Time</th>
-      <th>Source</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr dir-paginate="procedure in $ctrl.procedures | filter: $ctrl.search  | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(procedure.sourceId,procedure.source)" ng-class="{info: $ctrl.selected(procedure.sourceId)}">
-      <td data-th="Name">{{procedure.name}}</td>
-      <td data-th="Date" class="dateTime">{{procedure.date}}</td>
-      <td data-th="Time">{{procedure.time}}</td>
-      <td data-th="Source">{{procedure.source}}</td>
-    </tr>
-    <tr ng-if="!$ctrl.procedures.length">
-      <td colspan="4"><span class="label label-default">No procedures</span></td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="row">
-  <div class="col-md-12">
-    <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="patientSummary-spinner" spinner-start-active="true"></span>
-  </div>
-</div>
-
-<div class="row" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
-  <div class="col-md-6 hidden-xs"><div class="text-right"><dir-pagination-controls on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>
-  <div class="col-md-6 hidden-xs"><div class="text-right create-button"><button class="btn btn-info" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> Create</button></div></div>
-</div>
-<div class="row" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
-  <div class="col-xs-6 hidden-sm hidden-md hidden-lg"><div class="text-right"><dir-pagination-controls on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>
-  <div class="col-xs-6 hidden-sm hidden-md hidden-lg"><div class="text-right create-button"><button class="btn btn-info" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> Create</button></div></div>
-</div>
--->
