@@ -55,7 +55,6 @@ export default [
   transferOfCare,
   vaccinations,
   vitals,
-  clinicalstatements
-  vitals,
+  clinicalstatements,
   events
 ]
