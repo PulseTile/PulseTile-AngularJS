@@ -33,6 +33,7 @@ import transferOfCare from './rippleui/pages/transfer-of-care/index';
 import vaccinations from './rippleui/pages/vaccinations/index';
 import vitals from './rippleui/pages/vitals/index';
 import clinicalstatements from './rippleui/pages/clinical-statements/index';
+import events from './rippleui/pages/events/index';
 
 export default [
   clinicalnotes,
@@ -55,4 +56,6 @@ export default [
   vaccinations,
   vitals,
   clinicalstatements
+  vitals,
+  events
 ]
