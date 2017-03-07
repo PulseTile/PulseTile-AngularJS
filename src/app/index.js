@@ -57,6 +57,7 @@ import ServiceStateManager from './services/serviceStateManager.js';
 import ServiceVitalsSigns from './rippleui/pages/vitals/serviceVitalsSigns.js';
 import ServiceActions from './rippleui/pages/dicom/serviceActions.js';
 import ServiceFormatted from './services/serviceFormatted.js';
+import SocketService from './services/socketService.js';
 
 import routeConfig from 'app/index.route';
 import 'app/scss/core.scss';
@@ -91,7 +92,8 @@ let app = angular
     .service('serviceRequests', ServiceRequests)
     .service('serviceStateManager', ServiceStateManager)
     .service('serviceVitalsSigns', ServiceVitalsSigns)
-    .service('serviceActions', ServiceActions);
+    .service('serviceActions', ServiceActions)
+    .service('socketService', SocketService);
 
   plugins.forEach((plugin)=>{
     Object.keys(plugin.components).forEach((name)=>{
