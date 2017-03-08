@@ -43,7 +43,9 @@ import personalnotes from '../rippleui/pages/personal-notes/personalnotes-reduce
 import genericmdt from '../rippleui/pages/generic-mdt/generic-mdt-reducer-all';
 import transferOfCare from '../rippleui/pages/transfer-of-care/transfer-of-care-reducer-all';
 
-export default combineReducers({
+import plugins from '../plugins';
+
+let reducers = {
   patients,
   patientsGet,
   search, 
@@ -71,4 +73,10 @@ export default combineReducers({
   personalnotes,
   genericmdt,
   transferOfCare
-});
+}
+
+plugins.forEach((plugin)=>{
+  reducers[plugin.name] = plugin.reducer;
+})
+
+export default combineReducers(reducers);
