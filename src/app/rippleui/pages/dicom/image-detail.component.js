@@ -47,20 +47,22 @@ class ImageDetailController {
         $scope.series[index].seriesTime = moment($scope.series[index].seriesTime).format('h:mma');
       });
     };
-
-      
+    
+    function getImgBlock() {
+      return $('#dicomImage').get(0);
+    }
+    
     $scope.zoomIn = function (ev) {
+      var element = getImgBlock();
       var viewport = cornerstone.getViewport(element);
       viewport.scale += 0.25;
       cornerstone.setViewport(element, viewport);
     };
     $scope.zoomOut = function (ev) {
+      var element = getImgBlock();
       var viewport = cornerstone.getViewport(element);
       viewport.scale -= 0.25;
       cornerstone.setViewport(element, viewport);
-    };
-    $scope.reset = function (ev) {
-      cornerstone.reset(element);
     };
 
   }

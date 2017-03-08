@@ -49,6 +49,9 @@ class HeaderController {
     };
     
     this.goPatientList = function () {
+      /* istanbul ignore if  */
+      if ($scope.title === 'PHR') return;
+      
       $state.go('patients-list');
     };
     

@@ -95,7 +95,9 @@
   }
   &.btn-none-border {
     border-color: transparent !important;
-    &:hover {border-color: transparent !important;}
+    &:hover,
+    &:focus,
+    &:active {border-color: transparent !important;}
   }
   .btn.disabled,
   .btn[disabled] {
@@ -114,7 +116,9 @@
   }
   &.btn-none-border {
     border-color: transparent !important;
-    &:hover {border-color: transparent !important;}
+    &:hover,
+    &:focus,
+    &:active {border-color: transparent !important;}
   }
 }
 

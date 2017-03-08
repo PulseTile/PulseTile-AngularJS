@@ -66,7 +66,6 @@ class AllergiesCreateController {
       };
 
       if (allergyForm.$valid) {
-        debugger
         $scope.allergiesCreate(this.currentPatient.id, toAdd);
       }
     }.bind(this);

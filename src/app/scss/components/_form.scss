@@ -62,6 +62,7 @@ label.control-label {
   color: #9393a0;
   padding: 0 7px;
 }
+select.input-sm {line-height: 20px;}
 
 
 .non-edit-value {
@@ -79,8 +80,10 @@ label.control-label {
 .input-holder {
   position: relative;
 }
-textarea.textarea-big {
+textarea.textarea-big,
+.textarea-big {
   height: 101px;
+  overflow-y: auto;
 }
 
 .uib-daypicker:focus {outline: none !important;}
