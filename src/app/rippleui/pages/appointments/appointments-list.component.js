@@ -47,8 +47,13 @@ class AppointmentsListController {
       if (data.appointments.data) {
         this.appointments = data.appointments.data;
 
+        for (var i = 0; i < this.appointments.length; i++) {
+          if (angular.isNumber(this.appointments[i].timeOfAppointment)) {
+            this.appointments[i].timeOfAppointment = moment(this.appointments[i].timeOfAppointment).format('h:mma') + '-' + moment(this.appointments[i].timeOfAppointment).add(59, 'm').format('h:mma');
+          }
+        }
+        
         serviceFormatted.formattingTablesDate(this.appointments, ['dateOfAppointment'], serviceFormatted.formatCollection.DDMMMYYYY);
-        serviceFormatted.formattingTablesDate(this.appointments, ['timeOfAppointment', 'timeOfAppointmentTo'], serviceFormatted.formatCollection.HHmm);
         serviceFormatted.filteringKeys = ['serviceTeam', 'dateOfAppointment', 'timeOfAppointment', 'source'];
 
       }

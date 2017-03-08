@@ -45,9 +45,9 @@
 
       <tbody>
       <tr dir-paginate="appointment in $ctrl.appointments | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage"  ng-click="$ctrl.go(appointment.sourceId)" ng-class="{info: $ctrl.selected(appointment.sourceId)}">
-        <td data-th="Date of App" ng-class="sortClass('dateOfAppointment');">{{ appointment.dateOfAppointment}}</td>
-        <td data-th="Time" ng-class="sortClass('timeOfAppointment');">{{ appointment.timeOfAppointment}} - {{appointment.timeOfAppointmentTo}}</td>
-        <td data-th="Care Service Team" ng-class="sortClass('serviceTeam');">{{ appointment.serviceTeam}}</td>
+        <td data-th="Date of App" ng-class="sortClass('dateOfAppointment');">{{ appointment.dateOfAppointment }}</td>
+        <td data-th="Time" ng-class="sortClass('timeOfAppointment');">{{ appointment.timeOfAppointment }}</td>
+        <td data-th="Care Service Team" ng-class="sortClass('serviceTeam');">{{ appointment.serviceTeam }}</td>
         <td data-th="Source" ng-class="sortClass('source');">{{ appointment.source }}</td>
       </tr>
 

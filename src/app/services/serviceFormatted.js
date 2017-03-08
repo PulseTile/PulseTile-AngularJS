@@ -28,7 +28,9 @@ class ServiceFormatted {
     this.formattingTablesDate = function(collection, dateArgs, format) {
       for (var i = 0; i < collection.length; i++) {
         for (var j = 0; j < dateArgs.length; j++) {
-          collection[i][dateArgs[j]] = moment(collection[i][dateArgs[j]]).format(format);
+          if (angular.isNumber(collection[i][dateArgs[j]])) {
+            collection[i][dateArgs[j]] = moment(collection[i][dateArgs[j]]).format(format);
+          }
         }
       }
       return collection;
