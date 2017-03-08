@@ -23,7 +23,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         title: 'Patient Summary',
         state: 'patients-summary'
       }, {
-        title: 'Vaccinations',
+        title: 'Events',
         state: 'events'
       }];
       
