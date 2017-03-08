@@ -33,7 +33,6 @@ export default {
   "sidebarInfo": {
     // name: 'heightAndWeights',
     // link: 'heightAndWeights',
-    // linkDetail: 'heightAndWeights-detail',
     // title: 'Height & Weight'
   }
 }

@@ -35,7 +35,6 @@ export default {
   "sidebarInfo": {
     name: 'procedures',
     link: 'procedures',
-    linkDetail: 'procedures-detail',
     title: 'Procedures'
   }
 }

@@ -33,7 +33,6 @@ export default {
   "sidebarInfo": {
     // name: 'documents',
     // link: 'documents',
-    // linkDetail: 'documents-detail',
     // title: 'Documents'
   }
 }

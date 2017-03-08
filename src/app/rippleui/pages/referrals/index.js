@@ -35,7 +35,6 @@ export default {
   "sidebarInfo": {
     name: 'referrals',
     link: 'referrals',
-    linkDetail: 'referrals-detail',
     title: 'Referrals'
   }
 }
