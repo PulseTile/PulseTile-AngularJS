@@ -53,7 +53,9 @@ class EventsListController {
           date: Date.parse(new Date()),
           author: 'ripple_osi',
           dateCreate: Date.parse(new Date()),
-          source: 'Marand'
+          source: 'Marand',
+          timeSlot: 'Discharge',
+          status: 'Scheduled'
         }, {
           sourceId: '2',
           name: 'Event 2',
@@ -63,6 +65,8 @@ class EventsListController {
           author: 'ripple_osi',
           dateCreate: Date.parse(new Date(date.setDate(date.getDate()-1))),
           source: 'EtherCIS',
+          timeSlot: 'Transfer',
+          status: 'Scheduled'
         }, {
           sourceId: '3',
           name: 'Meeting 1',
@@ -72,6 +76,8 @@ class EventsListController {
           author: 'ripple_osi',
           dateCreate: Date.parse(new Date(date.setDate(date.getDate()-7))),
           source: 'Marand',
+          timeSlot: 'Admission',
+          status: 'Scheduled'
         }, {
           sourceId: '4',
           name: 'Event 3',
@@ -81,6 +87,9 @@ class EventsListController {
           author: 'ripple_osi',
           dateCreate: Date.parse(new Date(date.setDate(date.getDate()-30))),
           source: 'Marand',
+          location: 'Leeds General',
+          timeSlot: 'Appointment',
+          status: 'Scheduled'
         }, {
           sourceId: '5',
           name: 'Meeting 2',
@@ -90,6 +99,8 @@ class EventsListController {
           author: 'ripple_osi',
           dateCreate: Date.parse(new Date(date.setDate(date.getDate()-1))),
           source: 'Marand',
+          timeSlot: 'Admission',
+          status: 'Scheduled'
         }
       ];
 
