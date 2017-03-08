@@ -29,6 +29,8 @@ export default function appointments(state = INITIAL_STATE, action) {
 
   var actions = {
     [types.APPOINTMENTS]: (state) => {
+      state.dataCreate = null;
+      state.dataUpdate = null;
       return Object.assign({}, state, {
         isFetching: true,
         error: false
