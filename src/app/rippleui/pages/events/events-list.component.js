@@ -23,6 +23,8 @@ class EventsListController {
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'events-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'events';
     
+    $scope.viewList;
+
     this.create = function () {
       $state.go('events-create', {
         patientId: $stateParams.patientId
@@ -30,6 +32,7 @@ class EventsListController {
     };
 
     this.go = function (id, source) {
+      serviceRequests.viewList = $scope.viewList;
       $state.go('events-detail', {
         patientId: $stateParams.patientId,
         detailsIndex: id,
@@ -37,6 +40,26 @@ class EventsListController {
         source: source
       });
     };
+
+    $scope.isViewList = function (viewName) {
+      return $scope.viewList === viewName;
+    };
+
+    $scope.changeViewList = function (viewName) {
+      var currentPage = this.currentPage || 1;
+      var vitalsForChart;
+      $scope.viewList = viewName;
+
+      // if ($scope.dateForChart) {
+      //   if (viewName === 'chartNews') {
+      //     vitalsForChart = $scope.dateForChart.slice((currentPage - 1) * 10, currentPage * 10);
+
+      //     $timeout(function(){
+      //       $scope.chartLoad(vitalsForChart);
+      //     }, 0);
+      //   }
+      // }
+    }.bind(this);
     
     this.setCurrentPageData = function (data) {
       // if (data.events.data) {
@@ -53,7 +76,9 @@ class EventsListController {
           date: Date.parse(new Date()),
           author: 'ripple_osi',
           dateCreate: Date.parse(new Date()),
-          source: 'Marand'
+          source: 'Marand',
+          timeSlot: 'Discharge',
+          status: 'Scheduled'
         }, {
           sourceId: '2',
           name: 'Event 2',
@@ -63,6 +88,8 @@ class EventsListController {
           author: 'ripple_osi',
           dateCreate: Date.parse(new Date(date.setDate(date.getDate()-1))),
           source: 'EtherCIS',
+          timeSlot: 'Transfer',
+          status: 'Scheduled'
         }, {
           sourceId: '3',
           name: 'Meeting 1',
@@ -72,6 +99,8 @@ class EventsListController {
           author: 'ripple_osi',
           dateCreate: Date.parse(new Date(date.setDate(date.getDate()-7))),
           source: 'Marand',
+          timeSlot: 'Admission',
+          status: 'Scheduled'
         }, {
           sourceId: '4',
           name: 'Event 3',
@@ -81,6 +110,9 @@ class EventsListController {
           author: 'ripple_osi',
           dateCreate: Date.parse(new Date(date.setDate(date.getDate()-30))),
           source: 'Marand',
+          location: 'Leeds General',
+          timeSlot: 'Appointment',
+          status: 'Scheduled'
         }, {
           sourceId: '5',
           name: 'Meeting 2',
@@ -90,8 +122,12 @@ class EventsListController {
           author: 'ripple_osi',
           dateCreate: Date.parse(new Date(date.setDate(date.getDate()-1))),
           source: 'Marand',
+          timeSlot: 'Admission',
+          status: 'Scheduled'
         }
       ];
+
+      this.eventsTimeline = this.modificateEventsArr(this.events);
 
       serviceFormatted.formattingTablesDate(this.events, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
       serviceFormatted.filteringKeys = ['name', 'type', 'date'];
@@ -103,11 +139,37 @@ class EventsListController {
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
       }
+
+      $scope.changeViewList(serviceRequests.viewList || 'timeline');
     };
 
-    if ($stateParams.page) {
-      this.currentPage = $stateParams.page;
-    }
+    this.modificateEventsArr = function (arr) {
+      let _ = require('underscore');
+      
+      arr = _.chain(arr)
+            .sortBy(function (value) {
+              return value.date;
+            })
+            .reverse()
+            .each(function (value, index) {
+              console.log('index % 2');
+              console.log(index);
+              console.log(index % 2);
+              if (index % 2) {
+                value['isEven'] = true;
+              } else {
+                value['isEven'] = false;
+              }
+            })
+            .groupBy(function(value) {
+              return value.date;
+            })
+            .value();
+
+      // console.log('EventsArr');
+      // console.log(arr);
+      return arr;
+    };
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)

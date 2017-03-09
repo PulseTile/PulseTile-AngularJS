@@ -33,7 +33,6 @@ export default {
   "sidebarInfo": {
     // name: 'careplans',
     // link: 'eolcareplans',
-    // linkDetail: 'eolcareplans-detail',
     // title: 'Care Plans'
   }
 }

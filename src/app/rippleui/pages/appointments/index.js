@@ -35,7 +35,6 @@ export default {
   "sidebarInfo": {
     name: 'appointments',
     link: 'appointments',
-    linkDetail: 'appointments-detail',
     title: 'Appointments'
   }
 }

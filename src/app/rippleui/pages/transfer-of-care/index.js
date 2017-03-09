@@ -33,7 +33,6 @@ export default {
   "sidebarInfo": {
     // name: 'transfers',
     // link: 'transferOfCare',
-    // linkDetail: 'transferOfCare-detail',
     // title: 'Transfer of Care'
   }
 }

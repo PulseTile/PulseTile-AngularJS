@@ -35,7 +35,6 @@ export default {
   "sidebarInfo": {
     name: 'mdt',
     link: 'genericMdt',
-    linkDetail: 'genericMdt-detail',
     title: 'MDT'
   }
 }

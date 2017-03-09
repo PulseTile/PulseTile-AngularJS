@@ -35,7 +35,6 @@ export default {
   "sidebarInfo": {
     name: 'clinicalNotes',
     link: 'clinicalNotes',
-    linkDetail: 'clinicalNotes-detail',
     title: 'Clinical Notes'
   }
 }

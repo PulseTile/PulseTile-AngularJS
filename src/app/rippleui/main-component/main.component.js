@@ -96,6 +96,10 @@ class MainController {
       $scope.isSecondPanel = views.detail ? true : false;
       $scope.isSidebar = views.actions ? true : false;
 
+      
+      if ($scope.isSidebar === true && window.innerWidth > 767) {
+        $scope.isClassShowSidebar = true;
+      }
     };
 
     this.setHeightSidebarForMobile = function() {

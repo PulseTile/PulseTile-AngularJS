@@ -16,8 +16,18 @@
 routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 function routeConfig($stateProvider, $urlRouterProvider) {
+  var breadcrumbs = [{
+        title: 'Patient Listings',
+        state: 'patients-list'
+      }, {
+        title: 'Patient Summary',
+        state: 'patients-summary'
+      }, {
+        title: 'Events',
+        state: 'events'
+      }];
+      
   $stateProvider
-
     .state('events', {
       url: '/patients/{patientId:int}/events?reportType&searchString&queryType',
       views: {
@@ -25,16 +35,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
         main: {template: '<events-list-component></events-list-component>'}
       },
-      breadcrumbs: [{
-        title: 'Patient Listings',
-        state: 'patients-list'
-      }, {
-        title: 'Patient Summary',
-        state: 'patients-summary'
-      }, {
-        title: 'Vaccinations',
-        state: 'events'
-      }]
+      breadcrumbs: breadcrumbs
     })
     .state('events-create', {
       url: '/patients/{patientId:int}/events/create?reportType&searchString&queryType',
@@ -44,16 +45,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         main: {template: '<events-list-component></events-list-component>'},
         detail: {template: '<events-create-component></events-create-component>'}
       },
-      breadcrumbs: [{
-        title: 'Patient Listings',
-        state: 'patients-list'
-      }, {
-        title: 'Patient Summary',
-        state: 'patients-summary'
-      }, {
-        title: 'Events',
-        state: 'events'
-      }]
+      breadcrumbs: breadcrumbs
     })
     .state('events-detail', {
       url: '/patients/{patientId:int}/events/{detailsIndex}?page&reportType&searchString&queryType',
@@ -64,16 +56,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         detail: {template: '<events-detail-component></events-detail-component>'}
       },
       params: { source: '{}' },
-      breadcrumbs: [{
-        title: 'Patient Listings',
-        state: 'patients-list'
-      }, {
-        title: 'Patient Summary',
-        state: 'patients-summary'
-      }, {
-        title: 'Vaccinations',
-        state: 'events'
-      }]
+      breadcrumbs: breadcrumbs
     })
 }
 

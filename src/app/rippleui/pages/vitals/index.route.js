@@ -16,16 +16,7 @@
 routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 function routeConfig($stateProvider, $urlRouterProvider) {
-  $stateProvider
-
-    .state('vitals', {
-      url: '/patients/{patientId:int}/vitals?reportType&searchString&queryType',
-      views: {
-        banner: {template: '<patients-banner-component></patients-banner-component>'},
-        actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-        main: {template: '<vitals-list-component></vitals-list-component>'}
-      },
-      breadcrumbs: [{
+  var breadcrumbs = [{
         title: 'Patient Listings',
         state: 'patients-list'
       }, {
@@ -34,7 +25,17 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       }, {
         title: 'Vitals - NEWS',
         state: 'vitals'
-      }]
+      }];
+      
+  $stateProvider
+    .state('vitals', {
+      url: '/patients/{patientId:int}/vitals?reportType&searchString&queryType',
+      views: {
+        banner: {template: '<patients-banner-component></patients-banner-component>'},
+        actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+        main: {template: '<vitals-list-component></vitals-list-component>'}
+      },
+      breadcrumbs: breadcrumbs
     })
     .state('vitals-create', {
       url: '/patients/{patientId:int}/vitals/create?reportType&searchString&queryType',
@@ -44,16 +45,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         main: {template: '<vitals-list-component></vitals-list-component>'},
         detail: {template: '<vitals-create-component></vitals-create-component>'}
       },
-      breadcrumbs: [{
-        title: 'Patient Listings',
-        state: 'patients-list'
-      }, {
-        title: 'Patient Summary',
-        state: 'patients-summary'
-      }, {
-        title: 'Vitals - NEWS',
-        state: 'vitals'
-      }]
+      breadcrumbs: breadcrumbs
     })
     .state('vitals-detail', {
       url: '/patients/{patientId:int}/vitals/{detailsIndex}?page&reportType&searchString&queryType',
@@ -64,16 +56,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         detail: {template: '<vitals-detail-component></vitals-detail-component>'}
       },
       params: { source: '{}' },
-      breadcrumbs: [{
-        title: 'Patient Listings',
-        state: 'patients-list'
-      }, {
-        title: 'Patient Summary',
-        state: 'patients-summary'
-      }, {
-        title: 'Vitals - NEWS',
-        state: 'vitals'
-      }]
+      breadcrumbs: breadcrumbs
     });
 }
 

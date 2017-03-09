@@ -35,7 +35,6 @@ export default {
   "sidebarInfo": {
     name: 'personalNotes',
     link: 'personalNotes',
-    linkDetail: 'personalNotes-detail',
     title: 'Personal Notes'
   }
 }

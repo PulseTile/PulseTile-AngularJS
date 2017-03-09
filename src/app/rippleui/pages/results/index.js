@@ -33,7 +33,6 @@ export default {
   "sidebarInfo": {
     name: 'results',
     link: 'results',
-    linkDetail: 'results-detail',
     title: 'Test Results'
   }
 }
