@@ -23,8 +23,9 @@ import createLogger from 'redux-logger';
 import 'angular-loading-bar';
 import 'fullcalendar';
 import 'angular-ui-calendar';
-import 'jquery';
-
+// import 'jquery';
+// import 'malihu-custom-scrollbar-plugin';
+import 'ng-scrollbars';
 import 'chart.js';
 
 import 'angular-spinner';
@@ -84,7 +85,8 @@ let app = angular
         'ui.calendar',
         'ui.timepicker',
         'angular-loading-bar',
-        'xeditable'
+        'xeditable',
+        'ngScrollbars'
     ])
     .factory('httpMiddleware', httpMiddleware)
     .factory('Patient', Patient)
@@ -135,7 +137,21 @@ let app = angular
     }])
     .config(['cfpLoadingBarProvider', cfpLoadingBarProvider => {
         cfpLoadingBarProvider.includeSpinner = false;
-    }]);
+    }])
+    .config(function (ScrollBarsProvider) {
+        // the following settings are defined for all scrollbars unless the
+        // scrollbar has local scope configuration
+        ScrollBarsProvider.defaults = {
+            scrollButtons: {
+                scrollAmount: 'auto', // scroll amount when button pressed
+                enable: true // enable scrolling buttons by default
+            },
+            scrollInertia: 400, // adjust however you want
+            axis: 'yx', // enable 2 axis scrollbars by default,
+            theme: 'dark',
+            autoHideScrollbar: true
+        };
+    });
     app.run(function(editableOptions, editableThemes) {
       editableOptions.theme = 'bs3'; // bootstrap3 theme
       editableThemes.bs3.inputClass = 'input-sm';
