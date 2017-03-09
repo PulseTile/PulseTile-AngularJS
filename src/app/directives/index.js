@@ -253,8 +253,8 @@ angular.module('ripple-ui.directives', [])
       /* istanbul ignore next  */
       return {
           restrict: 'A',
-          controller: ['$scope', '$element','$attrs', '$stateParams', 'serviceStateManager', '$state', 
-              function($scope, $element, $attrs, $stateParams, serviceStateManager, $state) {
+          controller: ['$scope', '$element','$attrs', '$stateParams', 'serviceStateManager', 
+              function($scope, $element, $attrs, $stateParams, serviceStateManager) {
                   var tableSettingsData = serviceStateManager.getTableSettings();
 
                   $scope.order = tableSettingsData.order;
@@ -326,4 +326,33 @@ angular.module('ripple-ui.directives', [])
                 };
           }]
       }
-  });
+  })
+  .directive('mcMultiViews', function() {
+      /* istanbul ignore next  */
+      return {
+          restrict: 'A',
+          controller: ['$scope','$attrs', 'serviceStateManager', 
+              function($scope, $attrs, serviceStateManager) {
+                  var viewSettingsData = serviceStateManager.getViewsSettings();
+
+                  $scope.activeView = viewSettingsData.activeView;
+                  
+                  $scope.isActiveView = function (viewName) {
+                    return $scope.activeView === viewName;
+                  };
+
+                  $scope.changeActiveView = function (viewName) {
+                    $scope.activeView = viewName;
+                    serviceStateManager.setViewsSettings({
+                      activeView: viewName
+                    });
+                  };
+
+                  $scope.$watch($attrs.defaultView, function() {
+                    if ($scope.activeView === '') {
+                      $scope.changeActiveView($attrs.defaultView)
+                    }
+                  });
+          }]
+      }
+  })

@@ -49,16 +49,6 @@ class EventsListController {
       var currentPage = this.currentPage || 1;
       var vitalsForChart;
       $scope.viewList = viewName;
-
-      // if ($scope.dateForChart) {
-      //   if (viewName === 'chartNews') {
-      //     vitalsForChart = $scope.dateForChart.slice((currentPage - 1) * 10, currentPage * 10);
-
-      //     $timeout(function(){
-      //       $scope.chartLoad(vitalsForChart);
-      //     }, 0);
-      //   }
-      // }
     }.bind(this);
     
     this.setCurrentPageData = function (data) {
@@ -152,13 +142,10 @@ class EventsListController {
             })
             .reverse()
             .each(function (value, index) {
-              console.log('index % 2');
-              console.log(index);
-              console.log(index % 2);
               if (index % 2) {
-                value['isEven'] = true;
+                value['sideDateInTimeline'] = 'right';
               } else {
-                value['isEven'] = false;
+                value['sideDateInTimeline'] = 'left';
               }
             })
             .groupBy(function(value) {

@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
 
-<div mc-full-panel table-settings order="name" filtering class="panel panel-primary">
+<div mc-full-panel table-settings order="name" filtering mc-multi-views default-view="table" class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
@@ -23,18 +23,18 @@
       <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')" ng-if="$ctrl.isShowExpandBtn"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
       <div class="dropdown">
         <button mc-dropdown class="btn btn-success btn-inverse btn-dropdown-toggle btn-table" ng-click="toggleDropdown($event);">
-          <i ng-if="isViewList('table')" class="fa fa-table"></i>
-          <i ng-if="isViewList('timeline')" class="fa fa-calendar-plus-o"></i>
+          <i ng-if="isActiveView('table')" class="fa fa-table"></i>
+          <i ng-if="isActiveView('timeline')" class="fa fa-calendar-plus-o"></i>
         </button>
         <div class="dropdown-menu dm-panel dm-right dm-tables">
           <div class="heading">TABLES</div>
           <div class="dm-list">
-            <div class="dm-item" ng-class="{active: isViewList('table')}" ng-click="changeViewList('table')"><i class="fa fa-table"></i><span>Events</span></div>
+            <div class="dm-item" ng-class="{active: isActiveView('table')}" ng-click="changeActiveView('table')"><i class="fa fa-table"></i><span>Events</span></div>
           </div>
           <div class="heading">TIMELINES</div>
           <div class="dm-wrap-list">
             <div class="dm-list">
-              <div class="dm-item" ng-class="{active: isViewList('timeline')}" ng-click="changeViewList('timeline')"><i class="fa fa-calendar-plus-o"></i><span>Events</span></div>
+              <div class="dm-item" ng-class="{active: isActiveView('timeline')}" ng-click="changeActiveView('timeline')"><i class="fa fa-calendar-plus-o"></i><span>Events</span></div>
             </div>
           </div>
         </div>
@@ -51,7 +51,7 @@
     </div>
   </div>
   <div class="panel-body">
-    <div ng-if="isViewList('table')">
+    <div ng-if="isActiveView('table')">
       <table class="table table-striped table-hover table-bordered rwd-table table-sorted table-fixedcol">
         <colgroup>
           <col style="width: 50%;">
@@ -80,13 +80,13 @@
       </table>
     </div>
 
-    <div class="wrap-timeline" ng-if="isViewList('timeline')">
+    <div class="wrap-timeline" ng-if="isActiveView('timeline')">
       <div class="timeline">
         <div class="timeline-inner">
           <div ng-repeat="(key, eventGroup) in $ctrl.eventsTimeline">
             <div class="header">{{ key | date:'dd MMMM yyyy' }}</div>
             <div class="date-group" >
-              <div class="date" ng-repeat="event in eventGroup" ng-class="event.isEven ? 'right' : 'left'">
+              <div class="date" ng-repeat="event in eventGroup" ng-class="event.sideDateInTimeline">
                 <div class="date-content" ng-click="$ctrl.go(event.sourceId, event)" ng-class="{active: selectedRow(event.sourceId)}">
                   <div class="title">{{ event.name }}</div>
                   <div class="subtitle">{{ event.type }}</div>
@@ -103,7 +103,7 @@
 
     <div class="panel-control">
       <div class="wrap-control-group">
-        <div class="control-group with-indent left" ng-if="isViewList('table')">
+        <div class="control-group with-indent left" ng-if="isActiveView('table')">
           <dir-pagination-controls max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
         </div>
         <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1 && $ctrl.isShowCreateBtn">

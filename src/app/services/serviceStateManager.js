@@ -27,6 +27,9 @@ class ServiceStateManager {
           isOpen: false,
           query: ''
         };
+        this.viewsSettings = {
+          activeView: ''
+        };
 
         this.getFilter = function () {
           this.checkChangeState();
@@ -75,6 +78,23 @@ class ServiceStateManager {
             isOpen: false,
             query: ''
           };
+          this.viewsSettings = {
+            activeView: ''
+          };
+        };
+
+        this.getViewsSettings = function () {
+          this.checkChangeState();
+
+          return this.viewsSettings;
+        };
+
+        this.setViewsSettings = function (viewSettings) {
+          if (typeof viewSettings === "undefined") return;
+
+          if (viewSettings.activeView) {
+            this.viewsSettings.activeView = viewSettings.activeView;
+          }
         };
 
         this.checkChangeState = function () {
