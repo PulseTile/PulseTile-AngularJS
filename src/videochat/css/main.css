@@ -16,7 +16,7 @@ body,
   margin-top: 15px; }
 
 body {
-  background: url("../images/site-bg2.png") center 100px no-repeat #ffffff;
+  /*background: url("../images/site-bg2.png") center 100px no-repeat #ffffff;*/
   background-size: 100% auto;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
