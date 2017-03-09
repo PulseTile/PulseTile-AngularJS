@@ -16,15 +16,26 @@
 routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 function routeConfig($stateProvider, $urlRouterProvider) {
-  $stateProvider
+  var breadcrumbs = [{
+        title: 'Patient Listings',
+        state: 'patients-list'
+      }, {
+        title: 'Patient Summary',
+        state: 'patients-summary'
+      }, {
+        title: 'Care Plans',
+        state: 'eolcareplans'
+      }];
 
+  $stateProvider
     .state('eolcareplans', {
       url: '/patients/{patientId:int}/eolcareplans?reportType&searchString&queryType',
       views: {
         banner: {template: '<patients-banner-component></patients-banner-component>'},
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
         main: {template: '<eolcareplans-list-component></eolcareplans-list-component>'}
-      }
+      },
+      breadcrumbs: breadcrumbs
     })
     .state('eolcareplans-detail', {
       url: '/patients/{patientId:int}/eolcareplans/{eolcareplansIndex}?filter&page&reportType&searchString&queryType',
@@ -33,7 +44,8 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
         main: {template: '<eolcareplans-list-component></eolcareplans-list-component>'},
         detail: {template: '<eolcareplans-detail-component></eolcareplans-detail-component>'}
-      }
+      },
+      breadcrumbs: breadcrumbs
     })
 }
 

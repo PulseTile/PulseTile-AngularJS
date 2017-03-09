@@ -16,15 +16,26 @@
 routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 function routeConfig($stateProvider, $urlRouterProvider) {
-  $stateProvider
+  var breadcrumbs = [{
+        title: 'Patient Listings',
+        state: 'patients-list'
+      }, {
+        title: 'Patient Summary',
+        state: 'patients-summary'
+      }, {
+        title: 'Documents',
+        state: 'documents'
+      }];
 
+  $stateProvider
     .state('documents', {
       url: '/patients/{patientId:int}/documents?reportType&searchString&queryType',
       views: {
         banner: {template: '<patients-banner-component></patients-banner-component>'},
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
         main: {template: '<documents-list-component></documents-list-component>'}
-      }
+      },
+      breadcrumbs: breadcrumbs
     })
     .state('documents-detail', {
       url: '/patients/{patientId:int}/documents/{documentIndex}?filter&page&reportType&searchString&queryType&documentType&source',
@@ -33,7 +44,8 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
         main: {template: '<documents-list-component></documents-list-component>'},
         detail: {template: '<documents-detail-component></documents-detail-component>'}
-      }
+      },
+      breadcrumbs: breadcrumbs
     })
 }
 
