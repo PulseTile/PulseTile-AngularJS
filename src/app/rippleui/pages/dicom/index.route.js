@@ -16,16 +16,7 @@
 routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 function routeConfig($stateProvider, $urlRouterProvider) {
-  $stateProvider
-
-    .state('images', {
-      url: '/patients/{patientId:int}/images?filter&page&reportType&searchString&queryType',
-      views: {
-        banner: {template: '<patients-banner-component></patients-banner-component>'},
-        actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-        main: {template: '<image-list-component></image-list-component>'}
-      },
-      breadcrumbs: [{
+  var breadcrumbs = [{
         title: 'Patient Listings',
         state: 'patients-list'
       }, {
@@ -34,7 +25,17 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       }, {
         title: 'Images',
         state: 'images'
-      }]
+      }];
+
+  $stateProvider
+    .state('images', {
+      url: '/patients/{patientId:int}/images?filter&page&reportType&searchString&queryType',
+      views: {
+        banner: {template: '<patients-banner-component></patients-banner-component>'},
+        actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+        main: {template: '<image-list-component></image-list-component>'}
+      },
+      breadcrumbs: breadcrumbs
     })
     .state('images-detail', {
       url: '/patients/{patientId:int}/images/{detailsIndex}?page&reportType&searchString&queryType&source',
@@ -44,16 +45,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         main: {template: '<image-list-component></image-list-component>'},
         detail: {template: '<image-detail-component></image-detail-component>'}
       },
-      breadcrumbs: [{
-        title: 'Patient Listings',
-        state: 'patients-list'
-      }, {
-        title: 'Patient Summary',
-        state: 'patients-summary'
-      }, {
-        title: 'Images',
-        state: 'images'
-      }]
+      breadcrumbs: breadcrumbs
     })
 }
 

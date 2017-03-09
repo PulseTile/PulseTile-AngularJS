@@ -16,16 +16,7 @@
 routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 function routeConfig($stateProvider, $urlRouterProvider) {
-  $stateProvider
-
-    .state('procedures', {
-      url: '/patients/{patientId:int}/procedures?reportType&searchString&queryType',
-      views: {
-        banner: {template: '<patients-banner-component></patients-banner-component>'},
-        actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-        main: {template: '<procedures-list-component></procedures-list-component>'}
-      },
-      breadcrumbs: [{
+  var breadcrumbs = [{
         title: 'Patient Listings',
         state: 'patients-list'
       }, {
@@ -34,7 +25,17 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       }, {
         title: 'Procedures',
         state: 'procedures'
-      }]
+      }];
+
+  $stateProvider
+    .state('procedures', {
+      url: '/patients/{patientId:int}/procedures?reportType&searchString&queryType',
+      views: {
+        banner: {template: '<patients-banner-component></patients-banner-component>'},
+        actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+        main: {template: '<procedures-list-component></procedures-list-component>'}
+      },
+      breadcrumbs: breadcrumbs
     })
     .state('procedures-detail', {
       url: '/patients/{patientId:int}/procedures/{detailsIndex}?page&reportType&searchString&queryType&source',
@@ -44,16 +45,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         main: {template: '<procedures-list-component></procedures-list-component>'},
         detail: {template: '<procedures-detail-component></procedures-detail-component>'}
       },
-      breadcrumbs: [{
-        title: 'Patient Listings',
-        state: 'patients-list'
-      }, {
-        title: 'Patient Summary',
-        state: 'patients-summary'
-      }, {
-        title: 'Procedures',
-        state: 'procedures'
-      }]
+      breadcrumbs:breadcrumbs
     })
     .state('procedures-create', {
       url: '/patients/{patientId:int}/procedures/create?reportType&searchString&queryType',
@@ -63,16 +55,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         main: {template: '<procedures-list-component></procedures-list-component>'},
         detail: {template: '<procedures-create-component></procedures-create-component>'}
       },
-      breadcrumbs: [{
-        title: 'Patient Listings',
-        state: 'patients-list'
-      }, {
-        title: 'Patient Summary',
-        state: 'patients-summary'
-      }, {
-        title: 'Procedures',
-        state: 'procedures'
-      }]
+      breadcrumbs: breadcrumbs
     })
 }
 

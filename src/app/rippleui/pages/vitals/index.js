@@ -35,7 +35,6 @@ export default {
   "sidebarInfo": {
     name: 'vitals',
     link: 'vitals',
-    linkDetail: 'vitals-detail',
     title: 'Vitals - News'
   }
 }

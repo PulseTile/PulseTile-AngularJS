@@ -34,7 +34,6 @@ export default {
   "sidebarInfo": {
     name: 'orders',
     link: 'orders',
-    linkDetail: 'orders-detail',
     title: 'Orders'
   }
 }

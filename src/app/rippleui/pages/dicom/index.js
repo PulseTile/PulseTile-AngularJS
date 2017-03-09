@@ -33,7 +33,6 @@ export default {
   "sidebarInfo": {
     name: 'images',
     link: 'images',
-    linkDetail: 'images-detail',
     title: 'Images'
   }
 }

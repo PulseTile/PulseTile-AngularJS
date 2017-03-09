@@ -16,16 +16,7 @@
 routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 function routeConfig($stateProvider, $urlRouterProvider) {
-  $stateProvider
-
-    .state('orders', {
-      url: '/patients/{patientId:int}/orders?reportType&searchString&queryType',
-      views: {
-        banner: {template: '<patients-banner-component></patients-banner-component>'},
-        actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-        main: {template: '<orders-list-component></orders-list-component>'}
-      },
-      breadcrumbs: [{
+  var breadcrumbs = [{
         title: 'Patient Listings',
         state: 'patients-list'
       }, {
@@ -34,7 +25,17 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       }, {
         title: 'Orders',
         state: 'orders'
-      }]
+      }];
+
+  $stateProvider
+    .state('orders', {
+      url: '/patients/{patientId:int}/orders?reportType&searchString&queryType',
+      views: {
+        banner: {template: '<patients-banner-component></patients-banner-component>'},
+        actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+        main: {template: '<orders-list-component></orders-list-component>'}
+      },
+      breadcrumbs: breadcrumbs
     })
     .state('orders-create', {
       url: '/patients/{patientId:int}/orders/create?reportType&searchString&queryType',
@@ -44,16 +45,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         main: {template: '<orders-list-component></orders-list-component>'},
         detail: {template: '<orders-create-component></orders-create-component>'}
       },
-      breadcrumbs: [{
-        title: 'Patient Listings',
-        state: 'patients-list'
-      }, {
-        title: 'Patient Summary',
-        state: 'patients-summary'
-      }, {
-        title: 'Orders',
-        state: 'orders'
-      }]
+      breadcrumbs: breadcrumbs
     })
     .state('orders-detail', {
       url: '/patients/{patientId:int}/orders/{detailsIndex}?page&reportType&searchString&queryType&source',
@@ -64,16 +56,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         detail: {template: '<orders-detail-component></orders-detail-component>'}
       },
       params: { source: '{}' },
-      breadcrumbs: [{
-        title: 'Patient Listings',
-        state: 'patients-list'
-      }, {
-        title: 'Patient Summary',
-        state: 'patients-summary'
-      }, {
-        title: 'Orders',
-        state: 'orders'
-      }]
+      breadcrumbs: breadcrumbs
     })
 }
 

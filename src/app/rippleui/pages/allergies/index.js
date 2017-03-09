@@ -35,7 +35,6 @@ export default {
   "sidebarInfo": {
     name: 'allergies',
     link: 'allergies',
-    linkDetail: 'allergies-detail',
     title: 'Allergies'
   }
 }
