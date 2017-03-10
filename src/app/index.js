@@ -24,7 +24,7 @@ import 'angular-loading-bar';
 import 'fullcalendar';
 import 'angular-ui-calendar';
 // import 'jquery';
-
+import 'ng-scrollbars';
 import 'chart.js';
 
 import 'angular-spinner';
