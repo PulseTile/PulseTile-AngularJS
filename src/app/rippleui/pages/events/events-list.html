@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
 
-<div mc-full-panel table-settings order="name" filtering mc-multi-views default-view="timeline" class="panel panel-primary">
+<div mc-full-panel table-settings order="name" filtering mc-multi-views default-view="table" class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
@@ -68,9 +68,9 @@
 
         <tbody>
           <tr dir-paginate="event in $ctrl.events | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(event.sourceId, event)" ng-class="{info: selectedRow(event.sourceId)}">
-            <td data-th="Event Name" ng-class="sortClass('name');">{{ event.name }}</td>
+            <td data-th="Event Name" ng-class="sortClass('name');">{{ event.serviceTeam }}</td>
             <td data-th="Event Type" ng-class="sortClass('type')">{{ event.type }}</td>
-            <td data-th="Date" ng-class="sortClass('date')">{{ event.date | date:'dd-MMM-yyyy' }}</td>
+            <td data-th="Date" ng-class="sortClass('date')">{{ event.dateOfAppointment | date:'dd-MMM-yyyy' }}</td>
           </tr>
 
           <tr ng-if="!$ctrl.events.length">
@@ -89,9 +89,9 @@
               <div class="date-group" >
                 <div class="date" ng-repeat="event in eventGroup" ng-class="event.sideDateInTimeline">
                   <div class="date-content" ng-click="$ctrl.go(event.sourceId, event)" ng-class="{active: selectedRow(event.sourceId)}">
-                    <div class="title">{{ event.name }}</div>
+                    <div class="title">{{ event.serviceTeam }}</div>
                     <div class="subtitle">{{ event.type }}</div>
-                    <div class="text">{{ event.date | date:'dd MMMM yyyy' }}, 10:00-10:59</div>
+                    <div class="text">{{ event.dateOfAppointment | date:'dd MMMM yyyy' }}<!-- , 10:00-10:59 --></div>
                   </div>
                 </div>
               </div>

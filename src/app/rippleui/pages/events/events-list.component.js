@@ -52,77 +52,84 @@ class EventsListController {
     }.bind(this);
     
     this.setCurrentPageData = function (data) {
-      // if (data.events.data) {
-      //   this.events = data.events.data;
-      //   usSpinnerService.stop('patientSummary-spinner');
-      // }
-      var date = new Date();
-      this.events = [
-        {
-          sourceId: '1',
-          name: 'Event 1',
-          type: 'Discharge',
-          note: 'Very important event 1',
-          date: Date.parse(new Date()),
-          author: 'ripple_osi',
-          dateCreate: Date.parse(new Date()),
-          source: 'Marand',
-          timeSlot: 'Discharge',
-          status: 'Scheduled'
-        }, {
-          sourceId: '2',
-          name: 'Event 2',
-          type: 'Transfer',
-          note: 'Very important event 2',
-          date: Date.parse(new Date(date.setDate(date.getDate()-1))),
-          author: 'ripple_osi',
-          dateCreate: Date.parse(new Date(date.setDate(date.getDate()-1))),
-          source: 'EtherCIS',
-          timeSlot: 'Transfer',
-          status: 'Scheduled'
-        }, {
-          sourceId: '3',
-          name: 'Meeting 1',
-          type: 'Admission',
-          note: 'Very important meeting 1',
-          date: Date.parse(new Date(date.setDate(date.getDate()-7))),
-          author: 'ripple_osi',
-          dateCreate: Date.parse(new Date(date.setDate(date.getDate()-7))),
-          source: 'Marand',
-          timeSlot: 'Admission',
-          status: 'Scheduled'
-        }, {
-          sourceId: '4',
-          name: 'Event 3',
-          type: 'Appointment',
-          note: 'Very important event 3',
-          date: Date.parse(new Date(date.setDate(date.getDate()-30))),
-          author: 'ripple_osi',
-          dateCreate: Date.parse(new Date(date.setDate(date.getDate()-30))),
-          source: 'Marand',
-          location: 'Leeds General',
-          timeSlot: 'Appointment',
-          status: 'Scheduled'
-        }, {
-          sourceId: '5',
-          name: 'Meeting 2',
-          type: 'Admission',
-          note: 'Very important meeting 2',
-          date: Date.parse(new Date(date.setDate(date.getDate()-1))),
-          author: 'ripple_osi',
-          dateCreate: Date.parse(new Date(date.setDate(date.getDate()-1))),
-          source: 'Marand',
-          timeSlot: 'Admission',
-          status: 'Scheduled'
-        }
-      ];
+      if (data.events.data) {
+        this.events = data.events.data;
+        console.log('this.events');
+        console.log(this.events);
+        usSpinnerService.stop('patientSummary-spinner');
+        this.eventsTimeline = this.modificateEventsArr(this.events);
 
-      this.eventsTimeline = this.modificateEventsArr(this.events);
+        serviceFormatted.formattingTablesDate(this.events, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['name', 'type', 'date'];
 
-      serviceFormatted.formattingTablesDate(this.events, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
-      serviceFormatted.filteringKeys = ['name', 'type', 'date'];
+      }
+      // var date = new Date();
+      // this.events = [
+      //   {
+      //     sourceId: '1',
+      //     name: 'Event 1',
+      //     type: 'Discharge',
+      //     note: 'Very important event 1',
+      //     date: Date.parse(new Date()),
+      //     author: 'ripple_osi',
+      //     dateCreate: Date.parse(new Date()),
+      //     source: 'Marand',
+      //     timeSlot: 'Discharge',
+      //     status: 'Scheduled'
+      //   }, {
+      //     sourceId: '2',
+      //     name: 'Event 2',
+      //     type: 'Transfer',
+      //     note: 'Very important event 2',
+      //     date: Date.parse(new Date(date.setDate(date.getDate()-1))),
+      //     author: 'ripple_osi',
+      //     dateCreate: Date.parse(new Date(date.setDate(date.getDate()-1))),
+      //     source: 'EtherCIS',
+      //     timeSlot: 'Transfer',
+      //     status: 'Scheduled'
+      //   }, {
+      //     sourceId: '3',
+      //     name: 'Meeting 1',
+      //     type: 'Admission',
+      //     note: 'Very important meeting 1',
+      //     date: Date.parse(new Date(date.setDate(date.getDate()-7))),
+      //     author: 'ripple_osi',
+      //     dateCreate: Date.parse(new Date(date.setDate(date.getDate()-7))),
+      //     source: 'Marand',
+      //     timeSlot: 'Admission',
+      //     status: 'Scheduled'
+      //   }, {
+      //     sourceId: '4',
+      //     name: 'Event 3',
+      //     type: 'Appointment',
+      //     note: 'Very important event 3',
+      //     date: Date.parse(new Date(date.setDate(date.getDate()-30))),
+      //     author: 'ripple_osi',
+      //     dateCreate: Date.parse(new Date(date.setDate(date.getDate()-30))),
+      //     source: 'Marand',
+      //     location: 'Leeds General',
+      //     timeSlot: 'Appointment',
+      //     status: 'Scheduled'
+      //   }, {
+      //     sourceId: '5',
+      //     name: 'Meeting 2',
+      //     type: 'Admission',
+      //     note: 'Very important meeting 2',
+      //     date: Date.parse(new Date(date.setDate(date.getDate()-1))),
+      //     author: 'ripple_osi',
+      //     dateCreate: Date.parse(new Date(date.setDate(date.getDate()-1))),
+      //     source: 'Marand',
+      //     timeSlot: 'Admission',
+      //     status: 'Scheduled'
+      //   }
+      // ];
 
-      usSpinnerService.stop('patientSummary-spinner');
+      // this.eventsTimeline = this.modificateEventsArr(this.events);
+
+      // serviceFormatted.formattingTablesDate(this.events, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
+      // serviceFormatted.filteringKeys = ['name', 'type', 'date'];
+
+      // usSpinnerService.stop('patientSummary-spinner');
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
@@ -138,7 +145,7 @@ class EventsListController {
       
       arr = _.chain(arr)
             .sortBy(function (value) {
-              return value.date;
+              return value.dateOfAppointment;
             })
             .reverse()
             .each(function (value, index) {
@@ -147,9 +154,10 @@ class EventsListController {
               } else {
                 value['sideDateInTimeline'] = 'left';
               }
+              value.type = 'Appointment';
             })
             .groupBy(function(value) {
-              return value.date;
+              return value.dateOfAppointment;
             })
             .value();
 
@@ -164,8 +172,8 @@ class EventsListController {
     
     $scope.$on('$destroy', unsubscribe);
     
-    // this.eventsLoad = eventsActions.all;
-    // this.eventsLoad($stateParams.patientId);
+    this.eventsLoad = eventsActions.all;
+    this.eventsLoad($stateParams.patientId);
 
     // (function($){
     //   $(window).on("load",function(){
