@@ -144,10 +144,10 @@ let app = angular
         ScrollBarsProvider.defaults = {
             scrollButtons: {
                 scrollAmount: 'auto', // scroll amount when button pressed
-                enable: true // enable scrolling buttons by default
+                enable: false // enable scrolling buttons by default
             },
             scrollInertia: 400, // adjust however you want
-            axis: 'yx', // enable 2 axis scrollbars by default,
+            axis: 'y',
             theme: 'dark',
             autoHideScrollbar: true
         };

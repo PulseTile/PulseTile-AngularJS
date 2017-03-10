@@ -4,12 +4,16 @@
   border: 1px solid #d8d8d8;
 }
 
+.timeline-content-scroll {
+  overflow: hidden;
+  height: 648px;
+  
+}
 .timeline {
   overflow: hidden;
   position: relative;
   padding-top: 14px;
   max-width: 454px;
-  min-height: 673px;
   margin: 0 auto;
   .timeline-inner {
     position: relative;

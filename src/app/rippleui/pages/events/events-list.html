@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
 
-<div mc-full-panel table-settings order="name" filtering mc-multi-views default-view="table" class="panel panel-primary">
+<div mc-full-panel table-settings order="name" filtering mc-multi-views default-view="timeline" class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
@@ -51,7 +51,7 @@
     </div>
   </div>
   <div class="panel-body">
-    <div ng-if="isActiveView('table')">
+    <div ng-show="isActiveView('table')">
       <table class="table table-striped table-hover table-bordered rwd-table table-sorted table-fixedcol">
         <colgroup>
           <col style="width: 50%;">
@@ -80,17 +80,19 @@
       </table>
     </div>
 
-    <div class="wrap-timeline" ng-if="isActiveView('timeline')">
-      <div class="timeline">
-        <div class="timeline-inner">
-          <div ng-repeat="(key, eventGroup) in $ctrl.eventsTimeline">
-            <div class="header">{{ key | date:'dd MMMM yyyy' }}</div>
-            <div class="date-group" >
-              <div class="date" ng-repeat="event in eventGroup" ng-class="event.sideDateInTimeline">
-                <div class="date-content" ng-click="$ctrl.go(event.sourceId, event)" ng-class="{active: selectedRow(event.sourceId)}">
-                  <div class="title">{{ event.name }}</div>
-                  <div class="subtitle">{{ event.type }}</div>
-                  <div class="text">{{ event.date | date:'dd MMMM yyyy' }}, 10:00-10:59</div>
+    <div class="wrap-timeline" ng-show="isActiveView('timeline')">
+      <div class="timeline-content-scroll" ng-scrollbars ng-scrollbars-update=updateScrollbar>
+        <div class="timeline">
+          <div class="timeline-inner">
+            <div ng-repeat="(key, eventGroup) in $ctrl.eventsTimeline">
+              <div class="header">{{ key | date:'dd MMMM yyyy' }}</div>
+              <div class="date-group" >
+                <div class="date" ng-repeat="event in eventGroup" ng-class="event.sideDateInTimeline">
+                  <div class="date-content" ng-click="$ctrl.go(event.sourceId, event)" ng-class="{active: selectedRow(event.sourceId)}">
+                    <div class="title">{{ event.name }}</div>
+                    <div class="subtitle">{{ event.type }}</div>
+                    <div class="text">{{ event.date | date:'dd MMMM yyyy' }}, 10:00-10:59</div>
+                  </div>
                 </div>
               </div>
             </div>

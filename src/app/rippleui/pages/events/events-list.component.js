@@ -16,7 +16,7 @@
 let templateEventsList = require('./events-list.html');
 
 class EventsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, usSpinnerService, serviceFormatted) {
+  constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, usSpinnerService, serviceFormatted, $rootScope) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -166,6 +166,19 @@ class EventsListController {
     
     // this.eventsLoad = eventsActions.all;
     // this.eventsLoad($stateParams.patientId);
+
+    // (function($){
+    //   $(window).on("load",function(){
+    //     $(".timeline-content-scroll").mCustomScrollbar({
+    //       theme:"dark"
+    //     });
+    //     $rootScope.$on('$locationChangeStart', function(e) {
+    //       $(".timeline-content-scroll").mCustomScrollbar({
+    //         theme:"dark"
+    //       });
+    //     });
+    //   });
+    // })(jQuery);
   }
 }
 
@@ -174,5 +187,5 @@ const EventsListComponent = {
   controller: EventsListController
 };
 
-EventsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
+EventsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted', '$rootScope'];
 export default EventsListComponent;
