@@ -1,0 +1,35 @@
+/* theme for Malihu's jQuery Custom Scrollbar: "dark-custom" */
+
+.mCSB_inside.mCS-dark-custom > .mCSB_container {
+    margin-right: 10px;
+}
+.mCS-dark-custom.mCSB_scrollTools {
+  width: 7px;
+  .mCSB_draggerRail,
+  .mCSB_dragger .mCSB_dragger_bar {
+    width: 7px; 
+    border-radius: 7px;
+    margin: 0;
+  }
+  .mCSB_draggerRail {
+    background-color: #f3f3f3; 
+  }
+
+  .mCSB_dragger {
+    .mCSB_dragger_bar { 
+      background-color: rgba(217, 217, 217, 1); 
+    }
+
+    &:hover .mCSB_dragger_bar { background-color: rgba(0,0,0,0.3); }
+
+    &:active .mCSB_dragger_bar,
+    &.mCSB_dragger_onDrag .mCSB_dragger_bar { background-color: rgba(0,0,0,0.5); }
+  }
+}
+
+.mCS-dark-custom.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar, 
+.mCS-dark-custom.mCSB_scrollTools_horizontal .mCSB_draggerRail {
+  width: 100%;
+  height: 7px;
+  margin: 5px 0;
+}

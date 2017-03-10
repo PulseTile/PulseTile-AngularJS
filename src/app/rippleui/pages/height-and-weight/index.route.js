@@ -16,15 +16,26 @@
 routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 function routeConfig($stateProvider, $urlRouterProvider) {
-  $stateProvider
+  var breadcrumbs = [{
+        title: 'Patient Listings',
+        state: 'patients-list'
+      }, {
+        title: 'Patient Summary',
+        state: 'patients-summary'
+      }, {
+        title: 'Height and Weight',
+        state: 'heightAndWeights'
+      }];
 
+  $stateProvider
     .state('heightAndWeights', {
       url: '/patients/{patientId:int}/heightAndWeights?reportType&searchString&queryType',
       views: {
         banner: {template: '<patients-banner-component></patients-banner-component>'},
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
         main: {template: '<height-and-weight-list-component></height-and-weight-list-component>'}
-      }
+      },
+      breadcrumbs: breadcrumbs
     })
     .state('heightAndWeights-detail', {
       url: '/patients/{patientId:int}/heightAndWeights/{heightAndWeightIndex}?filter&page&reportType&searchString&queryType',
@@ -33,7 +44,8 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
         main: {template: '<height-and-weight-list-component></height-and-weight-list-component>'},
         detail: {template: '<height-and-weight-detail-component></height-and-weight-detail-component>'}
-      }
+      },
+      breadcrumbs: breadcrumbs
     })
 }
 

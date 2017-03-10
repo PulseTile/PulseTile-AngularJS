@@ -11,6 +11,14 @@
 @import 'base/grid';
 
 
+// @import '../assets/foundation-icons/foundation-icons.css';
+@import '~angular-loading-bar/src/loading-bar.css';
+@import '~fullcalendar/dist/fullcalendar.min.css';
+@import '../../../bower_components/jquery-timepicker-jt/jquery.timepicker.css';
+@import '~angular-xeditable/dist/css/xeditable.min.css';
+@import '~malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css';
+
+
 // @import 'components/';
 @import 'components/btn';
 @import 'components/table';
@@ -23,6 +31,7 @@
 @import 'components/fieldset';
 @import 'components/datepicker';
 @import 'components/tag';
+@import 'components/scrollbar';
 
 @import 'base';
 // @import 'main';
@@ -46,14 +55,3 @@
 @import 'blocks/dicom';
 @import 'blocks/timelines';
 // @import 'blocks/sb-admin-2';
-
-
-
-
-
-
-// @import '../assets/foundation-icons/foundation-icons.css';
-@import '~angular-loading-bar/src/loading-bar.css';
-@import '~fullcalendar/dist/fullcalendar.min.css';
-@import '../../../bower_components/jquery-timepicker-jt/jquery.timepicker.css';
-@import '~angular-xeditable/dist/css/xeditable.min.css';

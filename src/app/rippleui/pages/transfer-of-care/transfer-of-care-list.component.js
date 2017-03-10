@@ -17,7 +17,7 @@ let templateTransferOfCareList = require('./transfer-of-care-list.html');
 
 class TransferOfCareListController {
   constructor($scope, $state, $stateParams, $ngRedux, transferOfCareActions, serviceRequests, usSpinnerService) {
-    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-details'});
+    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
     this.go = function (id, transferfCareSource) {

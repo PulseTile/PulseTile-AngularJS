@@ -17,7 +17,7 @@ let templateAppointmentsList = require('./appointments-list.html');
 
 class AppointmentsListController {
   constructor($scope, $state, $stateParams, $ngRedux, appointmentsActions, serviceRequests, usSpinnerService, serviceFormatted) {
-    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-details'});
+    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'allergies-create';
