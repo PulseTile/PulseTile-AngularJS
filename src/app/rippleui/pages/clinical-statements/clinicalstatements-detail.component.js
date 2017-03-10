@@ -114,14 +114,14 @@ class ClinicalstatementsDetailController {
       pasteHtmlAtCaret(html, userinput);
       
       // Apply Editable
-      // $('span.tag .editable').editable({
-      //     type: 'text',
-      //     title: 'Edit Text',
-      //     success: function(response, newValue) {
-      //         //userModel.set('username', newValue); //update backbone model
-      //     },
-      //     //mode: 'inline'
-      // });
+      $('span.tag .editable').editable({
+          type: 'text',
+          title: 'Edit Text',
+          success: function(response, newValue) {
+              //userModel.set('username', newValue); //update backbone model
+          },
+          //mode: 'inline'
+      });
     
       // Bind Remove to tag
       removeTags('#clinicalNote');

@@ -24,99 +24,123 @@ const TAG_NAMES = [
 ]
 
 class ClinicalstatementsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, serviceRequests) {
-    $scope.clinicalStatement = {};
-    $scope.clinicalStatement.statements = [];
-    $scope.isString = angular.isString
-    $scope.isObject = angular.isObject
-    $scope.clinicalStatement.dateCreated = new Date().toISOString().slice(0, 10);
-    
-    this.currentPage = 1; 
+  constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, usSpinnerService, serviceRequests) {
+    this.clinicalStatement = $stateParams.source;
+    $scope.statements = [
+      {"id":1,"phrase":"Presented with Shoulder Pain"},
+      {"id":2,"phrase":"Pain is of 6 months"},
+      {"id":4,"phrase":"Pain is right side"},
+      {"id":5,"phrase":"Pain is left side"},
+      {"id":3,"phrase":"Onset is from a fall"},
+      {"id":7,"phrase":"Internal rotation to 30 degrees"},
+      {"id":8,"phrase":"Internal rotation to 45 degrees"},
+      {"id":9,"phrase":"Internal rotation to |?| degrees"},
+      {"id":10,"phrase":"Abduction to 30 degrees"},
+      {"id":11,"phrase":"Abduction to 45 degrees"},
+      {"id":12,"phrase":"Xray shows early OsteoArthritis change"},
+      {"id":13,"phrase":"Utrasound shows rotator cuff tear"},
+      {"id":14,"phrase":"Plan is physio for 3 sessions"},
+      {"id":15,"phrase":"If doesn't improve, will need laparoscopic surgical exploration +/- repair"},
+      {"id":16,"phrase":"Presented with Knee Pain"}
+    ];
+    $scope.statementsText = _.map($scope.statements, function (el) {
+      return el.phrase;
+    });
+
 
     this.setCurrentPageData = function (data) {
-      this.searchResults = data.clinicalstatements.searchData;
-
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
-    };
-
-    /**
-     * Listen for an enter key in the custom statement input box. When detected,
-     * add a new statement and clear the statement content
-     */
-    this.keyDownCustomStatement = function(evt) {
-      if(evt.keyCode === 13) {
-        this.addStatement($scope.clinicalStatement.customStatement);
-        delete $scope.clinicalStatement.customStatement;
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
+        $scope.clinicalStatementEdit = Object.assign({}, this.clinicalStatement);
+        $scope.clinicalStatementEdit.dateCreated = new Date();
+        $scope.clinicalStatementEdit.author = this.currentUser.email;
       }
-    };
-
-    this.addStatement = function(result) {
-      if(angular.isString(result)) {
-        $scope.clinicalStatement.statements.push(result);
-      } else {
-        $scope.clinicalStatement.statements.push({
-          parsed: helper.parsePhrase(result.phrase),
-          id:     result.id
-        });
-      }
-    };
-
-    this.removeStatement = function(pos) {
-      $scope.clinicalStatement.statements.splice(pos, 1);
-    };
-
-    /**
-     * Evaluate the current search expression. Look for a tag at the begining
-     * of the query, if one is found remove it from the query and set as the 
-     * tag to search in.
-     */
-    this.checkExpression = function(input) {
-      if(!$scope.clinicalStatement.tag) {
-        let tag = _.find(TAG_NAMES, t => input.startsWith(t + ' '));
-        let query = (tag) ? input.substring(tag.length + 1) : input;
-        Object.assign($scope.clinicalStatement, {query, tag});
-      }
-    };
-
-    this.performClinicalSearch = function() {
-      let {query, tag} = $scope.clinicalStatement;
-      $scope.clinicalstatementsQuery(query, tag);
-    }
-
-    /**
-     * Event handler for removing the tag being used for search
-     */
-    this.removeTag = function() {
-      delete $scope.clinicalStatement.tag;
+      // if (data.clinicalStatements.dataGet) {
+      //   this.clinicalStatement = data.clinicalStatements.dataGet;
+      //   this.statementsText = _.map(this.clinicalStatement.statements, helper.toText);
+      // }
+      usSpinnerService.stop("clinicalStatementDetail-spinner");
     };
 
     this.goList = function () {
       $state.go('clinicalstatements', {
         patientId: $stateParams.patientId,
+        reportType: $stateParams.reportType,
         searchString: $stateParams.searchString,
         queryType: $stateParams.queryType
       });
     };
-    
-    this.cancel = function () {
+    this.cancelEdit = function () {
       this.goList();
     };
-
-    $scope.create = function (clinicalStatementForm, clinicalStatement) {
+    $scope.confirmEdit = function (clinicalStatementForm, clinicalStatement) {
       $scope.formSubmitted = true;
-      let apiStatements = helper.transformPhrases(clinicalStatement.statements);
-      let toAdd = {
-        statements: apiStatements,
-        dateCreated: clinicalStatement.dateCreated,
-        author: clinicalStatement.author,
-        source: 'openehr'
-      };
+      
+      // let toAdd = {
+      //   // code: $scope.clinicalStatement.code,
+      //   dateOfOnset: $scope.clinicalStatement.dateOfOnset.toISOString().slice(0, 10),
+      //   description: $scope.clinicalStatement.description,
+      //   problem: $scope.clinicalStatement.problem,
+      //   source: $scope.clinicalStatement.source,
+      //   sourceId: '',
+      //   terminology: $scope.clinicalStatement.terminology
+      // };
       if (clinicalStatementForm.$valid) {
-        $scope.clinicalstatementsCreate(this.currentPatient.id, toAdd);
+        this.goList();
+      //   $scope.isEdit = false;
+      //   clinicalStatement = Object.assign(clinicalStatement, $scope.clinicalStatementEdit);
+      //   $scope.diagnosesUpdate($scope.patient.id, toAdd);
       }
     }.bind(this);
+
+
+    var keys = new Array();
+    // Add Dropdown to Input (select or change value)
+    $scope.cc = 0;
+    $scope.clickSelect = function () {
+      console.log('clickSelect');
+      $scope.cc++;
+      if ($scope.cc == 2) {
+        // $(this).change();
+        $scope.cc = 0;
+      }
+    };
+    $scope.atemp = 'lalalala';
+    $scope.changeSelect = function () {
+      console.log('changeSelect');
+      var userinput = jQuery('#clinicalNote');
+      var id = $scope.clinicalStatementEdit.search;
+      var phrase = $scope.statementsText[id];
+
+      // Parse inputs
+      var inner = phrase.replace(/(.*)(\{|\|)([^~|])(\}|\|)(.*)/, '$1<span class="editable" contenteditable="false" data-arr-subject="$1" editable-text="atemp" data-arr-unit="$3" data-arr-value="$5">$3</span>$5');
+      var html = '<span class="tag" data-id="' + id + '" data-phrase="' + phrase + '" contenteditable="false">' + inner + '. <a class="remove" contenteditable="false"><i class="fa fa-close" contenteditable="false"></i></a></span>';
+      console.log('userinput');
+      console.log(userinput);
+      pasteHtmlAtCaret(html, userinput);
+
+      // Apply Editable
+      $('span.tag .editable').editable({
+        type: 'text',
+        title: 'Edit Text',
+        success: function(response, newValue) {
+          //userModel.set('username', newValue); //update backbone model
+        },
+        //mode: 'inline'
+      });
+
+      // Bind Remove to tag
+      removeTags('#clinicalNote');
+
+      $scope.cc = -1;
+    };
+
+
+
+
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
@@ -124,13 +148,160 @@ class ClinicalstatementsCreateController {
 
     $scope.$on('$destroy', unsubscribe);
 
-    // Listen to the change in the query and tag and then perform a search
-    $scope.$watch('[clinicalStatement.query,clinicalStatement.tag]',
-      _.debounce(this.performClinicalSearch, 300)
-    );
+    this.clinicalstatementsLoad = clinicalstatementsActions.get;
+    this.clinicalstatementsLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
 
-    $scope.clinicalstatementsCreate = clinicalstatementsActions.create;
-    $scope.clinicalstatementsQuery = clinicalstatementsActions.query;
+
+
+
+
+    jQuery(document).ready(function(){
+      // Update Structure Data as user types
+      $('#update').click(function(e){
+        e.preventDefault();
+        var userinput = $('#clinicalNote');
+        // Store Structured
+        setStructured(userinput);
+      });
+      // Remove tags on click
+      // removeTags('#clinicalNote');
+    });
+
+    function removeTags(userinput){
+      // Bind remove events
+      $(userinput).find('a.remove').each(function(){
+        // Remove binding is already assigned
+        $(this).unbind('click');
+
+        // Re-bind
+        $(this).click(function(){
+          $(this).closest('span').remove();
+
+          // Store Structured
+          setStructured(userinput);
+        });
+      });
+
+
+    }
+
+
+    function setStructured(userinput){
+      // Parse the text box for all tags
+      var tags = [];
+      $(userinput).contents().each(function(){
+
+        // Is it a tag?
+        if( $(this).hasClass('tag') ){
+
+          var editable = $(this).find('.editable');
+          // console.log('editable');
+          // console.log(editable);
+          if( $(editable).length > 0 ){
+            // Contains structured data
+            var newTag = {
+              id: $(this).attr('data-id'),
+              //subject: editable.attr('data-arr-subject'),
+              value: editable.html(),
+              //value: editable.attr('data-arr-value')
+              //phrase: $(this).attr('data-phrase')
+            }
+          } else {
+            // Just a typed phrase
+            var newTag = {
+              id: $(this).attr('data-id')
+              //subject: $(this).attr('data-phrase'),
+              //unit: '',
+              //value: '',
+              //phrase: $(this).attr('data-phrase')
+            }
+          }
+
+          // Found in array
+          var found = false;
+
+          if( !found ){
+            tags.push(newTag);
+          }
+
+        } else if( this.wholeText.trim() != '' )  {
+          // It's text
+
+          var newTag = {
+            //subject: this.wholeText,
+            //unit: '',
+            //value: '',
+            phrase: this.wholeText
+          }
+
+          tags.push(newTag);
+
+        }
+
+      });
+
+      //Update the structured box for output
+      $( '#' + $(userinput).attr('data-structured') ).val( JSON.stringify(tags) );
+
+      $('#plain-data').val( strip($(userinput).html()) );
+
+    }
+
+    // Credit: http://stackoverflow.com/questions/6690752/insert-html-at-caret-in-a-contenteditable-div
+    function pasteHtmlAtCaret(html, target) {
+
+      // SG: Switch focus to target before inserting
+      target.focus();
+
+      var sel, range;
+      if (window.getSelection) {
+        // IE9 and non-IE
+        sel = window.getSelection();
+        if (sel.getRangeAt && sel.rangeCount) {
+          range = sel.getRangeAt(0);
+          range.deleteContents();
+
+          // Range.createContextualFragment() would be useful here but is
+          // only relatively recently standardized and is not supported in
+          // some browsers (IE9, for one)
+          var el = document.createElement("div");
+          el.innerHTML = html + ' ';
+          var frag = document.createDocumentFragment(), node, lastNode;
+          while ( (node = el.firstChild) ) {
+            lastNode = frag.appendChild(node);
+          }
+          range.insertNode(frag);
+          //console.log( range );
+
+          // Preserve the selection
+          if (lastNode) {
+            range = range.cloneRange();
+            range.setStartAfter(lastNode);
+            range.collapse(true);
+            sel.removeAllRanges();
+            sel.addRange(range);
+          }
+        }
+      } else if (document.selection && document.selection.type != "Control") {
+        // IE < 9
+        document.selection.createRange().pasteHTML(html);
+      }
+    }
+
+    function strip(html){
+      var tmp = document.createElement("DIV");
+      tmp.innerHTML = html;
+      console.log( tmp.textContent||tmp.innerText );
+      return tmp.textContent||tmp.innerText;
+
+      /*
+       var regex = /(<([^>]+)>)/ig
+       var body = html
+       var result = body.replace(regex, "").trim();
+
+       return result;
+       */
+    }
   }
 }
 
@@ -139,5 +310,5 @@ const ClinicalstatementsCreateComponent = {
   controller: ClinicalstatementsCreateController
 };
 
-ClinicalstatementsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalstatementsActions', 'serviceRequests'];
+ClinicalstatementsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalstatementsActions', 'usSpinnerService', 'serviceRequests'];
 export default ClinicalstatementsCreateComponent;

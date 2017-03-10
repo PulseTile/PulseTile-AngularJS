@@ -23,7 +23,7 @@ import createLogger from 'redux-logger';
 import 'angular-loading-bar';
 import 'fullcalendar';
 import 'angular-ui-calendar';
-import 'jquery';
+// import 'jquery';
 
 import 'chart.js';
 
