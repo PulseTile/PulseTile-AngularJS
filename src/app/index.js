@@ -23,15 +23,14 @@ import createLogger from 'redux-logger';
 import 'angular-loading-bar';
 import 'fullcalendar';
 import 'angular-ui-calendar';
-// import 'jquery';
-// import 'malihu-custom-scrollbar-plugin';
-import 'ng-scrollbars';
+
 import 'chart.js';
 
 import 'angular-spinner';
 import 'jquery-timepicker-jt';
 import 'angular-jquery-timepicker';
 import 'angular-xeditable';
+import 'ng-scrollbars';
 
 //commons
 import reducer from './redux/reducer';
@@ -146,15 +145,28 @@ let app = angular
                 scrollAmount: 'auto', // scroll amount when button pressed
                 enable: false // enable scrolling buttons by default
             },
-            scrollInertia: 400, // adjust however you want
+            scrollInertia: 0, // adjust however you want
             axis: 'y',
             theme: 'dark-custom',
-            autoHideScrollbar: false
+            autoHideScrollbar: false,
+            mouseWheel:{ preventDefault: false }
         };
     });
     app.run(function(editableOptions, editableThemes) {
       editableOptions.theme = 'bs3'; // bootstrap3 theme
       editableThemes.bs3.inputClass = 'input-sm';
       editableThemes.bs3.buttonsClass = 'btn-sm';
+    });
+    app.controller('mainCtrl', function ($scope, $timeout) {
+        // $timeout(function() {
+        //     $scope.updateScrollbar('scrollTo', 100, {
+        //     scrollInertia: 0
+        //   });
+        // });
+        // $scope.myScrollTo = function () {
+        //   $scope.updateScrollbar('scrollTo', 1000, {
+        //     scrollInertia: 0
+        //   });
+        // };
     });
 console.log('app start');

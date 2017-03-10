@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
 
-<div mc-full-panel table-settings order="name" filtering mc-multi-views default-view="table" class="panel panel-primary">
+<div mc-full-panel table-settings order="name" filtering mc-multi-views default-view="timeline" class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
@@ -80,8 +80,9 @@
       </table>
     </div>
 
-    <div class="wrap-timeline" ng-show="isActiveView('timeline')">
-      <div class="timeline-content-scroll" ng-scrollbars ng-scrollbars-update=updateScrollbar>
+    <div class="wrap-timeline" ng-show="isActiveView('timeline')" ng-controller="mainCtrl">
+      <button ng-click="myScrollTo()">Scroll</button>
+      <div class="timeline-content-scroll" ng-scrollbars ng-scroll-to="2500" ng-scrollbars-config="configScrollbar" ng-scrollbars-update=updateScrollbar>
         <div class="timeline">
           <div class="timeline-inner">
             <div ng-repeat="(key, eventGroup) in $ctrl.eventsTimeline">

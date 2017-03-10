@@ -16,14 +16,29 @@
 let templateEventsList = require('./events-list.html');
 
 class EventsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, usSpinnerService, serviceFormatted, $rootScope) {
+  constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, usSpinnerService, serviceFormatted, $timeout) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'events-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'events';
-    
-    $scope.viewList;
+
+    $scope.configScrollbar = {
+      // setHeight: 200,
+      // setTop: 100,
+      mouseWheel:{ enable: true },
+      contentTouchScroll: 50,
+      documentTouchScroll: true,
+      // theme: 'light'
+      
+    }
+    // $timeout(function() {
+    //   this.updateScrollbar('scrollTo', 100{
+    //       scrollInertia: 0
+    //   });
+    //   console.dir('updateScrollbar');
+    //   console.dir(updateScrollbar);
+    // }, 1000);
 
     this.create = function () {
       $state.go('events-create', {
@@ -32,7 +47,6 @@ class EventsListController {
     };
 
     this.go = function (id, source) {
-      serviceRequests.viewList = $scope.viewList;
       $state.go('events-detail', {
         patientId: $stateParams.patientId,
         detailsIndex: id,
@@ -41,21 +55,10 @@ class EventsListController {
       });
     };
 
-    $scope.isViewList = function (viewName) {
-      return $scope.viewList === viewName;
-    };
-
-    $scope.changeViewList = function (viewName) {
-      var currentPage = this.currentPage || 1;
-      var vitalsForChart;
-      $scope.viewList = viewName;
-    }.bind(this);
-    
     this.setCurrentPageData = function (data) {
       if (data.events.data) {
         this.events = data.events.data;
-        console.log('this.events');
-        console.log(this.events);
+        
         usSpinnerService.stop('patientSummary-spinner');
         this.eventsTimeline = this.modificateEventsArr(this.events);
 
@@ -136,8 +139,6 @@ class EventsListController {
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
       }
-
-      $scope.changeViewList(serviceRequests.viewList || 'timeline');
     };
 
     this.modificateEventsArr = function (arr) {
@@ -175,18 +176,6 @@ class EventsListController {
     this.eventsLoad = eventsActions.all;
     this.eventsLoad($stateParams.patientId);
 
-    // (function($){
-    //   $(window).on("load",function(){
-    //     $(".timeline-content-scroll").mCustomScrollbar({
-    //       theme:"dark"
-    //     });
-    //     $rootScope.$on('$locationChangeStart', function(e) {
-    //       $(".timeline-content-scroll").mCustomScrollbar({
-    //         theme:"dark"
-    //       });
-    //     });
-    //   });
-    // })(jQuery);
   }
 }
 
@@ -195,5 +184,5 @@ const EventsListComponent = {
   controller: EventsListController
 };
 
-EventsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted', '$rootScope'];
+EventsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted', '$timeout'];
 export default EventsListComponent;
