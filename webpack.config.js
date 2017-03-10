@@ -65,9 +65,9 @@ const config = {
     new webpack.ProvidePlugin({
       angularSpinner: 'angular-spinner',
       _: 'underscore',
-      $: "jquery",
-      "window.jQuery": "jquery",
-      jQuery: "jquery",
+      // $: "jquery",
+      // "window.jQuery": "jquery",
+      // jQuery: "jquery",
       "moment": "moment",
       Raphael: 'raphael',
       io: 'socket.io-client'
