@@ -148,8 +148,8 @@ let app = angular
             },
             scrollInertia: 400, // adjust however you want
             axis: 'y',
-            theme: 'dark',
-            autoHideScrollbar: true
+            theme: 'dark-custom',
+            autoHideScrollbar: false
         };
     });
     app.run(function(editableOptions, editableThemes) {
