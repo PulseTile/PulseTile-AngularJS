@@ -24,21 +24,47 @@
       <div class="panel-body-inner">
         <form name="clinicalStatementForm" class="form" editable-form>
           <div class="form-group-wrapper">
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.clinicalType.$dirty) && clinicalStatementForm.clinicalType.$invalid, 'has-success': clinicalStatementForm.clinicalType.$valid && clinicalStatementForm.clinicalType.$dirty}">
+                  <label for="clinicalNote" class="control-label">Type</label>
+                  <div class="input-holder">
+                    <input class="form-control input-sm" id="clinicalType" name="clinicalType" ng-model="clinicalStatementCreate.clinicalType" required />
+                  </div>
+
+                  <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.clinicalType.$error.required">You must enter a value.</span>
+                </div>
+              </div>
+            </div>
             <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.name.$dirty) && clinicalStatementForm.name.$invalid, 'has-success': clinicalStatementForm.name.$valid && clinicalStatementForm.name.$dirty}">
               <label for="search" class="control-label">Search</label>
               <div class="input-holder">
-                <select class="form-control input-sm" id="search" name="search" ng-model="clinicalStatementEdit.search" ng-change="changeSelect()" required>
-                  <option value="">-- Search --</option>
-                  <option ng-repeat="(id, phrase) in statementsText" value="{{id}}">{{phrase}}</option>
-                </select>
+                <div class="dropdown" ng-class="{open:openSearch}">
+                  <div mc-dropdown class="form-control input-sm" contenteditable="true" id="clinicalTags" name="clinicalTags" ng-click="toggleDropdown($event);" ng-model="queryFilter"><i class="fa fa-times" ng-if="clinicalStatementCreate.clinicalTag" ng-click="$ctrl.removeTag()"></i>{{clinicalStatementCreate.clinicalTag}} </div>
+                  <div class="dropdown-menu dm-panel dm-tables" ng-if="!statements.length">
+                    <div class="heading">Tags</div>
+                    <div class="dm-wrap-list">
+                      <div class="dm-list">
+                        <div class="dm-item" ng-click="$ctrl.getTag(tag)" ng-repeat="tag in tags"><span>{{tag}}</span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="dropdown-menu dm-panel dm-tables" ng-if="statements.length">
+                    <div class="heading">Search</div>
+                    <div class="dm-wrap-list">
+                      <div class="dm-list">
+                        <div class="dm-item" ng-click="changeSelect(id)" ng-repeat="(id, phrase) in statementsText"><span>{{phrase}}</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.name.$error.required">You must enter a value.</span>
             </div>
 
             <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.clinicalNote.$dirty) && clinicalStatementForm.clinicalNote.$invalid, 'has-success': clinicalStatementForm.clinicalNote.$valid && clinicalStatementForm.clinicalNote.$dirty}">
               <label for="clinicalNote" class="control-label">Clinical Note</label>
               <div class="input-holder">
-                <div class="form-control textarea-big input-sm" contenteditable="true" id="clinicalNote" name="clinicalNote" ng-html="clinicalStatementEdit.clinicalNote" required></div>
+                <div class="form-control textarea-big input-sm" contenteditable="true" id="clinicalNote" name="clinicalNote" ng-html="clinicalStatementCreate.clinicalNote" required></div>
               </div>
               <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.clinicalNote.$error.required">You must enter a value.</span>
             </div>
@@ -48,7 +74,7 @@
                 <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.author.$dirty) && clinicalStatementForm.author.$invalid, 'has-success': clinicalStatementForm.author.$valid && clinicalStatementForm.author.$dirty}">
                   <label for="author" class="control-label">Author</label>
                   <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="author" name="author" ng-model="clinicalStatementEdit.author" required disabled />
+                    <input type="text" class="form-control input-sm" id="author" name="author" ng-model="clinicalStatementCreate.author" required disabled />
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.author.$error.required">You must enter a value.</span>
                 </div>
@@ -60,7 +86,7 @@
                     <div class="addon">
                       <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control" id="dateCreate" name="dateCreate" ng-model="clinicalStatementEdit.dateCreated" ng-click="dateofSubmittedDatepicker($event, 'dateCreate')" uib-datepicker-popup="dd-MMM-y" is-open="datepickers.dateCreate" required disabled />
+                    <input type="text" class="form-control" id="dateCreate" name="dateCreate" ng-model="clinicalStatementCreate.dateCreated" ng-click="dateofSubmittedDatepicker($event, 'dateCreate')" uib-datepicker-popup="dd-MMM-y" is-open="datepickers.dateCreate" required disabled />
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.dateCreate.$error.required">You must enter a valid date.</span>
                 </div>
@@ -73,7 +99,7 @@
         <div class="wrap-control-group">
           <div class="control-group right">
             <button class="btn btn-danger" ng-click="$ctrl.cancelEdit()"><i class="fa fa-ban"></i> Cancel</button>
-            <button class="btn btn-success" ng-click="confirmEdit(clinicalStatementForm, clinicalStatementEdit)"><i class="fa fa-check"></i> Complete</button>
+            <button class="btn btn-success" ng-click="confirmEdit(clinicalStatementForm, clinicalStatementCreate)"><i class="fa fa-check"></i> Complete</button>
           </div>
         </div>
       </div>

@@ -40,7 +40,7 @@ export function get(patientId, compositionId, source) {
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/clinicalStatements/' + compositionId + '?source=' + source
+      url: 'api/contentStore/ts/tags'
     },
 
     meta: {
@@ -91,8 +91,7 @@ export function query(prefix='', tag='') {
     
     config: {
       method: 'get',
-      // url: '/api/contentStore/ts/phrases?' + queryString.join('&')
-      url: '/api/contentStore/ts/phrases?search=s&'
+      url: '/api/contentStore/ts/phrases?' + queryString.join('&')
     },
 
     meta: {

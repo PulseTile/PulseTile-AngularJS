@@ -25,44 +25,44 @@ const TAG_NAMES = [
 
 class ClinicalstatementsCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, usSpinnerService, serviceRequests) {
+    
     this.clinicalStatement = $stateParams.source;
-    $scope.statements = [
-      {"id":1,"phrase":"Presented with Shoulder Pain"},
-      {"id":2,"phrase":"Pain is of 6 months"},
-      {"id":4,"phrase":"Pain is right side"},
-      {"id":5,"phrase":"Pain is left side"},
-      {"id":3,"phrase":"Onset is from a fall"},
-      {"id":7,"phrase":"Internal rotation to 30 degrees"},
-      {"id":8,"phrase":"Internal rotation to 45 degrees"},
-      {"id":9,"phrase":"Internal rotation to |?| degrees"},
-      {"id":10,"phrase":"Abduction to 30 degrees"},
-      {"id":11,"phrase":"Abduction to 45 degrees"},
-      {"id":12,"phrase":"Xray shows early OsteoArthritis change"},
-      {"id":13,"phrase":"Utrasound shows rotator cuff tear"},
-      {"id":14,"phrase":"Plan is physio for 3 sessions"},
-      {"id":15,"phrase":"If doesn't improve, will need laparoscopic surgical exploration +/- repair"},
-      {"id":16,"phrase":"Presented with Knee Pain"}
-    ];
-    $scope.statementsText = _.map($scope.statements, function (el) {
-      return el.phrase;
-    });
-
-
+    $scope.statements = [];
+    $scope.tags = [];
+    $scope.clinicalStatementCreate = {};
+    $scope.clinicalStatementCreate.search = [];
+    $scope.queryFilter = '';
+    $scope.openSearch = false;
+    
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
-        $scope.clinicalStatementEdit = Object.assign({}, this.clinicalStatement);
-        $scope.clinicalStatementEdit.dateCreated = new Date();
-        $scope.clinicalStatementEdit.author = this.currentUser.email;
+        $scope.clinicalStatementCreate.dateCreated = new Date();
+        $scope.clinicalStatementCreate.author = this.currentUser.email;
       }
-      // if (data.clinicalStatements.dataGet) {
-      //   this.clinicalStatement = data.clinicalStatements.dataGet;
-      //   this.statementsText = _.map(this.clinicalStatement.statements, helper.toText);
-      // }
+      if (data.clinicalstatements.dataGet) {
+        $scope.tags = data.clinicalstatements.dataGet;
+      }
+      if (data.clinicalstatements.searchData) {
+        $scope.statements = data.clinicalstatements.searchData;
+        $scope.statementsText = _.map($scope.statements, function (el) {
+          return el.phrase;
+        });
+      }
       usSpinnerService.stop("clinicalStatementDetail-spinner");
+    };
+
+    this.getTag = function (tag) {
+      $scope.clinicalStatementCreate.clinicalTag = tag;
+      this.clinicalstatementsQuery(null, tag);
+    };
+
+    this.removeTag = function () {
+      $scope.clinicalStatementCreate.clinicalTag = '';
+      $scope.statements = [];
     };
 
     this.goList = function () {
@@ -78,7 +78,8 @@ class ClinicalstatementsCreateController {
     };
     $scope.confirmEdit = function (clinicalStatementForm, clinicalStatement) {
       $scope.formSubmitted = true;
-      
+      var userinput = $('#clinicalNote');
+      setStructured(userinput);      
       // let toAdd = {
       //   // code: $scope.clinicalStatement.code,
       //   dateOfOnset: $scope.clinicalStatement.dateOfOnset.toISOString().slice(0, 10),
@@ -88,11 +89,9 @@ class ClinicalstatementsCreateController {
       //   sourceId: '',
       //   terminology: $scope.clinicalStatement.terminology
       // };
+      console.log('confirmEdit ', clinicalStatementForm, $scope.clinicalStatementCreate);
       if (clinicalStatementForm.$valid) {
         this.goList();
-      //   $scope.isEdit = false;
-      //   clinicalStatement = Object.assign(clinicalStatement, $scope.clinicalStatementEdit);
-      //   $scope.diagnosesUpdate($scope.patient.id, toAdd);
       }
     }.bind(this);
 
@@ -109,17 +108,16 @@ class ClinicalstatementsCreateController {
       }
     };
     $scope.atemp = 'lalalala';
-    $scope.changeSelect = function () {
-      console.log('changeSelect');
+
+    $scope.changeSelect = function (id) {
+
       var userinput = jQuery('#clinicalNote');
-      var id = $scope.clinicalStatementEdit.search;
       var phrase = $scope.statementsText[id];
 
       // Parse inputs
       var inner = phrase.replace(/(.*)(\{|\|)([^~|])(\}|\|)(.*)/, '$1<span class="editable" contenteditable="false" data-arr-subject="$1" editable-text="atemp" data-arr-unit="$3" data-arr-value="$5">$3</span>$5');
       var html = '<span class="tag" data-id="' + id + '" data-phrase="' + phrase + '" contenteditable="false">' + inner + '. <a class="remove" contenteditable="false"><i class="fa fa-close" contenteditable="false"></i></a></span>';
-      console.log('userinput');
-      console.log(userinput);
+      
       pasteHtmlAtCaret(html, userinput);
 
       // Apply Editable
@@ -138,10 +136,6 @@ class ClinicalstatementsCreateController {
       $scope.cc = -1;
     };
 
-
-
-
-
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
@@ -149,11 +143,8 @@ class ClinicalstatementsCreateController {
     $scope.$on('$destroy', unsubscribe);
 
     this.clinicalstatementsLoad = clinicalstatementsActions.get;
+    this.clinicalstatementsQuery = clinicalstatementsActions.query;
     this.clinicalstatementsLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
-
-
-
-
 
     jQuery(document).ready(function(){
       // Update Structure Data as user types
@@ -182,9 +173,7 @@ class ClinicalstatementsCreateController {
         });
       });
 
-
     }
-
 
     function setStructured(userinput){
       // Parse the text box for all tags
@@ -291,6 +280,7 @@ class ClinicalstatementsCreateController {
     function strip(html){
       var tmp = document.createElement("DIV");
       tmp.innerHTML = html;
+      $scope.clinicalStatementCreate.search.push(tmp.textContent||tmp.innerText);
       console.log( tmp.textContent||tmp.innerText );
       return tmp.textContent||tmp.innerText;
 
