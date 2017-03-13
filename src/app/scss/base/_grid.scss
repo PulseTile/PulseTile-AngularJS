@@ -55,6 +55,8 @@
     .col-panel-details  {width: 100%;}
   }
 
+  .expand-label {display: none;}
+
   .full-panel {
     .row-expand {
       @include clearfix;
@@ -69,6 +71,7 @@
       width: 50%;
       padding-left: 4.42%;
     }
+    .expand-label {display: block;}
   }
 
 }

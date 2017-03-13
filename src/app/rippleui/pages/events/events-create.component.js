@@ -17,9 +17,32 @@ let templateEventsCreate = require('./events-create.html');
 
 class EventsCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, patientsActions, eventsActions, serviceRequests) {
+    var currentStateName = $state.router.globals.$current.name;
+    var partsCurrentStateName = currentStateName.split('-');
+    this.typeCreate = partsCurrentStateName[partsCurrentStateName.length - 1];
+
+
     $scope.event = {};
     $scope.event.dateCreated = new Date();
     $scope.event.source = 'Marand';
+    $scope.event.isConnection = true;
+
+    switch(this.typeCreate) {
+      case 'appointment':
+          $scope.event.type = 'Appointment';
+          break;
+      case 'admission':
+          $scope.event.type = 'Admission';
+          break;
+      case 'transfer':
+          $scope.event.type = 'Transfer';
+          break;
+      case 'discharge':
+          $scope.event.type = 'Discharge';
+          break;
+      default: 
+          $scope.event.type = 'Event';
+    }
 
     this.setCurrentPageData = function (data) {
       // if (data.events.dataCreate !== null) {

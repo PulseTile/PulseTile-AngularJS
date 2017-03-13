@@ -81,7 +81,7 @@
     </div>
 
     <div class="wrap-timeline" ng-show="isActiveView('timeline')" ng-controller="mainCtrl">
-      <button ng-click="myScrollTo()">Scroll</button>
+      <!-- <button ng-click="myScrollTo()">Scroll</button> -->
       <div class="timeline-content-scroll" ng-scrollbars ng-scroll-to="2500" ng-scrollbars-config="configScrollbar" ng-scrollbars-update=updateScrollbar>
         <div class="timeline">
           <div class="timeline-inner">
@@ -109,16 +109,16 @@
         <div class="control-group with-indent left" ng-if="isActiveView('table')">
           <dir-pagination-controls max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
         </div>
-        <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1 && $ctrl.isShowCreateBtn">
+        <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
           <div class="dropdown">
             <button mc-dropdown class="btn btn-success btn-dropdown-toggle btn-table" ng-click="toggleDropdown($event);"><span>Create</span></button>
             <div class="dropdown-menu dm-top-right dm-tables">
               <div class="dm-wrap-list">
                 <div class="dm-list">
-                  <div class="dm-item" ng-class="{active: false}" ng-click="$ctrl.create();"><span>Appointment</span></div>
-                  <div class="dm-item" ng-class="{active: false}" ng-click="$ctrl.create();"><span>Admission</span></div>
-                  <div class="dm-item" ng-class="{active: false}" ng-click="$ctrl.create();"><span>Transfer</span></div>
-                  <div class="dm-item" ng-class="{active: false}" ng-click="$ctrl.create();"><span>Discharge</span></div>
+                  <div class="dm-item" ng-class="{active: $ctrl.isActiveCreate('appointment')}" ng-click="$ctrl.create('appointment');"><span>Appointment</span></div>
+                  <div class="dm-item" ng-class="{active: $ctrl.isActiveCreate('admission')}" ng-click="$ctrl.create('admission');"><span>Admission</span></div>
+                  <div class="dm-item" ng-class="{active: $ctrl.isActiveCreate('transfer')}" ng-click="$ctrl.create('transfer');"><span>Transfer</span></div>
+                  <div class="dm-item" ng-class="{active: $ctrl.isActiveCreate('discharge')}" ng-click="$ctrl.create('discharge');"><span>Discharge</span></div>
                 </div>
               </div>
             </div>

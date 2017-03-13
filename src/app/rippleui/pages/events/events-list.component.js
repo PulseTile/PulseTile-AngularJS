@@ -20,8 +20,9 @@ class EventsListController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.isShowCreateBtn = $state.router.globals.$current.name !== 'events-create';
-    this.isShowExpandBtn = $state.router.globals.$current.name !== 'events';
+    this.currentStateName = $state.router.globals.$current.name;
+    this.isShowExpandBtn = this.currentStateName !== 'events';
+    this.partsStateName = this.currentStateName.split('-');
 
     $scope.configScrollbar = {
       // setHeight: 200,
@@ -40,10 +41,17 @@ class EventsListController {
     //   console.dir(updateScrollbar);
     // }, 1000);
 
-    this.create = function () {
-      $state.go('events-create', {
-        patientId: $stateParams.patientId
-      });
+    this.isActiveCreate = function (typeCreate) {
+      return this.partsStateName[this.partsStateName.length - 1] === typeCreate;
+    };
+
+    this.create = function (typeCreate) {
+      if (typeof typeCreate !== "undefined") {
+        console.log('events-create-' + typeCreate);
+        $state.go('events-create-' + typeCreate, {
+          patientId: $stateParams.patientId
+        });
+      }
     };
 
     this.go = function (id, source) {

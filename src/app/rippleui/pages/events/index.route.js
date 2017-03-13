@@ -26,7 +26,17 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         title: 'Events',
         state: 'events'
       }];
-      
+  var eventsCreateParams = {
+        url: '/patients/{patientId:int}/events/create?reportType&searchString&queryType',
+        views: {
+          banner: {template: '<patients-banner-component></patients-banner-component>'},
+          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+          main: {template: '<events-list-component></events-list-component>'},
+          detail: {template: '<events-create-component></events-create-component>'}
+        },
+        breadcrumbs: breadcrumbs
+      };
+
   $stateProvider
     .state('events', {
       url: '/patients/{patientId:int}/events?reportType&searchString&queryType',
@@ -37,16 +47,10 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       },
       breadcrumbs: breadcrumbs
     })
-    .state('events-create', {
-      url: '/patients/{patientId:int}/events/create?reportType&searchString&queryType',
-      views: {
-        banner: {template: '<patients-banner-component></patients-banner-component>'},
-        actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-        main: {template: '<events-list-component></events-list-component>'},
-        detail: {template: '<events-create-component></events-create-component>'}
-      },
-      breadcrumbs: breadcrumbs
-    })
+    .state('events-create-appointment', eventsCreateParams)
+    .state('events-create-admission', eventsCreateParams)
+    .state('events-create-transfer', eventsCreateParams)
+    .state('events-create-discharge', eventsCreateParams)
     .state('events-detail', {
       url: '/patients/{patientId:int}/events/{detailsIndex}?page&reportType&searchString&queryType',
       views: {
