@@ -40,7 +40,7 @@
               <label for="search" class="control-label">Search</label>
               <div class="input-holder">
                 <div class="dropdown" ng-class="{open:openSearch}">
-                  <div mc-dropdown class="form-control input-sm" contenteditable="true" id="clinicalTags" name="clinicalTags" ng-click="toggleDropdown($event);">{{clinicalTag}}<i class="fa fa-times" ng-if="clinicalTag" ng-click="$ctrl.removeTag()"></i> </div>
+                  <div mc-dropdown class="form-control input-sm"  id="clinicalTags" name="clinicalTags" ng-click="toggleDropdown($event);">{{clinicalTag}}<i class="fa fa-times" ng-if="clinicalTag" ng-click="$ctrl.removeTag()"></i> <span contenteditable="true" contenteditabled ng-model="queryFilter"></span></div>
                   <div class="dropdown-menu dm-panel dm-tables" ng-if="!statements.length">
                     <div class="heading">Tags</div>
                     <div class="dm-wrap-list">
@@ -49,11 +49,11 @@
                       </div>
                     </div>
                   </div>
-                  <div class="dropdown-menu dm-panel dm-tables" ng-if="statements.length">
-                    <div class="heading">Search</div>
+                  <div class="dropdown-menu dm-panel dm-tables" ng-if="queryFilter.length">
+                    <div class="heading">Statements</div>
                     <div class="dm-wrap-list">
                       <div class="dm-list">
-                        <div class="dm-item" ng-click="changeSelect(id)" ng-repeat="(id, phrase) in statementsText"><span>{{phrase}}</span></div>
+                        <div class="dm-item" ng-click="changeSelect(id)" ng-repeat="(id, phrase) in statementsText | filter: queryFilter" ><span>{{phrase}}</span></div>
                       </div>
                     </div>
                   </div>

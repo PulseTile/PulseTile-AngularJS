@@ -27,22 +27,32 @@
         <div class="form">
           <div class="form-group-wrapper">
             <div class="form-group">
-              <label class="control-label">Statements</label>
-              <div class="form-control-static">
-                <ul ng-repeat="statement in $ctrl.statementsText track by $index">
-                  <li>{{ statement }}</li>
-                </ul>
-              </div>
+              <label class="control-label">Type</label>
+              <div class="form-control-static">{{ $ctrl.clinicalStatement.type }}</div>
             </div>
 
             <div class="form-group">
-              <label class="control-label">Author</label>
-              <div class="form-control-static">{{ $ctrl.clinicalStatement.author }}</div>
+              <label class="control-label">Statements</label>
+              <div class="form-control-static">{{ $ctrl.clinicalStatement.text }}</div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Tags</label>
+              <div class="form-control-static">
+                <div class="control-group">
+                  <span class="label label-success" ng-repeat="(key, val) in $ctrl.clinicalStatement.tags track by $index">{{ key }}</span>
+                </div>
+              </div>
             </div>
 
             <div class="form-group">
               <label class="control-label">Date</label>
               <div class="form-control-static">{{ $ctrl.clinicalStatement.dateCreated | date:'dd-MMM-yyyy'  }}</div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Author</label>
+              <div class="form-control-static">{{ $ctrl.clinicalStatement.author }}</div>
             </div>
 
             <div class="form-group">

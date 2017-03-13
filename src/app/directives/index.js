@@ -356,3 +356,32 @@ angular.module('ripple-ui.directives', [])
           }]
       }
   })
+  .directive('contenteditabled', ['$sce', function($sce) {
+    return {
+        restrict: 'A',
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModel) {
+            
+            if (!ngModel) return;
+        
+            ngModel.$render = function() {
+                element.html($sce.getTrustedHtml(ngModel.$viewValue || ''));
+            };
+        
+            // Listen for change events to enable binding
+            element.on('blur keyup change', function() {
+                scope.$evalAsync(read);
+            });
+            read(); // initialize
+        
+            // Write data to the model
+            function read() {
+                var html = element.html();
+                if ( attrs.stripBr && html == '<br>' ) {
+                    html = '';
+                }
+                ngModel.$setViewValue(html);
+            }
+        }
+    };
+  }]);
