@@ -33,10 +33,10 @@ class PatientsSidebarController {
     });
     
     $scope.nameState = $state.router.globals.$current.name;
+    $scope.partsNameState = $scope.nameState.split('-');
 
     $scope.isActiveItem = function (itemLink) {
-      var nameState = $scope.nameState.replace(/-(detail|create)/, '');
-      return nameState == itemLink;
+      return $scope.partsNameState[0] == itemLink;
     };
     
     this.goTo = function (section) {
