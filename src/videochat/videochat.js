@@ -194,7 +194,7 @@ console.log('user: ', user);
     $.get('/api/patients/' + data.patientId).then(function (data) {
       console.log('getPatientInfo: ', data);
       $('#patientName').text(data.name);
-      $('#patientPhone').text(user.telephone);
+      $('#patientPhone').text(data.telephone);
       $('#patientDob').text(moment(data.dateOfBirth).format('DD-MMM-YYYY'));
       $('#patientGender').text(data.gender);
       $('#patientNhs').text(data.nhsNumber);
