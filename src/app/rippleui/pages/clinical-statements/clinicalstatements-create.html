@@ -40,7 +40,7 @@
               <label for="search" class="control-label">Search</label>
               <div class="input-holder">
                 <div class="dropdown" ng-class="{open:openSearch}">
-                  <div mc-dropdown class="form-control input-sm" contenteditable="true" id="clinicalTags" name="clinicalTags" ng-click="toggleDropdown($event);" ng-model="queryFilter"><i class="fa fa-times" ng-if="clinicalStatementCreate.clinicalTag" ng-click="$ctrl.removeTag()"></i>{{clinicalStatementCreate.clinicalTag}} </div>
+                  <div mc-dropdown class="form-control input-sm" contenteditable="true" id="clinicalTags" name="clinicalTags" ng-click="toggleDropdown($event);" ng-model="queryFilter">{{clinicalStatementCreate.clinicalTag}}<i class="fa fa-times" ng-if="clinicalStatementCreate.clinicalTag" ng-click="$ctrl.removeTag()"></i> </div>
                   <div class="dropdown-menu dm-panel dm-tables" ng-if="!statements.length">
                     <div class="heading">Tags</div>
                     <div class="dm-wrap-list">

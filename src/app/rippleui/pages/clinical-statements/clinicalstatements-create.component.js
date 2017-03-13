@@ -18,16 +18,12 @@ import * as helper from './clinicalstatements-helper';
 let templateClinicalstatementsCreate = require('./clinicalstatements-create.html');
 let _ = require('underscore');
 
-// Todo - Use a service to get the latest tag names
-const TAG_NAMES = [
-  "PC", "XM", "Ix", "Vitals", "Rx", "Ortho", "Dx", "Meds", "MH", "HA", "Shoulder"
-]
-
 class ClinicalstatementsCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, usSpinnerService, serviceRequests) {
     
     this.clinicalStatement = $stateParams.source;
     $scope.statements = [];
+    $scope.statementsText = [];
     $scope.tags = [];
     $scope.clinicalStatementCreate = {};
     $scope.clinicalStatementCreate.search = [];
@@ -43,8 +39,8 @@ class ClinicalstatementsCreateController {
         $scope.clinicalStatementCreate.dateCreated = new Date();
         $scope.clinicalStatementCreate.author = this.currentUser.email;
       }
-      if (data.clinicalstatements.dataGet) {
-        $scope.tags = data.clinicalstatements.dataGet;
+      if (data.clinicalstatements.dataTags) {
+        $scope.tags = data.clinicalstatements.dataTags;
       }
       if (data.clinicalstatements.searchData) {
         $scope.statements = data.clinicalstatements.searchData;
@@ -89,8 +85,13 @@ class ClinicalstatementsCreateController {
       //   sourceId: '',
       //   terminology: $scope.clinicalStatement.terminology
       // };
+      $scope.statements = [];
+      $scope.statementsText = [];
+      $scope.clinicalStatementCreate.clinicalTag = '';
       console.log('confirmEdit ', clinicalStatementForm, $scope.clinicalStatementCreate);
       if (clinicalStatementForm.$valid) {
+        
+        // this.clinicalstatementsCreate($stateParams.patientId, $scope.clinicalStatementCreate);
         this.goList();
       }
     }.bind(this);
@@ -142,9 +143,10 @@ class ClinicalstatementsCreateController {
 
     $scope.$on('$destroy', unsubscribe);
 
-    this.clinicalstatementsLoad = clinicalstatementsActions.get;
+    this.clinicalstatementsTags = clinicalstatementsActions.getTags;
     this.clinicalstatementsQuery = clinicalstatementsActions.query;
-    this.clinicalstatementsLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
+    this.clinicalstatementsCreate = clinicalstatementsActions.create;
+    this.clinicalstatementsTags($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
 
     jQuery(document).ready(function(){
       // Update Structure Data as user types
