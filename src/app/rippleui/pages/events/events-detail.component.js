@@ -16,7 +16,7 @@
 let templateEventsDetail = require('./events-detail.html');
 
 class EventsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, eventsActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, eventsActions, serviceRequests, usSpinnerService, ScheduleModal) {
     $scope.isEdit = false;
 
     /*
@@ -46,6 +46,10 @@ class EventsDetailController {
         $scope.eventsUpdate($scope.patient.id, $scope.event);
       }
     }.bind(this);
+
+    this.openSchedule = function () {
+      ScheduleModal.openModal(this.currentPatient, {title: 'Schedule event (Appointment)'}, this.event, this.currentUser);
+    };
 
     this.setCurrentPageData = function (data) {
       // if (data.events.dataGet) {
@@ -87,5 +91,5 @@ const EventsDetailComponent = {
   controller: EventsDetailController
 };
 
-EventsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'eventsActions', 'serviceRequests', 'usSpinnerService'];
+EventsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'eventsActions', 'serviceRequests', 'usSpinnerService', 'ScheduleModal'];
 export default EventsDetailComponent;

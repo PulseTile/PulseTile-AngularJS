@@ -10,6 +10,8 @@
 /* Confirmation Modal */
 
 .modal-header {
+  margin: -1px;
+  margin-bottom: 0;
   padding: 10px;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
@@ -31,9 +33,15 @@
 }
 
 .modal-backdrop {
-  background-color: #ffffff;
+  background-color: #000;
+}
+
+.modal-content {
+  border: 1px solid #d7d7d7;
+  border-radius: 6px;
 }
 
 .modal-body {
+  padding: 12px 17px 17px;
   background-color: #ffffff;
 }

@@ -21,7 +21,7 @@ import ngRedux from 'ng-redux';
 import dirPagination from 'angular-utils-pagination';
 import createLogger from 'redux-logger';
 import 'angular-loading-bar';
-import 'fullcalendar';
+// import 'fullcalendar';
 import 'angular-ui-calendar';
 
 import 'chart.js';
@@ -60,6 +60,8 @@ import ServiceActions from './rippleui/pages/dicom/serviceActions.js';
 import ServiceFormatted from './services/serviceFormatted.js';
 import SocketService from './services/socketService.js';
 
+import ScheduleModal from './rippleui/pages/events/schedule-modal';
+
 import routeConfig from 'app/index.route';
 import 'app/scss/core.scss';
 
@@ -87,6 +89,8 @@ let app = angular
         'xeditable',
         'ngScrollbars'
     ])
+    .factory('ScheduleModal', ScheduleModal)
+
     .factory('httpMiddleware', httpMiddleware)
     .factory('Patient', Patient)
     .factory('deviceDetector', deviceDetector)

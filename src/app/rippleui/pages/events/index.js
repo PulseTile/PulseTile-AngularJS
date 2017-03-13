@@ -15,10 +15,15 @@
  */
 import routes from "./index.route";
 import reducer from "./events-reducer-all";
+
+// import ScheduleModal from './schedule-modal';
+
 import eventsListComponent from './events-list.component';
 import eventsCreateComponent from './events-create.component';
 import eventsDetailComponent from './events-detail.component';
 import eventsActions from './events-actions';
+
+// .factory('AppointmentsModal', AppointmentsModal)
 
 export default {
   "name": 'events',

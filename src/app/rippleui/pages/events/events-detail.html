@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
   
-<div mc-full-panel mc-datepicker mc-accordion mc-open-panel="eventDetails" class="panel-group accordion">
+<div mc-full-panel mc-datepicker mc-accordion mc-open-panel="eventSchedule" class="panel-group accordion">
   <div class="panel panel-secondary" ng-if="getShowPanel('eventDetails') && !isEdit" ng-class="getOpenPanelClass('eventDetails');">
     <div class="panel-heading">
       <div class="control-group right">
@@ -191,7 +191,7 @@
                 <div class="form-group">
                   <div class="wrap-control-group">
                     <div class="control-group left">
-                      <button type="button" class="btn btn-info btn-icon-normal">
+                      <button type="button" class="btn btn-info btn-icon-normal" ng-click="$ctrl.openSchedule()">
                         <i class="fa fa-calendar"></i>
                         <span>Schedule</span>
                       </button>
