@@ -26,7 +26,10 @@ class ClinicalstatementsCreateController {
     $scope.statementsText = [];
     $scope.tags = [];
     $scope.clinicalStatementCreate = {};
-    $scope.clinicalStatementCreate.search = [];
+    $scope.clinicalStatementCreate.contentStore = {
+      name: "ts",
+      phrases: []
+    };
     $scope.queryFilter = '';
     $scope.openSearch = false;
     
@@ -52,12 +55,12 @@ class ClinicalstatementsCreateController {
     };
 
     this.getTag = function (tag) {
-      $scope.clinicalStatementCreate.clinicalTag = tag;
+      $scope.clinicalTag = tag;
       this.clinicalstatementsQuery(null, tag);
     };
 
     this.removeTag = function () {
-      $scope.clinicalStatementCreate.clinicalTag = '';
+      $scope.clinicalTag = '';
       $scope.statements = [];
     };
 
@@ -75,23 +78,14 @@ class ClinicalstatementsCreateController {
     $scope.confirmEdit = function (clinicalStatementForm, clinicalStatement) {
       $scope.formSubmitted = true;
       var userinput = $('#clinicalNote');
-      setStructured(userinput);      
-      // let toAdd = {
-      //   // code: $scope.clinicalStatement.code,
-      //   dateOfOnset: $scope.clinicalStatement.dateOfOnset.toISOString().slice(0, 10),
-      //   description: $scope.clinicalStatement.description,
-      //   problem: $scope.clinicalStatement.problem,
-      //   source: $scope.clinicalStatement.source,
-      //   sourceId: '',
-      //   terminology: $scope.clinicalStatement.terminology
-      // };
-      $scope.statements = [];
+      setStructured(userinput);  
+      
+      $scope.statements.length = 0;
       $scope.statementsText = [];
-      $scope.clinicalStatementCreate.clinicalTag = '';
-      console.log('confirmEdit ', clinicalStatementForm, $scope.clinicalStatementCreate);
+      $scope.clinicalTag = '';
+      
       if (clinicalStatementForm.$valid) {
-        
-        // this.clinicalstatementsCreate($stateParams.patientId, $scope.clinicalStatementCreate);
+        this.clinicalstatementsCreate($stateParams.patientId, $scope.clinicalStatementCreate);
         this.goList();
       }
     }.bind(this);
@@ -101,7 +95,6 @@ class ClinicalstatementsCreateController {
     // Add Dropdown to Input (select or change value)
     $scope.cc = 0;
     $scope.clickSelect = function () {
-      console.log('clickSelect');
       $scope.cc++;
       if ($scope.cc == 2) {
         // $(this).change();
@@ -114,7 +107,9 @@ class ClinicalstatementsCreateController {
 
       var userinput = jQuery('#clinicalNote');
       var phrase = $scope.statementsText[id];
-
+      
+      var phraseItem = {id: id, tag: $scope.clinicalTag};
+      $scope.clinicalStatementCreate.contentStore.phrases.push(phraseItem);
       // Parse inputs
       var inner = phrase.replace(/(.*)(\{|\|)([^~|])(\}|\|)(.*)/, '$1<span class="editable" contenteditable="false" data-arr-subject="$1" editable-text="atemp" data-arr-unit="$3" data-arr-value="$5">$3</span>$5');
       var html = '<span class="tag" data-id="' + id + '" data-phrase="' + phrase + '" contenteditable="false">' + inner + '. <a class="remove" contenteditable="false"><i class="fa fa-close" contenteditable="false"></i></a></span>';
@@ -282,7 +277,7 @@ class ClinicalstatementsCreateController {
     function strip(html){
       var tmp = document.createElement("DIV");
       tmp.innerHTML = html;
-      $scope.clinicalStatementCreate.search.push(tmp.textContent||tmp.innerText);
+      $scope.clinicalStatementCreate.text = (tmp.textContent||tmp.innerText);
       console.log( tmp.textContent||tmp.innerText );
       return tmp.textContent||tmp.innerText;
 

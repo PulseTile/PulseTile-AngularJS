@@ -26,13 +26,13 @@
           <div class="form-group-wrapper">
             <div class="row-expand">
               <div class="col-expand-left">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.clinicalType.$dirty) && clinicalStatementForm.clinicalType.$invalid, 'has-success': clinicalStatementForm.clinicalType.$valid && clinicalStatementForm.clinicalType.$dirty}">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.type.$dirty) && clinicalStatementForm.type.$invalid, 'has-success': clinicalStatementForm.type.$valid && clinicalStatementForm.type.$dirty}">
                   <label for="clinicalNote" class="control-label">Type</label>
                   <div class="input-holder">
-                    <input class="form-control input-sm" id="clinicalType" name="clinicalType" ng-model="clinicalStatementCreate.clinicalType" required />
+                    <input class="form-control input-sm" id="type" name="type" ng-model="clinicalStatementCreate.type" required />
                   </div>
 
-                  <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.clinicalType.$error.required">You must enter a value.</span>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.type.$error.required">You must enter a value.</span>
                 </div>
               </div>
             </div>
@@ -40,7 +40,7 @@
               <label for="search" class="control-label">Search</label>
               <div class="input-holder">
                 <div class="dropdown" ng-class="{open:openSearch}">
-                  <div mc-dropdown class="form-control input-sm" contenteditable="true" id="clinicalTags" name="clinicalTags" ng-click="toggleDropdown($event);" ng-model="queryFilter">{{clinicalStatementCreate.clinicalTag}}<i class="fa fa-times" ng-if="clinicalStatementCreate.clinicalTag" ng-click="$ctrl.removeTag()"></i> </div>
+                  <div mc-dropdown class="form-control input-sm" contenteditable="true" id="clinicalTags" name="clinicalTags" ng-click="toggleDropdown($event);">{{clinicalTag}}<i class="fa fa-times" ng-if="clinicalTag" ng-click="$ctrl.removeTag()"></i> </div>
                   <div class="dropdown-menu dm-panel dm-tables" ng-if="!statements.length">
                     <div class="heading">Tags</div>
                     <div class="dm-wrap-list">
