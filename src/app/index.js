@@ -23,6 +23,7 @@ import createLogger from 'redux-logger';
 import 'angular-loading-bar';
 // import 'fullcalendar';
 import 'angular-ui-calendar';
+import 'angularjs-slider';
 
 import 'chart.js';
 
@@ -87,7 +88,8 @@ let app = angular
         'ui.timepicker',
         'angular-loading-bar',
         'xeditable',
-        'ngScrollbars'
+        'ngScrollbars',
+        'rzModule'
     ])
     .factory('ScheduleModal', ScheduleModal)
 

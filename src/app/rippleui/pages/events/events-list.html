@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
 
-<div mc-full-panel table-settings order="name" filtering mc-multi-views default-view="timeline" class="panel panel-primary">
+<div mc-full-panel table-settings order="name" filtering mc-multi-views default-view="table" class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
@@ -52,6 +52,10 @@
   </div>
   <div class="panel-body">
     <div ng-show="isActiveView('table')">
+      <rzslider class="mc-rz-slider"
+                rz-slider-model="sliderRange.minValue"
+                rz-slider-high="sliderRange.maxValue"
+                rz-slider-options="sliderRange.options"></rzslider>
       <table class="table table-striped table-hover table-bordered rwd-table table-sorted table-fixedcol">
         <colgroup>
           <col style="width: 50%;">

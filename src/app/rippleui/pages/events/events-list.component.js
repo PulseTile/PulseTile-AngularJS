@@ -24,6 +24,18 @@ class EventsListController {
     this.isShowExpandBtn = this.currentStateName !== 'events';
     this.partsStateName = this.currentStateName.split('-');
 
+    $scope.sliderRange = {
+        minValue: 10,
+        maxValue: 90,
+        options: {
+            floor: 0,
+            ceil: 100,
+            step: 1,
+            minRange: 10,
+            maxRange: 50
+        }
+    };
+
     $scope.configScrollbar = {
       // setHeight: 200,
       // setTop: 100,

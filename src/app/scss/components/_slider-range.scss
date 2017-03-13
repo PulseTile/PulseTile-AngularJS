@@ -1,0 +1,43 @@
+.mc-rz-slider.rzslider .rz-bar {
+  background: #ffe4d1;
+  height: 2px;
+}
+.mc-rz-slider.rzslider .rz-selection {
+  background: orange;
+}
+
+.mc-rz-slider.rzslider .rz-pointer {
+  width: 8px;
+  height: 16px;
+  top: auto; /* to remove the default positioning */
+  bottom: 0;
+  background-color: #333;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.mc-rz-slider.rzslider .rz-pointer:after {
+  display: none;
+}
+
+.mc-rz-slider.rzslider .rz-bubble {
+  bottom: 14px;
+}
+
+.mc-rz-slider.rzslider .rz-limit {
+  font-weight: bold;
+  color: orange;
+}
+
+.mc-rz-slider.rzslider .rz-tick {
+  width: 1px;
+  height: 10px;
+  margin-left: 4px;
+  border-radius: 0;
+  background: #ffe4d1;
+  top: -1px;
+}
+
+.mc-rz-slider.rzslider .rz-tick.rz-selected {
+  background: orange;
+}
