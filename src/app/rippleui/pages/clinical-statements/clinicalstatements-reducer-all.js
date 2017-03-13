@@ -22,7 +22,8 @@ const INITIAL_STATE = {
   data: null,
   dataGet: null,
   dataCreate: null,
-  dataUpdate: null
+  dataUpdate: null,
+  dataTags: null
 };
 
 export default function clinicalstatements(state = INITIAL_STATE, action) {
@@ -60,6 +61,24 @@ export default function clinicalstatements(state = INITIAL_STATE, action) {
       });
     },
     [types.CLINICALSTATEMENTS_GET_ERROR]: (state) => {
+      return Object.assign({}, state, {
+        isFetching: false,
+        error: payload.error
+      });
+    },
+    [types.CLINICALSTATEMENTS_TAGS]: (state) => {
+      return Object.assign({}, state, {
+        isFetching: true,
+        error: false
+      });
+    },
+    [types.CLINICALSTATEMENTS_TAGS_SUCCESS]: (state) => {
+      return Object.assign({}, state, {
+        isFetching: false,
+        dataTags: payload.response
+      });
+    },
+    [types.CLINICALSTATEMENTS_TAGS_ERROR]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         error: payload.error
