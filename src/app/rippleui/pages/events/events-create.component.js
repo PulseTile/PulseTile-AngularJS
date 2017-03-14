@@ -21,6 +21,13 @@ class EventsCreateController {
     var partsCurrentStateName = currentStateName.split('-');
     this.typeCreate = partsCurrentStateName[partsCurrentStateName.length - 1];
 
+    $scope.appointment = {
+      dateCreated: new Date(),
+      dateOfAppointment: "2017-02-10",
+      location: "Leeds General",
+      status: "Scheduled",
+      timeOfAppointment: "2017-02-10T14:00:00.000Z"
+    };
 
     $scope.event = {};
     $scope.event.dateCreated = new Date();
@@ -45,9 +52,9 @@ class EventsCreateController {
     }
 
     this.setCurrentPageData = function (data) {
-      // if (data.events.dataCreate !== null) {
-      //   this.goList();
-      // }
+      if (data.appointments.dataCreate !== null) {
+        this.goList();
+      }
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
@@ -63,22 +70,28 @@ class EventsCreateController {
         searchString: $stateParams.searchString,
         queryType: $stateParams.queryType
       });
-    }
+    };
+    
     this.cancel = function () {
       this.goList();
     };
     $scope.create = function (eventForm, event) {
       $scope.formSubmitted = true;
-
       let toAdd = {
-        name: event.name,
-        comment: event.comment,
-        seriesNumber: event.seriesNumber,
+        // name: event.name,
+        // comment: event.comment,
+        // seriesNumber: event.seriesNumber,
+        // dateCreated: event.dateCreated,
+        // startDate: event.startDate,
+        // source: event.source
         dateCreated: event.dateCreated,
-        startDate: event.startDate,
-        source: event.source,
+        dateOfAppointment: event.date,
+        location: event.location,
+        serviceTeam: event.name,
+        status: "Scheduled",
+        timeOfAppointment: "2017-02-10T14:00:00.000Z"
       };
-
+      console.log('create --> ', toAdd, event);
       if (eventForm.$valid) {
 
         $scope.eventsCreate(this.currentPatient.id, toAdd);
