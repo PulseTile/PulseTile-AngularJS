@@ -19,7 +19,10 @@ class EventsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, patientsActions, eventsActions, serviceRequests, usSpinnerService, ScheduleModal) {
     $scope.isEdit = false;
     var socket = io.connect('wss://' + window.location.hostname + ':' + 8070);
-    
+
+    this.currentUser = serviceRequests.currentUserData;
+    $scope.currentUser = this.currentUser;
+
     this.edit = function () {
       $scope.isEdit = true;
 
@@ -57,9 +60,9 @@ class EventsDetailController {
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
-      if (serviceRequests.currentUserData) {
-        $scope.currentUser = serviceRequests.currentUserData;
-      }
+      // if (serviceRequests.currentUserData) {
+      //   $scope.currentUser = serviceRequests.currentUserData;
+      // }
     };
 
     window.onbeforeunload = function (e) {

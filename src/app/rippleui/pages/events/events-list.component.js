@@ -112,67 +112,6 @@ class EventsListController {
         };
       }
 
-      // var date = new Date();
-      // this.events = [
-      //   {
-      //     sourceId: '1',
-      //     name: 'Event 1',
-      //     type: 'Discharge',
-      //     note: 'Very important event 1',
-      //     date: Date.parse(new Date()),
-      //     author: 'ripple_osi',
-      //     dateCreate: Date.parse(new Date()),
-      //     source: 'Marand',
-      //     timeSlot: 'Discharge',
-      //     status: 'Scheduled'
-      //   }, {
-      //     sourceId: '2',
-      //     name: 'Event 2',
-      //     type: 'Transfer',
-      //     note: 'Very important event 2',
-      //     date: Date.parse(new Date(date.setDate(date.getDate()-1))),
-      //     author: 'ripple_osi',
-      //     dateCreate: Date.parse(new Date(date.setDate(date.getDate()-1))),
-      //     source: 'EtherCIS',
-      //     timeSlot: 'Transfer',
-      //     status: 'Scheduled'
-      //   }, {
-      //     sourceId: '3',
-      //     name: 'Meeting 1',
-      //     type: 'Admission',
-      //     note: 'Very important meeting 1',
-      //     date: Date.parse(new Date(date.setDate(date.getDate()-7))),
-      //     author: 'ripple_osi',
-      //     dateCreate: Date.parse(new Date(date.setDate(date.getDate()-7))),
-      //     source: 'Marand',
-      //     timeSlot: 'Admission',
-      //     status: 'Scheduled'
-      //   }, {
-      //     sourceId: '4',
-      //     name: 'Event 3',
-      //     type: 'Appointment',
-      //     note: 'Very important event 3',
-      //     date: Date.parse(new Date(date.setDate(date.getDate()-30))),
-      //     author: 'ripple_osi',
-      //     dateCreate: Date.parse(new Date(date.setDate(date.getDate()-30))),
-      //     source: 'Marand',
-      //     location: 'Leeds General',
-      //     timeSlot: 'Appointment',
-      //     status: 'Scheduled'
-      //   }, {
-      //     sourceId: '5',
-      //     name: 'Meeting 2',
-      //     type: 'Admission',
-      //     note: 'Very important meeting 2',
-      //     date: Date.parse(new Date(date.setDate(date.getDate()-1))),
-      //     author: 'ripple_osi',
-      //     dateCreate: Date.parse(new Date(date.setDate(date.getDate()-1))),
-      //     source: 'Marand',
-      //     timeSlot: 'Admission',
-      //     status: 'Scheduled'
-      //   }
-      // ];
-
       // this.eventsTimeline = this.modificateEventsArr(this.events);
 
       // serviceFormatted.formattingTablesDate(this.events, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
