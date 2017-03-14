@@ -24,16 +24,23 @@ class EventsListController {
     this.isShowExpandBtn = this.currentStateName !== 'events';
     this.partsStateName = this.currentStateName.split('-');
 
-    $scope.sliderRange = {
-        minValue: 10,
-        maxValue: 90,
-        options: {
-            floor: 0,
-            ceil: 100,
-            step: 1,
-            minRange: 10,
-            maxRange: 50
-        }
+    // $scope.sliderRange = {
+    //     minValue: 10,
+    //     maxValue: 90,
+    //     options: {
+    //         floor: 0,
+    //         ceil: 100,
+    //         step: 1,
+    //         minRange: 10,
+    //         maxRange: 50
+    //     }
+    // };
+
+    $scope.sliderRange;
+    $scope.refreshSlider = function () {
+        $timeout(function () {
+            $scope.$broadcast('rzSliderForceRender');
+        });
     };
 
     $scope.configScrollbar = {
@@ -74,18 +81,37 @@ class EventsListController {
         source: source
       });
     };
-
+    $scope.$watch($scope.sliderRange, function(value) {
+      console.log('$scope.sliderRange');
+      console.log($scope.sliderRange);
+    });
     this.setCurrentPageData = function (data) {
       if (data.events.data) {
         this.events = data.events.data;
         
         usSpinnerService.stop('patientSummary-spinner');
+
         this.eventsTimeline = this.modificateEventsArr(this.events);
+        this.eventsFilterSteps = this.getFilterArray(this.events);
+        serviceFormatted.formattingTablesDate(this.eventsFilterSteps, ['value', 'legend'], serviceFormatted.formatCollection.DDMMMYYYY);
 
         serviceFormatted.formattingTablesDate(this.events, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
         serviceFormatted.filteringKeys = ['name', 'type', 'date'];
 
+        $scope.sliderRange = {
+          minValue: this.eventsFilterSteps[0].value,
+          maxValue: this.eventsFilterSteps[this.eventsFilterSteps.length - 1].value,
+          options: {
+            floor: this.eventsFilterSteps[0].value,
+            ceil: this.eventsFilterSteps[this.eventsFilterSteps.length - 1].value,
+            step: 100000,
+            showTicks: true,
+            showTicksValues: false,
+            stepsArray: this.eventsFilterSteps
+          }
+        };
       }
+
       // var date = new Date();
       // this.events = [
       //   {
@@ -160,7 +186,38 @@ class EventsListController {
         this.currentUser = serviceRequests.currentUserData;
       }
     };
+    this.getFilterArray = function (arr) {
+      let _ = require('underscore');
+      var countLabel = 3;
+  
+      arr = _.chain(arr)
+            .filter(function (el, index, arr) {
+              return el.dateOfAppointment;
+            })
+            .uniq(function (el) {
+              return el.dateOfAppointment;
+            })
+            .sortBy(function (el) {
+              return el.dateOfAppointment;
+            })
+            .map(function (el, index, arr) {
+              var newEl = {
+                value: +(el.dateOfAppointment),
+                label: +(el.dateOfAppointment)
+              }
+              if (index % Math.round(arr.length / countLabel) === 0 ||
+                  index === arr.length - 1) {
 
+                newEl.legend = +el.dateOfAppointment;
+              }
+              
+              return newEl;
+            })
+            .value();
+            console.log('arr');
+            console.log(arr);
+      return arr;
+    };
     this.modificateEventsArr = function (arr) {
       let _ = require('underscore');
       
@@ -182,8 +239,6 @@ class EventsListController {
             })
             .value();
 
-      // console.log('EventsArr');
-      // console.log(arr);
       return arr;
     };
 
