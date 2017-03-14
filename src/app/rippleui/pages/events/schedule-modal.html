@@ -14,14 +14,25 @@
   -->
 
 <div class="modal-header">
-    <h4 class="modal-title">{{ patient.name }}</h4>
-    <div class="panel-body">
-      <div class="row">
-        <div class="col-sm-4 text-left"><label>DOB:</label> <strong>{{ patient.dateOfBirth | date:'dd-MMM-yyyy' }}</strong></div>
-        <div class="col-sm-4 text-center"><label>Gender:</label> <strong>{{ patient.gender }}</strong></div>
-        <div class="col-sm-4 text-right"><label>NHS No:</label> <strong>{{ patient.nhsNumber | formatNHSNumber }}</strong></div>
+  <div class="wrap-patient-info">
+    <div class="patient-info">
+      <div class="patient-info-group-2">
+        <div class="column-1">
+          <div class="patient-info-item"><span class="key">D.O.B.</span> {{ patient.dateOfBirth | date:'dd-MMM-yyyy' }}</div>
+          <div class="patient-info-item"><span class="key">Phone:</span> {{ patient.telephone }}</div>
+        </div>
+        <div class="column-2">
+          <div class="patient-info-item"><span class="key">Gender:</span> {{ patient.gender }}</div>
+          <div class="patient-info-item"><span class="key">NHS No.</span> <span ng-bind="patient.nhsNumber | formatNHSNumber"></span></div>
+        </div>
       </div>
+      <div class="patient-info-group-1">
+        <div class="patient-info-item significant hidden-xs">{{ patient.name }}</div>
+        <div class="patient-info-item"><span class="key">Doctor:</span> {{ patient.gpName }}</div>
+      </div>
+      <div class="patient-info-item"><span class="key">Address:</span> {{ patient.gpAddress }}</div>
     </div>
+  </div>
 </div>
 
 <div class="modal-body">
@@ -46,7 +57,7 @@
       <div class="panel-control">
         <div class="wrap-control-group">
           <div class="control-group right">
-            <button class="btn btn-danger" ng-click="$ctrl.cancel()"><i class="fa fa-ban"></i> <span>Cancel</span></button>
+            <button class="btn btn-danger" ng-click="cancel()"><i class="fa fa-ban"></i> <span>Cancel</span></button>
           </div>
         </div>
       </div>
