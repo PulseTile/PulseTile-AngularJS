@@ -19,11 +19,6 @@ class EventsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, patientsActions, eventsActions, serviceRequests, usSpinnerService, ScheduleModal) {
     $scope.isEdit = false;
 
-    /*
-      TODO: Only for demo
-    */
-    this.event = $stateParams.source;
-
     this.edit = function () {
       $scope.isEdit = true;
 
@@ -52,10 +47,10 @@ class EventsDetailController {
     };
 
     this.setCurrentPageData = function (data) {
-      // if (data.events.dataGet) {
-      //   this.event = data.events.dataGet;
-      //   usSpinnerService.stop('eventDetail-spinner');
-      // }
+      if (data.events.dataGet) {
+        this.event = data.events.dataGet;
+        usSpinnerService.stop('eventDetail-spinner');
+      }
       // this.event = {
       //   name: 'Influenza',
       //   date: new Date(),
@@ -80,8 +75,8 @@ class EventsDetailController {
 
     $scope.$on('$destroy', unsubscribe);
 
-    // this.eventsLoad = eventsActions.get;
-    // this.eventsLoad($stateParams.patientId, $stateParams.detailsIndex);
+    this.eventsLoad = eventsActions.get;
+    this.eventsLoad($stateParams.patientId, $stateParams.detailsIndex);
     // $scope.eventsUpdate = eventsActions.update;
   }
 }
