@@ -222,3 +222,42 @@ textarea.textarea-big,
 .uib-datepicker-popup.dropdown-menu {
   padding: 10px 0;
 }
+.input-container {
+  padding-bottom: 0;
+  padding-top: 0;
+  font-size: 0;
+  position: relative;
+}
+.input-contenteditable {
+  display: inline-block;
+  font-size: 14px;
+  height: 28px;
+  line-height: 28px;
+  vertical-align: top;
+}
+.input-tag {
+  background-color: $base-color;
+  border-radius: 2px;
+  color: $text-on-base-color;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 400;
+  height: 26px;
+  left: 0;
+  line-height: 26px;
+  margin-right: 5px;
+  padding: 0 25px 0 8px;
+  position: relative;
+  top: 1px;
+  vertical-align: top;
+  i {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: -1px;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

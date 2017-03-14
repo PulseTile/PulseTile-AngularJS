@@ -39,8 +39,14 @@
             <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.name.$dirty) && clinicalStatementForm.name.$invalid, 'has-success': clinicalStatementForm.name.$valid && clinicalStatementForm.name.$dirty}">
               <label for="search" class="control-label">Search</label>
               <div class="input-holder">
-                <div class="dropdown" ng-class="{open:openSearch}">
-                  <div mc-dropdown class="form-control input-sm"  id="clinicalTags" name="clinicalTags" ng-click="toggleDropdown($event);">{{clinicalTag}}<i class="fa fa-times" ng-if="clinicalTag" ng-click="$ctrl.removeTag()"></i> <span contenteditable="true" contenteditabled ng-model="queryFilter"></span></div>
+                <div class="dropdown" ng-class="{open: !!queryFilter}">
+                  <div mc-dropdown class="form-control input-sm input-container"  id="clinicalTags" name="clinicalTags" ng-click="toggleDropdown($event);">
+                    <span class="input-tag" ng-if="clinicalTag">
+                      <span>{{clinicalTag}}</span>
+                      <i class="fa fa-times" ng-click="$ctrl.removeTag()"></i>
+                    </span>
+                    <span class="input-contenteditable" ng-show="!!clinicalTag"  contenteditable="true" contenteditabled ng-model="queryFilter"></span>
+                  </div>
                   <div class="dropdown-menu dm-panel dm-tables" ng-if="!statements.length">
                     <div class="heading">Tags</div>
                     <div class="dm-wrap-list">
@@ -49,7 +55,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="dropdown-menu dm-panel dm-tables" ng-if="queryFilter.length">
+                  <div class="dropdown-menu dm-panel dm-tables" ng-if="queryFilter.length && statements.length">
                     <div class="heading">Statements</div>
                     <div class="dm-wrap-list">
                       <div class="dm-list">
