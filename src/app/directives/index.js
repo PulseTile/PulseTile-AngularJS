@@ -217,6 +217,7 @@ angular.module('ripple-ui.directives', [])
           controller: ['$scope', '$element', '$timeout', 'serviceFormatted', 'serviceStateManager', '$state', 
               function($scope, $element, $timeout, serviceFormatted, serviceStateManager, $state) {
                   var filterData = serviceStateManager.getFilter();
+                  var filterEl;
 
                   $scope.isFilterOpen = filterData.isOpen;
                   $scope.queryFilter = filterData.query;
@@ -226,7 +227,10 @@ angular.module('ripple-ui.directives', [])
 
                       if ($scope.isFilterOpen) {
                           $timeout(function(){
-                              document.getElementById('filter').focus();
+                              filterEl = document.getElementById('filter');
+                              if(filterEl) {
+                                filterEl.focus();
+                              }
                           }, 0);
                       } else {
                           $scope.queryFilter = '';
