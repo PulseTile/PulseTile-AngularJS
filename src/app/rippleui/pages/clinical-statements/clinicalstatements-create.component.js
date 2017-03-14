@@ -61,6 +61,7 @@ class ClinicalstatementsCreateController {
 
     this.removeTag = function () {
       $scope.clinicalTag = '';
+      $scope.queryFilter = '';
       $scope.statements = [];
     };
 

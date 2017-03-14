@@ -82,9 +82,9 @@ class EventsListController {
       });
     };
     $scope.$watch($scope.sliderRange, function(value) {
-      console.log('$scope.sliderRange');
-      console.log($scope.sliderRange);
-    });
+          console.log('$scope.sliderRange');
+          console.log($scope.sliderRange);
+        });
     this.setCurrentPageData = function (data) {
       if (data.events.data) {
         this.events = data.events.data;
