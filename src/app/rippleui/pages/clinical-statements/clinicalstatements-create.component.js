@@ -18,103 +18,79 @@ import * as helper from './clinicalstatements-helper';
 let templateClinicalstatementsCreate = require('./clinicalstatements-create.html');
 let _ = require('underscore');
 
-// Todo - Use a service to get the latest tag names
-const TAG_NAMES = [
-  "PC", "XM", "Ix", "Vitals", "Rx", "Ortho", "Dx", "Meds", "MH", "HA", "Shoulder"
-]
-
 class ClinicalstatementsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, serviceRequests) {
-    $scope.clinicalStatement = {};
-    $scope.clinicalStatement.statements = [];
-    $scope.isString = angular.isString
-    $scope.isObject = angular.isObject
-    $scope.clinicalStatement.dateCreated = new Date().toISOString().slice(0, 10);
+  constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, usSpinnerService, serviceRequests) {
     
-    this.currentPage = 1; 
-
+    this.clinicalStatement = $stateParams.source;
+    $scope.statements = [];
+    $scope.statementsText = [];
+    $scope.tags = [];
+    $scope.clinicalStatementCreate = {};
+    $scope.clinicalStatementCreate.contentStore = {
+      name: "ts",
+      phrases: []
+    };
+    $scope.queryFilter = '';
+    $scope.openSearch = false;
+    
     this.setCurrentPageData = function (data) {
-      this.searchResults = data.clinicalstatements.searchData;
-
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
-    };
-
-    /**
-     * Listen for an enter key in the custom statement input box. When detected,
-     * add a new statement and clear the statement content
-     */
-    this.keyDownCustomStatement = function(evt) {
-      if(evt.keyCode === 13) {
-        this.addStatement($scope.clinicalStatement.customStatement);
-        delete $scope.clinicalStatement.customStatement;
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
+        $scope.clinicalStatementCreate.dateCreated = new Date();
+        $scope.clinicalStatementCreate.author = this.currentUser.email;
       }
-    };
-
-    this.addStatement = function(result) {
-      if(angular.isString(result)) {
-        $scope.clinicalStatement.statements.push(result);
-      } else {
-        $scope.clinicalStatement.statements.push({
-          parsed: helper.parsePhrase(result.phrase),
-          id:     result.id
+      if (data.clinicalstatements.dataTags) {
+        $scope.tags = data.clinicalstatements.dataTags;
+      }
+      if (data.clinicalstatements.searchData) {
+        $scope.statements = data.clinicalstatements.searchData;
+        $scope.statementsText = _.map($scope.statements, function (el) {
+          return el.phrase;
         });
       }
+      usSpinnerService.stop("clinicalStatementDetail-spinner");
     };
 
-    this.removeStatement = function(pos) {
-      $scope.clinicalStatement.statements.splice(pos, 1);
+    this.getTag = function (tag) {
+      $scope.clinicalTag = tag;
+      this.clinicalstatementsQuery(null, tag);
     };
 
-    /**
-     * Evaluate the current search expression. Look for a tag at the begining
-     * of the query, if one is found remove it from the query and set as the 
-     * tag to search in.
-     */
-    this.checkExpression = function(input) {
-      if(!$scope.clinicalStatement.tag) {
-        let tag = _.find(TAG_NAMES, t => input.startsWith(t + ' '));
-        let query = (tag) ? input.substring(tag.length + 1) : input;
-        Object.assign($scope.clinicalStatement, {query, tag});
-      }
-    };
-
-    this.performClinicalSearch = function() {
-      let {query, tag} = $scope.clinicalStatement;
-      $scope.clinicalstatementsQuery(query, tag);
-    }
-
-    /**
-     * Event handler for removing the tag being used for search
-     */
-    this.removeTag = function() {
-      delete $scope.clinicalStatement.tag;
+    this.removeTag = function () {
+      $scope.clinicalTag = '';
+      $scope.statements = [];
     };
 
     this.goList = function () {
       $state.go('clinicalstatements', {
         patientId: $stateParams.patientId,
+        reportType: $stateParams.reportType,
         searchString: $stateParams.searchString,
         queryType: $stateParams.queryType
       });
     };
-    
-    this.cancel = function () {
+    this.cancelEdit = function () {
       this.goList();
     };
 
-    $scope.create = function (clinicalStatementForm, clinicalStatement) {
+    $scope.confirmEdit = function (clinicalStatementForm, clinicalStatement) {
       $scope.formSubmitted = true;
-      let apiStatements = helper.transformPhrases(clinicalStatement.statements);
-      let toAdd = {
-        statements: apiStatements,
-        dateCreated: clinicalStatement.dateCreated,
-        author: clinicalStatement.author,
-        source: 'openehr'
-      };
+      var userinput = $('#clinicalNote');
+      function cb(text) {
+        $scope.clinicalStatementCreate.text = text;
+      }
+      helper.setStructured(userinput, cb);  
+      
+      $scope.statements.length = 0;
+      $scope.statementsText = [];
+      $scope.clinicalTag = '';
+      
       if (clinicalStatementForm.$valid) {
-        $scope.clinicalstatementsCreate(this.currentPatient.id, toAdd);
+        this.clinicalstatementsCreate($stateParams.patientId, $scope.clinicalStatementCreate);
+        this.goList();
       }
     }.bind(this);
 
@@ -124,13 +100,49 @@ class ClinicalstatementsCreateController {
 
     $scope.$on('$destroy', unsubscribe);
 
-    // Listen to the change in the query and tag and then perform a search
-    $scope.$watch('[clinicalStatement.query,clinicalStatement.tag]',
-      _.debounce(this.performClinicalSearch, 300)
-    );
+    this.clinicalstatementsTags = clinicalstatementsActions.getTags;
+    this.clinicalstatementsQuery = clinicalstatementsActions.query;
+    this.clinicalstatementsCreate = clinicalstatementsActions.create;
+    this.clinicalstatementsTags($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
 
-    $scope.clinicalstatementsCreate = clinicalstatementsActions.create;
-    $scope.clinicalstatementsQuery = clinicalstatementsActions.query;
+    // Add Dropdown to Input (select or change value)
+    $scope.cc = 0;
+    $scope.clickSelect = function () {
+      $scope.cc++;
+      if ($scope.cc == 2) {
+        // $(this).change();
+        $scope.cc = 0;
+      }
+    };
+
+    $scope.changeSelect = function (id) {
+
+      var userinput = jQuery('#clinicalNote');
+      var phrase = $scope.statementsText[id];
+
+      var phraseItem = {id: id, tag: $scope.clinicalTag};
+      $scope.clinicalStatementCreate.contentStore.phrases.push(phraseItem);
+      // Parse inputs
+      var inner = phrase.replace(/(.*)(\{|\|)([^~|])(\}|\|)(.*)/, '$1<span class="editable" contenteditable="false" data-arr-subject="$1" editable-text data-arr-unit="$3" data-arr-value="$5">$3</span>$5');
+      var html = '<span class="tag" data-id="' + id + '" data-phrase="' + phrase + '" contenteditable="false">' + inner + '. <a class="remove" contenteditable="false"><i class="fa fa-close" contenteditable="false"></i></a></span>';
+
+      helper.pasteHtmlAtCaret(html, userinput);
+
+      // Apply Editable
+      $('span.tag .editable').editable({
+        type: 'text',
+        title: 'Edit Text',
+        success: function(response, newValue) {
+          phraseItem.value = newValue;
+        }
+      });
+
+      // Bind Remove to tag
+      helper.removeTags('#clinicalNote');
+
+      $scope.cc = -1;
+    };
+    
   }
 }
 
@@ -139,5 +151,5 @@ const ClinicalstatementsCreateComponent = {
   controller: ClinicalstatementsCreateController
 };
 
-ClinicalstatementsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalstatementsActions', 'serviceRequests'];
+ClinicalstatementsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalstatementsActions', 'usSpinnerService', 'serviceRequests'];
 export default ClinicalstatementsCreateComponent;
