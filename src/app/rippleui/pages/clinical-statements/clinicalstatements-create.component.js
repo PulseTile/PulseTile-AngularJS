@@ -19,8 +19,21 @@ let templateClinicalstatementsCreate = require('./clinicalstatements-create.html
 let _ = require('underscore');
 
 class ClinicalstatementsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, usSpinnerService, serviceRequests) {
-    
+  constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, usSpinnerService, serviceRequests, $timeout) {
+
+    this.goNext = function () {
+      var dd = angular.element('.nn').get(1);
+      $timeout(function() {
+        angular.element(dd).triggerHandler('click');
+      }, 0);
+    };
+    this.goPrev = function () {
+      var pp = angular.element('.pp').get(1);
+      $timeout(function() {
+        angular.element(pp).triggerHandler('click');
+      }, 0);
+    };
+
     this.clinicalStatement = $stateParams.source;
     $scope.statements = [];
     $scope.statementsText = [];
@@ -153,5 +166,5 @@ const ClinicalstatementsCreateComponent = {
   controller: ClinicalstatementsCreateController
 };
 
-ClinicalstatementsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalstatementsActions', 'usSpinnerService', 'serviceRequests'];
+ClinicalstatementsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalstatementsActions', 'usSpinnerService', 'serviceRequests', '$timeout'];
 export default ClinicalstatementsCreateComponent;
