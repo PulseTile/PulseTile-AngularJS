@@ -65,7 +65,7 @@
         </thead>
 
         <tbody>
-          <tr dir-paginate="event in $ctrl.events | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(event.sourceId, event)" ng-class="{info: selectedRow(event.sourceId)}">
+          <tr dir-paginate="event in eventsFiltering | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(event.sourceId, event)" ng-class="{info: selectedRow(event.sourceId)}">
             <td data-th="Event Name" ng-class="sortClass('name');">{{ event.serviceTeam }}</td>
             <td data-th="Event Type" ng-class="sortClass('type')">{{ event.type }}</td>
             <td data-th="Date" ng-class="sortClass('date')">{{ event.dateOfAppointment | date:'dd-MMM-yyyy' }}</td>
@@ -83,7 +83,7 @@
       <div class="timeline-content-scroll" ng-scrollbars ng-scroll-to="2500" ng-scrollbars-config="configScrollbar" ng-scrollbars-update=updateScrollbar>
         <div class="timeline">
           <div class="timeline-inner">
-            <div ng-repeat="(key, eventGroup) in $ctrl.eventsTimeline">
+            <div ng-repeat="(key, eventGroup) in eventsTimeline">
               <div class="header">{{ key | date:'dd MMMM yyyy' }}</div>
               <div class="date-group" >
                 <div class="date" ng-repeat="event in eventGroup" ng-class="event.sideDateInTimeline">

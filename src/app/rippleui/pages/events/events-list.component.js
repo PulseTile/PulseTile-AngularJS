@@ -20,23 +20,17 @@ class EventsListController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
+    let _ = require('underscore');
+
     this.currentStateName = $state.router.globals.$current.name;
     this.isShowExpandBtn = this.currentStateName !== 'events';
     this.partsStateName = this.currentStateName.split('-');
 
-    // $scope.sliderRange = {
-    //     minValue: 10,
-    //     maxValue: 90,
-    //     options: {
-    //         floor: 0,
-    //         ceil: 100,
-    //         step: 1,
-    //         minRange: 10,
-    //         maxRange: 50
-    //     }
-    // };
-
     $scope.sliderRange;
+    this.events = [];
+    $scope.eventsFiltering = [];
+    $scope.eventsTimeline = [];
+
     $scope.refreshSlider = function () {
         $timeout(function () {
             $scope.$broadcast('rzSliderForceRender');
@@ -81,23 +75,16 @@ class EventsListController {
         source: source
       });
     };
-    $scope.$watch($scope.sliderRange, function(value) {
-          console.log('$scope.sliderRange');
-          console.log($scope.sliderRange);
-        });
+
     this.setCurrentPageData = function (data) {
       if (data.events.data) {
         this.events = data.events.data;
-        
-        usSpinnerService.stop('patientSummary-spinner');
 
-        this.eventsTimeline = this.modificateEventsArr(this.events);
-        this.eventsFilterSteps = this.getFilterArray(this.events);
-        serviceFormatted.formattingTablesDate(this.eventsFilterSteps, ['value', 'legend'], serviceFormatted.formatCollection.DDMMMYYYY);
-
-        serviceFormatted.formattingTablesDate(this.events, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
         serviceFormatted.filteringKeys = ['name', 'type', 'date'];
 
+        this.eventsFilterSteps = $scope.getFilterArray(this.events);
+        serviceFormatted.formattingTablesDate(this.eventsFilterSteps, ['value', 'legend'], serviceFormatted.formatCollection.DDMMMYYYY);
+        
         $scope.sliderRange = {
           minValue: this.eventsFilterSteps[0].value,
           maxValue: this.eventsFilterSteps[this.eventsFilterSteps.length - 1].value,
@@ -110,75 +97,12 @@ class EventsListController {
             stepsArray: this.eventsFilterSteps
           }
         };
+
+        $scope.formCollectionsEvents(this.events);
+
+        usSpinnerService.stop('patientSummary-spinner');
       }
 
-      // var date = new Date();
-      // this.events = [
-      //   {
-      //     sourceId: '1',
-      //     name: 'Event 1',
-      //     type: 'Discharge',
-      //     note: 'Very important event 1',
-      //     date: Date.parse(new Date()),
-      //     author: 'ripple_osi',
-      //     dateCreate: Date.parse(new Date()),
-      //     source: 'Marand',
-      //     timeSlot: 'Discharge',
-      //     status: 'Scheduled'
-      //   }, {
-      //     sourceId: '2',
-      //     name: 'Event 2',
-      //     type: 'Transfer',
-      //     note: 'Very important event 2',
-      //     date: Date.parse(new Date(date.setDate(date.getDate()-1))),
-      //     author: 'ripple_osi',
-      //     dateCreate: Date.parse(new Date(date.setDate(date.getDate()-1))),
-      //     source: 'EtherCIS',
-      //     timeSlot: 'Transfer',
-      //     status: 'Scheduled'
-      //   }, {
-      //     sourceId: '3',
-      //     name: 'Meeting 1',
-      //     type: 'Admission',
-      //     note: 'Very important meeting 1',
-      //     date: Date.parse(new Date(date.setDate(date.getDate()-7))),
-      //     author: 'ripple_osi',
-      //     dateCreate: Date.parse(new Date(date.setDate(date.getDate()-7))),
-      //     source: 'Marand',
-      //     timeSlot: 'Admission',
-      //     status: 'Scheduled'
-      //   }, {
-      //     sourceId: '4',
-      //     name: 'Event 3',
-      //     type: 'Appointment',
-      //     note: 'Very important event 3',
-      //     date: Date.parse(new Date(date.setDate(date.getDate()-30))),
-      //     author: 'ripple_osi',
-      //     dateCreate: Date.parse(new Date(date.setDate(date.getDate()-30))),
-      //     source: 'Marand',
-      //     location: 'Leeds General',
-      //     timeSlot: 'Appointment',
-      //     status: 'Scheduled'
-      //   }, {
-      //     sourceId: '5',
-      //     name: 'Meeting 2',
-      //     type: 'Admission',
-      //     note: 'Very important meeting 2',
-      //     date: Date.parse(new Date(date.setDate(date.getDate()-1))),
-      //     author: 'ripple_osi',
-      //     dateCreate: Date.parse(new Date(date.setDate(date.getDate()-1))),
-      //     source: 'Marand',
-      //     timeSlot: 'Admission',
-      //     status: 'Scheduled'
-      //   }
-      // ];
-
-      // this.eventsTimeline = this.modificateEventsArr(this.events);
-
-      // serviceFormatted.formattingTablesDate(this.events, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
-      // serviceFormatted.filteringKeys = ['name', 'type', 'date'];
-
-      // usSpinnerService.stop('patientSummary-spinner');
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
@@ -186,8 +110,40 @@ class EventsListController {
         this.currentUser = serviceRequests.currentUserData;
       }
     };
-    this.getFilterArray = function (arr) {
-      let _ = require('underscore');
+    $scope.formCollectionsEvents = function (events) {
+      $scope.eventsFiltering = $scope.filterEvents(events);
+      $scope.eventsTimeline = $scope.modificateEventsArr($scope.eventsFiltering);
+
+      serviceFormatted.formattingTablesDate($scope.eventsFiltering, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
+    };
+    $scope.filterEvents = function (events) {
+      var newEvents = [];
+      var minRange, maxRange;
+
+      if ($scope.isFilterOpen) {
+        minRange = Date.parse($scope.sliderRange.minValue);
+        maxRange = Date.parse($scope.sliderRange.maxValue);
+        if (minRange && maxRange) {
+          newEvents = _.chain(events)
+              .filter(function (el, index, arr) {
+                var dateInSecongs = +el.dateOfAppointment;
+                // console.log('minRange ---> ', minRange);
+                // console.log('dateInSecongs ---> ', dateInSecongs);
+                // console.log('maxRange ---> ', maxRange);
+                return (minRange <= dateInSecongs && dateInSecongs <= maxRange);
+              })
+              .value();
+        }
+
+        // console.log('newEvents');
+        // console.log(newEvents);
+
+        return newEvents;
+      }
+
+      return events;
+    };
+    $scope.getFilterArray = function (arr) {
       var countLabel = 3;
   
       arr = _.chain(arr)
@@ -203,7 +159,6 @@ class EventsListController {
             .map(function (el, index, arr) {
               var newEl = {
                 value: +(el.dateOfAppointment),
-                label: +(el.dateOfAppointment)
               }
               if (index % Math.round(arr.length / countLabel) === 0 ||
                   index === arr.length - 1) {
@@ -214,13 +169,10 @@ class EventsListController {
               return newEl;
             })
             .value();
-            console.log('arr');
-            console.log(arr);
+
       return arr;
     };
-    this.modificateEventsArr = function (arr) {
-      let _ = require('underscore');
-      
+    $scope.modificateEventsArr = function (arr) {
       arr = _.chain(arr)
             .sortBy(function (value) {
               return value.dateOfAppointment;
@@ -241,6 +193,19 @@ class EventsListController {
 
       return arr;
     };
+    
+
+
+    $scope.$watch('sliderRange.minValue', function() {
+      if (this.events) {
+        $scope.formCollectionsEvents(this.events);
+      }
+    }.bind(this));
+    $scope.$watch('sliderRange.maxValue', function() {
+      if (this.events) {
+        $scope.formCollectionsEvents(this.events);
+      }
+    }.bind(this));
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
