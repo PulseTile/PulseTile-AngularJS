@@ -89,13 +89,13 @@
 .dm-list {
   margin-bottom: 12px;
   .dm-item {
-    padding: 0 14px;
+    padding: 5px 14px;
     font-size: 0;
     line-height: 0;
     cursor: pointer;
     &.active { background: #f3f3f3; } 
     span, i {
-      line-height: 28px;
+      line-height: 18px;
       display: inline-block;
       vertical-align: middle;
     }
@@ -110,17 +110,24 @@
       color: $base-color;
     }
   }
-  &.dm-list-small {
-    .dm-item {
-      padding-top: 1px;
-      padding-bottom: 1px;
-      span, i {
-        line-height: 12px;
-      }
-      span {
-        font-size:10px;
-      }
-    }
-  }
+  
 }
 .is-not-touch-device .dm-list .dm-item:hover { background: #f3f3f3; }
+
+.dm-small {
+  padding: 10px;
+  .dm-list {
+    margin-right: -10px;
+    margin-left: -10px;
+    .dm-item {
+        padding-top: 4px;
+        padding-bottom: 4px;
+        span, i {
+          line-height: 14px;
+        }
+        span {
+          font-size: 14px;
+        }
+      }
+  }
+}

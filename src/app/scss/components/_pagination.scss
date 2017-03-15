@@ -1,6 +1,15 @@
+.pagination-short {
+  .pagination-block li {
+    display: none;
+    &.short-show {
+      display: block;
+    }
+  }
+}
 .pagination-block {
   margin: 0;
   border: 0;
+  padding-right: 1px;
   li {
     float: left;
     position: relative;
@@ -58,4 +67,9 @@
       cursor: not-allowed;
     }
   }
+}
+.pagination-heading {
+  height: 34px;
+  line-height: 34px;
+  @include text-truncate;
 }

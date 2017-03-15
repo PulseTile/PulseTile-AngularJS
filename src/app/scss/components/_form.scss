@@ -223,23 +223,29 @@ textarea.textarea-big,
   padding: 10px 0;
 }
 .input-container {
-  padding-bottom: 0;
-  padding-top: 0;
+  padding: 0;
   font-size: 0;
   position: relative;
 }
 .input-contenteditable {
   display: inline-block;
+  padding: 0 10px;
   font-size: 14px;
   height: 28px;
   line-height: 28px;
   vertical-align: top;
+  outline: none;
+  min-width: 5px;
+  width: 100%;
+}
+.input-container .input-tag:first-child {
+  margin-left: 10px;
 }
 .input-tag {
+  float: left;
   background-color: $base-color;
   border-radius: 2px;
   color: $text-on-base-color;
-  display: inline-block;
   font-size: 16px;
   font-weight: 400;
   height: 26px;
@@ -249,7 +255,6 @@ textarea.textarea-big,
   padding: 0 25px 0 8px;
   position: relative;
   top: 1px;
-  vertical-align: top;
   i {
     cursor: pointer;
     font-size: 14px;

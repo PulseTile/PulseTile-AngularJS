@@ -45,9 +45,11 @@
                       <span>{{clinicalTag}}</span>
                       <i class="fa fa-times" ng-click="$ctrl.removeTag()"></i>
                     </span>
-                    <span class="input-contenteditable" tabindex="0" contenteditable="true" contenteditabled ng-model="queryFilter"></span>
+                    <div class="wrap-overflow">
+                      <span class="input-contenteditable" tabindex="0" contenteditable="true" contenteditabled ng-model="queryFilter"></span>
+                    </div>
                   </div>
-                  <div class="dropdown-menu dm-panel dm-statements" ng-if="!statements.length && queryFilter.length >=3">
+                  <div class="dropdown-menu dm-panel dm-statements dm-small" ng-if="!statements.length && queryFilter.length >=3">
                     <div class="heading">Tags</div>
                     <div class="dm-wrap-list">
                       <div class="dm-list">
@@ -55,15 +57,16 @@
                       </div>
                     </div>
                   </div>
-                  <div class="dropdown-menu dm-panel dm-statements dm-top-left" ng-if="queryFilter.length >=3 && statements.length">
-                    <div class="heading">Statements
-                      <spnan ng-click="$ctrl.goPrev()"><--pp</spnan>
-                      <spnan ng-click="$ctrl.goNext()">nn--></spnan>
-                      <dir-pagination-controls ng-show="false" max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false" pagination-id="cust"></dir-pagination-controls>
+                  <div class="dropdown-menu dm-panel dm-statements dm-small dm-top-left" ng-if="queryFilter.length >=3 && statements.length">
+                    <div class="heading wrap-overflow">
+                      <div class="control-group right">
+                        <dir-pagination-controls class="pagination-short" max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false" pagination-id="cust"></dir-pagination-controls>
+                      </div>
+                      <div class="pagination-heading">Statements</div>
                     </div>
                     <div class="dm-wrap-list">
-                      <div class="dm-list dm-list-small">
-                        <div class="dm-item" ng-click="changeSelect(id)" dir-paginate="(id, phrase) in statementsText | filter: queryFilter | itemsPerPage: 10" pagination-id="cust"><span>{{phrase}}</span></div>
+                      <div class="dm-list">
+                        <div class="dm-item" ng-click="changeSelect(id)" dir-paginate="(id, phrase) in statementsText | filter: queryFilter | itemsPerPage: 5" pagination-id="cust"><span>{{phrase}}</span></div>
                       </div>
                     </div>
                   </div>
