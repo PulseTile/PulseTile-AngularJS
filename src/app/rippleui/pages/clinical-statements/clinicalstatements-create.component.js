@@ -56,6 +56,7 @@ class ClinicalstatementsCreateController {
 
     this.getTag = function (tag) {
       $scope.clinicalTag = tag;
+      $scope.queryFilter = '';
       this.clinicalstatementsQuery(null, tag);
     };
 
@@ -128,7 +129,7 @@ class ClinicalstatementsCreateController {
       var html = '<span class="tag" data-id="' + id + '" data-phrase="' + phrase + '" contenteditable="false">' + inner + '. <a class="remove" contenteditable="false"><i class="fa fa-close" contenteditable="false"></i></a></span>';
 
       helper.pasteHtmlAtCaret(html, userinput);
-
+      $scope.queryFilter = '';
       // Apply Editable
       $('span.tag .editable').editable({
         type: 'text',

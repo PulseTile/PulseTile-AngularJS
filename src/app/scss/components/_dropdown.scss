@@ -26,6 +26,10 @@
     right: 0;
     bottom: 100%;
   }
+  &.dm-top-left {
+    top: auto;
+    bottom: 100%;
+  }
 }
 .dropdown.open .btn-inverse {
   &,

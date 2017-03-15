@@ -138,7 +138,11 @@ export function strip(html, cb){
   var tmp = document.createElement("DIV");
   tmp.innerHTML = html;  
   var resultText = tmp.textContent||tmp.innerText;
-  cb(resultText);
+
+  if (typeof cb === 'function') {
+    cb(resultText);
+  }
+  
   console.log( tmp.textContent||tmp.innerText );
   
   return tmp.textContent||tmp.innerText;
