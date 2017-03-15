@@ -16,7 +16,7 @@
 let templateEventsCreate = require('./events-create.html');
 
 class EventsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, eventsActions, serviceRequests) {
+  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, eventsActions, serviceRequests, ScheduleModal) {
     var currentStateName = $state.router.globals.$current.name;
     var partsCurrentStateName = currentStateName.split('-');
     this.typeCreate = partsCurrentStateName[partsCurrentStateName.length - 1];
@@ -75,6 +75,11 @@ class EventsCreateController {
     this.cancel = function () {
       this.goList();
     };
+
+    this.openSchedule = function () {
+      ScheduleModal.openModal(this.currentPatient, {title: 'Schedule event (Appointment)'}, {}, $scope.currentUser);
+    };
+    
     $scope.create = function (eventForm, event) {
       $scope.formSubmitted = true;
       let toAdd = {
@@ -113,5 +118,5 @@ const EventsCreateComponent = {
   controller: EventsCreateController
 };
 
-EventsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'eventsActions', 'serviceRequests'];
+EventsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'eventsActions', 'serviceRequests', 'ScheduleModal'];
 export default EventsCreateComponent;

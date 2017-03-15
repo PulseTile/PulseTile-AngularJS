@@ -17,7 +17,6 @@ let templateEventsDetail = require('./events-detail.html');
 
 class EventsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, patientsActions, eventsActions, serviceRequests, usSpinnerService, ScheduleModal) {
-    $scope.isEdit = false;
     var socket = io.connect('wss://' + window.location.hostname + ':' + 8070);
 
     this.currentUser = serviceRequests.currentUserData;
@@ -36,32 +35,24 @@ class EventsDetailController {
     this.cancelEdit = function () {
       $scope.isEdit = false;
     };
-    
-    $scope.confirmEdit = function (eventForm, event) {
-      $scope.formSubmitted = true;
-      if (eventForm.$valid) {
-        $scope.isEdit = false;
-        this.event = Object.assign(this.event, $scope.eventEdit);
-        $scope.eventsUpdate($scope.patient.id, $scope.event);
-      }
-    }.bind(this);
 
-    this.openSchedule = function () {
-      ScheduleModal.openModal(this.currentPatient, {title: 'Schedule event (Appointment)'}, this.event, $scope.currentUser);
-    };
+    $scope.formDisabled = true;
+    $scope.messages = [];
 
     this.setCurrentPageData = function (data) {
-      if (data.events.dataGet) {
-        this.event = data.events.dataGet;
-        socket.emit('appointment:messages', {appointmentId: this.event.sourceId});
-        usSpinnerService.stop('eventDetail-spinner');
-      }
-      usSpinnerService.stop('eventDetail-spinner');
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
-      // if (serviceRequests.currentUserData) {
-      //   $scope.currentUser = serviceRequests.currentUserData;
+      if (data.appointments.dataGet) {
+        this.event = data.appointments.dataGet;
+        $scope.appt = this.event;
+        usSpinnerService.stop('appointmentsDetail-spinner');
+
+        socket.emit('appointment:messages', {appointmentId: this.event.sourceId});
+      }
+      // if (data.user.data) {
+      //   this.currentUser = serviceRequests.currentUserData;
+      //   console.log('currentUser: ', this.currentUser);
       // }
     };
 
@@ -89,10 +80,11 @@ class EventsDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     this.eventsLoad = eventsActions.get;
-    this.eventsLoad($stateParams.patientId, $stateParams.detailsIndex);
-    // $scope.eventsUpdate = eventsActions.update;
+    this.eventsLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
 
-    var appointmentId = $stateParams.appointmentIndex;
+
+    //var socket = socketService.socket;
+    var appointmentId = $stateParams.detailsIndex;
     var user = serviceRequests.currentUserData;
     var ROLE_DOCTOR = 'IDCR';
     var token = getCookie('JSESSIONID');
@@ -119,7 +111,7 @@ class EventsDetailController {
 
     $scope.patient =  this.currentPatient;
     $scope.appt =  this.event;
-    console.log('$scope.appt == ', $scope.appt, this.event);
+
     $scope.canStartAppointment = function () {
       if (!$scope.isDoctor())
         return false;
@@ -186,7 +178,7 @@ class EventsDetailController {
       return 'width=' + w + ', height=' + h + ', top=' + top + ', left=' + left;
     }
 
-    socket.emit('appointment:status', {appointmentId: $stateParams.appointmentIndex, token: token});
+    socket.emit('appointment:status', {appointmentId: $stateParams.detailsIndex, token: token});
     socket.off('appointment:messages'); // remove dublicate socket listeners
     socket.off('appointment:close');
     socket.off('appointment:status');
@@ -195,10 +187,9 @@ class EventsDetailController {
     socket.on('appointment:status', onStatus);
 
     function onMessages(dt) {
-      console.log('onMessages ---> ', dt);
       var data = JSON.parse(JSON.stringify(dt));
       usSpinnerService.stop('appointmentsDetail-spinner');
-      if (!data.appointment || $state.current.name != 'appointments-detail' || $stateParams.appointmentIndex != data.appointmentId) return;
+      if (!data.appointment || $state.current.name != 'appointments-detail' || $stateParams.detailsIndex != data.appointmentId) return;
 
       $scope.messages = data.messages.map(function (message) {
         message.timestamp = moment(+message.timestamp).format('HH:mm');
@@ -220,15 +211,15 @@ class EventsDetailController {
     function onClose(data) {
       console.log('onClose ---> ', data);
       $scope.showJoinAppointment = null;
-      if (data.appointmentId == $stateParams.appointmentIndex) {
-        socket.emit('appointment:status', {appointmentId: $stateParams.appointmentIndex, token: token});
-        socket.emit('appointment:messages', {appointmentId: $stateParams.appointmentIndex, token: token});
+      if (data.appointmentId == $stateParams.detailsIndex) {
+        socket.emit('appointment:status', {appointmentId: $stateParams.detailsIndex, token: token});
+        socket.emit('appointment:messages', {appointmentId: $stateParams.detailsIndex, token: token});
       }
     }
 
     function onStatus(data) {
-      console.log('onStatus ---> ', data, data.appointmentId, ' == ', $stateParams.appointmentIndex);
-      if (data.appointmentId == $stateParams.appointmentIndex) {
+      console.log('onStatus ---> ', data, data.appointmentId, ' == ', $stateParams.detailsIndex);
+      if (data.appointmentId == $stateParams.detailsIndex) {
         $scope.isClosed = data.isClosed;
       }
     }

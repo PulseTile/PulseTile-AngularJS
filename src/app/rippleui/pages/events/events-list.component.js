@@ -153,8 +153,6 @@ class EventsListController {
               return newEl;
             })
             .value();
-            console.log('arr');
-            console.log(arr);
       return arr;
     };
     this.modificateEventsArr = function (arr) {
