@@ -19,8 +19,21 @@ let templateClinicalstatementsCreate = require('./clinicalstatements-create.html
 let _ = require('underscore');
 
 class ClinicalstatementsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, usSpinnerService, serviceRequests) {
-    
+  constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, usSpinnerService, serviceRequests, $timeout) {
+
+    this.goNext = function () {
+      var dd = angular.element('.nn').get(1);
+      $timeout(function() {
+        angular.element(dd).triggerHandler('click');
+      }, 0);
+    };
+    this.goPrev = function () {
+      var pp = angular.element('.pp').get(1);
+      $timeout(function() {
+        angular.element(pp).triggerHandler('click');
+      }, 0);
+    };
+
     this.clinicalStatement = $stateParams.source;
     $scope.statements = [];
     $scope.statementsText = [];
@@ -56,6 +69,7 @@ class ClinicalstatementsCreateController {
 
     this.getTag = function (tag) {
       $scope.clinicalTag = tag;
+      $scope.queryFilter = '';
       this.clinicalstatementsQuery(null, tag);
     };
 
@@ -128,7 +142,7 @@ class ClinicalstatementsCreateController {
       var html = '<span class="tag" data-id="' + id + '" data-phrase="' + phrase + '" contenteditable="false">' + inner + '. <a class="remove" contenteditable="false"><i class="fa fa-close" contenteditable="false"></i></a></span>';
 
       helper.pasteHtmlAtCaret(html, userinput);
-
+      $scope.queryFilter = '';
       // Apply Editable
       $('span.tag .editable').editable({
         type: 'text',
@@ -152,5 +166,5 @@ const ClinicalstatementsCreateComponent = {
   controller: ClinicalstatementsCreateController
 };
 
-ClinicalstatementsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalstatementsActions', 'usSpinnerService', 'serviceRequests'];
+ClinicalstatementsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalstatementsActions', 'usSpinnerService', 'serviceRequests', '$timeout'];
 export default ClinicalstatementsCreateComponent;

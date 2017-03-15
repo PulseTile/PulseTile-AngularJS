@@ -97,7 +97,7 @@ class EventsListController {
             stepsArray: this.eventsFilterSteps
           }
         };
-
+        
         $scope.formCollectionsEvents(this.events);
 
         usSpinnerService.stop('patientSummary-spinner');

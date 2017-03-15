@@ -26,6 +26,14 @@
     right: 0;
     bottom: 100%;
   }
+  &.dm-top-left {
+    top: auto;
+    bottom: 100%;
+  }
+  &.dm-small {
+    font-size: 10px;
+    line-height: 12px;
+  }
 }
 .dropdown.open .btn-inverse {
   &,
@@ -71,6 +79,10 @@
 .dm-tables {
   width: 215px;
 }
+.dm-statements {
+  width: 100%;
+  max-width: 360px;
+}
 .dm-wrap-list {
   margin-bottom: -12px;
 }
@@ -96,6 +108,18 @@
       margin-right: 12px;
       font-size: 16px;
       color: $base-color;
+    }
+  }
+  &.dm-list-small {
+    .dm-item {
+      padding-top: 1px;
+      padding-bottom: 1px;
+      span, i {
+        line-height: 12px;
+      }
+      span {
+        font-size:10px;
+      }
     }
   }
 }
