@@ -40,7 +40,7 @@ angular.module('ripple-ui.directives', [])
 
         scope.openPanel = function (namePanel) {
           if (scope.panelOpen === namePanel) {
-            scope.panelOpen = '';
+            // scope.panelOpen = '';
           } else {
             scope.panelOpen = namePanel;
             if (scope.showPanel && scope.showPanel.length) {

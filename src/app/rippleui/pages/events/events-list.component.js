@@ -79,7 +79,7 @@ class EventsListController {
     this.setCurrentPageData = function (data) {
       if (data.events.data) {
         this.events = data.events.data;
-
+      
         serviceFormatted.filteringKeys = ['name', 'type', 'date'];
 
         this.eventsFilterSteps = $scope.getFilterArray(this.events);
@@ -122,21 +122,20 @@ class EventsListController {
 
       if ($scope.isFilterOpen) {
         minRange = Date.parse($scope.sliderRange.minValue);
-        maxRange = Date.parse($scope.sliderRange.maxValue);
+        maxRange = Date.parse($scope.sliderRange.maxValue)  + (24 * 60 * 60 * 1000) - 1;
         if (minRange && maxRange) {
           newEvents = _.chain(events)
               .filter(function (el, index, arr) {
                 var dateInSecongs = +el.dateOfAppointment;
+                // console.log('el.dateOfAppointment --->', el.serviceTeam);
                 // console.log('minRange ---> ', minRange);
                 // console.log('dateInSecongs ---> ', dateInSecongs);
                 // console.log('maxRange ---> ', maxRange);
+                // console.log('---------------------------');
                 return (minRange <= dateInSecongs && dateInSecongs <= maxRange);
               })
               .value();
         }
-
-        // console.log('newEvents');
-        // console.log(newEvents);
 
         return newEvents;
       }
@@ -145,7 +144,7 @@ class EventsListController {
     };
     $scope.getFilterArray = function (arr) {
       var countLabel = 3;
-  
+
       arr = _.chain(arr)
             .filter(function (el, index, arr) {
               return el.dateOfAppointment;
@@ -202,6 +201,11 @@ class EventsListController {
       }
     }.bind(this));
     $scope.$watch('sliderRange.maxValue', function() {
+      if (this.events) {
+        $scope.formCollectionsEvents(this.events);
+      }
+    }.bind(this));
+    $scope.$watch('isFilterOpen', function() {
       if (this.events) {
         $scope.formCollectionsEvents(this.events);
       }
