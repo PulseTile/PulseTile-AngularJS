@@ -19,12 +19,13 @@ let templateClinicalstatementsCreate = require('./clinicalstatements-create.html
 let _ = require('underscore');
 
 class ClinicalstatementsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, usSpinnerService, serviceRequests, $timeout) {
+  constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, usSpinnerService, serviceRequests, serviceFormatted) {
 
     this.clinicalStatement = $stateParams.source;
     $scope.statements = [];
     $scope.statementsText = [];
     $scope.tags = [];
+    $scope.clinicalTag = '';
     $scope.clinicalStatementCreate = {};
     $scope.clinicalStatementCreate.contentStore = {
       name: "ts",
@@ -47,8 +48,10 @@ class ClinicalstatementsCreateController {
       }
       if (data.clinicalstatements.searchData) {
         $scope.statements = data.clinicalstatements.searchData;
-        $scope.statementsText = _.map($scope.statements, function (el) {
-          return el.phrase;
+        console.log('$scope.statements', $scope.statements);
+        $scope.statementsText = _.map($scope.statements, function (el, index) {
+          el.index = index;
+          return el;
         });
       }
       usSpinnerService.stop("clinicalStatementDetail-spinner");
@@ -96,6 +99,11 @@ class ClinicalstatementsCreateController {
       }
     }.bind(this);
 
+    serviceFormatted.filteringKeys2 = ['phrase'];
+    $scope.queryFiltering = function (row) {
+      return serviceFormatted.formattedSearching2(row, $scope.queryFilter);
+    };
+    
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
@@ -117,19 +125,18 @@ class ClinicalstatementsCreateController {
       }
     };
 
-    $scope.changeSelect = function (id) {
-
+    $scope.changeSelect = function (index) {
+      
       var userinput = jQuery('#clinicalNote');
-      var phrase = $scope.statementsText[id];
-
-      var phraseItem = {id: id, tag: $scope.clinicalTag};
+      var statement = $scope.statementsText[index];
+      
+      var phraseItem = {id: statement.id, tag: $scope.clinicalTag};
       $scope.clinicalStatementCreate.contentStore.phrases.push(phraseItem);
       // Parse inputs
-      var inner = phrase.replace(/(.*)(\{|\|)([^~|])(\}|\|)(.*)/, '$1<span class="editable" contenteditable="false" data-arr-subject="$1" editable-text data-arr-unit="$3" data-arr-value="$5">$3</span>$5');
-      var html = '<span class="tag" data-id="' + id + '" data-phrase="' + phrase + '" contenteditable="false">' + inner + '. <a class="remove" contenteditable="false"><i class="fa fa-close" contenteditable="false"></i></a></span>';
+      var inner = statement.phrase.replace(/(.*)(\{|\|)([^~|])(\}|\|)(.*)/, '$1<span class="editable" contenteditable="false" data-arr-subject="$1" editable-text data-arr-unit="$3" data-arr-value="$5">$3</span>$5');
+      var html = '<span class="tag" data-id="' + index + '" data-phrase="' + statement.phrase + '" contenteditable="false">' + inner + '. <a class="remove" contenteditable="false"><i class="fa fa-close" contenteditable="false"></i></a></span>';
 
       helper.pasteHtmlAtCaret(html, userinput);
-      $scope.queryFilter = '';
       // Apply Editable
       $('span.tag .editable').editable({
         type: 'text',
@@ -153,5 +160,5 @@ const ClinicalstatementsCreateComponent = {
   controller: ClinicalstatementsCreateController
 };
 
-ClinicalstatementsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalstatementsActions', 'usSpinnerService', 'serviceRequests', '$timeout'];
+ClinicalstatementsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalstatementsActions', 'usSpinnerService', 'serviceRequests', 'serviceFormatted'];
 export default ClinicalstatementsCreateComponent;

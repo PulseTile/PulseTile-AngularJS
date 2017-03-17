@@ -24,6 +24,7 @@ import 'angular-loading-bar';
 // import 'fullcalendar';
 import 'angular-ui-calendar';
 import 'angularjs-slider';
+import 'angular-sanitize';
 
 import 'chart.js';
 
@@ -92,6 +93,7 @@ let app = angular
         'ngScrollbars',
         'rzModule',
         // 'ngTimeline'
+        'ngSanitize'
     ])
     .factory('ScheduleModal', ScheduleModal)
 

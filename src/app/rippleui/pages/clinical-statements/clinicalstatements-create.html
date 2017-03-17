@@ -49,24 +49,29 @@
                       <span class="input-contenteditable" tabindex="0" contenteditable="true" contenteditabled ng-model="queryFilter"></span>
                     </div>
                   </div>
-                  <div class="dropdown-menu dm-panel dm-statements dm-small" ng-if="!statements.length && queryFilter.length >=3">
-                    <div class="heading">Tags</div>
+                  <div class="dropdown-menu dm-panel dm-statements dm-small dm-top-left" ng-if="!statements.length">
+                    <div class="heading wrap-overflow">
+                      <div class="control-group right">
+                        <dir-pagination-controls class="pagination-short" max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false" pagination-id="tags"></dir-pagination-controls>
+                      </div>
+                      <div class="pagination-heading">Tags</div>
+                    </div>
                     <div class="dm-wrap-list">
                       <div class="dm-list">
-                        <div class="dm-item" ng-click="$ctrl.getTag(tag)" ng-repeat="tag in tags | filter: queryFilter"><span>{{tag}}</span></div>
+                        <div class="dm-item" ng-click="$ctrl.getTag(tag)" dir-paginate="tag in tags | filter: queryFilter | itemsPerPage: 5" pagination-id="tags"><span>{{tag}}</span></div>
                       </div>
                     </div>
                   </div>
-                  <div class="dropdown-menu dm-panel dm-statements dm-small dm-top-left" ng-if="queryFilter.length >=3 && statements.length">
+                  <div class="dropdown-menu dm-panel dm-statements dm-small dm-top-left" ng-if="statements.length">
                     <div class="heading wrap-overflow">
                       <div class="control-group right">
-                        <dir-pagination-controls class="pagination-short" max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false" pagination-id="cust"></dir-pagination-controls>
+                        <dir-pagination-controls class="pagination-short" max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false" pagination-id="phrase"></dir-pagination-controls>
                       </div>
                       <div class="pagination-heading">Statements</div>
                     </div>
                     <div class="dm-wrap-list">
                       <div class="dm-list">
-                        <div class="dm-item" ng-click="changeSelect(id)" dir-paginate="(id, phrase) in statementsText | filter: queryFilter | itemsPerPage: 5" pagination-id="cust"><span>{{phrase}}</span></div>
+                        <div class="dm-item" ng-click="changeSelect(item.index)" dir-paginate="item in statementsText | filter: queryFiltering | itemsPerPage: 5" pagination-id="phrase"><span>{{item.phrase}}</span></div>
                       </div>
                     </div>
                   </div>
@@ -77,7 +82,7 @@
             <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.clinicalNote.$dirty) && clinicalStatementForm.clinicalNote.$invalid, 'has-success': clinicalStatementForm.clinicalNote.$valid && clinicalStatementForm.clinicalNote.$dirty}">
               <label for="clinicalNote" class="control-label">Clinical Note</label>
               <div class="input-holder">
-                <div class="form-control textarea-big input-sm" tabindex="0" contenteditable="true" id="clinicalNote" name="clinicalNote" ng-html="clinicalStatementCreate.clinicalNote" required></div>
+                <div class="form-control textarea-big input-sm contenteditable-resize" tabindex="0" contenteditable="true" id="clinicalNote" name="clinicalNote" ng-html="clinicalStatementCreate.clinicalNote" required></div>
               </div>
               <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.clinicalNote.$error.required">You must enter a value.</span>
             </div>
