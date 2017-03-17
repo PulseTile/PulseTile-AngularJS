@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
 
-<div mc-full-panel table-settings order="" filtering mc-multi-views default-view="table" class="panel panel-primary">
+<div mc-full-panel table-settings order="serviceTeam" filtering mc-multi-views default-view="table" class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter(); refreshSlider();"><i class="fa fa-filter"></i></button>
@@ -58,17 +58,17 @@
         </colgroup>
         <thead>
           <tr>
-              <th ng-click="sort('name')" ng-class="sortClass('name')">Event Name</th>
+              <th ng-click="sort('serviceTeam')" ng-class="sortClass('serviceTeam')">Event Name</th>
               <th ng-click="sort('type')" ng-class="sortClass('type')">Event Type</th>
-              <th ng-click="sort('date')" ng-class="sortClass('date')">Date</th>
+              <th ng-click="sort('dateOfAppointment')" ng-class="sortClass('dateOfAppointment')">Date</th>
           </tr>
         </thead>
 
         <tbody>
           <tr dir-paginate="event in eventsFiltering | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(event.sourceId, event)" ng-class="{info: selectedRow(event.sourceId)}">
-            <td data-th="Event Name" ng-class="sortClass('name');">{{ event.serviceTeam }}</td>
+            <td data-th="Event Name" ng-class="sortClass('serviceTeam');">{{ event.serviceTeam }}</td>
             <td data-th="Event Type" ng-class="sortClass('type')">{{ event.type }}</td>
-            <td data-th="Date" ng-class="sortClass('date')">{{ event.dateOfAppointment | date:'dd-MMM-yyyy' }}</td>
+            <td data-th="Date" ng-class="sortClass('dateOfAppointment')">{{ event.dateOfAppointment | date:'dd-MMM-yyyy' }}</td>
           </tr>
 
           <tr ng-if="!$ctrl.events.length">
