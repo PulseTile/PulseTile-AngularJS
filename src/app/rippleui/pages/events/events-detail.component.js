@@ -135,7 +135,12 @@ class EventsDetailController {
       return !$scope.isDoctor();
     };
 
-
+    $scope.isShow = false;
+    function timer() {
+      setTimeout(function(){ $scope.isShow = true; }, 1000);
+    };
+    timer();
+    
     $scope.startAppointment = function () {
       console.log('startAppointment ===> ',  $scope.patient, $scope.appt);
       if (!$scope.appt) return;

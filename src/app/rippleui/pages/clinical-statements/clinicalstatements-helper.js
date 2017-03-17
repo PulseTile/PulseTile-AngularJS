@@ -15,17 +15,17 @@
  */
 let _ = require('underscore');
 
-jQuery(document).ready(function(){
-  // Update Structure Data as user types
-  $('#update').click(function(e){
-    e.preventDefault();
-    var userinput = $('#clinicalNote');
-    // Store Structured
-    setStructured(userinput);
-  });
-  // Remove tags on click
-  // removeTags('#clinicalNote');
-});
+// jQuery(document).ready(function(){
+//   // Update Structure Data as user types
+//   $('#update').click(function(e){
+//     e.preventDefault();
+//     var userinput = $('#clinicalNote');
+//     // Store Structured
+//     setStructured(userinput);
+//   });
+//   // Remove tags on click
+//   // removeTags('#clinicalNote');
+// });
 
 export function removeTags(userinput){
   // Bind remove events
@@ -57,7 +57,7 @@ export function setStructured(userinput, cb){
         // Contains structured data
         var newTag = {
           id: $(this).attr('data-id'),
-          value: editable.html(),
+          value: editable.html()
         }
       } else {
         // Just a typed phrase
@@ -72,8 +72,8 @@ export function setStructured(userinput, cb){
       if( !found ){
         tags.push(newTag);
       }
-
-    } else if( this.wholeText.trim() != '' )  {
+      
+    } else   {
       // It's text
 
       var newTag = {
@@ -140,7 +140,7 @@ export function strip(html, cb){
   var resultText = tmp.textContent||tmp.innerText;
 
   if (typeof cb === 'function') {
-    cb(resultText);
+    cb(tmp.innerHTML);
   }
   
   console.log( tmp.textContent||tmp.innerText );
