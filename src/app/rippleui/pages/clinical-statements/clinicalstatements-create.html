@@ -36,50 +36,50 @@
               </div>
             </div>
             <div class="row-expand">
-            <div class="col-expand-left">
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.name.$dirty) && clinicalStatementForm.name.$invalid, 'has-success': clinicalStatementForm.name.$valid && clinicalStatementForm.name.$dirty}">
-              <label for="search" class="control-label">Search</label>
-              <div class="input-holder">
-                <div class="dropdown" ng-class="{open: !!queryFilter}">
-                  <div mc-dropdown class="form-control input-sm input-container" id="clinicalTags" name="clinicalTags">
-                    <span class="input-tag" ng-if="clinicalTag">
-                      <span>{{clinicalTag}}</span>
-                      <i class="fa fa-times" ng-click="$ctrl.removeTag()"></i>
-                    </span>
-                    <div class="wrap-overflow">
-                      <span class="input-contenteditable" tabindex="0" contenteditable="true" contenteditabled ng-model="queryFilter"></span>
-                    </div>
-                  </div>
-                  <div class="dropdown-menu dm-panel dm-statements dm-small dm-top-left" ng-if="!statements.length">
-                    <div class="heading wrap-overflow">
-                      <div class="control-group right">
-                        <dir-pagination-controls class="pagination-short" max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false" pagination-id="tags"></dir-pagination-controls>
+              <div class="col-expand-left">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.name.$dirty) && clinicalStatementForm.name.$invalid, 'has-success': clinicalStatementForm.name.$valid && clinicalStatementForm.name.$dirty}">
+                  <label for="search" class="control-label">Search</label>
+                  <div class="input-holder">
+                    <div class="dropdown" ng-class="{open: !!queryFilter}">
+                      <div mc-dropdown class="form-control input-sm input-container" id="clinicalTags" name="clinicalTags">
+                        <span class="input-tag" ng-if="clinicalTag">
+                          <span>{{clinicalTag}}</span>
+                          <i class="fa fa-times" ng-click="$ctrl.removeTag()"></i>
+                        </span>
+                        <div class="wrap-overflow">
+                          <span class="input-contenteditable" tabindex="0" contenteditable="true" contenteditabled ng-model="queryFilter"></span>
+                        </div>
                       </div>
-                      <div class="pagination-heading">Tags</div>
-                    </div>
-                    <div class="dm-wrap-list">
-                      <div class="dm-list">
-                        <div class="dm-item" ng-click="$ctrl.getTag(tag)" dir-paginate="tag in tags | filter: queryFilter | itemsPerPage: 5" pagination-id="tags"><span>{{tag}}</span></div>
+                      <div class="dropdown-menu dm-panel dm-statements dm-small dm-top-left" ng-if="!statements.length">
+                        <div class="heading wrap-overflow">
+                          <div class="control-group right">
+                            <dir-pagination-controls class="pagination-short" max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false" pagination-id="tags"></dir-pagination-controls>
+                          </div>
+                          <div class="pagination-heading">Tags</div>
+                        </div>
+                        <div class="dm-wrap-list">
+                          <div class="dm-list">
+                            <div class="dm-item" ng-click="$ctrl.getTag(tag)" dir-paginate="tag in tags | filter: queryFilter | itemsPerPage: 5" pagination-id="tags"><span>{{tag}}</span></div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="dropdown-menu dm-panel dm-statements dm-small dm-top-left" ng-if="statements.length">
-                    <div class="heading wrap-overflow">
-                      <div class="control-group right">
-                        <dir-pagination-controls class="pagination-short" max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false" pagination-id="phrase"></dir-pagination-controls>
-                      </div>
-                      <div class="pagination-heading">Statements</div>
-                    </div>
-                    <div class="dm-wrap-list">
-                      <div class="dm-list">
-                        <div class="dm-item" ng-click="changeSelect(item.index)" dir-paginate="item in statementsText | filter: queryFiltering | itemsPerPage: 5" pagination-id="phrase"><span>{{item.phrase}}</span></div>
+                      <div class="dropdown-menu dm-panel dm-statements dm-small dm-top-left" ng-if="statements.length">
+                        <div class="heading wrap-overflow">
+                          <div class="control-group right">
+                            <dir-pagination-controls class="pagination-short" max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false" pagination-id="phrase"></dir-pagination-controls>
+                          </div>
+                          <div class="pagination-heading">Statements</div>
+                        </div>
+                        <div class="dm-wrap-list">
+                          <div class="dm-list">
+                            <div class="dm-item" ng-click="changeSelect(item.index)" dir-paginate="item in statementsText | filter: queryFiltering | itemsPerPage: 5" pagination-id="phrase"><span>{{item.phrase}}</span></div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            </div>
               <div class="col-expand-right">
                 <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.clinicalNote.$dirty) && clinicalStatementForm.clinicalNote.$invalid, 'has-success': clinicalStatementForm.clinicalNote.$valid && clinicalStatementForm.clinicalNote.$dirty}">
                   <label for="clinicalNote" class="control-label">Clinical Note</label>
@@ -89,8 +89,6 @@
                   <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.clinicalNote.$error.required">You must enter a value.</span>
                 </div>
               </div>
-            </div>
-            <div class="row-expand">
               <div class="col-expand-left">
                 <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.author.$dirty) && clinicalStatementForm.author.$invalid, 'has-success': clinicalStatementForm.author.$valid && clinicalStatementForm.author.$dirty}">
                   <label for="author" class="control-label">Author</label>
@@ -100,20 +98,18 @@
                   <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.author.$error.required">You must enter a value.</span>
                 </div>
               </div>
-            </div>
-            <div class="row-expand">
-            <div class="col-expand-left">
-              <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.dateCreate.$dirty) && clinicalStatementForm.dateCreate.$invalid, 'has-success': clinicalStatementForm.dateCreate.$valid && clinicalStatementForm.dateCreate.$dirty}">
-                <label for="Date" class="control-label">Date</label>
-                <div class="inner-addon addon-left">
-                  <div class="addon">
-                    <i class="fa fa-calendar"></i>
+              <div class="col-expand-left">
+                <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.dateCreate.$dirty) && clinicalStatementForm.dateCreate.$invalid, 'has-success': clinicalStatementForm.dateCreate.$valid && clinicalStatementForm.dateCreate.$dirty}">
+                  <label for="Date" class="control-label">Date</label>
+                  <div class="inner-addon addon-left">
+                    <div class="addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control" id="dateCreate" name="dateCreate" ng-model="clinicalStatementCreate.dateCreated" ng-click="dateofSubmittedDatepicker($event, 'dateCreate')" uib-datepicker-popup="dd-MMM-y" is-open="datepickers.dateCreate" required disabled />
                   </div>
-                  <input type="text" class="form-control" id="dateCreate" name="dateCreate" ng-model="clinicalStatementCreate.dateCreated" ng-click="dateofSubmittedDatepicker($event, 'dateCreate')" uib-datepicker-popup="dd-MMM-y" is-open="datepickers.dateCreate" required disabled />
+                  <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.dateCreate.$error.required">You must enter a valid date.</span>
                 </div>
-                <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.dateCreate.$error.required">You must enter a valid date.</span>
               </div>
-            </div>
             </div>
           </div>
         </form>
