@@ -34,6 +34,7 @@ import vaccinations from './rippleui/pages/vaccinations/index';
 import vitals from './rippleui/pages/vitals/index';
 import clinicalstatements from './rippleui/pages/clinical-statements/index';
 import events from './rippleui/pages/events/index';
+import eventsTimeline from './rippleui/pages/events-timeline/index';
 
 export default [
   clinicalnotes,
@@ -56,5 +57,6 @@ export default [
   vaccinations,
   vitals,
   clinicalstatements,
-  events
+  events,
+  eventsTimeline
 ]
