@@ -35,6 +35,9 @@ label.control-label {
   box-shadow: none !important;
   -webkit-appearance: none;
 }
+.form-control.not-bordered {
+  border: 0;
+}
 
 .form-control.readonly,
 .form-control[readonly] {
