@@ -33,8 +33,8 @@ export default {
     appointmentsActions
   },
   "sidebarInfo": {
-    name: 'appointments',
-    link: 'appointments',
-    title: 'Appointments'
+    // name: 'appointments',
+    // link: 'appointments',
+    // title: 'Appointments'
   }
 }

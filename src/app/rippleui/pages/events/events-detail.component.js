@@ -22,20 +22,6 @@ class EventsDetailController {
     this.currentUser = serviceRequests.currentUserData;
     $scope.currentUser = this.currentUser;
 
-    this.edit = function () {
-      $scope.isEdit = true;
-
-      $scope.eventEdit = Object.assign({}, this.event);
-      console.log('$scope.eventEdit.date');
-      console.log(new Date(+$scope.eventEdit.date)) ;
-      $scope.eventEdit.date = new Date(+$scope.eventEdit.date);
-      $scope.eventEdit.dateCreate = new Date();
-    };
-
-    this.cancelEdit = function () {
-      $scope.isEdit = false;
-    };
-
     $scope.formDisabled = true;
     $scope.messages = [];
 
@@ -44,11 +30,12 @@ class EventsDetailController {
         this.currentPatient = data.patientsGet.data;
       }
       if (data.appointments.dataGet) {
+        this.appointment = data.appointments.dataGet;
         this.event = data.appointments.dataGet;
-        $scope.appt = this.event;
+        $scope.appt = this.appointment;
         usSpinnerService.stop('appointmentsDetail-spinner');
 
-        socket.emit('appointment:messages', {appointmentId: this.event.sourceId});
+        socket.emit('appointment:messages', {appointmentId: this.appointment.sourceId});
       }
       // if (data.user.data) {
       //   this.currentUser = serviceRequests.currentUserData;
@@ -110,7 +97,7 @@ class EventsDetailController {
     }
 
     $scope.patient =  this.currentPatient;
-    $scope.appt =  this.event;
+    $scope.appt =  this.appointment;
 
     $scope.canStartAppointment = function () {
       if (!$scope.isDoctor())
@@ -194,7 +181,7 @@ class EventsDetailController {
     function onMessages(dt) {
       var data = JSON.parse(JSON.stringify(dt));
       usSpinnerService.stop('appointmentsDetail-spinner');
-      if (!data.appointment || $state.current.name != 'appointments-detail' || $stateParams.detailsIndex != data.appointmentId) return;
+      if (!data.appointment || $state.current.name != 'events-detail' || $stateParams.detailsIndex != data.appointmentId) return;
 
       $scope.messages = data.messages.map(function (message) {
         message.timestamp = moment(+message.timestamp).format('HH:mm');
@@ -211,6 +198,7 @@ class EventsDetailController {
         }
         return message;
       });
+      console.log('onMessages ---> ', $scope.messages);
     }
 
     function onClose(data) {

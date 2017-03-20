@@ -25,17 +25,18 @@
         <form name="clinicalStatementForm" class="form" editable-form>
           <div class="form-group-wrapper">
             <div class="row-expand">
-              <div class="col-expand-left">
+              <div class="col-expand">
                 <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.type.$dirty) && clinicalStatementForm.type.$invalid, 'has-success': clinicalStatementForm.type.$valid && clinicalStatementForm.type.$dirty}">
                   <label for="clinicalNote" class="control-label">Type</label>
                   <div class="input-holder">
                     <input class="form-control input-sm" id="type" name="type" ng-model="clinicalStatementCreate.type" tabindex="0" required />
                   </div>
-
                   <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.type.$error.required">You must enter a value.</span>
                 </div>
               </div>
             </div>
+            <div class="row-expand">
+            <div class="col-expand-left">
             <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.name.$dirty) && clinicalStatementForm.name.$invalid, 'has-success': clinicalStatementForm.name.$valid && clinicalStatementForm.name.$dirty}">
               <label for="search" class="control-label">Search</label>
               <div class="input-holder">
@@ -78,15 +79,17 @@
                 </div>
               </div>
             </div>
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.clinicalNote.$dirty) && clinicalStatementForm.clinicalNote.$invalid, 'has-success': clinicalStatementForm.clinicalNote.$valid && clinicalStatementForm.clinicalNote.$dirty}">
-              <label for="clinicalNote" class="control-label">Clinical Note</label>
-              <div class="input-holder">
-                <div class="form-control textarea-big input-sm contenteditable-resize" tabindex="0" contenteditable="true" id="clinicalNote" name="clinicalNote" ng-html="clinicalStatementCreate.clinicalNote" required></div>
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.clinicalNote.$error.required">You must enter a value.</span>
             </div>
-
+              <div class="col-expand-right">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.clinicalNote.$dirty) && clinicalStatementForm.clinicalNote.$invalid, 'has-success': clinicalStatementForm.clinicalNote.$valid && clinicalStatementForm.clinicalNote.$dirty}">
+                  <label for="clinicalNote" class="control-label">Clinical Note</label>
+                  <div class="input-holder">
+                    <div class="form-control textarea-big input-sm contenteditable-resize" tabindex="0" contenteditable="true" id="clinicalNote" name="clinicalNote" ng-html="clinicalStatementCreate.clinicalNote" required></div>
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.clinicalNote.$error.required">You must enter a value.</span>
+                </div>
+              </div>
+            </div>
             <div class="row-expand">
               <div class="col-expand-left">
                 <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.author.$dirty) && clinicalStatementForm.author.$invalid, 'has-success': clinicalStatementForm.author.$valid && clinicalStatementForm.author.$dirty}">
@@ -97,18 +100,20 @@
                   <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.author.$error.required">You must enter a value.</span>
                 </div>
               </div>
-              <div class="col-expand-right">
-                <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.dateCreate.$dirty) && clinicalStatementForm.dateCreate.$invalid, 'has-success': clinicalStatementForm.dateCreate.$valid && clinicalStatementForm.dateCreate.$dirty}">
-                  <label for="Date" class="control-label">Date</label>
-                  <div class="inner-addon addon-left">
-                    <div class="addon">
-                      <i class="fa fa-calendar"></i>
-                    </div>
-                    <input type="text" class="form-control" id="dateCreate" name="dateCreate" ng-model="clinicalStatementCreate.dateCreated" ng-click="dateofSubmittedDatepicker($event, 'dateCreate')" uib-datepicker-popup="dd-MMM-y" is-open="datepickers.dateCreate" required disabled />
+            </div>
+            <div class="row-expand">
+            <div class="col-expand-left">
+              <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.dateCreate.$dirty) && clinicalStatementForm.dateCreate.$invalid, 'has-success': clinicalStatementForm.dateCreate.$valid && clinicalStatementForm.dateCreate.$dirty}">
+                <label for="Date" class="control-label">Date</label>
+                <div class="inner-addon addon-left">
+                  <div class="addon">
+                    <i class="fa fa-calendar"></i>
                   </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.dateCreate.$error.required">You must enter a valid date.</span>
+                  <input type="text" class="form-control" id="dateCreate" name="dateCreate" ng-model="clinicalStatementCreate.dateCreated" ng-click="dateofSubmittedDatepicker($event, 'dateCreate')" uib-datepicker-popup="dd-MMM-y" is-open="datepickers.dateCreate" required disabled />
                 </div>
+                <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.dateCreate.$error.required">You must enter a valid date.</span>
               </div>
+            </div>
             </div>
           </div>
         </form>
