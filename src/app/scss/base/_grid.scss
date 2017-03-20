@@ -72,6 +72,10 @@
       padding-left: 4.42%;
     }
     .expand-label {display: block;}
-  }
 
+    .hidden-expand {display: none !important;}
+    .visible-expand {display: block !important;}
+  }
+  .hidden-not-expand {display: none !important;}
+  .visible-not-expand {display: block !important;}
 }

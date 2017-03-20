@@ -53,6 +53,8 @@ class ClinicalstatementsCreateController {
           el.index = index;
           return el;
         });
+        console.log('$scope.statementsText');
+        console.log($scope.statementsText);
       }
       usSpinnerService.stop("clinicalStatementDetail-spinner");
     };
@@ -126,7 +128,8 @@ class ClinicalstatementsCreateController {
     };
 
     $scope.changeSelect = function (index) {
-      
+      console.log('index');
+      console.log(index);
       var userinput = jQuery('#clinicalNote');
       var statement = $scope.statementsText[index];
       
