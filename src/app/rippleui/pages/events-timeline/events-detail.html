@@ -63,14 +63,14 @@
       <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
         <div class="wrap-control-group">
           <div class="control-group right">
-            <button class="btn btn-primary ng-cloak" ng-if="isShow" ng-cloak ng-click="startAppointment();" ng-show="canStartAppointment();">Start Appointment</button>
-            <button class="btn btn-primary ng-cloak" ng-if="isShow" ng-cloak ng-click="joinAppointment();" ng-show="canJoinAppointment();">Join Appointment</button>
+            <button class="btn btn-primary ng-cloak" ng-cloak ng-click="startAppointment();" ng-show="canStartAppointment();">Start Appointment</button>
+            <button class="btn btn-primary ng-cloak" ng-cloak ng-click="joinAppointment();" ng-show="canJoinAppointment();">Join Appointment</button>
             <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.edit();"><i class="fa fa-edit"></i> Edit</button>
           </div>
         </div>
       </div>
       <div class="panel-control" ng-if="currentUser.permissions.indexOf('WRITE') === -1">
-        <div class="wrap-control-group" ng-if="isShow">
+        <div class="wrap-control-group">
           <div class="control-group right">
             <button class="btn btn-primary ng-cloak" ng-cloak ng-click="joinAppointment();" ng-if="$root.socketData.showJoinAppointment == appointment.sourceId">Join Appointment</button>
           </div>

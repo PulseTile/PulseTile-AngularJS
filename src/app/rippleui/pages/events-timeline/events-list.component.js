@@ -15,7 +15,7 @@
 */
 let templateEventsList = require('./events-list.html');
 
-class EventsListController {
+class EventsTimelineListController {
   constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, usSpinnerService, serviceFormatted, $timeout) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
@@ -30,6 +30,7 @@ class EventsListController {
     this.events = [];
     $scope.eventsFiltering = [];
     $scope.eventsTimeline = [];
+    $scope.eventsChronometry = [];
 
     $scope.refreshSlider = function () {
         $timeout(function () {
@@ -113,6 +114,7 @@ class EventsListController {
     $scope.formCollectionsEvents = function (events) {
       $scope.eventsFiltering = $scope.filterEvents(events);
       $scope.eventsTimeline = $scope.modificateEventsArr($scope.eventsFiltering);
+      $scope.eventsChronometry = $scope.modificateEventsForChronometry($scope.eventsFiltering);
 
       serviceFormatted.formattingTablesDate($scope.eventsFiltering, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
     };
@@ -171,6 +173,7 @@ class EventsListController {
 
       return arr;
     };
+    
     $scope.modificateEventsArr = function (arr) {
       arr = _.chain(arr)
             .sortBy(function (value) {
@@ -190,6 +193,34 @@ class EventsListController {
             })
             .value();
 
+      return arr;
+    };
+
+    $scope.modificateEventsForChronometry = function (arr) {
+      arr = _.chain(arr)
+            .filter(function (el, index, arr) {
+              return el.dateOfAppointment && el.serviceTeam.length;
+            })
+            .map(function (el, index) {
+              var data = new Date(el.dateOfAppointment);
+              return {
+                  "media": {
+                    "url": "",
+                    "caption": "",
+                    "credit": ""
+                  },
+                  "start_date": {
+                    "month": data.getMonth(),
+                    "day": data.getDate(),
+                    "year": data.getYear()
+                  },
+                  "text": {
+                    "headline": index + ') ' + el.serviceTeam,
+                    "text": "Houston and Brown first meet at the Soul Train Music Awards. In an interview with Rolling Stone Magazine, Houston admitted that it was not love at first sight. She turned down Brown's first marriage proposal but eventually fell in love with him."
+                  }
+                }
+            })
+            .value();
       return arr;
     };
     
@@ -220,13 +251,62 @@ class EventsListController {
     this.eventsLoad = eventsActions.all;
     this.eventsLoad($stateParams.patientId);
 
+
+
+    // $scope.timelineData = {
+    //     "title": {
+    //         "media": {
+    //           "url": "//www.flickr.com/photos/tm_10001/2310475988/",
+    //           "caption": "Whitney Houston performing on her My Love is Your Love Tour in Hamburg.",
+    //           "credit": "flickr/<a href='http://www.flickr.com/photos/tm_10001/'>tm_10001</a>"
+    //         },
+    //         "text": {
+    //           "headline": "Whitney Houston<br/> 1963 - 2012",
+    //           "text": "<p>Houston's voice caught the imagination of the world propelling her to superstardom at an early age becoming one of the most awarded performers of our time. This is a look into the amazing heights she achieved and her personal struggles with substance abuse and a tumultuous marriage.</p>"
+    //         }
+    //     },
+    //     "events": $scope.eventsChronometry
+    // }
+
+    // angular.element(document).ready(function () {
+    //   console.log('element(document)');
+    //   window.timeline = new TL.Timeline('timeline-embed', $scope.timelineData);
+    // });
+
+    $scope.$watch('eventsChronometry', function() {
+      if ($scope.eventsChronometry.length) {
+        $scope.timelineData = {
+            // "title": {
+            //     "media": {
+            //       "url": "//www.flickr.com/photos/tm_10001/2310475988/",
+            //       "caption": "Whitney Houston performing on her My Love is Your Love Tour in Hamburg.",
+            //       "credit": "flickr/<a href='http://www.flickr.com/photos/tm_10001/'>tm_10001</a>"
+            //     },
+            //     "text": {
+            //       "headline": "Whitney Houston<br/> 1963 - 2012",
+            //       "text": "<p>Houston's voice caught the imagination of the world propelling her to superstardom at an early age becoming one of the most awarded performers of our time. This is a look into the amazing heights she achieved and her personal struggles with substance abuse and a tumultuous marriage.</p>"
+            //     }
+            // },
+            "events": $scope.eventsChronometry
+        }
+        window.timeline = new TL.Timeline('timeline-embed', $scope.timelineData);
+      }
+    }.bind(this));
+    // $rootScope.$on('$locationChangeStart', function(e) {
+    //   console.log('$locationChangeStart');
+    //   window.timeline = new TL.Timeline('timeline-embed', $scope.timelineData);
+    //   $scope.fullPanelClass = '';
+    // });
+
+
+
   }
 }
 
 const EventsListComponent = {
   template: templateEventsList,
-  controller: EventsListController
+  controller: EventsTimelineListController
 };
 
-EventsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted', '$timeout'];
+EventsTimelineListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted', '$timeout'];
 export default EventsListComponent;

@@ -26,6 +26,9 @@ class ClinicalstatementsDetailController {
           }
           if (data.clinicalstatements.dataGet) {
               this.clinicalStatement = data.clinicalstatements.dataGet;
+              this.clinicalStatement.text = this.clinicalStatement.text.replace('fa-close', '');
+              this.clinicalStatement.text = this.clinicalStatement.text.replace('tag', '');
+              this.clinicalStatement.text = this.clinicalStatement.text.replace('editable', '');
           }
           usSpinnerService.stop("clinicalStatementDetail-spinner");
       };

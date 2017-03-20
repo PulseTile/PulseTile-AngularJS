@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
 
-<div mc-full-panel table-settings order="name" filtering class="panel panel-primary">
+<div mc-full-panel table-settings order="type" filtering class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
@@ -43,7 +43,7 @@
       <thead>
         <tr>
             <th ng-click="sort('type')" ng-class="sortClass('type')">Type</th>
-            <th ng-click="sort('date')" ng-class="sortClass('date')">Date Created</th>
+            <th ng-click="sort('dateCreated')" ng-class="sortClass('dateCreated')">Date Created</th>
             <th ng-click="sort('author')" ng-class="sortClass('author')">Author</th>
             <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
         </tr>
@@ -52,7 +52,7 @@
       <tbody>
         <tr dir-paginate="clinicalStatement in $ctrl.clinicalStatements | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(clinicalStatement.sourceId, clinicalStatement)" ng-class="{info: selectedRow(clinicalStatement.sourceId)}">
           <td data-th="Name" ng-class="sortClass('type');">{{ clinicalStatement.type }}</td>
-          <td data-th="Date" ng-class="sortClass('date')">{{ clinicalStatement.dateCreated | date:'dd-MMM-yyyy' }}</td>
+          <td data-th="Date" ng-class="sortClass('dateCreated')">{{ clinicalStatement.dateCreated | date:'dd-MMM-yyyy' }}</td>
           <td data-th="Name" ng-class="sortClass('author');">{{ clinicalStatement.author }}</td>
           <td data-th="Source" ng-class="sortClass('source')">{{ clinicalStatement.source }}</td>
         </tr>

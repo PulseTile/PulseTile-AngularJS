@@ -24,6 +24,7 @@ import 'angular-loading-bar';
 // import 'fullcalendar';
 import 'angular-ui-calendar';
 import 'angularjs-slider';
+import 'angular-sanitize';
 
 import 'chart.js';
 
@@ -32,6 +33,7 @@ import 'jquery-timepicker-jt';
 import 'angular-jquery-timepicker';
 import 'angular-xeditable';
 import 'ng-scrollbars';
+// import 'angular-timelinejs3';
 
 //commons
 import reducer from './redux/reducer';
@@ -89,7 +91,9 @@ let app = angular
         'angular-loading-bar',
         'xeditable',
         'ngScrollbars',
-        'rzModule'
+        'rzModule',
+        // 'ngTimeline'
+        'ngSanitize'
     ])
     .factory('ScheduleModal', ScheduleModal)
 
