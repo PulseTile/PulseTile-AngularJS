@@ -103,13 +103,10 @@ export function pasteHtmlAtCaret(html, target) {
   if (window.getSelection) {
     // IE9 and non-IE
     sel = window.getSelection();
-    console.log('sel');
-    console.log(sel);
+
     if (sel.getRangeAt && sel.rangeCount) {
       range = sel.getRangeAt(0);
       range.deleteContents();
-      console.log('range');
-      console.log(range);
 
       // Range.createContextualFragment() would be useful here but is
       // only relatively recently standardized and is not supported in

@@ -53,8 +53,6 @@ class ClinicalstatementsCreateController {
           el.index = index;
           return el;
         });
-        console.log('$scope.statementsText');
-        console.log($scope.statementsText);
       }
       usSpinnerService.stop("clinicalStatementDetail-spinner");
     };
@@ -69,6 +67,7 @@ class ClinicalstatementsCreateController {
       $scope.clinicalTag = '';
       $scope.queryFilter = '';
       $scope.statements = [];
+      $scope.statementsText = [];
     };
 
     this.goList = function () {
@@ -128,11 +127,9 @@ class ClinicalstatementsCreateController {
     };
 
     $scope.changeSelect = function (index) {
-      console.log('index');
-      console.log(index);
       var userinput = jQuery('#clinicalNote');
       var statement = $scope.statementsText[index];
-      
+
       var phraseItem = {id: statement.id, tag: $scope.clinicalTag};
       $scope.clinicalStatementCreate.contentStore.phrases.push(phraseItem);
       // Parse inputs

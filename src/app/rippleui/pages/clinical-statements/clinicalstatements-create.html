@@ -63,7 +63,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="dropdown-menu dm-panel dm-statements dm-small dm-top-left" ng-if="statements.length">
+                      <div class="dropdown-menu dm-panel dm-statements dm-small dm-top-left hidden-expand" ng-if="statements.length">
                         <div class="heading wrap-overflow">
                           <div class="control-group right">
                             <dir-pagination-controls class="pagination-short" max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false" pagination-id="phrase"></dir-pagination-controls>
@@ -80,6 +80,18 @@
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group hidden-not-expand visible-expand">
+                  <label for="" class="control-label">Statements</label>
+                  <div class="input-holder">
+                  <select multiple="" class="form-control textarea-big ng-valid ng-dirty" ng-model="selectedStatements" ng-change="changeSelect(selectedStatements)">
+                    <option value="{{item.index}}" ng-repeat="item in statementsText | filter: queryFiltering">{{item.phrase}}</option>
+                  </select>
+                  </div>
+                </div>
+              </div>
               <div class="col-expand-right">
                 <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.clinicalNote.$dirty) && clinicalStatementForm.clinicalNote.$invalid, 'has-success': clinicalStatementForm.clinicalNote.$valid && clinicalStatementForm.clinicalNote.$dirty}">
                   <label for="clinicalNote" class="control-label">Clinical Note</label>
@@ -89,6 +101,8 @@
                   <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.clinicalNote.$error.required">You must enter a value.</span>
                 </div>
               </div>
+            </div>
+            <div class="row-expand">
               <div class="col-expand-left">
                 <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.author.$dirty) && clinicalStatementForm.author.$invalid, 'has-success': clinicalStatementForm.author.$valid && clinicalStatementForm.author.$dirty}">
                   <label for="author" class="control-label">Author</label>
@@ -98,7 +112,7 @@
                   <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.author.$error.required">You must enter a value.</span>
                 </div>
               </div>
-              <div class="col-expand-left">
+              <div class="col-expand-right">
                 <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.dateCreate.$dirty) && clinicalStatementForm.dateCreate.$invalid, 'has-success': clinicalStatementForm.dateCreate.$valid && clinicalStatementForm.dateCreate.$dirty}">
                   <label for="Date" class="control-label">Date</label>
                   <div class="inner-addon addon-left">
