@@ -221,7 +221,6 @@ class EventsTimelineListController {
                 }
             })
             .value();
-      console.log(arr);
       return arr;
     };
     
@@ -275,7 +274,6 @@ class EventsTimelineListController {
     // });
 
     $scope.$watch('eventsChronometry', function() {
-      console.log('lallala');
       if ($scope.eventsChronometry.length) {
         $scope.timelineData = {
             // "title": {
