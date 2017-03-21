@@ -17,7 +17,18 @@
 <div mc-full-panel table-settings order="serviceTeam" filtering mc-multi-views default-view="table" class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
-      <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter(); refreshSlider();"><i class="fa fa-filter"></i></button>
+      <div class="dropdown">
+        <button mc-dropdown class="btn btn-success btn-inverse btn-filter btn-dropdown-toggle" ng-click="toggleDropdown($event);"><i class="fa fa-filter"></i></button>
+        <div class="dropdown-menu dm-panel dm-right dm-tables">
+          <div class="heading">FILTERING</div>
+          <div class="dm-wrap-list">
+            <div class="dm-list">
+              <div class="dm-item" ng-class="{active: isFilterOpen}" ng-click="toggleFilter(); refreshSlider();"><span>Filter</span></div>
+              <div class="dm-item" ng-class="{active: isFilterTimelineOpen}" ng-click="toggleFilterTimeline(); refreshSlider();"><span>Timelines</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="control-group right" >
       <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')" ng-if="$ctrl.isShowExpandBtn"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
@@ -41,9 +52,17 @@
       </div>
     </div>
     <h3 class="panel-title">Events</h3>
+    <div class="panel-filter" ng-show="isFilterOpen">
+      <div class="inner-addon addon-left">
+        <div class="addon">
+          <i class="fa fa-filter"></i>
+        </div>
+        <input type="text" id="filter" class="form-control" placeholder="Filter..." ng-model="queryFilter" />
+      </div>
+    </div>
   </div>
   <div class="panel-body">
-    <div class="wrap-rzslider" ng-show="isFilterOpen">
+    <div class="wrap-rzslider" ng-show="isFilterTimelineOpen">
       <rzslider class="mc-rz-slider"
                 rz-slider-model="sliderRange.minValue"
                 rz-slider-high="sliderRange.maxValue"

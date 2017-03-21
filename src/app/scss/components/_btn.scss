@@ -147,6 +147,7 @@
 }
 .btn-filter {
   width: 42px;
+  &.btn-dropdown-toggle {width: auto;}
   i {
     font-size: 19px;
     font-weight: 400;

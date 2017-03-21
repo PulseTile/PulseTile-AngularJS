@@ -81,8 +81,8 @@
       white-space: nowrap; 
       max-width: initial;
     }
-    &:first-child .rz-tick-legend { transform: translate(0, 0);}
-    &:last-child  .rz-tick-legend { transform: translate(-100%, 0);}
+    &:first-child .rz-tick-legend { display: none; transform: translate(0, 0);}
+    &:last-child  .rz-tick-legend { display: none; transform: translate(-100%, 0);}
   }
 
   .rz-tick.rz-selected {

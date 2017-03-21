@@ -16,9 +16,10 @@
 let templateEventsList = require('./events-list.html');
 
 class EventsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, usSpinnerService, serviceFormatted, $timeout) {
+  constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, usSpinnerService, serviceFormatted, $timeout, serviceStateManager) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
+    var filterTimelineData = serviceStateManager.getFilterTimeline();
 
     let _ = require('underscore');
 
@@ -26,10 +27,25 @@ class EventsListController {
     this.isShowExpandBtn = this.currentStateName !== 'events';
     this.partsStateName = this.currentStateName.split('-');
 
+    $scope.isFilterTimelineOpen = filterTimelineData.isOpen;
     $scope.sliderRange;
     this.events = [];
     $scope.eventsFiltering = [];
     $scope.eventsTimeline = [];
+
+    $scope.toggleFilterTimeline = function () {
+      $scope.isFilterTimelineOpen = !$scope.isFilterTimelineOpen;
+      serviceStateManager.setFilterTimeline({
+      });
+    };
+    
+    $scope.saveFilterTimelineParams = function () {
+      serviceStateManager.setFilterTimeline({
+        isOpen: $scope.isFilterTimelineOpen,
+        rangeMin: $scope.sliderRange.minValue,
+        rangeMax: $scope.sliderRange.maxValue,
+      });
+    };
 
     $scope.refreshSlider = function () {
         $timeout(function () {
@@ -60,7 +76,8 @@ class EventsListController {
 
     this.create = function (typeCreate) {
       if (typeof typeCreate !== "undefined") {
-        console.log('events-create-' + typeCreate);
+        $scope.saveFilterTimelineParams();
+
         $state.go('events-create-' + typeCreate, {
           patientId: $stateParams.patientId
         });
@@ -68,6 +85,7 @@ class EventsListController {
     };
 
     this.go = function (id, source) {
+      $scope.saveFilterTimelineParams()
       $state.go('events-detail', {
         patientId: $stateParams.patientId,
         detailsIndex: id,
@@ -80,14 +98,19 @@ class EventsListController {
       if (data.events.data) {
         this.events = data.events.data;
       
-        serviceFormatted.filteringKeys = ['name', 'type', 'date'];
+        serviceFormatted.filteringKeys = ['serviceTeam', 'type', 'dateOfAppointment'];
 
         this.eventsFilterSteps = $scope.getFilterArray(this.events);
         serviceFormatted.formattingTablesDate(this.eventsFilterSteps, ['value', 'legend'], serviceFormatted.formatCollection.DDMMMYYYY);
         
+
+        console.log('filterTimelineData.rangeMin');
+        console.log(filterTimelineData.rangeMin);
+        console.log('filterTimelineData.rangeMax');
+        console.log(filterTimelineData.rangeMax);
         $scope.sliderRange = {
-          minValue: this.eventsFilterSteps[0].value,
-          maxValue: this.eventsFilterSteps[this.eventsFilterSteps.length - 1].value,
+          minValue: filterTimelineData.rangeMin ? filterTimelineData.rangeMin : this.eventsFilterSteps[0].value,
+          maxValue: filterTimelineData.rangeMax ? filterTimelineData.rangeMax : this.eventsFilterSteps[this.eventsFilterSteps.length - 1].value,
           options: {
             floor: this.eventsFilterSteps[0].value,
             ceil: this.eventsFilterSteps[this.eventsFilterSteps.length - 1].value,
@@ -114,29 +137,24 @@ class EventsListController {
       $scope.eventsFiltering = $scope.filterEvents(events);
       $scope.eventsTimeline = $scope.modificateEventsArr($scope.eventsFiltering);
 
-      serviceFormatted.formattingTablesDate($scope.eventsFiltering, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
+      serviceFormatted.formattingTablesDate($scope.eventsFiltering, ['dateOfAppointment'], serviceFormatted.formatCollection.DDMMMYYYY);
     };
     $scope.filterEvents = function (events) {
       var newEvents = [];
       var minRange, maxRange;
-
-      if ($scope.isFilterOpen) {
+      if ($scope.isFilterTimelineOpen) {
         minRange = Date.parse($scope.sliderRange.minValue);
         maxRange = Date.parse($scope.sliderRange.maxValue)  + (24 * 60 * 60 * 1000) - 1;
         if (minRange && maxRange) {
           newEvents = _.chain(events)
               .filter(function (el, index, arr) {
-                var dateInSecongs = +el.dateOfAppointment;
-                // console.log('el.dateOfAppointment --->', el.serviceTeam);
-                // console.log('minRange ---> ', minRange);
-                // console.log('dateInSecongs ---> ', dateInSecongs);
-                // console.log('maxRange ---> ', maxRange);
-                // console.log('---------------------------');
+                var dateInSecongs = Date.parse(new Date(el.dateOfAppointment));
+
                 return (minRange <= dateInSecongs && dateInSecongs <= maxRange);
               })
               .value();
         }
-
+        
         return newEvents;
       }
 
@@ -205,7 +223,7 @@ class EventsListController {
         $scope.formCollectionsEvents(this.events);
       }
     }.bind(this));
-    $scope.$watch('isFilterOpen', function() {
+    $scope.$watch('isFilterTimelineOpen', function() {
       if (this.events) {
         $scope.formCollectionsEvents(this.events);
       }
@@ -228,5 +246,5 @@ const EventsListComponent = {
   controller: EventsListController
 };
 
-EventsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted', '$timeout'];
+EventsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted', '$timeout', 'serviceStateManager'];
 export default EventsListComponent;
