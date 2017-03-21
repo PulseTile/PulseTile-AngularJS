@@ -26,9 +26,15 @@ class ClinicalstatementsDetailController {
           }
           if (data.clinicalstatements.dataGet) {
               this.clinicalStatement = data.clinicalstatements.dataGet;
-              this.clinicalStatement.text = this.clinicalStatement.text.replace('fa-close', '');
-              this.clinicalStatement.text = this.clinicalStatement.text.replace('tag', '');
-              this.clinicalStatement.text = this.clinicalStatement.text.replace('editable', '');
+              var mapObj = {
+                  'fa-close':'',
+                  'tag':'',
+                  'editable':''
+
+              };
+              this.clinicalStatement.text = this.clinicalStatement.text.replace(/fa-close|tag|editable/gi, function(matched){
+                  return mapObj[matched];
+              });
           }
           usSpinnerService.stop("clinicalStatementDetail-spinner");
       };
