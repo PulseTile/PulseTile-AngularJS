@@ -70,10 +70,10 @@
                           </div>
                           <div class="pagination-heading">Statements</div>
                         </div>
-                        <div class="dm-wrap-list">
-                          <div class="dm-list">
-                            <div class="dm-item" ng-click="changeSelect(item.index)" dir-paginate="item in statementsText | filter: queryFiltering | itemsPerPage: 5" pagination-id="phrase"><span>{{item.phrase}}</span></div>
-                          </div>
+                        <div class="input-holder">
+                          <select multiple="" class="form-control textarea-big ng-valid ng-dirty" ng-model="selectedStatements" ng-change="changeSelect(selectedStatements)">
+                            <option value="{{item.index}}" dir-paginate="item in statementsText | filter: queryFiltering | itemsPerPage: 5" pagination-id="phrase">{{item.phrase}}</option>
+                          </select>
                         </div>
                       </div>
                     </div>
