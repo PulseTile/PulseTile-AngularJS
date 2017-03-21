@@ -72,12 +72,10 @@
                         </div>
                         <div class="dm-wrap-list">
                           <div class="dm-list">
-                            <!-- <div class="dm-item" ng-click="changeSelect(item.index)" dir-paginate="item in statementsText | filter: queryFiltering | itemsPerPage: 5" pagination-id="phrase"><span>{{item.phrase}}</span></div> -->
                             <select multiple="" class="form-control not-bordered textarea-big ng-valid ng-dirty" ng-model="selectedStatements" ng-change="changeSelect(selectedStatements)">
-                              <option value="{{item.index}}" ng-repeat="item in statementsText | filter: queryFiltering">{{item.phrase}}</option>
+                              <option value="{{item.index}}" dir-paginate="item in statementsText | filter: queryFiltering | itemsPerPage: 5" pagination-id="phrase">{{item.phrase}}</option>
                             </select>
                           </div>
-                        </div>
                       </div>
                     </div>
                   </div>
