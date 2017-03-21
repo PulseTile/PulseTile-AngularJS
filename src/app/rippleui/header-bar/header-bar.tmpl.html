@@ -84,6 +84,17 @@
       <!-- Nav Search -->
       <div class="wrap-search wrap-header-search ng-cloak hidden-xs" ng-if="searchBar" ng-cloak ng-class="{'searchBarHidden' : !$ctrl.searchBarEnabled }">
         <div class="header-search">
+          <div class="control-group left dropdown">
+            <button mc-dropdown class="btn btn-success btn-inverse btn-dropdown-toggle" ng-click="toggleDropdown($event);"><i class="fa fa-bars"></i></button>
+            <div class="dropdown-menu dm-panel dm-left dm-tables">
+              <div class="heading">Search Options</div>
+              <div class="dm-wrap-list">
+                <div class="dm-list">
+                  <div class="dm-item" ng-repeat="item in searchOptionsList" ng-click="$ctrl.toggleAdvancedSearch()"><span>{{item}}</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
           <button class="btn-header inverse btn-search" ng-click="$ctrl.searchFunction();"><i class="fa fa-search"></i></button>
           <div class="header-search-inner">
             <div class="holder">
@@ -107,6 +118,9 @@
               <i ng-show="search.searchExpression !== '' || $root.searchMode" ng-click="$ctrl.cancelSearchMode()" class="clearAll fa fa-times-circle"></i>
             </div>
           </div>
+        </div>
+        <div class="main-search" ng-show="$ctrl.mainSearchEnabled && $ctrl.showAdvancedSearch">
+          <search-advanced-component></search-advanced-component>
         </div>
       </div>
       <!-- / Nav Search -->

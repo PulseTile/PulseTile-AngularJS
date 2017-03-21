@@ -20,6 +20,12 @@ class HeaderController {
 
     var self = this;
     $scope.title = '';
+    this.mainSearchEnabled = true;
+    this.showAdvancedSearch = false;
+    $scope.searchOptionsList = ['Patient Search', 'Patient Search - Advanced', 'Clinical Query'];
+    this.toggleAdvancedSearch = function() {
+      this.showAdvancedSearch = !this.showAdvancedSearch;
+    }.bind(this);
 
     this.goBack = function () {
       /* istanbul ignore if  */

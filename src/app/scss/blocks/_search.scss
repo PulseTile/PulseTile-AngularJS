@@ -54,7 +54,7 @@
 }
 
 .wrap-header-search {
-  overflow: hidden;
+  //overflow: hidden;
   width: auto;
   @include respond-to(sm) {
     .form-control {
