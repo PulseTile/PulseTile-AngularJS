@@ -102,6 +102,9 @@ angular.module('ripple-ui.directives', [])
     /* istanbul ignore next  */
     return {
       link: function(scope, element, attrs) {
+          scope.$watch(attrs.isOpenSearch, function() {
+              element[0].classList.toggle('open');
+          });
         scope.toggleDropdown = function (ev) {
           ev.currentTarget.parentElement.classList.toggle('open');
         };

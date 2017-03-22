@@ -49,6 +49,19 @@ class SearchAdvancedController {
     $scope.detailsFocused = false;
     $scope.searchParams = {};
 
+    $scope.sliderRange = {
+      minValue: 0,
+      maxValue: 100,
+      options: {
+        floor: 0,
+        ceil: 100,
+        step: 5,
+        showTicks: true,
+        showTicksValues: false,
+        stepsArray: this.eventsFilterSteps
+      }
+    };
+    
     if ($scope.searchParams.surname) {
       $scope.surnameFocus = true;
     }
@@ -132,9 +145,9 @@ class SearchAdvancedController {
 
       var surnameClean = surname.$invalid || !$scope.searchParams.surname || $scope.searchParams.surname === '';
       var forenameClean = forename.$invalid || !$scope.searchParams.forename || $scope.searchParams.forename === '';
-      var dateOfBirthClean = dateOfBirth.$invalid || !$scope.searchParams.dateOfBirth || $scope.searchParams.dateOfBirth === '';
+      // var dateOfBirthClean = dateOfBirth.$invalid || !$scope.searchParams.dateOfBirth || $scope.searchParams.dateOfBirth === '';
 
-      return surnameClean && forenameClean && dateOfBirthClean;
+      return surnameClean && forenameClean;
     };
 
     $scope.searchByDetails = function (queryParams) {

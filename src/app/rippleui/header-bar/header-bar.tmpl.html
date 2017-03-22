@@ -119,8 +119,10 @@
             </div>
           </div>
         </div>
-        <div class="main-search" ng-show="$ctrl.mainSearchEnabled && $ctrl.showAdvancedSearch">
-          <search-advanced-component></search-advanced-component>
+        <div mc-dropdown is-open-search="isOpenSearch" ng-if="isOpenSearch">
+          <div class="dropdown-menu dm-search dm-center">
+            <search-advanced-component></search-advanced-component>
+          </div>
         </div>
       </div>
       <!-- / Nav Search -->

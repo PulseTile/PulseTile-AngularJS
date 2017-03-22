@@ -34,6 +34,13 @@
     font-size: 10px;
     line-height: 12px;
   }
+  &.dm-search {
+    width: 832px;
+  }
+  &.dm-center {
+    top: 0;
+    right: 0;
+  }
 }
 .dropdown.open .btn-inverse {
   &,

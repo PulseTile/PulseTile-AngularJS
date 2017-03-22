@@ -46,9 +46,8 @@ class ClinicalstatementsCreateController {
       if (data.clinicalstatements.dataTags) {
         $scope.tags = data.clinicalstatements.dataTags;
       }
-      if (data.clinicalstatements.searchData) {
+      if (data.clinicalstatements.searchData && $scope.clinicalTag.length) {
         $scope.statements = data.clinicalstatements.searchData;
-        console.log('$scope.statements', $scope.statements);
         $scope.statementsText = _.map($scope.statements, function (el, index) {
           el.index = index;
           return el;
