@@ -80,19 +80,21 @@
                   <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.route.$dirty) && medicationForm.route.$invalid, 'has-success': medicationForm.route.$valid && medicationForm.route.$dirty}">
                       <label for="gender" class="control-label">Gender</label>
                       <div class="input-holder">
-                          <div class="wrap-fcustominp">
-                              <div class="fcustominp">
-                                  <input type="checkbox" id="gender-male" ng-change="changeDashboards()" name="gender-male" ng-model="dashboard.show" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                                  <label for="gender-male"></label>
+                          <div class="wrap-fcustominps-inline">
+                              <div class="wrap-fcustominp">
+                                  <div class="fcustominp">
+                                      <input type="checkbox" id="gender-male" ng-change="changeDashboards()" name="gender-male" ng-model="dashboard.show" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                      <label for="gender-male"></label>
+                                  </div>
+                                  <label for="gender-male" class="fcustominp-label ng-binding">Male</label>
                               </div>
-                              <label for="gender-male" class="fcustominp-label ng-binding">Male</label>
-                          </div>
-                          <div class="wrap-fcustominp">
-                              <div class="fcustominp">
-                                  <input type="checkbox" id="gender-female" ng-change="changeDashboards()" name="gender-female" ng-model="dashboard.show" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                                  <label for="gender-female"></label>
+                              <div class="wrap-fcustominp">
+                                  <div class="fcustominp">
+                                      <input type="checkbox" id="gender-female" ng-change="changeDashboards()" name="gender-female" ng-model="dashboard.show" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                      <label for="gender-female"></label>
+                                  </div>
+                                  <label for="gender-female" class="fcustominp-label ng-binding">Female</label>
                               </div>
-                              <label for="gender-female" class="fcustominp-label ng-binding">Female</label>
                           </div>
                       </div>
                   </div>

@@ -16,7 +16,7 @@
 let templateSearch = require('./search-advanced.html');
 
 class SearchAdvancedController {
-  constructor($scope, $http, $ngRedux, serviceRequests, searchActions, $state) {
+  constructor($scope, $http, $ngRedux, serviceRequests, searchActions, $state, $timeout) {
     // serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'main-search'});
     // serviceRequests.publisher('headerTitle', {title: 'Welcome', isShowTitle: true});
 
@@ -57,10 +57,17 @@ class SearchAdvancedController {
         ceil: 100,
         step: 5,
         showTicks: true,
-        showTicksValues: false,
-        stepsArray: this.eventsFilterSteps
+        showTicksValues: false
       }
     };
+
+    $scope.refreshSlider = function () {
+      $timeout(function () {
+        $scope.$broadcast('rzSliderForceRender');
+      });
+    };
+
+    $scope.refreshSlider();
     
     if ($scope.searchParams.surname) {
       $scope.surnameFocus = true;
@@ -166,5 +173,5 @@ const SearchAdvancedComponent = {
   controller: SearchAdvancedController
 };
 
-SearchAdvancedController.$inject = ['$scope', '$http', '$ngRedux', 'serviceRequests', 'searchActions', '$state'];
+SearchAdvancedController.$inject = ['$scope', '$http', '$ngRedux', 'serviceRequests', 'searchActions', '$state', '$timeout'];
 export default SearchAdvancedComponent;
