@@ -1,0 +1,62 @@
+.table thead tr th, 
+.table tbody tr td {
+  &.patient-control {
+    &:before {display: none;}
+    padding: 5px 4px 5px 7px;
+    @include clearfix;
+  }
+}
+.patient-buttons {
+  @include clearfix;
+  float: right;
+  width: 76px;
+  .btn {
+    border-radius: 0;
+    float: left;
+  }
+  .btn-view-patient { width: 57px; }
+  .btn-dropdown-toggle {
+    margin-left: -1px;
+    min-width: auto;
+    padding: 0;
+    width: 20px;
+    &:after {
+      margin-right: 1px;
+      right: 50%;
+      transform: translate(50%, -50%);
+    }
+  }
+  &.dropdown.open {
+    .btn-dropdown-toggle,
+    .btn-dropdown-toggle:hover,
+    .btn-dropdown-toggle:focus {
+      background: $base-color !important;
+      &:after {
+        color: $text-on-base-color
+      }
+    }
+  }
+
+}
+
+.wrap-patients-table {
+  position: relative;
+  width: 100%;
+  max-width: initial;
+  overflow-x: scroll; 
+  .table {
+    width: initial;
+    min-width: 100%;
+    thead tr th,
+    tbody tr td {
+      height: 40px;
+      word-wrap: normal;
+      white-space: nowrap;
+    }
+  }
+  // .fixed-col-control {
+  //   position: absolute;
+  //   width: 90px;
+  //   right: 0;
+  // }
+}

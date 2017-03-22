@@ -103,7 +103,7 @@ angular.module('ripple-ui.directives', [])
     return {
       link: function(scope, element, attrs) {
         scope.toggleDropdown = function (ev) {
-          ev.currentTarget.parentElement.classList.toggle('open');
+          $(ev.currentTarget).closest('.dropdown').toggleClass('open');
         };
       }
     }

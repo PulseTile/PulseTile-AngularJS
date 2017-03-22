@@ -22,11 +22,106 @@ class PatientsController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-list'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Lists', isShowTitle: true});
     
-    vm.go = function (patient) {
-      $state.go('patients-summary', {
-        patientId: patient.id,
-        patientsList: vm.patients
-      });
+    $scope.patientsTable = serviceRequests.patientsTable || {
+      info: {
+        title: 'PATIENT INFO',
+        settings: {
+          name: {
+            select: true,
+            title: 'Name',
+            disabled: true
+          },
+          address: {
+            select: true,
+            title: 'Address'
+          },
+          dateOfBirth: {
+            select: true,
+            title: 'Born',
+            disabled: true
+          },
+          gender: {
+            select: true,
+            title: 'Gender',
+            disabled: true
+          }, 
+          nhsNumber: {
+            select: true,
+            title: 'NHS No.'
+          }
+        }
+      },
+      date: {
+        title: 'DATE / TIME',
+        settings: {
+          orders: {
+            select: false,
+            title: 'Orders'
+          },
+          results: {
+            select: false,
+            title: 'Results'
+          },
+          vitals: {
+            select: false,
+            title: 'Vitals'
+          },
+          diagnosis: {
+            select: false,
+            title: 'Diagnosis'
+          }
+        }
+      },
+      count: {
+        title: 'COUNT',
+        settings: {
+          orders: {
+            select: false,
+            title: 'Orders'
+          },
+          results: {
+            select: false,
+            title: 'Results'
+          },
+          vitals: {
+            select: false,
+            title: 'Vitals'
+          },
+          diagnosis: {
+            select: false,
+            title: 'Diagnosis'
+          }
+        }
+      }
+    };
+
+    if (serviceRequests.patientsTable) {
+      serviceRequests.patientsTable = $scope.patientsTable;
+    }
+
+    $scope.changeTableSettings = function () {
+      serviceRequests.patientsTable = $scope.patientsTable;
+    };
+
+    $scope.selectAllSettings = function (key) {
+      var settings = $scope.patientsTable[key].settings
+
+      for (var item in settings) {
+        settings[item].select = true;
+      }
+    };
+
+    vm.go = function (patient, state) {
+      if (state != undefined) {
+        $state.go(state, {
+          patientId: patient.id,
+        });
+      } else {
+        $state.go('patients-summary', {
+          patientId: patient.id,
+          patientsList: vm.patients
+        });
+      }
     };
 
     vm.patientFilter = function (patient) {

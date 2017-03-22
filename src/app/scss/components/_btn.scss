@@ -15,9 +15,16 @@
 .btn-sm {
   height: 30px;
   line-height: 18px;
-  i {
-    font-weight: 400;
-  }
+  i { font-weight: 400; }
+}
+.btn-smaller {
+  font-size: 14px;
+  height: 26px;
+  line-height: 16px;
+  margin: 2px 0;
+  padding-bottom: 4px;
+  padding-top: 4px;
+  i { font-weight: 400; }
 }
 .btn.btn-icon-normal i {font-weight: 400;}
 
