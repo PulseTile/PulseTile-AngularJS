@@ -165,12 +165,14 @@ class SearchAdvancedController {
       return surnameClean && forenameClean;
     };
 
+    var queryOption = this.option;
+
     $scope.searchByDetails = function (queryParams) {
       /* istanbul ignore if */
       if (queryParams.dateOfBirth) {
         queryParams.dateOfBirth = new Date(queryParams.dateOfBirth.getTime() - (60000 * queryParams.dateOfBirth.getTimezoneOffset()));
       }
-      this.searchResult = searchActions.advancedSearch;
+      this.searchResult = queryOption.type === 'advanced' ? searchActions.advancedSearch : searchActions.querySearch;
       this.searchResult(queryParams);
     };
   }

@@ -48,6 +48,8 @@
                         <select class="form-control input-sm" tabindex="5" id="type" name="type" ng-model="searchParams.type">
                             <option ng-repeat="type in $ctrl.typesList" value="type">{{type.title}}</option>
                         </select>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.type.$invalid && !detailsFocused">You must enter a value.</span>
+                        <span class="required-label" ng-show="!detailsFocused">*Required</span>
                     </div>
                 </div>
             </div>
@@ -72,6 +74,8 @@
                         <select class="form-control input-sm" tabindex="5" id="query" name="query" ng-model="searchParams.query">
                             <option ng-repeat="query in $ctrl.queryList" value="query">{{query}}</option>
                         </select>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.query.$invalid && !detailsFocused">You must enter a value.</span>
+                        <span class="required-label" ng-show="!detailsFocused">*Required</span>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6" ng-if="$ctrl.option.type === 'advanced'">
