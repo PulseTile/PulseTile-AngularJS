@@ -40,23 +40,39 @@
 }
 
 .wrap-patients-table {
-  position: relative;
+  // position: relative;
   width: 100%;
   max-width: initial;
   overflow-x: scroll; 
   .table {
-    width: initial;
+    // width: initial;
     min-width: 100%;
+    max-width: none;
     thead tr th,
     tbody tr td {
-      height: 40px;
+      min-height: 40px;
+      // width: 250px;
       word-wrap: normal;
-      white-space: nowrap;
+      // white-space: nowrap;
     }
   }
-  // .fixed-col-control {
-  //   position: absolute;
-  //   width: 90px;
-  //   right: 0;
-  // }
+}
+
+.wrap-patients-table .table-patients-name,
+.wrap-patients-table .table-patients-controls {
+  position: absolute;
+  top: 0;
+  min-width: initial;
+  z-index: 2;
+  @media (max-width: map-get($breakpoints, 'xs') - 1) {
+    display: none;
+  }
+}
+.wrap-patients-table .table-patients-name { 
+  left: 0; 
+  width: auto;
+}
+.wrap-patients-table .table-patients-controls { 
+  right: 0; 
+  width: auto;
 }

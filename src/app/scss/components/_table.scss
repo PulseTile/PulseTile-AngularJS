@@ -245,13 +245,15 @@ td[ng-click] {
     }
     &.table-striped {
       tbody {
-        tr {
-          &:nth-of-type(odd) td.sorted {
-            background-color: map-get($colored-table, 'sorted-background-odd');
-          }
-          &:hover td.sorted {
-            background-color: map-get($colored-table, 'row-background-hover');
-          }
+        tr:nth-of-type(odd) td.sorted {
+          background-color: map-get($colored-table, 'sorted-background-odd');
+        }
+      }
+    }
+    &.table-striped.table-hover {
+      tbody {
+        tr:hover td.sorted {
+          background-color: map-get($colored-table, 'row-background-hover');
         }
       }
     }
