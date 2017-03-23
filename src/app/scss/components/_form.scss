@@ -159,6 +159,19 @@ select.textarea-big,
     display: flex;
     align-items: center;
     & + .wrap-fcustominp {margin-top: 5px;}
+    .fcustominp-state {
+      margin: 0 -2px;
+      padding: 0 2px;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      &.disabled {
+        background: #f3f3f3;
+        opacity: 0.6;
+        .fcustominp label,
+        .fcustominp-label { cursor: default; }
+      }
+    }
     .fcustominp-label {
       float: left;
       font-size: 14px;

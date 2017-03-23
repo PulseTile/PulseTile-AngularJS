@@ -1,39 +1,38 @@
 .wrap-control-group {
   @include clearfix;
-  &.hide-indent-bottom {margin-bottom: -5px;}
+  &.hide-indent-bottom { margin-bottom: -5px; }
 }
 .control-group {
   margin-right: -5px;
-  & > * {
-    margin-right: 5px;
-  }
+  & > * { margin-right: 5px; }
   &.right {
     float: right;
     margin-left: 5px;
   }
   &.left {
     float: left;
-    margin-right: 5px;
     margin-left: -5px;
+    margin-right: 5px;
     & > * {
-      margin-right: 0;
       margin-left: 5px;
+      margin-right: 0;
     }
   }
   &.left,
   &.right {
-    & > * {float: left;}
+    & > * { float: left; }
   }
   &.center {
     font-size: 0;
     text-align: center;
+    & > * { display: inline-block; }
   }
-  &.with-indent > * {margin-bottom: 5px;}
+  &.with-indent > * { margin-bottom: 5px; }
   .control-separate {
+    background: #ccc;
     display: inline-block;
+    height: 30px;
     vertical-align: top;
     width: 1px;
-    height: 30px;
-    background: #ccc;
   }
 }

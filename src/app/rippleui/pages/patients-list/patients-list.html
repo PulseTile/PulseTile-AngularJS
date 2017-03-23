@@ -16,11 +16,38 @@
 <div table-settings order="name" filtering class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
-      <!--<button class="btn btn-success btn-inverse btn-dropdown-toggle btn-table"><i class="fa fa-table"></i></button>-->
+      <div class="dropdown">
+        <button mc-dropdown class="btn btn-success btn-inverse btn-dropdown-toggle" ng-click="toggleDropdown($event);"><i class="fa fa-cog"></i></button>
+        <div class="dropdown-menu dm-panel dm-right dm-summery">
+          <div class="form-group-wrapper">
+            <div ng-repeat="(itemKey, item) in patientsTable">
+              <div class="heading">{{ item.title }}</div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-6 col-sm-4" ng-repeat="(key, tableSettings) in item.settings">
+                    <div class="wrap-fcustominp">
+                      <div class="fcustominp-state" ng-class="{disabled: !!tableSettings.disabled}">
+                        <div class="fcustominp">
+                          <input type="checkbox" id="patients-table-{{ itemKey }}-{{ key }}" ng-change="changeTableSettings()" name="patients-table-{{ itemKey }}-{{ key }}" ng-model="tableSettings.select"  ng-disabled="{{ !!tableSettings.disabled }}"/>
+                          <label for="patients-table-{{ itemKey }}-{{ key }}"></label>
+                        </div>
+                        <label for="patients-table-{{ itemKey }}-{{ key }}" class="fcustominp-label">{{ tableSettings.title }}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-4">
+                    <button class="btn btn-success btn-inverse btn-smaller" ng-click="selectAllSettings(itemKey)">Select All</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
     </div>
     <h3 class="panel-title">
-      Patient Info<span ng-if="$ctrl.filters.ageRange">. Age range: {{$ctrl.filters.ageRange}}</span><span ng-if="$ctrl.filters.department">. Setting: {{$ctrl.filters.department}}</span>
+      Patient Info<span ng-if="$ctrl.filters.ageRange">. Age range: {{ $ctrl.filters.ageRange }}</span><span ng-if="$ctrl.filters.department">. Setting: {{$ctrl.filters.department}}</span>
     </h3>
     <div class="panel-filter" ng-show="isFilterOpen">
       <div class="inner-addon addon-left">
@@ -32,42 +59,72 @@
     </div>
   </div>
   <div class="panel-body">
-    <table class="table table-striped table-hover table-bordered rwd-table table-sorted table-fixedcol">
-      <colgroup>
-        <col style="width: 17%;">
-        <col style="width: 37%;">
-        <col style="width: 15%;">
-        <col style="width: 15%;">
-        <col style="width: 16%;">
-      </colgroup>
-      <thead>
-        <tr>
-            <th ng-click="sort('name')" ng-class="sortClass('name')">Name</th>
-            <th ng-click="sort('address')" ng-class="sortClass('address')">Address</th>
-            <th ng-click="sort('dateOfBirth')" ng-class="sortClass('dateOfBirth')">Date of Birth</th>
-            <th ng-click="sort('gender')" ng-class="sortClass('gender')">Gender</th>
-            <th ng-click="sort('nhsNumber')" ng-class="sortClass('nhsNumber')">NHS No.</th>
-        </tr>
-      </thead>
+    <div class="wrap-patients-table">
+      <table class="table table-striped table-hover table-bordered rwd-table table-sorted table-fixedcol">
+        <thead>
+          <tr>
+              <th ng-repeat="(key, item) in patientsTable.info.settings"
+                  ng-click="sort(key)" 
+                  ng-class="sortClass(key)"
+                  ng-if="item.select">{{ item.title }}</th>
+              <th ng-repeat="(key, item) in patientsTable.date.settings"
+                  ng-click="sort(key)" 
+                  ng-class="sortClass(key)"
+                  ng-if="item.select"><span>{{ item.title }}</span><i class="fa fa-calendar"></i></th>
+              <th ng-repeat="(key, item) in patientsTable.count.settings"
+                  ng-click="sort(key + '#')" 
+                  ng-class="sortClass(key + '#')"
+                  ng-if="item.select">{{ item.title }} #</th>
+              <th></th>
+          </tr>
+        </thead>
 
-      <tbody>
-        <tr dir-paginate="patient in $ctrl.patients | filter:queryFiltering | filter: $ctrl.patientFilter | orderBy:[order] : reverse | itemsPerPage: 10" ng-click="$ctrl.go(patient)">
-            <td data-th="Name" ng-class="sortClass('name')">{{ patient.name }}</td>
-            <td data-th="Address" ng-class="sortClass('address')" class="cell-truncate">{{ patient.address }}</td>
-            <td data-th="Date of Birth" ng-class="sortClass('dateOfBirth')" class="dateTime">{{ patient.dateOfBirth }}</td>
-            <td data-th="Gender" ng-class="sortClass('gender')">{{ patient.gender }}</td>
-            <td data-th="NHS No" ng-class="sortClass('nhsNumber')">{{ patient.nhsNumber | formatNHSNumber }}</td>
-        </tr>
+        <tbody>
+          <tr dir-paginate="patient in $ctrl.patients | filter:queryFiltering | filter: $ctrl.patientFilter | orderBy:[order] : reverse | itemsPerPage: 10">
+              <td ng-repeat="(key, item) in patientsTable.info.settings"
+                  data-th='{{ item.title }}'
+                  ng-class="sortClass(key)"
+                  ng-if="item.select">{{ patient[key] }}</td>
+              <td ng-repeat="(key, item) in patientsTable.date.settings"
+                  data-th='{{ item.title }} Data'
+                  ng-class="sortClass(key)"
+                  ng-if="item.select">27-Jan-1947</td>
+              <td ng-repeat="(key, item) in patientsTable.count.settings"
+                  data-th='{{ item.title }} #'
+                  ng-class="sortClass(key) + '#'"
+                  ng-if="item.select">123</td>
+              <!--           
+                <td data-th="NHS No" 
+                    ng-class="sortClass('nhsNumber')"
+                    ng-if="patientsTable.info.settings.nhsNumber.select">{{ patient.nhsNumber | formatNHSNumber }}</td> -->
+              <td class="patient-control">
+                <div class="patient-buttons dropdown">
+                  <button class="btn btn-success btn-inverse btn-sm btn-view-patient" ng-click="$ctrl.go(patient)">View</button>
+                  <button mc-dropdown class="btn btn-success btn-inverse btn-sm btn-dropdown-toggle" ng-click="toggleDropdown($event);"></button>
+                  <div class="dropdown-menu dm-right">
+                    <div class="dm-wrap-list">
+                      <div class="dm-list">
+                        <div class="dm-item" ng-click="$ctrl.go(patient, 'orders')"><span>Orders</span></div>
+                        <div class="dm-item" ng-click="$ctrl.go(patient, 'results')"><span>Results</span></div>
+                        <div class="dm-item" ng-click="$ctrl.go(patient, 'vitals')"><span>Vitals</span></div>
+                        <div class="dm-item" ng-click="$ctrl.go(patient, 'diagnoses')"><span>Diagnosis</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+          </tr>
 
-        <tr ng-if="!$ctrl.patients.length">
-            <td colspan="5"><span class="label label-default">No patients found</span></td>
-        </tr>
-      </tbody>
-    </table>
+          <tr ng-if="!$ctrl.patients.length">
+              <td colspan="5"><span class="label label-default">No patients found</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <div class="panel-control">
       <div class="wrap-control-group">
-        <div class="control-group with-indent left">
+        <div class="control-group with-indent center">
           <dir-pagination-controls max-size="5" boundary-links="false"></dir-pagination-controls>
         </div>
       </div>

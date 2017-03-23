@@ -106,7 +106,7 @@ angular.module('ripple-ui.directives', [])
               element[0].classList.toggle('open');
           });
         scope.toggleDropdown = function (ev) {
-          ev.currentTarget.parentElement.classList.toggle('open');
+          $(ev.currentTarget).closest('.dropdown').toggleClass('open');
         };
       }
     }
