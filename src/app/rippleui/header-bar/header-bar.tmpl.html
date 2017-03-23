@@ -90,7 +90,7 @@
               <div class="heading">Search Options</div>
               <div class="dm-wrap-list">
                 <div class="dm-list">
-                  <div class="dm-item" ng-repeat="item in searchOptionsList" ng-click="$ctrl.toggleAdvancedSearch()"><span>{{item}}</span></div>
+                  <div class="dm-item" ng-repeat="item in searchOptionsList" ng-click="$ctrl.openAdvancedSearch($index)"><span>{{item.name}}</span></div>
                 </div>
               </div>
             </div>
@@ -121,7 +121,7 @@
         </div>
         <div mc-dropdown is-open-search="isOpenSearch" ng-if="isOpenSearch">
           <div class="dropdown-menu dm-search dm-center">
-            <search-advanced-component></search-advanced-component>
+            <search-advanced-component option="searchOption"></search-advanced-component>
           </div>
         </div>
       </div>

@@ -16,6 +16,7 @@
 let templateHeader = require('./header-bar.tmpl.html');
 
 class HeaderController {
+
   constructor($rootScope, $scope, $state, $stateParams, $ngRedux, patientsActions, serviceRequests, socketService) {
 
     var self = this;
@@ -23,15 +24,33 @@ class HeaderController {
     
     this.mainSearchEnabled = true;
     this.showAdvancedSearch = false;
-    $scope.searchOptionsList = ['Patient Search', 'Patient Search - Advanced', 'Clinical Query'];
+    $scope.searchOptionsList = [
+      {
+        name: 'Patient Search',
+        type: 'patients'
+      },
+      {
+        name: 'Patient Search - Advanced',
+        type: 'advanced'
+      },
+      {
+        name: 'Clinical Query',
+        type: 'clinicalQuery'
+      }
+    ];
     
-    this.toggleAdvancedSearch = function() {
+    this.openAdvancedSearch = function(index) {
       $scope.isOpenSearch = !$scope.isOpenSearch;
-    }.bind(this);
+      $scope.searchOption = $scope.searchOptionsList[index];
+    };
+    
+    this.closeAdvancedSearch = function() {
+      $scope.isOpenSearch = !$scope.isOpenSearch;
+    };
     
     $scope.isOpenSearch = false;
     
-    serviceRequests.subscriber('toggleAdvancedSearch', this.toggleAdvancedSearch);
+    serviceRequests.subscriber('closeAdvancedSearch', this.closeAdvancedSearch);
     
     this.goBack = function () {
       /* istanbul ignore if  */

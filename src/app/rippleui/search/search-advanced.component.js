@@ -21,7 +21,7 @@ class SearchAdvancedController {
     // serviceRequests.publisher('headerTitle', {title: 'Welcome', isShowTitle: true});
 
     this.cancel = function () {
-      serviceRequests.publisher('toggleAdvancedSearch', {});
+      serviceRequests.publisher('closeAdvancedSearch', {});
     };
 
     var changeState = function () {
@@ -169,6 +169,9 @@ class SearchAdvancedController {
 }
 
 const SearchAdvancedComponent = {
+  bindings: {
+    option: '='
+  },
   template: templateSearch,
   controller: SearchAdvancedController
 };
