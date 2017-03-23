@@ -27,7 +27,7 @@ class HeaderController {
     $scope.searchOptionsList = [
       {
         name: 'Patient Search',
-        type: 'patients'
+        type: 'advanced'
       },
       {
         name: 'Patient Search - Advanced',

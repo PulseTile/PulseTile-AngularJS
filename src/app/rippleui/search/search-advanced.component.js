@@ -14,15 +14,23 @@
    ~  limitations under the License.
  */
 let templateSearch = require('./search-advanced.html');
+import plugins from '../../plugins';
 
 class SearchAdvancedController {
   constructor($scope, $http, $ngRedux, serviceRequests, searchActions, $state, $timeout) {
-    // serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'main-search'});
-    // serviceRequests.publisher('headerTitle', {title: 'Welcome', isShowTitle: true});
 
     this.cancel = function () {
       serviceRequests.publisher('closeAdvancedSearch', {});
     };
+
+    this.typesList = [];
+    this.queryList = ['contains' , 'excludes'];
+    
+    plugins.forEach((plugin)=>{
+      /* istanbul ignore if  */
+      if (!Object.keys(plugin.sidebarInfo).length) return;
+      this.typesList.push(plugin.sidebarInfo);
+    });
 
     var changeState = function () {
       $scope.formSubmitted = true;
