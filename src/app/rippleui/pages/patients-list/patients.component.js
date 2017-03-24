@@ -30,29 +30,29 @@ class PatientsController {
             select: true,
             title: 'Name',
             disabled: true,
-            width: 200
+            width: 150
           },
           address: {
             select: true,
             title: 'Address',
-            width: 400
+            width: 300
           },
           dateOfBirth: {
             select: true,
             title: 'Born',
             disabled: true,
-            width: 200
+            width: 130
           },
           gender: {
             select: true,
             title: 'Gender',
             disabled: true,
-            width: 200
+            width: 120
           }, 
           nhsNumber: {
             select: true,
             title: 'NHS No.',
-            width: 200
+            width: 150
           }
         }
       },
@@ -62,22 +62,22 @@ class PatientsController {
           orders: {
             select: false,
             title: 'Orders',
-            width: 150
+            width: 130
           },
           results: {
             select: false,
             title: 'Results',
-            width: 150
+            width: 130
           },
           vitals: {
             select: false,
             title: 'Vitals',
-            width: 150
+            width: 130
           },
           diagnosis: {
             select: false,
             title: 'Diagnosis',
-            width: 150
+            width: 130
           }
         }
       },
@@ -87,22 +87,22 @@ class PatientsController {
           orders: {
             select: false,
             title: 'Orders',
-            width: 150
+            width: 120
           },
           results: {
             select: false,
             title: 'Results',
-            width: 150
+            width: 120
           },
           vitals: {
             select: false,
             title: 'Vitals',
-            width: 150
+            width: 120
           },
           diagnosis: {
             select: false,
             title: 'Diagnosis',
-            width: 150
+            width: 120
           }
         }
       }

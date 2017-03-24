@@ -16,6 +16,7 @@
   border-radius: 4px;
   box-shadow: 2px 3px 3px 0px rgba(0, 0, 0, 0.2);
   background-clip: padding-box;
+  &.dm-show { display: block; }
   &.dm-right {
     left: auto;
     right: 0;
@@ -35,13 +36,7 @@
     font-size: 10px;
     line-height: 12px;
   }
-  &.dm-search {
-    width: 832px;
-  }
-  &.dm-center {
-    top: 0;
-    right: 0;
-  }
+  &.dm-without-shadow {box-shadow: none !important; }
 }
 .dropdown.open .btn-inverse {
   &,

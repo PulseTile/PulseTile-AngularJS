@@ -14,12 +14,15 @@
   ~  limitations under the License.
   -->
 
-<div mc-datepicker class="panel panel-secondary">
+<div mc-datepicker class="panel panel-secondary without-margin">
   <div class="panel-heading">
     <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="$ctrl.cancel()"><i class="fa fa-chevron-up"></i></button>
     </div>
-    <h3 class="panel-title">{{$ctrl.option.name}}</h3>
+    <h3 class="panel-title">
+      <span>{{$ctrl.option.name}}:</span>
+      <span ng-if="searchParams.nhsNumber">NHS Number: {{searchParams.nhsNumber}}</span>
+    </h3>
   </div>
   <div class="panel-body">
     <div class="panel-body-inner">
@@ -94,7 +97,7 @@
                     <div class="form-group"
                          ng-class="{'has-error': !detailsFocused,
                     'has-success': !detailsFocused && advancedSearchForm.queryNext.$valid && advancedSearchForm.queryNext.$dirty}">
-                        <label for="queryNext" class="control-label"></label>
+                        <label for="queryNext" class="control-label">Age Range (Years)</label>
                         <div class="input-holder">
                             <input type="text" tabindex="3" class="form-control input-sm" id="queryNext" name="queryNext" ng-model="searchParams.queryNext" ng-focus="detailsFocused=true" ng-required='detailsFocused' placeholder="e.g. John"/>
                         </div>
@@ -111,20 +114,20 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
-                  <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.route.$dirty) && medicationForm.route.$invalid, 'has-success': medicationForm.route.$valid && medicationForm.route.$dirty}">
+                  <div class="form-group" ng-class="{'has-error': (formSubmitted || advancedSearchForm.route.$dirty) && medicationForm.route.$invalid, 'has-success': medicationForm.route.$valid && medicationForm.route.$dirty}">
                       <label for="gender" class="control-label">Gender</label>
                       <div class="input-holder">
                           <div class="wrap-fcustominps-inline">
                               <div class="wrap-fcustominp">
                                   <div class="fcustominp">
-                                      <input type="checkbox" id="gender-male" ng-change="changeDashboards()" name="gender-male" ng-model="dashboard.show" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                      <input type="checkbox" id="gender-male" name="gender-male" ng-model="searchParams.sexMale" class="ng-pristine ng-untouched ng-valid ng-not-empty">
                                       <label for="gender-male"></label>
                                   </div>
                                   <label for="gender-male" class="fcustominp-label ng-binding">Male</label>
                               </div>
                               <div class="wrap-fcustominp">
                                   <div class="fcustominp">
-                                      <input type="checkbox" id="gender-female" ng-change="changeDashboards()" name="gender-female" ng-model="dashboard.show" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                      <input type="checkbox" id="gender-female" name="gender-female" ng-model="searchParams.sexFemale" class="ng-pristine ng-untouched ng-valid ng-not-empty">
                                       <label for="gender-female"></label>
                                   </div>
                                   <label for="gender-female" class="fcustominp-label ng-binding">Female</label>
@@ -142,7 +145,7 @@
       <div class="wrap-control-group hide-indent-bottom">
         <div class="control-group with-indent right">
           <button class="btn btn-danger" ng-click="$ctrl.cancel()"><i class="fa fa-ban"></i> Cancel</button>
-          <button class="btn btn-success" ng-click="ok(advancedSearchForm)"><i class="fa fa-check"></i> Complete</button>
+          <button class="btn btn-success" ng-click="ok(advancedSearchForm)"><i class="fa fa-search"></i> Search</button>
         </div>
       </div>
     </div>

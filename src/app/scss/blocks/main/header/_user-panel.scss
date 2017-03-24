@@ -1,12 +1,9 @@
-.user-panel {
-  float: right;
-  & > li {
-    float: left;
-    &.open .btn-header,
-    &.active .btn-header {
-      background: #fff;
-      color: $auxiliary-color;
-      .count {display: none;}
-    }
+.user-panel > li {
+  float: left;
+  &.open .btn-header,
+  &.active .btn-header {
+    background: #fff;
+    color: $auxiliary-color;
+    .count {display: none;}
   }
 }

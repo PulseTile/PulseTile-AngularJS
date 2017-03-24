@@ -21,13 +21,15 @@ class HeaderController {
 
     var self = this;
     $scope.title = '';
+    $scope.searchActive = false;
     
     this.mainSearchEnabled = true;
     this.showAdvancedSearch = false;
     $scope.searchOptionsList = [
       {
         name: 'Patient Search',
-        type: 'advanced'
+        // type: 'advanced'
+        type: ''
       },
       {
         name: 'Patient Search - Advanced',
@@ -40,8 +42,16 @@ class HeaderController {
     ];
     
     this.openAdvancedSearch = function(index) {
-      $scope.isOpenSearch = !$scope.isOpenSearch;
-      $scope.searchOption = $scope.searchOptionsList[index];
+      if (!$scope.searchOptionsList[index].type.length || 
+          ($scope.searchOption && $scope.searchOption.type === $scope.searchOptionsList[index].type)
+         ) {
+
+        $scope.isOpenSearch = $scope.searchOption = false;
+
+      } else {
+        $scope.isOpenSearch = true;
+        $scope.searchOption = $scope.searchOptionsList[index];
+      }
     };
     
     this.closeAdvancedSearch = function() {

@@ -56,6 +56,22 @@ class SearchAdvancedController {
     $scope.formSubmitted = false;
     $scope.detailsFocused = false;
     $scope.searchParams = {};
+    $scope.agesSteps = [];
+
+    var step;
+    for (var i = 0; i <= 100; i += 5) {
+      step = {
+        value: i
+      };
+      if (i % 10 === 0) {
+        step.legend = i;
+      }
+      $scope.agesSteps.push(step);
+    }
+    // $scope.agesSteps.push({
+    //   value: 200,
+    //   legend: '100+'
+    // });
 
     $scope.sliderRange = {
       minValue: 0,
@@ -65,8 +81,10 @@ class SearchAdvancedController {
         ceil: 100,
         step: 5,
         showTicks: true,
-        showTicksValues: false
-      }
+        showTicksValues: false,
+        stepsArray: $scope.agesSteps
+      },
+
     };
 
     $scope.refreshSlider = function () {
