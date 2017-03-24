@@ -16,7 +16,7 @@
 let templatePatients = require('./patients-list.html');
 
 class PatientsController {
-  constructor($scope, $state, $stateParams, $location, $ngRedux, patientsActions, serviceRequests, Patient, serviceFormatted) {
+  constructor($scope, $state, $stateParams, $location, $ngRedux, patientsActions, serviceRequests, Patient, serviceFormatted, $timeout) {
     let vm = this;
 
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-list'});
@@ -29,25 +29,30 @@ class PatientsController {
           name: {
             select: true,
             title: 'Name',
-            disabled: true
+            disabled: true,
+            width: 200
           },
           address: {
             select: true,
-            title: 'Address'
+            title: 'Address',
+            width: 400
           },
           dateOfBirth: {
             select: true,
             title: 'Born',
-            disabled: true
+            disabled: true,
+            width: 200
           },
           gender: {
             select: true,
             title: 'Gender',
-            disabled: true
+            disabled: true,
+            width: 200
           }, 
           nhsNumber: {
             select: true,
-            title: 'NHS No.'
+            title: 'NHS No.',
+            width: 200
           }
         }
       },
@@ -56,19 +61,23 @@ class PatientsController {
         settings: {
           orders: {
             select: false,
-            title: 'Orders'
+            title: 'Orders',
+            width: 150
           },
           results: {
             select: false,
-            title: 'Results'
+            title: 'Results',
+            width: 150
           },
           vitals: {
             select: false,
-            title: 'Vitals'
+            title: 'Vitals',
+            width: 150
           },
           diagnosis: {
             select: false,
-            title: 'Diagnosis'
+            title: 'Diagnosis',
+            width: 150
           }
         }
       },
@@ -77,23 +86,28 @@ class PatientsController {
         settings: {
           orders: {
             select: false,
-            title: 'Orders'
+            title: 'Orders',
+            width: 150
           },
           results: {
             select: false,
-            title: 'Results'
+            title: 'Results',
+            width: 150
           },
           vitals: {
             select: false,
-            title: 'Vitals'
+            title: 'Vitals',
+            width: 150
           },
           diagnosis: {
             select: false,
-            title: 'Diagnosis'
+            title: 'Diagnosis',
+            width: 150
           }
         }
       }
     };
+    $scope.patientsTableSettings = {};
 
     if (serviceRequests.patientsTable) {
       serviceRequests.patientsTable = $scope.patientsTable;
@@ -101,7 +115,49 @@ class PatientsController {
 
     $scope.changeTableSettings = function () {
       serviceRequests.patientsTable = $scope.patientsTable;
+      $scope.resizeFixedTables();
     };
+
+    $scope.getpatientsTableSettings = function () {
+      var newSettings = {};
+      for (var key in $scope.patientsTable.info.settings) {
+        newSettings[key] = $scope.patientsTable.info.settings[key];
+        newSettings[key].type = 'info';
+      }
+      for (var key in $scope.patientsTable.date.settings) {
+        newSettings[key + 'Date'] = $scope.patientsTable.date.settings[key];
+        newSettings[key + 'Date'].type = 'date';
+        newSettings[key + 'Count'] = $scope.patientsTable.count.settings[key];
+        newSettings[key + 'Count'].type = 'count';
+      }
+      console.log('newSettings');
+      console.log(newSettings);
+      $scope.patientsTableSettings = newSettings;
+    };
+    $scope.getpatientsTableSettings();
+
+    $scope.resizeFixedTables = function () {
+      $timeout(function () {
+        var $wrapTables = $('.wrap-patients-table');
+
+        var $tableNames = $wrapTables.find('.table-patients-name');
+        var $tableNamesRows = $tableNames.find('tr');
+
+        var $tableControls = $wrapTables.find('.table-patients-controls');
+        var $tableControlsRows = $tableControls.find('tr');
+
+        var $tableFullRows = $('.table-patients-full tr');
+        var $tds = $tableFullRows.eq(1).find('td');
+
+        $tableNames.width($tds.eq(0).outerWidth());
+        $tableControls.width($tds.eq($tds.length - 1).outerWidth());
+        $tableFullRows.each(function (i, row, rows) {
+          var height = $(row).height();
+          $tableNamesRows.eq(i).height(height);
+          $tableControlsRows.eq(i).height(height);
+        });
+      });
+    }
 
     $scope.selectAllSettings = function (key) {
       var settings = $scope.patientsTable[key].settings
@@ -109,6 +165,7 @@ class PatientsController {
       for (var item in settings) {
         settings[item].select = true;
       }
+      $scope.resizeFixedTables();
     };
 
     vm.go = function (patient, state) {
@@ -147,7 +204,12 @@ class PatientsController {
       vm.patients = curPatients.slice();
       serviceFormatted.formattingTablesDate(vm.patients, ['dateOfBirth'], serviceFormatted.formatCollection.DDMMMYYYY);
       serviceFormatted.filteringKeys = ['name', 'address', 'dateOfBirth', 'gender', 'nhsNumber'];
+      
+      $scope.resizeFixedTables();
     };
+    $(window).on('resize', function () {
+      $scope.resizeFixedTables();
+    });
 
     if ($stateParams.patientsList.length === 0 && !$stateParams.displayEmptyTable) {
       vm.filters = {
@@ -184,5 +246,5 @@ const PatientsComponent = {
   controller: PatientsController
 };
 
-PatientsController.$inject = ['$scope', '$state', '$stateParams', '$location', '$ngRedux', 'patientsActions', 'serviceRequests', 'Patient', 'serviceFormatted'];
+PatientsController.$inject = ['$scope', '$state', '$stateParams', '$location', '$ngRedux', 'patientsActions', 'serviceRequests', 'Patient', 'serviceFormatted', '$timeout'];
 export default PatientsComponent;
