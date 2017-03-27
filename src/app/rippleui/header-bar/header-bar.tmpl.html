@@ -35,7 +35,7 @@
     <div class="wrap-search wrap-header-search ng-cloak hidden-xs" ng-if="searchBar" ng-cloak ng-class="{'searchBarHidden' : !$ctrl.searchBarEnabled }">
       <div class="header-search">
         <div uib-dropdown class="control-group left dropdown">
-          <button uib-dropdown-toggle class="btn btn-success btn-inverse btn-dropdown-toggle"><i class="fa fa-bars"></i></button>
+          <button uib-dropdown-toggle class="btn btn-success btn-inverse btn-dropdown-toggle" ng-click="$ctrl.closeSearchOptions()"><i class="fa fa-bars"></i></button>
           <div uib-dropdown-menu class="dropdown-menu dm-panel dm-left dm-tables">
             <div class="heading">Search Options</div>
             <div class="dm-wrap-list">

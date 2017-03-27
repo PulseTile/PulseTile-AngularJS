@@ -54,6 +54,12 @@ class HeaderController {
       }
     };
     
+    this.closeSearchOptions = function() {
+      if ($scope.isOpenSearch) {
+        $scope.isOpenSearch = false;
+      }      
+    };
+    
     this.closeAdvancedSearch = function() {
       $scope.isOpenSearch = !$scope.isOpenSearch;
     };
@@ -68,7 +74,7 @@ class HeaderController {
 
       switch ($state.router.globals.$current.name) {
         case 'patients-charts': 
-				  $state.go('main-search');
+				  
           break;
         case 'patients-summary': 
           $state.go('patients-list');
