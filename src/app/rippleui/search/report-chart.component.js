@@ -27,69 +27,6 @@ class ReportChartController {
 
     var requestBody;
     var graphData;
-    vm.openModal = function (row, requestBody) {
-      $uibModal.open({
-        template: require('app/rippleui/confirmation.html'),
-        size: 'md',
-        controller: function ($scope) {
-
-          $scope.cancel = function () {
-            $scope.$close(true);
-          };
-
-          $scope.ok = function () {
-            $scope.$close(true);
-            var ageArr = row.series.split('-');
-            var ageFr = 0;
-            var ageT = 0;
-
-            if (ageArr.length === 2) {
-              ageFr = ageArr[0];
-              ageT = ageArr[1];
-            } else {
-              ageFr = 80;
-              ageT = 130;
-            }
-
-            $state.go('patients-list-full', {
-              queryType: 'Reports: ',
-              ageFrom: ageFr,
-              ageTo: ageT,
-              orderColumn: 'name',
-              orderType: 'ASC',
-              pageNumber: 1,
-              reportType: requestBody.reportType,
-              searchString: requestBody.searchString
-            });
-
-          };
-        }
-      });
-    };
-    vm.ageChart = function (graphData) {
-      $timeout(function () {
-        /*
-          Todo: change MorrisJS on ChartJS
-        */
-        // $window.Morris.Bar({
-        //   element: 'age-chart',
-        //   resize: true,
-        //   data: graphData,
-        //   ykeys: ['value'],
-        //   xkey: 'series',
-        //   labels: ['Patients'],
-        //   barColors: ['#7E28CD'],
-        //   ymin: 0,
-        //   ymax: 46,
-        //   barGap: 4,
-        //   barSizeRatio: 0.55,
-        //   xLabelAngle: 50,
-        //   redraw: true
-        // }).on('click', function (i, row) {
-        //   vm.openModal(row, requestBody);
-        // });
-      }, 200);
-    };
     vm.setDataRequest = function (result) {
       /* istanbul ignore if  */
       if (result.chart.data && !graphData) {
