@@ -115,15 +115,15 @@
               </td>
               <td class="patient-control">
                 <div class="patient-buttons dropdown">
-                  <button class="btn btn-success btn-inverse btn-sm btn-view-patient" ng-click="$ctrl.go(patient)">View</button>
+                  <button class="btn btn-success btn-inverse btn-sm btn-view-patient" ng-click="$ctrl.openModal(patient)">View</button>
                   <button mc-dropdown class="btn btn-success btn-inverse btn-sm btn-dropdown-toggle" ng-click="toggleDropdown($event);"></button>
                   <div class="dropdown-menu dm-right">
                     <div class="dm-wrap-list">
                       <div class="dm-list">
-                        <div class="dm-item" ng-click="$ctrl.go(patient, 'orders')"><span>Orders</span></div>
-                        <div class="dm-item" ng-click="$ctrl.go(patient, 'results')"><span>Results</span></div>
-                        <div class="dm-item" ng-click="$ctrl.go(patient, 'vitals')"><span>Vitals</span></div>
-                        <div class="dm-item" ng-click="$ctrl.go(patient, 'diagnoses')"><span>Diagnosis</span></div>
+                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'orders')"><span>Orders</span></div>
+                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'results')"><span>Results</span></div>
+                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'vitals')"><span>Vitals</span></div>
+                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'diagnoses')"><span>Diagnosis</span></div>
                       </div>
                     </div>
                   </div>
@@ -150,15 +150,15 @@
           <tr dir-paginate="patient in $ctrl.patients | filter:queryFiltering | filter: $ctrl.patientFilter | orderBy:[order] : reverse | itemsPerPage: 10">
               <td class="patient-control">
                 <div class="patient-buttons dropdown">
-                  <button class="btn btn-success btn-inverse btn-sm btn-view-patient" ng-click="$ctrl.go(patient)">View</button>
+                  <button class="btn btn-success btn-inverse btn-sm btn-view-patient" ng-click="$ctrl.openModal(patient)">View</button>
                   <button mc-dropdown class="btn btn-success btn-inverse btn-sm btn-dropdown-toggle" ng-click="toggleDropdown($event);"></button>
                   <div class="dropdown-menu dm-right">
                     <div class="dm-wrap-list">
                       <div class="dm-list">
-                        <div class="dm-item" ng-click="$ctrl.go(patient, 'orders')"><span>Orders</span></div>
-                        <div class="dm-item" ng-click="$ctrl.go(patient, 'results')"><span>Results</span></div>
-                        <div class="dm-item" ng-click="$ctrl.go(patient, 'vitals')"><span>Vitals</span></div>
-                        <div class="dm-item" ng-click="$ctrl.go(patient, 'diagnoses')"><span>Diagnosis</span></div>
+                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'orders')"><span>Orders</span></div>
+                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'results')"><span>Results</span></div>
+                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'vitals')"><span>Vitals</span></div>
+                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'diagnoses')"><span>Diagnosis</span></div>
                       </div>
                     </div>
                   </div>

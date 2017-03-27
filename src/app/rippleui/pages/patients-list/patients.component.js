@@ -16,7 +16,7 @@
 let templatePatients = require('./patients-list.html');
 
 class PatientsController {
-  constructor($scope, $state, $stateParams, $location, $ngRedux, patientsActions, serviceRequests, Patient, serviceFormatted, $timeout) {
+  constructor($scope, $state, $stateParams, $location, $ngRedux, patientsActions, serviceRequests, Patient, serviceFormatted, $timeout, $uibModal) {
     let vm = this;
 
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-list'});
@@ -168,18 +168,19 @@ class PatientsController {
       $scope.resizeFixedTables();
     };
 
-    vm.go = function (patient, state) {
-      if (state != undefined) {
-        $state.go(state, {
-          patientId: patient.id,
-        });
-      } else {
-        $state.go('patients-summary', {
-          patientId: patient.id,
-          patientsList: vm.patients
-        });
-      }
-    };
+    // vm.go = function (patient, state) {
+    //   console.log('go');
+    //   if (state != undefined) {
+    //     $state.go(state, {
+    //       patientId: patient.id,
+    //     });
+    //   } else {
+    //     $state.go('patients-summary', {
+    //       patientId: patient.id,
+    //       patientsList: vm.patients
+    //     });
+    //   }
+    // };
 
     vm.patientFilter = function (patient) {
       if (vm.filters.department) {
@@ -210,6 +211,33 @@ class PatientsController {
     $(window).on('resize', function () {
       $scope.resizeFixedTables();
     });
+
+
+    vm.openModal = function (patient, state) {
+      $uibModal.open({
+        template: require('app/rippleui/confirmation.html'),
+        controller: function ($scope) {
+
+          $scope.cancel = function () {
+            $scope.$close(true);
+          };
+
+          $scope.ok = function () {
+            if (state != undefined) {
+              $state.go(state, {
+                patientId: patient.id,
+              });
+            } else {
+              $state.go('patients-summary', {
+                patientId: patient.id,
+                patientsList: vm.patients
+              });
+            }
+            $scope.$close(true);
+          };
+        }
+      });
+    };
 
     if ($stateParams.patientsList.length === 0 && !$stateParams.displayEmptyTable) {
       vm.filters = {
@@ -246,5 +274,5 @@ const PatientsComponent = {
   controller: PatientsController
 };
 
-PatientsController.$inject = ['$scope', '$state', '$stateParams', '$location', '$ngRedux', 'patientsActions', 'serviceRequests', 'Patient', 'serviceFormatted', '$timeout'];
+PatientsController.$inject = ['$scope', '$state', '$stateParams', '$location', '$ngRedux', 'patientsActions', 'serviceRequests', 'Patient', 'serviceFormatted', '$timeout', '$uibModal'];
 export default PatientsComponent;

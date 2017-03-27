@@ -38,8 +38,10 @@
 }
 
 .modal-content {
-  border: 1px solid #d7d7d7;
-  border-radius: 6px;
+  // border: 1px solid #d7d7d7;
+  // border-radius: 6px;
+  border: 0;
+  border-radius: 0;
 }
 
 .modal-body {
