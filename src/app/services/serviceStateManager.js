@@ -45,12 +45,16 @@ class ServiceStateManager {
         this.setFilter = function (filter) {
           if (typeof filter === "undefined") return;
 
-          if (filter.isOpen) {
-            this.filter.isOpen = filter.isOpen;
-          }
-          if (filter.query) {
-            this.filter.query = filter.query;
-          }
+            if (filter.isOpen) {
+                this.filter.isOpen = filter.isOpen;
+            } else {
+                this.filter.isOpen = filter.isOpen;
+            }
+            if (filter.query) {
+                this.filter.query = filter.query;
+            } else {
+                this.filter.query = '';
+            }
         };
 
         this.getFilterTimeline = function () {

@@ -247,6 +247,7 @@ angular.module('ripple-ui.directives', [])
 
                   $scope.$watch('queryFilter', function(queryFilterValue) {
                       serviceStateManager.setFilter({
+                        isOpen: $scope.isFilterOpen,
                         query: queryFilterValue
                       });
                   });
