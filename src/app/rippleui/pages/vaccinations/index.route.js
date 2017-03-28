@@ -16,16 +16,7 @@
 routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 function routeConfig($stateProvider, $urlRouterProvider) {
-  $stateProvider
-
-    .state('vaccinations', {
-      url: '/patients/{patientId:int}/vaccinations?reportType&searchString&queryType',
-      views: {
-        banner: {template: '<patients-banner-component></patients-banner-component>'},
-        actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-        main: {template: '<vaccinations-list-component></vaccinations-list-component>'}
-      },
-      breadcrumbs: [{
+  var breadcrumbs = [{
         title: 'Patient Listings',
         state: 'patients-list'
       }, {
@@ -34,7 +25,17 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       }, {
         title: 'Vaccinations',
         state: 'vaccinations'
-      }]
+      }];
+      
+  $stateProvider
+    .state('vaccinations', {
+      url: '/patients/{patientId:int}/vaccinations?reportType&searchString&queryType',
+      views: {
+        banner: {template: '<patients-banner-component></patients-banner-component>'},
+        actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+        main: {template: '<vaccinations-list-component></vaccinations-list-component>'}
+      },
+      breadcrumbs: breadcrumbs
     })
     .state('vaccinations-create', {
       url: '/patients/{patientId:int}/vaccinations/create?reportType&searchString&queryType',
@@ -44,16 +45,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         main: {template: '<vaccinations-list-component></vaccinations-list-component>'},
         detail: {template: '<vaccinations-create-component></vaccinations-create-component>'}
       },
-      breadcrumbs: [{
-        title: 'Patient Listings',
-        state: 'patients-list'
-      }, {
-        title: 'Patient Summary',
-        state: 'patients-summary'
-      }, {
-        title: 'Vaccinations',
-        state: 'vaccinations'
-      }]
+      breadcrumbs: breadcrumbs
     })
     .state('vaccinations-detail', {
       url: '/patients/{patientId:int}/vaccinations/{detailsIndex}?page&reportType&searchString&queryType',
@@ -64,16 +56,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         detail: {template: '<vaccinations-detail-component></vaccinations-detail-component>'}
       },
       params: { source: '{}' },
-      breadcrumbs: [{
-        title: 'Patient Listings',
-        state: 'patients-list'
-      }, {
-        title: 'Patient Summary',
-        state: 'patients-summary'
-      }, {
-        title: 'Vaccinations',
-        state: 'vaccinations'
-      }]
+      breadcrumbs: breadcrumbs
     })
 }
 

@@ -16,16 +16,7 @@
 routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 function routeConfig($stateProvider, $urlRouterProvider) {
-  $stateProvider
-
-    .state('genericMdt', {
-      url: '/patients/{patientId:int}/generic-mdt-list?reportType&searchString&queryType',
-      views: {
-        banner: {template: '<patients-banner-component></patients-banner-component>'},
-        actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-        main: {template: '<generic-mdt-list-component></generic-mdt-list-component>'}
-      },
-      breadcrumbs: [{
+  var breadcrumbs = [{
         title: 'Patient Listings',
         state: 'patients-list'
       }, {
@@ -34,7 +25,17 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       }, {
         title: 'MDT',
         state: 'genericMdt'
-      }]
+      }];
+
+  $stateProvider
+    .state('genericMdt', {
+      url: '/patients/{patientId:int}/generic-mdt-list?reportType&searchString&queryType',
+      views: {
+        banner: {template: '<patients-banner-component></patients-banner-component>'},
+        actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+        main: {template: '<generic-mdt-list-component></generic-mdt-list-component>'}
+      },
+      breadcrumbs: breadcrumbs
     })
     .state('genericMdt-detail', {
       url: '/patients/{patientId:int}/generic-mdt-detail/{detailsIndex}?page&reportType&searchString&queryType',
@@ -45,16 +46,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         detail: {template: '<generic-mdt-detail-component></generic-mdt-detail-component>'}
       },
       params: { source: '{}' },
-      breadcrumbs: [{
-        title: 'Patient Listings',
-        state: 'patients-list'
-      }, {
-        title: 'Patient Summary',
-        state: 'patients-summary'
-      }, {
-        title: 'MDT',
-        state: 'genericMdt'
-      }]
+      breadcrumbs: breadcrumbs
     })
     .state('genericMdt-create', {
       url: '/patients/{patientId:int}/generic-mdt/create?reportType&searchString&queryType',
@@ -64,16 +56,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         main: {template: '<generic-mdt-list-component></generic-mdt-list-component>'},
         detail: {template: '<generic-mdt-create-component></generic-mdt-create-component>'}
       },
-      breadcrumbs: [{
-        title: 'Patient Listings',
-        state: 'patients-list'
-      }, {
-        title: 'Patient Summary',
-        state: 'patients-summary'
-      }, {
-        title: 'MDT',
-        state: 'genericMdt'
-      }]
+      breadcrumbs: breadcrumbs
     })
 }
 

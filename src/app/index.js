@@ -21,9 +21,10 @@ import ngRedux from 'ng-redux';
 import dirPagination from 'angular-utils-pagination';
 import createLogger from 'redux-logger';
 import 'angular-loading-bar';
-import 'fullcalendar';
+// import 'fullcalendar';
 import 'angular-ui-calendar';
-import 'jquery';
+import 'angularjs-slider';
+import 'angular-sanitize';
 
 import 'chart.js';
 
@@ -31,6 +32,7 @@ import 'angular-spinner';
 import 'jquery-timepicker-jt';
 import 'angular-jquery-timepicker';
 import 'angular-xeditable';
+import 'ng-scrollbars';
 
 //commons
 import reducer from './redux/reducer';
@@ -60,6 +62,9 @@ import ServiceActions from './rippleui/pages/dicom/serviceActions.js';
 import ServiceFormatted from './services/serviceFormatted.js';
 import SocketService from './services/socketService.js';
 
+import ScheduleModal from './rippleui/pages/events/schedule-modal';
+import ConfirmationModal from './rippleui/confirmation/confirmation';
+
 import routeConfig from 'app/index.route';
 import 'app/scss/core.scss';
 
@@ -84,8 +89,14 @@ let app = angular
         'ui.calendar',
         'ui.timepicker',
         'angular-loading-bar',
-        'xeditable'
+        'xeditable',
+        'ngScrollbars',
+        'rzModule',
+        'ngSanitize'
     ])
+    .factory('ScheduleModal', ScheduleModal)
+    .factory('ConfirmationModal', ConfirmationModal)
+    
     .factory('httpMiddleware', httpMiddleware)
     .factory('Patient', Patient)
     .factory('deviceDetector', deviceDetector)
@@ -135,10 +146,37 @@ let app = angular
     }])
     .config(['cfpLoadingBarProvider', cfpLoadingBarProvider => {
         cfpLoadingBarProvider.includeSpinner = false;
-    }]);
+    }])
+    .config(function (ScrollBarsProvider) {
+        // the following settings are defined for all scrollbars unless the
+        // scrollbar has local scope configuration
+        ScrollBarsProvider.defaults = {
+            scrollButtons: {
+                scrollAmount: 'auto', // scroll amount when button pressed
+                enable: false // enable scrolling buttons by default
+            },
+            scrollInertia: 0, // adjust however you want
+            axis: 'y',
+            theme: 'dark-custom',
+            autoHideScrollbar: false,
+            mouseWheel:{ preventDefault: false }
+        };
+    });
     app.run(function(editableOptions, editableThemes) {
       editableOptions.theme = 'bs3'; // bootstrap3 theme
       editableThemes.bs3.inputClass = 'input-sm';
       editableThemes.bs3.buttonsClass = 'btn-sm';
+    });
+    app.controller('mainCtrl', function ($scope, $timeout) {
+        // $timeout(function() {
+        //     $scope.updateScrollbar('scrollTo', 100, {
+        //     scrollInertia: 0
+        //   });
+        // });
+        // $scope.myScrollTo = function () {
+        //   $scope.updateScrollbar('scrollTo', 1000, {
+        //     scrollInertia: 0
+        //   });
+        // };
     });
 console.log('app start');

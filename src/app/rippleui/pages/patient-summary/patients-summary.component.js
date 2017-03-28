@@ -21,7 +21,7 @@ class PatientsSummaryController {
     serviceRequests.publisher('headerTitle', {title: 'Patients Summary'});
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-summary'});
 
-    $scope.listsDashboards = serviceRequests.listsDashboards || {
+    $scope.listsDashboards = {
       problems: {
         show: true,
         title: 'Problems',
@@ -124,8 +124,8 @@ class PatientsSummaryController {
 
     $scope.$on('$destroy', unsubscribe);
     
-    this.loadPatient = patientsActions.getPatient;
-    this.loadPatient($stateParams.patientId);
+    // this.loadPatient = patientsActions.getPatient;
+    // this.loadPatient($stateParams.patientId);
   }
 }
 

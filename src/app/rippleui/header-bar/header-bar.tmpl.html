@@ -15,133 +15,159 @@
   -->
 <header class="header">
   <nav class="navbar">
-    <div class="header-navbar">
-      <a ng-click="$ctrl.goBack()" class="btn-header btn-header-prev" ng-if="isShowPreviousBtn"><i class="fa fa-arrow-left"></i></a>
-      <div class="wrap-logo">
-        <div class="logo" >
-          <div class="logo-icon">
-            <a ng-click="$ctrl.goChart()">
-              <span class="img"></span>
-            </a>
-          </div>
-          <div class="logo-text">
-            <a ng-click="$ctrl.goPatientList()">
-              <span >{{title}}</span> <span class="logo-mobile-hidden"></span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <ul class="user-panel" role="tablist">
-        <li ng-class="$ctrl.activeNavTab('searchBar')" ng-if="searchBar" class="visible-xs"><a class="btn-header" ng-click="$ctrl.changeNavTab('searchBar')">
-          <i class="fa fa-search"></i></a>
-        </li>
-        <li uib-dropdown>
-          <a class="btn-header btn-notification" uib-dropdown-toggle>
-            <i class="fa fa-bell-o"></i>
-            <span class="count">2</span>
+    <a ng-click="$ctrl.goBack()" class="btn-header btn-header-prev" ng-if="isShowPreviousBtn"><i class="fa fa-arrow-left"></i></a>
+    <div class="wrap-logo">
+      <div class="logo" >
+        <div class="logo-icon">
+          <a ng-click="$ctrl.goChart()">
+            <span class="img"></span>
           </a>
-          <div class="notifications-drop dm-right" id="tab-notifications" uib-dropdown-menu>
-            <div class="notifications-header">Notifications (2)</div>
-            <div class="notifications-body">
-              <ul>
-                <li>
-                  <div class="notification-info">Information from Liquid Logic (Social Care) is currently unavailable.</div>
-                  <div class="notification-time"><em>10 minutes ago</em></div>
-                </li>
-                <li>
-                  <div class="notification-info">Information from Liquid Logic (Social Care) is currently unavailable.</div>
-                  <div class="notification-time"><em>15 minutes ago</em></div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </li>
-        <li uib-dropdown>
-          <a class="btn-header btn-user" uib-dropdown-toggle>
-            <i class="fa fa-user"></i>
+        </div>
+        <div class="logo-text">
+          <a ng-click="$ctrl.goPatientList()">
+            <span >{{title}}</span> <span class="logo-mobile-hidden"></span>
           </a>
-          <div class="user-drop dm-right" uib-dropdown-menu>
-            <div class="user-profile-image" ng-click="$ctrl.goProfile()">
-              <!-- <i class="fa fa-user"></i> -->
-              <div class="img">
-                <img src="../../assets/images/user.jpg" alt="">
-              </div>
-            </div>
-            <div class="user-profile-info">
-              <div class="name"  ng-click="$ctrl.goProfile()">{{user.given_name}} {{user.family_name}}</div>
-              <div class="specification">
-                <div class="item" ng-if="user.role"><em>{{user.role}}</em></div>
-                <div class="item" ng-if="user.email">{{user.email}}</div>
-                <div class="item gray"><em>10/05/2099</em></div>
-              </div>
-              <a class="btn btn-success btn-block btn-signout" ng-click="$ctrl.signout()">Sign Out <i class="fa fa-sign-out"></i></a>
-            </div>
-          </div>
-        </li>
-      </ul>
-
-      <!-- Nav Search -->
-      <div class="wrap-search wrap-header-search ng-cloak hidden-xs" ng-if="searchBar" ng-cloak ng-class="{'searchBarHidden' : !$ctrl.searchBarEnabled }">
-        <div class="header-search">
-          <button class="btn-header inverse btn-search" ng-click="$ctrl.searchFunction();"><i class="fa fa-search"></i></button>
-          <div class="header-search-inner">
-            <div class="holder">
-              <div ng-show="$root.searchMode" class="ng-cloak" ng-cloak>
-                <span ng-cloak class="ng-cloak search-left-inner-addon">
-                  <span ng-if="$root.reportMode">Reports&nbsp;</span>
-                  <span ng-if="$root.settingsMode">Setting&nbsp;</span>
-                  <span ng-if="$root.patientMode">Patients&nbsp;</span>
-                  <i ng-click="$ctrl.cancelSearchMode()" class="fa fa-times"></i>
-                </span>
-              </div>
-              <div ng-show="$root.reportTypeSet" class="ng-cloak" ng-cloak>
-                <span ng-cloak class="ng-cloak reportType-label">
-                <div class="reportTypeSet">
-                  {{$root.reportTypeString}}&nbsp;
-                  <i ng-click="$ctrl.cancelReportType()" class="fa cancel-reportType fa-times"></i>
-                </div>
-                </span>
-              </div>
-              <input key-bind="{ enter: '$ctrl.searchFunction()', esc: '$ctrl.cancelSearchMode()' }" class="form-control" placeholder="Search" type="text" uib-typeahead="report for report in $ctrl.reportTypes | filter:$viewValue" ng-model="search.searchExpression" ng-keyup="$ctrl.checkExpression(search.searchExpression)" ng-trim="false" ng-class="{'moveRight': $root.searchMode && !$root.reportTypeSet, 'moveFurtherRight': $root.searchMode && $root.reportTypeSet}" focus-element="searchFocused"/>
-              <i ng-show="search.searchExpression !== '' || $root.searchMode" ng-click="$ctrl.cancelSearchMode()" class="clearAll fa fa-times-circle"></i>
-            </div>
-          </div>
         </div>
       </div>
-      <!-- / Nav Search -->
-
-      <!-- Nav Mobile Search -->
-      <div class="wrap-search wrap-search-mobile clearfix ng-cloak" ng-if="searchBar && $ctrl.currentNavTab==='searchBar'" ng-cloak ng-class="{'searchBarHidden' : !$ctrl.searchBarEnabled }">
-        <div class="header-search">
-          <button class="btn-header secondary btn-search" ng-click="$ctrl.searchFunction();"><i class="fa fa-search"></i></button>
-          <div class="header-search-inner">
-            <div class="holder">
-              <div ng-show="$root.searchMode" class="ng-cloak" ng-cloak>
-                <span ng-cloak class="ng-cloak search-left-inner-addon">
-                  <span ng-if="$root.reportMode">Reports&nbsp;</span>
-                  <span ng-if="$root.settingsMode">Setting&nbsp;</span>
-                  <span ng-if="$root.patientMode">Patients&nbsp;</span>
-                  <i ng-click="$ctrl.cancelSearchMode()" class="fa fa-times"></i>
-                </span>
-              </div>
-              <div ng-show="$root.reportTypeSet" class="ng-cloak" ng-cloak>
-                <span ng-cloak class="ng-cloak reportType-label">
-                  <div class="reportTypeSet">
-                    {{$root.reportTypeString}}&nbsp;
-                    <i ng-click="$ctrl.cancelReportType()" class="fa cancel-reportType fa-times"></i>
-                  </div>
-                </span>
-              </div>
-              <input key-bind="{ enter: '$ctrl.searchFunction()', esc: '$ctrl.cancelSearchMode()' }" class="form-control" placeholder="Search" type="text" uib-typeahead="report for report in $ctrl.reportTypes | filter:$viewValue" ng-model="search.searchExpression" ng-keyup="$ctrl.checkExpression(search.searchExpression)" ng-trim="false" ng-class="{'moveRight': $root.searchMode && !$root.reportTypeSet, 'moveFurtherRight': $root.searchMode && $root.reportTypeSet}" focus-element="searchFocused"/>
-              <i ng-show="search.searchExpression !== '' || $root.searchMode" ng-click="$ctrl.cancelSearchMode()" class="clearAll fa fa-times-circle"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- / Nav Mobile Search -->
     </div>
+
+    <!-- Nav Search -->
+    <div class="wrap-search wrap-header-search ng-cloak hidden-xs" ng-if="searchBar" ng-cloak ng-class="{'searchBarHidden' : !$ctrl.searchBarEnabled }">
+      <div class="header-search">
+        <div uib-dropdown class="control-group left dropdown">
+          <button uib-dropdown-toggle class="btn btn-success btn-inverse btn-dropdown-toggle"><i class="fa fa-bars"></i></button>
+          <div uib-dropdown-menu class="dropdown-menu dm-panel dm-left dm-tables">
+            <div class="heading">Search Options</div>
+            <div class="dm-wrap-list">
+              <div class="dm-list">
+                <div class="dm-item" ng-repeat="item in searchOptionsList" ng-click="$ctrl.openAdvancedSearch($index)"><span>{{item.name}}</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button ng-show="!searchActive && !isOpenSearch" class="btn btn-success btn-search" ng-click="$ctrl.searchFunction();"><i class="fa fa-search"></i></button>
+        <div ng-show="!searchActive && !isOpenSearch" class="wrap-search-holder">
+          <div class="search-holder">
+            <div ng-show="$root.searchMode" class="ng-cloak" ng-cloak>
+              <span ng-cloak class="ng-cloak search-left-inner-addon">
+                <span ng-if="$root.reportMode">Reports&nbsp;</span>
+                <span ng-if="$root.settingsMode">Setting&nbsp;</span>
+                <span ng-if="$root.patientMode">Patients&nbsp;</span>
+                <i ng-click="$ctrl.cancelSearchMode()" class="fa fa-times"></i>
+              </span>
+            </div>
+            <div ng-show="$root.reportTypeSet" class="ng-cloak" ng-cloak>
+              <span ng-cloak class="ng-cloak reportType-label">
+              <div class="reportTypeSet">
+                {{$root.reportTypeString}}&nbsp;
+                <i ng-click="$ctrl.cancelReportType()" class="fa cancel-reportType fa-times"></i>
+              </div>
+              </span>
+            </div>
+            <input key-bind="{ enter: '$ctrl.searchFunction()', esc: '$ctrl.cancelSearchMode()' }" class="form-control" placeholder="Search" type="text" uib-typeahead="report for report in $ctrl.reportTypes | filter:$viewValue" ng-model="search.searchExpression" ng-keyup="$ctrl.checkExpression(search.searchExpression)" ng-trim="false" ng-class="{'moveRight': $root.searchMode && !$root.reportTypeSet, 'moveFurtherRight': $root.searchMode && $root.reportTypeSet}" focus-element="searchFocused"/>
+            <i ng-show="search.searchExpression !== '' || $root.searchMode" ng-click="$ctrl.cancelSearchMode()" class="clearAll fa fa-times-circle"></i>
+          </div>
+        </div>
+      </div>
+      
+      <div class="dropdown-menu dm-search dm-right dm-without-shadow dm-show" ng-if="searchActive && !isOpenSearch">
+        <div class="panel panel-secondary without-margin">
+          <div class="panel-heading">
+            <div class="control-group right open">
+              <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="$ctrl.openAdvancedSearch(searchOption)"><i class="fa fa-chevron-up"></i></button>
+            </div>
+            <h3 class="panel-title">{{$ctrl.option.name}}</h3>
+          </div>
+        </div>
+      </div>
+
+      <div mc-dropdown is-open="isOpenSearch" ng-if="isOpenSearch">
+        <div class="dropdown-menu dm-search dm-right">
+          <search-advanced-component option="searchOption"></search-advanced-component>
+        </div>
+      </div>
+    </div>
+    <!-- / Nav Search -->
+
+    <ul class="user-panel" role="tablist">
+      <li ng-class="$ctrl.activeNavTab('searchBar')" ng-if="searchBar" class="visible-xs"><a class="btn-header" ng-click="$ctrl.changeNavTab('searchBar')">
+        <i class="fa fa-search"></i></a>
+      </li>
+      <li uib-dropdown>
+        <a class="btn-header btn-notification" uib-dropdown-toggle>
+          <i class="fa fa-bell-o"></i>
+          <span class="count">2</span>
+        </a>
+        <div class="notifications-drop dm-right" id="tab-notifications" uib-dropdown-menu>
+          <div class="notifications-header">Notifications (2)</div>
+          <div class="notifications-body">
+            <ul>
+              <li>
+                <div class="notification-info">Information from Liquid Logic (Social Care) is currently unavailable.</div>
+                <div class="notification-time"><em>10 minutes ago</em></div>
+              </li>
+              <li>
+                <div class="notification-info">Information from Liquid Logic (Social Care) is currently unavailable.</div>
+                <div class="notification-time"><em>15 minutes ago</em></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li uib-dropdown>
+        <a class="btn-header btn-user" uib-dropdown-toggle>
+          <i class="fa fa-user"></i>
+        </a>
+        <div class="user-drop dm-right" uib-dropdown-menu>
+          <div class="user-profile-image" ng-click="$ctrl.goProfile()">
+            <!-- <i class="fa fa-user"></i> -->
+            <div class="img">
+              <img src="../../assets/images/user.jpg" alt="">
+            </div>
+          </div>
+          <div class="user-profile-info">
+            <div class="name"  ng-click="$ctrl.goProfile()">{{user.given_name}} {{user.family_name}}</div>
+            <div class="specification">
+              <div class="item" ng-if="user.role"><em>{{user.role}}</em></div>
+              <div class="item" ng-if="user.email">{{user.email}}</div>
+              <div class="item gray"><em>10/05/2099</em></div>
+            </div>
+            <a class="btn btn-success btn-block btn-signout" ng-click="$ctrl.signout()">Sign Out <i class="fa fa-sign-out"></i></a>
+          </div>
+        </div>
+      </li>
+    </ul>
   </nav>
+    
+  <!-- Nav Mobile Search -->
+  <div class="wrap-search wrap-search-mobile clearfix ng-cloak" ng-if="searchBar && $ctrl.currentNavTab==='searchBar'" ng-cloak ng-class="{'searchBarHidden' : !$ctrl.searchBarEnabled }">
+    <div class="header-search">
+      <button class="btn-header secondary btn-search" ng-click="$ctrl.searchFunction();"><i class="fa fa-search"></i></button>
+      <div class="wrap-search-holder">
+        <div class="search-holder">
+          <div ng-show="$root.searchMode" class="ng-cloak" ng-cloak>
+            <span ng-cloak class="ng-cloak search-left-inner-addon">
+              <span ng-if="$root.reportMode">Reports&nbsp;</span>
+              <span ng-if="$root.settingsMode">Setting&nbsp;</span>
+              <span ng-if="$root.patientMode">Patients&nbsp;</span>
+              <i ng-click="$ctrl.cancelSearchMode()" class="fa fa-times"></i>
+            </span>
+          </div>
+          <div ng-show="$root.reportTypeSet" class="ng-cloak" ng-cloak>
+            <span ng-cloak class="ng-cloak reportType-label">
+              <div class="reportTypeSet">
+                {{$root.reportTypeString}}&nbsp;
+                <i ng-click="$ctrl.cancelReportType()" class="fa cancel-reportType fa-times"></i>
+              </div>
+            </span>
+          </div>
+          <input key-bind="{ enter: '$ctrl.searchFunction()', esc: '$ctrl.cancelSearchMode()' }" class="form-control" placeholder="Search" type="text" uib-typeahead="report for report in $ctrl.reportTypes | filter:$viewValue" ng-model="search.searchExpression" ng-keyup="$ctrl.checkExpression(search.searchExpression)" ng-trim="false" ng-class="{'moveRight': $root.searchMode && !$root.reportTypeSet, 'moveFurtherRight': $root.searchMode && $root.reportTypeSet}" focus-element="searchFocused"/>
+          <i ng-show="search.searchExpression !== '' || $root.searchMode" ng-click="$ctrl.cancelSearchMode()" class="clearAll fa fa-times-circle"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- / Nav Mobile Search -->
 
   <!-- Header title -->
   <div class="wrap-header-title" ng-if="isPageHeader">

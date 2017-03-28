@@ -1,0 +1,78 @@
+.table thead tr th, 
+.table tbody tr td {
+  &.patient-control {
+    &:before {display: none;}
+    padding: 5px 4px 5px 7px;
+    @include clearfix;
+  }
+}
+.patient-buttons {
+  @include clearfix;
+  float: right; 
+  width: 77px;
+  @include respond-to(xs) {
+    margin: 0 auto;
+    float: none;
+  }
+  .btn {
+    border-radius: 0;
+    float: left;
+  }
+  .btn-view-patient { width: 57px; }
+  .btn-dropdown-toggle {
+    margin-left: -1px;
+    min-width: auto;
+    padding: 0;
+    width: 20px;
+    &:after {
+      margin-right: 1px;
+      right: 50%;
+      transform: translate(50%, -50%);
+    }
+  }
+  &.dropdown.open {
+    .btn-dropdown-toggle,
+    .btn-dropdown-toggle:hover,
+    .btn-dropdown-toggle:focus {
+      background: $base-color !important;
+      &:after {
+        color: $text-on-base-color
+      }
+    }
+  }
+
+}
+
+.wrap-patients-table {
+  width: 100%;
+  max-width: initial;
+  overflow-x: auto; 
+  .table {
+    min-width: 100%;
+    max-width: none;
+    thead tr th,
+    tbody tr td {
+      @include respond-to(xs) { min-height: 40px; }
+      word-wrap: normal;
+    }
+  }
+}
+
+.wrap-patients-table .table-patients-name,
+.wrap-patients-table .table-patients-controls {
+  position: absolute;
+  top: 0;
+  min-width: initial;
+  z-index: 2;
+  @media (max-width: map-get($breakpoints, 'xs') - 1) {
+    display: none;
+  }
+}
+.wrap-patients-table .table-patients-name { 
+  left: 0; 
+  width: auto;
+}
+.wrap-patients-table .table-patients-controls { 
+  right: 0; 
+  width: auto;
+}

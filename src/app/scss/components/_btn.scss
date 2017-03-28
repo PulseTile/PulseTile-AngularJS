@@ -15,9 +15,16 @@
 .btn-sm {
   height: 30px;
   line-height: 18px;
-  i {
-    font-weight: 400;
-  }
+  i { font-weight: 400; }
+}
+.btn-smaller {
+  font-size: 14px;
+  height: 26px;
+  line-height: 16px;
+  margin: 2px 0;
+  padding-bottom: 4px;
+  padding-top: 4px;
+  i { font-weight: 400; }
 }
 .btn.btn-icon-normal i {font-weight: 400;}
 
@@ -40,8 +47,7 @@
   .btn-default:active { color: #333333 !important; }
   
   .is-not-touch-device {
-   .btn-#{$button}:hover,
-   .btn-#{$button}:focus {
+   .btn-#{$button}:hover {
       background-color: darken($color, 10%) !important;
       border-color: darken($color, 10%) !important;
     }
@@ -97,7 +103,10 @@
     border-color: transparent !important;
     &:hover,
     &:focus,
-    &:active {border-color: transparent !important;}
+    &:active {
+      border-color: transparent !important;
+      box-shadow: 0 0 0 rgb(0, 0, 0) !important;
+    }
   }
   .btn.disabled,
   .btn[disabled] {
@@ -108,8 +117,7 @@
 }
 .is-not-touch-device .btn-inverse {
   @each $button, $color in $colored-buttons {
-    &.btn-#{$button}:hover,
-    &.btn-#{$button}:focus {
+    &.btn-#{$button}:hover {
       color: darken($color, 10%) !important;
       border-color: darken($color, 10%) !important;
     }
@@ -118,7 +126,10 @@
     border-color: transparent !important;
     &:hover,
     &:focus,
-    &:active {border-color: transparent !important;}
+    &:active {
+      border-color: transparent !important;
+      box-shadow: 0 0 0 rgb(0, 0, 0) !important;
+    }
   }
 }
 
@@ -143,6 +154,7 @@
 }
 .btn-filter {
   width: 42px;
+  &.btn-dropdown-toggle {width: auto;}
   i {
     font-size: 19px;
     font-weight: 400;

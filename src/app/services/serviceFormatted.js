@@ -23,12 +23,15 @@ class ServiceFormatted {
       HHmm: 'HH:mm'
     };
     this.filteringKeys = [];
+    this.filteringKeys2 = [];
 
     /* istanbul ignore next  */
     this.formattingTablesDate = function(collection, dateArgs, format) {
       for (var i = 0; i < collection.length; i++) {
         for (var j = 0; j < dateArgs.length; j++) {
-          collection[i][dateArgs[j]] = moment(collection[i][dateArgs[j]]).format(format);
+          if (angular.isNumber(collection[i][dateArgs[j]])) {
+            collection[i][dateArgs[j]] = moment(collection[i][dateArgs[j]]).format(format);
+          }
         }
       }
       return collection;
@@ -49,6 +52,23 @@ class ServiceFormatted {
         farmatedStr = str.indexOf(query.toLowerCase() || '') !== -1;
       });
       
+      return farmatedStr;
+    };
+    this.formattedSearching2 = function(row, query) {
+      var str = '';
+      var farmatedStr;
+
+      Object.keys(row).map((key, index)=>{
+        if (typeof row[key] !== 'string') {
+          row[key] += '';
+        }
+        if (this.filteringKeys2.indexOf(key) !== -1) {
+          str += ' ' + row[key].toLowerCase();
+        }
+        query = query.replace('&nbsp;', ' ');
+        farmatedStr = str.indexOf(query.toLowerCase() || '') !== -1;
+      });
+
       return farmatedStr;
     };
       

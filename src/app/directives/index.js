@@ -40,7 +40,7 @@ angular.module('ripple-ui.directives', [])
 
         scope.openPanel = function (namePanel) {
           if (scope.panelOpen === namePanel) {
-            scope.panelOpen = '';
+            // scope.panelOpen = '';
           } else {
             scope.panelOpen = namePanel;
             if (scope.showPanel && scope.showPanel.length) {
@@ -102,8 +102,11 @@ angular.module('ripple-ui.directives', [])
     /* istanbul ignore next  */
     return {
       link: function(scope, element, attrs) {
+        scope.$watch(attrs.isOpen, function() {
+            element[0].classList.toggle('open');
+        });
         scope.toggleDropdown = function (ev) {
-          ev.currentTarget.parentElement.classList.toggle('open');
+          $(ev.currentTarget).closest('.dropdown').toggleClass('open');
         };
       }
     }
@@ -217,6 +220,7 @@ angular.module('ripple-ui.directives', [])
           controller: ['$scope', '$element', '$timeout', 'serviceFormatted', 'serviceStateManager', '$state', 
               function($scope, $element, $timeout, serviceFormatted, serviceStateManager, $state) {
                   var filterData = serviceStateManager.getFilter();
+                  var filterEl;
 
                   $scope.isFilterOpen = filterData.isOpen;
                   $scope.queryFilter = filterData.query;
@@ -226,7 +230,10 @@ angular.module('ripple-ui.directives', [])
 
                       if ($scope.isFilterOpen) {
                           $timeout(function(){
-                              document.getElementById('filter').focus();
+                              filterEl = document.getElementById('filter');
+                              if(filterEl) {
+                                filterEl.focus();
+                              }
                           }, 0);
                       } else {
                           $scope.queryFilter = '';
@@ -240,6 +247,7 @@ angular.module('ripple-ui.directives', [])
 
                   $scope.$watch('queryFilter', function(queryFilterValue) {
                       serviceStateManager.setFilter({
+                        isOpen: $scope.isFilterOpen,
                         query: queryFilterValue
                       });
                   });
@@ -253,8 +261,8 @@ angular.module('ripple-ui.directives', [])
       /* istanbul ignore next  */
       return {
           restrict: 'A',
-          controller: ['$scope', '$element','$attrs', '$stateParams', 'serviceStateManager', '$state', 
-              function($scope, $element, $attrs, $stateParams, serviceStateManager, $state) {
+          controller: ['$scope', '$element','$attrs', '$stateParams', 'serviceStateManager', 
+              function($scope, $element, $attrs, $stateParams, serviceStateManager) {
                   var tableSettingsData = serviceStateManager.getTableSettings();
 
                   $scope.order = tableSettingsData.order;
@@ -326,4 +334,62 @@ angular.module('ripple-ui.directives', [])
                 };
           }]
       }
-  });
+  })
+  .directive('mcMultiViews', function() {
+      /* istanbul ignore next  */
+      return {
+          restrict: 'A',
+          controller: ['$scope','$attrs', 'serviceStateManager', 
+              function($scope, $attrs, serviceStateManager) {
+                  var viewSettingsData = serviceStateManager.getViewsSettings();
+
+                  $scope.activeView = viewSettingsData.activeView;
+                  
+                  $scope.isActiveView = function (viewName) {
+                    return $scope.activeView === viewName;
+                  };
+
+                  $scope.changeActiveView = function (viewName) {
+                    $scope.activeView = viewName;
+                    serviceStateManager.setViewsSettings({
+                      activeView: viewName
+                    });
+                  };
+
+                  $scope.$watch($attrs.defaultView, function() {
+                    if ($scope.activeView === '') {
+                      $scope.changeActiveView($attrs.defaultView)
+                    }
+                  });
+          }]
+      }
+  })
+  .directive('contenteditabled', ['$sce', function($sce) {
+    return {
+        restrict: 'A',
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModel) {
+            
+            if (!ngModel) return;
+        
+            ngModel.$render = function() {
+                element.html($sce.getTrustedHtml(ngModel.$viewValue || ''));
+            };
+        
+            // Listen for change events to enable binding
+            element.on('blur keyup change', function() {
+                scope.$evalAsync(read);
+            });
+            read(); // initialize
+        
+            // Write data to the model
+            function read() {
+                var html = element.html();
+                if ( attrs.stripBr && html == '<br>' ) {
+                    html = '';
+                }
+                ngModel.$setViewValue(html);
+            }
+        }
+    };
+  }]);

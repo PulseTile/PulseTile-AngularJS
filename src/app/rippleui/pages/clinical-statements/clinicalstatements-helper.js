@@ -15,79 +15,138 @@
  */
 let _ = require('underscore');
 
-/**
- * Take a supplied clinical phrase which could contain any of the following
- * delimiters:
- *   ~SUBJECT~
- *   |VALUE|
- *   {UNIT}
- * and returns the phrase in a processed array form, where the fixed strings
- * are string values and the variables are defined as an object representation
- */
-export function parsePhrase(phrase) {
-  let variables = { 
-    subject: /\~[^|{]*?\~/,
-    value:   /\|[^~{]*?\|/,
-    unit:    /\{[^~|]*?\}/
-  };
+// jQuery(document).ready(function(){
+//   // Update Structure Data as user types
+//   $('#update').click(function(e){
+//     e.preventDefault();
+//     var userinput = $('#clinicalNote');
+//     // Store Structured
+//     setStructured(userinput);
+//   });
+//   // Remove tags on click
+//   // removeTags('#clinicalNote');
+// });
 
-  let parts = [phrase];
+export function removeTags(userinput){
+  // Bind remove events
+  $(userinput).find('a.remove').each(function(){
+    // Remove binding is already assigned
+    $(this).unbind('click');
 
-  _.each(variables, (regex, type) => {
-    parts = _.flatten(_.map(parts, (p) => {
-      let match = regex.exec(p);
-      if(match) {
-        let before = p.slice(0,match.index);
-        let variable = { type, value: match[0].slice(1,-1) };
-        let after = p.substring(match.index + match[0].length);
-        return _.reject([before, variable, after], _.isEmpty);
-      }
-      else {
-        return p
-      }
-    }));
-  })
-  return parts;
-}
+    // Re-bind
+    $(this).click(function(){
+      $(this).closest('span').remove();
 
-/**
- * Takes the UI phrases array (custom statements are strings and templated
- * values are parsed objects) and converts in to a format to be sent ready
- * to be sent to the api for persistence
- */
-export function transformPhrases(phrases) {
-  return _.map(phrases, (p) =>{
-    if(_.isString(p)) {
-      return {id: null, subject: p}
-    }
-    else {
-      let varHash = _
-        .chain(p.parsed)
-        .reject(_.isString)
-        .map((v)=>[v.type, v.value])
-        .object()
-        .value();
-      return Object.assign({id: p.id}, varHash);
-    }
+      // Store Structured
+      setStructured(userinput);
+    });
   });
+
 }
 
-/**
- * Processes a statement object in to a UI displayable value. The function
- * handles custom statements (those which are not created from a templated
- * phrase) and those which are created from a templated phrase.
- */
-export function toText(statement) {
-  // Check if this is a purely custom phrase
-  if(!statement.id) {
-    return statement.subject;
+export function setStructured(userinput, cb){
+  // Parse the text box for all tags
+  var tags = [];
+  $(userinput).contents().each(function(){
+
+    // Is it a tag?
+    if( $(this).hasClass('tag') ){
+
+      var editable = $(this).find('.editable');
+      if( $(editable).length > 0 ){
+        // Contains structured data
+        var newTag = {
+          id: $(this).attr('data-id'),
+          value: editable.html()
+        }
+      } else {
+        // Just a typed phrase
+        var newTag = {
+          id: $(this).attr('data-id')
+        }
+      }
+
+      // Found in array
+      var found = false;
+
+      if( !found ){
+        tags.push(newTag);
+      }
+      
+    } else   {
+      // It's text
+
+      var newTag = {
+        phrase: this.wholeText
+      };
+
+      tags.push(newTag);
+
+    }
+
+  });
+
+  //Update the structured box for output
+  $( '#' + $(userinput).attr('data-structured') ).val( JSON.stringify(tags) );
+
+  $('#plain-data').val( strip($(userinput).html(), cb) );
+
+}
+
+// Credit: http://stackoverflow.com/questions/6690752/insert-html-at-caret-in-a-contenteditable-div
+export function pasteHtmlAtCaret(html, target) {
+  var parentNode = document.getElementById("clinicalNote");
+  var startNode = parentNode.lastChild;
+  // SG: Switch focus to target before inserting
+  target.focus();
+
+  var sel, range;
+  if (window.getSelection) {
+    // IE9 and non-IE
+    sel = window.getSelection();
+
+    if (sel.getRangeAt && sel.rangeCount) {
+      range = sel.getRangeAt(0);
+      range.deleteContents();
+
+      // Range.createContextualFragment() would be useful here but is
+      // only relatively recently standardized and is not supported in
+      // some browsers (IE9, for one)
+      var el = document.createElement("div");
+      el.innerHTML = html + ' ';
+      var frag = document.createDocumentFragment(), node, lastNode;
+      while ( (node = el.firstChild) ) {
+        lastNode = frag.appendChild(node);
+      }
+      range.insertNode(frag);
+      //console.log( range );
+
+      // Preserve the selection
+      if (lastNode) {
+        range = range.cloneRange();
+        range.setStartAfter(lastNode);
+        range.collapse(true);
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+    }
+  } else if (document.selection && document.selection.type != "Control") {
+    // IE < 9
+    document.selection.createRange().pasteHTML(html);
   }
-  console.log('statement.phrase');
-  console.log(statement.phrase);
-  let parsed = parsePhrase(statement.phrase);
-  console.log('parsed');
-  console.log(parsed);
-  return _.map(parsed,(p) => {
-    return (_.isObject(p)) ? statement[p.type] : p;
-  }).join('');
+}
+
+export function strip(html, cb){
+  var tmp = document.createElement("DIV");
+  tmp.innerHTML = html;  
+  var resultText = tmp.textContent||tmp.innerText;
+
+  if (typeof cb === 'function') {
+    cb(tmp.innerHTML);
+  }
+  
+  console.log( tmp.textContent||tmp.innerText );
+  
+  return tmp.textContent||tmp.innerText;
+
 }

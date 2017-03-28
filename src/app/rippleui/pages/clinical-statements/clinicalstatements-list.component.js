@@ -30,32 +30,11 @@ class ClinicalstatementsListController {
         this.currentPatient = data.patientsGet.data;
       }
       if (data.clinicalstatements.data) {
-        // this.clinicalStatements = data.clinicalstatements.data;
+        this.clinicalStatements = data.clinicalstatements.data;
+        serviceFormatted.formattingTablesDate(this.clinicalStatements, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['type', 'author', 'dateCreated', 'source'];
       }
-      var date = new Date();
-      this.clinicalStatements = [
-        {
-          sourceId: '1',
-          author: 'ripple_osi author 1',
-          dateCreate: Date.parse(new Date()),
-          source: 'Marand'
-        }, {
-          sourceId: '2',
-          author: 'ripple_osi author 2',
-          dateCreate: Date.parse(new Date(date.setDate(date.getDate()-1))),
-          source: 'EtherCIS'
-        }, {
-          sourceId: '3',
-          author: 'ripple_osi author 3',
-          dateCreate: Date.parse(new Date(date.setDate(date.getDate()-4))),
-          source: 'Marand'
-        }
 
-      ];
-
-      serviceFormatted.formattingTablesDate(this.clinicalStatements, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
-      serviceFormatted.filteringKeys = ['author', 'dateCreate', 'source'];
-    
       usSpinnerService.stop("patientSummary-spinner");
 
       if (serviceRequests.currentUserData) {

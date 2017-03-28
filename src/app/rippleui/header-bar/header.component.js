@@ -16,11 +16,52 @@
 let templateHeader = require('./header-bar.tmpl.html');
 
 class HeaderController {
+
   constructor($rootScope, $scope, $state, $stateParams, $ngRedux, patientsActions, serviceRequests, socketService) {
 
     var self = this;
     $scope.title = '';
+    $scope.searchActive = false;
+    
+    this.mainSearchEnabled = true;
+    this.showAdvancedSearch = false;
+    $scope.searchOptionsList = [
+      {
+        name: 'Patient Search',
+        // type: 'advanced'
+        type: ''
+      },
+      {
+        name: 'Patient Search - Advanced',
+        type: 'advanced'
+      },
+      {
+        name: 'Clinical Query',
+        type: 'clinicalQuery'
+      }
+    ];
+    
+    this.openAdvancedSearch = function(index) {
+      if (!$scope.searchOptionsList[index].type.length || 
+          ($scope.searchOption && $scope.searchOption.type === $scope.searchOptionsList[index].type)
+         ) {
 
+        $scope.isOpenSearch = $scope.searchOption = false;
+
+      } else {
+        $scope.isOpenSearch = true;
+        $scope.searchOption = $scope.searchOptionsList[index];
+      }
+    };
+    
+    this.closeAdvancedSearch = function() {
+      $scope.isOpenSearch = !$scope.isOpenSearch;
+    };
+    
+    $scope.isOpenSearch = false;
+    
+    serviceRequests.subscriber('closeAdvancedSearch', this.closeAdvancedSearch);
+    
     this.goBack = function () {
       /* istanbul ignore if  */
       if ($scope.title === 'PHR') return;
@@ -49,6 +90,9 @@ class HeaderController {
     };
     
     this.goPatientList = function () {
+      /* istanbul ignore if  */
+      if ($scope.title === 'PHR') return;
+      
       $state.go('patients-list');
     };
     

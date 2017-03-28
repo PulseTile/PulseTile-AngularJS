@@ -17,7 +17,7 @@ let templateHeightAndWeightList = require('./heightAndWeight-list.html');
 
 class HeightAndWeightListController {
   constructor($scope, $state, $stateParams, $ngRedux, heightAndWeightActions, serviceRequests, usSpinnerService) {
-    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-details'});
+    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
     this.go = function (id) {

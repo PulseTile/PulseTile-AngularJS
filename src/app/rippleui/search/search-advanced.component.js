@@ -14,15 +14,23 @@
    ~  limitations under the License.
  */
 let templateSearch = require('./search-advanced.html');
+import plugins from '../../plugins';
 
 class SearchAdvancedController {
-  constructor($scope, $http, $ngRedux, serviceRequests, searchActions, $state) {
-    // serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'main-search'});
-    // serviceRequests.publisher('headerTitle', {title: 'Welcome', isShowTitle: true});
+  constructor($scope, $http, $ngRedux, serviceRequests, searchActions, $state, $timeout) {
 
     this.cancel = function () {
-      serviceRequests.publisher('toggleAdvancedSearch', {});
+      serviceRequests.publisher('closeAdvancedSearch', {});
     };
+
+    this.typesList = [];
+    this.queryList = ['contains' , 'excludes'];
+    
+    plugins.forEach((plugin)=>{
+      /* istanbul ignore if  */
+      if (!Object.keys(plugin.sidebarInfo).length) return;
+      this.typesList.push(plugin.sidebarInfo);
+    });
 
     var changeState = function () {
       $scope.formSubmitted = true;
@@ -48,7 +56,45 @@ class SearchAdvancedController {
     $scope.formSubmitted = false;
     $scope.detailsFocused = false;
     $scope.searchParams = {};
+    $scope.agesSteps = [];
 
+    var step;
+    for (var i = 0; i <= 100; i += 5) {
+      step = {
+        value: i
+      };
+      if (i % 10 === 0) {
+        step.legend = i;
+      }
+      $scope.agesSteps.push(step);
+    }
+    // $scope.agesSteps.push({
+    //   value: 200,
+    //   legend: '100+'
+    // });
+
+    $scope.sliderRange = {
+      minValue: 0,
+      maxValue: 100,
+      options: {
+        floor: 0,
+        ceil: 100,
+        step: 5,
+        showTicks: true,
+        showTicksValues: false,
+        stepsArray: $scope.agesSteps
+      },
+
+    };
+
+    $scope.refreshSlider = function () {
+      $timeout(function () {
+        $scope.$broadcast('rzSliderForceRender');
+      });
+    };
+
+    $scope.refreshSlider();
+    
     if ($scope.searchParams.surname) {
       $scope.surnameFocus = true;
     }
@@ -132,26 +178,31 @@ class SearchAdvancedController {
 
       var surnameClean = surname.$invalid || !$scope.searchParams.surname || $scope.searchParams.surname === '';
       var forenameClean = forename.$invalid || !$scope.searchParams.forename || $scope.searchParams.forename === '';
-      var dateOfBirthClean = dateOfBirth.$invalid || !$scope.searchParams.dateOfBirth || $scope.searchParams.dateOfBirth === '';
+      // var dateOfBirthClean = dateOfBirth.$invalid || !$scope.searchParams.dateOfBirth || $scope.searchParams.dateOfBirth === '';
 
-      return surnameClean && forenameClean && dateOfBirthClean;
+      return surnameClean && forenameClean;
     };
+
+    var queryOption = this.option;
 
     $scope.searchByDetails = function (queryParams) {
       /* istanbul ignore if */
       if (queryParams.dateOfBirth) {
         queryParams.dateOfBirth = new Date(queryParams.dateOfBirth.getTime() - (60000 * queryParams.dateOfBirth.getTimezoneOffset()));
       }
-      this.searchResult = searchActions.advancedSearch;
+      this.searchResult = queryOption.type === 'advanced' ? searchActions.advancedSearch : searchActions.querySearch;
       this.searchResult(queryParams);
     };
   }
 }
 
 const SearchAdvancedComponent = {
+  bindings: {
+    option: '='
+  },
   template: templateSearch,
   controller: SearchAdvancedController
 };
 
-SearchAdvancedController.$inject = ['$scope', '$http', '$ngRedux', 'serviceRequests', 'searchActions', '$state'];
+SearchAdvancedController.$inject = ['$scope', '$http', '$ngRedux', 'serviceRequests', 'searchActions', '$state', '$timeout'];
 export default SearchAdvancedComponent;

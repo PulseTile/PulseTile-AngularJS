@@ -63,9 +63,6 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           main: {template: '<patients-charts-component><patients-charts-component>'},
         },
         breadcrumbs: [{
-          title: 'Home',
-          state: 'main-search'
-        }, {
           title: 'System Dashboard',
           state: 'patients-charts'
         }]
@@ -78,7 +75,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         params: { patientsList: [], advancedSearchParams: [], displayEmptyTable: false },
 				breadcrumbs: [{
           title: 'Home',
-          state: 'main-search'
+          state: 'patients-charts'
         }, {
 					title: 'Patient Listings',
 					state: 'patients-list'

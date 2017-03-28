@@ -16,7 +16,7 @@
 let templateVaccinationsList = require('./vaccinations-list.html');
 
 class VaccinationsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, vaccinationsActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, vaccinationsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
@@ -74,6 +74,10 @@ class VaccinationsListController {
           dateCreate: Date.parse(new Date(date.setDate(date.getDate()-4)))
         }
       ];
+
+      serviceFormatted.formattingTablesDate(this.vaccinations, ['dateCreate'], serviceFormatted.formatCollection.DDMMMYYYY);
+      serviceFormatted.filteringKeys = ['name', 'source', 'dateCreate'];
+
       usSpinnerService.stop('patientSummary-spinner');
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
@@ -81,10 +85,6 @@ class VaccinationsListController {
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
       }
-    };
-
-    this.selected = function (vaccinationIndex) {
-      return vaccinationIndex === $stateParams.vaccinationIndex;
     };
 
     if ($stateParams.page) {
@@ -107,5 +107,5 @@ const VaccinationsListComponent = {
   controller: VaccinationsListController
 };
 
-VaccinationsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'vaccinationsActions', 'serviceRequests', 'usSpinnerService'];
+VaccinationsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'vaccinationsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default VaccinationsListComponent;

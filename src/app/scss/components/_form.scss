@@ -35,6 +35,9 @@ label.control-label {
   box-shadow: none !important;
   -webkit-appearance: none;
 }
+.form-control.not-bordered {
+  border: 0;
+}
 
 .form-control.readonly,
 .form-control[readonly] {
@@ -81,6 +84,7 @@ select.input-sm {line-height: 20px;}
   position: relative;
 }
 textarea.textarea-big,
+select.textarea-big,
 .textarea-big {
   height: 101px;
   overflow-y: auto;
@@ -155,6 +159,19 @@ textarea.textarea-big,
     display: flex;
     align-items: center;
     & + .wrap-fcustominp {margin-top: 5px;}
+    .fcustominp-state {
+      margin: 0 -2px;
+      padding: 0 2px;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      &.disabled {
+        background: #f3f3f3;
+        opacity: 0.6;
+        .fcustominp label,
+        .fcustominp-label { cursor: default; }
+      }
+    }
     .fcustominp-label {
       float: left;
       font-size: 14px;
@@ -221,4 +238,51 @@ textarea.textarea-big,
 
 .uib-datepicker-popup.dropdown-menu {
   padding: 10px 0;
+}
+.input-container {
+  padding: 0;
+  font-size: 0;
+  position: relative;
+}
+.input-contenteditable {
+  display: inline-block;
+  padding: 0 10px;
+  font-size: 14px;
+  height: 28px;
+  line-height: 28px;
+  vertical-align: top;
+  outline: none;
+  min-width: 5px;
+  width: 100%;
+}
+.input-container .input-tag:first-child {
+  margin-left: 10px;
+}
+.input-tag {
+  float: left;
+  background-color: $base-color;
+  border-radius: 2px;
+  color: $text-on-base-color;
+  font-size: 16px;
+  font-weight: 400;
+  height: 26px;
+  left: 0;
+  line-height: 26px;
+  margin-right: 5px;
+  padding: 0 25px 0 8px;
+  position: relative;
+  top: 1px;
+  i {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: -1px;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+.contenteditable-resize {
+  resize: vertical;
 }

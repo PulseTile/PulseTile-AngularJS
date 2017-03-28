@@ -16,7 +16,7 @@ body,
   margin-top: 15px; }
 
 body {
-  background: url("../images/site-bg2.png") center 100px no-repeat #ffffff;
+  /*background: url("../images/site-bg2.png") center 100px no-repeat #ffffff;*/
   background-size: 100% auto;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
@@ -160,8 +160,8 @@ a[ui-sref] {
 .animate-fade.ng-hide {
   height: 0; }
 
-.btn {
-  font-weight: bold; }
+/*.btn {*/
+  /*font-weight: bold; }*/
 
 .btn-info,
 .btn-info:hover,
@@ -525,6 +525,8 @@ body:after {
           top: 2%;
           right: 2%; }
       #chat .chat-wrapper .video-chat-wrapper .video-chat-controller {
+        border: 1px #cacaca solid;
+        background: rgba(221, 221, 221, 0.5);
         height: 17%;
         display: -webkit-box;
         display: -moz-box;
@@ -2315,3 +2317,154 @@ div#age-chart div.morris-hover.morris-default-style {
 
 .import-record {
   cursor: pointer; }
+
+.wrap-patient-info {
+  background: #0D672F;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.wrap-patient-info.show .patient-info {
+  display: table
+}
+
+.patient-info {
+  display: none;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: -5px;
+  padding-top: 10px;
+  font-size: 18px;
+  line-height: 25px;
+  color: #fff
+}
+
+.patient-info .patient-info-group-1 {
+  overflow: hidden;
+  display: table-header-group
+}
+
+.patient-info .patient-info-group-2 {
+  margin-left: 5px;
+  display: table-footer-group
+}
+
+.patient-info .patient-info-group-2 .patient-info-item {
+  white-space: nowrap
+}
+
+@media (min-width: 768px) {
+  .wrap-patient-info {
+    overflow: hidden
+  }
+  .patient-info-caption {
+    display: none
+  }
+  .patient-info {
+    display: block;
+    padding-top: 0
+  }
+  .patient-info .patient-info-group-1 {
+    display: block;
+    overflow: hidden
+  }
+  .patient-info .patient-info-group-2 {
+    display: block;
+    float: right;
+    margin-left: 5px
+  }
+  .patient-info .column-1 {
+    float: left;
+    margin-right: 34px
+  }
+  .patient-info .column-2 {
+    float: right;
+    padding-right: 3px;
+    text-align: right
+  }
+}
+
+/*.patient-info-item {*/
+  /*margin-bottom: 10px;*/
+  /*font-weight: 600*/
+/*}*/
+
+.patient-info-item .key {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 400
+}
+
+.patient-info-item.significant {
+  margin-bottom: 3px;
+  font-size: 18px;
+  font-weight: 400
+}
+
+.btn {
+  height: 34px;
+  min-width: 34px;
+  font-size: 16px;
+  line-height: 22px;
+  border-radius: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  vertical-align: top
+}
+
+/*.btn i {*/
+  /*font-weight: 700*/
+/*}*/
+
+.btn-success,
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active {
+  color: #ffffff !important;
+  background-color: #007a41 !important;
+  border-color: #007a41 !important
+}
+
+.btn-success.active,
+.btn-success:hover.active,
+.btn-success:focus.active,
+.btn-success:active.active {
+  background-color: #007a41 !important;
+  border-color: #007a41 !important
+}
+
+.is-not-touch-device .btn-success:hover,
+.is-not-touch-device .btn-success:focus {
+  background-color: #004726 !important;
+  border-color: #004726 !important
+}
+
+.btn-default,
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active {
+  color: #333333 !important
+}
+
+.btn-danger,
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active {
+  color: #ffffff !important;
+  background-color: #DA534F !important;
+  border-color: #DA534F !important
+}
+
+.btn-danger.active,
+.btn-danger:hover.active,
+.btn-danger:focus.active,
+.btn-danger:active.active {
+  background-color: #DA534F !important;
+  border-color: #DA534F !important
+}
+
+.is-not-touch-device .btn-danger:hover,
+.is-not-touch-device .btn-danger:focus {
+  background-color: #cb2f2b !important;
+  border-color: #cb2f2b !important
+}

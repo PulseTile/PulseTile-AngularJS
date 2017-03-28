@@ -9,7 +9,6 @@
   background: map-get($colored-table, 'row-odd-background');
   thead {
     background-color: map-get($colored-table, 'header-background');
-  ;
     font-weight: 700;
     i {
       margin-left: 5px;
@@ -17,11 +16,11 @@
   }
   thead tr th,
   tbody tr td {
-    padding: 10px 5px;
+    padding: 10px 4px 10px 5px;
     vertical-align: middle;
     word-wrap: break-word;
     @include respond-to(sm) {
-      padding: 10px;
+      padding: 10px 4px 10px 10px;
     }
   }
   thead tr th.selected {
@@ -252,13 +251,15 @@ td[ng-click] {
     }
     &.table-striped {
       tbody {
-        tr {
-          &:nth-of-type(odd) td.sorted {
-            background-color: map-get($colored-table, 'sorted-background-odd');
-          }
-          &:hover td.sorted {
-            background-color: map-get($colored-table, 'row-background-hover');
-          }
+        tr:nth-of-type(odd) td.sorted {
+          background-color: map-get($colored-table, 'sorted-background-odd');
+        }
+      }
+    }
+    &.table-striped.table-hover {
+      tbody {
+        tr:hover td.sorted {
+          background-color: map-get($colored-table, 'row-background-hover');
         }
       }
     }

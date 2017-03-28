@@ -16,18 +16,182 @@
 let templatePatients = require('./patients-list.html');
 
 class PatientsController {
-  constructor($scope, $state, $stateParams, $location, $ngRedux, patientsActions, serviceRequests, Patient, serviceFormatted) {
+  constructor($scope, $state, $stateParams, $location, $ngRedux, patientsActions, serviceRequests, Patient, serviceFormatted, $timeout, $uibModal, ConfirmationModal) {
     let vm = this;
 
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-list'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Lists', isShowTitle: true});
     
-    vm.go = function (patient) {
-      $state.go('patients-summary', {
-        patientId: patient.id,
-        patientsList: vm.patients
-      });
+    $scope.patientsTable = serviceRequests.patientsTable || {
+      info: {
+        title: 'PATIENT INFO',
+        settings: {
+          name: {
+            select: true,
+            title: 'Name',
+            disabled: true,
+            width: 150
+          },
+          address: {
+            select: true,
+            title: 'Address',
+            width: 300
+          },
+          dateOfBirth: {
+            select: true,
+            title: 'Born',
+            disabled: true,
+            width: 105
+          },
+          gender: {
+            select: true,
+            title: 'Gender',
+            disabled: true,
+            width: 90
+          }, 
+          nhsNumber: {
+            select: true,
+            title: 'NHS No.',
+            width: 115  
+          }
+        }
+      },
+      date: {
+        title: 'DATE / TIME',
+        settings: {
+          orders: {
+            select: false,
+            title: 'Orders',
+            width: 110
+          },
+          results: {
+            select: false,
+            title: 'Results',
+            width: 110
+          },
+          vitals: {
+            select: false,
+            title: 'Vitals',
+            width: 110
+          },
+          diagnosis: {
+            select: false,
+            title: 'Diagnosis',
+            width: 130
+          }
+        }
+      },
+      count: {
+        title: 'COUNT',
+        settings: {
+          orders: {
+            select: false,
+            title: 'Orders',
+            width: 100
+          },
+          results: {
+            select: false,
+            title: 'Results',
+            width: 100
+          },
+          vitals: {
+            select: false,
+            title: 'Vitals',
+            width: 100
+          },
+          diagnosis: {
+            select: false,
+            title: 'Diagnosis',
+            width: 120
+          }
+        }
+      }
     };
+    $scope.patientsTableSettings = {};
+
+    if (serviceRequests.patientsTable) {
+      serviceRequests.patientsTable = $scope.patientsTable;
+    }
+
+    $scope.changeTableSettings = function () {
+      serviceRequests.patientsTable = $scope.patientsTable;
+      $scope.resizeFixedTables();
+    };
+
+    $scope.getpatientsTableSettings = function () {
+      var newSettings = {};
+      for (var key in $scope.patientsTable.info.settings) {
+        newSettings[key] = $scope.patientsTable.info.settings[key];
+        newSettings[key].type = 'info';
+      }
+      for (var key in $scope.patientsTable.date.settings) {
+        newSettings[key + 'Date'] = $scope.patientsTable.date.settings[key];
+        newSettings[key + 'Date'].type = 'date';
+        newSettings[key + 'Count'] = $scope.patientsTable.count.settings[key];
+        newSettings[key + 'Count'].type = 'count';
+      }
+      console.log('newSettings');
+      console.log(newSettings);
+      $scope.patientsTableSettings = newSettings;
+    };
+    $scope.getpatientsTableSettings();
+
+    $scope.resizeFixedTables = function () {
+      $timeout(function () {
+        var $wrapTables = $('.wrap-patients-table');
+
+        var $tableNames = $wrapTables.find('.table-patients-name');
+        var $tableNamesRows = $tableNames.find('tr');
+
+        var $tableControls = $wrapTables.find('.table-patients-controls');
+        var $tableControlsRows = $tableControls.find('tr');
+
+        var $tableFullRows = $('.table-patients-full tr');
+        var $tds = $tableFullRows.eq(1).find('td');
+
+        $tableNames.width($tds.eq(0).outerWidth());
+        $tableControls.width($tds.eq($tds.length - 1).outerWidth());
+        $tableFullRows.each(function (i, row, rows) {
+          var height = $(row).height();
+          $tableNamesRows.eq(i).height(height);
+          $tableControlsRows.eq(i).height(height);
+        });
+      });
+    }
+
+    $scope.selectAllSettings = function (key) {
+      var settings = $scope.patientsTable[key].settings;
+      var isSelectAll = true;
+
+      for (var item in settings) {
+        if (settings[item].select === false) {
+          isSelectAll = false;
+          break;
+        }
+      }
+
+      for (var item in settings) {
+        if (!settings[item].disabled) {
+          settings[item].select = !isSelectAll;
+        }
+      }
+
+      $scope.resizeFixedTables();
+    };
+
+    // vm.go = function (patient, state) {
+    //   console.log('go');
+    //   if (state != undefined) {
+    //     $state.go(state, {
+    //       patientId: patient.id,
+    //     });
+    //   } else {
+    //     $state.go('patients-summary', {
+    //       patientId: patient.id,
+    //       patientsList: vm.patients
+    //     });
+    //   }
+    // };
 
     vm.patientFilter = function (patient) {
       if (vm.filters.department) {
@@ -52,7 +216,41 @@ class PatientsController {
       vm.patients = curPatients.slice();
       serviceFormatted.formattingTablesDate(vm.patients, ['dateOfBirth'], serviceFormatted.formatCollection.DDMMMYYYY);
       serviceFormatted.filteringKeys = ['name', 'address', 'dateOfBirth', 'gender', 'nhsNumber'];
+      
+      $scope.resizeFixedTables();
     };
+    $(window).on('resize', function () {
+      $scope.resizeFixedTables();
+    });
+
+    vm.openModal = function (patient, state) {
+      ConfirmationModal.openModal(patient, state);
+    };
+    // vm.openModal = function (patient, state) {
+    //   $uibModal.open({
+    //     template: require('app/rippleui/confirmation.html'),
+    //     controller: function ($scope) {
+
+    //       $scope.cancel = function () {
+    //         $scope.$close(true);
+    //       };
+
+    //       $scope.ok = function () {
+    //         if (state != undefined) {
+    //           $state.go(state, {
+    //             patientId: patient.id,
+    //           });
+    //         } else {
+    //           $state.go('patients-summary', {
+    //             patientId: patient.id,
+    //             patientsList: vm.patients
+    //           });
+    //         }
+    //         $scope.$close(true);
+    //       };
+    //     }
+    //   });
+    // };
 
     if ($stateParams.patientsList.length === 0 && !$stateParams.displayEmptyTable) {
       vm.filters = {
@@ -89,5 +287,5 @@ const PatientsComponent = {
   controller: PatientsController
 };
 
-PatientsController.$inject = ['$scope', '$state', '$stateParams', '$location', '$ngRedux', 'patientsActions', 'serviceRequests', 'Patient', 'serviceFormatted'];
+PatientsController.$inject = ['$scope', '$state', '$stateParams', '$location', '$ngRedux', 'patientsActions', 'serviceRequests', 'Patient', 'serviceFormatted', '$timeout', '$uibModal', 'ConfirmationModal'];
 export default PatientsComponent;

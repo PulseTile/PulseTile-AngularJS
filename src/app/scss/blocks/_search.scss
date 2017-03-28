@@ -1,4 +1,17 @@
 .wrap-search {
+  flex-grow: 1;
+  height: 52px;
+  padding: 4px 0;
+  position: relative;
+  z-index: 10;
+  @include respond-to(sm) { 
+    margin-left: 0;
+    margin-right: 10px;
+  }
+  @include respond-to(md) { 
+    margin-left: 20px;
+    margin-right: 30px;
+  }
   .form-control {
     display: block;
     width: 100%;
@@ -6,7 +19,6 @@
     padding: 0 24px 0 12px;
     font-size: 15px;
     line-height: 1.42857143;
-    color: #C5C5C5;
     background-color: white;
     background-image: none;
     border: 1px solid #C3C3C3;
@@ -24,9 +36,6 @@
       color: #C5C5C5;
     }
   }
-  .holder {
-    position: relative;
-  }
   i.clearAll {
     position: absolute;
     color: map-get($colored-buttons, 'danger');
@@ -40,6 +49,9 @@
 
 .btn-search {
   float: right;
+  height: 34px;
+  line-height: 34px;
+  padding: 0;
   width: 43px;
 }
 
@@ -54,15 +66,22 @@
 }
 
 .wrap-header-search {
-  overflow: hidden;
+  //overflow: hidden;
   width: auto;
   @include respond-to(sm) {
     .form-control {
-      height: 36px;
-      border-radius: 2px;
+      height: 34px;
+      border-radius: 0px;
     }
   }
 }
+
+.header-search {
+  position: relative;
+  z-index: 2;
+  margin: 4px 5px;
+}
+
 .wrap-search-mobile {
   width: 100%;
   padding: 5px;
@@ -72,30 +91,28 @@
     .header-search {padding: 5px 0;}
   }
 }
-.header-search {
-  width: 100%;
-  @include respond-to(sm) {
-    max-width: 452px;
-    margin: 0 auto;
-  }
-}
-.header-search-inner {
+
+.wrap-search-holder {
   overflow: hidden;
   padding: 0;
   position: relative;
   @include respond-to(sm) {
-    padding: 7px 4px 9px;
+    padding: 0 7px;
   }
+  .search-holder { position: relative; }
 }
+
 .main-search {
   max-width: 832px;
   margin: 0 auto;
 }
+
 .main-search-inner {
   overflow: hidden;
   padding: 0;
   position: relative;
 }
+
 .wrap-search-mobile,
 .main-search {
   .btn-search {
@@ -116,11 +133,11 @@
   left: 2px;
   margin: 0;
   padding: 0 25px 0 8px;
-  height: 32px;
+  height: 30px;
   width: 105px;
   font-size: 16px;
   font-weight: 400;
-  line-height: 32px;
+  line-height: 30px;
   color: $text-on-base-color;
   border-radius: 2px;
   background-color: $base-color;
@@ -148,4 +165,18 @@
 .wrap-datepicker-top .dropdown-menu {
   top: 0 !important;
   transform: translateY(-100%);
+}
+
+
+.dropdown-menu.dm-search {
+  width: 100%;
+  border-radius: 0;
+  top: 3px;
+  border: 0;
+  z-index: 1;
+  .panel-secondary .panel-heading { 
+    padding-bottom: 4px;
+    padding-left: 80px; 
+    padding-top: 4px;
+  }
 }

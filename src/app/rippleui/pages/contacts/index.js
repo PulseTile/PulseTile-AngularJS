@@ -34,7 +34,6 @@ export default {
   "sidebarInfo": {
     name: 'contacts',
     link: 'contacts',
-    linkDetail: 'contacts-detail',
     title: 'Contacts'
   }
 }

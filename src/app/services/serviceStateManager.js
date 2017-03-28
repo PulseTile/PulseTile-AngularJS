@@ -27,6 +27,14 @@ class ServiceStateManager {
           isOpen: false,
           query: ''
         };
+        this.filterTimeline = {
+          isOpen: false,
+          rangeMin: '',
+          rangeMax: ''
+        };
+        this.viewsSettings = {
+          activeView: ''
+        };
 
         this.getFilter = function () {
           this.checkChangeState();
@@ -37,11 +45,35 @@ class ServiceStateManager {
         this.setFilter = function (filter) {
           if (typeof filter === "undefined") return;
 
-          if (filter.isOpen) {
-            this.filter.isOpen = filter.isOpen;
+            if (filter.isOpen) {
+                this.filter.isOpen = filter.isOpen;
+            } else {
+                this.filter.isOpen = filter.isOpen;
+            }
+            if (filter.query) {
+                this.filter.query = filter.query;
+            } else {
+                this.filter.query = '';
+            }
+        };
+
+        this.getFilterTimeline = function () {
+          this.checkChangeState();
+
+          return this.filterTimeline;
+        };
+
+        this.setFilterTimeline = function (filterTimeline) {
+          if (typeof filterTimeline === "undefined") return;
+
+          if (filterTimeline.isOpen) {
+            this.filterTimeline.isOpen = filterTimeline.isOpen;
           }
-          if (filter.query) {
-            this.filter.query = filter.query;
+          if (filterTimeline.rangeMin) {
+            this.filterTimeline.rangeMin = filterTimeline.rangeMin;
+          }
+          if (filterTimeline.rangeMax) {
+            this.filterTimeline.rangeMax = filterTimeline.rangeMax;
           }
         };
 
@@ -75,6 +107,28 @@ class ServiceStateManager {
             isOpen: false,
             query: ''
           };
+          this.filterTimeline = {
+            isOpen: false,
+            rangeMin: '',
+            rangeMax: ''
+          };
+          this.viewsSettings = {
+            activeView: ''
+          };
+        };
+
+        this.getViewsSettings = function () {
+          this.checkChangeState();
+
+          return this.viewsSettings;
+        };
+
+        this.setViewsSettings = function (viewSettings) {
+          if (typeof viewSettings === "undefined") return;
+
+          if (viewSettings.activeView) {
+            this.viewsSettings.activeView = viewSettings.activeView;
+          }
         };
 
         this.checkChangeState = function () {

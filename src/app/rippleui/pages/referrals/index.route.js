@@ -16,16 +16,7 @@
 routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 function routeConfig($stateProvider, $urlRouterProvider) {
-  $stateProvider
-
-    .state('referrals', {
-      url: '/patients/{patientId:int}/referrals?reportType&searchString&queryType',
-      views: {
-        banner: {template: '<patients-banner-component></patients-banner-component>'},
-        actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-        main: {template: '<referrals-list-component></referrals-list-component>'}
-      },
-      breadcrumbs: [{
+  var breadcrumbs = [{
         title: 'Patient Listings',
         state: 'patients-list'
       }, {
@@ -34,7 +25,17 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       }, {
         title: 'Referrals',
         state: 'referrals'
-      }]
+      }];
+
+  $stateProvider
+    .state('referrals', {
+      url: '/patients/{patientId:int}/referrals?reportType&searchString&queryType',
+      views: {
+        banner: {template: '<patients-banner-component></patients-banner-component>'},
+        actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+        main: {template: '<referrals-list-component></referrals-list-component>'}
+      },
+      breadcrumbs: breadcrumbs
     })
     .state('referrals-detail', {
       url: '/patients/{patientId:int}/referrals/{detailsIndex}?page&reportType&searchString&queryType',
@@ -44,16 +45,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         main: {template: '<referrals-list-component></referrals-list-component>'},
         detail: {template: '<referrals-detail-component></referrals-detail-component>'}
       },
-      breadcrumbs: [{
-        title: 'Patient Listings',
-        state: 'patients-list'
-      }, {
-        title: 'Patient Summary',
-        state: 'patients-summary'
-      }, {
-        title: 'Referrals',
-        state: 'referrals'
-      }]
+      breadcrumbs: breadcrumbs
     })
     .state('referrals-create', {
       url: '/patients/{patientId:int}/referrals/create?reportType&searchString&queryType',
@@ -63,16 +55,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         main: {template: '<referrals-list-component></referrals-list-component>'},
         detail: {template: '<referrals-create-component></referrals-create-component>'}
       },
-      breadcrumbs: [{
-        title: 'Patient Listings',
-        state: 'patients-list'
-      }, {
-        title: 'Patient Summary',
-        state: 'patients-summary'
-      }, {
-        title: 'Referrals',
-        state: 'referrals'
-      }]
+      breadcrumbs: breadcrumbs
     })
 }
 

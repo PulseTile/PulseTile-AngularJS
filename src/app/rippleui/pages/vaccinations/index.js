@@ -35,7 +35,6 @@ export default {
   "sidebarInfo": {
     name: 'vaccinations',
     link: 'vaccinations',
-    linkDetail: 'vaccinations-detail',
     title: 'Vaccinations'
   }
 }

@@ -44,7 +44,7 @@
         <tr>
             <th ng-click="sort('name')" ng-class="sortClass('name')">Name</th>
             <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
-            <th ng-click="sort('date')" ng-class="sortClass('date')">Date</th>
+            <th ng-click="sort('dateCreate')" ng-class="sortClass('dateCreate')">Date</th>
         </tr>
       </thead>
 
@@ -66,7 +66,7 @@
     <div class="panel-control">
       <div class="wrap-control-group">
         <div class="control-group with-indent left">
-          <dir-pagination-controls max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
+          <dir-pagination-controls max-size="6" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
         </div>
         <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1 && $ctrl.isShowCreateBtn">
           <button class="btn btn-success btn-inverse btn-create" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> <span>Create</span></button>

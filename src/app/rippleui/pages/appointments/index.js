@@ -33,9 +33,8 @@ export default {
     appointmentsActions
   },
   "sidebarInfo": {
-    name: 'appointments',
-    link: 'appointments',
-    linkDetail: 'appointments-detail',
-    title: 'Appointments'
+    // name: 'appointments',
+    // link: 'appointments',
+    // title: 'Appointments'
   }
 }

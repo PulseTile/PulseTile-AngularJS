@@ -17,7 +17,7 @@ let templateDocumentsList = require('./documents-list.html');
 
 class DocumentsListController {
   constructor($scope, $state, $stateParams, $ngRedux, documentsActions, serviceRequests, usSpinnerService) {
-    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-details'});
+    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
     this.currentPage = 1;

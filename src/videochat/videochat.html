@@ -21,15 +21,20 @@
 
 <body>
 <div id="chat">
-  <div class="panel panel-default panel-chat">
-    <div class="panel-heading">
-      <h4 class="panel-title ng-binding" id="patientName"></h4>
-    </div>
-    <div class="panel-body">
-      <div class="row">
-        <div class="col-xs-4"><span>DOB:</span> <strong id="patientDob"></strong></div>
-        <div class="col-xs-4"><span>Gender:</span> <strong id="patientGender"></strong></div>
-        <div class="col-xs-4"><span>NHS No.:</span> <strong id="patientNhs"></strong></div>
+  <div class="wrap-patient-info show">
+    <div class="patient-info">
+      <div class="patient-info-group-2">
+        <div class="column-1">
+          <div class="patient-info-item"><span class="key">D.O.B. </span> <span id="patientDob"></span></div>
+          <div class="patient-info-item"><span class="key">Phone: </span> <span id="patientPhone"></span></div>
+        </div>
+        <div class="column-2">
+          <div class="patient-info-item"><span class="key">Gender: </span> <span id="patientGender"></span></div>
+          <div class="patient-info-item"><span class="key">NHS No. </span> <span id="patientNhs"></span></div>
+        </div>
+      </div>
+      <div class="patient-info-group-1">
+        <div class="patient-info-item significant hidden-xs ng-binding" id="patientName"></div>
       </div>
     </div>
   </div>
@@ -52,7 +57,7 @@
         </div>
         <div class="video-chat-controller">
           <!--<p>Please press End Call to close this appointment when you are finished</p>-->
-          <button class="btn btn-danger" id="endCall">End Call</button>
+          <button class="btn btn-danger" id="endCall"><i class="fa fa-phone"></i> End Call</button>
           <button class="btn btn-danger" style="display: none;" id="closeWindow"><i class="fa fa-times-circle" aria-hidden="true"></i> Close Window</button>
           <button class="btn btn-success" style="display: none;" id="restartCall">Restart the call</button>
           <span id="callDuration">Connected - <span id="timer">00:00:00</span></span>
@@ -73,7 +78,7 @@
         </ul>
         <form action="" id="sendMessage">
           <textarea name="iMessage" id="iMessage" rows="3"></textarea>
-          <button class="btn btn-info"><i class="fa fa-pencil"></i> Send</button>
+          <button class="btn btn-success"><i class="fa fa-send"></i> Send</button>
         </form>
       </div>
     </div>
