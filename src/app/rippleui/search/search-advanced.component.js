@@ -54,7 +54,7 @@ class SearchAdvancedController {
     };
 
     $scope.formSubmitted = false;
-    $scope.detailsFocused = false;
+    this.detailsFocused = false;
     $scope.searchParams = {};
     $scope.agesSteps = [];
 
@@ -102,10 +102,10 @@ class SearchAdvancedController {
       $scope.nhsNumberFocus = true;
     }
 
-    if ($scope.searchParams.dateOfBirth) {
-      $scope.searchParams.dateOfBirth = new Date($scope.searchParams.dateOfBirth).toISOString().slice(0, 10);
-      $scope.detailsFocused = true;
-    }
+    // if ($scope.searchParams.dateOfBirth) {
+    //   $scope.searchParams.dateOfBirth = new Date($scope.searchParams.dateOfBirth).toISOString().slice(0, 10);
+    //   this.detailsFocused = true;
+    // }
 
     $scope.getResult = function (result) {
       $scope.patients = result.data;
@@ -174,7 +174,7 @@ class SearchAdvancedController {
     $scope.areDetailsFieldsClean = function (advancedSearchForm) {
       var surname = advancedSearchForm.surname;
       var forename = advancedSearchForm.forename;
-      var dateOfBirth = advancedSearchForm.dateOfBirth;
+      // var dateOfBirth = advancedSearchForm.dateOfBirth;
 
       var surnameClean = surname.$invalid || !$scope.searchParams.surname || $scope.searchParams.surname === '';
       var forenameClean = forename.$invalid || !$scope.searchParams.forename || $scope.searchParams.forename === '';
@@ -189,6 +189,9 @@ class SearchAdvancedController {
       /* istanbul ignore if */
       if (queryParams.dateOfBirth) {
         queryParams.dateOfBirth = new Date(queryParams.dateOfBirth.getTime() - (60000 * queryParams.dateOfBirth.getTimezoneOffset()));
+      }
+      if (queryParams.surname) {
+        queryParams.dateOfBirth = "2017-03-22T00:00:00.000Z";
       }
       this.searchResult = queryOption.type === 'advanced' ? searchActions.advancedSearch : searchActions.querySearch;
       this.searchResult(queryParams);

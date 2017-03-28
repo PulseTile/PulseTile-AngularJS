@@ -42,16 +42,10 @@ class HeaderController {
     ];
     
     this.openAdvancedSearch = function(index) {
-      if (!$scope.searchOptionsList[index].type.length || 
-          ($scope.searchOption && $scope.searchOption.type === $scope.searchOptionsList[index].type)
-         ) {
-
-        $scope.isOpenSearch = $scope.searchOption = false;
-
-      } else {
-        $scope.isOpenSearch = true;
-        $scope.searchOption = $scope.searchOptionsList[index];
-      }
+      if (!$scope.searchOptionsList[index].type.length) return;
+      
+      $scope.isOpenSearch = !$scope.isOpenSearch;
+      $scope.searchOption = $scope.searchOptionsList[index];
     };
     
     this.closeSearchOptions = function() {
