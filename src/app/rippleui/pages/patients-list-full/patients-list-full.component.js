@@ -16,7 +16,7 @@
 let templatePatientsListFull = require('./patients-list-full.html');
 
 class PatientsListFullController {
-  constructor($scope, $window, $rootScope, $state, $stateParams, $ngRedux, searchReport, Patient, serviceRequests, patientsActions, $timeout) {
+  constructor($scope, $window, $rootScope, $state, $stateParams, $ngRedux, searchReport, Patient, serviceRequests, patientsActions, $timeout, ConfirmationModal, serviceFormatted) {
     serviceRequests.publisher('headerTitle', {title: 'Search results', isShowTitle: true});
 
 
@@ -155,7 +155,11 @@ class PatientsListFullController {
           $tableControlsRows.eq(i).height(height);
         });
       });
-    }
+    };
+
+    $(window).on('resize', function () {
+      $scope.resizeFixedTables();
+    });
 
     $scope.selectAllSettings = function (key) {
       var settings = $scope.patientsTable[key].settings;
@@ -176,6 +180,12 @@ class PatientsListFullController {
 
       $scope.resizeFixedTables();
     };
+
+    this.openModal = function (patient, state) {
+      ConfirmationModal.openModal({id: patient.nhsNumber }, state);
+    };
+
+
 
 
 
@@ -320,7 +330,7 @@ class PatientsListFullController {
             if (this.pagingInfo.totalItems === 0) {
               this.noResults = 'There are no results that match your search criteria';
             } else {
-              this.processData();
+              // this.processData();
             }
 
             break;
@@ -332,7 +342,7 @@ class PatientsListFullController {
             if (this.pagingInfo.totalItems === 0) {
               this.noResults = 'There are no results that match your search criteria';
             } else {
-              this.processData();
+              // this.processData();
             }
 
             break;
@@ -348,6 +358,9 @@ class PatientsListFullController {
 
               this.patients = patients;
               this.pagingInfo.totalItems = result.data.totalPatients;
+
+              serviceFormatted.formattingTablesDate(this.patients, ['dateOfBirth'], serviceFormatted.formatCollection.DDMMMYYYY);
+              serviceFormatted.filteringKeys = ['name', 'address', 'dateOfBirth', 'gender', 'nhsNumber'];
 
               if (this.pagingInfo.totalItems === 0) {
                 this.noResults = 'There are no results that match your search criteria';
@@ -497,5 +510,5 @@ const PatientsSummaryComponent = {
   controller: PatientsListFullController
 };
 
-PatientsListFullController.$inject = ['$scope', '$window', '$rootScope', '$state', '$stateParams', '$ngRedux', 'searchReport', 'Patient', 'serviceRequests', 'patientsActions', '$timeout'];
+PatientsListFullController.$inject = ['$scope', '$window', '$rootScope', '$state', '$stateParams', '$ngRedux', 'searchReport', 'Patient', 'serviceRequests', 'patientsActions', '$timeout', 'ConfirmationModal', 'serviceFormatted'];
 export default PatientsSummaryComponent;

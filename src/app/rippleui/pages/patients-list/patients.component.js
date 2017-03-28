@@ -157,7 +157,7 @@ class PatientsController {
           $tableControlsRows.eq(i).height(height);
         });
       });
-    }
+    };
 
     $scope.selectAllSettings = function (key) {
       var settings = $scope.patientsTable[key].settings;
