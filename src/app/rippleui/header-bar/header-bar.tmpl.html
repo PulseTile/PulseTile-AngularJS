@@ -48,7 +48,9 @@
         <button ng-show="!searchActive && !isOpenSearch" class="btn btn-success btn-search" ng-click="$ctrl.searchFunction();"><i class="fa fa-search"></i></button>
         <div ng-show="!searchActive && !isOpenSearch" class="wrap-search-holder">
           <div class="search-holder">
+          <form ng-submit="$ctrl.searchFunction()">
             <input key-bind="{ enter: '$ctrl.searchFunction()', esc: '$ctrl.cancelSearchMode()' }" class="form-control" placeholder="Search" type="text" uib-typeahead="report for report in $ctrl.reportTypes | filter:$viewValue" ng-model="search.searchExpression" ng-keyup="$ctrl.checkExpression(search.searchExpression)" ng-trim="false" ng-class="{'moveRight': $root.searchMode && !$root.reportTypeSet, 'moveFurtherRight': $root.searchMode && $root.reportTypeSet}" focus-element="searchFocused"/>
+          </form>
             <i ng-show="search.searchExpression !== ''" ng-click="$ctrl.cancelSearchMode()" class="clearAll fa fa-times-circle"></i>
           </div>
         </div>

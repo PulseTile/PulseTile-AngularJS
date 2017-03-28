@@ -16,8 +16,171 @@
 let templatePatientsListFull = require('./patients-list-full.html');
 
 class PatientsListFullController {
-  constructor($scope, $window, $rootScope, $state, $stateParams, $ngRedux, searchReport, Patient, serviceRequests, patientsActions) {
+  constructor($scope, $window, $rootScope, $state, $stateParams, $ngRedux, searchReport, Patient, serviceRequests, patientsActions, $timeout) {
     serviceRequests.publisher('headerTitle', {title: 'Search results', isShowTitle: true});
+
+
+    $scope.patientsTable = serviceRequests.patientsTable || {
+      info: {
+        title: 'PATIENT INFO',
+        settings: {
+          name: {
+            select: true,
+            title: 'Name',
+            disabled: true,
+            width: 150
+          },
+          address: {
+            select: true,
+            title: 'Address',
+            width: 300
+          },
+          dateOfBirth: {
+            select: true,
+            title: 'Born',
+            disabled: true,
+            width: 105
+          },
+          gender: {
+            select: true,
+            title: 'Gender',
+            disabled: true,
+            width: 90
+          }, 
+          nhsNumber: {
+            select: true,
+            title: 'NHS No.',
+            width: 115  
+          }
+        }
+      },
+      date: {
+        title: 'DATE / TIME',
+        settings: {
+          orders: {
+            select: false,
+            title: 'Orders',
+            width: 110
+          },
+          results: {
+            select: false,
+            title: 'Results',
+            width: 110
+          },
+          vitals: {
+            select: false,
+            title: 'Vitals',
+            width: 110
+          },
+          diagnosis: {
+            select: false,
+            title: 'Diagnosis',
+            width: 130
+          }
+        }
+      },
+      count: {
+        title: 'COUNT',
+        settings: {
+          orders: {
+            select: false,
+            title: 'Orders',
+            width: 100
+          },
+          results: {
+            select: false,
+            title: 'Results',
+            width: 100
+          },
+          vitals: {
+            select: false,
+            title: 'Vitals',
+            width: 100
+          },
+          diagnosis: {
+            select: false,
+            title: 'Diagnosis',
+            width: 120
+          }
+        }
+      }
+    };
+    $scope.patientsTableSettings = {};
+
+    if (serviceRequests.patientsTable) {
+      serviceRequests.patientsTable = $scope.patientsTable;
+    }
+
+    $scope.changeTableSettings = function () {
+      serviceRequests.patientsTable = $scope.patientsTable;
+      $scope.resizeFixedTables();
+    };
+
+    $scope.getpatientsTableSettings = function () {
+      var newSettings = {};
+      for (var key in $scope.patientsTable.info.settings) {
+        newSettings[key] = $scope.patientsTable.info.settings[key];
+        newSettings[key].type = 'info';
+      }
+      for (var key in $scope.patientsTable.date.settings) {
+        newSettings[key + 'Date'] = $scope.patientsTable.date.settings[key];
+        newSettings[key + 'Date'].type = 'date';
+        newSettings[key + 'Count'] = $scope.patientsTable.count.settings[key];
+        newSettings[key + 'Count'].type = 'count';
+      }
+      console.log('newSettings');
+      console.log(newSettings);
+      $scope.patientsTableSettings = newSettings;
+    };
+    $scope.getpatientsTableSettings();
+
+    $scope.resizeFixedTables = function () {
+      $timeout(function () {
+        var $wrapTables = $('.wrap-patients-table');
+
+        var $tableNames = $wrapTables.find('.table-patients-name');
+        var $tableNamesRows = $tableNames.find('tr');
+
+        var $tableControls = $wrapTables.find('.table-patients-controls');
+        var $tableControlsRows = $tableControls.find('tr');
+
+        var $tableFullRows = $('.table-patients-full tr');
+        var $tds = $tableFullRows.eq(1).find('td');
+
+        $tableNames.width($tds.eq(0).outerWidth());
+        $tableControls.width($tds.eq($tds.length - 1).outerWidth());
+        $tableFullRows.each(function (i, row, rows) {
+          var height = $(row).height();
+          $tableNamesRows.eq(i).height(height);
+          $tableControlsRows.eq(i).height(height);
+        });
+      });
+    }
+
+    $scope.selectAllSettings = function (key) {
+      var settings = $scope.patientsTable[key].settings;
+      var isSelectAll = true;
+
+      for (var item in settings) {
+        if (settings[item].select === false) {
+          isSelectAll = false;
+          break;
+        }
+      }
+
+      for (var item in settings) {
+        if (!settings[item].disabled) {
+          settings[item].select = !isSelectAll;
+        }
+      }
+
+      $scope.resizeFixedTables();
+    };
+
+
+
+
+
 
     var searchType;
 
@@ -189,7 +352,7 @@ class PatientsListFullController {
               if (this.pagingInfo.totalItems === 0) {
                 this.noResults = 'There are no results that match your search criteria';
               } else {
-                this.processData();
+                // this.processData();
               }
             break;
           }
@@ -198,6 +361,7 @@ class PatientsListFullController {
           }
         }
       }
+      $scope.resizeFixedTables();
     };
 
     this.viewPatients = function () {
@@ -214,12 +378,6 @@ class PatientsListFullController {
       this.tab = 'counts';
       this.tabName = 'Counts';
     };
-
-    // $scope.$watch('this.pagingInfo.page', function (page) {
-    //   // this.pagingInfo.page = page;
-    //   $stateParams.pageNumber = page;
-    //   getData();
-    // });
 
     this.clickGetItem = false;
     this.go = function (patient) {
@@ -326,6 +484,8 @@ class PatientsListFullController {
       });
 
       this.patients = curPatients.slice();
+
+      $scope.resizeFixedTables();
     };
 
     this.getData();
@@ -337,5 +497,5 @@ const PatientsSummaryComponent = {
   controller: PatientsListFullController
 };
 
-PatientsListFullController.$inject = ['$scope', '$window', '$rootScope', '$state', '$stateParams', '$ngRedux', 'searchReport', 'Patient', 'serviceRequests', 'patientsActions'];
+PatientsListFullController.$inject = ['$scope', '$window', '$rootScope', '$state', '$stateParams', '$ngRedux', 'searchReport', 'Patient', 'serviceRequests', 'patientsActions', '$timeout'];
 export default PatientsSummaryComponent;
