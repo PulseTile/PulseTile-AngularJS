@@ -42,16 +42,16 @@ class HeaderController {
     ];
     
     this.openAdvancedSearch = function(index) {
-      if (!$scope.searchOptionsList[index].type.length || 
-          ($scope.searchOption && $scope.searchOption.type === $scope.searchOptionsList[index].type)
-         ) {
-
-        $scope.isOpenSearch = $scope.searchOption = false;
-
-      } else {
-        $scope.isOpenSearch = true;
-        $scope.searchOption = $scope.searchOptionsList[index];
-      }
+      if (!$scope.searchOptionsList[index].type.length) return;
+      
+      $scope.isOpenSearch = !$scope.isOpenSearch;
+      $scope.searchOption = $scope.searchOptionsList[index];
+    };
+    
+    this.closeSearchOptions = function() {
+      if ($scope.isOpenSearch) {
+        $scope.isOpenSearch = false;
+      }      
     };
     
     this.closeAdvancedSearch = function() {
@@ -68,7 +68,7 @@ class HeaderController {
 
       switch ($state.router.globals.$current.name) {
         case 'patients-charts': 
-				  $state.go('main-search');
+				  
           break;
         case 'patients-summary': 
           $state.go('patients-list');
@@ -331,23 +331,7 @@ class HeaderController {
 
     this.searchFunction = function () {
       /* istanbul ignore if  */
-      if ($rootScope.reportTypeSet && $scope.search.searchExpression !== '') {
-        var tempExpression = $rootScope.reportTypeString + ': ' + $scope.search.searchExpression;
-        $state.go('search-report', {
-          searchString: tempExpression
-        });
-      }
-      /* istanbul ignore if  */
-      if ($rootScope.settingsMode && $scope.search.searchExpression !== '') {
-        $state.go('patients-list-full', {
-          queryType: 'Setting: ',
-          searchString: $scope.search.searchExpression,
-          orderType: 'ASC',
-          pageNumber: '1'
-        });
-      }
-      /* istanbul ignore if  */
-      if ($rootScope.patientMode && $scope.search.searchExpression !== '') {
+      if ($scope.search.searchExpression !== '') {
         $state.go('patients-list-full', {
           queryType: 'Patient: ',
           searchString: $scope.search.searchExpression,

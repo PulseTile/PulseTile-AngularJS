@@ -96,7 +96,8 @@ export function setStructured(userinput, cb){
 // Credit: http://stackoverflow.com/questions/6690752/insert-html-at-caret-in-a-contenteditable-div
 export function pasteHtmlAtCaret(html, target) {
   var parentNode = document.getElementById("clinicalNote");
-  var startNode = parentNode.lastChild;
+  var lastChildNode = parentNode.lastChild;
+  var insertNodeBlock = document.getElementById("temp");
   // SG: Switch focus to target before inserting
   target.focus();
 
@@ -118,6 +119,11 @@ export function pasteHtmlAtCaret(html, target) {
       while ( (node = el.firstChild) ) {
         lastNode = frag.appendChild(node);
       }
+      
+      if (sel.focusOffset === 0 && lastChildNode) {
+        range.selectNode(insertNodeBlock);
+      }
+      
       range.insertNode(frag);
       //console.log( range );
 

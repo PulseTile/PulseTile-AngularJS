@@ -35,7 +35,7 @@
     <div class="wrap-search wrap-header-search ng-cloak hidden-xs" ng-if="searchBar" ng-cloak ng-class="{'searchBarHidden' : !$ctrl.searchBarEnabled }">
       <div class="header-search">
         <div uib-dropdown class="control-group left dropdown">
-          <button uib-dropdown-toggle class="btn btn-success btn-inverse btn-dropdown-toggle"><i class="fa fa-bars"></i></button>
+          <button uib-dropdown-toggle class="btn btn-success btn-inverse btn-dropdown-toggle" ng-click="$ctrl.closeSearchOptions()"><i class="fa fa-bars"></i></button>
           <div uib-dropdown-menu class="dropdown-menu dm-panel dm-left dm-tables">
             <div class="heading">Search Options</div>
             <div class="dm-wrap-list">
@@ -48,24 +48,8 @@
         <button ng-show="!searchActive && !isOpenSearch" class="btn btn-success btn-search" ng-click="$ctrl.searchFunction();"><i class="fa fa-search"></i></button>
         <div ng-show="!searchActive && !isOpenSearch" class="wrap-search-holder">
           <div class="search-holder">
-            <div ng-show="$root.searchMode" class="ng-cloak" ng-cloak>
-              <span ng-cloak class="ng-cloak search-left-inner-addon">
-                <span ng-if="$root.reportMode">Reports&nbsp;</span>
-                <span ng-if="$root.settingsMode">Setting&nbsp;</span>
-                <span ng-if="$root.patientMode">Patients&nbsp;</span>
-                <i ng-click="$ctrl.cancelSearchMode()" class="fa fa-times"></i>
-              </span>
-            </div>
-            <div ng-show="$root.reportTypeSet" class="ng-cloak" ng-cloak>
-              <span ng-cloak class="ng-cloak reportType-label">
-              <div class="reportTypeSet">
-                {{$root.reportTypeString}}&nbsp;
-                <i ng-click="$ctrl.cancelReportType()" class="fa cancel-reportType fa-times"></i>
-              </div>
-              </span>
-            </div>
             <input key-bind="{ enter: '$ctrl.searchFunction()', esc: '$ctrl.cancelSearchMode()' }" class="form-control" placeholder="Search" type="text" uib-typeahead="report for report in $ctrl.reportTypes | filter:$viewValue" ng-model="search.searchExpression" ng-keyup="$ctrl.checkExpression(search.searchExpression)" ng-trim="false" ng-class="{'moveRight': $root.searchMode && !$root.reportTypeSet, 'moveFurtherRight': $root.searchMode && $root.reportTypeSet}" focus-element="searchFocused"/>
-            <i ng-show="search.searchExpression !== '' || $root.searchMode" ng-click="$ctrl.cancelSearchMode()" class="clearAll fa fa-times-circle"></i>
+            <i ng-show="search.searchExpression !== ''" ng-click="$ctrl.cancelSearchMode()" class="clearAll fa fa-times-circle"></i>
           </div>
         </div>
       </div>
