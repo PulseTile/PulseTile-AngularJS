@@ -179,20 +179,6 @@ class PatientsController {
       $scope.resizeFixedTables();
     };
 
-    // vm.go = function (patient, state) {
-    //   console.log('go');
-    //   if (state != undefined) {
-    //     $state.go(state, {
-    //       patientId: patient.id,
-    //     });
-    //   } else {
-    //     $state.go('patients-summary', {
-    //       patientId: patient.id,
-    //       patientsList: vm.patients
-    //     });
-    //   }
-    // };
-
     vm.patientFilter = function (patient) {
       if (vm.filters.department) {
         return (patient.department === vm.filters.department);
@@ -226,31 +212,6 @@ class PatientsController {
     vm.openModal = function (patient, state) {
       ConfirmationModal.openModal(patient, state);
     };
-    // vm.openModal = function (patient, state) {
-    //   $uibModal.open({
-    //     template: require('app/rippleui/confirmation.html'),
-    //     controller: function ($scope) {
-
-    //       $scope.cancel = function () {
-    //         $scope.$close(true);
-    //       };
-
-    //       $scope.ok = function () {
-    //         if (state != undefined) {
-    //           $state.go(state, {
-    //             patientId: patient.id,
-    //           });
-    //         } else {
-    //           $state.go('patients-summary', {
-    //             patientId: patient.id,
-    //             patientsList: vm.patients
-    //           });
-    //         }
-    //         $scope.$close(true);
-    //       };
-    //     }
-    //   });
-    // };
 
     if ($stateParams.patientsList.length === 0 && !$stateParams.displayEmptyTable) {
       vm.filters = {

@@ -30,12 +30,10 @@ class HeaderController {
         name: 'Patient Search',
         // type: 'advanced'
         type: ''
-      },
-      {
+      }, {
         name: 'Patient Search - Advanced',
         type: 'advanced'
-      },
-      {
+      }, {
         name: 'Clinical Query',
         type: 'clinicalQuery'
       }
@@ -290,7 +288,7 @@ class HeaderController {
     };
 
     this.checkExpression = function (expression) {
-      $scope.search.searchExpression = expression.toLowerCase();
+      // $scope.search.searchExpression = expression.toLowerCase();
       /* istanbul ignore if  */
       if ($rootScope.searchMode) {
         if ($rootScope.reportMode && !$rootScope.reportTypeSet) {

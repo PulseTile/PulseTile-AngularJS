@@ -45,6 +45,10 @@
     transform: translateY(-50%);
     cursor: pointer;
   }
+  .btn-dropdown-toggle {
+    padding-top: 5px;
+    i { font-size: 22px; }
+  }
 }
 
 .btn-search {

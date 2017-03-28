@@ -27,7 +27,34 @@
   </div>
   <div class="panel-heading">
     <div class="control-group right">
-      <button class="btn btn-success btn-inverse btn-dropdown-toggle btn-table"><i class="fa fa-table"></i></button>
+      <div class="dropdown">
+        <button mc-dropdown class="btn btn-success btn-inverse btn-dropdown-toggle" ng-click="toggleDropdown($event);"><i class="fa fa-cog"></i></button>
+        <div class="dropdown-menu dm-panel dm-right dm-summery">
+          <div class="form-group-wrapper">
+            <div ng-repeat="(itemKey, item) in patientsTable">
+              <div class="heading">{{ item.title }}</div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-6 col-sm-4" ng-repeat="(key, tableSettings) in item.settings">
+                    <div class="wrap-fcustominp">
+                      <div class="fcustominp-state" ng-class="{disabled: !!tableSettings.disabled}">
+                        <div class="fcustominp">
+                          <input type="checkbox" id="patients-table-{{ itemKey }}-{{ key }}" ng-change="changeTableSettings()" name="patients-table-{{ itemKey }}-{{ key }}" ng-model="tableSettings.select"  ng-disabled="{{ !!tableSettings.disabled }}"/>
+                          <label for="patients-table-{{ itemKey }}-{{ key }}"></label>
+                        </div>
+                        <label for="patients-table-{{ itemKey }}-{{ key }}" class="fcustominp-label">{{ tableSettings.title }}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-4">
+                    <button class="btn btn-success btn-inverse btn-smaller" ng-click="selectAllSettings(itemKey)">Select All</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
     </div>
     <h3 class="panel-title">{{$root.subHeader}}</h3>
@@ -41,37 +68,117 @@
     </div>
   </div>
   <div class="panel-body">
-    <table ng-if="$ctrl.tab == 'patientInfo'" class="table table-striped table-hover table-bordered rwd-table table-sorted table-fixedcol">
-      <colgroup>
-        <col style="width: 17%;">
-        <col style="width: 37%;">
-        <col style="width: 15%;">
-        <col style="width: 15%;">
-        <col style="width: 16%;">
-      </colgroup>
-      <thead>
-        <tr>
-            <th ng-click="sort('name')" ng-class="sortClass('name')">Name</th>
-            <th ng-click="sort('address')" ng-class="sortClass('address')">Address</th>
-            <th ng-click="sort('dateOfBirth')" ng-class="sortClass('dateOfBirth')">Date of Birth</th>
-            <th ng-click="sort('gender')" ng-class="sortClass('gender')">Gender</th>
-            <th ng-click="sort('nhsNumber')" ng-class="sortClass('nhsNumber')">NHS No.</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr dir-paginate="patient in $ctrl.patients | filter:queryFiltering | orderBy: [order] : reverse | itemsPerPage: 10" ng-click="$ctrl.go(patient)">
-            <td data-th="Name" ng-class="sortClass('name')"><span>{{ patient.name }}</span></td>
-            <td data-th="Address" ng-class="sortClass('address')" class="cell-truncate"><span>{{ patient.address }}</span></td>
-            <td data-th="Date of Birth" ng-class="sortClass('dateOfBirth')"><span>{{ patient.dateOfBirth | date:'dd-MMM-yyyy' }}</span></td>
-            <td data-th="Gender" ng-class="sortClass('gender')"><span>{{ patient.gender }}</span></td>
-            <td data-th="NHS No" ng-class="sortClass('nhsNumber')"><span>{{ patient.nhsNumber | formatNHSNumber }}</span></td>
-        </tr>
+    <div class="wrap-patients-table" ng-if="$ctrl.tab == 'patientInfo'">
+      <table class="table table-striped  table-bordered rwd-table table-sorted table-fixedcol table-patients-name" ng-if="$ctrl.patients.length">
+        <colgroup>
+          <col style="{{patientsTable.info.settings.name.style}}">
+        </colgroup>
+        <thead>
+          <tr>
+              <th ng-click="sort('name'); resizeFixedTables();" 
+                  ng-class="sortClass('name')"
+                  ng-if="patientsTable.info.settings.name.select">{{ patientsTable.info.settings.name.title }}</th>
+          </tr>
+        </thead>
 
-        <tr ng-if="!$ctrl.patients.length">
-            <td colspan="5"><span class="label label-default">No patients found</span></td>
-        </tr>
-      </tbody>
-    </table>
+        <tbody>
+          <tr dir-paginate="patient in $ctrl.patients | filter:queryFiltering | filter: $ctrl.patientFilter | orderBy:[order] : reverse | itemsPerPage: 10">
+              <td data-th='{{ patientsTable.info.settings.name.title }}'
+                  ng-class="sortClass('name')"
+                  ng-if="patientsTable.info.settings.name.select">{{ patient['name'] }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table table-striped table-bordered rwd-table table-sorted table-fixedcol table-patients-full">
+        <colgroup>
+          <col  ng-repeat="item in patientsTableSettings" 
+                style="width: {{item.width}}px;"
+                ng-if="item.select"></col>
+          <col  style="width: 90px;">
+        </colgroup>
+        <thead>
+          <tr>
+              <th ng-repeat="(key, item) in patientsTableSettings"
+                  ng-click="sort(key); resizeFixedTables();" 
+                  ng-class="sortClass(key)"
+                  ng-if="item.select">
+                    <span>{{ item.title }}</span>
+                    <i class="fa fa-calendar" ng-if="item.type === 'date'"></i>
+                    <span ng-if="item.type === 'count'">#</span>
+              </th>
+              <th>&nbsp;</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr dir-paginate="patient in $ctrl.patients | filter:queryFiltering | filter: $ctrl.patientFilter | orderBy:[order] : reverse | itemsPerPage: 10">
+              <td ng-repeat="(key, item) in patientsTableSettings"
+                  data-th='{{ item.title + (item.type === "count" ? " #" : "") + (item.type === "date" ? " Date" : "")}}'
+                  ng-class="sortClass(key); {'text-center': key != 'name' && key != 'address' }"
+                  ng-if="item.select">
+                  <span ng-if="item.type === 'info' && key === 'nhsNumber'">{{ patient[key] | formatNHSNumber }}</span>
+                  <span ng-if="item.type === 'info' && key !== 'nhsNumber'">{{ patient[key] }}</span>
+                  <span ng-if="item.type === 'date'">27-Jan-1947</span>
+                  <span ng-if="item.type === 'count'">123</span>
+              </td>
+              <td class="patient-control">
+                <div uib-dropdown class="patient-buttons dropdown">
+                  <button class="btn btn-success btn-inverse btn-sm btn-view-patient" ng-click="$ctrl.openModal(patient)">View</button>
+                  <button uib-dropdown-toggle class="btn btn-success btn-inverse btn-sm btn-dropdown-toggle" ng-click="toggleDropdown($event);"></button>
+                  <div uib-dropdown-menu class="dropdown-menu dm-right">
+                    <div class="dm-wrap-list">
+                      <div class="dm-list">
+                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'orders')"><span>Orders</span></div>
+                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'results')"><span>Results</span></div>
+                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'vitals')"><span>Vitals</span></div>
+                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'diagnoses')"><span>Diagnosis</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+          </tr>
+
+          <tr ng-if="!$ctrl.patients.length">
+              <td colspan="6"><span class="label label-default">No patients found</span></td>
+          </tr>
+        </tbody>
+
+
+      </table>
+
+      <table class="table table-striped table-bordered rwd-table table-sorted table-fixedcol table-patients-controls" ng-if="$ctrl.patients.length">
+        <colgroup>
+          <col style="width: 90px;">
+        </colgroup>
+        <thead>
+          <tr><th>&nbsp;</th></tr>
+        </thead>
+        <tbody>
+          <tr dir-paginate="patient in $ctrl.patients | filter:queryFiltering | filter: $ctrl.patientFilter | orderBy:[order] : reverse | itemsPerPage: 10">
+              <td class="patient-control">
+                <div uib-dropdown class="patient-buttons dropdown">
+                  <button class="btn btn-success btn-inverse btn-sm btn-view-patient" ng-click="$ctrl.openModal(patient)">View</button>
+                  <button uib-dropdown-toggle class="btn btn-success btn-inverse btn-sm btn-dropdown-toggle" ng-click="toggleDropdown($event);"></button>
+                  <div uib-dropdown-menu class="dropdown-menu dm-right">
+                    <div class="dm-wrap-list">
+                      <div class="dm-list">
+                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'orders')"><span>Orders</span></div>
+                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'results')"><span>Results</span></div>
+                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'vitals')"><span>Vitals</span></div>
+                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'diagnoses')"><span>Diagnosis</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
     <table ng-if="$ctrl.tab == 'dateTime' || $ctrl.tab == 'counts'" class="table table-striped table-hover table-bordered rwd-table table-sorted">
       <thead>
         <tr>
