@@ -42,8 +42,6 @@ export default function ConfirmationModal($uibModal, $ngRedux, patientsActions) 
             $uibModalInstance.dismiss('cancel');
           };
 
-          // $scope.schedulesCreate = schedulesActions.create;
-          // $scope.schedulesUpdate = schedulesActions.update;
         }
       });
     }

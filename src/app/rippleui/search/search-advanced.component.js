@@ -17,9 +17,9 @@ let templateSearch = require('./search-advanced.html');
 import plugins from '../../plugins';
 
 class SearchAdvancedController {
-  constructor($scope, $http, $ngRedux, serviceRequests, searchActions, $state, $timeout) {
+  constructor($scope, $http, $ngRedux, serviceRequests, searchActions, $state, $timeout, ConfirmationModal) {
 
-    this.cancel = function () {
+    $scope.cancel = function () {
       serviceRequests.publisher('closeAdvancedSearch', {});
     };
 
@@ -34,11 +34,11 @@ class SearchAdvancedController {
 
     var changeState = function () {
       $scope.formSubmitted = true;
-
       if ($scope.patients.constructor === Array && $scope.patients.length == 1) {
-        $state.go('patients-summary', {
-          patientId: $scope.patients[0].nhsNumber
-        });
+        
+        ConfirmationModal.openModal($scope.patients[0]);
+        $scope.cancel();
+        
       } else if ($scope.patients.constructor === Array && $scope.patients.length > 1) {
         $state.go('patients-list', {
           patientsList: $scope.patients,
@@ -207,5 +207,5 @@ const SearchAdvancedComponent = {
   controller: SearchAdvancedController
 };
 
-SearchAdvancedController.$inject = ['$scope', '$http', '$ngRedux', 'serviceRequests', 'searchActions', '$state', '$timeout'];
+SearchAdvancedController.$inject = ['$scope', '$http', '$ngRedux', 'serviceRequests', 'searchActions', '$state', '$timeout', 'ConfirmationModal'];
 export default SearchAdvancedComponent;
