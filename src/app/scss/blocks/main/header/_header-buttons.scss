@@ -10,7 +10,7 @@
   color: $base-color;
   border: none;
   outline: none;
-  @include respond-to(xs) {
+  @include respond-from(xs) {
     width: 52px;
   }
   &.inverse {
@@ -36,7 +36,7 @@
     text-align: center;
     border-radius: 50%;
     font-weight: 400;
-    @include respond-to(xs) {
+    @include respond-from(xs) {
       right: 3px;
     }
   }
@@ -48,6 +48,10 @@
 .btn-header-prev {
   float: left;
   width: 52px;
+  @include respond-from(sm) {
+    float: none;
+    order: 1;
+  }
 }
 .btn-header.btn-user {
   font-size: 21px;
@@ -55,7 +59,7 @@
 .btn-notification {
   font-size: 18px;
   padding-right: 2px;
-  @include respond-to(xs) {
+  @include respond-from(xs) {
     font-size: 19px;
     padding-right: 0;
   }

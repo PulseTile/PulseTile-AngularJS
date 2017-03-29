@@ -8,7 +8,7 @@
   color: $text-on-base-color;
   text-align: center;
 }
-@include respond-to(xs) {
+@include respond-from(xs) {
   .header-title {
     padding: 10px 0;
     font-size: 18px;

@@ -59,19 +59,19 @@ class SearchAdvancedController {
     $scope.agesSteps = [];
 
     var step;
-    for (var i = 0; i <= 100; i += 5) {
+    for (var i = 0; i < 100; i += 5) {
       step = {
         value: i
       };
       if (i % 10 === 0) {
-        step.legend = i;
+        step.legend = i.toString();
       }
       $scope.agesSteps.push(step);
     }
-    // $scope.agesSteps.push({
-    //   value: 200,
-    //   legend: '100+'
-    // });
+    $scope.agesSteps.push({
+      value: 100,
+      legend: '100+'
+    });
 
     $scope.sliderRange = {
       minValue: 0,

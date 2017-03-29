@@ -12,7 +12,7 @@
 		margin-right: 8px;
 		font-size: 12px;
 		line-height: 20px;
-		@include respond-to(sm) {
+		@include respond-from(sm) {
 			font-size: 14px;
 		}
 	}

@@ -1,6 +1,6 @@
 .panel-primary .panel-control {
   padding: 2px 5px 0;
-  @include respond-to(xs) {
+  @include respond-from(xs) {
     padding: 2px 0 0;
   }
 }

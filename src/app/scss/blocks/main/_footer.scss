@@ -3,7 +3,7 @@
   */
 .wrapper {
   padding-bottom: 15px;
-  @include respond-to(sm) {
+  @include respond-from(sm) {
     padding-bottom: 56px;
   }
 }
@@ -16,7 +16,7 @@
   line-height: 29px;
   color: #757584;
   background-color: #EEEEEE;
-  @include respond-to(sm) {
+  @include respond-from(sm) {
     position: fixed;
     bottom: 0;
     z-index: 1000;

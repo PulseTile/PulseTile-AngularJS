@@ -19,7 +19,7 @@
     padding: 10px 4px 10px 5px;
     vertical-align: middle;
     word-wrap: break-word;
-    @include respond-to(sm) {
+    @include respond-from(sm) {
       padding: 10px 4px 10px 10px;
     }
   }
@@ -52,7 +52,7 @@
     background-color: #d0e8af;
   }
 }
-@include respond-to(xs) {
+@include respond-from(xs) {
   .table { font-size: 14px; }
 }
 .table > thead > tr > td.info,
@@ -114,13 +114,13 @@ td[ng-click] {
 .table-bordered {
   border: 1px solid #B4B5B4;
   border-collapse: separate;
-  // @include respond-to(xs) {
+  // @include respond-from(xs) {
   //   border-collapse: collapse;
   // }
   thead tr th,
   tbody tr td {
     border: none;
-    @include respond-to(xs) {
+    @include respond-from(xs) {
       border-left: 1px solid #B4B5B4;
       &:first-child {
         border: none;
@@ -137,14 +137,14 @@ td[ng-click] {
     }
   }
 }
-@media (max-width: map-get($breakpoints, 'xs') - 1) {
+@include respond-to(xs) {
   .table-bordered {
     border-left: 0;
     border-right: 0;
   }
 }
 
-@media (max-width: map-get($breakpoints, 'xs') - 1) {
+@include respond-to(xs) {
   // Responsive Tables - http://codepen.io/geoffyuen/pen/FCBEg
   .rwd-table {
     display: block;
@@ -181,7 +181,7 @@ td[ng-click] {
           float: left;
           padding-right: 10px;
           // end options
-          @include respond-to(xs) {
+          @include respond-from(xs) {
             display: none;
           }
         }
@@ -195,7 +195,7 @@ td[ng-click] {
     th, td {
       text-align: left;
       
-      @include respond-to(xs) {
+      @include respond-from(xs) {
         display: table-cell;
         padding: .25em .5em;
 
@@ -209,6 +209,7 @@ td[ng-click] {
     display: none ;
   }
 }
+
 .sort-asc:after {
   padding-left: 5px;
   content: '\25BC'
@@ -218,7 +219,7 @@ td[ng-click] {
   padding-left: 5px;
   content: '\25B2'
 }
-@include respond-to(xs) {
+@include respond-from(xs) {
   .table-sorted {
     thead tr th {
       cursor: pointer;

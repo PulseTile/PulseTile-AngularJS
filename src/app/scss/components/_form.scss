@@ -33,7 +33,6 @@ label.control-label {
   border-color: #c3c3c3;
   border-radius: 2px;
   box-shadow: none !important;
-  -webkit-appearance: none;
 }
 .form-control.not-bordered {
   border: 0;
@@ -93,7 +92,7 @@ select.textarea-big,
 .uib-daypicker:focus {outline: none !important;}
 
 
-@include respond-to(xs) {
+@include respond-from(xs) {
   .form-group-wrapper {
     margin-bottom: -17px;
   }
@@ -243,6 +242,9 @@ select.textarea-big,
   padding: 0;
   font-size: 0;
   position: relative;
+}
+.form-contenteditable {
+  -webkit-appearance: none;
 }
 .input-contenteditable {
   display: inline-block;

@@ -1,4 +1,5 @@
 .wrap-logo {
+  float: left;
   padding: 6px 9px;
   margin: auto;
   margin-left: 0;
@@ -38,8 +39,10 @@
 }
 .is-not-touch-device .logo .logo-text a:hover { color: $auxiliary-color; }
 
-@include respond-to(xs) {
+@include respond-from(sm) {
   .wrap-logo {
+    order: 2;
+    float: none;
     padding-left: 9px;
     padding-right: 9px;
   }

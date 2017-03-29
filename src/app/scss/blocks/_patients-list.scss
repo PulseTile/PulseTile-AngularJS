@@ -10,7 +10,7 @@
   @include clearfix;
   float: right; 
   width: 77px;
-  @include respond-to(xs) {
+  @include respond-from(xs) {
     margin: 0 auto;
     float: none;
   }
@@ -43,6 +43,17 @@
 
 }
 
+@include respond-to(xs) {
+  .dropdown-menu.dm-patients {
+    right: -35px;
+    width: 288px;
+    .btn-smaller {
+      height: 30px;
+      line-height: 20px;
+    }
+  }
+}
+
 .wrap-patients-table {
   width: 100%;
   max-width: initial;
@@ -52,7 +63,7 @@
     max-width: none;
     thead tr th,
     tbody tr td {
-      @include respond-to(xs) { min-height: 40px; }
+      @include respond-from(xs) { min-height: 40px; }
       word-wrap: normal;
     }
   }
@@ -64,9 +75,7 @@
   top: 0;
   min-width: initial;
   z-index: 2;
-  @media (max-width: map-get($breakpoints, 'xs') - 1) {
-    display: none;
-  }
+  @include respond-to(xs) { display: none; }
 }
 .wrap-patients-table .table-patients-name { 
   left: 0; 

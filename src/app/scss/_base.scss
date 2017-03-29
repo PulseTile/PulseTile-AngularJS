@@ -110,7 +110,7 @@ label:focus,
 .page-wrapper {
   padding: 10px 0;
   background-color: transparent;
-  @include respond-to(xs) {
+  @include respond-from(xs) {
     padding: $indent-wrapper-big;
   }
 }

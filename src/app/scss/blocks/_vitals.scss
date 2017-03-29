@@ -21,7 +21,7 @@ $vitalsInputColor: (
     padding-bottom: 3px;
   }
 }
-@include respond-to(xs) {
+@include respond-from(xs) {
   .vitals-group {
     margin-left: 0;
     .highlighter { width: 4px; }

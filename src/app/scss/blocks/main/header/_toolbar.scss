@@ -9,11 +9,11 @@
   font-size: 15px;
   line-height: 20px;
   color: $text-on-base-color;
-  @include respond-to(xs) {
+  @include respond-from(xs) {
     min-height: 56px;
     padding: 11px 0;
   }
-  @include respond-to(sm) {
+  @include respond-from(sm) {
     padding-left: 109px;
   }
 }

@@ -37,7 +37,7 @@
   }
   
 }
-@include respond-to(sm) {
+@include respond-from(sm) {
   .wrap-patient-info {
     overflow: hidden;
   }
@@ -79,7 +79,7 @@
     font-weight: 400;
   }
 }
-@include respond-to(sm) {
+@include respond-from(sm) {
   .patient-info-item {
     margin-bottom: 2px;
     .key {

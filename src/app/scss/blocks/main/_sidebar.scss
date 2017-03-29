@@ -8,7 +8,7 @@
   width: 165px;
   border-right: 1px solid #B7B7B7;
   background: #F7F7F7;
-  @include respond-to(sm) {
+  @include respond-from(sm) {
     position: static;
     float: left;
     overflow-y: initial;
@@ -49,7 +49,7 @@
   color: $base-color;
   background: $text-on-base-color;
 }
-@include respond-to(xs) {
+@include respond-from(xs) {
   .btn-toggle-sidebar,
   .btn-toggle-sidebar:focus,
   .btn-toggle-sidebar:hover, {
@@ -59,7 +59,7 @@
     span {display: inline;}
   }
 }
-@include respond-to(sm) {
+@include respond-from(sm) {
   .btn-toggle-sidebar,
   .btn-toggle-sidebar:focus,
   .btn-toggle-sidebar:hover, {

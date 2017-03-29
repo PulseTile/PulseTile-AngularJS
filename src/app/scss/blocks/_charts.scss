@@ -12,7 +12,7 @@
     canvas {
       height: 441px !important;
       background-color: #eee;
-      @include respond-to(md) {
+      @include respond-from(md) {
          height: 525px !important;
       } 
     }

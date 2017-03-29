@@ -72,10 +72,10 @@
 .dm-summery {
   width: 300px;
   padding: 15px 10px 19px 20px;
-  @include respond-to(xs) {
+  @include respond-from(xs) {
     width: 400px;
   }
-  @include respond-to(sm) {
+  @include respond-from(sm) {
     width: 470px;
   }
 }
