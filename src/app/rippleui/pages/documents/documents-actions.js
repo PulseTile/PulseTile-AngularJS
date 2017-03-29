@@ -24,7 +24,7 @@ export function findAllDocuments(patientId) {
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/documents'
+      url: '/api/documents/patient/' + patientId
     },
 
     meta: {

@@ -23,6 +23,7 @@ import studies from '../rippleui/pages/dicom/studies-reducer-all';
 import series from '../rippleui/pages/dicom/series-reducer-all';
 import instanceGet from '../rippleui/pages/dicom/instance-reducer-get';
 import instanceIdGet from '../rippleui/pages/dicom/instance-id-reducer-get';
+import findReferral from '../rippleui/pages/documents/documents-reducer-find-referral';
 
 import plugins from '../plugins';
 
@@ -34,7 +35,8 @@ let reducers = {
   studies,
   series,
   instanceGet,
-  instanceIdGet
+  instanceIdGet,
+  findReferral
 };
 
 plugins.forEach((plugin)=>{

@@ -37,7 +37,7 @@ class DocumentsListController {
     
     this.go = function (id, documentType, source) {
       $state.go('documents-detail', {
-        patientId: $scope.patient.id,
+        patientId: this.currentPatient.id,
         documentType: documentType,
         documentIndex: id,
         filter: $scope.query,

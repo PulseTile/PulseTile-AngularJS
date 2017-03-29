@@ -21,12 +21,13 @@ class DocumentsDetailController {
     $scope.documentType = $stateParams.documentType;
 
     this.setCurrentPageData = function (data) {
-      if (data.documents.data) {
-        this.clinicalDocument = data.documentsFindDischarge.data;
-      }
-      if (data.documents.data) {
-        this.clinicalDocument = data.documentsFindReferral.data;
-      }
+      console.log('setCurrentPageData ', data);
+      // if (data.documents.data) {
+      //   this.clinicalDocument = data.documentsFindDischarge.data;
+      // }
+      // if (data.documents.data) {
+      //   this.clinicalDocument = data.documentsFindReferral.data;
+      // }
     };
 
     let unsubscribe = $ngRedux.connect(state => ({
@@ -39,7 +40,7 @@ class DocumentsDetailController {
       this.documentsFindDischarge = documentsActions.findDischarge;
       this.documentsFindDischarge($stateParams.patientId, $stateParams.documentIndex, $stateParams.source);
     }
-    else if ($scope.documentType == 'Healthlink Referral') {
+    else if ($scope.documentType == 'Referral') {
       this.documentsFindReferral = documentsActions.findReferral;
       this.documentsFindReferral($stateParams.patientId, $stateParams.documentIndex, $stateParams.source);
     }
