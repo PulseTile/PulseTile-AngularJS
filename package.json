@@ -48,6 +48,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-preset-stage-1": "~6.5.0",
     "babelify": "^7.3.0",
+    "bootstrap-editable": "^1.0.1",
     "bootstrap-loader": "^1.1.6",
     "bower-webpack-plugin": "^0.1.9",
     "codecov.io": "^0.1.6",

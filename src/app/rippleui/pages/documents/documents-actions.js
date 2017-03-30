@@ -40,7 +40,7 @@ export function findReferral(patientId, referralId, source) {
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/documents/referral/' + referralId + '?source=' + source
+      url: '/api/documents/patient/' + patientId + '/' + referralId
     },
 
     meta: {

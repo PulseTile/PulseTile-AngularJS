@@ -21,13 +21,14 @@ import ngRedux from 'ng-redux';
 import dirPagination from 'angular-utils-pagination';
 import createLogger from 'redux-logger';
 import 'angular-loading-bar';
-// import 'fullcalendar';
+import 'fullcalendar';
 import 'angular-ui-calendar';
 import 'angularjs-slider';
 import 'angular-sanitize';
-
 import 'chart.js';
-
+import 'bootstrap/dist/js/bootstrap';
+import 'X-editable/dist/bootstrap3-editable/js/bootstrap-editable';
+import 'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar'
 import 'angular-spinner';
 import 'jquery-timepicker-jt';
 import 'angular-jquery-timepicker';
