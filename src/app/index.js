@@ -27,7 +27,7 @@ import 'angularjs-slider';
 import 'angular-sanitize';
 import 'chart.js';
 import 'bootstrap/dist/js/bootstrap';
-import 'X-editable/dist/bootstrap3-editable/js/bootstrap-editable';
+import 'bootstrap-editable';
 import 'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar'
 import 'angular-spinner';
 import 'jquery-timepicker-jt';
