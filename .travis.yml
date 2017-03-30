@@ -10,7 +10,7 @@ cache:
 
 branches:
   only:
-    - develop
+    - feature/documents
 
 node_js:
   - "6"

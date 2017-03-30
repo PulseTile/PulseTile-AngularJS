@@ -25,10 +25,10 @@ describe('SearchAdvancedComponent', function() {
   }));
 
   beforeEach(function() {
-    spyOn(ctrl, 'cancel');
+    spyOn(scope, 'cancel');
     spyOn(scope, 'ok');
 
-    ctrl.cancel();
+    scope.cancel();
     scope.ok();
   });
 
@@ -42,7 +42,7 @@ describe('SearchAdvancedComponent', function() {
     expect(template).toBeDefined();
   });
   it("cancel was called", function() {
-    expect(ctrl.cancel).toHaveBeenCalled();
+    expect(scope.cancel).toHaveBeenCalled();
   });
   it("ok was called", function() {
     expect(scope.ok).toHaveBeenCalled();

@@ -29,12 +29,8 @@ describe('ReportChartComponent', function() {
     }));
 
     beforeEach(function() {
-        spyOn(ctrl, 'openModal');
-        spyOn(ctrl, 'ageChart');
         spyOn(ctrl, 'setDataRequest');
 
-        ctrl.openModal();
-        ctrl.ageChart();
         ctrl.setDataRequest();
     });
 
@@ -43,12 +39,6 @@ describe('ReportChartComponent', function() {
     });
     it('Template exist', function() {
         expect(template).toBeDefined();
-    });
-    it("openModal was called", function() {
-        expect(ctrl.openModal).toHaveBeenCalled();
-    });
-    it("ageChart was called", function() {
-        expect(ctrl.ageChart).toHaveBeenCalled();
     });
     it("setDataRequest was called", function() {
         expect(ctrl.setDataRequest).toHaveBeenCalled();

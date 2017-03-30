@@ -36,12 +36,10 @@ describe('Patients Summary', function() {
     spyOn(ctrl, 'goToSection');
     spyOn(ctrl, 'getPatientData');
     spyOn(scope, 'go');
-    spyOn(ctrl, 'loadPatient');
 
     ctrl.goToSection();
     ctrl.getPatientData();
     scope.go();
-    ctrl.loadPatient();
 
   });
      
@@ -59,8 +57,5 @@ describe('Patients Summary', function() {
   });
   it("route go was called", function() {
     expect(scope.go).toHaveBeenCalled();
-  });
-  it("loadPatient was called", function() {
-    expect(ctrl.loadPatient).toHaveBeenCalled();
   });
 });

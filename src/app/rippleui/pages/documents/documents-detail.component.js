@@ -21,7 +21,6 @@ class DocumentsDetailController {
     $scope.documentType = $stateParams.documentType;
 
     this.setCurrentPageData = function (data) {
-      console.log('setCurrentPageData ', data);
       // if (data.documents.data) {
       //   this.clinicalDocument = data.documentsFindDischarge.data;
       // }

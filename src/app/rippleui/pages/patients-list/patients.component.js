@@ -130,8 +130,6 @@ class PatientsController {
         newSettings[key + 'Count'] = $scope.patientsTable.count.settings[key];
         newSettings[key + 'Count'].type = 'count';
       }
-      console.log('newSettings');
-      console.log(newSettings);
       $scope.patientsTableSettings = newSettings;
     };
     $scope.getpatientsTableSettings();
