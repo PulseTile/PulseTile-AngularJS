@@ -18,7 +18,6 @@ let templateOrdersCreate= require('./orders-create.html');
 class OrdersCreateController {
     constructor($scope, $state, $stateParams, $ngRedux, ordersActions, serviceRequests) {
         $scope.order = {};
-        $scope.order.author = 'Dr John Smith';
         $scope.order.dateSubmitted = new Date();
         $scope.firstPage = true;
         $scope.chosenOrders = [];
@@ -141,6 +140,12 @@ class OrdersCreateController {
 
         $scope.pageOne = function () {
             $scope.firstPage = true;
+        };
+
+        this.cancel = function () {
+            $state.go('orders', {
+                patientId: $stateParams.patientId,
+            });
         };
 
         let unsubscribe = $ngRedux.connect(state => ({

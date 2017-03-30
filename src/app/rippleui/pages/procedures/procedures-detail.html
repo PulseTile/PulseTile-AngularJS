@@ -175,7 +175,7 @@
                 <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.author.$dirty) && procedureForm.author.$invalid, 'has-success': procedureForm.author.$valid && procedureForm.author.$dirty}">
                   <label for="author" class="control-label">Author</label>
                   <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="author" name="author" ng-model="procedureEdit.author" required />
+                    <input type="text" class="form-control input-sm" id="author" name="author" ng-model="procedureEdit.author" required disabled/>
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.author.$error.required">You must enter a value.</span>
                 </div>

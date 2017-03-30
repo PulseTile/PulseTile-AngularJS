@@ -55,7 +55,7 @@
                 <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || personalNoteForm.author.$dirty) && personalNoteForm.author.$invalid, 'has-success': personalNoteForm.author.$valid && personalNoteForm.author.$dirty}">
                   <label for="author" class="control-label">Author</label>
                   <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="author" name="author" ng-model="personalNote.author" required/>
+                    <input type="text" value="{{currentUser.email}}" placeholder="{{currentUser.email}}" class="form-control input-sm" id="author" name="author" ng-model="personalNote.author" disabled />
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && personalNoteForm.author.$error.required">You must enter a value.</span>
                 </div>

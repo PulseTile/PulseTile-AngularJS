@@ -91,7 +91,7 @@
                 <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.author.$dirty) && referralsForm.author.$invalid, 'has-success': referralsForm.author.$valid && referralsForm.author.$dirty}">
                   <label for="author" class="control-label">Author</label>
                   <div class="input-holder">
-                    <input class="form-control input-sm" id="author" name="author" ng-model="referralsEdit.author" required />
+                    <input type="text" value="{{currentUser.email}}" placeholder="{{currentUser.email}}" class="form-control input-sm" id="author" name="author" ng-model="referralsEdit.author" disabled />
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.author.$error.required">You must enter a value.</span>
                 </div>

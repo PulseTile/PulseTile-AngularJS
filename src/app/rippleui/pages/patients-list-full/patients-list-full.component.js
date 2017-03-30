@@ -17,6 +17,7 @@ let templatePatientsListFull = require('./patients-list-full.html');
 
 class PatientsListFullController {
   constructor($scope, $window, $rootScope, $state, $stateParams, $ngRedux, searchReport, Patient, serviceRequests, patientsActions, $timeout, ConfirmationModal, serviceFormatted) {
+    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-list-full'});
     serviceRequests.publisher('headerTitle', {title: 'Search results', isShowTitle: true});
 
 

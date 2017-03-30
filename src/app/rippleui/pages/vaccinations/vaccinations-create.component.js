@@ -31,6 +31,8 @@ class VaccinationsCreateController {
       if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;
       }
+      console.log('$scope.vaccination');
+      console.log($scope.vaccination);
     };
 
     this.goList = function () {

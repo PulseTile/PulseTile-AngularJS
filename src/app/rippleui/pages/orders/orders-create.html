@@ -86,7 +86,7 @@
                         <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || orderForm.author.$dirty) && orderForm.author.$invalid, 'has-success': orderForm.author.$valid && orderForm.author.$dirty}">
                             <label for="author" class="control-label">Author</label>
                             <div class="input-holder">
-                                <input type="text" value="{{order.author}}" placeholder="{{order.author}}" class="form-control input-sm" id="author" name="author" ng-model="order.author" disabled />
+                                <input type="text" value="{{currentUser.email}}" placeholder="{{currentUser.email}}" class="form-control input-sm" id="author" name="author" ng-model="order.author" disabled />
                             </div>
                             <span class="help-block animate-fade" ng-show="formSubmitted && orderForm.author.$error.required">You must enter a value.</span>
                         </div>

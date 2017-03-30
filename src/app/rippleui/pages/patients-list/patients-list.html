@@ -36,7 +36,7 @@
                     </div>
                   </div>
                   <div class="col-xs-6 col-sm-4">
-                    <button class="btn btn-success btn-inverse btn-smaller" ng-click="selectAllSettings(itemKey)">Select All</button>
+                    <button class="btn btn-success btn-inverse btn-bold btn-smaller" ng-click="selectAllSettings(itemKey)">Select All</button>
                   </div>
                 </div>
               </div>
@@ -115,7 +115,7 @@
               </td>
               <td class="patient-control">
                 <div uib-dropdown class="patient-buttons dropdown">
-                  <button class="btn btn-success btn-inverse btn-sm btn-view-patient" ng-click="$ctrl.openModal(patient)">View</button>
+                  <button class="btn btn-success btn-inverse btn-sm btn-bold btn-view-patient" ng-click="$ctrl.openModal(patient)">View</button>
                   <button uib-dropdown-toggle class="btn btn-success btn-inverse btn-sm btn-dropdown-toggle" ng-click="toggleDropdown($event);"></button>
                   <div uib-dropdown-menu class="dropdown-menu dm-right">
                     <div class="dm-wrap-list">
@@ -150,7 +150,7 @@
           <tr dir-paginate="patient in $ctrl.patients | filter:queryFiltering | filter: $ctrl.patientFilter | orderBy:[order] : reverse | itemsPerPage: 10">
               <td class="patient-control">
                 <div uib-dropdown class="patient-buttons dropdown">
-                  <button class="btn btn-success btn-inverse btn-sm btn-view-patient" ng-click="$ctrl.openModal(patient)">View</button>
+                  <button class="btn btn-success btn-inverse btn-sm btn-bold btn-view-patient" ng-click="$ctrl.openModal(patient)">View</button>
                   <button uib-dropdown-toggle class="btn btn-success btn-inverse btn-sm btn-dropdown-toggle" ng-click="toggleDropdown($event);"></button>
                   <div uib-dropdown-menu class="dropdown-menu dm-right">
                     <div class="dm-wrap-list">

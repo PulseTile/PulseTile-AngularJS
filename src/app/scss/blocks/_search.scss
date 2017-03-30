@@ -78,7 +78,6 @@
 }
 
 .wrap-header-search {
-  //overflow: hidden;
   width: auto;
   @include respond-from(sm) {
     .form-control {
@@ -89,10 +88,13 @@
 }
 
 .header-search {
-  position: relative;
-  z-index: 2;
   padding: 4px 5px;
+  @include clearfix;
   @include respond-to(sm) { padding: 5px; }
+  .control-search-select {
+    position: relative;
+    z-index: 2;
+  }
 }
 
 .wrap-search-holder {
@@ -202,7 +204,7 @@
         &.btn-square {width: 44px;}
       }
     }
-    .form-control  {
+    .form-control {
       font-size: 12px;
       height: 36px;
     }
