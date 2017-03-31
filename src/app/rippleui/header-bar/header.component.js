@@ -151,7 +151,7 @@ class HeaderController {
       if (data) {
         $scope.title = data.role;
       }
-      // $scope.switchDirectByRole(data);
+      $scope.switchDirectByRole(data);
     };
 
     $scope.setLoginData = function (loginResult) {
