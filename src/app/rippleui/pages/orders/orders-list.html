@@ -34,24 +34,29 @@
   </div>
   <div class="panel-body">
     <table class="table table-striped table-hover table-bordered rwd-table table-sorted">
+      <colgroup>
+        <col style="width: 56%;">
+        <col style="width: 25%;">
+        <col style="width: 19%;">
+      </colgroup>
       <thead>
-      <tr>
-        <th ng-click="sort('name')" ng-class="sortClass('name')">Order Name</th>
-        <th ng-click="sort('orderDate')" ng-class="sortClass('orderDate')">Date</th>
-        <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
-      </tr>
+        <tr>
+          <th ng-click="sort('name')" ng-class="sortClass('name')">Order Name</th>
+          <th ng-click="sort('orderDate')" ng-class="sortClass('orderDate')">Date Created</th>
+          <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
+        </tr>
       </thead>
 
       <tbody>
-      <tr dir-paginate="orderItem in $ctrl.orders | filter: queryFiltering | orderBy:[orderItem] : reverse | itemsPerPage: 10" current-page="currentPage"  ng-click="$ctrl.go(orderItem.sourceId, orderItem.source)" ng-class="{info: selectedRow(orderItem.sourceId)}">
-        <td data-th="Order Name" ng-class="sortClass('name');"><span>{{ orderItem.name }}</span></td>
-        <td data-th="Date" class="orderDateTime" ng-class="sortClass('orderDate');"><span>{{ orderItem.orderDate }}</span></td>
-        <td data-th="Source" ng-class="sortClass('source');"><span>{{ orderItem.source }}</span></td>
-      </tr>
+        <tr dir-paginate="orderItem in $ctrl.orders | filter: queryFiltering | orderBy:[orderItem] : reverse | itemsPerPage: 10" current-page="currentPage"  ng-click="$ctrl.go(orderItem.sourceId, orderItem.source)" ng-class="{info: selectedRow(orderItem.sourceId)}">
+          <td data-th="Order Name" ng-class="sortClass('name');"><span>{{ orderItem.name }}</span></td>
+          <td data-th="Date" ng-class="sortClass('orderDate');"><span>{{ orderItem.orderDate }}</span></td>
+          <td data-th="Source" ng-class="sortClass('source');"><span>{{ orderItem.source }}</span></td>
+        </tr>
 
-      <tr ng-if="!$ctrl.orders.length">
-        <td colspan="4"><span class="label label-default">No orders</span></td>
-      </tr>
+        <tr ng-if="!$ctrl.orders.length">
+          <td colspan="4"><span class="label label-default">No orders</span></td>
+        </tr>
       </tbody>
     </table>
 

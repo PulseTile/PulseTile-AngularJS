@@ -127,15 +127,16 @@ class OrdersCreateController {
             }
         };
         $scope.cancelAll = function () {
-            var d;
-            for (d = $scope.chosenOrders.length - 1; d >= 0; d--) {
+            for (var d = $scope.chosenOrders.length - 1; d >= 0; d--) {
                 $scope.suggestions.push($scope.chosenOrders[d]);
                 $scope.chosenOrders.splice(d, 1);
             }
         };
 
         $scope.pageTwo = function () {
-            $scope.firstPage = false;
+            if ($scope.chosenOrders.length) {
+                $scope.firstPage = false;
+            }
         };
 
         $scope.pageOne = function () {

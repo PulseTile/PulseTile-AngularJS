@@ -1,0 +1,90 @@
+.selectable {
+  position: relative;
+  @include clearfix;
+}
+.selectable-col {
+  width: 100%;
+  @include respond-from(sm) {
+    float: left;
+    width: 50%;
+    &.selectable-from {
+      float: left;
+      padding-right: 23px;
+    }
+    &.selectable-to {
+      float: right;
+      padding-left: 23px;
+    }
+  }
+}
+@include respond-from(md) {
+  .full-panel {
+    .selectable-col {
+      &.selectable-from { padding-right: 4.42%; }
+      &.selectable-to { padding-left: 4.42%; }
+    }
+  }
+}
+
+.selectable-control {
+  padding: 10px 0;
+  text-align: center;
+}
+.selectable-control-group {
+  font-size: 0;
+  display: inline-block;
+  vertical-align: top;
+  & + & { margin: 0 0 0 13px; }
+  .btn {
+    & + .btn { margin: 0 0 0 5px; }
+    font-size: 18px;
+    height: 24px;
+    line-height: 17px;
+    min-width: initial;
+    padding: 0;
+    width: 30px;
+  }
+}
+
+@include respond-from(sm) {
+  .selectable-control {
+    padding: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .selectable-control-group {
+    display: block;
+    & + & { margin: 13px 0 0 0; }
+    .btn {
+      & + .btn { margin: 5px 0 0 0; }
+      display: block;
+      height: 20px;
+    }
+  }
+}
+
+.selectable-list {
+  border: 1px solid #D8D8D8;
+  font-size: 12px;
+  font-weight: 500;
+  height: 220px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  width: 100%;
+  .selectable-item {
+    border-bottom: 1px solid #D8D8D8;
+    cursor: pointer;
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: -1px;
+    padding: 0 10px;
+    @include text-truncate;
+    &.selected {
+      background: $base-color;
+      color: $text-on-base-color;
+    }
+  }
+}
