@@ -13,5 +13,8 @@
 }
 .panel-group.accordion {
   .panel-body {display: none;}
-  .panel.open .panel-body {display: block;}
+  .panel.open {
+    & + .panel {margin-top: 0;}
+    .panel-body {display: block;}
+  }
 }
