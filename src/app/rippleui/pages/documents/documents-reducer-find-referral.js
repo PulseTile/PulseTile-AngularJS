@@ -21,7 +21,7 @@ const INITIAL_STATE = {
   data: null
 };
 
-export default function allergies(state = INITIAL_STATE, action) {
+export default function findReferral(state = INITIAL_STATE, action) {
   const {payload} = action;
 
   var actions = {

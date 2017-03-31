@@ -24,7 +24,7 @@ export function findAllDocuments(patientId) {
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/documents'
+      url: '/api/documents/patient/' + patientId
     },
 
     meta: {
@@ -40,7 +40,7 @@ export function findReferral(patientId, referralId, source) {
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/documents/referral/' + referralId + '?source=' + source
+      url: '/api/documents/patient/' + patientId + '/' + referralId
     },
 
     meta: {

@@ -31,8 +31,8 @@ export default {
     documentsActions
   },
   "sidebarInfo": {
-    // name: 'documents',
-    // link: 'documents',
-    // title: 'Documents'
+    name: 'documents',
+    link: 'documents',
+    title: 'Documents'
   }
 }
