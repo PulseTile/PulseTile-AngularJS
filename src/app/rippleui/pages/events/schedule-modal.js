@@ -16,6 +16,7 @@ export default function ScheduleModal($uibModal, $ngRedux, serviceRequests) {
   var isModalClosed = true;
 
   var openModal = function (patient, modal, schedule, currentUser) {
+    /* istanbul ignore if  */
     if (isModalClosed) {
       isModalClosed = false;
 

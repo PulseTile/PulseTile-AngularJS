@@ -73,6 +73,7 @@ class EventsListController {
     };
 
     this.create = function (typeCreate) {
+      /* istanbul ignore if  */
       if (typeof typeCreate !== "undefined") {
         $scope.saveFilterTimelineParams();
 
@@ -93,6 +94,7 @@ class EventsListController {
     };
 
     this.setCurrentPageData = function (data) {
+      /* istanbul ignore if  */
       if (data.events.data) {
         this.events = data.events.data;
       

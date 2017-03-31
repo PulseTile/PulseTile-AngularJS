@@ -1,4 +1,5 @@
 (function (ElementProto) {
+  /* istanbul ignore if  */
   if (typeof ElementProto.matches !== 'function') {
     ElementProto.matches = ElementProto.msMatchesSelector || ElementProto.mozMatchesSelector || ElementProto.webkitMatchesSelector || function matches(selector) {
       var element = this;
@@ -13,6 +14,7 @@
     };
   }
 
+  /* istanbul ignore if  */
   if (typeof ElementProto.closest !== 'function') {
     ElementProto.closest = function closest(selector) {
       var element = this;

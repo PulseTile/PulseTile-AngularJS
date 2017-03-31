@@ -16,6 +16,7 @@ export default function ConfirmationModal($uibModal, $ngRedux, patientsActions) 
   var isModalClosed = true;
 
   var openModal = function (patient, state) {
+    /* istanbul ignore if  */
     if (isModalClosed) {
       isModalClosed = false;
 
