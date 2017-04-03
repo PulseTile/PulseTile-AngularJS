@@ -60,12 +60,9 @@ angular.module('ripple-ui.directives', [])
   })
   .directive('mcSubAccordion', function() {
     /* istanbul ignore next  */
-    scope: {
-      isOpen: false
-    }
     return {
+      scope: true,
       link: function(scope, element, attrs) {
-
         scope.toggleSubAccordion = function () {
           scope.isOpen = !scope.isOpen;
         };
