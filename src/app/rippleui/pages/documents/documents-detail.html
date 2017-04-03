@@ -435,27 +435,31 @@
                             </div>
                         </div>
 
-                        <div class="row-expand">
-                            <div class="col-expand-left">
-                                <div class="form-group">
-                                    <h3>Facility</h3>
+                        <div mc-sub-accordion class="panel panel-subaccordion accordion" ng-class="getOpenSubAccordion()">
+                            <div class="panel-heading" ng-click="toggleSubAccordion()">
+                                <h3 class="panel-title">Facility</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="panel-body-inner">
+                                    <div class="form-group-wrapper">
+                                        <div class="row-expand">
+                                            <div class="col-expand-left">
+                                                <div class="form-group">
+                                                    <label class="control-label">Name</label>
+                                                    <div class="form-control-static">{{ $ctrl.result.status }}</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-expand-right">
+                                                <div class="form-group">
+                                                    <label class="control-label">Provide ID</label>
+                                                    <div class="form-control-static">{{ $ctrl.result.sampleTaken | date:'dd-MMM-y' }}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row-expand">
-                            <div class="col-expand-left">
-                                <div class="form-group">
-                                    <label class="control-label">Name</label>
-                                    <div class="form-control-static">{{ $ctrl.result.status }}</div>
-                                </div>
-                            </div>
-                            <div class="col-expand-right">
-                                <div class="form-group">
-                                    <label class="control-label">Provide ID</label>
-                                    <div class="form-control-static">{{ $ctrl.result.sampleTaken | date:'dd-MMM-y' }}</div>
-                                </div>
-                            </div>
-                        </div>
+                        </div> 
 
                         <div class="row-expand">
                             <div class="col-expand-left">
