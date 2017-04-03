@@ -41,8 +41,8 @@ class DocumentsListController {
       }
       if (data.documents.data) {
         this.documents = data.documents.data;
-        serviceFormatted.formattingTablesDate(this.documents, ['documentDate'], serviceFormatted.formatCollection.DDMMMYYYY);
-        serviceFormatted.filteringKeys = ['documentType', 'documentDate', 'source'];
+        serviceFormatted.formattingTablesDate(this.documents, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['documentType', 'dateCreated', 'source'];
         usSpinnerService.stop('patientSummary-spinner');
       }
       if (serviceRequests.currentUserData) {

@@ -27,10 +27,14 @@ class ServiceFormatted {
 
     /* istanbul ignore next  */
     this.formattingTablesDate = function(collection, dateArgs, format) {
+      var dateType;
       for (var i = 0; i < collection.length; i++) {
         for (var j = 0; j < dateArgs.length; j++) {
           if (angular.isNumber(collection[i][dateArgs[j]])) {
             collection[i][dateArgs[j]] = moment(collection[i][dateArgs[j]]).format(format);
+          } else {
+            dateType = new Date(collection[i][dateArgs[j]]).getTime();
+            collection[i][dateArgs[j]] = moment(dateType).format(format);
           }
         }
       }

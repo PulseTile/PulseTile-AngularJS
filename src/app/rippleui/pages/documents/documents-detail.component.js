@@ -13,8 +13,6 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-let templateDocumentsDetail= require('./documents-detail.html');
-
 class DocumentsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, documentsActions, usSpinnerService) {
 
@@ -24,9 +22,9 @@ class DocumentsDetailController {
       // if (data.documents.data) {
       //   this.clinicalDocument = data.findDischarge.data;
       // }
-      // if (data.documents.data) {
-      //   this.clinicalDocument = data.findReferral.data;
-      // }
+      if (data.documents.data) {
+        this.clinicalDocument = data.findReferral.data;
+      }
       usSpinnerService.stop('documentssDetail-spinner');
     };
 
@@ -36,19 +34,16 @@ class DocumentsDetailController {
 
     $scope.$on('$destroy', unsubscribe);
 
-    // if ($scope.documentType == 'Discharge summary') {
-    //   this.documentsFindDischarge = documentsActions.findDischarge;
-    //   this.documentsFindDischarge($stateParams.patientId, $stateParams.documentIndex, $stateParams.source);
-    // }
-    // else if ($scope.documentType == 'Referral') {
       this.documentsFindReferral = documentsActions.findReferral;
       this.documentsFindReferral($stateParams.patientId, $stateParams.documentIndex, $stateParams.source);
-    // }
   }
 }
 
 const DocumentsDetailComponent = {
-  template: templateDocumentsDetail,
+  template: function($element, $attrs, templateService) {
+    let templateDocumentsType = require('./'+templateService.getTemplate());
+    return templateDocumentsType;
+  },
   controller: DocumentsDetailController
 };
 
