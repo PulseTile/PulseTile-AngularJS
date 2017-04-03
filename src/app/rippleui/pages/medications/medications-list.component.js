@@ -46,8 +46,8 @@ class MedicationsListController {
       if (data.medication.data) {
         this.medications = data.medication.data;
         
-        serviceFormatted.formattingTablesDate(this.medications, ['startDate'], serviceFormatted.formatCollection.DDMMMYYYY);
-        serviceFormatted.filteringKeys = ['name', 'doseAmount', 'startDate', 'source'];
+        serviceFormatted.formattingTablesDate(this.medications, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['name', 'doseAmount', 'dateCreated', 'source'];
         /*
           TODO: Remove. Only for demo
         */

@@ -16,11 +16,12 @@
 let templateDocumentsList = require('./documents-list.html');
 
 class DocumentsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, documentsActions, serviceRequests, usSpinnerService, serviceFormatted) {
+  constructor($scope, $state, $stateParams, $ngRedux, documentsActions, serviceRequests, usSpinnerService, serviceFormatted, templateService) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
     this.go = function (id, documentType, source) {
+      templateService.setTemplateType(documentType);
       $state.go('documents-detail', {
         patientId: this.currentPatient.id,
         documentType: documentType,
@@ -40,8 +41,8 @@ class DocumentsListController {
       }
       if (data.documents.data) {
         this.documents = data.documents.data;
-        serviceFormatted.formattingTablesDate(this.documents, ['documentDate'], serviceFormatted.formatCollection.DDMMMYYYY);
-        serviceFormatted.filteringKeys = ['documentType', 'documentDate', 'source'];
+        serviceFormatted.formattingTablesDate(this.documents, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['documentType', 'dateCreated', 'source'];
         usSpinnerService.stop('patientSummary-spinner');
       }
       if (serviceRequests.currentUserData) {
@@ -66,5 +67,5 @@ const DocumentsListComponent = {
   controller: DocumentsListController
 };
 
-DocumentsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'documentsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
+DocumentsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'documentsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted', 'templateService'];
 export default DocumentsListComponent;
