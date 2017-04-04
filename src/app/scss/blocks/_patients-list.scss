@@ -80,6 +80,11 @@
 .wrap-patients-table .table-patients-name { 
   left: 0; 
   width: auto;
+  border-right: 0;
+  thead tr th:first-child, 
+  tbody tr td:first-child {
+    border-right: 1px solid #B4B5B4;
+  }
 }
 .wrap-patients-table .table-patients-controls { 
   right: 0; 

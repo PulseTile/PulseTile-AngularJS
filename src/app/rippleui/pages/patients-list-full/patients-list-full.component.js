@@ -117,6 +117,17 @@ class PatientsListFullController {
       $scope.resizeFixedTables();
     };
 
+    $scope.hoveredTableRow = -1;
+    $scope.hoverTableRow = function (index) {
+      $scope.hoveredTableRow = index;
+    };
+    $scope.unHoverTableRow = function () {
+      $scope.hoveredTableRow = -1;
+    };
+    $scope.getHoveredTableRow = function (index) {
+      return $scope.hoveredTableRow == index;
+    };
+
     $scope.getpatientsTableSettings = function () {
       var newSettings = {};
       for (var key in $scope.patientsTable.info.settings) {
@@ -146,7 +157,7 @@ class PatientsListFullController {
         var $tableFullRows = $('.table-patients-full tr');
         var $tds = $tableFullRows.eq(1).find('td');
 
-        $tableNames.width($tds.eq(0).outerWidth());
+        $tableNames.width($tds.eq(0).outerWidth() + 1);
         $tableControls.width($tds.eq($tds.length - 1).outerWidth());
         $tableFullRows.each(function (i, row, rows) {
           var height = $(row).height();

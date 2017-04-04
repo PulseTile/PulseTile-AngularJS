@@ -107,7 +107,8 @@ td[ng-click] {
 .is-not-touch-device .table-hover > tbody > tr.info:hover > th,
 .is-not-touch-device .table-hover > tbody > tr[ng-click]:hover > td,
 .is-not-touch-device .table-hover > tbody > tr:hover > td[ng-click],
-.is-not-touch-device .table-hover > tbody > tr[ng-click]:hover {
+.is-not-touch-device .table-hover > tbody > tr[ng-click]:hover,
+.is-not-touch-device .table-hover > tbody > tr.hovered {
   background-color: map-get($colored-table, 'row-background-hover');
 }
 
@@ -259,6 +260,7 @@ td[ng-click] {
     }
     &.table-striped.table-hover {
       tbody {
+        tr.hovered td.sorted,
         tr:hover td.sorted {
           background-color: map-get($colored-table, 'row-background-hover');
         }

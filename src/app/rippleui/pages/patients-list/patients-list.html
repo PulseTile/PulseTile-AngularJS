@@ -62,7 +62,7 @@
     <div class="wrap-patients-table">
       <table class="table table-striped  table-bordered rwd-table table-sorted table-hover table-fixedcol table-patients-name" ng-if="$ctrl.patients.length">
         <colgroup>
-          <col style="{{patientsTable.info.settings.name.style}}">
+          <col ng-style="{width: patientsTable.info.settings.name.width}">
         </colgroup>
         <thead>
           <tr>
@@ -73,7 +73,11 @@
         </thead>
 
         <tbody>
-          <tr dir-paginate="patient in $ctrl.patients | filter:queryFiltering | filter: $ctrl.patientFilter | orderBy:[order] : reverse | itemsPerPage: 10" ng-click="$ctrl.openModal(patient)">
+          <tr dir-paginate="(index, patient) in $ctrl.patients | filter:queryFiltering | filter: $ctrl.patientFilter | orderBy:[order] : reverse | itemsPerPage: 10" 
+              ng-click="$ctrl.openModal(patient)"
+              ng-mouseenter="hoverTableRow(index);" 
+              ng-mouseleave="unHoverTableRow(index);"
+              ng-class="{hovered: getHoveredTableRow(index)}">
               <td data-th='{{ patientsTable.info.settings.name.title }}'
                   ng-class="sortClass('name')"
                   ng-if="patientsTable.info.settings.name.select">{{ patient['name'] }}</td>
@@ -84,7 +88,7 @@
       <table class="table table-striped table-bordered rwd-table table-sorted table-hover table-fixedcol table-patients-full">
         <colgroup>
           <col  ng-repeat="item in patientsTableSettings" 
-                style="width: {{item.width}}px;"
+                ng-style="{width: item.width}"
                 ng-if="item.select"></col>
           <col  style="width: 90px;">
         </colgroup>
@@ -103,10 +107,14 @@
         </thead>
 
         <tbody>
-          <tr dir-paginate="patient in $ctrl.patients | filter:queryFiltering | filter: $ctrl.patientFilter | orderBy:[order] : reverse | itemsPerPage: 10" ng-click="$ctrl.openModal(patient)">
+          <tr dir-paginate="(index, patient) in $ctrl.patients | filter:queryFiltering | filter: $ctrl.patientFilter | orderBy:[order] : reverse | itemsPerPage: 10" 
+              ng-click="$ctrl.openModal(patient)" 
+              ng-mouseenter="hoverTableRow(index);" 
+              ng-mouseleave="unHoverTableRow(index);"
+              ng-class="{hovered: getHoveredTableRow(index)}">
               <td ng-repeat="(key, item) in patientsTableSettings"
                   data-th='{{ item.title + (item.type === "count" ? " #" : "") + (item.type === "date" ? " Date" : "")}}'
-                  ng-class="sortClass(key); {'text-center': key != 'name' && key != 'address' }"
+                  ng-class="{'text-center': key != 'name' && key != 'address', sorted: sortClass(key) }"
                   ng-if="item.select">
                   <span ng-if="item.type === 'info' && key === 'nhsNumber'">{{ patient[key] | formatNHSNumber }}</span>
                   <span ng-if="item.type === 'info' && key !== 'nhsNumber'">{{ patient[key] }}</span>
