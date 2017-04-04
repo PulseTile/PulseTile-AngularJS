@@ -58,6 +58,20 @@ angular.module('ripple-ui.directives', [])
       }
     }
   })
+  .directive('mcSubAccordion', function() {
+    /* istanbul ignore next  */
+    return {
+      scope: true,
+      link: function(scope, element, attrs) {
+        scope.toggleSubAccordion = function () {
+          scope.isOpen = !scope.isOpen;
+        };
+        scope.getOpenSubAccordion = function () {
+          return scope.isOpen ? 'open' : '';
+        };
+      }
+    }
+  })
   .directive('mcFullPanel', function() {
     /* istanbul ignore next  */
     return {

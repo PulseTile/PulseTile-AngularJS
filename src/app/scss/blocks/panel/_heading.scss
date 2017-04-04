@@ -55,3 +55,30 @@
     line-height: 24px;
   }
 }
+
+.panel-subaccordion {
+  &.open .panel-heading:after {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  .panel-heading {
+    position: relative;
+    padding: 5px 25px 5px 6px;
+    color: $text-color;
+    background: #E8E8E8;
+    border-radius: 0;
+    cursor: pointer;
+    @include clearfix;
+    &:after {
+      content: '\f078';
+      font-family: 'FontAwesome';
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%) rotate(-90deg);
+    }
+  }
+  .panel-title {
+    font-size: 13px;
+    line-height: 24px;
+  }
+}

@@ -14,383 +14,660 @@
   ~  limitations under the License.
   -->
 
-<div class="transbox">
-    <div class="innerTransbox">
-        <h3><strong>Document</strong></h3>
 
-        <div class="form-horizontal text-left">
-
-            <div ng-if="$ctrl.clinicalDocument.documentType == 'Healthlink Discharge summary'">
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-3">Document Name:</label>
-                    <div class="col-lg-4">
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.documentType }}</div>
-                    </div>
-                </div>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-3">Document Date:</label>
-                    <div class="col-lg-4">
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.documentDate | date:'dd-MMM-yyyy' }}</div>
-                    </div>
-                </div>
-
-                <br>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-6">Author</label>
-                    <div class="col-md-9">
-                        <div class="form-control-static">
-                            <label class="control-label col-lg-4">Name:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.author_name }}</div>
-                            <label class="control-label col-lg-4">ID:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.author_id }}</div>
-                            <label class="control-label col-lg-4">ID Scheme:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.author_idScheme }}</div>
-                        </div>
-                    </div>
-                </div>
-
-                <br>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-3">Facility:</label>
-                    <div class="col-lg-4">
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.facility }}</div>
-                    </div>
-                </div>
-
-                <br>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-6"><strong>Patient Identifiers</strong></label>
-                    <div class="col-md-9">
-                        <div class="form-control-static">
-                            <label class="control-label col-lg-4">MRN:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.patientIdentifier_mrn }}</div>
-                            <label class="control-label col-lg-4">MRN Type:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.patientIdentifier_mrnType }}</div>
-                            <label class="control-label col-lg-4">OTH:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.patientIdentifier_oth }}</div>
-                            <label class="control-label col-lg-4">OTH Type:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.patientIdentifier_othType }}</div>
-                            <label class="control-label col-lg-4">GMS:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.patientIdentifier_gms }}</div>
-                            <label class="control-label col-lg-4">GMS Type:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.patientIdentifier_gmsType }}</div>
-                        </div>
-                    </div>
-                </div>
-
-                <br>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-6"><strong>Responsible Professional</strong></label>
-                    <div class="col-md-9">
-                        <div class="form-control-static">
-                            <label class="control-label col-lg-4">Name:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.responsibleProfessional_name }}</div>
-                            <label class="control-label col-lg-4">ID:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.responsibleProfessional_id }}</div>
-                            <label class="control-label col-lg-4">ID Type:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.responsibleProfessional_idType }}</div>
-                        </div>
-                    </div>
-                </div>
-
-                <br>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-3">Discharging Organisation:</label>
-                    <div class="col-lg-4">
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.dischargingOrganisation }}</div>
-                    </div>
-                </div>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-3">Date/Time of Discharge:</label>
-                    <div class="col-lg-4">
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.dateTimeOfDischarge | date:'dd-MMM-yyyy' }}</div>
-                    </div>
-                </div>
-
-                <br>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-6"><strong>Discharge Diagnoses</strong></label>
-                    <div class="col-md-12">
-
-                        <table class="table table-bordered table-striped table-hover">
-                            <tbody>
-                            <tr dir-paginate="diagnosis in $ctrl.clinicalDocument.diagnosisList | itemsPerPage: 3">
-                                <td>{{ diagnosis.problem }}</td>
-                                <td class="dateTime">{{ diagnosis.dateCreated | date:'dd-MMM-yyyy' }}</td>
-                                <td style="text-align: center;">
-                    <span title="Import to core record"
-                          class="glyphicon glyphicon-floppy-disk ui-state-hover import-record"
-                          ng-click="$ctrl.importDiagnosis(diagnosis)"></span>
-                                </td>
-                            </tr>
-
-                            <tr ng-if="!$ctrl.clinicalDocument.diagnosisList || !$ctrl.clinicalDocument.diagnosisList.length">
-                                <td colspan="3"><span class="label label-default">No diagnoses</span></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <label class="control-label col-md-3">Clinical Synopsis:</label>
-                    <div class="col-md-9">
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.clinicalSynopsis }}</div>
-                    </div>
-                </div>
-
-                <br>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-3">Source:</label>
-                    <div class="col-lg-4">
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.source }}</div>
-                    </div>
-                </div>
+<div mc-full-panel mc-accordion mc-open-panel="detail" class="panel-group accordion">
+    <div class="panel panel-secondary" ng-if="getShowPanel('detail')" ng-class="getOpenPanelClass('detail')">
+        <div class="panel-heading">
+            <div class="control-group right">
+                <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'detail')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+                <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('detail')"><i class="fa fa-chevron-up"></i></button>
             </div>
-
-            <div ng-if="$ctrl.clinicalDocument.documentType == 'Healthlink Referral'">
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-3">Document Name:</label>
-                    <div class="col-lg-4">
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.documentType }}</div>
-                    </div>
-                </div>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-3">Document Date:</label>
-                    <div class="col-lg-4">
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.documentDate | date:'dd-MMM-yyyy' }}</div>
-                    </div>
-                </div>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-3">Author:</label>
-                    <div class="col-lg-4">
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.composerName }}</div>
-                    </div>
-                </div>
-
-                <br>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-6">Facility:</label>
-                    <div class="col-md-9">
-                        <div class="form-control-static">
-                            <label class="control-label col-lg-4">Name:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.facility }}</div>
-                            <label class="control-label col-lg-4">Provider ID:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.providerId }}</div>
-                        </div>
-                    </div>
-                </div>
-
-                <br>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-6">Referral:</label>
-                    <div class="col-md-9">
-                        <div class="form-control-static">
-                            <label class="control-label col-lg-4">Date:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.referralDateTime | date:'dd-MMM-yyyy' }}</div>
-                            <label class="control-label col-lg-4">Type:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.referralType }}</div>
-                            <label class="control-label col-lg-4">Priority:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.priorityOfReferral }}</div>
-                            <label class="control-label col-lg-4">Ref:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.referralReferenceNumber }}</div>
-                            <label class="control-label col-lg-4">From:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.referredFrom }}</div>
-                            <label class="control-label col-lg-4">To:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.referredTo }}</div>
-                            <label class="control-label col-lg-4">Comments:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.referralComments }}</div>
-
-                            <div ng-repeat="referralReason in $ctrl.clinicalDocument.reasonForReferral">
-                                <label class="control-label col-lg-4">Comments:</label><div class="form-control-static">{{ referralReason }}</div>
+            <h3 class="panel-title">Document Details</h3>
+        </div>
+        <div class="panel-body">
+            <div class="panel-body-inner">
+                <div class="form">
+                    <div class="form-group-wrapper">
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Document Name</label>
+                                    <div class="form-control-static">{{ $ctrl.result.testName }}</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <br>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-6">Organisation/Provider:</label>
-                    <div class="col-md-9">
-                        <div class="form-control-static">
-                            <label class="control-label col-lg-4">Name:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.providerContact_organisationName }}</div>
-                            <label class="control-label col-lg-4">ID:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.providerContact_id }}</div>
-                            <label class="control-label col-lg-4">Work Phone:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.providerContact_workNumber }}</div>
-                            <label class="control-label col-lg-4">Emergency Phone:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.providerContact_emergencyNumber }}</div>
-                            <label class="control-label col-lg-4">Email:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.providerContact_email }}</div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Document Date</label>
+                                    <div class="form-control-static">{{ $ctrl.result.testName }}</div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <br>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-6">Referral Status:</label>
-                    <div class="col-md-9">
-                        <div class="form-control-static">
-                            <label class="control-label col-lg-4">Status:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.referralStatus_value }}</div>
-                            <label class="control-label col-lg-4">Original Code:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.referralStatus_mapped }}</div>
-                            <label class="control-label col-lg-4">Code:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.referralStatus_code }}</div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Author</label>
+                                    <div class="form-control-static">{{ $ctrl.result.author }}</div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <br>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-6">Clinical Synopsis:</label>
-                    <div class="col-md-9">
-                        <div class="form-control-static">
-                            <label class="control-label col-lg-4">Narrative:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.clinicalNarrative }}</div>
-                            <label class="control-label col-lg-4">Present Illness:</label><div class="form-control-static col-lg-8">{{ $ctrl.clinicalDocument.presentIllness }}</div>
-                            <label class="control-label col-lg-4">Comments:</label><div class="form-control-static col-lg-8">{{ $ctrl.clinicalDocument.clinicalSynopsisComments }}</div>
-                            <label class="control-label col-lg-4">Previous Hospital:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.previousHospitalAttendance }}</div>
+                        <div mc-sub-accordion class="panel panel-subaccordion accordion" ng-class="getOpenSubAccordion()">
+                            <div class="panel-heading" ng-click="toggleSubAccordion()">
+                                <h3 class="panel-title">Facility</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="panel-body-inner">
+                                    <div class="form-group-wrapper">
+                                        <div class="row-expand">
+                                            <div class="col-expand-left">
+                                                <div class="form-group">
+                                                    <label class="control-label">Name</label>
+                                                    <div class="form-control-static">{{ $ctrl.result.status }}</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-expand-right">
+                                                <div class="form-group">
+                                                    <label class="control-label">Provide ID</label>
+                                                    <div class="form-control-static">{{ $ctrl.result.sampleTaken | date:'dd-MMM-y' }}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <br>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-6">Past Illnesses</label>
-                    <div class="col-md-9">
-                        <div class="form-control-static" ng-repeat="pastIllness in $ctrl.clinicalDocument.pastIllensses">
-                            <label class="control-label col-lg-4">{{ pastIllness.value }}:</label><div class="form-control-static">{{ pastIllness.date | date:'dd-MMM-yyyy' }}</div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <h3>Referral</h3>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <br>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-6">Surgical Procedures</label>
-                    <div class="col-md-9">
-                        <div class="form-control-static" ng-repeat="procedure in $ctrl.clinicalDocument.surgicalProcedures">
-                            <label class="control-label col-lg-4">{{ procedure.value }}:</label><div class="form-control-static">{{ procedure.date | date:'dd-MMM-yyyy' }}</div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Date</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <br>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-6"><strong>Medications</strong></label>
-                    <div class="col-md-12">
-
-                        <table class="table table-bordered table-striped table-hover">
-                            <tbody>
-                            <tr dir-paginate="medication in $ctrl.clinicalDocument.medications | itemsPerPage: 3">
-                                <td>{{ medication.name }}</td>
-                                <td class="dateTime">{{ medication.startDate | date:'dd-MMM-yyyy' }}</td>
-                                <td style="text-align: center;">
-                    <span title="Import to core record"
-                          class="glyphicon glyphicon-floppy-disk ui-state-hover import-record"
-                          ng-click="importMedication('{{ medication }}')"></span>
-                                </td>
-                            </tr>
-
-                            <tr ng-if="!$ctrl.clinicalDocument.medications || !$ctrl.clinicalDocument.medications.length">
-                                <td colspan="3"><span class="label label-default">No medications</span></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-3">Medication Anticoagulation Use:</label>
-                    <div class="col-md-6">
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.medication_anticoagulation_use }}</div>
-                    </div>
-                </div>
-
-                <br>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-6"><strong>Allergies</strong></label>
-                    <div class="col-md-12">
-
-                        <table class="table table-bordered table-striped table-hover">
-                            <tbody>
-                            <tr dir-paginate="allergy in $ctrl.clinicalDocument.allergies | itemsPerPage: 3">
-                                <td>{{ allergy.cause }}</td>
-                                <td>{{ allergy.reaction }}</td>
-                                <td style="text-align: center;">
-                    <span title="Import to core record"
-                          class="glyphicon glyphicon-floppy-disk ui-state-hover import-record"
-                          ng-click="$ctrl.importAllergy(allergy)"></span>
-                                </td>
-                            </tr>
-
-                            <tr ng-if="!$ctrl.clinicalDocument.allergies || !$ctrl.clinicalDocument.allergies.length">
-                                <td colspan="3"><span class="label label-default">No allergies</span></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <br>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-3">Tobacco Use:</label>
-                    <div class="col-lg-4">
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.tobaccoUse }}</div>
-                    </div>
-                </div>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-3">Alcohol Use:</label>
-                    <div class="col-lg-4">
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.alcholUse }}</div>
-                    </div>
-                </div>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-3">Physical Impairment:</label>
-                    <div class="col-lg-4">
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.physicalImparement }}</div>
-                    </div>
-                </div>
-
-                <br>
-
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-6">Measurements:</label>
-                    <div class="col-md-9">
-                        <div class="form-control-static">
-                            <label class="control-label col-lg-4">Systolic BP:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.systolicBP }}</div>
-                            <label class="control-label col-lg-4">Systolic BP Units:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.systolicBP_units }}</div>
-                            <label class="control-label col-lg-4">Diastolic BP:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.diastolicBP }}</div>
-                            <label class="control-label col-lg-4">Diastolic BP Units:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.diastolicBP_units }}</div>
-                            <label class="control-label col-lg-4">Pulse:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.pulse }}</div>
-                            <label class="control-label col-lg-4">Pulse Units:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.pulse_units }}</div>
-                            <label class="control-label col-lg-4">Height:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.height }}</div>
-                            <label class="control-label col-lg-4">Height Units:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.height_units }}</div>
-                            <label class="control-label col-lg-4">Weight:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.weight }}</div>
-                            <label class="control-label col-lg-4">Weight Units:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.weight_units }}</div>
-                            <label class="control-label col-lg-4">Body Mass:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.bodyMass }}</div>
-                            <label class="control-label col-lg-4">Body Mass Units:</label><div class="form-control-static">{{ $ctrl.clinicalDocument.bodyMass_units }}</div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Type</label>
+                                    <div class="form-control-static">{{ $ctrl.result.source }}</div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Priority</label>
+                                    <div class="form-control-static">{{ $ctrl.result.source }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Ref</label>
+                                    <div class="form-control-static">{{ $ctrl.result.source }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">From</label>
+                                    <div class="form-control-static">{{ $ctrl.result.source }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">To</label>
+                                    <div class="form-control-static">{{ $ctrl.result.source }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Comments</label>
+                                    <div class="form-control-static">{{ $ctrl.result.source }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Comments</label>
+                                    <div class="form-control-static">{{ $ctrl.result.source }}</div>
+                                </div>
+                            </div>
+                        </div>
 
-                <br>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <h3>Organisation/Provider</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Name</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">ID</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Work Phone</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Emergency Phone</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Email</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-3">Other Examination Findings:</label>
-                    <div class="col-lg-4">
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.otherExaminationFindings }}</div>
-                    </div>
-                </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <h3>Referral Status</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Status</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Original Code</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Code</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
 
-                <br>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <h3>Clinical Synopsis</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Narrative</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Present Illness</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Comments</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Previous Hospital</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-3">Original Source:</label>
-                    <div class="col-lg-4">
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.documentOriginalSource }}</div>
-                    </div>
-                </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <h3>Present Illness</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Hypertension</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="form-group form-group-sm">
-                    <label class="control-label col-md-3">Source:</label>
-                    <div class="col-lg-4">
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.source }}</div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <h3>Surgical Procedures</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Hypertension</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Medication Anticoagulation Use</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Tobacco Use</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Alcohol Use</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Physical Impairment</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <h3>Measurements</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Systolic BP</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Systolic BP Units</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Diastolic BP</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Diastolic BP Units</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Pulse</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Pulse Units</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Height</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Height Units</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Weight</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Weight Units</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Body Mass</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Body Mass Units</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Other Examination Findings</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Original Source</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Source</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="panel panel-secondary" ng-if="getShowPanel('medications')" ng-class="getOpenPanelClass('medications')">
+        <div class="panel-heading">
+            <div class="control-group right">
+                <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'medications')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+                <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('medications')"><i class="fa fa-chevron-up"></i></button>
+            </div>
+            <h3 class="panel-title">Medications</h3>
+        </div>
+        <div class="panel-body">
+            <div class="panel-body-inner">
+                <div class="form">
+                    <div class="form-group-wrapper">
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Name</label>
+                                    <div class="form-control-static">{{ $ctrl.result.testName }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Start Date</label>
+                                    <div class="form-control-static">{{ $ctrl.result.testName }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Time</label>
+                                    <div class="form-control-static">{{ $ctrl.result.testName }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Dose Amount</label>
+                                    <div class="form-control-static">{{ $ctrl.result.testName }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Dose Directions</label>
+                                    <div class="form-control-static">{{ $ctrl.result.testName }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Dose Timing</label>
+                                    <div class="form-control-static">{{ $ctrl.result.status }}</div>
+                                </div>
+                            </div>
+                            <div class="col-expand-right">
+                                <div class="form-group">
+                                    <label class="control-label">Route</label>
+                                    <div class="form-control-static">{{ $ctrl.result.sampleTaken | date:'dd-MMM-y' }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Terminology</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Terminology Code</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Author</label>
+                                    <div class="form-control-static">{{ $ctrl.result.author }}</div>
+                                </div>
+                            </div>
+                            <div class="col-expand-right">
+                                <div class="form-group">
+                                    <label class="control-label">Date</label>
+                                    <div class="form-control-static">{{ $ctrl.result.dateCreated | date: 'dd-MMM-y' }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Source</label>
+                                    <div class="form-control-static">{{ $ctrl.result.source }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-secondary" ng-if="getShowPanel('allergies')" ng-class="getOpenPanelClass('allergies')">
+        <div class="panel-heading">
+            <div class="control-group right">
+                <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'allergies')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+                <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('allergies')"><i class="fa fa-chevron-up"></i></button>
+            </div>
+            <h3 class="panel-title">Allergies</h3>
+        </div>
+        <div class="panel-body">
+            <div class="panel-body-inner">
+                <div class="form">
+                    <div class="form-group-wrapper">
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Cause</label>
+                                    <div class="form-control-static">{{ $ctrl.result.testName }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Cause Code</label>
+                                    <div class="form-control-static">{{ $ctrl.result.status }}</div>
+                                </div>
+                            </div>
+                            <div class="col-expand-right">
+                                <div class="form-group">
+                                    <label class="control-label">Reaction</label>
+                                    <div class="form-control-static">{{ $ctrl.result.sampleTaken | date:'dd-MMM-y' }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Terminology</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Terminology Code</label>
+                                    <div class="form-control-static">{{ $ctrl.result.conclusion }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Author</label>
+                                    <div class="form-control-static">{{ $ctrl.result.author }}</div>
+                                </div>
+                            </div>
+                            <div class="col-expand-right">
+                                <div class="form-group">
+                                    <label class="control-label">Date</label>
+                                    <div class="form-control-static">{{ $ctrl.result.dateCreated | date: 'dd-MMM-y' }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-expand">
+                            <div class="col-expand-left">
+                                <div class="form-group">
+                                    <label class="control-label">Source</label>
+                                    <div class="form-control-static">{{ $ctrl.result.source }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="documentssDetail-spinner" spinner-start-active="true"></span>
 </div>

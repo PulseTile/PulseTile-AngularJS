@@ -38,7 +38,7 @@
             <thead>
             <tr>
                 <th ng-click="sort('documentType')" ng-class="sortClass('documentType')">Name</th>
-                <th ng-click="sort('documentDate')" ng-class="sortClass('documentDate')">Date</th>
+                <th ng-click="sort('dateCreated')" ng-class="sortClass('dateCreated')">Date</th>
                 <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
             </tr>
             </thead>
@@ -46,7 +46,7 @@
             <tbody>
             <tr dir-paginate="document in $ctrl.documents | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(document.sourceId, document.documentType, document.source)" ng-class="{info: selectedRow(document.sourceId)}">
                 <td data-th="Name" ng-class="sortClass('documentType');"><span>{{document.documentType}}</span></td>
-                <td data-th="Date" ng-class="sortClass('documentDate');"><span>{{document.documentDate}}</span></td>
+                <td data-th="Date" ng-class="sortClass('dateCreated');"><span>{{document.dateCreated}}</span></td>
                 <td data-th="Source" ng-class="sortClass('source');"><span>{{document.source}}</span></td>
             </tr>
 

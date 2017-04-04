@@ -69,7 +69,7 @@
   </div>
   <div class="panel-body">
     <div class="wrap-patients-table" ng-if="$ctrl.tab == 'patientInfo'">
-      <table class="table table-striped  table-bordered rwd-table table-sorted table-fixedcol table-patients-name" ng-if="$ctrl.patients.length">
+      <table class="table table-striped table-bordered rwd-table table-sorted table-hover table-fixedcol table-patients-name" ng-if="$ctrl.patients.length">
         <colgroup>
           <col style="{{patientsTable.info.settings.name.style}}">
         </colgroup>
@@ -82,7 +82,7 @@
         </thead>
 
         <tbody>
-          <tr dir-paginate="patient in $ctrl.patients | filter:queryFiltering | filter: $ctrl.patientFilter | orderBy:[order] : reverse | itemsPerPage: 10">
+          <tr dir-paginate="patient in $ctrl.patients | filter:queryFiltering | filter: $ctrl.patientFilter | orderBy:[order] : reverse | itemsPerPage: 10" ng-click="$ctrl.openModal(patient)">
               <td data-th='{{ patientsTable.info.settings.name.title }}'
                   ng-class="sortClass('name')"
                   ng-if="patientsTable.info.settings.name.select">{{ patient['name'] }}</td>
@@ -90,7 +90,7 @@
         </tbody>
       </table>
 
-      <table class="table table-striped table-bordered rwd-table table-sorted table-fixedcol table-patients-full">
+      <table class="table table-striped table-bordered rwd-table table-sorted table-hover table-fixedcol table-patients-full">
         <colgroup>
           <col  ng-repeat="item in patientsTableSettings" 
                 style="width: {{item.width}}px;"
@@ -112,7 +112,7 @@
         </thead>
 
         <tbody>
-          <tr dir-paginate="patient in $ctrl.patients | filter:queryFiltering | filter: $ctrl.patientFilter | orderBy:[order] : reverse | itemsPerPage: 10">
+          <tr dir-paginate="patient in $ctrl.patients | filter:queryFiltering | filter: $ctrl.patientFilter | orderBy:[order] : reverse | itemsPerPage: 10" ng-click="$ctrl.openModal(patient)">
               <td ng-repeat="(key, item) in patientsTableSettings"
                   data-th='{{ item.title + (item.type === "count" ? " #" : "") + (item.type === "date" ? " Date" : "")}}'
                   ng-class="sortClass(key); {'text-center': key != 'name' && key != 'address' }"

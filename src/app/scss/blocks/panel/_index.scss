@@ -16,14 +16,16 @@
     background: transparent;
     box-shadow: none;
   }
+  &.panel-subaccordion {
+    background: #ffffff;
+    box-shadow: none;
+    border: 0;
+  }
   &.panel-small {
     margin-bottom: 0;
     background: #ffffff;
     box-shadow: none;
     border: 1px solid #D8D8D8;
-    // &.panel-table {
-    //   border-bottom: 0;
-    // }
   }
   &.without-margin {margin-bottom: 0;}
 }

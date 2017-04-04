@@ -16,7 +16,7 @@
 let templateEventsDetail = require('./events-detail.html');
 
 class EventsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, eventsActions, serviceRequests, usSpinnerService, ScheduleModal) {
+  constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, usSpinnerService) {
     var socket = io.connect('wss://' + window.location.hostname + ':' + 8070);
 
     this.currentUser = serviceRequests.currentUserData;
@@ -26,6 +26,7 @@ class EventsDetailController {
     $scope.messages = [];
 
     this.setCurrentPageData = function (data) {
+      /* istanbul ignore if  */
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
@@ -100,6 +101,7 @@ class EventsDetailController {
     $scope.appt =  this.appointment;
 
     $scope.canStartAppointment = function () {
+      /* istanbul ignore if  */
       if (!$scope.isDoctor())
         return false;
 
@@ -111,6 +113,7 @@ class EventsDetailController {
     };
     
     $scope.canJoinAppointment = function () {
+      /* istanbul ignore if  */
       if (!$scope.isPatient())
         return false;
 
@@ -224,5 +227,5 @@ const EventsDetailComponent = {
   controller: EventsDetailController
 };
 
-EventsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'eventsActions', 'serviceRequests', 'usSpinnerService', 'ScheduleModal'];
+EventsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests', 'usSpinnerService'];
 export default EventsDetailComponent;
