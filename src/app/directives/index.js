@@ -346,6 +346,11 @@ angular.module('ripple-ui.directives', [])
 
                   return false;
                 };
+                $scope.removeFocus = function ($event) {
+                  $event.currentTarget.blur();
+                  
+                  return false;
+                };
           }]
       }
   })
