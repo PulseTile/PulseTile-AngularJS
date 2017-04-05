@@ -4,12 +4,13 @@
     &:before {display: none;}
     padding: 5px 4px 5px 7px;
     @include clearfix;
+    @include respond-to(xs) { display: none; }
   }
 }
 .patient-buttons {
   @include clearfix;
   float: right; 
-  width: 77px;
+  width: 80px;
   @include respond-from(xs) {
     margin: 0 auto;
     float: none;
@@ -18,7 +19,12 @@
     border-radius: 0;
     float: left;
   }
-  .btn-view-patient { width: 57px; }
+  .btn-view-patient { 
+    padding-left: 0;
+    padding-right: 0;
+    width: 57px;
+    text-align: center;
+  }
   .btn-dropdown-toggle {
     margin-left: -1px;
     min-width: auto;
@@ -73,7 +79,7 @@
 .wrap-patients-table .table-patients-controls {
   position: absolute;
   top: 0;
-  min-width: initial;
+  min-width: 50px;
   z-index: 2;
   @include respond-to(xs) { display: none; }
 }
