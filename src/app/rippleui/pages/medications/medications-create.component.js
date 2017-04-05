@@ -72,7 +72,7 @@ class MedicationsCreateController {
         doseAmount: medication.doseAmount,
         doseDirections: medication.doseDirections,
         doseTiming: medication.doseTiming,
-        medicationCode: medication.medicationCode,
+        medicationCode: "123456789",
         medicationTerminology: medication.medicationTerminology,
         name: medication.name,
         route: medication.route,
