@@ -2,6 +2,7 @@
   font-family: 'Myriad Pro';
   src:  url($path-assets-fonts + 'Myriad Pro.eot?#iefix');
   src:  url($path-assets-fonts + 'Myriad Pro.eot?#iefix') format('embedded-opentype'),  
+        url($path-assets-fonts + 'Myriad Pro.woff2') format('woff2'), 
         url($path-assets-fonts + 'Myriad Pro.woff') format('woff'), 
         url($path-assets-fonts + 'Myriad Pro.ttf')  format('truetype'), 
         url($path-assets-fonts + 'Myriad Pro.svg#MyriadPro') format('svg');
