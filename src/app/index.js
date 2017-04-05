@@ -62,7 +62,7 @@ import ServiceVitalsSigns from './rippleui/pages/vitals/serviceVitalsSigns.js';
 import ServiceActions from './rippleui/pages/dicom/serviceActions.js';
 import ServiceFormatted from './services/serviceFormatted.js';
 import SocketService from './services/socketService.js';
-import TemplateService from './services/templateService.js';
+import TemplateService from './services/TemplateService.js';
 
 import ScheduleModal from './rippleui/pages/events/schedule-modal';
 import ConfirmationModal from './rippleui/confirmation/confirmation';
