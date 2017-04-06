@@ -1,8 +1,7 @@
 .panel-primary .panel-control {
-  padding: 2px 5px 0;
-  @include respond-from(xs) {
-    padding: 12px 0 6px;
-  }
+  padding: 2px 0px 0;
+  @include respond-to(md) { padding: 12px 0 6px; }
+  @include respond-to(xs) { padding: 12px 5px 6px; }
 }
 .panel-secondary .panel-control {
   padding: 5px;
