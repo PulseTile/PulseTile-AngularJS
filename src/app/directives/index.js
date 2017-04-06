@@ -92,6 +92,10 @@ angular.module('ripple-ui.directives', [])
           }
           serviceRequests.publisher('changeFullPanel', {panelName: fullPanelName});
         };
+        $scope.resetFullPanel = function () {
+          $scope.showPanel = '';
+        };
+        serviceRequests.subscriber('resetFullPanel', $scope.resetFullPanel);
       }]
     };
   })
