@@ -30,9 +30,9 @@ class EventsDetailController {
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
-      if (data.appointments.dataGet) {
-        this.appointment = data.appointments.dataGet;
-        this.event = data.appointments.dataGet;
+      if (data.events.dataGet) {
+        this.appointment = data.events.dataGet;
+        this.event = data.events.dataGet;
         $scope.appt = this.appointment;
         usSpinnerService.stop('appointmentsDetail-spinner');
 
