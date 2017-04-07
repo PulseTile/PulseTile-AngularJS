@@ -14,7 +14,7 @@
   ~  limitations under the License.
 */
 class DocumentsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, documentsActions, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, documentsActions, usSpinnerService, ConfirmationDocsModal) {
 
     // $scope.documentType = $stateParams.documentType;
 
@@ -29,18 +29,7 @@ class DocumentsDetailController {
     };
 
     $scope.importToCreate = function (typeCreate, data) {
-      data.importURL = location.href;
-      
-      if (typeCreate && data) {
-        $state.go(typeCreate + '-create', {
-          patientId: $stateParams.patientId,
-          importData: {
-            data: data,
-            documentIndex: $stateParams.detailsIndex
-          }
-
-        });
-      }
+      ConfirmationDocsModal.openModal(typeCreate, data);
     }
 
     let unsubscribe = $ngRedux.connect(state => ({
@@ -62,5 +51,5 @@ const DocumentsDetailComponent = {
   controller: DocumentsDetailController
 };
 
-DocumentsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'documentsActions', 'usSpinnerService'];
+DocumentsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'documentsActions', 'usSpinnerService', 'ConfirmationDocsModal'];
 export default DocumentsDetailComponent;
