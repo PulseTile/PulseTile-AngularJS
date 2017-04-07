@@ -416,7 +416,7 @@
                                 <div class="fgs-control">
                                     <div class="wrap-control-group">
                                         <div class="control-group right">
-                                            <button class="btn btn-primary" ng-click=""><span>Import Data</span></button>
+                                            <button class="btn btn-primary" ng-click="importToCreate('medications', $ctrl.clinicalDocument.medications[0])"><span>Import Data</span></button>
                                         </div>
                                     </div>
                                 </div>
@@ -503,11 +503,11 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="fgs-control">
-                                <div class="wrap-control-group">
-                                    <div class="control-group right">
-                                        <button class="btn btn-primary" ng-click=""><span>Import Data</span></button>
+                                <div class="fgs-control">
+                                    <div class="wrap-control-group">
+                                        <div class="control-group right">
+                                            <button class="btn btn-primary" ng-click="importToCreate('allergies', {})"><span>Import Data</span></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

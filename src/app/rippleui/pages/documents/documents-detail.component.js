@@ -16,7 +16,7 @@
 class DocumentsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, documentsActions, usSpinnerService) {
 
-    $scope.documentType = $stateParams.documentType;
+    // $scope.documentType = $stateParams.documentType;
 
     this.setCurrentPageData = function (data) {
       // if (data.documents.data) {
@@ -28,6 +28,21 @@ class DocumentsDetailController {
       usSpinnerService.stop('documentssDetail-spinner');
     };
 
+    $scope.importToCreate = function (typeCreate, data) {
+      data.importURL = location.href;
+      
+      if (typeCreate && data) {
+        $state.go(typeCreate + '-create', {
+          patientId: $stateParams.patientId,
+          importData: {
+            data: data,
+            documentIndex: $stateParams.detailsIndex
+          }
+
+        });
+      }
+    }
+
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
@@ -35,13 +50,13 @@ class DocumentsDetailController {
     $scope.$on('$destroy', unsubscribe);
 
       this.documentsFindReferral = documentsActions.findReferral;
-      this.documentsFindReferral($stateParams.patientId, $stateParams.documentIndex, $stateParams.source);
+      this.documentsFindReferral($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
   }
 }
 
 const DocumentsDetailComponent = {
   template: function($element, $attrs, templateService) {
-    let templateDocumentsType = require('./'+templateService.getTemplate());
+    let templateDocumentsType = require('./' + templateService.getTemplate());
     return templateDocumentsType;
   },
   controller: DocumentsDetailController

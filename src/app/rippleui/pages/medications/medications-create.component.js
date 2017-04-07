@@ -21,6 +21,21 @@ class MedicationsCreateController {
 
     $scope.medication = {};
     $scope.medication.startDate = new Date();
+    $scope.isImportCreate = false;
+    
+    if ($stateParams.importData) {
+      $scope.isImportCreate = true;
+      $scope.medication = $stateParams.importData.data;
+    }
+    
+    this.backToDocs = function () {
+        // templateService.setTemplateType(documentType);
+      $state.go('documents-detail', {
+        patientId: $stateParams.patientId,
+        detailsIndex: $stateParams.importData.documentIndex,
+        page: 1
+      });
+    }
     
     this.setCurrentPageData = function (data) {
       if (data.medication.dataCreate !== null) {

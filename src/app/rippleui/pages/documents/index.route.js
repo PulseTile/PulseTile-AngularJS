@@ -38,7 +38,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
       breadcrumbs: breadcrumbs
     })
     .state('documents-detail', {
-      url: '/patients/{patientId:int}/documents/{documentIndex}?filter&page&reportType&searchString&queryType&documentType&source',
+      url: '/patients/{patientId:int}/documents/{detailsIndex}?filter&page&reportType&searchString&queryType&documentType&source',
       views: {
         banner: {template: '<patients-banner-component></patients-banner-component>'},
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
