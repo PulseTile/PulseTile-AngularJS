@@ -17,8 +17,8 @@ class TemplateService {
     constructor () {
         this.templateType = '';
         this.templatesCollection = {
-            Discharge: 'type-discharge.html',
-            Referral: 'type-referral.html'
+            Discharge: 'documents-detail-discharge.html',
+            Referral: 'documents-detail-referral.html'
         };
         this.setTemplateType = function (type) {
             if (type.indexOf('Discharge') >= 0) {

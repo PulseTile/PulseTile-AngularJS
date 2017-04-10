@@ -44,7 +44,7 @@
             </thead>
 
             <tbody>
-            <tr dir-paginate="document in $ctrl.documents | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(document.sourceId, document.documentType, document.source)" ng-class="{info: selectedRow(document.sourceId)}">
+            <tr dir-paginate="document in $ctrl.documents | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(document.sourceId, document.documentType)" ng-class="{info: selectedRow(document.sourceId)}">
                 <td data-th="Name" ng-class="sortClass('documentType');"><span>{{document.documentType}}</span></td>
                 <td data-th="Date" ng-class="sortClass('dateCreated');"><span>{{document.dateCreated}}</span></td>
                 <td data-th="Source" ng-class="sortClass('source');"><span>{{document.source}}</span></td>

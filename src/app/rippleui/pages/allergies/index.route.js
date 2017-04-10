@@ -46,7 +46,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         main: {template: '<allergies-list-component></allergies-list-component>'},
         detail: {template: '<allergies-create-component></allergies-create-component>'}
       },
-      params: {patientId: null, reportType: null},
+      params: {patientId: null, reportType: null, importData: null},
       breadcrumbs: breadcrumbs
     })
     .state('allergies-detail', {

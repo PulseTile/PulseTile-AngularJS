@@ -111,6 +111,13 @@
               </div>
             </div>
 
+            <div class="form-group form-group-sm" ng-if="isImportCreate" ng-class="{'has-error': (formSubmitted || medicationForm.importURL.$dirty) && medicationForm.importURL.$invalid, 'has-success': medicationForm.importURL.$valid && medicationForm.importURL.$dirty}">
+                <label for="importURL" class="control-label">Import URL</label>
+                <div class="input-holder">
+                    <input type="text" class="form-control input-sm" id="importURL" name="importURL" ng-model="medication.importURL" disabled />
+                </div>
+                <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.importURL.$error.required">You must enter a value.</span>
+            </div>
 
             <div class="row-expand">
               <div class="col-expand-left">
@@ -166,8 +173,11 @@
         <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="medicationsCreate-spinner" spinner-start-active="false"></span>
       </div>
       <div class="panel-control">
-        <div class="wrap-control-group">
-          <div class="control-group right">
+        <div class="wrap-control-group hide-indent-bottom">
+          <div class="control-group with-indent left" ng-if="isImportCreate">
+            <button class="btn btn-success btn-inverse btn-icon-normal btn-back-doc" ng-click="$ctrl.backToDocs()"><i class="fa fa-caret-left"></i> <span>Back to Documents</span></button>
+          </div>
+          <div class="control-group with-indent right">
             <button class="btn btn-danger" ng-click="$ctrl.cancel()"><i class="fa fa-ban"></i> Cancel</button>
             <button class="btn btn-success" ng-click="create(medicationForm, medication);"><i class="fa fa-check"></i> Complete</button>
           </div>

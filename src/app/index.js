@@ -66,6 +66,7 @@ import TemplateService from './services/TemplateService.js';
 
 import ScheduleModal from './rippleui/pages/events/schedule-modal';
 import ConfirmationModal from './rippleui/confirmation/confirmation';
+import ConfirmationDocsModal from './rippleui/confirmation/confirmation-documents';
 
 import routeConfig from 'app/index.route';
 import 'app/scss/core.scss';
@@ -98,6 +99,8 @@ let app = angular
     ])
     .factory('ScheduleModal', ScheduleModal)
     .factory('ConfirmationModal', ConfirmationModal)
+    .factory('ConfirmationDocsModal', ConfirmationDocsModal)
+
     
     .factory('httpMiddleware', httpMiddleware)
     .factory('Patient', Patient)

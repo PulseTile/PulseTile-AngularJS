@@ -20,18 +20,12 @@ class DocumentsListController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.go = function (id, documentType, source) {
+    this.go = function (id, documentType) {
       templateService.setTemplateType(documentType);
       $state.go('documents-detail', {
-        patientId: this.currentPatient.id,
-        documentType: documentType,
-        documentIndex: id,
-        filter: $scope.query,
-        page: $scope.currentPage,
-        reportType: $stateParams.reportType,
-        searchString: $stateParams.searchString,
-        queryType: $stateParams.queryType,
-        source: source
+        patientId: $stateParams.patientId,
+        detailsIndex: id,
+        page: $scope.currentPage || 1
       });
     };
 
