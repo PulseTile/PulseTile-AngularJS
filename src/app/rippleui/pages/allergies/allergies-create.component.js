@@ -24,8 +24,7 @@ class AllergiesCreateController {
     $scope.allergy.terminologyCode = '12393890';  
 
     $scope.isImportCreate = false;
-    console.log('$stateParams.importData');
-    console.log($stateParams.importData);
+    
     if ($stateParams.importData) {
       $scope.isImportCreate = true;
       $scope.allergy = $stateParams.importData.data;
@@ -38,7 +37,7 @@ class AllergiesCreateController {
         detailsIndex: $stateParams.importData.documentIndex,
         page: 1
       });
-    }
+    };
 
     this.setCurrentPageData = function (data) {
       if (data.allergies.dataCreate !== null) {
@@ -66,10 +65,12 @@ class AllergiesCreateController {
         searchString: $stateParams.searchString,
         queryType: $stateParams.queryType
       });
-    }
+    };
+
     this.cancel = function () {
       this.goList();
     };
+    
     $scope.create = function (allergyForm, allergies) {
       $scope.formSubmitted = true;
 
