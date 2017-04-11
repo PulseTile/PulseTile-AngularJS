@@ -29,7 +29,6 @@ class MedicationsCreateController {
     }
     
     this.backToDocs = function () {
-        // templateService.setTemplateType(documentType);
       $state.go('documents-detail', {
         patientId: $stateParams.patientId,
         detailsIndex: $stateParams.importData.documentIndex,

@@ -113,8 +113,11 @@
         </form>
       </div>
       <div class="panel-control">
-        <div class="wrap-control-group">
-          <div class="control-group right">
+        <div class="wrap-control-group hide-indent-bottom">
+          <div class="control-group with-indent left" ng-if="isImportCreate">
+            <button class="btn btn-success btn-inverse btn-icon-normal btn-back-doc" ng-click="$ctrl.backToDocs()"><i class="fa fa-caret-left"></i> <span>Back to Documents</span></button>
+          </div>
+          <div class="control-group with-indent right">
             <button class="btn btn-danger" ng-click="$ctrl.cancel()"><i class="fa fa-ban"></i> Cancel</button>
             <button class="btn btn-success" ng-click="create(diagnosisForm, diagnosis)"><i class="fa fa-check"></i> Complete</button>
           </div>

@@ -154,7 +154,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group-section">
+                    <div class="form-group-section fgs-bordered fgs-primary">
                         <div class="fgs-heading">
                             <label class="control-label">Diagnosis List</label>
                         </div>
@@ -164,7 +164,7 @@
                                     <div class="col-expand-left">
                                         <div class="form-group">
                                             <label class="control-label">Problem</label>
-                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.problem }}</div>
+                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.diagnosisList[0].problem }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -172,14 +172,21 @@
                                     <div class="col-expand-left">
                                         <div class="form-group">
                                             <label class="control-label">Description</label>
-                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.description }}</div>
+                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.diagnosisList[0].description }}</div>
                                         </div>
                                     </div>
                                     <div class="col-expand-right">
                                         <div class="form-group">
                                             <label class="control-label">Terminology</label>
-                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.terminology }}</div>
+                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.diagnosisList[0].terminology }}</div>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fgs-control">
+                                <div class="wrap-control-group">
+                                    <div class="control-group right">
+                                        <button class="btn btn-primary" ng-click="importToCreate('diagnoses', $ctrl.clinicalDocument.diagnosisList[0])"><span>Import Data</span></button>
                                     </div>
                                 </div>
                             </div>

@@ -46,7 +46,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         main: {template: '<diagnoses-list-component></diagnoses-list-component>'},
         detail: {template: '<diagnoses-create-component></diagnoses-create-component>'}
       },
-      params: {patientId: null, reportType: null},
+      params: {patientId: null, reportType: null, importData: null},
       breadcrumbs: breadcrumbs
     })
     .state('diagnoses-detail', {

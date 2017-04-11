@@ -21,6 +21,21 @@ class DiagnosesCreateController {
     $scope.diagnosis.dateSubmitted = new Date();
     $scope.diagnosis.code = '12393890';
 
+    $scope.isImportCreate = false;
+    
+    if ($stateParams.importData) {
+      $scope.isImportCreate = true;
+      $scope.diagnosis = $stateParams.importData.data;
+    }
+    
+    this.backToDocs = function () {
+      $state.go('documents-detail', {
+        patientId: $stateParams.patientId,
+        detailsIndex: $stateParams.importData.documentIndex,
+        page: 1
+      });
+    }
+
     this.setCurrentPageData = function (data) {
       if (data.diagnoses.dataCreate !== null) {
         this.goList();
