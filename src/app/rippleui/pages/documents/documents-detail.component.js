@@ -29,7 +29,21 @@ class DocumentsDetailController {
     };
 
     $scope.importToCreate = function (typeCreate, data) {
-      ConfirmationDocsModal.openModal(typeCreate, data);
+      ConfirmationDocsModal.openModal(function () {
+        data.isImport = true;
+        data.importURL = location.href;
+        
+        if (typeCreate && data) {
+          $state.go(typeCreate + '-create', {
+            patientId: $stateParams.patientId,
+            importData: {
+              data: data,
+              documentIndex: $stateParams.detailsIndex
+            }
+
+          });
+        } 
+      });
     }
 
     let unsubscribe = $ngRedux.connect(state => ({

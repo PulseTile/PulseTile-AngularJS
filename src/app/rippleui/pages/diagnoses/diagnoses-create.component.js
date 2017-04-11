@@ -18,15 +18,18 @@ let templateDiagnosesCreate = require('./diagnoses-create.html');
 class DiagnosesCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, patientsActions, diagnosesActions, serviceRequests) {
     $scope.diagnosis = {};
-    $scope.diagnosis.dateSubmitted = new Date();
-    $scope.diagnosis.code = '12393890';
 
-    $scope.isImportCreate = false;
+    $scope.diagnosis.isImport = false;
     
     if ($stateParams.importData) {
-      $scope.isImportCreate = true;
       $scope.diagnosis = $stateParams.importData.data;
     }
+
+    if (typeof $scope.diagnosis.dateSubmitted == "undefined") {
+      $scope.diagnosis.dateSubmitted = new Date();
+    }
+    
+    $scope.diagnosis.code = '12393890';
     
     this.backToDocs = function () {
       $state.go('documents-detail', {
@@ -45,6 +48,7 @@ class DiagnosesCreateController {
       }
       if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;
+        $scope.diagnosis.author = $scope.currentUser.email;
       }
     };
 
@@ -63,17 +67,17 @@ class DiagnosesCreateController {
     $scope.create = function (diagnosisForm, diagnosis) {
       $scope.formSubmitted = true;
 
-      let toAdd = {
-        code: diagnosis.code,
-        dateOfOnset: diagnosis.dateOfOnset.toISOString().slice(0, 10),
-        description: diagnosis.description,
-        problem: diagnosis.problem,
-        source: diagnosis.source,
-        sourceId: '',
-        terminology: diagnosis.terminology
-      };
-
       if (diagnosisForm.$valid) {
+        let toAdd = {
+          code: diagnosis.code,
+          dateOfOnset: diagnosis.dateOfOnset.toISOString().slice(0, 10),
+          description: diagnosis.description,
+          problem: diagnosis.problem,
+          source: diagnosis.source,
+          sourceId: '',
+          isImport: diagnosis.isImport,
+          terminology: diagnosis.terminology
+        };
           
         $scope.diagnosesCreate(this.currentPatient.id, toAdd);
       }

@@ -110,15 +110,19 @@
                 
               </div>
             </div>
+            
+            <div class="form-group hidden">
+              <input type="hidden" id="isImport" name="isImport" ng-model="medication.isImport" disabled />
+            </div>
 
-            <div class="form-group form-group-sm" ng-if="isImportCreate" ng-class="{'has-error': (formSubmitted || medicationForm.importURL.$dirty) && medicationForm.importURL.$invalid, 'has-success': medicationForm.importURL.$valid && medicationForm.importURL.$dirty}">
+            <div class="form-group form-group-sm" ng-if="medication.isImport" ng-class="{'has-error': (formSubmitted || medicationForm.importURL.$dirty) && medicationForm.importURL.$invalid, 'has-success': medicationForm.importURL.$valid && medicationForm.importURL.$dirty}">
                 <label for="importURL" class="control-label">Import URL</label>
                 <div class="input-holder">
                     <input type="text" class="form-control input-sm" id="importURL" name="importURL" ng-model="medication.importURL" disabled />
                 </div>
                 <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.importURL.$error.required">You must enter a value.</span>
             </div>
-
+            
             <div class="row-expand">
               <div class="col-expand-left">
                 <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || medicationForm.author.$dirty) && medicationForm.author.$invalid, 'has-success': medicationForm.author.$valid && medicationForm.author.$dirty}">
@@ -174,12 +178,12 @@
       </div>
       <div class="panel-control">
         <div class="wrap-control-group hide-indent-bottom">
-          <div class="control-group with-indent left" ng-if="isImportCreate">
-            <button class="btn btn-success btn-inverse btn-icon-normal btn-back-doc" ng-click="$ctrl.backToDocs()"><i class="fa fa-caret-left"></i> <span>Back to Documents</span></button>
-          </div>
           <div class="control-group with-indent right">
             <button class="btn btn-danger" ng-click="$ctrl.cancel()"><i class="fa fa-ban"></i> Cancel</button>
             <button class="btn btn-success" ng-click="create(medicationForm, medication);"><i class="fa fa-check"></i> Complete</button>
+          </div>
+          <div class="control-group with-indent left" ng-if="medication.isImport">
+            <button class="btn btn-success btn-inverse btn-icon-normal btn-back-doc" ng-click="$ctrl.backToDocs()"><i class="fa fa-caret-left"></i> <span>Back to Documents</span></button>
           </div>
         </div>
       </div>
