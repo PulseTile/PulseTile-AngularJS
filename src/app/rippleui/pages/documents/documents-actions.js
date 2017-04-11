@@ -20,7 +20,7 @@ export function findAllDocuments(patientId) {
   return {
     types: [types.DOCUMENTS, types.DOCUMENTS_SUCCESS, types.DOCUMENTS_ERROR],
 
-    shouldCallAPI: (state) => !state.allergies.response,
+    shouldCallAPI: (state) => !state.documents.response,
 
     config: {
       method: 'get',
@@ -36,7 +36,7 @@ export function findReferral(patientId, referralId, source) {
   return {
     types: [types.DOCUMENTS_FIND_REFERRAL, types.DOCUMENTS_FIND_REFERRAL_SUCCESS, types.DOCUMENTS_FIND_REFERRAL_ERROR],
 
-    shouldCallAPI: (state) => !state.allergies.response,
+    shouldCallAPI: (state) => !state.documents.response,
 
     config: {
       method: 'get',
@@ -52,7 +52,7 @@ export function findDischarge(patientId, dischargeId, source) {
   return {
     types: [types.DOCUMENTS_FIND_DISCHARGE, types.DOCUMENTS_FIND_DISCHARGE_SUCCESS, types.DOCUMENTS_FIND_DISCHARGE_ERROR],
 
-    shouldCallAPI: (state) => !state.allergies.response,
+    shouldCallAPI: (state) => !state.documents.response,
 
     config: {
       method: 'get',
@@ -68,7 +68,7 @@ export function uploadReferral(patientId, referral) {
   return {
     types: [types.DOCUMENTS_UPLOAD_REFERRAL, types.DOCUMENTS_UPLOAD_REFERRAL_SUCCESS, types.DOCUMENTS_UPLOAD_REFERRAL_ERROR],
 
-    shouldCallAPI: (state) => !state.allergies.response,
+    shouldCallAPI: (state) => !state.documents.response,
 
     config: {
       method: 'post',
@@ -85,7 +85,7 @@ export function uploadDischarge(patientId, discharge) {
   return {
     types: [types.DOCUMENTS_UPLOAD_DISCHARGE, types.DOCUMENTS_UPLOAD_DISCHARGE_SUCCESS, types.DOCUMENTS_UPLOAD_DISCHARGE_ERROR],
 
-    shouldCallAPI: (state) => !state.allergies.response,
+    shouldCallAPI: (state) => !state.documents.response,
 
     config: {
       method: 'post',

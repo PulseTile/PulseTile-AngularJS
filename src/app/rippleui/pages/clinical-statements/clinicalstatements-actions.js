@@ -20,7 +20,7 @@ export function all(patientId) {
   return {
     types: [types.CLINICALSTATEMENTS, types.CLINICALSTATEMENTS_SUCCESS, types.CLINICALSTATEMENTS_ERROR],
 
-    shouldCallAPI: (state) => !state.contacts.response,
+    shouldCallAPI: (state) => !state.clinicalstatements.response,
 
     config: {
       method: 'get',
@@ -36,7 +36,7 @@ export function get(patientId, sourceId) {
   return {
     types: [types.CLINICALSTATEMENTS_GET, types.CLINICALSTATEMENTS_GET_SUCCESS, types.CLINICALSTATEMENTS_GET_ERROR],
 
-    shouldCallAPI: (state) => !state.contacts.response,
+    shouldCallAPI: (state) => !state.clinicalstatements.response,
 
     config: {
       method: 'get',
@@ -52,7 +52,7 @@ export function getTags() {
   return {
     types: [types.CLINICALSTATEMENTS_TAGS, types.CLINICALSTATEMENTS_TAGS_SUCCESS, types.CLINICALSTATEMENTS_TAGS_ERROR],
 
-    shouldCallAPI: (state) => !state.contacts.response,
+    shouldCallAPI: (state) => !state.clinicalstatements.response,
 
     config: {
       method: 'get',
@@ -68,7 +68,7 @@ export function create(patientId, composition) {
   return {
     types: [types.CLINICALSTATEMENTS_CREATE, types.CLINICALSTATEMENTS_CREATE_SUCCESS, types.CLINICALSTATEMENTS_CREATE_ERROR],
 
-    shouldCallAPI: (state) => !state.contacts.response,
+    shouldCallAPI: (state) => !state.clinicalstatements.response,
 
     config: {
       method: 'post',
@@ -85,7 +85,7 @@ export function update(patientId, composition) {
   return {
     types: [types.CLINICALSTATEMENTS_UPDATE, types.CLINICALSTATEMENTS_UPDATE_SUCCESS, types.CLINICALSTATEMENTS_UPDATE_ERROR],
 
-    shouldCallAPI: (state) => !state.contacts.response,
+    shouldCallAPI: (state) => !state.clinicalstatements.response,
 
     config: {
       method: 'put',
