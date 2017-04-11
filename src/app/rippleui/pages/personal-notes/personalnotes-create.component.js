@@ -30,6 +30,7 @@ class PersonalnotesCreateController {
       }
       if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;
+        $scope.personalNote.author = $scope.currentUser.email;
       }
     };
 
@@ -49,15 +50,14 @@ class PersonalnotesCreateController {
     $scope.create = function (personalNoteForm, personalNote) {
       $scope.formSubmitted = true;
 
-      let toAdd = {
-        noteType: personalNote.noteType,
-        notes: personalNote.notes,
-        dateCreated: personalNote.dateCreated,
-        author: personalNote.author,
-        source: 'openehr'
-      };
-
       if (personalNoteForm.$valid) {
+        let toAdd = {
+          noteType: personalNote.noteType,
+          notes: personalNote.notes,
+          dateCreated: personalNote.dateCreated,
+          author: personalNote.author,
+          source: 'openehr'
+        };
 
         $scope.personalnotesCreate(this.currentPatient.id, toAdd);
       }

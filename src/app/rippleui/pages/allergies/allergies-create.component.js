@@ -57,6 +57,7 @@ class AllergiesCreateController {
       }
       if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;
+        $scope.allergy.author = $scope.currentUser.email;
       }
     };
 

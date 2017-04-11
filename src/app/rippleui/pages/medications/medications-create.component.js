@@ -48,6 +48,7 @@ class MedicationsCreateController {
       }
       if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;
+        $scope.medication.author = $scope.currentUser.email;
       }
     };
 

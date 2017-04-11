@@ -30,6 +30,7 @@ class VaccinationsCreateController {
       }
       if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;
+        $scope.vaccination.author = $scope.currentUser.email;
       }
     };
 
@@ -49,16 +50,15 @@ class VaccinationsCreateController {
     $scope.create = function (vaccinationForm, vaccination) {
       $scope.formSubmitted = true;
 
-      let toAdd = {
-        vaccinationName: vaccination.vaccinationName,
-        comment: vaccination.comment,
-        series: vaccination.series,
-        dateCreated: vaccination.dateCreated,
-        vaccinationDateTime: vaccination.vaccinationDateTime,
-        source: vaccination.source
-      };
-
       if (vaccinationForm.$valid) {
+        let toAdd = {
+          vaccinationName: vaccination.vaccinationName,
+          comment: vaccination.comment,
+          series: vaccination.series,
+          dateCreated: vaccination.dateCreated,
+          vaccinationDateTime: vaccination.vaccinationDateTime,
+          source: vaccination.source
+        };
 
         $scope.vaccinationsCreate(this.currentPatient.id, toAdd);
       }
