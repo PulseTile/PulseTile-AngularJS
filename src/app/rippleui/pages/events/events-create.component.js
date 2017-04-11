@@ -52,7 +52,7 @@ class EventsCreateController {
     }
 
     this.setCurrentPageData = function (data) {
-      if (data.appointments.dataCreate !== null) {
+      if (data.events.dataCreate !== null) {
         this.goList();
       }
       if (data.patientsGet.data) {

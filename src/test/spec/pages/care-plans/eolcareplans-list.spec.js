@@ -44,7 +44,6 @@ describe('Care Plans List', function() {
       usSpinnerService: usSpinnerService
     });
 
-    actions = $injector.get('appointmentsActions');
     // scope.$digest();
   }));
 
@@ -71,9 +70,6 @@ describe('Care Plans List', function() {
   });
   it('Controller exist', function() {
     expect(ctrl).toBeDefined();
-  });
-  it('Include appointmentsActions in index actions file', function() {
-    expect(actions).toBeDefined();
   });
   it("Appointments reducer was called", function() {
     expect(fakeCall.callCareplans).toHaveBeenCalled();

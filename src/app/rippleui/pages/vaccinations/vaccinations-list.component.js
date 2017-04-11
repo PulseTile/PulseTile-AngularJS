@@ -39,46 +39,15 @@ class VaccinationsListController {
     };
     
     this.setCurrentPageData = function (data) {
-      // if (data.vaccinations.data) {
-      //   this.vaccinations = data.vaccinations.data;
-      //   usSpinnerService.stop('patientSummary-spinner');
-      // }
-      var date = new Date();
-      this.vaccinations = [
-        {
-          sourceId: '1',
-          name: 'Inactivated Poliovirus Vaccine',
-          source: 'Marand',
-          seriesNumber: 1,
-          comment: 'Hospital staff',
-          date: Date.parse(new Date()),
-          author: 'ripple_osi',
-          dateCreate: Date.parse(new Date())
-        }, {
-          sourceId: '2',
-          name: 'Cell-Culture Influenza Vaccine',
-          source: 'EtherCIS',
-          seriesNumber: 2,
-          comment: 'Hospital staff',
-          date: Date.parse(new Date(date.setDate(date.getDate()-1))),
-          author: 'ripple_osi',
-          dateCreate: Date.parse(new Date(date.setDate(date.getDate()-1)))
-        }, {
-          sourceId: '3',
-          name: 'Varicella Vaccine',
-          source: 'Marand',
-          seriesNumber: 3,
-          comment: 'Hospital staff',
-          date: Date.parse(new Date(date.setDate(date.getDate()-4))),
-          author: 'ripple_osi',
-          dateCreate: Date.parse(new Date(date.setDate(date.getDate()-4)))
-        }
-      ];
+      if (data.vaccinations.data) {
+        this.vaccinations = data.vaccinations.data;
+        
+        serviceFormatted.formattingTablesDate(this.vaccinations, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['vaccinationName', 'source', 'dateCreated'];
 
-      serviceFormatted.formattingTablesDate(this.vaccinations, ['dateCreate'], serviceFormatted.formatCollection.DDMMMYYYY);
-      serviceFormatted.filteringKeys = ['name', 'source', 'dateCreate'];
-
-      usSpinnerService.stop('patientSummary-spinner');
+        usSpinnerService.stop('patientSummary-spinner');
+      }
+      
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
@@ -97,8 +66,8 @@ class VaccinationsListController {
     
     $scope.$on('$destroy', unsubscribe);
     
-    // this.vaccinationsLoad = vaccinationsActions.all;
-    // this.vaccinationsLoad($stateParams.patientId);
+    this.vaccinationsLoad = vaccinationsActions.all;
+    this.vaccinationsLoad($stateParams.patientId);
   }
 }
 

@@ -28,26 +28,26 @@
           <div class="form-group-wrapper">
             <div class="row-expand">
               <div class="col-expand-left">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || vaccinationForm.name.$dirty) && vaccinationForm.name.$invalid, 'has-success': vaccinationForm.name.$valid && vaccinationForm.name.$dirty}">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || vaccinationForm.vaccinationName.$dirty) && vaccinationForm.vaccinationName.$invalid, 'has-success': vaccinationForm.vaccinationName.$valid && vaccinationForm.vaccinationName.$dirty}">
                   <label for="name" class="control-label">Vaccination Name</label>
                   <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="name" name="name" ng-model="vaccination.name" required />
+                    <input type="text" class="form-control input-sm" id="name" name="name" ng-model="vaccination.vaccinationName" required />
                   </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && vaccinationForm.name.$error.required">You must enter a value.</span>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && vaccinationForm.vaccinationName.$error.required">You must enter a value.</span>
                 </div>
               </div>
               <div class="col-expand-right">
                 <div class="row">
                   <div class="col-xs-12 col-md-6">
-                    <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || vaccinationForm.date.$dirty) && vaccinationForm.date.$invalid, 'has-success': vaccinationForm.date.$valid && vaccinationForm.date.$dirty}">
+                    <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || vaccinationForm.vaccinationDateTime.$dirty) && vaccinationForm.vaccinationDateTime.$invalid, 'has-success': vaccinationForm.vaccinationDateTime.$valid && vaccinationForm.vaccinationDateTime.$dirty}">
                         <label for="" class="control-label">Vaccination Date</label>
                         <div class="inner-addon addon-left">
                             <div class="addon">
                               <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" class="form-control" id="date" name="date" ng-model="vaccination.startDate" ng-click="openDatepicker($event, 'date')"  ng-focus="removeFocus($event)" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.date" required readonly/>
+                            <input type="text" class="form-control" id="date" name="date" ng-model="vaccination.vaccinationDateTime" ng-click="openDatepicker($event, 'vaccinationDateTime')"  ng-focus="removeFocus($event)" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.vaccinationDateTime" required readonly/>
                         </div>
-                        <span class="help-block animate-fade" ng-show="formSubmitted && vaccinationForm.date.$error.required">You must enter a valid date.</span>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && vaccinationForm.vaccinationDateTime.$error.required">You must enter a valid date.</span>
                     </div>
                   </div>
                   <div class="col-xs-12 col-md-6">
@@ -62,12 +62,12 @@
 
             <div class="row-expand">
               <div class="col-expand-left">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || vaccinationForm.seriesNumber.$dirty) && vaccinationForm.seriesNumber.$invalid, 'has-success': vaccinationForm.seriesNumber.$valid && vaccinationForm.seriesNumber.$dirty}">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || vaccinationForm.series.$dirty) && vaccinationForm.series.$invalid, 'has-success': vaccinationForm.series.$valid && vaccinationForm.series.$dirty}">
                   <label for="seriesNumber" class="control-label">Series Number</label>
                   <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="seriesNumber" name="seriesNumber" ng-model="vaccination.seriesNumber" required />
+                    <input type="text" class="form-control input-sm" id="seriesNumber" name="seriesNumber" ng-model="vaccination.series" required />
                   </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && vaccinationForm.seriesNumber.$error.required">You must enter a value.</span>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && vaccinationForm.series.$error.required">You must enter a value.</span>
                 </div>
               </div>
             </div>
