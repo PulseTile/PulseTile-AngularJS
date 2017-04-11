@@ -22,9 +22,9 @@ class VaccinationsCreateController {
     $scope.vaccination.source = 'Marand';
 
     this.setCurrentPageData = function (data) {
-      // if (data.vaccinations.dataCreate !== null) {
-      //   this.goList();
-      // }
+      if (data.vaccinations.dataCreate !== null) {
+        this.goList();
+      }
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
@@ -40,20 +40,22 @@ class VaccinationsCreateController {
         searchString: $stateParams.searchString,
         queryType: $stateParams.queryType
       });
-    }
+    };
+    
     this.cancel = function () {
       this.goList();
     };
+    
     $scope.create = function (vaccinationForm, vaccination) {
       $scope.formSubmitted = true;
 
       let toAdd = {
-        name: vaccination.name,
+        vaccinationName: vaccination.vaccinationName,
         comment: vaccination.comment,
-        seriesNumber: vaccination.seriesNumber,
+        series: vaccination.series,
         dateCreated: vaccination.dateCreated,
-        startDate: vaccination.startDate,
-        source: vaccination.source,
+        vaccinationDateTime: vaccination.vaccinationDateTime,
+        source: vaccination.source
       };
 
       if (vaccinationForm.$valid) {
