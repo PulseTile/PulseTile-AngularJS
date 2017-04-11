@@ -32,14 +32,13 @@
 }
 .selectable-control-group {
   font-size: 0;
-  display: inline-block;
-  vertical-align: top;
-  & + & { margin: 0 0 0 13px; }
+  display: block;
+  & + & { margin: 8px 0 0 0; }
   .btn {
-    & + .btn { margin: 0 0 0 5px; }
+    & + .btn { margin: 0 0 0 8px; }
     font-size: 18px;
     height: 24px;
-    line-height: 17px;
+    line-height: 21px;
     min-width: initial;
     padding: 0;
     width: 30px;
@@ -60,6 +59,7 @@
     .btn {
       & + .btn { margin: 5px 0 0 0; }
       display: block;
+      line-height: 17px;
       height: 20px;
     }
   }
