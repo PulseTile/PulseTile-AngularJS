@@ -40,6 +40,7 @@ class OrdersCreateController {
             }
             if (serviceRequests.currentUserData) {
                 $scope.currentUser = serviceRequests.currentUserData;
+                $scope.order.author = $scope.currentUser.email;
             }
         };
 

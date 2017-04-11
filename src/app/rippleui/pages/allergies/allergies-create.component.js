@@ -19,19 +19,21 @@ let templateAllergiesCreate = require('./allergies-create.html');
 class AllergiesCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, allergiesActions, serviceRequests) {
     $scope.allergy = {};
-    $scope.allergy.dateCreated = new Date();
-    $scope.allergy.causeCode = '1239085';
-    $scope.allergy.terminologyCode = '12393890';  
 
-    $scope.isImportCreate = false;
+    $scope.allergy.isImport = false;
     
     if ($stateParams.importData) {
-      $scope.isImportCreate = true;
       $scope.allergy = $stateParams.importData.data;
     }
+
+    if (typeof $scope.allergy.dateCreated == "undefined") {
+      $scope.allergy.dateCreated = new Date();
+    }
+
+    $scope.allergy.causeCode = '1239085';
+    $scope.allergy.terminologyCode = '12393890';  
     
     this.backToDocs = function () {
-        // templateService.setTemplateType(documentType);
       $state.go('documents-detail', {
         patientId: $stateParams.patientId,
         detailsIndex: $stateParams.importData.documentIndex,
@@ -55,6 +57,7 @@ class AllergiesCreateController {
       }
       if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;
+        $scope.allergy.author = $scope.currentUser.email;
       }
     };
 
@@ -74,16 +77,17 @@ class AllergiesCreateController {
     $scope.create = function (allergyForm, allergies) {
       $scope.formSubmitted = true;
 
-      let toAdd = {
-        sourceId: '',
-        cause: allergies.cause,
-        causeCode: allergies.causeCode,
-        causeTerminology: allergies.causeTerminology,
-        reaction: allergies.reaction,
-        source: allergies.source
-      };
-
       if (allergyForm.$valid) {
+        let toAdd = {
+          sourceId: '',
+          cause: allergies.cause,
+          causeCode: allergies.causeCode,
+          causeTerminology: allergies.causeTerminology,
+          reaction: allergies.reaction,
+          isImport: allergies.isImport,
+          source: allergies.source
+        };
+        
         $scope.allergiesCreate(this.currentPatient.id, toAdd);
       }
     }.bind(this);

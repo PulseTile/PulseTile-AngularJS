@@ -29,6 +29,7 @@ class ProceduresCreateController {
       }
       if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;
+        $scope.procedure.author = $scope.currentUser.email;
       }
     };
 

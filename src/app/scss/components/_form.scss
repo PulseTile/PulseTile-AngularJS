@@ -14,6 +14,14 @@
     position: relative;
     .form-group-wrapper { margin-bottom: -12px; }
     .form-group { margin-bottom: 12px; }
+    label.control-label {
+      margin-bottom: 2px;
+      line-height: 16px;
+    }
+    .form-control-static {
+      line-height: 16px;
+      min-height: 16px;
+    }
     .fgs-control {
       padding-top: 5px;
       margin: 0 -19px -5px;
@@ -24,8 +32,6 @@
     .fgs-body {
       border-color: #ccc;
       padding: 15px 19px;
-      .form-group-wrapper { margin-bottom: -15px; }
-      .form-group { margin-bottom: 15px; }
       .fgs-control {margin: 0 -19px -15px;}
     }
     @each $section, $color in $colored-buttons {
