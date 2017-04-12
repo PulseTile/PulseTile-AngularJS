@@ -39,14 +39,15 @@ class ReferralsCreateController {
 
 		this.setCurrentPageData = function (data) {
 		  if (data.patientsGet.data) {
-			this.currentPatient = data.patientsGet.data;
+        this.currentPatient = data.patientsGet.data;
 		  }
 		  if (data.referrals.dataGet) {
-			this.referral = data.referrals.dataGet;
-			usSpinnerService.stop('referralsDetail-spinner');
+        this.referral = data.referrals.dataGet;
+        usSpinnerService.stop('referralsDetail-spinner');
 		  }
 		  if (serviceRequests.currentUserData) {
-			$scope.currentUser = serviceRequests.currentUserData;
+        $scope.currentUser = serviceRequests.currentUserData;
+        $scope.referralsEdit.author = $scope.currentUser.email;
 		  }
 		};
 

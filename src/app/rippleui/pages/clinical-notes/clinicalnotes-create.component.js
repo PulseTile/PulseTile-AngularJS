@@ -30,6 +30,7 @@ class ClinicalnotesCreateController {
       }
       if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;
+        $scope.clinicalNote.author = $scope.currentUser.email;
       }
     };
 
@@ -49,15 +50,14 @@ class ClinicalnotesCreateController {
     $scope.create = function (clinicalNoteForm, clinicalNote) {
       $scope.formSubmitted = true;
 
-      let toAdd = {
-        noteType: clinicalNote.noteType,
-        notes: clinicalNote.notes,
-        dateCreated: clinicalNote.dateCreated,
-        author: clinicalNote.author,
-        source: 'openehr'
-      };
-
       if (clinicalNoteForm.$valid) {
+        let toAdd = {
+          noteType: clinicalNote.noteType,
+          notes: clinicalNote.notes,
+          dateCreated: clinicalNote.dateCreated,
+          author: clinicalNote.author,
+          source: 'openehr'
+        };
 
         $scope.clinicalnotesCreate(this.currentPatient.id, toAdd);
       }

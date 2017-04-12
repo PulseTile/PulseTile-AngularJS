@@ -22,7 +22,7 @@ const INITIAL_STATE = {
   dataGet: null
 };
 
-export default function allergies(state = INITIAL_STATE, action) {
+export default function results(state = INITIAL_STATE, action) {
   const {payload} = action;
 
   var actions = {

@@ -25,7 +25,7 @@ const INITIAL_STATE = {
   dataUpdate: null
 };
 
-export default function contacts(state = INITIAL_STATE, action) {
+export default function personalnotes(state = INITIAL_STATE, action) {
   const {payload} = action;
 
   var actions = {

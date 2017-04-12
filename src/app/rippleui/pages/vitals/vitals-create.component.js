@@ -34,6 +34,7 @@ class VitalsCreateController {
       }
       if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;
+        $scope.vitalEdit.author = $scope.currentUser.email;
       }
       
       $scope.vitalStatuses = serviceVitalsSigns.setVitalStatuses($scope.vitalEdit);

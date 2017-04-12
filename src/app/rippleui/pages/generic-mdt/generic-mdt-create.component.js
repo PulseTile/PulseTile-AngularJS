@@ -32,6 +32,7 @@ class GenericMdtCreateController {
             }
             if (serviceRequests.currentUserData) {
                 $scope.currentUser = serviceRequests.currentUserData;
+                $scope.genericMdt.author = $scope.currentUser.email;
             }
         };
 

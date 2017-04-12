@@ -15,7 +15,7 @@
 export default function ConfirmationDocsModal($uibModal, $stateParams) {
   var isModalClosed = true;
 
-  var openModal = function (typeCreate, data) {
+  var openModal = function (agreeFunc) {
     /* istanbul ignore if  */
     if (isModalClosed) {
       isModalClosed = false;
@@ -28,18 +28,7 @@ export default function ConfirmationDocsModal($uibModal, $stateParams) {
           };
 
           $scope.ok = function () {
-            data.importURL = location.href;
-            
-            if (typeCreate && data) {
-              $state.go(typeCreate + '-create', {
-                patientId: $stateParams.patientId,
-                importData: {
-                  data: data,
-                  documentIndex: $stateParams.detailsIndex
-                }
-
-              });
-            } 
+            agreeFunc();
 
             $uibModalInstance.dismiss('cancel');
           };
