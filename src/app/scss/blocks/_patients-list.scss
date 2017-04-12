@@ -15,17 +15,15 @@
     margin: 0 auto;
     float: none;
   }
-  .btn {
-    border-radius: 0;
-    float: left;
-  }
+  .btn { border-radius: 0; }
   .btn-view-patient { 
     padding-left: 0;
     padding-right: 0;
-    width: 57px;
+    width: 100%;
     text-align: center;
   }
   .btn-dropdown-toggle {
+    float: right;
     margin-left: -1px;
     min-width: auto;
     padding: 0;
