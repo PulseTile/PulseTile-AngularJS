@@ -168,6 +168,7 @@
   border: 0;
   top: 0;
   z-index: 1;
+  .panel-group {margin-bottom: 0;}
   .panel-secondary .panel-heading { 
     padding-bottom: 4px;
     padding-left: 80px; 
@@ -181,7 +182,8 @@
       .rz-tick {
         .rz-tick-legend { top: 17px; }
         @include respond-to(sm) {
-          &:nth-child(4n-1) .rz-tick-legend {display: none;}
+          display: none;
+          &:nth-child(4n-3) {display: block;}
         }
         &:first-child   .rz-tick-legend,
         &:last-child    .rz-tick-legend { display: block; transform: translateX(-50%); }

@@ -105,17 +105,6 @@
         </div>
       </div>
       
-      <div class="dropdown-menu dm-search dm-right dm-without-shadow dm-show" ng-if="searchActive && !isOpenSearch">
-        <div class="panel panel-secondary without-margin">
-          <div class="panel-heading">
-            <div class="control-group right open">
-              <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="$ctrl.openAdvancedSearch(searchOption)"><i class="fa fa-chevron-up"></i></button>
-            </div>
-            <h3 class="panel-title">{{$ctrl.option.name}}</h3>
-          </div>
-        </div>
-      </div>
-
       <div mc-dropdown is-open="isOpenSearch" ng-if="isOpenSearch">
         <div class="dropdown-menu dm-search dm-right">
           <search-advanced-component option="searchOption"></search-advanced-component>

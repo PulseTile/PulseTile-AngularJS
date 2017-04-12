@@ -17,8 +17,10 @@ let templateSearch = require('./search-advanced.html');
 import plugins from '../../plugins';
 
 class SearchAdvancedController {
-  constructor($scope, $http, $ngRedux, serviceRequests, searchActions, $state, $timeout, ConfirmationModal) {
+  constructor($scope, $http, $ngRedux, serviceRequests, searchActions, $state, $timeout, ConfirmationModal, $rootScope) {
     $scope.selectAgeField = 'range';
+    $scope.isOpenPanelsearch = true;
+
     $scope.cancel = function () {
       serviceRequests.publisher('closeAdvancedSearch', {});
     };
@@ -196,6 +198,11 @@ class SearchAdvancedController {
       this.searchResult = queryOption.type === 'advanced' ? searchActions.advancedSearch : searchActions.querySearch;
       this.searchResult(queryParams);
     };
+
+
+    $rootScope.$on('$locationChangeStart', function() {
+      $scope.isOpenPanelsearch = false;
+    });
   }
 }
 
@@ -207,5 +214,5 @@ const SearchAdvancedComponent = {
   controller: SearchAdvancedController
 };
 
-SearchAdvancedController.$inject = ['$scope', '$http', '$ngRedux', 'serviceRequests', 'searchActions', '$state', '$timeout', 'ConfirmationModal'];
+SearchAdvancedController.$inject = ['$scope', '$http', '$ngRedux', 'serviceRequests', 'searchActions', '$state', '$timeout', 'ConfirmationModal', '$rootScope'];
 export default SearchAdvancedComponent;

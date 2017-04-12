@@ -13,174 +13,175 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
-
-<div mc-datepicker class="panel panel-secondary without-margin">
-  <div class="panel-heading">
-    <div class="control-group right">
-      <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="cancel()"><i class="fa fa-chevron-up"></i></button>
+<div mc-datepicker class="panel-group accordion">
+  <div class="panel panel-secondary without-margin" ng-class="{open: isOpenPanelsearch}">
+    <div class="panel-heading">
+      <div class="control-group right">
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="isOpenPanelsearch = !isOpenPanelsearch"><i class="fa fa-chevron-up"></i></button>
+      </div>
+      <h3 class="panel-title">
+        <span>{{$ctrl.option.name}}:</span>
+        <span ng-if="searchParams.nhsNumber">NHS Number: {{searchParams.nhsNumber}}</span>
+      </h3>
     </div>
-    <h3 class="panel-title">
-      <span>{{$ctrl.option.name}}:</span>
-      <span ng-if="searchParams.nhsNumber">NHS Number: {{searchParams.nhsNumber}}</span>
-    </h3>
-  </div>
-  <div class="panel-body">
-    <div class="panel-body-inner">
-      <form name="advancedSearchForm" class="form">
-        <div class="form-group-wrapper">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6" ng-if="$ctrl.option.type === 'advanced'">
-                  <div class="form-group"
-                    ng-class="{'has-error': !$ctrl.detailsFocused && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) && areDetailsFieldsClean(advancedSearchForm),
-                    'has-success': !$ctrl.detailsFocused && advancedSearchForm.nhsNumber.$valid && advancedSearchForm.nhsNumber.$dirty}">
-                      <label for="nhsNumber" class="control-label">NHS Number</label>
-                      <div class="input-holder">
-                          <input type="text" tabindex="1" class="form-control input-sm" id="nhsNumber" name="nhsNumber" ng-model="searchParams.nhsNumber" focus-element="nhsNumberFocus" is-valid-nhs-number ng-focus="$ctrl.detailsFocused=false" ng-required="!$ctrl.detailsFocused" placeholder="e.g. 123 456 7890"/>
-                      </div>
-                      <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.nhsNumber.$invalid && !$ctrl.detailsFocused">You must enter a value.</span>
-                      <span class="required-label" ng-show="!$ctrl.detailsFocused && isNhsNumberRequired(advancedSearchForm)">*Required</span>
-                      <span class="required-label" ng-show="!$ctrl.detailsFocused && isNhsNumberTooShort(advancedSearchForm.nhsNumber.$viewValue)">*NHS Number too short</span>
-                      <span class="required-label" ng-show="!$ctrl.detailsFocused && isNhsNumberTooLong(advancedSearchForm.nhsNumber.$viewValue)">*NHS Number too long</span>
-                  </div>
-                </div>
-                <div class="col-xs-12 col-sm-6" ng-if="$ctrl.option.type === 'clinicalQuery'">
+    <div class="panel-body">
+      <div class="panel-body-inner">
+        <form name="advancedSearchForm" class="form">
+          <div class="form-group-wrapper">
+              <div class="row">
+                  <div class="col-xs-12 col-sm-6" ng-if="$ctrl.option.type === 'advanced'">
                     <div class="form-group"
-                         ng-class="{'has-error': !$ctrl.detailsFocused,
-                    'has-success': !$ctrl.detailsFocused && advancedSearchForm.type.$valid && advancedSearchForm.type.$dirty}">
-                        <label for="type" class="control-label">Search Type</label>
-                        <select class="form-control input-sm" tabindex="5" id="type" name="type" ng-model="searchParams.type">
-                            <option ng-repeat="type in $ctrl.typesList" value="type">{{type.title}}</option>
-                        </select>
-                        <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.type.$invalid && !$ctrl.detailsFocused">You must enter a value.</span>
-                        <span class="required-label" ng-show="!$ctrl.detailsFocused">*Required</span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-sm-6" ng-if="$ctrl.option.type === 'advanced'">
-                  <div class="form-group"
-                    ng-class="{'has-error': advancedSearchForm.surname.$error.required && advancedSearchForm.surname.$invalid && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber),
-                    'has-success': $ctrl.detailsFocused && advancedSearchForm.surname.$valid && advancedSearchForm.surname.$dirty && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)}">
-                      <label for="surname" class="control-label">Last Name</label>
-                      <div class="input-holder">
-                          <input type="text" tabindex="2" class="form-control input-sm" id="surname" name="surname" ng-model="searchParams.surname" focus-element="surnameFocus" ng-focus="$ctrl.detailsFocused=true" ng-required='$ctrl.detailsFocused' placeholder="e. g. Smith"/>
-                      </div>
-                      <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.surname.$error.required && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)">You must enter a value.</span>
-                      <span class="required-label" ng-show="$ctrl.detailsFocused && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) && (advancedSearchForm.surname.$invalid || advancedSearchForm.forename.$invalid || advancedSearchForm.dateOfBirth.$invalid)">*Required</span>
-                  </div>
-                </div>
-                <div class="col-xs-12 col-sm-4" ng-if="$ctrl.option.type === 'clinicalQuery'">
-                    <div class="form-group"
-                         ng-class="{'has-error': !$ctrl.detailsFocused ,
-                    'has-success': !$ctrl.detailsFocused && advancedSearchForm.query.$valid && advancedSearchForm.query.$dirty}">
-                        <label for="nhsNumber" class="control-label">Search Query</label>
-                        <select class="form-control input-sm" tabindex="5" id="query" name="query" ng-model="searchParams.query">
-                            <option ng-repeat="query in $ctrl.queryList" value="query">{{query}}</option>
-                        </select>
-                        <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.query.$invalid && !$ctrl.detailsFocused">You must enter a value.</span>
-                        <span class="required-label" ng-show="!$ctrl.detailsFocused">*Required</span>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6" ng-if="$ctrl.option.type === 'advanced'">
-                  <div class="form-group"
-                    ng-class="{'has-error': advancedSearchForm.forename.$error.required && advancedSearchForm.forename.$invalid && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber),
-                    'has-success': $ctrl.detailsFocused && advancedSearchForm.forename.$valid && advancedSearchForm.forename.$dirty && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)}">
-                      <label for="forename" class="control-label">First Name</label>
-                      <div class="input-holder">
-                          <input type="text" tabindex="3" class="form-control input-sm" id="forename" name="forename" ng-model="searchParams.forename" ng-focus="$ctrl.detailsFocused=true" ng-required='$ctrl.detailsFocused' placeholder="e.g. John"/>
-                      </div>
-                      <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.forename.$error.required && (advancedSearchForm.nhsNumber.$invalid || advancedSearchForm.nhsNumber.$pristine)">You must enter a value.</span>
-                      <span class="required-label" ng-show="$ctrl.detailsFocused && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) && (advancedSearchForm.surname.$invalid || advancedSearchForm.forename.$invalid || advancedSearchForm.dateOfBirth.$invalid)">*Required</span>
-                  </div>
-                </div>
-                <div class="col-xs-12 col-sm-8" ng-if="$ctrl.option.type === 'clinicalQuery'">
-                    <div class="form-group"
-                         ng-class="{'has-error': !$ctrl.detailsFocused,
-                    'has-success': !$ctrl.detailsFocused && advancedSearchForm.queryNext.$valid && advancedSearchForm.queryNext.$dirty}">
-                        <label for="queryNext" class="control-label hidden-xs"></label>
+                      ng-class="{'has-error': !$ctrl.detailsFocused && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) && areDetailsFieldsClean(advancedSearchForm),
+                      'has-success': !$ctrl.detailsFocused && advancedSearchForm.nhsNumber.$valid && advancedSearchForm.nhsNumber.$dirty}">
+                        <label for="nhsNumber" class="control-label">NHS Number</label>
                         <div class="input-holder">
-                            <input type="text" tabindex="3" class="form-control input-sm" id="queryNext" name="queryNext" ng-model="searchParams.queryNext" ng-focus="$ctrl.detailsFocused=true" ng-required='$ctrl.detailsFocused' placeholder="e.g. John"/>
+                            <input type="text" tabindex="1" class="form-control input-sm" id="nhsNumber" name="nhsNumber" ng-model="searchParams.nhsNumber" focus-element="nhsNumberFocus" is-valid-nhs-number ng-focus="$ctrl.detailsFocused=false" ng-required="!$ctrl.detailsFocused" placeholder="e.g. 123 456 7890"/>
                         </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.nhsNumber.$invalid && !$ctrl.detailsFocused">You must enter a value.</span>
+                        <span class="required-label" ng-show="!$ctrl.detailsFocused && isNhsNumberRequired(advancedSearchForm)">*Required</span>
+                        <span class="required-label" ng-show="!$ctrl.detailsFocused && isNhsNumberTooShort(advancedSearchForm.nhsNumber.$viewValue)">*NHS Number too short</span>
+                        <span class="required-label" ng-show="!$ctrl.detailsFocused && isNhsNumberTooLong(advancedSearchForm.nhsNumber.$viewValue)">*NHS Number too long</span>
                     </div>
-                </div>
-            </div>
-
-            <div class="row">
-              <div class="col-xs-12 col-sm-4">
-                  <div class="form-group">
-                      <label for="selectAgeField" class="control-label">Select Age Params</label>
-                      <select class="form-control input-sm" tabindex="5" id="selectAgeField" name="selectAgeField" ng-model="selectAgeField">
-                          <option value="range">Age Range</option>
-                          <option value="birthday">Birthday</option>
-                      </select>
+                  </div>
+                  <div class="col-xs-12 col-sm-6" ng-if="$ctrl.option.type === 'clinicalQuery'">
+                      <div class="form-group"
+                           ng-class="{'has-error': !$ctrl.detailsFocused,
+                      'has-success': !$ctrl.detailsFocused && advancedSearchForm.type.$valid && advancedSearchForm.type.$dirty}">
+                          <label for="type" class="control-label">Search Type</label>
+                          <select class="form-control input-sm" tabindex="5" id="type" name="type" ng-model="searchParams.type">
+                              <option ng-repeat="type in $ctrl.typesList" value="type">{{type.title}}</option>
+                          </select>
+                          <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.type.$invalid && !$ctrl.detailsFocused">You must enter a value.</span>
+                          <span class="required-label" ng-show="!$ctrl.detailsFocused">*Required</span>
+                      </div>
                   </div>
               </div>
-            </div>
-
-
-            <div class="form-group" ng-if="selectAgeField == 'range'">
-              <label for="" class="control-label">Age Range (Years)</label>
-              <div class="wrap-rzslider-search">
-                  <rzslider class="mc-rz-slider"
-                            rz-slider-model="sliderRange.minValue"
-                            rz-slider-high="sliderRange.maxValue"
-                            rz-slider-options="sliderRange.options"></rzslider>
-              </div>
-            </div>
-
-            <div class="row" ng-if="selectAgeField == 'birthday'">
-              <div class="col-xs-12 col-sm-6">
-                <div class="form-group form-group-sm" ng-class="{'has-error': detailsFocused && advancedSearchForm.dateOfBirth.$invalid && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber), 'has-success': detailsFocused && advancedSearchForm.dateOfBirth.$valid && advancedSearchForm.dateOfBirth.$dirty && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)}">
-                  <label for="" class="control-label">Date of Birth</label>
-                  <div class="inner-addon addon-left wrap-datepicker-top">
-                    <div class="addon">
-                      <i class="fa fa-calendar"></i>
+              <div class="row">
+                  <div class="col-xs-12 col-sm-6" ng-if="$ctrl.option.type === 'advanced'">
+                    <div class="form-group"
+                      ng-class="{'has-error': advancedSearchForm.surname.$error.required && advancedSearchForm.surname.$invalid && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber),
+                      'has-success': $ctrl.detailsFocused && advancedSearchForm.surname.$valid && advancedSearchForm.surname.$dirty && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)}">
+                        <label for="surname" class="control-label">Last Name</label>
+                        <div class="input-holder">
+                            <input type="text" tabindex="2" class="form-control input-sm" id="surname" name="surname" ng-model="searchParams.surname" focus-element="surnameFocus" ng-focus="$ctrl.detailsFocused=true" ng-required='$ctrl.detailsFocused' placeholder="e. g. Smith"/>
+                        </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.surname.$error.required && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)">You must enter a value.</span>
+                        <span class="required-label" ng-show="$ctrl.detailsFocused && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) && (advancedSearchForm.surname.$invalid || advancedSearchForm.forename.$invalid || advancedSearchForm.dateOfBirth.$invalid)">*Required</span>
                     </div>
-                    <input type="text" tabindex="4" class="form-control popupinputs" id="dateOfBirth" name="dateOfBirth" ng-model="searchParams.dateOfBirth" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.dateOfBirth" ng-focus="detailsFocused=true" ng-click="openDatepicker($event, 'dateOfBirth')" ui-date-format ng-required='detailsFocused' placeholder="03-Aug-1970" readonly readonly/>
-                    <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.dateOfBirth.$error.required && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)">You must enter a value.</span>
-                    <span class="required-label" ng-show="detailsFocused && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) && (advancedSearchForm.surname.$invalid || advancedSearchForm.surname.$invalid || advancedSearchForm.dateOfBirth.$invalid)">*Required</span>
                   </div>
-                </div>
-              </div>
-            </div>
-
-
-
-
-            <div class="row">
-                <div class="col-xs-12 col-sm-6">
-                  <div class="form-group" ng-class="{'has-error': (formSubmitted || advancedSearchForm.route.$dirty) && medicationForm.route.$invalid, 'has-success': medicationForm.route.$valid && medicationForm.route.$dirty}">
-                      <label for="gender" class="control-label">Gender</label>
-                      <div class="input-holder">
-                          <div class="wrap-fcustominps-inline">
-                              <div class="wrap-fcustominp">
-                                  <div class="fcustominp">
-                                      <input type="checkbox" id="gender-male" name="gender-male" ng-model="searchParams.sexMale" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                                      <label for="gender-male"></label>
-                                  </div>
-                                  <label for="gender-male" class="fcustominp-label ng-binding">Male</label>
-                              </div>
-                              <div class="wrap-fcustominp">
-                                  <div class="fcustominp">
-                                      <input type="checkbox" id="gender-female" name="gender-female" ng-model="searchParams.sexFemale" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                                      <label for="gender-female"></label>
-                                  </div>
-                                  <label for="gender-female" class="fcustominp-label ng-binding">Female</label>
-                              </div>
+                  <div class="col-xs-12 col-sm-4" ng-if="$ctrl.option.type === 'clinicalQuery'">
+                      <div class="form-group"
+                           ng-class="{'has-error': !$ctrl.detailsFocused ,
+                      'has-success': !$ctrl.detailsFocused && advancedSearchForm.query.$valid && advancedSearchForm.query.$dirty}">
+                          <label for="nhsNumber" class="control-label">Search Query</label>
+                          <select class="form-control input-sm" tabindex="5" id="query" name="query" ng-model="searchParams.query">
+                              <option ng-repeat="query in $ctrl.queryList" value="query">{{query}}</option>
+                          </select>
+                          <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.query.$invalid && !$ctrl.detailsFocused">You must enter a value.</span>
+                          <span class="required-label" ng-show="!$ctrl.detailsFocused">*Required</span>
+                      </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-6" ng-if="$ctrl.option.type === 'advanced'">
+                    <div class="form-group"
+                      ng-class="{'has-error': advancedSearchForm.forename.$error.required && advancedSearchForm.forename.$invalid && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber),
+                      'has-success': $ctrl.detailsFocused && advancedSearchForm.forename.$valid && advancedSearchForm.forename.$dirty && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)}">
+                        <label for="forename" class="control-label">First Name</label>
+                        <div class="input-holder">
+                            <input type="text" tabindex="3" class="form-control input-sm" id="forename" name="forename" ng-model="searchParams.forename" ng-focus="$ctrl.detailsFocused=true" ng-required='$ctrl.detailsFocused' placeholder="e.g. John"/>
+                        </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.forename.$error.required && (advancedSearchForm.nhsNumber.$invalid || advancedSearchForm.nhsNumber.$pristine)">You must enter a value.</span>
+                        <span class="required-label" ng-show="$ctrl.detailsFocused && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) && (advancedSearchForm.surname.$invalid || advancedSearchForm.forename.$invalid || advancedSearchForm.dateOfBirth.$invalid)">*Required</span>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-8" ng-if="$ctrl.option.type === 'clinicalQuery'">
+                      <div class="form-group"
+                           ng-class="{'has-error': !$ctrl.detailsFocused,
+                      'has-success': !$ctrl.detailsFocused && advancedSearchForm.queryNext.$valid && advancedSearchForm.queryNext.$dirty}">
+                          <label for="queryNext" class="control-label hidden-xs"></label>
+                          <div class="input-holder">
+                              <input type="text" tabindex="3" class="form-control input-sm" id="queryNext" name="queryNext" ng-model="searchParams.queryNext" ng-focus="$ctrl.detailsFocused=true" ng-required='$ctrl.detailsFocused' placeholder="e.g. John"/>
                           </div>
                       </div>
                   </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                    <div class="form-group">
+                        <label for="selectAgeField" class="control-label">Select Age Params</label>
+                        <select class="form-control input-sm" tabindex="5" id="selectAgeField" name="selectAgeField" ng-model="selectAgeField">
+                            <option value="range">Age Range</option>
+                            <option value="birthday">Birthday</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-        </div>
-      </form>
-      
-    </div>
-    <div class="panel-control">
-      <div class="wrap-control-group hide-indent-bottom">
-        <div class="control-group with-indent right">
-          <button class="btn btn-danger btn-icon-normal" ng-click="cancel()"><i class="fa fa-times"></i> Close</button>
-          <button class="btn btn-success btn-icon-normal" ng-click="ok(advancedSearchForm)"><i class="fa fa-search"></i> Search</button>
+              </div>
+
+
+              <div class="form-group" ng-if="selectAgeField == 'range'">
+                <label for="" class="control-label">Age Range (Years)</label>
+                <div class="wrap-rzslider-search">
+                    <rzslider class="mc-rz-slider"
+                              rz-slider-model="sliderRange.minValue"
+                              rz-slider-high="sliderRange.maxValue"
+                              rz-slider-options="sliderRange.options"></rzslider>
+                </div>
+              </div>
+
+              <div class="row" ng-if="selectAgeField == 'birthday'">
+                <div class="col-xs-12 col-sm-6">
+                  <div class="form-group form-group-sm" ng-class="{'has-error': detailsFocused && advancedSearchForm.dateOfBirth.$invalid && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber), 'has-success': detailsFocused && advancedSearchForm.dateOfBirth.$valid && advancedSearchForm.dateOfBirth.$dirty && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)}">
+                    <label for="" class="control-label">Date of Birth</label>
+                    <div class="inner-addon addon-left wrap-datepicker-top">
+                      <div class="addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" tabindex="4" class="form-control popupinputs" id="dateOfBirth" name="dateOfBirth" ng-model="searchParams.dateOfBirth" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.dateOfBirth" ng-focus="detailsFocused=true" ng-click="openDatepicker($event, 'dateOfBirth')" ui-date-format ng-required='detailsFocused' placeholder="03-Aug-1970" readonly readonly/>
+                      <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.dateOfBirth.$error.required && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)">You must enter a value.</span>
+                      <span class="required-label" ng-show="detailsFocused && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) && (advancedSearchForm.surname.$invalid || advancedSearchForm.surname.$invalid || advancedSearchForm.dateOfBirth.$invalid)">*Required</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+              <div class="row">
+                  <div class="col-xs-12 col-sm-6">
+                    <div class="form-group" ng-class="{'has-error': (formSubmitted || advancedSearchForm.route.$dirty) && medicationForm.route.$invalid, 'has-success': medicationForm.route.$valid && medicationForm.route.$dirty}">
+                        <label for="gender" class="control-label">Gender</label>
+                        <div class="input-holder">
+                            <div class="wrap-fcustominps-inline">
+                                <div class="wrap-fcustominp">
+                                    <div class="fcustominp">
+                                        <input type="checkbox" id="gender-male" name="gender-male" ng-model="searchParams.sexMale" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                        <label for="gender-male"></label>
+                                    </div>
+                                    <label for="gender-male" class="fcustominp-label ng-binding">Male</label>
+                                </div>
+                                <div class="wrap-fcustominp">
+                                    <div class="fcustominp">
+                                        <input type="checkbox" id="gender-female" name="gender-female" ng-model="searchParams.sexFemale" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                        <label for="gender-female"></label>
+                                    </div>
+                                    <label for="gender-female" class="fcustominp-label ng-binding">Female</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        </form>
+        
+      </div>
+      <div class="panel-control">
+        <div class="wrap-control-group hide-indent-bottom">
+          <div class="control-group with-indent right">
+            <button class="btn btn-danger btn-icon-normal" ng-click="cancel()"><i class="fa fa-times"></i> Close</button>
+            <button class="btn btn-success btn-icon-normal" ng-click="ok(advancedSearchForm)"><i class="fa fa-search"></i> Search</button>
+          </div>
         </div>
       </div>
     </div>
