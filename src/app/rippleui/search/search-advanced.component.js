@@ -18,7 +18,7 @@ import plugins from '../../plugins';
 
 class SearchAdvancedController {
   constructor($scope, $http, $ngRedux, serviceRequests, searchActions, $state, $timeout, ConfirmationModal) {
-
+    $scope.selectAgeField = 'range';
     $scope.cancel = function () {
       serviceRequests.publisher('closeAdvancedSearch', {});
     };
