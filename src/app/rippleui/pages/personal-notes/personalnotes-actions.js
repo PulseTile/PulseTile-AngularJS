@@ -21,7 +21,7 @@ export function all(patientId) {
   return {
     types: [types.PERSONALNOTES, types.PERSONALNOTES_SUCCESS, types.PERSONALNOTES_ERROR],
 
-    shouldCallAPI: (state) => !state.contacts.response,
+    shouldCallAPI: (state) => !state.personalnotes.response,
 
     config: {
       method: 'get',
@@ -37,7 +37,7 @@ export function get(patientId, compositionId, source) {
   return {
     types: [types.PERSONALNOTES_GET, types.PERSONALNOTES_GET_SUCCESS, types.PERSONALNOTES_GET_ERROR],
 
-    shouldCallAPI: (state) => !state.contacts.response,
+    shouldCallAPI: (state) => !state.personalnotes.response,
 
     config: {
       method: 'get',
@@ -53,7 +53,7 @@ export function create(patientId, composition) {
   return {
     types: [types.PERSONALNOTES_CREATE, types.PERSONALNOTES_CREATE_SUCCESS, types.PERSONALNOTES_CREATE_ERROR],
 
-    shouldCallAPI: (state) => !state.contacts.response,
+    shouldCallAPI: (state) => !state.personalnotes.response,
 
     config: {
       method: 'post',
@@ -70,7 +70,7 @@ export function update(patientId, composition) {
   return {
     types: [types.PERSONALNOTES_UPDATE, types.PERSONALNOTES_UPDATE_SUCCESS, types.PERSONALNOTES_UPDATE_ERROR],
 
-    shouldCallAPI: (state) => !state.contacts.response,
+    shouldCallAPI: (state) => !state.personalnotes.response,
 
     config: {
       method: 'put',
