@@ -15,7 +15,6 @@
  */
 import clinicalnotes from './rippleui/pages/clinical-notes/index';
 import allergies from './rippleui/pages/allergies/index';
-import appointments from './rippleui/pages/appointments/index';
 import eolcareplans from './rippleui/pages/care-plans/index';
 import contacts from './rippleui/pages/contacts/index';
 import diagnoses from './rippleui/pages/diagnoses/index';
@@ -38,7 +37,6 @@ import events from './rippleui/pages/events/index';
 export default [
   clinicalnotes,
   allergies,
-  appointments,
   eolcareplans,
   contacts,
   diagnoses,

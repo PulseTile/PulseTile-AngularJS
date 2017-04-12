@@ -1,0 +1,208 @@
+<!--
+  ~  Copyright 2016 Ripple Foundation C.I.C. Ltd
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  -->
+<div mc-full-panel mc-accordion mc-open-panel="detail" class="panel-group accordion">
+    <div class="panel panel-secondary" ng-if="getShowPanel('detail')" ng-class="getOpenPanelClass('detail')">
+        <div class="panel-heading">
+            <div class="control-group right">
+                <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'detail')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+                <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('detail')"><i class="fa fa-chevron-up"></i></button>
+            </div>
+            <h3 class="panel-title">Document Details</h3>
+        </div>
+        <div class="panel-body">
+            <div class="panel-body-inner">
+                <div class="form">
+                    <div class="row-expand">
+                        <div class="col-expand-left">
+                            <div class="form-group">
+                                <label class="control-label">Document Name</label>
+                                <div class="form-control-static">{{ $ctrl.clinicalDocument.documentName }}</div>
+                            </div>
+                        </div>
+                        <div class="col-expand-right">
+                            <div class="form-group">
+                                <label class="control-label">Document Date</label>
+                                <div class="form-control-static">{{ $ctrl.clinicalDocument.documentDate | date:'dd-MMM-y' }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row-expand">
+                        <div class="col-expand-left">
+                            <div class="form-group">
+                                <label class="control-label">Author</label>
+                                <div class="form-control-static">{{ $ctrl.clinicalDocument.author_name }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group-section">
+                        <div class="fgs-heading">
+                            <label class="control-label">Facility</label>
+                        </div>
+                        <div class="fgs-body">
+                            <div class="form-group-wrapper">
+                                <div class="row-expand">
+                                    <div class="col-expand-left">
+                                        <div class="form-group">
+                                            <label class="control-label">Name</label>
+                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.facility }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group-section">
+                        <div class="fgs-heading">
+                            <label class="control-label">Patient Identifier</label>
+                        </div>
+                        <div class="fgs-body">
+                            <div class="form-group-wrapper">
+                                <div class="row-expand">
+                                    <div class="col-expand-left">
+                                        <div class="form-group">
+                                            <label class="control-label">MRM Type</label>
+                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.patientIdentifier_mrnType }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-expand-right">
+                                        <div class="form-group">
+                                            <label class="control-label">OTH Type</label>
+                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.patientIdentifier_othType }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                              
+                                <div class="row-expand">
+                                    <div class="col-expand-left">
+                                        <div class="form-group">
+                                            <label class="control-label">GMS Type</label>
+                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.patientIdentifier_gmsType }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="row-expand">
+                                    <div class="col-expand-left">
+                                        <div class="form-group">
+                                            <label class="control-label">Responsible Professional</label>
+                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.responsibleProfessional_name }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-expand-right">
+                                        <div class="form-group">
+                                            <label class="control-label">Responsible Professional Type</label>
+                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.responsibleProfessional_idType }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row-expand">
+                                    <div class="col-expand-left">
+                                        <div class="form-group">
+                                            <label class="control-label">From</label>
+                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.source }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-expand-right">
+                                        <div class="form-group">
+                                            <label class="control-label">Discharging Organisation</label>
+                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.dischargingOrganisation }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row-expand">
+                                    <div class="col-expand-left">
+                                        <div class="form-group">
+                                            <label class="control-label">Discharging Date</label>
+                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.dateTimeOfDischarge }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row-expand">
+                                    <div class="col-expand-left">
+                                        <div class="form-group">
+                                            <label class="control-label">Clinical Synopsis</label>
+                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.clinicalSynopsis }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-expand-right">
+                                        <div class="form-group">
+                                            <label class="control-label">Date of Admission</label>
+                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.dateOfAdmission }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group-section fgs-bordered fgs-primary">
+                        <div class="fgs-heading">
+                            <label class="control-label">Diagnosis List</label>
+                        </div>
+                        <div class="fgs-body">
+                            <div class="form-group-wrapper">
+                                <div class="row-expand">
+                                    <div class="col-expand-left">
+                                        <div class="form-group">
+                                            <label class="control-label">Problem</label>
+                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.diagnosisList[0].problem }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-expand-right">
+                                        <div class="form-group">
+                                            <label class="control-label">Description</label>
+                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.diagnosisList[0].description }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-expand">
+                                    <div class="col-expand-left">
+                                        <div class="form-group">
+                                            <label class="control-label">Terminology</label>
+                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.diagnosisList[0].terminology }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-expand-right">
+                                        <div class="form-group">
+                                            <label class="control-label">Terminology Code</label>
+                                            <div class="form-control-static">{{ $ctrl.clinicalDocument.diagnosisList[0].terminologyCode }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fgs-control">
+                                <div class="wrap-control-group">
+                                    <div class="control-group right">
+                                        <button class="btn btn-primary" ng-click="importToCreate('diagnoses', $ctrl.clinicalDocument.diagnosisList[0])"><span>Import Data</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="documentssDetail-spinner" spinner-start-active="true"></span>
+</div>

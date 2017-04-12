@@ -52,11 +52,12 @@
 
             <div class="row-expand">
               <div class="col-expand-left">
-                <div class="form-group">
-                  <label for="text" class="control-label">Description</label>
-                  <div class="input-holder">
-                    <textarea class="form-control textarea-big input-sm" id="text" name="text" ng-model="diagnosis.description"></textarea>
-                  </div>
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || diagnosisForm.description.$dirty) && diagnosisForm.description.$invalid, 'has-success': diagnosisForm.description.$valid && diagnosisForm.description.$dirty}">
+                    <label for="description" class="control-label">Description</label>
+                    <div class="input-holder">
+                        <textarea type="text" class="form-control textarea-big input-sm" id="description" name="description" ng-model="diagnosis.description" required></textarea>
+                    </div>
+                    <span class="help-block animate-fade" ng-show="formSubmitted && diagnosisForm.description.$error.required">You must enter a value.</span>
                 </div>
               </div>
               <div class="col-expand-right">
@@ -71,11 +72,12 @@
 
             <div class="row-expand">
               <div class="col-expand-left">
-                <div class="form-group">
-                  <label for="terminology" class="control-label">Terminology</label>
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || diagnosisForm.terminology.$dirty) && diagnosisForm.terminology.$invalid, 'has-success': diagnosisForm.terminology.$valid && diagnosisForm.terminology.$dirty}">
+                  <label for="text" class="control-label">Terminology</label>
                   <div class="input-holder">
-                    <input type="text" class="form-control" id="terminology" ng-model="diagnosis.terminology" />
+                    <input type="text" class="form-control input-sm" id="terminology" name="terminology" ng-model="diagnosis.terminology" required />
                   </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && diagnosisForm.terminology.$error.required">You must enter a value.</span>
                 </div>
               </div>
               <div class="col-expand-right">
@@ -84,6 +86,18 @@
                   <div class="non-edit-value">{{ diagnosis.code }}</div>
                 </div>
               </div>
+            </div>
+
+            <div class="form-group hidden">
+              <input type="hidden" id="isImport" name="isImport" ng-model="diagnosis.isImport" disabled />
+            </div>
+            
+            <div class="form-group form-group-sm" ng-if="diagnosis.isImport" ng-class="{'has-error': (formSubmitted || diagnosisForm.importURL.$dirty) && diagnosisForm.importURL.$invalid, 'has-success': diagnosisForm.importURL.$valid && diagnosisForm.importURL.$dirty}">
+                <label for="importURL" class="control-label">Import URL</label>
+                <div class="input-holder">
+                    <input type="text" class="form-control input-sm" id="importURL" name="importURL" ng-model="diagnosis.importURL" disabled />
+                </div>
+                <span class="help-block animate-fade" ng-show="formSubmitted && diagnosisForm.importURL.$error.required">You must enter a value.</span>
             </div>
 
             <div class="row-expand">
@@ -113,10 +127,13 @@
         </form>
       </div>
       <div class="panel-control">
-        <div class="wrap-control-group">
-          <div class="control-group right">
+        <div class="wrap-control-group hide-indent-bottom">
+          <div class="control-group with-indent right">
             <button class="btn btn-danger" ng-click="$ctrl.cancel()"><i class="fa fa-ban"></i> Cancel</button>
             <button class="btn btn-success" ng-click="create(diagnosisForm, diagnosis)"><i class="fa fa-check"></i> Complete</button>
+          </div>
+          <div class="control-group with-indent left" ng-if="diagnosis.isImport">
+            <button class="btn btn-success btn-inverse btn-icon-normal btn-back-doc" ng-click="$ctrl.backToDocs()"><i class="fa fa-caret-left"></i> <span>Back to Documents</span></button>
           </div>
         </div>
       </div>

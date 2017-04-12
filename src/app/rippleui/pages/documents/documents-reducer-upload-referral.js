@@ -21,7 +21,7 @@ const INITIAL_STATE = {
   data: null
 };
 
-export default function allergies(state = INITIAL_STATE, action) {
+export default function documents(state = INITIAL_STATE, action) {
   const {payload} = action;
 
   var actions = {

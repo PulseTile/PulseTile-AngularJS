@@ -52,7 +52,7 @@ class EventsCreateController {
     }
 
     this.setCurrentPageData = function (data) {
-      if (data.appointments.dataCreate !== null) {
+      if (data.events.dataCreate !== null) {
         this.goList();
       }
       if (data.patientsGet.data) {
@@ -60,6 +60,7 @@ class EventsCreateController {
       }
       if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;
+        $scope.event.author = $scope.currentUser.email;
       }
     };
 
@@ -82,22 +83,22 @@ class EventsCreateController {
     
     $scope.create = function (eventForm, event) {
       $scope.formSubmitted = true;
-      let toAdd = {
-        // name: event.name,
-        // comment: event.comment,
-        // seriesNumber: event.seriesNumber,
-        // dateCreated: event.dateCreated,
-        // startDate: event.startDate,
-        // source: event.source
-        dateCreated: event.dateCreated,
-        dateOfAppointment: event.date,
-        location: event.location,
-        serviceTeam: event.name,
-        status: "Scheduled",
-        timeOfAppointment: "2017-02-10T14:00:00.000Z"
-      };
-      console.log('create --> ', toAdd, event);
+      
       if (eventForm.$valid) {
+        let toAdd = {
+          // name: event.name,
+          // comment: event.comment,
+          // seriesNumber: event.seriesNumber,
+          // dateCreated: event.dateCreated,
+          // startDate: event.startDate,
+          // source: event.source
+          dateCreated: event.dateCreated,
+          dateOfAppointment: event.date,
+          location: event.location,
+          serviceTeam: event.name,
+          status: "Scheduled",
+          timeOfAppointment: "2017-02-10T14:00:00.000Z"
+        };
 
         $scope.eventsCreate(this.currentPatient.id, toAdd);
       }
