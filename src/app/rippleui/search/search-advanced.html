@@ -104,7 +104,21 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-4">
+                  <div class="form-group">
+                      <label for="selectAgeField" class="control-label">Select Age Params</label>
+                      <select class="form-control input-sm" tabindex="5" id="selectAgeField" name="selectAgeField" ng-model="selectAgeField">
+                          <option value="range">Age Range</option>
+                          <option value="birthday">Birthday</option>
+                      </select>
+                  </div>
+              </div>
+            </div>
+
+
+            <div class="form-group" ng-if="selectAgeField == 'range'">
               <label for="" class="control-label">Age Range (Years)</label>
               <div class="wrap-rzslider-search">
                   <rzslider class="mc-rz-slider"
@@ -113,6 +127,26 @@
                             rz-slider-options="sliderRange.options"></rzslider>
               </div>
             </div>
+
+            <div class="row" ng-if="selectAgeField == 'birthday'">
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group form-group-sm" ng-class="{'has-error': detailsFocused && advancedSearchForm.dateOfBirth.$invalid && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber), 'has-success': detailsFocused && advancedSearchForm.dateOfBirth.$valid && advancedSearchForm.dateOfBirth.$dirty && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)}">
+                  <label for="" class="control-label">Date of Birth</label>
+                  <div class="inner-addon addon-left wrap-datepicker-top">
+                    <div class="addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" tabindex="4" class="form-control popupinputs" id="dateOfBirth" name="dateOfBirth" ng-model="searchParams.dateOfBirth" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.dateOfBirth" ng-focus="detailsFocused=true" ng-click="openDatepicker($event, 'dateOfBirth')" ui-date-format ng-required='detailsFocused' placeholder="03-Aug-1970" readonly readonly/>
+                    <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.dateOfBirth.$error.required && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)">You must enter a value.</span>
+                    <span class="required-label" ng-show="detailsFocused && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) && (advancedSearchForm.surname.$invalid || advancedSearchForm.surname.$invalid || advancedSearchForm.dateOfBirth.$invalid)">*Required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
                   <div class="form-group" ng-class="{'has-error': (formSubmitted || advancedSearchForm.route.$dirty) && medicationForm.route.$invalid, 'has-success': medicationForm.route.$valid && medicationForm.route.$dirty}">
