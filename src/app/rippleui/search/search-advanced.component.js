@@ -29,6 +29,13 @@ class SearchAdvancedController {
       $scope.isOpenPanelSearch = true;
     });
 
+
+    $scope.getSearchParams = function () {
+      var paramsText = '';
+
+      return paramsText.length ? ': ' + paramsText : '';
+    }
+
     this.typesList = [];
     this.queryList = ['contains' , 'excludes'];
     
