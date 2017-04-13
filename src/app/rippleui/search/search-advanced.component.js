@@ -19,11 +19,15 @@ import plugins from '../../plugins';
 class SearchAdvancedController {
   constructor($scope, $http, $ngRedux, serviceRequests, searchActions, $state, $timeout, ConfirmationModal, $rootScope) {
     $scope.selectAgeField = 'range';
-    $scope.isOpenPanelsearch = true;
+    $scope.isOpenPanelSearch = true;
 
     $scope.cancel = function () {
       serviceRequests.publisher('closeAdvancedSearch', {});
     };
+
+    serviceRequests.subscriber('openSearchPanel', function () {
+      $scope.isOpenPanelSearch = true;
+    });
 
     this.typesList = [];
     this.queryList = ['contains' , 'excludes'];
@@ -33,6 +37,8 @@ class SearchAdvancedController {
       if (!Object.keys(plugin.sidebarInfo).length) return;
       this.typesList.push(plugin.sidebarInfo);
     });
+
+
 
     var changeState = function () {
       $scope.formSubmitted = true;
@@ -201,7 +207,7 @@ class SearchAdvancedController {
 
 
     $rootScope.$on('$locationChangeStart', function() {
-      $scope.isOpenPanelsearch = false;
+      $scope.isOpenPanelSearch = false;
     });
   }
 }
