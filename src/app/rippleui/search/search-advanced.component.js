@@ -48,7 +48,6 @@ class SearchAdvancedController {
 
 
     var changeState = function () {
-      $scope.formSubmitted = true;
       if ($scope.patients.constructor === Array && $scope.patients.length == 1) {
         
         ConfirmationModal.openModal($scope.patients[0]);
@@ -131,12 +130,14 @@ class SearchAdvancedController {
     };
 
     $scope.ok = function (searchForm) {
-      /* istanbul ignore if */
-      if ($scope.searchParams.nhsNumber) {
-        $scope.searchParams.nhsNumber = $scope.searchParams.nhsNumber.replace(/\s+/g, '');
-      }
+      $scope.formSubmitted = true;
 
+      /* istanbul ignore if */
       if (searchForm.$valid) {
+        if ($scope.searchParams.nhsNumber) {
+          $scope.searchParams.nhsNumber = $scope.searchParams.nhsNumber.replace(/\s+/g, '');
+        }
+        
         $scope.searchByDetails($scope.searchParams);
 
         let unsubscribe = $ngRedux.connect(state => ({
@@ -145,7 +146,7 @@ class SearchAdvancedController {
 
         $scope.$on('$destroy', unsubscribe);
       }
-    };
+    };  
 
     $scope.isNhsNumberRequired = function (advancedSearchForm) {
       var nhsNumber = $scope.advancedSearchForm.nhsNumber.$viewValue;
