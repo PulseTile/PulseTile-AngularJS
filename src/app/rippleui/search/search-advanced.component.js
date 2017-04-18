@@ -20,6 +20,7 @@ class SearchAdvancedController {
   constructor($scope, $http, $ngRedux, serviceRequests, searchActions, $state, $timeout, ConfirmationModal, $rootScope, serviceFormatted) {
     $scope.selectAgeField = 'range';
     $scope.isOpenPanelSearch = true;
+    $scope.isSearchCompleted = false;
 
     $scope.formSubmitted = false;
     this.detailsFocused = false;
@@ -34,9 +35,12 @@ class SearchAdvancedController {
       $scope.isOpenPanelSearch = true;
     });
 
-    serviceRequests.subscriber('clearSearchParams', function () {
+    $scope.clearSearchParams = function () {
+      $scope.selectAgeField = 'range';
       $scope.searchParams = {};
-    });
+    };
+
+    serviceRequests.subscriber('clearSearchParams', $scope.clearSearchParams);
 
 
     $scope.getSearchParams = function (params) {
@@ -216,6 +220,7 @@ class SearchAdvancedController {
 
       /* istanbul ignore if */
       if (searchForm.$valid) {
+        $scope.isSearchCompleted = true;
         if ($scope.searchParams.nhsNumber) {
           $scope.searchParams.nhsNumber = $scope.searchParams.nhsNumber.replace(/\s+/g, '');
         }
@@ -297,7 +302,15 @@ class SearchAdvancedController {
 
 
     $rootScope.$on('$locationChangeStart', function() {
+      var currentState = $state.router.globals.$current.name;
       $scope.isOpenPanelSearch = false;
+
+      if ($scope.isSearchCompleted &&
+          currentState !== 'patients-list-full' && 
+          currentState !== 'patients-summary') {
+        $scope.isSearchCompleted = false;
+        $scope.clearSearchParams();
+      }
     });
   }
 }
