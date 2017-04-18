@@ -59,6 +59,7 @@ class HeaderController {
       } else {
         $scope.isOpenSearch = true;
         $scope.searchOption = $scope.searchOptionsList[index];
+        serviceRequests.publisher('clearSearchParams', {});
         serviceRequests.publisher('openSearchPanel', {});
       }
       

@@ -23,7 +23,7 @@
             </div>
             <h3 class="panel-title">
               <span>{{$ctrl.option.name}}</span>
-              <span ng-bind-html="getSearchParams()"></span>
+              <span ng-bind-html="getSearchParams(searchParams)"></span>
               <!-- <span ng-if="searchParams.nhsNumber">NHS Number: {{searchParams.nhsNumber}}</span> -->
             </h3>
           </div>
@@ -81,7 +81,7 @@
                           'has-success': advancedSearchForm.type.$valid && advancedSearchForm.type.$dirty}">
                               <label for="type" class="control-label">Search Type</label>
                               <select class="form-control input-sm" tabindex="5" id="type" name="type" ng-model="searchParams.type" required>
-                                  <option ng-repeat="type in $ctrl.typesList" value="type">{{type.title}}</option>
+                                  <option ng-repeat="type in $ctrl.typesList" value="{{type.title}}">{{type.title}}</option>
                               </select>
                               <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.type.$invalid">You must enter a value.</span>
                           </div>
@@ -94,7 +94,7 @@
                           'has-success': advancedSearchForm.query.$valid && advancedSearchForm.query.$dirty}">
                               <label for="nhsNumber" class="control-label">Search Query</label>
                               <select class="form-control input-sm" tabindex="5" id="query" name="query" ng-model="searchParams.query" required>
-                                  <option ng-repeat="query in $ctrl.queryList" value="query">{{query}}</option>
+                                  <option ng-repeat="query in $ctrl.queryList" value="{{query}}">{{query}}</option>
                               </select>
                               <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.query.$invalid">You must enter a value.</span>
                           </div>
