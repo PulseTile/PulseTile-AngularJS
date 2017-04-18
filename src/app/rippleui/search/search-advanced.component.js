@@ -64,7 +64,7 @@ class SearchAdvancedController {
       if (params.forename) {
         paramsArr.push({
           key: 'First Name',
-          value: params.surname
+          value: params.forename
         });
       }
 
