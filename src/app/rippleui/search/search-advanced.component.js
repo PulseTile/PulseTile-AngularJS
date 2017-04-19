@@ -290,11 +290,11 @@ class SearchAdvancedController {
 
     $scope.searchByDetails = function (queryParams) {
       /* istanbul ignore if */
+      // if (queryParams.surname) {
+      //   queryParams.dateOfBirth = "2017-03-22T00:00:00.000Z";
+      // }
       if (queryParams.dateOfBirth) {
         queryParams.dateOfBirth = new Date(queryParams.dateOfBirth.getTime() - (60000 * queryParams.dateOfBirth.getTimezoneOffset()));
-      }
-      if (queryParams.surname) {
-        queryParams.dateOfBirth = "2017-03-22T00:00:00.000Z";
       }
       this.searchResult = queryOption.type === 'advanced' ? searchActions.advancedSearch : searchActions.querySearch;
       this.searchResult(queryParams);
