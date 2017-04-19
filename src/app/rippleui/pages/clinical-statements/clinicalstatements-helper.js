@@ -50,6 +50,7 @@ export function setStructured(userinput, cb){
   $(userinput).contents().each(function(){
 
     // Is it a tag?
+    /* istanbul ignore if  */
     if( $(this).hasClass('tag') ){
 
       var editable = $(this).find('.editable');
@@ -102,6 +103,7 @@ export function pasteHtmlAtCaret(html, target) {
   target.focus();
 
   var sel, range;
+  /* istanbul ignore if  */
   if (window.getSelection) {
     // IE9 and non-IE
     sel = window.getSelection();
