@@ -86,13 +86,11 @@ class PatientsSummaryController {
       }
       return arr;
     }
-    this.getPatientData = function (data) {
+    this.setCurrentPageData = function (data) {
       /* istanbul ignore if  */
       if (!data || !data.nhsNumber) {
         return false;
       }
-      /* istanbul ignore next */
-      usSpinnerService.stop('patientSummary-spinner');
 
       this.patient = data;
 
@@ -116,16 +114,19 @@ class PatientsSummaryController {
       
       this.transferofCareComposition.transfers = descendingTransferofCareComposition;
       this.transferofCareComposition = this.transferofCareComposition.transfers.slice(0, 5);
+
+      /* istanbul ignore next */
+      usSpinnerService.stop('patientSummary-spinner');
     };
 
     let unsubscribe = $ngRedux.connect(state => ({
-      patient: this.getPatientData(state.patientsGet.data)
+      patient: this.setCurrentPageData(state.patientsGet.data)
     }))(this);
 
     $scope.$on('$destroy', unsubscribe);
     
-    // this.loadPatient = patientsActions.getPatient;
-    // this.loadPatient($stateParams.patientId);
+    this.loadPatient = patientsActions.getPatient;
+    this.loadPatient($stateParams.patientId);
   }
 }
 

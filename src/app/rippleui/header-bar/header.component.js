@@ -21,7 +21,7 @@ class HeaderController {
 
     var self = this;
     $scope.title = '';
-    $scope.searchActive = false;
+    // $scope.searchActive = false;
     $scope.isOpenSearch = false;
 
     $scope.isToogleSearchShow = false;
@@ -29,12 +29,15 @@ class HeaderController {
     
     this.mainSearchEnabled = true;
     this.showAdvancedSearch = false;
+
+    $scope.searchOption = null;
     $scope.searchOptionsList = [
+      // {
+      //   name: 'Patient Search',
+      //   // type: 'advanced'
+      //   type: ''
+      // }, 
       {
-        name: 'Patient Search',
-        // type: 'advanced'
-        type: ''
-      }, {
         name: 'Patient Search - Advanced',
         type: 'advanced'
       }, {
@@ -43,22 +46,31 @@ class HeaderController {
       }
     ];
     
+    this.closeAdvancedSearch = function() {
+      $scope.isOpenSearch = false;
+      $scope.searchOption = null;
+    };
+
     this.openAdvancedSearch = function(index) {
       if (!$scope.searchOptionsList[index].type.length) return;
       
-      $scope.isOpenSearch = !$scope.isOpenSearch;
-      $scope.searchOption = $scope.searchOptionsList[index];
+      if ($scope.searchOption && ($scope.searchOptionsList[index].type == $scope.searchOption.type)) {
+        this.closeAdvancedSearch();
+      } else {
+        $scope.isOpenSearch = true;
+        $scope.searchOption = $scope.searchOptionsList[index];
+        serviceRequests.publisher('clearSearchParams', {});
+        serviceRequests.publisher('openSearchPanel', {});
+      }
+      
     };
-    
-    this.closeSearchOptions = function() {
-      if ($scope.isOpenSearch) {
-        $scope.isOpenSearch = false;
-      }      
-    };
-    
-    this.closeAdvancedSearch = function() {
-      $scope.isOpenSearch = !$scope.isOpenSearch;
-    };
+    $scope.isActiveTypeSearch = function (type) {
+      if ($scope.searchOption && $scope.searchOption.type === type) {
+        return true;
+      }
+
+      return false;
+    }
 
     $scope.checkIsToggleSearch = function () {
       if (window.innerWidth < 768) {
@@ -358,7 +370,7 @@ class HeaderController {
       // $scope.searchBar = data.title === 'Welcome' ? false : true;
     };
     this.checkIsShowPreviousBtn = function () {
-      $scope.isShowPreviousBtn = $state.router.globals.$current.name !== 'main-search';
+      $scope.isShowPreviousBtn = $state.router.globals.$current.name !== 'patients-charts';
     };
 
     serviceRequests.subscriber('routeState', this.getPageComponents);

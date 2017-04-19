@@ -145,7 +145,7 @@
 .btn-toggle-rotate i {
   transform: rotate(0) translateY(-1px);
 }
-.open .btn-toggle-rotate i {
+.panel.open .btn-toggle-rotate i {
   transform: rotate(180deg) translateY(-2px);
 }
 

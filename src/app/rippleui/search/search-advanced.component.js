@@ -17,11 +17,113 @@ let templateSearch = require('./search-advanced.html');
 import plugins from '../../plugins';
 
 class SearchAdvancedController {
-  constructor($scope, $http, $ngRedux, serviceRequests, searchActions, $state, $timeout, ConfirmationModal) {
+  constructor($scope, $http, $ngRedux, serviceRequests, searchActions, $state, $timeout, ConfirmationModal, $rootScope, serviceFormatted) {
     $scope.selectAgeField = 'range';
+    $scope.isOpenPanelSearch = true;
+    $scope.isSearchCompleted = false;
+
+    $scope.formSubmitted = false;
+    this.detailsFocused = false;
+    $scope.searchParams = {};
+    $scope.agesSteps = [];
+
     $scope.cancel = function () {
       serviceRequests.publisher('closeAdvancedSearch', {});
     };
+
+    serviceRequests.subscriber('openSearchPanel', function () {
+      $scope.isOpenPanelSearch = true;
+    });
+
+    $scope.clearSearchParams = function () {
+      $scope.selectAgeField = 'range';
+      $scope.searchParams = {};
+    };
+
+    serviceRequests.subscriber('clearSearchParams', $scope.clearSearchParams);
+
+
+    $scope.getSearchParams = function (params) {
+      var paramsText = '';
+      var paramsArr = [];
+
+      if (params.nhsNumber) {
+        paramsArr.push({
+          key: 'nhsNumber',
+          value: params.nhsNumber
+        });
+      }
+
+      if (params.surname) {
+        paramsArr.push({
+          key: 'Last Name',
+          value: params.surname
+        });
+      }
+
+      if (params.forename) {
+        paramsArr.push({
+          key: 'First Name',
+          value: params.forename
+        });
+      }
+
+      if (params.type) {
+        paramsArr.push({
+          key: 'Search Type',
+          value: params.type
+        });
+      }
+
+      if (params.query && params.queryNext) {
+        paramsArr.push({
+          key: 'Search Query',
+          value: params.query + ' ' + params.queryNext
+        });
+      }
+
+      if ($scope.selectAgeField == 'range') {
+        paramsArr.push({
+          key: 'Age Range',
+          value: $scope.sliderRange.minValue + '-' + $scope.sliderRange.maxValue
+        });
+      } else {
+        if (params.dateOfBirth) {
+          paramsArr.push({
+            key: 'Date of Birth',
+            value: serviceFormatted.formattingDate(params.dateOfBirth, serviceFormatted.formatCollection.DDMMMYYYY)
+          });
+        }
+      }
+
+      if (params.sexFemale || params.sexMale) {
+        let genderText = '';
+
+        if (params.sexFemale && params.sexMale) {
+          genderText = 'All';
+        } else if (params.sexFemale) {
+          genderText = 'Female';
+        } else {
+          genderText = 'Male';
+        }
+
+        paramsArr.push({
+          key: 'Gender',
+          value: genderText
+        });
+      }
+
+      for (var i = 0; i < paramsArr.length; i++) {
+        if (i !== 0) {
+          paramsText += ', ';
+        }
+
+        paramsText += paramsArr[i].key + ': ' + paramsArr[i].value;
+      }
+      
+
+      return paramsText.length ? ': ' + paramsText : '';
+    }
 
     this.typesList = [];
     this.queryList = ['contains' , 'excludes'];
@@ -32,8 +134,9 @@ class SearchAdvancedController {
       this.typesList.push(plugin.sidebarInfo);
     });
 
+
+
     var changeState = function () {
-      $scope.formSubmitted = true;
       if ($scope.patients.constructor === Array && $scope.patients.length == 1) {
         
         ConfirmationModal.openModal($scope.patients[0]);
@@ -53,10 +156,7 @@ class SearchAdvancedController {
       }
     };
 
-    $scope.formSubmitted = false;
-    this.detailsFocused = false;
-    $scope.searchParams = {};
-    $scope.agesSteps = [];
+    
 
     var step;
     for (var i = 0; i < 100; i += 5) {
@@ -116,12 +216,15 @@ class SearchAdvancedController {
     };
 
     $scope.ok = function (searchForm) {
-      /* istanbul ignore if */
-      if ($scope.searchParams.nhsNumber) {
-        $scope.searchParams.nhsNumber = $scope.searchParams.nhsNumber.replace(/\s+/g, '');
-      }
+      $scope.formSubmitted = true;
 
+      /* istanbul ignore if */
       if (searchForm.$valid) {
+        $scope.isSearchCompleted = true;
+        if ($scope.searchParams.nhsNumber) {
+          $scope.searchParams.nhsNumber = $scope.searchParams.nhsNumber.replace(/\s+/g, '');
+        }
+
         $scope.searchByDetails($scope.searchParams);
 
         let unsubscribe = $ngRedux.connect(state => ({
@@ -130,7 +233,7 @@ class SearchAdvancedController {
 
         $scope.$on('$destroy', unsubscribe);
       }
-    };
+    };  
 
     $scope.isNhsNumberRequired = function (advancedSearchForm) {
       var nhsNumber = $scope.advancedSearchForm.nhsNumber.$viewValue;
@@ -196,6 +299,19 @@ class SearchAdvancedController {
       this.searchResult = queryOption.type === 'advanced' ? searchActions.advancedSearch : searchActions.querySearch;
       this.searchResult(queryParams);
     };
+
+
+    $rootScope.$on('$locationChangeStart', function() {
+      var currentState = $state.router.globals.$current.name;
+      $scope.isOpenPanelSearch = false;
+
+      if ($scope.isSearchCompleted &&
+          currentState !== 'patients-list-full' && 
+          currentState !== 'patients-summary') {
+        $scope.isSearchCompleted = false;
+        $scope.clearSearchParams();
+      }
+    });
   }
 }
 
@@ -207,5 +323,5 @@ const SearchAdvancedComponent = {
   controller: SearchAdvancedController
 };
 
-SearchAdvancedController.$inject = ['$scope', '$http', '$ngRedux', 'serviceRequests', 'searchActions', '$state', '$timeout', 'ConfirmationModal'];
+SearchAdvancedController.$inject = ['$scope', '$http', '$ngRedux', 'serviceRequests', 'searchActions', '$state', '$timeout', 'ConfirmationModal', '$rootScope', 'serviceFormatted'];
 export default SearchAdvancedComponent;

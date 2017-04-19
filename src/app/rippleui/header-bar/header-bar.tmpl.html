@@ -84,18 +84,18 @@
     <div class="wrap-search wrap-header-search ng-cloak" ng-cloak ng-show="isShowSearch();">
       <div class="header-search">
         <div uib-dropdown class="control-group left control-search-select dropdown">
-          <button uib-dropdown-toggle class="btn btn-success btn-inverse btn-dropdown-toggle btn-search-toggle" ng-click="$ctrl.closeSearchOptions()"><i class="fa fa-bars"></i></button>
+          <button uib-dropdown-toggle class="btn btn-success btn-inverse btn-dropdown-toggle btn-search-toggle"><i class="fa fa-bars"></i></button>
           <div uib-dropdown-menu class="dropdown-menu dm-panel dm-left dm-tables dm-search-select">
             <div class="heading">Search Options</div>
             <div class="dm-wrap-list">
               <div class="dm-list">
-                <div class="dm-item" ng-repeat="item in searchOptionsList" ng-click="$ctrl.openAdvancedSearch($index)"><span>{{item.name}}</span></div>
+                <div class="dm-item" ng-repeat="item in searchOptionsList" ng-click="$ctrl.openAdvancedSearch($index)" ng-class="{active: isActiveTypeSearch(searchOptionsList[$index].type)}"><span>{{item.name}}</span></div>
               </div>
             </div>
           </div>
         </div>
-        <button ng-show="!searchActive && !isOpenSearch" class="btn btn-success btn-search" ng-click="$ctrl.searchFunction();"><i class="fa fa-search"></i></button>
-        <div ng-show="!searchActive && !isOpenSearch" class="wrap-search-holder">
+        <button ng-show="!isOpenSearch" class="btn btn-success btn-search" ng-click="$ctrl.searchFunction();"><i class="fa fa-search"></i></button>
+        <div ng-show="!isOpenSearch" class="wrap-search-holder">
           <div class="search-holder">
           <form ng-submit="$ctrl.searchFunction()">
             <input key-bind="{ enter: '$ctrl.searchFunction()', esc: '$ctrl.cancelSearchMode()' }" class="form-control" placeholder="Search" type="text" uib-typeahead="report for report in $ctrl.reportTypes | filter:$viewValue" ng-model="search.searchExpression" ng-keyup="$ctrl.checkExpression(search.searchExpression)" ng-trim="false" ng-class="{'moveRight': $root.searchMode && !$root.reportTypeSet, 'moveFurtherRight': $root.searchMode && $root.reportTypeSet}" focus-element="searchFocused"/>
@@ -104,22 +104,8 @@
           </div>
         </div>
       </div>
-      
-      <div class="dropdown-menu dm-search dm-right dm-without-shadow dm-show" ng-if="searchActive && !isOpenSearch">
-        <div class="panel panel-secondary without-margin">
-          <div class="panel-heading">
-            <div class="control-group right open">
-              <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="$ctrl.openAdvancedSearch(searchOption)"><i class="fa fa-chevron-up"></i></button>
-            </div>
-            <h3 class="panel-title">{{$ctrl.option.name}}</h3>
-          </div>
-        </div>
-      </div>
-
-      <div mc-dropdown is-open="isOpenSearch" ng-if="isOpenSearch">
-        <div class="dropdown-menu dm-search dm-right">
-          <search-advanced-component option="searchOption"></search-advanced-component>
-        </div>
+      <div ng-if="isOpenSearch">
+        <search-advanced-component option="searchOption"></search-advanced-component>
       </div>
     </div>
     <!-- / Nav Search -->

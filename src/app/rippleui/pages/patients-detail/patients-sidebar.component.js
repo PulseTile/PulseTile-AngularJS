@@ -32,8 +32,14 @@ class PatientsSidebarController {
       this.linksCollection.push(plugin.sidebarInfo);
     });
     
+    $scope.partsNameState = [];
     $scope.nameState = $state.router.globals.$current.name;
-    $scope.partsNameState = $scope.nameState.split('-');
+    
+    if ($scope.nameState === this.linksCollection[0].link) {
+      $scope.partsNameState[0] = this.linksCollection[0].link;
+    } else {
+      $scope.partsNameState = $scope.nameState.split('-');
+    }
 
     $scope.isActiveItem = function (itemLink) {
       return $scope.partsNameState[0] == itemLink;
