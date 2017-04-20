@@ -32,11 +32,6 @@ class HeaderController {
 
     $scope.searchOption = null;
     $scope.searchOptionsList = [
-      // {
-      //   name: 'Patient Search',
-      //   // type: 'advanced'
-      //   type: ''
-      // }, 
       {
         name: 'Patient Search - Advanced',
         type: 'advanced'
@@ -54,9 +49,7 @@ class HeaderController {
     this.openAdvancedSearch = function(index) {
       if (!$scope.searchOptionsList[index].type.length) return;
       
-      if ($scope.searchOption && ($scope.searchOptionsList[index].type == $scope.searchOption.type)) {
-        this.closeAdvancedSearch();
-      } else {
+      if (!$scope.searchOption || ($scope.searchOptionsList[index].type != $scope.searchOption.type)) {
         $scope.isOpenSearch = true;
         $scope.searchOption = $scope.searchOptionsList[index];
         serviceRequests.publisher('clearSearchParams', {});

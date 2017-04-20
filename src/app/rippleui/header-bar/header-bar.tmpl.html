@@ -89,6 +89,7 @@
             <div class="heading">Search Options</div>
             <div class="dm-wrap-list">
               <div class="dm-list">
+              <div class="dm-item" ng-click="$ctrl.closeAdvancedSearch()" ng-class="{active: !isOpenSearch}"><span>Patient Search - Basic</span></div>
                 <div class="dm-item" ng-repeat="item in searchOptionsList" ng-click="$ctrl.openAdvancedSearch($index)" ng-class="{active: isActiveTypeSearch(searchOptionsList[$index].type)}"><span>{{item.name}}</span></div>
               </div>
             </div>
