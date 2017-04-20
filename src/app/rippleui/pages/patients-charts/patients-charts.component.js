@@ -101,17 +101,20 @@ class PatientsChartsController {
 
         $timeout(function () {
           canvas = document.getElementById(options.id);
-          ctx = canvas.getContext("2d");
-          barChart = new $window.Chart(ctx, {
-              type: 'bar',
-              data: {
-                labels: labels,
-                datasets: [{data: datasets}]
-              },
-              options: getOption(options.borderColor, options.bagroundColor)
-          });
-          if (options.onClick) {
-            canvas.onclick = options.onClick(barChart);
+          
+          if (canvas) {
+            ctx = canvas.getContext("2d");
+            barChart = new $window.Chart(ctx, {
+                type: 'bar',
+                data: {
+                  labels: labels,
+                  datasets: [{data: datasets}]
+                },
+                options: getOption(options.borderColor, options.bagroundColor)
+            });
+            if (options.onClick) {
+              canvas.onclick = options.onClick(barChart);
+            }
           }
         }, 0);
       }

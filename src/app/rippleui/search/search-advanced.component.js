@@ -137,12 +137,13 @@ class SearchAdvancedController {
 
 
     var changeState = function () {
-      if ($scope.patients.constructor === Array && $scope.patients.length == 1) {
+      // if ($scope.patients.constructor === Array && $scope.patients.length == 1) {
         
-        ConfirmationModal.openModal($scope.patients[0]);
-        $scope.cancel();
+      //   ConfirmationModal.openModal($scope.patients[0]);
+      //   $scope.cancel();
         
-      } else if ($scope.patients.constructor === Array && $scope.patients.length > 1) {
+      // } else 
+      if ($scope.patients.constructor === Array && $scope.patients.length > 1) {
         $state.go('patients-list', {
           patientsList: $scope.patients,
           advancedSearchParams: $scope.searchParams
@@ -216,6 +217,7 @@ class SearchAdvancedController {
     };
 
     $scope.ok = function (searchForm) {
+      $scope.isOpenPanelSearch = false;
       $scope.formSubmitted = true;
 
       /* istanbul ignore if */
