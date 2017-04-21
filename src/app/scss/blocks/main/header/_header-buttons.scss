@@ -6,35 +6,28 @@
   background: #F7F7F7;
   text-align: center;
   line-height: 52px;
-  color: #0D672F;
   font-size: 19px;
-  color: $icon-chevron-color;
+  color: $base-color;
   border: none;
   outline: none;
-  @include respond-to(xs) {
+  @include respond-from(xs) {
     width: 52px;
-  }
-  &:hover {
-    color: $icon-chevron-color;
-    @include respond-to(sm) {
-      color: #7cbe31;
-    }
   }
   &.inverse {
     background: #fff;
   }
   &.secondary {
-    background: $secondary-color;
-    color: #fff;
+    background: $base-color;
+    color: $text-on-base-color;
   }
   .count {
     position: absolute;
     top: 9px;
-    right: 1px;
+    right: 0px;
     font-size: 10px;
     font-family: arial;
-    background-color: $icon-chevron-color;
-    color: #fff;
+    background-color: $base-color;
+    color: $text-on-base-color;
     display: block;
     padding: 0;
     width: 16px;
@@ -43,21 +36,31 @@
     text-align: center;
     border-radius: 50%;
     font-weight: 400;
-    @include respond-to(xs) {
+    @include respond-from(xs) {
       right: 3px;
     }
   }
-}
+}  
+.touch-device .btn-header .count { line-height: 17px; }
+.btn-header:hover { color: $base-color; }
+.is-not-touch-device .btn-header:hover { color: $auxiliary-color; }
+
 .btn-header-prev {
   float: left;
   width: 52px;
+  @include respond-from(sm) {
+    float: none;
+    order: 1;
+  }
 }
 .btn-header.btn-user {
   font-size: 21px;
 }
 .btn-notification {
   font-size: 18px;
-  @include respond-to(xs) {
+  padding-right: 2px;
+  @include respond-from(xs) {
     font-size: 19px;
+    padding-right: 0;
   }
 }

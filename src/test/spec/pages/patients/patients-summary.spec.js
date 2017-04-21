@@ -34,14 +34,12 @@ describe('Patients Summary', function() {
 
   beforeEach(function() {
     spyOn(ctrl, 'goToSection');
-    spyOn(ctrl, 'getPatientData');
+    spyOn(ctrl, 'setCurrentPageData');
     spyOn(scope, 'go');
-    spyOn(ctrl, 'loadPatient');
 
     ctrl.goToSection();
-    ctrl.getPatientData();
+    ctrl.setCurrentPageData();
     scope.go();
-    ctrl.loadPatient();
 
   });
      
@@ -54,13 +52,10 @@ describe('Patients Summary', function() {
   it("goToSection was called", function() {
     expect(ctrl.goToSection).toHaveBeenCalled();
   });
-  it("getPatientData was called", function() {
-    expect(ctrl.getPatientData).toHaveBeenCalled();
+  it("setCurrentPageData was called", function() {
+    expect(ctrl.setCurrentPageData).toHaveBeenCalled();
   });
   it("route go was called", function() {
     expect(scope.go).toHaveBeenCalled();
-  });
-  it("loadPatient was called", function() {
-    expect(ctrl.loadPatient).toHaveBeenCalled();
   });
 });

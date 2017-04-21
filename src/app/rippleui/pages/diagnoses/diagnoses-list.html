@@ -13,22 +13,22 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
-<div mc-full-panel class="panel panel-primary">
+<div mc-full-panel table-settings order="diagnoses" filtering class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
-      <button class="btn btn-success btn-inverse btn-filter" ng-click="$ctrl.toggleFilter()"><i class="fa fa-filter"></i></button>
+      <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
     </div>
     <div class="control-group right" >
       <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')" ng-if="$ctrl.isShowExpandBtn"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
       <!--<button class="btn btn-success btn-inverse btn-dropdown-toggle btn-table"><i class="fa fa-table"></i></button>-->
     </div>
     <h3 class="panel-title" >Problems / Diagnoses</h3>
-    <div class="panel-filter" ng-if="$ctrl.isFilter" ng-class="{active : $ctrl.isFilter}">
+    <div class="panel-filter" ng-show="isFilterOpen">
       <div class="inner-addon addon-left">
         <div class="addon">
           <i class="fa fa-filter"></i>
         </div>
-        <input type="text" class="form-control" placeholder="Filter..." ng-model="$ctrl.query" />
+        <input type="text" id="filter" class="form-control" placeholder="Filter..." ng-model="queryFilter" />
       </div>
     </div>
   </div>
@@ -41,17 +41,17 @@
       </colgroup>
       <thead>
         <tr>
-            <th ng-click="$ctrl.sort('diagnoses')" ng-class="$ctrl.sortClass('diagnoses')">Problems / Diagnoses</th>
-            <th ng-click="$ctrl.sort('date')" ng-class="$ctrl.sortClass('date')">Date</th>
-            <th ng-click="$ctrl.sort('source')" ng-class="$ctrl.sortClass('source')">Source</th>
+            <th ng-click="sort('diagnoses')" ng-class="sortClass('diagnoses')">Problems / Diagnoses</th>
+            <th ng-click="sort('date')" ng-class="sortClass('date')">Date</th>
+            <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr dir-paginate="diagnosis in $ctrl.diagnoses | filter:$ctrl.query | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage" ng-click="$ctrl.go(diagnosis.sourceId, diagnosis.source)" ng-class="{info: $ctrl.selected(diagnosis.sourceId)}">
-          <td data-th="Problems / Diagnoses" ng-class="$ctrl.sortClass('diagnoses');">{{ diagnosis.problem }}</td>
-          <td data-th="Date" ng-class="$ctrl.sortClass('date')">{{ diagnosis.dateOfOnset }}</td>
-          <td data-th="Source" ng-class="$ctrl.sortClass('source')">{{ diagnosis.source }}</td>
+        <tr dir-paginate="diagnosis in $ctrl.diagnoses | filter:queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(diagnosis.sourceId, diagnosis.source)" ng-class="{info: selectedRow(diagnosis.sourceId)}">
+          <td data-th="Problems / Diagnoses" ng-class="sortClass('diagnoses');"><span>{{ diagnosis.problem }}</span></td>
+          <td data-th="Date" ng-class="sortClass('date')"><span>{{ diagnosis.dateOfOnset }}</span></td>
+          <td data-th="Source" ng-class="sortClass('source')"><span>{{ diagnosis.source }}</span></td>
         </tr>
 
         <tr ng-if="! $ctrl.diagnoses || ! $ctrl.diagnoses.length">
@@ -65,7 +65,7 @@
     <div class="panel-control">
       <div class="wrap-control-group">
         <div class="control-group with-indent left">
-          <dir-pagination-controls max-size="5" on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
+          <dir-pagination-controls max-size="6" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
         </div>
         <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1 && $ctrl.isShowCreateBtn">
           <button class="btn btn-success btn-inverse btn-create" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> <span>Create</span></button>

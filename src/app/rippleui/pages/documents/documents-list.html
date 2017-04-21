@@ -14,44 +14,59 @@
   ~  limitations under the License.
   -->
 
-<h3><strong>Documents</strong></h3>
-
-<div class="inner-addon left-addon filterInput">
-    <i class="fa fa-filter"></i>
-    <input type="text" class="form-control" placeholder="Filter..." ng-model="$ctrl.query" />
-</div>
-
-<table class="table table-bordered table-striped table-hover">
-    <thead>
-    <tr>
-        <th>Document Name</th>
-        <th>Document Date</th>
-        <th>Source</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <tr dir-paginate="document in $ctrl.documents | filter:$ctrl.query | itemsPerPage: 10 " current-page="$ctrl.currentPage" ng-click="$ctrl.go(document.sourceId, document.documentType, document.source)" ng-class="{info: $ctrl.selected(document.sourceId)}">
-        <td>{{ document.documentType }}</td>
-        <td class="dateTime">{{ document.documentDate | date: 'dd-MMM-yyyy'}}</td>
-        <td>{{ document.source }}</td>
-    </tr>
-
-    <tr ng-if="!documents || !$ctrl.documents.length">
-        <td colspan="3"><span class="label label-default">No documents</span></td>
-    </tr>
-    </tbody>
-</table>
-
-<div class="row">
-    <div class="col-md-12">
-        <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="patientSummary-spinner" spinner-start-active="true"></span>
+<div mc-full-panel table-settings order="documentType" filtering class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="control-group right">
+            <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
+        </div>
+        <div class="control-group right" >
+            <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')" ng-if="$ctrl.isShowExpandBtn"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+            <!--<button class="btn btn-success btn-inverse btn-dropdown-toggle btn-table"><i class="fa fa-table"></i></button>-->
+        </div>
+        <h3 class="panel-title">Documents</h3>
+        <div class="panel-filter" ng-show="isFilterOpen">
+            <div class="inner-addon addon-left">
+                <div class="addon">
+                    <i class="fa fa-filter"></i>
+                </div>
+                <input type="text" id="filter" class="form-control" placeholder="Filter..." ng-model="queryFilter" />
+            </div>
+        </div>
     </div>
-</div>
+    <div class="panel-body">
+        <table class="table table-striped table-hover table-bordered rwd-table table-sorted">
+          <colgroup>
+            <col style="width: 56%;">
+            <col style="width: 25%;">
+            <col style="width: 19%;">
+          </colgroup>
+          <thead>
+            <tr>
+                <th ng-click="sort('documentType')" ng-class="sortClass('documentType')">Name</th>
+                <th ng-click="sort('dateCreated')" ng-class="sortClass('dateCreated')">Date</th>
+                <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
+            </tr>
+          </thead>
 
-<div class="row">
-    <div class="col-md-6 hidden-xs"><div class="text-right"><dir-pagination-controls on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>
-</div>
-<div class="row">
-    <div class="col-xs-6 hidden-sm hidden-md hidden-lg"><div class="text-right"><dir-pagination-controls on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>
+          <tbody>
+            <tr dir-paginate="document in $ctrl.documents | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(document.sourceId, document.documentType)" ng-class="{info: selectedRow(document.sourceId)}">
+                <td data-th="Name" ng-class="sortClass('documentType');"><span>{{document.documentType}}</span></td>
+                <td data-th="Date" ng-class="sortClass('dateCreated');"><span>{{document.dateCreated}}</span></td>
+                <td data-th="Source" ng-class="sortClass('source');"><span>{{document.source}}</span></td>
+            </tr>
+
+            <tr ng-if="!$ctrl.documents.length">
+                <td colspan="3"><span class="label label-default">No images</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="patientSummary-spinner" spinner-start-active="true"></span>
+        <div class="panel-control">
+            <div class="wrap-control-group">
+                <div class="control-group with-indent left">
+                    <dir-pagination-controls max-size="6" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

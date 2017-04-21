@@ -1,14 +1,13 @@
 .wrap-logo {
   float: left;
   padding: 6px 9px;
+  margin: auto;
+  margin-left: 0;
 }
-// .wrap-logo {
-//   float: left;
-//   padding: 6px 4px;
-// }
 .logo {
   font-size: 0;
   line-height: 0;
+  user-select: none;
   .logo-icon {
     display: inline-block;
     width: auto;
@@ -16,38 +15,42 @@
     margin-right: 10px;
     vertical-align: middle;
     cursor: pointer;
-    img {
-      height: 100%;
-      width: auto;
+    .img {
+      display: block;
+      height: 38px;
+      width: 35px;
+      background: url(map-get($config-site, "logo-icon")) no-repeat center center;
+      background-size: contain;
     }
   }
   .logo-text {
     display: inline-block;
-    font-family: 'MyriadPro';
+    font-family: 'MyriadProRegular';
     font-size: 23px;
-    color: #0C662D;
+    color: $base-color;
     line-height: 38px;
     letter-spacing: 2px;
     text-transform: uppercase;
     white-space: nowrap;
     vertical-align: middle;
-    a {
-      color: #0C662D;
-      &:hover {
-        color: #7cbe31;
-      }
-    }
+    a, a:hover { color: $base-color; }
   }
   .logo-mobile-hidden { display: none; }
 }
-@include respond-to(xs) {
+.is-not-touch-device .logo .logo-text a:hover { color: $auxiliary-color; }
+
+@include respond-from(sm) {
   .wrap-logo {
+    order: 2;
+    float: none;
     padding-left: 9px;
     padding-right: 9px;
   }
-  .logo {
-    .logo-mobile-hidden {
-      display: inline-block;
+  .logo .logo-mobile-hidden { 
+    display: inline; 
+    &:before {
+      display: inline; 
+      content: map-get($config-site, "logo-text");
     }
   }
 }

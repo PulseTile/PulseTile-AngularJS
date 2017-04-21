@@ -11,7 +11,9 @@
     }
   }
 }
-.panel-group.accordion {
-  .panel-body {display: none;}
-  .panel.open .panel-body {display: block;}
+.panel-group.accordion > .panel,
+.panel.accordion {
+  & > .panel-body {display: none;}
+  &.open > .panel-body {display: block;}
+  &.open + .panel {margin-top: 0;}
 }

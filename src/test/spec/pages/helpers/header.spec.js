@@ -49,8 +49,6 @@ describe('HeaderComponent', function() {
         spyOn(ctrl, 'searchFunction');
         spyOn(ctrl, 'cancelSearchMode');
         spyOn(ctrl, 'cancelReportType');
-        spyOn(ctrl, 'changeNavTab');
-        spyOn(ctrl, 'activeNavTab');
         spyOn(ctrl, 'getPageComponents');
         spyOn(ctrl, 'clickSidebarBtn');
         spyOn(ctrl, 'getPopulateHeaderSearch');
@@ -77,8 +75,6 @@ describe('HeaderComponent', function() {
         ctrl.searchFunction();
         ctrl.cancelSearchMode();
         ctrl.cancelReportType();
-        ctrl.changeNavTab();
-        ctrl.activeNavTab();
         ctrl.getPageComponents();
         ctrl.clickSidebarBtn();
         ctrl.getPopulateHeaderSearch();
@@ -163,12 +159,6 @@ describe('HeaderComponent', function() {
     });
     it("cancelReportType was called", function() {
         expect(ctrl.cancelReportType).toHaveBeenCalled();
-    });
-    it("changeNavTab was called", function() {
-        expect(ctrl.changeNavTab).toHaveBeenCalled();
-    });
-    it("activeNavTab was called", function() {
-        expect(ctrl.activeNavTab).toHaveBeenCalled();
     });
     it("getPageComponents was called", function() {
         expect(ctrl.getPageComponents).toHaveBeenCalled();

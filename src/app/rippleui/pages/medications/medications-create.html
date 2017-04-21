@@ -26,117 +26,139 @@
       <div class="panel-body-inner">
         <form name="medicationForm" class="form">
           <div class="form-group-wrapper">
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.name.$dirty) && medicationForm.name.$invalid, 'has-success': medicationForm.name.$valid && medicationForm.name.$dirty}">
-                <label for="name" class="control-label">Name</label>
-                <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="name" name="name" ng-model="medication.name" required>
-                </div>
-                <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.name.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="row">
-              <div class="col-xs-12 col-md-6">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.doseAmount.$dirty) && medicationForm.doseAmount.$invalid, 'has-success': medicationForm.doseAmount.$valid && medicationForm.doseAmount.$dirty}">
-                    <label for="doseAmount" class="control-label">Dose Amount</label>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.name.$dirty) && medicationForm.name.$invalid, 'has-success': medicationForm.name.$valid && medicationForm.name.$dirty}">
+                    <label for="name" class="control-label">Name</label>
                     <div class="input-holder">
-                        <input type="text" class="form-control input-sm" id="doseAmount" name="doseAmount" ng-model="medication.doseAmount" required />
+                        <input type="text" class="form-control input-sm" id="name" name="name" ng-model="medication.name" required>
                     </div>
-                    <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.doseAmount.$error.required">You must enter a value.</span>
+                    <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.name.$error.required">You must enter a value.</span>
                 </div>
               </div>
-              <div class="col-xs-12 col-md-6">
-                <div class="form-group">
-                  <label class="control-label"></label>
-                  <div class="input-holder">
-                    <div class="wrap-fcustominp">
-                      <div class="fcustominp">
-                        <input type="checkbox" id="doseAmountVariable" name="doseAmountVariable" ng-model="contact.doseAmountVariable" />
-                        <label for="doseAmountVariable"></label>
+              <div class="col-expand-right">
+                <div class="row">
+                  <div class="col-xs-12 col-md-6">
+                    <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.doseAmount.$dirty) && medicationForm.doseAmount.$invalid, 'has-success': medicationForm.doseAmount.$valid && medicationForm.doseAmount.$dirty}">
+                        <label for="doseAmount" class="control-label">Dose Amount</label>
+                        <div class="input-holder">
+                            <input type="text" class="form-control input-sm" id="doseAmount" name="doseAmount" ng-model="medication.doseAmount" required />
+                        </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.doseAmount.$error.required">You must enter a value.</span>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                      <label class="control-label"></label>
+                      <div class="input-holder">
+                        <div class="wrap-fcustominp">
+                          <div class="fcustominp">
+                            <input type="checkbox" id="doseAmountVariable" name="doseAmountVariable" ng-model="contact.doseAmountVariable" />
+                            <label for="doseAmountVariable"></label>
+                          </div>
+                          <label for="doseAmountVariable" class="fcustominp-label">Variable</label>
+                        </div>
                       </div>
-                      <label for="doseAmountVariable" class="fcustominp-label">Variable</label>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.doseTiming.$dirty) && medicationForm.doseTiming.$invalid, 'has-success': medicationForm.doseTiming.$valid && medicationForm.doseTiming.$dirty}">
-                <label for="doseTiming" class="control-label">Dose Timing</label>
-                <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="doseTiming" name="doseTiming" ng-model="medication.doseTiming" required />
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.doseTiming.$dirty) && medicationForm.doseTiming.$invalid, 'has-success': medicationForm.doseTiming.$valid && medicationForm.doseTiming.$dirty}">
+                    <label for="doseTiming" class="control-label">Dose Timing</label>
+                    <div class="input-holder">
+                        <input type="text" class="form-control input-sm" id="doseTiming" name="doseTiming" ng-model="medication.doseTiming" required />
+                    </div>
+                    <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.doseTiming.$error.required">You must enter a value.</span>
                 </div>
-                <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.doseTiming.$error.required">You must enter a value.</span>
+
+                <!-- <div class="form-group">
+                  <div class="wrap-control-group">
+                    <div class="control-group left">
+                      <button type="button" class="btn btn-info btn-inverse">Prescription</button>
+                    </div>
+                  </div>
+                </div> -->
+
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.doseDirections.$dirty) && medicationForm.doseDirections.$invalid, 'has-success': medicationForm.doseDirections.$valid && medicationForm.doseDirections.$dirty}">
+                    <label for="doseDirections" class="control-label">Dose Directions</label>
+                    <div class="input-holder">
+                        <textarea type="text" class="form-control textarea-big input-sm" id="doseDirections" name="doseDirections" ng-model="medication.doseDirections" required></textarea>
+                    </div>
+                    <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.doseDirections.$error.required">You must enter a value.</span>
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.route.$dirty) && medicationForm.route.$invalid, 'has-success': medicationForm.route.$valid && medicationForm.route.$dirty}">
+                    <label for="route" class="control-label">Route</label>
+                    <div class="input-holder">
+                        <select class="form-control input-sm" id="route" name="route" ng-model="medication.route" required>
+                            <option value="">-- Route --</option>
+                            <option>Po Per Oral</option>
+                            <option>IV Intra Venous</option>
+                            <option>IM Intra Muscular</option>
+                            <option>PN Per Nasal</option>
+                            <option>PR Per Rectum</option>
+                            <option>SL Sub Lingual</option>
+                            <option>SC Sub Cutaneous</option>
+                        </select>
+                    </div>
+                    <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.route.$error.required">You must enter a value.</span>
+                </div>
+                
+              </div>
+            </div>
+            
+            <div class="form-group hidden">
+              <input type="hidden" id="isImport" name="isImport" ng-model="medication.isImport" disabled />
             </div>
 
-            <!-- <div class="form-group">
-              <div class="wrap-control-group">
-                <div class="control-group left">
-                  <button type="button" class="btn btn-info btn-inverse">Prescription</button>
+            <div class="form-group form-group-sm" ng-if="medication.isImport" ng-class="{'has-error': (formSubmitted || medicationForm.importURL.$dirty) && medicationForm.importURL.$invalid, 'has-success': medicationForm.importURL.$valid && medicationForm.importURL.$dirty}">
+                <label for="importURL" class="control-label">Import URL</label>
+                <div class="input-holder">
+                    <input type="text" class="form-control input-sm" id="importURL" name="importURL" ng-model="medication.importURL" disabled />
+                </div>
+                <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.importURL.$error.required">You must enter a value.</span>
+            </div>
+            
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || medicationForm.author.$dirty) && medicationForm.author.$invalid, 'has-success': medicationForm.author.$valid && medicationForm.author.$dirty}">
+                    <label for="author" class="control-label">Author</label>
+                    <div class="input-holder">
+                        <input type="text" value="{{currentUser.email}}" placeholder="{{currentUser.email}}" class="form-control input-sm" id="author" name="author" ng-model="medication.author" disabled />
+                    </div>
+                    <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.author.$error.required">You must enter a value.</span>
                 </div>
               </div>
-            </div> -->
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.doseDirections.$dirty) && medicationForm.doseDirections.$invalid, 'has-success': medicationForm.doseDirections.$valid && medicationForm.doseDirections.$dirty}">
-                <label for="doseDirections" class="control-label">Dose Directions</label>
-                <div class="input-holder">
-                    <textarea type="text" class="form-control textarea-big input-sm" id="doseDirections" name="doseDirections" ng-model="medication.doseDirections" required></textarea>
-                </div>
-                <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.doseDirections.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.route.$dirty) && medicationForm.route.$invalid, 'has-success': medicationForm.route.$valid && medicationForm.route.$dirty}">
-                <label for="route" class="control-label">Route</label>
-                <div class="input-holder">
-                    <select class="form-control input-sm" class="form-control input-sm" id="route" name="route" ng-model="medication.route" required>
-                        <option value="">-- Route --</option>
-                        <option>Po Per Oral</option>
-                        <option>IV Intra Venous</option>
-                        <option>IM Intra Muscular</option>
-                        <option>PN Per Nasal</option>
-                        <option>PR Per Rectum</option>
-                        <option>SL Sub Lingual</option>
-                        <option>SC Sub Cutaneous</option>
-                    </select>
-                </div>
-                <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.route.$error.required">You must enter a value.</span>
-            </div>
-            
-            <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || medicationForm.author.$dirty) && medicationForm.author.$invalid, 'has-success': medicationForm.author.$valid && medicationForm.author.$dirty}">
-                <label for="author" class="control-label">Author</label>
-                <div class="input-holder">
-                    <input type="text" value="{{currentUser.email}}" placeholder="{{currentUser.email}}" class="form-control input-sm" id="author" name="author" ng-model="medication.author" disabled />
-                </div>
-                <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.author.$error.required">You must enter a value.</span>
-            </div>
-            
-            <div class="row">
-              <div class="col-sm-8">
+              <div class="col-expand-right">
                 <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || medicationForm.startDateTime.$dirty) && medicationForm.startDateTime.$invalid, 'has-success': medicationForm.startDateTime.$valid && medicationForm.startDateTime.$dirty}">
                     <label for="startDateTime" class="control-label">Date</label>
                     <div class="inner-addon addon-left">
                       <div class="addon">
                         <i class="fa fa-calendar"></i>
                       </div>
-                      <input type="text" class="form-control" id="startDateTime" name="startDateTime" ng-model="medication.startDate" ng-click="openDatepicker($event, 'startDateTime')" uib-datepicker-popup="dd-MMM-yyyy" is-open="startDateTime" required />
+                      <input type="text" class="form-control" id="startDateTime" name="startDateTime" ng-model="medication.startDate" uib-datepicker-popup="dd-MMM-yyyy" is-open="startDateTime" required disabled/>
                     </div>
                     <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.startDateTime.$error.required">You must enter a valid date.</span>
                 </div>
               </div>
-              <div class="col-sm-4">
-                <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || medicationForm.time.$dirty) && medicationForm.time.$invalid, 'has-success': medicationForm.time.$valid && medicationForm.time.$dirty}">
-                    <label for="time" class="control-label">Time</label>
-                    <div class="inner-addon addon-left">
-                      <div class="addon">
-                        <i class="fa fa-clock-o"></i>
-                      </div>
-                      <input class="form-control" id="time" name="time" ui-timepicker ng-model="medication.startTime" required/>
-                    </div>
-                </div>
-              </div>
             </div>
+            
+            <!-- <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || medicationForm.time.$dirty) && medicationForm.time.$invalid, 'has-success': medicationForm.time.$valid && medicationForm.time.$dirty}">
+                <label for="time" class="control-label">Time</label>
+                <div class="inner-addon addon-left">
+                  <div class="addon">
+                    <i class="fa fa-clock-o"></i>
+                  </div>
+                  <input class="form-control" id="time" name="time" ui-timepicker ng-model="medication.startTime" required/>
+                </div>
+            </div> -->
 
 
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.terminology.$dirty) && medicationForm.terminology.$invalid, 'has-success': medicationForm.terminology.$valid && medicationForm.terminology.$dirty}">
+            <!-- <div class="form-group" ng-class="{'has-error': (formSubmitted || medicationForm.terminology.$dirty) && medicationForm.terminology.$invalid, 'has-success': medicationForm.terminology.$valid && medicationForm.terminology.$dirty}">
                 <label for="terminology" class="control-label">Terminology</label>
                 <div class="input-holder">
                     <input type="text" class="form-control input-sm" id="terminology" name="terminology" ng-model="medication.medicationTerminology" required />
@@ -149,16 +171,19 @@
                     {{medication.medicationCode}}
                 </div>
                 <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.terminologyCode.$error.required">You must enter a value.</span>
-            </div>
+            </div> -->
           </div>
         </form>
         <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="medicationsCreate-spinner" spinner-start-active="false"></span>
       </div>
       <div class="panel-control">
-        <div class="wrap-control-group">
-          <div class="control-group right">
+        <div class="wrap-control-group hide-indent-bottom">
+          <div class="control-group with-indent right">
             <button class="btn btn-danger" ng-click="$ctrl.cancel()"><i class="fa fa-ban"></i> Cancel</button>
             <button class="btn btn-success" ng-click="create(medicationForm, medication);"><i class="fa fa-check"></i> Complete</button>
+          </div>
+          <div class="control-group with-indent left" ng-if="medication.isImport">
+            <button class="btn btn-success btn-inverse btn-icon-normal btn-back-doc" ng-click="$ctrl.backToDocs()"><i class="fa fa-caret-left"></i> <span>Back to Documents</span></button>
           </div>
         </div>
       </div>

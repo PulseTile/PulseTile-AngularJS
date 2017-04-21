@@ -18,46 +18,20 @@ import angular from 'angular';
 import patientsActions from '../rippleui/pages/patients-list/patients-actions';
 import searchActions from '../rippleui/search/search-actions';
 import searchReport from '../rippleui/search/search-report-actions';
-import diagnosesActions from '../rippleui/pages/diagnoses/diagnoses-actions';
-import allergiesActions from '../rippleui/pages/allergies/allergies-actions';
-import medicationsActions from '../rippleui/pages/medications/medications-actions';
-import contactsActions from '../rippleui/pages/contacts/contacts-actions';
-import vaccinationsActions from '../rippleui/pages/vaccinations/vaccinations-actions';
-import vitalsActions from '../rippleui/pages/vitals/vitals-actions';
-import ordersActions from '../rippleui/pages/orders/orders-actions';
-import resultsActions from '../rippleui/pages/results/results-actions';
-import referralsActions from '../rippleui/pages/referrals/referrals-actions';
-import proceduresActions from '../rippleui/pages/procedures/procedures-actions';
-import documentsActions from '../rippleui/pages/documents/documents-actions.js';
-import appointmentsActions from '../rippleui/pages/appointments/appointments-actions';
 import imageActions from '../rippleui/pages/dicom/image-actions';
-import eolcareplansActions from '../rippleui/pages/care-plans/eolcareplans-actions';
-import personalnotesActions from '../rippleui/pages/personal-notes/personalnotes-actions';
-import heightAndWeightActions from '../rippleui/pages/height-and-weight/heightAndWeight-actions';
-import genericmdtActions from '../rippleui/pages/generic-mdt/generic-mdt-actions';
-import transferOfCareActions from '../rippleui/pages/transfer-of-care/transfer-of-care-actions';
+import plugins from '../plugins';
 
-export default angular
-    .module('app.actions', [])
-    .factory('patientsActions', patientsActions)
-    .factory('searchActions', searchActions)
-    .factory('searchReport', searchReport)
-    .factory('diagnosesActions', diagnosesActions)
-    .factory('allergiesActions', allergiesActions)
-    .factory('medicationsActions', medicationsActions)
-    .factory('contactsActions', contactsActions)
-    .factory('vaccinationsActions', vaccinationsActions)
-    .factory('vitalsActions', vitalsActions)
-    .factory('ordersActions', ordersActions)
-    .factory('resultsActions', resultsActions)
-    .factory('referralsActions', referralsActions)
-    .factory('proceduresActions', proceduresActions)
-    .factory('documentsActions', documentsActions)
-    .factory('appointmentsActions', appointmentsActions)
-    .factory('imageActions', imageActions)
-    .factory('eolcareplansActions', eolcareplansActions)
-    .factory('personalnotesActions', personalnotesActions)
-    .factory('heightAndWeightActions', heightAndWeightActions)
-    .factory('genericmdtActions', genericmdtActions)
-    .factory('transferOfCareActions', transferOfCareActions)
-    .name;
+let app = angular
+  .module('app.actions', [])
+  .factory('patientsActions', patientsActions)
+  .factory('searchActions', searchActions)
+  .factory('searchReport', searchReport)
+  .factory('imageActions', imageActions)
+
+plugins.forEach((plugin)=>{
+  Object.keys(plugin.actions).forEach((name)=>{
+    app = app.factory(name, plugin.actions[name]);
+  })
+});
+
+export default app.name;

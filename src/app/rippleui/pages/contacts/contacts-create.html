@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
 <div mc-full-panel mc-accordion mc-open-panel="contactsCreate" class="panel-group accordion">
-  <div class="panel panel-secondary" ng-class="getOpenPanelClass('contactsCreate')">
+  <div class="panel panel-secondary" ng-if="getShowPanel('contactsCreate')" ng-class="getOpenPanelClass('contactsCreate')">
     <div class="panel-heading">
       <div class="control-group right">
         <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
@@ -26,102 +26,149 @@
       <div class="panel-body-inner">
         <form name="contactForm" class="form">
           <div class="form-group-wrapper">
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.name.$dirty) && contactForm.name.$invalid, 'has-success': contactForm.name.$valid && contactForm.name.$dirty}">
-              <label for="name" class="control-label">Name</label>
-              <div class="input-holder">
-                <input type="text" class="form-control input-sm" id="name" name="name" ng-model="contact.name" required />
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.name.$error.required">You must enter a value.</span>
-            </div>
-            
-            <div class="row">
-              <div class="col-xs-12 col-md-6">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.relationship.$dirty) && contactForm.relationship.$invalid, 'has-success': contactForm.relationship.$valid && contactForm.relationship.$dirty}">
-                  <label for="relationship" class="control-label">Relationship</label>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.name.$dirty) && contactForm.name.$invalid, 'has-success': contactForm.name.$valid && contactForm.name.$dirty}">
+                  <label for="name" class="control-label">Name</label>
                   <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="relationship" name="relationship" ng-model="contact.relationship" required />
+                    <input type="text" class="form-control input-sm" id="name" name="name" ng-model="contact.name" required />
                   </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.relationship.$error.required">You must enter a value.</span>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.name.$error.required">You must enter a value.</span>
                 </div>
               </div>
-              <div class="col-xs-12 col-md-6">
-                <div class="form-group">
-                  <label for="" class="control-label hidden-xs hidden-sm"></label>
-                  <div class="input-holder">
-                    <div class="wrap-fcustominp">
-                      <div class="fcustominp">
-                        <input type="checkbox" id="nextOfKin" name="nextOfKin" ng-model="contact.nextOfKin" />
-                        <label for="nextOfKin"></label>
+            </div>
+            
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="row">
+                  <div class="col-xs-12 col-md-6">
+                    <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.relationship.$dirty) && contactForm.relationship.$invalid, 'has-success': contactForm.relationship.$valid && contactForm.relationship.$dirty}">
+                      <label for="relationship" class="control-label">Relationship</label>
+                      <div class="input-holder">
+                        <select class="form-control input-sm" id="relationship" name="relationship" ng-model="contact.relationship" required>
+                            <option>Husband</option>
+                            <option>Wife</option>
+                            <option>Father</option>
+                            <option>Alone</option>
+                            <option>Mother</option>
+                            <option>Daughter</option>
+                            <option>Son</option>
+                            <option>Brother</option>
+                            <option>Sister</option>
+                            <option>Friend</option>
+                            <option>Family friend</option>
+                            <option>Neighbour</option>
+                            <option>District Nurse</option>
+                            <option>Primary Care Worker</option>
+                            <option>Allocated social worker</option>
+                            <option>Care C-ordinator</option>
+                        </select>
                       </div>
-                      <label for="nextOfKin" class="fcustominp-label">Next of Kin</label>
+                      <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.relationship.$error.required">You must enter a value.</span>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                      <label for="nextOfKin" class="control-label">Next of Kin</label>
+                      <div class="input-holder">
+                        <div class="wrap-fcustominp">
+                          <div class="fcustominp">
+                            <input type="checkbox" id="nextOfKin" name="nextOfKin" ng-model="contact.nextOfKin" />
+                            <label for="nextOfKin"></label>
+                          </div>
+                          <!-- <label for="nextOfKin" class="fcustominp-label">Next of Kin</label> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.relationshipType.$dirty) && contactForm.relationshipType.$invalid, 'has-success': contactForm.relationshipType.$valid && contactForm.relationshipType.$dirty}">
+                  <label for="relationshipType" class="control-label">Relationship Type</label>
+                  <div class="input-holder">
+                    <input type="text" class="form-control input-sm" id="relationshipType" name="relationshipType" ng-model="contact.relationshipType" required />
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.relationshipType.$error.required">You must enter a value.</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row-expand">
+              <div class="col-expand-left">
+              </div>
+              <div class="col-expand-right">
+              </div>
+            </div>
+            
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.relationshipTerminology.$dirty) && contactForm.relationshipTerminology.$invalid, 'has-success': contactForm.relationshipTerminology.$valid && contactForm.relationshipTerminology.$dirty}">
+                      <label for="relationshipTerminology" class="control-label">Relationship Terminology</label>
+                      <div class="non-edit-value">
+                        {{contact.relationshipTerminology}}
+                      </div>
+                      <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.relationshipTerminology.$error.required">You must enter a value.</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.relationshipCode.$dirty) && contactForm.relationshipCode.$invalid, 'has-success': contactForm.relationshipCode.$valid && contactForm.relationshipCode.$dirty}">
+                      <label for="relationshipCode" class="control-label">Relationship Code</label>
+                      <div class="non-edit-value">
+                        {{contact.relationshipCode}}
+                      </div>
+                      <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.relationshipCode.$error.required">You must enter a value.</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.relationshipType.$dirty) && contactForm.relationshipType.$invalid, 'has-success': contactForm.relationshipType.$valid && contactForm.relationshipType.$dirty}">
-              <label for="relationshipType" class="control-label">Relationship Type</label>
-              <div class="input-holder">
-                <input type="text" class="form-control input-sm" id="relationshipType" name="relationshipType" ng-model="contact.relationshipType" required />
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.relationshipType.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.relationshipTerminology.$dirty) && contactForm.relationshipTerminology.$invalid, 'has-success': contactForm.relationshipTerminology.$valid && contactForm.relationshipTerminology.$dirty}">
-                  <label for="relationshipTerminology" class="control-label">Relationship Terminology</label>
-                  <div class="non-edit-value">
-                    {{contact.relationshipTerminology}}
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.contactInformation.$dirty) && contactForm.contactInformation.$invalid, 'has-success': contactForm.contactInformation.$valid && contactForm.contactInformation.$dirty}">
+                  <label for="contactInformation" class="control-label">Contact Information</label>
+                  <div class="input-holder">
+                    <textarea type="text" class="form-control textarea-big input-sm" id="contactInformation" name="contactInformation" ng-model="contact.contactInformation" required></textarea>
                   </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.relationshipTerminology.$error.required">You must enter a value.</span>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.contactInformation.$error.required">You must enter a value.</span>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.relationshipCode.$dirty) && contactForm.relationshipCode.$invalid, 'has-success': contactForm.relationshipCode.$valid && contactForm.relationshipCode.$dirty}">
-                  <label for="relationshipCode" class="control-label">Relationship Code</label>
-                  <div class="non-edit-value">
-                    {{contact.relationshipCode}}
+              <div class="col-expand-right">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.note.$dirty) && contactForm.note.$invalid, 'has-success': contactForm.note.$valid && contactForm.note.$dirty}">
+                  <label for="note" class="control-label">Note</label>
+                  <div class="input-holder">
+                    <textarea class="form-control textarea-big input-sm" id="note" name="note" ng-model="contact.notes" required></textarea>
                   </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.relationshipCode.$error.required">You must enter a value.</span>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.note.$error.required">You must enter a value.</span>
                 </div>
               </div>
             </div>
 
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.contactInformation.$dirty) && contactForm.contactInformation.$invalid, 'has-success': contactForm.contactInformation.$valid && contactForm.contactInformation.$dirty}">
-              <label for="contactInformation" class="control-label">Contact Information</label>
-              <div class="input-holder">
-                <textarea type="text" class="form-control textarea-big input-sm" id="contactInformation" name="contactInformation" ng-model="contact.contactInformation" required></textarea>
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.contactInformation.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.note.$dirty) && contactForm.note.$invalid, 'has-success': contactForm.note.$valid && contactForm.note.$dirty}">
-              <label for="note" class="control-label">Note</label>
-              <div class="input-holder">
-                <textarea class="form-control textarea-big input-sm" id="note" name="note" ng-model="contact.notes" required></textarea>
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.note.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || contactForm.author.$dirty) && contactForm.author.$invalid, 'has-success': contactForm.author.$valid && contactForm.author.$dirty}">
-              <label for="author" class="control-label">Author</label>
-              <div class="input-holder">
-                <input type="text" value="{{currentUser.email}}" placeholder="{{currentUser.email}}" class="form-control input-sm" id="author" name="author" ng-model="contact.author" disabled />
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.author.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || contactForm.datesubmitted.$dirty) && contactForm.datesubmitted.$invalid, 'has-success': contactForm.datesubmitted.$valid && contactForm.datesubmitted.$dirty}">
-              <label for="Date" class="control-label">Date</label>
-              <div class="inner-addon addon-left">
-                <div class="addon">
-                  <i class="fa fa-calendar"></i>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || contactForm.author.$dirty) && contactForm.author.$invalid, 'has-success': contactForm.author.$valid && contactForm.author.$dirty}">
+                  <label for="author" class="control-label">Author</label>
+                  <div class="input-holder">
+                    <input type="text" value="{{currentUser.email}}" placeholder="{{currentUser.email}}" class="form-control input-sm" id="author" name="author" ng-model="contact.author" disabled />
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.author.$error.required">You must enter a value.</span>
                 </div>
-                <input type="text" class="form-control" id="datesubmitted" name="datesubmitted" ng-model="contact.dateSubmitted" ng-click="dateofSubmittedDatepicker($event, 'dateSubmitted')" uib-datepicker-popup="dd-MMM-y" is-open="dateSubmitted" required disabled />
               </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.datesubmitted.$error.required">You must enter a valid date.</span>
+              <div class="col-expand-right">
+                <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || contactForm.datesubmitted.$dirty) && contactForm.datesubmitted.$invalid, 'has-success': contactForm.datesubmitted.$valid && contactForm.datesubmitted.$dirty}">
+                  <label for="Date" class="control-label">Date</label>
+                  <div class="inner-addon addon-left">
+                    <div class="addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control" id="datesubmitted" name="datesubmitted" ng-model="contact.dateSubmitted" ng-click="dateofSubmittedDatepicker($event, 'dateSubmitted')" uib-datepicker-popup="dd-MMM-y" is-open="dateSubmitted" required disabled />
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.datesubmitted.$error.required">You must enter a valid date.</span>
+                </div>
+              </div>
             </div>
           </div>
         </form>

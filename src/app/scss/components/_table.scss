@@ -3,12 +3,12 @@
   margin-bottom: 5px;
   font-size: 11px;
   line-height: 20px;
-  color: #303030;
+  color: map-get($colored-table, 'text');
   border: none;
   border-radius: 0;
-  background: #ffffff;
+  background: map-get($colored-table, 'row-odd-background');
   thead {
-    background-color: $table-header-background;
+    background-color: map-get($colored-table, 'header-background');
     font-weight: 700;
     i {
       margin-left: 5px;
@@ -16,14 +16,15 @@
   }
   thead tr th,
   tbody tr td {
-    padding: 10px 5px;
+    padding: 10px 4px 10px 5px;
     vertical-align: middle;
-    @include respond-to(sm) {
-      padding: 10px;
+    word-wrap: break-word;
+    @include respond-from(sm) {
+      padding: 10px 4px 10px 10px;
     }
   }
   thead tr th.selected {
-    background: #A9D38E;
+    background: map-get($colored-table, 'selected-background');
   }
   tbody tr td.selected {
     color: #ffffff;
@@ -42,18 +43,16 @@
       }
     }
   }
-  .view {
-    min-width: 93px;
-    .btn-dropdown-toggle:hover {
-      background-color: #7dbe31;
-      border-color: #7dbe31;
-      & > li > a:hover {
-        background-color: #d0e8af;
-      }
-    }
+  .view { min-width: 93px; }
+}
+.is-not-touch-device .table .view .btn-dropdown-toggle:hover {
+  background-color: #7dbe31;
+  border-color: #7dbe31;
+  & > li > a:hover {
+    background-color: #d0e8af;
   }
 }
-@include respond-to(xs) {
+@include respond-from(xs) {
   .table { font-size: 14px; }
 }
 .table > thead > tr > td.info,
@@ -69,7 +68,7 @@
 .table > tbody > tr.info > th,
 .table > tfoot > tr.info > th,
 .table > tbody > tr.info {
-  background-color: $table-row-background-hover !important;
+  background-color: map-get($colored-table, 'row-background-hover') !important;
 }
 .wrap-table-scrollX {
   width: 100%;
@@ -84,15 +83,15 @@
   table-layout: fixed;
 }
 .table-striped {
-  background-color: $table-background;
+  background-color: map-get($colored-table, 'background');
   tbody {
     tr {
       &[ng-click]:hover td,
       &:hover td[ng-click] {
-        background-color: $table-row-background-hover;
+        background-color: map-get($colored-table, 'row-background-hover');
       }
       &:nth-of-type(odd) {
-        background-color: $table-row-odd-background;
+        background-color: map-get($colored-table, 'row-odd-background');
       }
     }
   }
@@ -101,27 +100,28 @@ tr[ng-click],
 td[ng-click] {
   cursor: pointer;
 }
-.table-hover > tbody > tr > td.info:hover,
-.table-hover > tbody > tr > th.info:hover,
-.table-hover > tbody > tr.info:hover > td,
-.table-hover > tbody > tr:hover > .info,
-.table-hover > tbody > tr.info:hover > th,
-.table-hover > tbody > tr[ng-click]:hover > td,
-.table-hover > tbody > tr:hover > td[ng-click],
-.table-hover > tbody > tr[ng-click]:hover {
-  background-color: $table-row-background-hover;
+.is-not-touch-device .table-hover > tbody > tr > td.info:hover,
+.is-not-touch-device .table-hover > tbody > tr > th.info:hover,
+.is-not-touch-device .table-hover > tbody > tr.info:hover > td,
+.is-not-touch-device .table-hover > tbody > tr:hover > .info,
+.is-not-touch-device .table-hover > tbody > tr.info:hover > th,
+.is-not-touch-device .table-hover > tbody > tr[ng-click]:hover > td,
+.is-not-touch-device .table-hover > tbody > tr:hover > td[ng-click],
+.is-not-touch-device .table-hover > tbody > tr[ng-click]:hover,
+.is-not-touch-device .table-hover > tbody > tr.hovered {
+  background-color: map-get($colored-table, 'row-background-hover');
 }
 
 .table-bordered {
   border: 1px solid #B4B5B4;
   border-collapse: separate;
-  // @include respond-to(xs) {
+  // @include respond-from(xs) {
   //   border-collapse: collapse;
   // }
   thead tr th,
   tbody tr td {
     border: none;
-    @include respond-to(xs) {
+    @include respond-from(xs) {
       border-left: 1px solid #B4B5B4;
       &:first-child {
         border: none;
@@ -129,14 +129,23 @@ td[ng-click] {
     }
   }
 }
-@media (max-width: map-get($breakpoints, 'xs') - 1) {
+.table-schedule {
+  thead tr th,
+  tbody tr td {
+    border-left: 1px solid #B4B5B4;
+    &:first-child {
+      border: none;
+    }
+  }
+}
+@include respond-to(xs) {
   .table-bordered {
     border-left: 0;
     border-right: 0;
   }
 }
 
-@media (max-width: map-get($breakpoints, 'xs') - 1) {
+@include respond-to(xs) {
   // Responsive Tables - http://codepen.io/geoffyuen/pen/FCBEg
   .rwd-table {
     display: block;
@@ -155,8 +164,13 @@ td[ng-click] {
         display: block;
         padding: 0 10px;
         line-height: 20px;
+        overflow: hidden;
         &.cell-truncate {
           @include text-truncate;
+        }
+        & > span {
+          display: block;
+          overflow: hidden;
         }
         &:before {
           content: attr(data-th)": "; // who knew you could do this? The internet, that's who.
@@ -164,10 +178,11 @@ td[ng-click] {
 
           // optional stuff to make it look nicer
           width: 100px;
-          display: inline-block;
+          display: block;
+          float: left;
           padding-right: 10px;
           // end options
-          @include respond-to(xs) {
+          @include respond-from(xs) {
             display: none;
           }
         }
@@ -181,7 +196,7 @@ td[ng-click] {
     th, td {
       text-align: left;
       
-      @include respond-to(xs) {
+      @include respond-from(xs) {
         display: table-cell;
         padding: .25em .5em;
 
@@ -195,6 +210,7 @@ td[ng-click] {
     display: none ;
   }
 }
+
 .sort-asc:after {
   padding-left: 5px;
   content: '\25BC'
@@ -204,13 +220,13 @@ td[ng-click] {
   padding-left: 5px;
   content: '\25B2'
 }
-@include respond-to(xs) {
+@include respond-from(xs) {
   .table-sorted {
     thead tr th {
       cursor: pointer;
       &.sorted {
         position: relative;
-        background: #A9D38E;
+        background: map-get($colored-table, 'selected-background');
         &.asc,
         &.desc {padding-right: 22px;}
         &.asc:after,
@@ -233,17 +249,20 @@ td[ng-click] {
       }
     }
     tbody tr td.sorted {
-      background: #E7EFDD;
+      background: map-get($colored-table, 'sorted-background');
     }
     &.table-striped {
       tbody {
-        tr {
-          &:nth-of-type(odd) td.sorted {
-            background-color: #EFF7E5;
-          }
-          &:hover td.sorted {
-            background-color: $table-row-background-hover;
-          }
+        tr:nth-of-type(odd) td.sorted {
+          background-color: map-get($colored-table, 'sorted-background-odd');
+        }
+      }
+    }
+    &.table-striped.table-hover {
+      tbody {
+        tr.hovered td.sorted,
+        tr:hover td.sorted {
+          background-color: map-get($colored-table, 'row-background-hover');
         }
       }
     }

@@ -1,12 +1,12 @@
 # PulseTile
-PulseTile is a clinically led team working with you to build an integrated digital care record platform for today and the future. Open source, open standards and underpinned by an open architecture that can be used worldwide.
 
-## Table of Contents
+[![travis build](https://img.shields.io/travis/PulseTile/PulseTile.svg?style=flat-square)](https://travis-ci.org/PulseTile/PulseTile)
+[![Codecov](https://img.shields.io/codecov/c/github/PulseTile/PulseTile/develop.svg?style=flat-square)](https://codecov.io/gh/PulseTile/PulseTile)
+[![GitHub release](https://img.shields.io/github/release/PulseTile/PulseTile.svg?style=flat-square)](https://github.com/PulseTile/PulseTile/releases)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)](http://commitizen.github.io/cz-cli/)
 
-- [Getting Started](# Getting Started)
-- [Prerequisites](#prerequisites)
-- [Installing](# installing)
-- [About](#about)
+PulseTile is a clinically led UX UI framework for healthcare.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -66,7 +66,7 @@ Plugins are extentions to currenly built 'core' (with general modules, that can 
 
 #### Installation of the new Plugins to the application:  
 1. Run the following command within your command line: npm/bower install moduleName (Module name here stands for github url for external plugin)
-`bower i https://github.com/RippleOSI/Org-Ripple-UI-Plugins.git`
+`bower i https://github.com/PulseTile-Plugins/Silver-Plugins.git`
 *We are downloading the module from external repository to root application directory*
 
 2. To copy files from node_modules/bower_components use: webpack.config.js --> CopyWebpackPlugin, change path in it's options { from: '', to: '' }
@@ -76,60 +76,33 @@ Plugins are extentions to currenly built 'core' (with general modules, that can 
 *Running the copy command itself*
 
 ##### Now we should edit the source files:
-* Add module-actions.js to src/app/actions/index.js
-*here we are adding the module's actions, which are added to use them within redux architecture. The action import should look like this:*
+* In the src/app/plugins.js we include all modules
 ```
-import clinicalnotesActions from '../rippleui/pages/clinical-notes/clinicalnotes-actions';
-```
-
-* Add module-reducer-name.js to src/app/redux/reducer.js
-*reducer.js is redux-related file, where we add the module to redux architecture. In general, the module addition within the named file looks like this:*
-```
-import clinicalnotes from '../rippleui/pages/clinical-notes/clinicalnotes-reducer-all';
+import clinicalnotes from './rippleui/pages/clinical-notes/index';
+export default [
+  clinicalnotes
+  ]
 ```
 
 * Add actions types from module/ActionTypes.js to src/app/constants/ActionTypes.js
 *The constants file contains global constants to use within an application, in general the addition to already existing 'core' constant file looks like this:*
 ```
-export const ALLERGIES = 'ALLERGIES';
-export const ALLERGIES_SUCCESS = 'ALLERGIES_SUCCESS';
-export const ALLERGIES_ERROR = 'ALLERGIES_ERROR';
+export const CLINICALNOTES = 'CLINICALNOTES';
+export const CLINICALNOTES_SUCCESS = 'CLINICALNOTES_SUCCESS';
+export const CLINICALNOTES_ERROR = 'CLINICALNOTES_ERROR';
 
-export const ALLERGIES_GET = 'ALLERGIES_GET';
-export const ALLERGIES_GET_SUCCESS = 'ALLERGIES_GET_SUCCESS';
-export const ALLERGIES_GET_ERROR = 'ALLERGIES_GET_ERROR';
+export const CLINICALNOTES_GET = 'CLINICALNOTES_GET';
+export const CLINICALNOTES_GET_SUCCESS = 'CLINICALNOTES_GET_SUCCESS';
+export const CLINICALNOTES_GET_ERROR = 'CLINICALNOTES_GET_ERROR';
 
-export const ALLERGIES_CREATE = 'ALLERGIES_CREATE';
-export const ALLERGIES_CREATE_SUCCESS = 'ALLERGIES_CREATE_SUCCESS';
-export const ALLERGIES_CREATE_ERROR = 'ALLERGIES_CREATE_ERROR';
+export const CLINICALNOTES_CREATE = 'CLINICALNOTES_CREATE';
+export const CLINICALNOTES_CREATE_SUCCESS = 'CLINICALNOTES_CREATE_SUCCESS';
+export const CLINICALNOTES_CREATE_ERROR = 'CLINICALNOTES_CREATE_ERROR';
 
-export const ALLERGIES_UPDATE = 'ALLERGIES_UPDATE';
-export const ALLERGIES_UPDATE_SUCCESS = 'ALLERGIES_UPDATE_SUCCESS';
-export const ALLERGIES_UPDATE_ERROR = 'ALLERGIES_UPDATE_ERROR';
+export const CLINICALNOTES_UPDATE = 'CLINICALNOTES_UPDATE';
+export const CLINICALNOTES_UPDATE_SUCCESS = 'CLINICALNOTES_UPDATE_SUCCESS';
+export const CLINICALNOTES_UPDATE_ERROR = 'CLINICALNOTES_UPDATE_ERROR';
 ```
-
-* Add components to src/app/index.js and src/app/index.route.js
-   * You should register the component with Angular. To add functionality also the index.js and index.route.js files should be updated also. Within the index.js the component addition in general looks like this:
-   ```
-  import ClinicalnotesListComponent from './rippleui/pages/clinical-notes/clinicalnotes-list.component';
-
-  const app = angular.module('app', []).component('clinicalnotesListComponent', ClinicalnotesListComponent)
-   ```
-     where ClinicalnotesListComponent is basically the AngularJS view name, and /rippleosi/pages/clinical-notes/ is the path to necessary for plugin files (listing and functionality of files for an example module are listed below);
-   * index.route.js is used for routing, so the application will know where to look for plugin's pages. For example, this is general view of a single plugin's code for route file:
-   ```
-    .state('clinicalNotes', {
-        url: '/patients/{patientId:int}/clinicalNotes?reportType&searchString&queryType',
-        views: {
-          banner: {template: '<patients-banner-component></patients-banner-component>'},
-          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-          main: {template: '<clinicalnotes-list-component></clinicalnotes-list-component>'}
-        }
-    })
-   ```
-   where:
-     * url: basically what user sees in his URL bar when he clicks on related module;
-     * views: list of components that will be displayed on the page after clicking on the module itself;*
 
 #### Explanations about module functionality files, that should be developed:
 1. example-actions.js
@@ -150,14 +123,11 @@ export const ALLERGIES_UPDATE_ERROR = 'ALLERGIES_UPDATE_ERROR';
 6. example-detail.html
 *HTML Template file for detail.component*
 
-7. example-modal.js
-*It's modal functionality file (should be added to plugin if the modal window is necessary)*
-
-8. example-modal.html
-*HTML Template file for modal window (should be added to plugin if the modal window is necessary)*
-
-9. ActionTypes.js
+7. ActionTypes.js
 *This file contains actions constants for redux architecture*
 
-10. index.route.js
+8. index.route.js
 *File with routes for core application*
+
+9. index.js
+*This file contains inclusion for all module files*

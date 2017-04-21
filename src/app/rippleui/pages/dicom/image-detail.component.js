@@ -14,73 +14,57 @@
   ~  limitations under the License.
 */
 let templateImageDetail= require('./image-detail.html');
+import cornerstoneJS from '../../../../cornerstone/cornerstone';
 
 class ImageDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, imageActions, serviceRequests, usSpinnerService) {
-    var seriesIdsIndex;
+  constructor($scope, $state, $stateParams, $ngRedux, serviceActions, serviceRequests, usSpinnerService) {
     
-    $scope.visibleModal = 'closeModal';
+    $scope.series = [];
     
-    this.toggleModal = function (data) {
-      $scope.visibleModal = data.className;
-      if (data.className === 'openModal') {
-        document.body.classList.add('modal-open');
-      } else {
-        document.body.classList.remove('modal-open');
+    var cornerstone = cornerstoneJS();
+    
+    serviceActions.getAllSeriesInStudy($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source).then(function (result) {
+      $scope.study = result.data;
+      var seriesIds = $scope.study.seriesIds;
+      $scope.instanceIds = [];
+      for (var i = 0; i < seriesIds.length; i++) {
+          findSeriesMetadata(seriesIds[i], i);
+          findFirstInstanceId(seriesIds[i], i);
       }
-    };
-
-    this.series = [];
-
-    this.setCurrentPageData = function (data) {
       usSpinnerService.stop('patientSummary-spinner');
-      this.instance = {
-        series_images: [{
-          imageLink: 'http://i.imgur.com/cEnTIeo.png',
-          imgName: 'screen1'
-        }],
-        modality: '',
-        protocol_name: '',
-        operator_name: '',
-        series_date: '',
-        author: '',
-        station: '',
-        time: '',
-        date: ''  
-      };
-      
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
+    });
+
+    var findFirstInstanceId = function (seriesId, index) {
+      serviceActions.getInstanceId($stateParams.patientId, seriesId, $stateParams.source).then(function (result) {
+        $scope.instanceIds[index] = result.data.instanceId;
+      });
     };
 
-    this.findFirstInstanceId = function (result) {
-      if (result) {
-        this.instanceIds[seriesIdsIndex] = result.data.instanceId;
-      }
+    var findSeriesMetadata = function(seriesId, index) {
+      serviceActions.getSeriesDetails($stateParams.patientId, seriesId).then(function (result) {
+        $scope.series[index] = result.data;
+        $scope.series[index].seriesDate = moment($scope.series[index].seriesDate).format('DD-MMM-YYYY');
+        $scope.series[index].seriesTime = moment($scope.series[index].seriesTime).format('h:mma');
+      });
+    };
+    
+    function getImgBlock() {
+      return $('#dicomImage').get(0);
+    }
+    
+    $scope.zoomIn = function (ev) {
+      var element = getImgBlock();
+      var viewport = cornerstone.getViewport(element);
+      viewport.scale += 0.25;
+      cornerstone.setViewport(element, viewport);
+    };
+    $scope.zoomOut = function (ev) {
+      var element = getImgBlock();
+      var viewport = cornerstone.getViewport(element);
+      viewport.scale -= 0.25;
+      cornerstone.setViewport(element, viewport);
     };
 
-    this.findSeriesMetadata = function(result) {
-      if (result) {
-        this.series[seriesIdsIndex] = result.data;
-        this.series[seriesIdsIndex].seriesDate = moment(this.series[seriesIdsIndex].seriesDate).format('DD-MMM-YYYY');
-        this.series[seriesIdsIndex].seriesTime = moment(this.series[seriesIdsIndex].seriesTime).format('h:mma');
-      }
-    };
-
-    let unsubscribe = $ngRedux.connect(state => ({
-      getStoreData: this.setCurrentPageData(state),
-      getInstanceId: this.findFirstInstanceId(state.instanceId),
-      getSeriesDetails: this.findSeriesMetadata(state.seriesDetails)
-    }))(this);
-
-    $scope.$on('$destroy', unsubscribe);
-    serviceRequests.subscriber('closeModal', this.toggleModal);
-    // this.imageLoad = imageActions.getAllSeriesInStudy;
-    // this.imageLoad($stateParams.patientId, $stateParams.studyId, $stateParams.source);
-    // this.instanceLoad = imageActions.getInstance;
-    // this.instanceIdLoad = imageActions.getInstanceId;
-    // this.seriesDetailsLoad = imageActions.getSeriesDetails;
   }
 }
 
@@ -89,5 +73,5 @@ const ImageDetailComponent = {
   controller: ImageDetailController
 };
 
-ImageDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'imageActions', 'serviceRequests', 'usSpinnerService'];
+ImageDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'serviceActions', 'serviceRequests', 'usSpinnerService'];
 export default ImageDetailComponent;

@@ -19,6 +19,26 @@ let templateMedicationsCreate = require('./medications-create.html');
 class MedicationsCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, serviceRequests, usSpinnerService) {
 
+    $scope.medication = {};
+    
+    $scope.medication.isImport = false;
+    
+    if ($stateParams.importData) {
+      $scope.medication = $stateParams.importData.data;
+    }
+
+    if (typeof $scope.medication.startDate == "undefined") {
+      $scope.medication.startDate = new Date();
+    }
+    
+    this.backToDocs = function () {
+      $state.go('documents-detail', {
+        patientId: $stateParams.patientId,
+        detailsIndex: $stateParams.importData.documentIndex,
+        page: 1
+      });
+    }
+    
     this.setCurrentPageData = function (data) {
       if (data.medication.dataCreate !== null) {
         this.goList();
@@ -28,6 +48,7 @@ class MedicationsCreateController {
       }
       if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;
+        $scope.medication.author = $scope.currentUser.email;
       }
     };
 
@@ -49,12 +70,6 @@ class MedicationsCreateController {
       'IM Intra Muscular'
     ];
 
-    $scope.openDatepicker = function ($event, name) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope[name] = true;
-    };
     $scope.patient = $scope.currentPatient;
     this.goList = function () {
       $state.go('medications', {
@@ -70,22 +85,22 @@ class MedicationsCreateController {
     $scope.create = function (medicationForm, medication) {
       $scope.formSubmitted = true;
 
-      let toAdd = {
-        sourceId: '',
-        doseAmount: medication.doseAmount,
-        doseDirections: medication.doseDirections,
-        doseTiming: medication.doseTiming,
-        medicationCode: medication.medicationCode,
-        medicationTerminology: medication.medicationTerminology,
-        name: medication.name,
-        route: medication.route,
-        startDate: medication.startDate,
-        startTime: medication.startTime,
-        author: medication.author,
-        dateCreated: medication.dateCreated
-      };
-
       if (medicationForm.$valid) {
+        let toAdd = {
+          sourceId: '',
+          doseAmount: medication.doseAmount,
+          doseDirections: medication.doseDirections,
+          doseTiming: medication.doseTiming,
+          medicationCode: "123456789",
+          medicationTerminology: medication.medicationTerminology,
+          name: medication.name,
+          route: medication.route,
+          startDate: medication.startDate,
+          startTime: medication.startTime,
+          author: medication.author,
+          isImport: medication.isImport,
+          dateCreated: medication.dateCreated
+        };
 
         $scope.medicationsCreate($scope.patient.id, toAdd);
 

@@ -16,98 +16,27 @@
 let templateProceduresList = require('./procedures-list.html');
 
 class ProceduresListController {
-  constructor($scope, $state, $stateParams, $ngRedux, proceduresActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, proceduresActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-		this.queryBy = '$';
-		this.query = {};
-		this.query[this.queryBy] = '';
-		this.currentPage = 1;
-		this.isShowCreateBtn = true;
-		this.isFilter = false;
 		this.isShowCreateBtn = $state.router.globals.$current.name !== 'procedures-create';
 		this.isShowExpandBtn = $state.router.globals.$current.name !== 'procedures';
 
-		this.toggleFilter = function () {
-			this.isFilter = !this.isFilter;
-		};
-
-		this.sort = function (field) {
-			var reverse = this.reverse;
-			if (this.order === field) {
-				this.reverse = !reverse;
-			} else {
-				this.order = field;
-				this.reverse = false;
-			}
-		};
-
-		this.sortClass = function (field) {
-			if (this.order === field) {
-				return this.reverse ? 'sorted desc' : 'sorted asc';
-			}
-		};
-
-		this.order = serviceRequests.currentSort.order || 'name';
-		this.reverse = serviceRequests.currentSort.reverse || false;
-		if (serviceRequests.filter) {
-			this.query[this.queryBy] = serviceRequests.filter;
-			this.isFilter = true;
-		}
-
-    this.pageChangeHandler = function (newPage) {
-      this.currentPage = newPage;
-    };
 
 		this.create = function () {
 			$state.go('procedures-create', {
-				patientId: $stateParams.patientId,
-				filter: this.query.$,
-				page: this.currentPage
+				patientId: $stateParams.patientId
 			});
 		};
 
-    if ($stateParams.page) {
-      this.currentPage = $stateParams.page;
-    }
-
-    if ($stateParams.filter) {
-      $scope.query = $stateParams.filter;
-    }
-
-    this.go = function (id, allergySource) {
+    this.go = function (id, source) {
       $state.go('procedures-detail', {
         patientId: $stateParams.patientId,
-        procedureId: id,
-        filter: $scope.query,
-        page: this.currentPage,
-        reportType: $stateParams.reportType,
-        searchString: $stateParams.searchString,
-        queryType: $stateParams.queryType,
-        source: allergySource
+        detailsIndex: id,
+        page: $scope.currentPage || 1,
+        source: source
       });
-    };
-
-    this.search = function (row) {
-      return (
-        row.name.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-        row.date.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-        row.time.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1 ||
-        row.source.toLowerCase().indexOf($scope.query.toLowerCase() || '') !== -1
-      );
-    };
-
-    this.selected = function (procedureId) {
-      return procedureId === $stateParams.procedureId;
-    };
-
-    this.create = function () {
-        $state.go('procedures-create', {
-            patientId: $stateParams.patientId,
-            filter: this.query.$,
-            page: this.currentPage
-        });
     };
 
     this.setCurrentPageData = function (data) {
@@ -118,19 +47,9 @@ class ProceduresListController {
       if (data.procedures.data) {
         this.procedures = data.procedures.data;
 
-        for (var i = 0; i < this.procedures.length; i++) {
-          if (angular.isNumber(this.procedures[i].date)) {
-            this.procedures[i].date = moment(this.procedures[i].date).format('DD-MMM-YYYY');
-          } else if (this.procedures[i].date === null) {
-            this.procedures[i].date = '';
-          }
-
-          if (angular.isNumber(this.procedures[i].time)) {
-            this.procedures[i].time = moment(this.procedures[i].time).format('HH:mm');
-          } else if (this.procedures[i].time === null) {
-            this.procedures[i].time = '';
-          }
-        }
+        serviceFormatted.formattingTablesDate(this.procedures, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.formattingTablesDate(this.procedures, ['time'], serviceFormatted.formatCollection.HHmm);
+        serviceFormatted.filteringKeys = ['date', 'name', 'time', 'source'];
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
@@ -153,5 +72,5 @@ const ProceduresListComponent = {
   controller: ProceduresListController
 };
 
-ProceduresListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'proceduresActions', 'serviceRequests', 'usSpinnerService'];
+ProceduresListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'proceduresActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default ProceduresListComponent;

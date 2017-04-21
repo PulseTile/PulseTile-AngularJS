@@ -15,90 +15,107 @@
   -->
 
 
-<div mc-full-panel mc-accordion mc-open-panel="referralsCreate" class="panel-group accordion">
-  <div class="panel panel-secondary" ng-class="getOpenPanelClass('referralsCreate')">
+<div mc-full-panel mc-datepicker class="panel-group">
+  <div class="panel panel-secondary">
     <div class="panel-heading">
       <div class="control-group right">
         <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('referralsCreate')"><i class="fa fa-chevron-up"></i></button>
       </div>
-      <h3 class="panel-title">Referral</h3>
+      <h3 class="panel-title">Create Referral</h3>
     </div>
     <div class="panel-body">
       <div class="panel-body-inner">
         <form name="referralsForm" class="form">
           <div class="form-group-wrapper">
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.referralFrom.$dirty) && referralsForm.referralFrom.$invalid, 'has-success': referralsForm.referralFrom.$valid && referralsForm.referralFrom.$dirty}">
-              <label for="referralFrom" class="control-label">Referral From:</label>
-              <div class="input-holder">
-                <input class="form-control input-sm" id="referralFrom" name="referralFrom" ng-model="referralsEdit.referralFrom" required />
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.referralFrom.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.referralTo.$dirty) && referralsForm.referralTo.$invalid, 'has-success': referralsForm.referralTo.$valid && referralsForm.referralTo.$dirty}">
-              <label for="referralTo" class="control-label">Referral To:</label>
-              <div class="input-holder">
-                <input class="form-control input-sm" id="referralTo" name="referralTo" ng-model="referralsEdit.referralTo" required />
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.referralTo.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.dateOfReferral.$dirty) && referralsForm.dateOfReferral.$invalid, 'has-success': referralsForm.dateOfReferral.$valid && referralsForm.dateOfReferral.$dirty}">
-              <label for="dateOfReferral" class="control-label">Date of Referral:</label>
-              <div class="inner-addon addon-left">
-                <div class="addon">
-                  <i class="fa fa-calendar"></i>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.referralFrom.$dirty) && referralsForm.referralFrom.$invalid, 'has-success': referralsForm.referralFrom.$valid && referralsForm.referralFrom.$dirty}">
+                  <label for="referralFrom" class="control-label">Referral From</label>
+                  <div class="input-holder">
+                    <input class="form-control input-sm" id="referralFrom" name="referralFrom" ng-model="referralsEdit.referralFrom" required />
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.referralFrom.$error.required">You must enter a value.</span>
                 </div>
-                <input type="text" class="form-control" id="dateOfReferral" name="dateOfReferral" ng-model="referralsEdit.dateOfReferral" ui-date ng-click="openDatepicker($event, 'DateOfReferral')" uib-datepicker-popup="dd-MMM-y" is-open="DateOfReferral" required disabled />
               </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.dateOfReferral.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.reason.$dirty) && referralsForm.reason.$invalid, 'has-success': referralsForm.reason.$valid && referralsForm.reason.$dirty}">
-              <label for="reason" class="control-label">Reason for Referral:</label>
-              <div class="input-holder">
-                <textarea type="text" class="form-control textarea-big input-sm" id="reason" name="reason" ng-model="referralsEdit.reason" required></textarea>
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.reason.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.clinicalSummary.$dirty) && referralsForm.clinicalSummary.$invalid, 'has-success': referralsForm.clinicalSummary.$valid && referralsForm.clinicalSummary.$dirty}">
-              <label for="clinicalSummary" class="control-label">Clinical Summary:</label>
-              <div class="input-holder">
-                <textarea type="text" class="form-control textarea-big input-sm" id="clinicalSummary" name="clinicalSummary" ng-model="referralsEdit.clinicalSummary" required></textarea>
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.clinicalSummary.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.author.$dirty) && referralsForm.author.$invalid, 'has-success': referralsForm.author.$valid && referralsForm.author.$dirty}">
-              <label for="author" class="control-label">Author:</label>
-              <div class="input-holder">
-                <input class="form-control input-sm" id="author" name="author" ng-model="referralsEdit.author" required />
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.author.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.dateCreated.$dirty) && referralsForm.dateCreated.$invalid, 'has-success': referralsForm.dateCreated.$valid && referralsForm.dateCreated.$dirty}">
-              <label for="dateCreated" class="control-label">Date Created:</label>
-              <div class="inner-addon addon-left">
-                <div class="addon">
-                  <i class="fa fa-calendar"></i>
+              <div class="col-expand-right">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.referralTo.$dirty) && referralsForm.referralTo.$invalid, 'has-success': referralsForm.referralTo.$valid && referralsForm.referralTo.$dirty}">
+                  <label for="referralTo" class="control-label">Referral To</label>
+                  <div class="input-holder">
+                    <input class="form-control input-sm" id="referralTo" name="referralTo" ng-model="referralsEdit.referralTo" required />
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.referralTo.$error.required">You must enter a value.</span>
                 </div>
-                <input type="text" class="form-control" id="dateCreated" name="dateCreated" ng-model="referralsEdit.dateCreated" ui-date ng-click="openDatepicker($event, 'DateSubmitted')" uib-datepicker-popup="dd-MMM-y" is-open="DateSubmitted" required disabled />
               </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.dateCreated.$error.required">You must enter a value.</span>
             </div>
 
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.source.$dirty) && referralsForm.source.$invalid, 'has-success': referralsForm.source.$valid && referralsForm.source.$dirty}">
-              <label for="source" class="control-label">Source:</label>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.dateOfReferral.$dirty) && referralsForm.dateOfReferral.$invalid, 'has-success': referralsForm.dateOfReferral.$valid && referralsForm.dateOfReferral.$dirty}">
+                  <label for="" class="control-label">Date of Referral</label>
+                  <div class="inner-addon addon-left">
+                    <div class="addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control" id="dateOfReferral" name="dateOfReferral" ng-model="referralsEdit.dateOfReferral" ui-date ng-click="openDatepicker($event, 'dateOfReferral')" uib-datepicker-popup="dd-MMM-y" is-open="datepickers.dateOfReferral" required readonly/>
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.dateOfReferral.$error.required">You must enter a value.</span>
+                </div>
+              </div>
+              <div class="col-expand-right">
+              </div>
+            </div>
+
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.reason.$dirty) && referralsForm.reason.$invalid, 'has-success': referralsForm.reason.$valid && referralsForm.reason.$dirty}">
+                  <label for="reason" class="control-label">Reason for Referral</label>
+                  <div class="input-holder">
+                    <textarea type="text" class="form-control textarea-big input-sm" id="reason" name="reason" ng-model="referralsEdit.reason" required></textarea>
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.reason.$error.required">You must enter a value.</span>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.clinicalSummary.$dirty) && referralsForm.clinicalSummary.$invalid, 'has-success': referralsForm.clinicalSummary.$valid && referralsForm.clinicalSummary.$dirty}">
+                  <label for="clinicalSummary" class="control-label">Clinical Summary</label>
+                  <div class="input-holder">
+                    <textarea type="text" class="form-control textarea-big input-sm" id="clinicalSummary" name="clinicalSummary" ng-model="referralsEdit.clinicalSummary" required></textarea>
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.clinicalSummary.$error.required">You must enter a value.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.author.$dirty) && referralsForm.author.$invalid, 'has-success': referralsForm.author.$valid && referralsForm.author.$dirty}">
+                  <label for="author" class="control-label">Author</label>
+                  <div class="input-holder">
+                    <input type="text" value="{{currentUser.email}}" placeholder="{{currentUser.email}}" class="form-control input-sm" id="author" name="author" ng-model="referralsEdit.author" disabled />
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.author.$error.required">You must enter a value.</span>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.dateCreated.$dirty) && referralsForm.dateCreated.$invalid, 'has-success': referralsForm.dateCreated.$valid && referralsForm.dateCreated.$dirty}">
+                  <label class="control-label">Date</label>
+                  <div class="inner-addon addon-left">
+                    <div class="addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control" id="dateCreated" name="dateCreated" ng-model="referralsEdit.dateCreated" ui-date uib-datepicker-popup="dd-MMM-y" required disabled />
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.dateCreated.$error.required">You must enter a value.</span>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.source.$dirty) && referralsForm.source.$invalid, 'has-success': referralsForm.source.$valid && referralsForm.source.$dirty}">
+              <label for="source" class="control-label">Source</label>
               <div class="input-holder">
                 <input class="form-control input-sm" id="source" name="source" ng-model="referralsEdit.source" required />
               </div>
               <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.source.$error.required">You must enter a value.</span>
-            </div>
-
+            </div> -->
           </div>
         </form>
       </div>
@@ -106,7 +123,7 @@
         <div class="wrap-control-group">
           <div class="control-group right">
             <button class="btn btn-danger" ng-click="$ctrl.cancel()"><i class="fa fa-ban"></i> Cancel</button>
-            <button class="btn btn-success" ng-click="confirmEdit(referralsForm, referralsEdit)"><i class="fa fa-check"></i> Complete</button>
+            <button class="btn btn-success" ng-click="create(referralsForm, referralsEdit)"><i class="fa fa-check"></i> Complete</button>
           </div>
         </div>
       </div>

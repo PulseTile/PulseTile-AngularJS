@@ -1,0 +1,57 @@
+.fc-event .fc-bg { opacity: 0; }
+.fc th {
+  padding: 3px 2px;
+  line-height: 21px;
+}
+.fc-day-header { background: #c5e29f; }
+
+.fc-widget-content tr { background: #ffffff; }
+.fc-widget-content tr:nth-child(4n-1),
+.fc-widget-content tr:nth-child(4n) { background: #f3f3f3; }
+.fc-ltr .fc-time-grid .fc-event-container { margin: 0 -1px 0 1px; }
+.fc-content-skeleton + hr { display: none !important; }
+
+.fc-view-container {
+  margin: 0 -1px;
+  margin-bottom: 29px;
+}
+.fc-toolbar.fc-header-toolbar {
+  padding: 7px 15px;
+  margin: 0;
+}
+.fc-toolbar.fc-header-toolbar {
+   h2 {
+    padding: 7px 0;
+    font-size: 14px;
+    line-height: 20px;
+    color: #303030;
+    text-align: center;
+  }
+  button {
+    min-width: 30px;
+    height: 34px;
+    padding: 0 5px;
+    border-radius: 0;
+    color: #0d672f;
+    border: 1px solid #0d672f;
+    background: #ffffff;
+    box-shadow: 0 0 0 rgb(0, 0, 0) !important;
+    &.fc-state-active {
+      background: #0d672f;
+      color: #ffffff;
+    }
+  }
+  .fc-center { vertical-align: top; }
+}
+.is-not-touch-device .fc-toolbar.fc-header-toolbar button:hover {
+  background: #0d672f;
+  color: #ffffff;
+}
+
+.fc-timeslot {
+  padding: 9px 15px 0;
+  font-size: 13px;
+  color: #959595;
+}
+
+.fc-unthemed td.fc-today { background: #ffffff; }

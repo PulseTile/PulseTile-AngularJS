@@ -54,19 +54,13 @@ describe('Image List', function() {
 
     spyOn(fakeCall, 'callSeries');
 
-    spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
-    spyOn(ctrl, 'selected');
-    spyOn(ctrl, 'search');
     spyOn(ctrl, 'setCurrentPageData');
     spyOn(ctrl, 'imageLoad');
 
     fakeCall.callSeries({}, types.SERIES_GET);
 
-    ctrl.pageChangeHandler();
     ctrl.go();
-    ctrl.selected();
-    ctrl.search();
     ctrl.setCurrentPageData();
     ctrl.imageLoad();
   });
@@ -83,17 +77,8 @@ describe('Image List', function() {
   it("Series reducer was called", function() {
     expect(fakeCall.callSeries).toHaveBeenCalled();
   });
-  it("pageChangeHandler was called", function() {
-    expect(ctrl.pageChangeHandler).toHaveBeenCalled();
-  });
   it("route go was called", function() {
     expect(ctrl.go).toHaveBeenCalled();
-  });
-  it("selected was called", function() {
-    expect(ctrl.selected).toHaveBeenCalled();
-  });
-  it("search was called", function() {
-    expect(ctrl.search).toHaveBeenCalled();
   });
   it("setCurrentPageData was called", function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();

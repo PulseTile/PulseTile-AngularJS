@@ -6,9 +6,9 @@ describe('Results List', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope, ctrl, controller, template, actions, stateParams, state, ngRedux, resultsActions, serviceRequests, usSpinnerService, fakeCall;
+  let scope, ctrl, controller, template, actions, stateParams, state, ngRedux, resultsActions, serviceRequests, usSpinnerService, serviceFormatted;
 
-  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _resultsActions_, _serviceRequests_, _usSpinnerService_) => {
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _resultsActions_, _serviceRequests_, _usSpinnerService_, _serviceFormatted_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
     state = _$state_;
@@ -17,6 +17,7 @@ describe('Results List', function() {
     stateParams = _$stateParams_;
     resultsActions = _resultsActions_;
     usSpinnerService = _usSpinnerService_;
+    serviceFormatted = _serviceFormatted_;    
 
     template = ResultsListComponent.template;
 
@@ -36,37 +37,24 @@ describe('Results List', function() {
   }));
 
   beforeEach(function() {
-    // fakeCall = {
-    //   callResults: results
-    // };
 
-    // spyOn(fakeCall, 'callResults');
-
-    spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
-    spyOn(ctrl, 'selected');
-    spyOn(ctrl, 'search');
     spyOn(ctrl, 'setCurrentPageData');
     spyOn(ctrl, 'resultsLoad');
 
-    // fakeCall.callResults({}, types.RESULTS);
-
-    ctrl.pageChangeHandler();
     ctrl.go();
-    ctrl.selected();
-    ctrl.search();
     ctrl.setCurrentPageData();
     ctrl.resultsLoad();
   });
 
-  it('Query is empty', function() {
-    expect(ctrl.query).toBe('');
-  });
   it('Template exist', function() {
     expect(template).toBeDefined();
   });
   it('Controller exist', function() {
     expect(ctrl).toBeDefined();
+  });
+  it('serviceFormatted exist', function() {
+    expect(serviceFormatted).toBeDefined();
   });
   it('Include resultsActions in index actions file', function() {
     expect(actions).toBeDefined();
@@ -74,17 +62,8 @@ describe('Results List', function() {
   it("resultsLoad was called", function() {
     expect(ctrl.resultsLoad).toHaveBeenCalled();
   });
-  it("pageChangeHandler was called", function() {
-    expect(ctrl.pageChangeHandler).toHaveBeenCalled();
-  });
   it("route go was called", function() {
     expect(ctrl.go).toHaveBeenCalled();
-  });
-  it("selected was called", function() {
-    expect(ctrl.selected).toHaveBeenCalled();
-  });
-  it("search was called", function() {
-    expect(ctrl.search).toHaveBeenCalled();
   });
   it("setCurrentPageData was called", function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();

@@ -13,7 +13,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-let templateOrdersDetail= require('./orders-detail.html');
+let templateOrdersDetail = require('./orders-detail.html');
 
 class OrdersDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, ordersActions, usSpinnerService, serviceRequests) {
@@ -38,7 +38,7 @@ class OrdersDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     this.ordersLoad = ordersActions.get;
-    this.ordersLoad($stateParams.patientId, $stateParams.orderId, $stateParams.source);
+    this.ordersLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
   }
 }
 

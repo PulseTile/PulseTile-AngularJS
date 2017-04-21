@@ -14,22 +14,22 @@
   ~  limitations under the License.
   -->
 
-<div mc-full-panel class="panel panel-primary">
+<div mc-full-panel table-settings order="name" filtering class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
-      <button class="btn btn-success btn-inverse btn-filter" ng-click="$ctrl.toggleFilter()"><i class="fa fa-filter"></i></button>
+      <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
     </div>
     <div class="control-group right" >
       <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')" ng-if="$ctrl.isShowExpandBtn"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
       <!--<button class="btn btn-success btn-inverse btn-dropdown-toggle btn-table"><i class="fa fa-table"></i></button>-->
     </div>
     <h3 class="panel-title">Procedures</h3>
-    <div class="panel-filter" ng-if="$ctrl.isFilter" ng-class="{active : $ctrl.isFilter}">
+    <div class="panel-filter" ng-show="isFilterOpen">
       <div class="inner-addon addon-left">
         <div class="addon">
           <i class="fa fa-filter"></i>
         </div>
-        <input type="text" class="form-control" placeholder="Filter..." ng-model="$ctrl.query[$ctrl.queryBy]" />
+        <input type="text" id="filter" class="form-control" placeholder="Filter..." ng-model="queryFilter" />
       </div>
     </div>
   </div>
@@ -43,19 +43,19 @@
       </colgroup>
       <thead>
         <tr>
-          <th ng-click="$ctrl.sort('procedureName')" ng-class="$ctrl.sortClass('procedureName')">Procedure Name</th>
-          <th ng-click="$ctrl.sort('procedureDate')" ng-class="$ctrl.sortClass('procedureDate')">Procedure Date</th>
-          <th ng-click="$ctrl.sort('time')" ng-class="$ctrl.sortClass('time')">Time</th>
-          <th ng-click="$ctrl.sort('source')" ng-class="$ctrl.sortClass('source')">Source</th>
+          <th ng-click="sort('name')" ng-class="sortClass('name')">Procedure Name</th>
+          <th ng-click="sort('date')" ng-class="sortClass('date')">Procedure Date</th>
+          <th ng-click="sort('time')" ng-class="sortClass('time')">Time</th>
+          <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr dir-paginate="procedure in $ctrl.procedures | filter: $ctrl.query | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage" ng-click="$ctrl.go(procedure.sourceId,procedure.source)" ng-class="{info: $ctrl.selected(procedure.sourceId)}">
-          <td data-th="Name" ng-class="$ctrl.sortClass('procedureName');">{{procedure.name}}</td>
-          <td data-th="Date" class="dateTime" ng-class="$ctrl.sortClass('procedureDate');">{{procedure.date}}</td>
-          <td data-th="Time" ng-class="$ctrl.sortClass('time');">{{procedure.time}}</td>
-          <td data-th="Source" ng-class="$ctrl.sortClass('source');">{{procedure.source}}</td>
+        <tr dir-paginate="procedure in $ctrl.procedures | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(procedure.sourceId,procedure.source)" ng-class="{info: selectedRow(procedure.sourceId)}">
+          <td data-th="Name" ng-class="sortClass('name');"><span>{{procedure.name}}</span></td>
+          <td data-th="Date" class="dateTime" ng-class="sortClass('date');"><span>{{procedure.date}}</span></td>
+          <td data-th="Time" ng-class="sortClass('time');"><span>{{procedure.time}}</span></td>
+          <td data-th="Source" ng-class="sortClass('source');"><span>{{procedure.source}}</span></td>
         </tr>
 
         <tr ng-if="!$ctrl.procedures.length">
@@ -69,7 +69,7 @@
     <div class="panel-control">
       <div class="wrap-control-group">
         <div class="control-group with-indent left">
-          <dir-pagination-controls max-size="5" on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
+          <dir-pagination-controls max-size="6" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
         </div>
         <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1 && $ctrl.isShowCreateBtn">
           <button class="btn btn-success btn-inverse btn-create" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> <span>Create</span></button>
@@ -78,51 +78,3 @@
     </div>
   </div>
 </div>
-
-<!--
-
-<h3><strong>Procedures</strong></h3>
-
-<div class="inner-addon left-addon filterInput">
-  <i class="fa fa-filter"></i>
-  <input type="text" class="form-control" placeholder="Filter..." ng-model="query" />
-</div>
-
-
-<table class="table table-bordered table-striped table-hover rwd-table">
-  <thead>
-    <tr>
-      <th>Procedure Name</th>
-      <th>Procedure Date</th>
-      <th>Time</th>
-      <th>Source</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr dir-paginate="procedure in $ctrl.procedures | filter: $ctrl.search  | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(procedure.sourceId,procedure.source)" ng-class="{info: $ctrl.selected(procedure.sourceId)}">
-      <td data-th="Name">{{procedure.name}}</td>
-      <td data-th="Date" class="dateTime">{{procedure.date}}</td>
-      <td data-th="Time">{{procedure.time}}</td>
-      <td data-th="Source">{{procedure.source}}</td>
-    </tr>
-    <tr ng-if="!$ctrl.procedures.length">
-      <td colspan="4"><span class="label label-default">No procedures</span></td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="row">
-  <div class="col-md-12">
-    <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="patientSummary-spinner" spinner-start-active="true"></span>
-  </div>
-</div>
-
-<div class="row" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
-  <div class="col-md-6 hidden-xs"><div class="text-right"><dir-pagination-controls on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>
-  <div class="col-md-6 hidden-xs"><div class="text-right create-button"><button class="btn btn-info" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> Create</button></div></div>
-</div>
-<div class="row" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
-  <div class="col-xs-6 hidden-sm hidden-md hidden-lg"><div class="text-right"><dir-pagination-controls on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>
-  <div class="col-xs-6 hidden-sm hidden-md hidden-lg"><div class="text-right create-button"><button class="btn btn-info" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> Create</button></div></div>
-</div>
--->

@@ -19,10 +19,27 @@ let templateAllergiesCreate = require('./allergies-create.html');
 class AllergiesCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, allergiesActions, serviceRequests) {
     $scope.allergy = {};
-    $scope.allergy.dateCreated = new Date();
-    // $scope.allergy.dateCreated = new Date().toISOString().slice(0, 10);
+
+    $scope.allergy.isImport = false;
+    
+    if ($stateParams.importData) {
+      $scope.allergy = $stateParams.importData.data;
+    }
+
+    if (typeof $scope.allergy.dateCreated == "undefined") {
+      $scope.allergy.dateCreated = new Date();
+    }
+
     $scope.allergy.causeCode = '1239085';
     $scope.allergy.terminologyCode = '12393890';  
+    
+    this.backToDocs = function () {
+      $state.go('documents-detail', {
+        patientId: $stateParams.patientId,
+        detailsIndex: $stateParams.importData.documentIndex,
+        page: 1
+      });
+    };
 
     this.setCurrentPageData = function (data) {
       if (data.allergies.dataCreate !== null) {
@@ -40,6 +57,7 @@ class AllergiesCreateController {
       }
       if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;
+        $scope.allergy.author = $scope.currentUser.email;
       }
     };
 
@@ -50,31 +68,29 @@ class AllergiesCreateController {
         searchString: $stateParams.searchString,
         queryType: $stateParams.queryType
       });
-    }
+    };
+
     this.cancel = function () {
       this.goList();
     };
+    
     $scope.create = function (allergyForm, allergies) {
       $scope.formSubmitted = true;
 
-      let toAdd = {
-        sourceId: '',
-        cause: allergies.cause,
-        causeCode: allergies.causeCode,
-        causeTerminology: allergies.causeTerminology,
-        reaction: allergies.reaction,
-        source: allergies.source
-      };
-
       if (allergyForm.$valid) {
-        debugger
+        let toAdd = {
+          sourceId: '',
+          cause: allergies.cause,
+          causeCode: allergies.causeCode,
+          causeTerminology: allergies.causeTerminology,
+          reaction: allergies.reaction,
+          isImport: allergies.isImport,
+          source: allergies.source
+        };
+        
         $scope.allergiesCreate(this.currentPatient.id, toAdd);
       }
     }.bind(this);
-
-    $scope.UnlockedSources = [
-      'handi.ehrscape.com'
-    ];
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)

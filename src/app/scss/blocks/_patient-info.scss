@@ -9,7 +9,7 @@
   font-size: 18px;
   font-weight: 700;
   line-height: 34px;
-  color: #fff;
+  color: $text-on-base-color;
   .patient-info-caption-btn {
     float: right;
     height: 34px;
@@ -37,7 +37,7 @@
   }
   
 }
-@include respond-to(sm) {
+@include respond-from(sm) {
   .wrap-patient-info {
     overflow: hidden;
   }
@@ -52,11 +52,7 @@
     .patient-info-group-2 {
       display: block;
       float: right;
-      margin-top: 3px;
       margin-left: 5px;
-      //.patient-info-item:first-child {
-      //  margin-bottom: 21px;
-      //}
     }
     .column-1 {
       float: left;
@@ -83,7 +79,7 @@
     font-weight: 400;
   }
 }
-@include respond-to(sm) {
+@include respond-from(sm) {
   .patient-info-item {
     margin-bottom: 2px;
     .key {

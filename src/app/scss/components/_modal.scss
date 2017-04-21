@@ -10,30 +10,45 @@
 /* Confirmation Modal */
 
 .modal-header {
+  margin: -1px;
+  margin-bottom: 0;
   padding: 10px;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
-  padding-bottom: 0;
   border-bottom: 0;
-  background-color: #007a41;
+  background-color: $base-color;
+  color: $text-on-base-color;
 }
 
 .modal-title {
   padding: 0px 10px 10px;
   font-weight: bold;
-  color: #fff;
-  background-color: #007a41;
+  color: $text-on-base-color;
+  background-color: $base-color;
 }
-
+  
 .modal-footer {
   padding-top: 0;
   border-top: 0;
 }
 
 .modal-backdrop {
-  background-color: #ffffff;
+  background-color: #000;
+}
+
+.modal-content {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.modal-content-inner {
+  border: 1px solid #d7d7d7;
+  border-radius: 6px 6px 0 0;
 }
 
 .modal-body {
+  padding: 12px 17px 17px;
   background-color: #ffffff;
 }
+
+.modal-content .panel.panel-secondary { background: #E8E8E8; }

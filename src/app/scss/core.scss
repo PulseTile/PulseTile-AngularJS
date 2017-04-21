@@ -1,25 +1,48 @@
+@import 'config';
+
+@import 'abstracts/variables';
 @import 'abstracts/colors';
-@import 'abstracts/config';
+@import 'abstracts/settings';
 @import 'abstracts/functions';
 @import 'abstracts/mixins';
-@import 'abstracts/variables';
 
 @import 'base/fonts';
 @import 'base/typography';
 @import 'base/grid';
 
+
+// @import '../assets/foundation-icons/foundation-icons.css';
+@import '~angular-loading-bar/src/loading-bar.css';
+@import '~fullcalendar/dist/fullcalendar.min.css';
+@import '../../../bower_components/jquery-timepicker-jt/jquery.timepicker.css';
+@import '~angular-xeditable/dist/css/xeditable.min.css';
+@import '~malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css';
+@import '~angularjs-slider/dist/rzslider.min.css';
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js');
+@import url('//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css');
+@import url('https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
+
 // @import 'components/';
 @import 'components/btn';
+@import 'components/label';
 @import 'components/table';
 @import 'components/pagination';
 @import 'components/form';
 @import 'components/highlighter';
 @import 'components/dropdown';
 @import 'components/modal';
+@import 'components/switch';
 @import 'components/fieldset';
+@import 'components/datepicker';
+@import 'components/tag';
+@import 'components/scrollbar';
+@import 'components/selectable';
+@import 'components/fullcalendar';
+@import 'components/slider-range';
 
 @import 'base';
-@import 'main';
+// @import 'main';
 
 @import 'blocks/main/header/index';
 @import 'blocks/main/sidebar';
@@ -36,14 +59,8 @@
 @import 'blocks/schedule';
 @import 'blocks/vitals';
 @import 'blocks/orders';
+@import 'blocks/charts';
+@import 'blocks/dicom';
+@import 'blocks/timelines';
+@import 'blocks/patients-list';
 // @import 'blocks/sb-admin-2';
-
-
-
-
-
-
-// @import '../assets/foundation-icons/foundation-icons.css';
-@import '~angular-loading-bar/src/loading-bar.css';
-@import '~fullcalendar/dist/fullcalendar.min.css';
-@import '../../../bower_components/jquery-timepicker-jt/jquery.timepicker.css';

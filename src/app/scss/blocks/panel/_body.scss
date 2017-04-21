@@ -11,15 +11,19 @@
   padding: 0;
   border-radius: 0;
   background: #fff;
-  .panel-body-inner {
-    padding: 11px 10px;
-    & + .panel-body-inner {
-      border-top: 1px solid #D8D8D8;
-    }
-    .panel-body-section + .panel-body-section {
-      margin-top: 4px;
-      padding-top: 24px;
-      border-top: 1px solid #D8D8D8;
-    }
+}
+.panel-body-inner {
+  padding: 14px 10px;
+  & + .panel-body-inner {
+    border-top: 1px solid #D8D8D8;
+  }
+  .panel-body-section + .panel-body-section {
+    margin-top: 4px;
+    padding-top: 24px;
+    border-top: 1px solid #D8D8D8;
+  }
+  .panel-subaccordion {
+    margin: 0 -10px;
+    .panel-body-inner {padding-left: 25px;}
   }
 }

@@ -1,13 +1,22 @@
+.pagination-short {
+  .pagination-block li {
+    display: none;
+    &.short-show {
+      display: block;
+    }
+  }
+}
 .pagination-block {
   margin: 0;
   border: 0;
+  padding-right: 1px;
   li {
     float: left;
     position: relative;
     margin-right: -1px;
     z-index: 1;
     &.active  { z-index: 2; }
-    a {
+    a, a:focus {
       display: block;
       min-width: 28px;
       height: 34px;
@@ -26,54 +35,41 @@
       line-height: 20px;
     }
     &.active a {
-      color: #fff;
-      border-color: $secondary-color;
-      background-color: $secondary-color;
+      color: $text-on-base-color;
+      border-color: $base-color;
+      background-color: $base-color;
       text-decoration: none;
     }
     &.disabled a {
-      color: #313131;
+      color: #303030;
       text-decoration: none;
       background-color: #F4F3F3;
       border-color: #ddd;
       cursor: not-allowed;
     }
   }
-  // li.increment {
-  //   a {
-  //     background-color: #0e672f;
-  //     color: #fff;
-  //     &:hover {
-  //       background-color: #128642;
-  //       color: #fff;
-  //     }
-  //   }
-  //   &.disabled a {
-  //     background-color: #9a9a9a;
-  //     color: #fff;
-  //   }
-  //   &.previous a {margin-right: 10px;}
-  //   &.next a { margin-left: 10px;}
-  // }
 }
-@include respond-to(xs) {
-  .pagination-block {
-    li {
-      &:not(.disabled):hover { z-index: 2; }
-      & a:hover,
-      &.active a:hover {
-        color: #fff;
-        border-color: $secondary-color;
-        background-color: $secondary-color;
-        text-decoration: none;
-      }
-      &.disabled a:hover {
-        color: #313131;
-        text-decoration: none;
-        background-color: #F4F3F3;
-        border-color: #ddd;
-        cursor: not-allowed;
-      }
+.is-not-touch-device .pagination-block {
+  li {
+    &:not(.disabled):hover { z-index: 2; }
+    & a:hover,
+    &.active a:hover {
+      color: $text-on-base-color;
+      border-color: $base-color;
+      background-color: $base-color;
+      text-decoration: none;
+    }
+    &.disabled a:hover {
+      color: $text-color;
+      text-decoration: none;
+      background-color: #F4F3F3;
+      border-color: #ddd;
+      cursor: not-allowed;
     }
   }
+}
+.pagination-heading {
+  height: 34px;
+  line-height: 34px;
+  @include text-truncate;
 }

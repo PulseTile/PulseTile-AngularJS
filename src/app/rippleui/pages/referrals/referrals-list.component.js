@@ -16,47 +16,25 @@
 let templateReferralsList = require('./referrals-list.html');
 
 class ReferralsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, referralsActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, referralsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
-
-    this.currentPage = 1;
-    this.query = '';
-		this.isFilter = false;
 
 		this.isShowCreateBtn = $state.router.globals.$current.name !== 'referrals-create';
 		this.isShowExpandBtn = $state.router.globals.$current.name !== 'referrals';
 
-    if ($stateParams.filter) {
-      this.query = $stateParams.filter;
-    }
-
-    this.pageChangeHandler = function (newPage) {
-      this.currentPage = newPage;
-    };
-
-    if ($stateParams.page) {
-      this.currentPage = $stateParams.page;
-    }
-
     this.go = function (id) {
       $state.go('referrals-detail', {
         patientId: $stateParams.patientId,
-        referralId: id,
-        filter: $scope.query,
-        page: this.currentPage,
-        reportType: $stateParams.reportType,
-        searchString: $stateParams.searchString,
-        queryType: $stateParams.queryType
+        detailsIndex: id,
+        page: $scope.currentPage || 1
       });
     };
-
-    this.selected = function (referralId) {
-      return referralId === $stateParams.referralId;
-    };
-
-    this.toggleFilter = function () {
-        this.isFilter = !this.isFilter;
+    
+    this.create = function () {
+      $state.go('referrals-create', {
+        patientId: $stateParams.patientId
+      });
     };
 
     this.setCurrentPageData = function (data) {
@@ -68,55 +46,13 @@ class ReferralsListController {
       if (data.referrals.data) {
         this.referrals = data.referrals.data;
 
-        for (var i = 0; i < this.referrals.length; i++) {
-          this.referrals[i].dateOfReferral = moment(this.referrals[i].dateOfReferral).format('DD-MMM-YYYY');
-        }
+        serviceFormatted.formattingTablesDate(this.referrals, ['dateOfReferral'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['dateOfReferral', 'referralFrom', 'referralTo', 'source'];
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
       }
     };
-
-		this.create = function () {
-			$state.go('referrals-create', {
-				patientId: $stateParams.patientId,
-				filter: $scope.query,
-				page: this.currentPage,
-				reportType: $stateParams.reportType,
-				searchString: $stateParams.searchString,
-				queryType: $stateParams.queryType
-			});
-		};
-
-		$scope.openDatepicker = function ($event, name) {
-			$event.preventDefault();
-			$event.stopPropagation();
-
-			$scope[name] = true;
-		};
-
-		this.sort = function (field) {
-			var reverse = this.reverse;
-			if (this.order === field) {
-				this.reverse = !reverse;
-			} else {
-				this.order = field;
-				this.reverse = false;
-			}
-		};
-
-		this.sortClass = function (field) {
-			if (this.order === field) {
-				return this.reverse ? 'sorted desc' : 'sorted asc';
-			}
-		};
-
-		this.order = serviceRequests.currentSort.order || 'dateOfReferral';
-		this.reverse = serviceRequests.currentSort.reverse || false;
-		if (serviceRequests.filter) {
-			this.query[this.queryBy] = serviceRequests.filter;
-			this.isFilter = true;
-		}
 		
 		let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
@@ -134,5 +70,5 @@ const ReferralsListComponent = {
   controller: ReferralsListController
 };
 
-ReferralsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'serviceRequests', 'usSpinnerService'];
+ReferralsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default ReferralsListComponent;

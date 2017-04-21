@@ -17,32 +17,8 @@ let templateEolcareplansList = require('./eolcareplans-list.html');
 
 class EolcareplansListController {
   constructor($scope, $state, $stateParams, $ngRedux, eolcareplansActions, serviceRequests, usSpinnerService) {
-    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-details'});
+    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
-    var vm = this;
-
-    this.currentPage = 1;
-
-    this.pageChangeHandler = function (newPage) {
-      this.currentPage = newPage;
-    };
-
-    if ($stateParams.page) {
-      this.currentPage = $stateParams.page;
-    }
-
-    if ($stateParams.filter) {
-      vm.query = $stateParams.filter;
-    }
-
-    this.search = function (row) {
-      return (
-        angular.lowercase(row.name).indexOf(angular.lowercase(vm.query) || '') !== -1 ||
-        angular.lowercase(row.type).indexOf(angular.lowercase(vm.query) || '') !== -1 ||
-        angular.lowercase(row.date).indexOf(angular.lowercase(vm.query) || '') !== -1 ||
-        angular.lowercase(row.source).indexOf(angular.lowercase(vm.query) || '') !== -1
-      );
-    };
 
     this.go = function (id) {
       $state.go('eolcareplans-detail', {
@@ -55,14 +31,6 @@ class EolcareplansListController {
         queryType: $stateParams.queryType
       });
     };
-
-    this.selected = function (eolcareplansIndex) {
-      return eolcareplansIndex === $stateParams.eolcareplansIndex;
-    };
-
-    // this.create = function () {
-    //   EolcareplansModal.openModal(this.currentPatient, {title: 'Create End of Life Care Document'}, {}, this.currentUser);
-    // };
 
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {

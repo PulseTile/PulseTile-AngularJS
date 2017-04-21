@@ -4,14 +4,17 @@
 .breadcrumbs {
 	padding: 9px 2px;
 	font-size: 0;
-	color: #313131;
+	color: $text-color;
 	.breadcrumb-link,
 	.breadcrumb-separate {
 		display: inline-block;
 		vertical-align: middle;
 		margin-right: 8px;
-		font-size: 14px;
+		font-size: 12px;
 		line-height: 20px;
+		@include respond-from(sm) {
+			font-size: 14px;
+		}
 	}
 	span:not(.breadcrumb-separate) {
 		font-weight: 700;

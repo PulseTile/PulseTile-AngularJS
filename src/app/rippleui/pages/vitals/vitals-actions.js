@@ -24,7 +24,7 @@ export function all(patientId) {
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/vitals'
+      url: '/api/patients/' + patientId + '/vitalsigns'
     },
 
     meta: {
@@ -40,7 +40,7 @@ export function get(patientId, compositionId) {
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/vitals/' + compositionId
+      url: '/api/patients/' + patientId + '/vitalsigns/' + compositionId
     },
 
     meta: {
@@ -56,7 +56,7 @@ export function create(patientId, composition) {
 
     config: {
       method: 'post',
-      url: '/api/patients/' + patientId + '/vitals',
+      url: '/api/patients/' + patientId + '/vitalsigns',
       data: composition
     },
 
@@ -73,7 +73,7 @@ export function update(patientId, composition) {
 
     config: {
       method: 'put',
-      url: '/api/patients/' + patientId + '/vitals',
+      url: '/api/patients/' + patientId + '/vitalsigns',
       data: composition
     },
 

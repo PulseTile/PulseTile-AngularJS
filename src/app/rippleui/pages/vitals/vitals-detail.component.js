@@ -16,62 +16,67 @@
 let templateVitalsDetail = require('./vitals-detail.html');
 
 class VitalsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, usSpinnerService, $sce) {
+  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, usSpinnerService, serviceVitalsSigns) {
     $scope.isEdit = false;
+    $scope.vitalStatuses = {};
+    $scope.popoverLabels = serviceVitalsSigns.getLabels();
+    $scope.pattern = serviceVitalsSigns.pattern;
+    $scope.vital = {};
 
-    /*
-      TODO: Only for demo
-    */
-    this.vital = $stateParams.source;
+    $scope.getHighlighterClass = function (vitalName) {
+      return serviceVitalsSigns.getHighlighterClass($scope.vitalStatuses[vitalName]);
+    };
 
-    $scope.getHighlighterClass = function (status) {
-      if (!status) return 'highlighter-not-vital';
+    $scope.changeVital = function (vital, vitalName) {
+      $scope.vitalStatuses[vitalName] = serviceVitalsSigns.getStatusOnValue(vital[vitalName], vitalName);
+      $scope.changeNewScore(vital);
+    };
+    $scope.changeNewScore = function (vital) {
+      vital.newsScore = serviceVitalsSigns.countNewsScore($scope.vitalStatuses);
+      $scope.vitalStatuses.newsScore = serviceVitalsSigns.getStatusOnValue(vital.newsScore, 'newsScore');
+    };
 
-      return 'highlighter-' + status;
-    }
     this.edit = function () {
       $scope.isEdit = true;
 
-      $scope.vitalEdit = Object.assign({}, this.vital);
-      $scope.vitalEdit.date = new Date();
-      $scope.vitalEdit.dateCreated = new Date();
+      $scope.vitalEdit = Object.assign({}, $scope.vital);
+      $scope.vitalEdit.dateCreate = Date.parse(new Date());
+
+      $scope.changeNewScore($scope.vitalEdit);
     };
+
     this.cancelEdit = function () {
       $scope.isEdit = false;
+      $scope.vitalStatuses = serviceVitalsSigns.setVitalStatuses($scope.vital);
+
     };
+
     $scope.confirmEdit = function (vitalForm, vital) {
       $scope.formSubmitted = true;
+  
       if (vitalForm.$valid) {
         $scope.isEdit = false;
-        this.vital = Object.assign(this.vital, $scope.vitalEdit);
-        $scope.vitalsUpdate($scope.patient.id, $scope.vital);
+        
+        $scope.vital = Object.assign($scope.vital, $scope.vitalEdit);
+        $scope.changeNewScore($scope.vital);
+
+        $scope.vitalsUpdate(this.currentPatient.id, $scope.vital);
       }
     }.bind(this);
-    $scope.openDatepicker = function ($event, name) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope[name] = true;
-    };
 
     this.setCurrentPageData = function (data) {
-      // if (data.vitals.dataGet) {
-      //   this.vital = data.vitals.dataGet;
-      //   usSpinnerService.stop('vitalDetail-spinner');
-      // }
-      // this.vital = {
-      //   name: 'Influenza',
-      //   date: new Date(),
-      //   seriesNumber: 1,
-      //   source: 'EtherCIS',
-      //   comment: 'Hospital staff',
-      //   author: 'ripple_osi',
-      //   dateCreated: new Date()
-      // };
-      usSpinnerService.stop('vitalDetail-spinner');
-      // if (data.patientsGet.data) {
-      //   this.currentPatient = data.patientsGet.data;
-      // }
+      if (data.vitals.dataGet) {
+        $scope.vital = serviceVitalsSigns.convertVitalCharacteristics(data.vitals.dataGet);
+
+        $scope.vitalStatuses = serviceVitalsSigns.setVitalStatuses($scope.vital);
+
+        usSpinnerService.stop('vitalDetail-spinner');
+      }
+  
+      if (data.patientsGet.data) {
+        this.currentPatient = data.patientsGet.data;
+      }
+
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
       }
@@ -83,9 +88,9 @@ class VitalsDetailController {
 
     $scope.$on('$destroy', unsubscribe);
 
-    // this.vitalsLoad = vitalsActions.get;
-    // this.vitalsLoad($stateParams.patientId, $stateParams.vitalIndex);
-    // $scope.vitalsUpdate = vitalsActions.update;
+    $scope.vitalsLoad = vitalsActions.get;
+    $scope.vitalsLoad($stateParams.patientId, $stateParams.detailsIndex);
+    $scope.vitalsUpdate = vitalsActions.update;
   }
 }
 
@@ -94,5 +99,5 @@ const VitalsDetailComponent = {
   controller: VitalsDetailController
 };
 
-VitalsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vitalsActions', 'serviceRequests', 'usSpinnerService', '$sce'];
+VitalsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vitalsActions', 'serviceRequests', 'usSpinnerService', 'serviceVitalsSigns'];
 export default VitalsDetailComponent;

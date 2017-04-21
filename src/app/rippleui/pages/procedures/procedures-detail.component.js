@@ -39,13 +39,6 @@ class ProceduresDetailController {
 				proceduresActions.update(this.currentPatient.id, this.procedure);
 			}
 		}.bind(this);
-    
-    $scope.openDatepicker = function ($event, name) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope[name] = true;
-    };
 
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
@@ -67,7 +60,7 @@ class ProceduresDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     this.proceduresLoad = proceduresActions.get;
-    this.proceduresLoad($stateParams.patientId, $stateParams.procedureId, $stateParams.source);
+    this.proceduresLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
   }
 }
 

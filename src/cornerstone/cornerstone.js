@@ -546,7 +546,7 @@ if(typeof cornerstone === 'undefined'){
 
         imageCache[imageId] = cachedImage;
         cachedImages.push(cachedImage);
-
+        
         imagePromise.then(function(image) {
             cachedImage.loaded = true;
 
@@ -582,6 +582,7 @@ if(typeof cornerstone === 'undefined'){
             throw "getImagePromise: imageId must not be undefined";
         }
         var cachedImage = imageCache[imageId];
+        
         if (cachedImage === undefined) {
             return undefined;
         }
@@ -690,6 +691,7 @@ if(typeof cornerstone === 'undefined'){
         var scheme = imageId.substring(0, colonIndex);
         var loader = imageLoaders[scheme];
         var imagePromise;
+        
         if(loader === undefined || loader === null) {
             if(unknownImageLoader !== undefined) {
                 imagePromise = unknownImageLoader(imageId);
@@ -699,6 +701,13 @@ if(typeof cornerstone === 'undefined'){
                 return undefined;
             }
         }
+        // if(converter !== undefined) {
+        //     convertPromise = converter(imageId);
+        //     convertPromise.then(function(image) {
+        //         console.log('converter.then 555 ', image);
+        //         imagePromise = loader(imageId);
+        //     });
+        // }
         imagePromise = loader(imageId);
 
         // broadcast an image loaded event once the image is loaded
@@ -750,7 +759,6 @@ if(typeof cornerstone === 'undefined'){
         }
 
         cornerstone.imageCache.putImagePromise(imageId, imagePromise);
-
         return imagePromise;
     }
 

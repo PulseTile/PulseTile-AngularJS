@@ -25,26 +25,22 @@ class PatientsSummaryController {
       problems: {
         show: true,
         title: 'Problems',
-        toState: 'diagnoses',
-        goNameIndex: 'diagnosisIndex'
+        toState: 'diagnoses'
       },
       contacts: {
         show: true,
         title: 'Contacts',
-        toState: 'contacts',
-        goNameIndex: 'contactIndex'
+        toState: 'contacts'
       },
       allergies: {
         show: true,
         title: 'Allergies',
-        toState: 'allergies',
-        goNameIndex: 'allergyIndex'
+        toState: 'allergies'
       },
       medications: {
         show: true,
         title: 'Medications',
-        toState: 'medications',
-        goNameIndex: 'medicationIndex'
+        toState: 'medications'
       }
       // transfers: {
       //   title: 'Transfer',
@@ -53,6 +49,12 @@ class PatientsSummaryController {
     };
     this.countPatientArr = 4;
 
+    if (serviceRequests.showListDashboards) {
+      for (var dashboard in serviceRequests.showListDashboards) {
+        $scope.listsDashboards[dashboard].show = serviceRequests.showListDashboards[dashboard];
+      }
+    }
+
     this.goToSection = function (state) {
       $state.go(state, {
         patientId: $stateParams.patientId,
@@ -60,10 +62,19 @@ class PatientsSummaryController {
       });
     };
 
-    $scope.go = function (state, sourceId, nameIndex) {
+    $scope.changeDashboards = function () {
+      var showListDashboards = {};
+
+      for (var dashboard in $scope.listsDashboards) {
+        showListDashboards[dashboard] = $scope.listsDashboards[dashboard].show;
+      }
+      serviceRequests.showListDashboards = showListDashboards;
+    }
+
+    $scope.go = function (state, sourceId) {
       var headerRequest = {};
       headerRequest.patientId = $stateParams.patientId;
-      headerRequest[nameIndex] = sourceId;
+      headerRequest.detailsIndex = sourceId;
 
       $state.go(state +'-detail', headerRequest);
     };
@@ -75,13 +86,11 @@ class PatientsSummaryController {
       }
       return arr;
     }
-    this.getPatientData = function (data) {
+    this.setCurrentPageData = function (data) {
       /* istanbul ignore if  */
       if (!data || !data.nhsNumber) {
         return false;
       }
-      /* istanbul ignore next */
-      usSpinnerService.stop('patientSummary-spinner');
 
       this.patient = data;
 
@@ -105,10 +114,13 @@ class PatientsSummaryController {
       
       this.transferofCareComposition.transfers = descendingTransferofCareComposition;
       this.transferofCareComposition = this.transferofCareComposition.transfers.slice(0, 5);
+
+      /* istanbul ignore next */
+      usSpinnerService.stop('patientSummary-spinner');
     };
 
     let unsubscribe = $ngRedux.connect(state => ({
-      patient: this.getPatientData(state.patientsGet.data)
+      patient: this.setCurrentPageData(state.patientsGet.data)
     }))(this);
 
     $scope.$on('$destroy', unsubscribe);

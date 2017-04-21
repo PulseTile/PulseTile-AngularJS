@@ -13,21 +13,38 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-let templateDocumentsDetail= require('./documents-detail.html');
-
 class DocumentsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, documentsActions) {
+  constructor($scope, $state, $stateParams, $ngRedux, documentsActions, usSpinnerService, ConfirmationDocsModal) {
 
-    $scope.documentType = $stateParams.documentType;
+    // $scope.documentType = $stateParams.documentType;
 
     this.setCurrentPageData = function (data) {
-      if (data.documentsFindDischarge.data) {
-        this.clinicalDocument = data.documentsFindDischarge.data;
+      // if (data.documents.data) {
+      //   this.clinicalDocument = data.findDischarge.data;
+      // }
+      if (data.documents.data) {
+        this.clinicalDocument = data.findReferral.data;
       }
-      if (data.documentsFindReferral.data) {
-        this.clinicalDocument = data.documentsFindReferral.data;
-      }
+      usSpinnerService.stop('documentssDetail-spinner');
     };
+
+    $scope.importToCreate = function (typeCreate, data) {
+      ConfirmationDocsModal.openModal(function () {
+        data.isImport = true;
+        data.importURL = location.href;
+        
+        if (typeCreate && data) {
+          $state.go(typeCreate + '-create', {
+            patientId: $stateParams.patientId,
+            importData: {
+              data: data,
+              documentIndex: $stateParams.detailsIndex
+            }
+
+          });
+        } 
+      });
+    }
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
@@ -35,21 +52,18 @@ class DocumentsDetailController {
 
     $scope.$on('$destroy', unsubscribe);
 
-    if ($scope.documentType == 'Healthlink Discharge summary') {
-      this.documentsFindDischarge = documentsActions.findDischarge;
-      this.documentsFindDischarge($stateParams.patientId, $stateParams.documentIndex, $stateParams.source);
-    }
-    else if ($scope.documentType == 'Healthlink Referral') {
       this.documentsFindReferral = documentsActions.findReferral;
-      this.documentsFindReferral($stateParams.patientId, $stateParams.documentIndex, $stateParams.source);
-    }
+      this.documentsFindReferral($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
   }
 }
 
 const DocumentsDetailComponent = {
-  template: templateDocumentsDetail,
+  template: function($element, $attrs, templateService) {
+    let templateDocumentsType = require('./' + templateService.getTemplate());
+    return templateDocumentsType;
+  },
   controller: DocumentsDetailController
 };
 
-DocumentsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'documentsActions'];
+DocumentsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'documentsActions', 'usSpinnerService', 'ConfirmationDocsModal'];
 export default DocumentsDetailComponent;

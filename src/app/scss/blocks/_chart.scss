@@ -1,15 +1,4 @@
-.chart-wrapper {
-  overflow: hidden;
-  padding-bottom: 0;
-  height: 350px;
-  align-content: center;
-}
-#chart-department {
-  padding-bottom: 30px;
-}
-
-.chart {
-  svg { height: 350px; }
+.chart-block {
   .chart-inner {
     border: 1px solid #bdbdbd;
     border-radius: 4px;
@@ -23,10 +12,10 @@
   overflow: hidden;
   margin-bottom: 5px;
   padding-top: 5px;
-  color: #313131;
+  color: $text-color;
 }
 .chart-title {
-  color: #313131;
+  color: $text-color;
   font-size: 24px;
   line-height: 26px;
   margin-bottom: 7px;
@@ -34,42 +23,6 @@
 .chart-subtitle {
   font-size: 16px;
   line-height: 20px;
-  color: #767676;
+  color: lighten($text-color, 30%);
   margin-bottom: 3px;
-}
-
-
-// @media (max-width: 768px) {
-//   .chart-inner {
-//     display: inline-block;
-//     padding-left: 0;
-//     padding-top: 10px;
-//     padding-right: 10px;
-//     padding-bottom: 0px;
-//   }
-//   #age-chart {
-//     height: 300px;
-//     padding-left: 20px;
-//   }
-//   #department-chart {
-//     height: 300px;
-//     padding-left: 20px;
-//   }
-//   .chart-title-group {
-//     padding-top: 20px;
-//   }
-//   .chart-title-group-mobile {
-//     padding-top: 10px;
-//     padding-left: 10px;
-//     font-size: 18px;
-//     font-family: "MyriadPro";
-//   }
-// }
-
-div#age-chart div.morris-hover.morris-default-style {
-  display: none !important;
-}
-
-.hoverChart div#age-chart div.morris-hover.morris-default-style {
-  display: block !important;
 }

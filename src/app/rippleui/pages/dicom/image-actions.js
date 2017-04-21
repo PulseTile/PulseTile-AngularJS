@@ -68,7 +68,7 @@ export function getInstanceId(patientId, seriesId, source) {
   return {
     types: [types.INSTANCE_ID_GET, types.INSTANCE_ID_GET_SUCCESS, types.INSTANCE_ID_GET_ERROR],
 
-    shouldCallAPI: (state) => !state.instanceId.response,
+    shouldCallAPI: (state) => !state.instanceIdGet.response,
 
     config: {
       method: 'get',
@@ -97,7 +97,7 @@ export function getInstance(patientId, instanceId, source) {
   };
 }
 
-export default function allergiesActions($ngRedux) {
+export default function imageActions($ngRedux) {
   let actionCreator = {
     allStudies, getAllSeriesInStudy, getSeriesDetails, getInstanceId, getInstance
   };
@@ -105,4 +105,4 @@ export default function allergiesActions($ngRedux) {
   return bindActionCreators(actionCreator, $ngRedux.dispatch);
 }
 
-allergiesActions.$inject = ['$ngRedux'];
+imageActions.$inject = ['$ngRedux'];

@@ -22,13 +22,6 @@ class GenericMdtCreateController {
         // $scope.contact.dateSubmitted = new Date().toISOString().slice(0, 10);
         $scope.genericMdt.relationshipCode = 'at0039';
         $scope.genericMdt.relationshipTerminology = 'local';
-
-        $scope.openDatepicker = function ($event, name) {
-            $event.preventDefault();
-            $event.stopPropagation();
-
-            $scope[name] = true;
-        };
         
         this.setCurrentPageData = function (data) {
             if (data.genericmdt.dataCreate !== null) {
@@ -39,6 +32,7 @@ class GenericMdtCreateController {
             }
             if (serviceRequests.currentUserData) {
                 $scope.currentUser = serviceRequests.currentUserData;
+                $scope.genericMdt.author = $scope.currentUser.email;
             }
         };
 

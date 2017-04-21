@@ -42,26 +42,17 @@ describe('Procedures List', function() {
 
     spyOn(fakeCall, 'callProcedures');
 
-    spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
-    spyOn(ctrl, 'selected');
-    spyOn(ctrl, 'search');
     spyOn(ctrl, 'create');
     spyOn(ctrl, 'setCurrentPageData');
 
     fakeCall.callProcedures({}, types.PROCEDURES);
 
-    ctrl.pageChangeHandler();
     ctrl.go();
-    ctrl.selected();
-    ctrl.search();
     ctrl.create();
     ctrl.setCurrentPageData();
   });
 
-  it('currentPage is 1', function() {
-    expect(ctrl.currentPage).toBe(1);
-  });
   it('Template exist', function() {
     expect(template).toBeDefined();
   });
@@ -74,20 +65,11 @@ describe('Procedures List', function() {
   it("procedures reducer was called", function() {
     expect(fakeCall.callProcedures).toHaveBeenCalled();
   });
-  it("pageChangeHandler was called", function() {
-    expect(ctrl.pageChangeHandler).toHaveBeenCalled();
-  });
   it("route go was called", function() {
     expect(ctrl.go).toHaveBeenCalled();
   });
-  it("selected was called", function() {
-    expect(ctrl.selected).toHaveBeenCalled();
-  });
   it("create was called", function() {
     expect(ctrl.create).toHaveBeenCalled();
-  });
-  it("search was called", function() {
-    expect(ctrl.search).toHaveBeenCalled();
   });
   it("setCurrentPageData was called", function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();

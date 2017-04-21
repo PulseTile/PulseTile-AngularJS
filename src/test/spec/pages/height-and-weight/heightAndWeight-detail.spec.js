@@ -38,9 +38,6 @@ describe('HeightAndWeight Details', function() {
   it('formDisabled', function() {
     expect(scope.formDisabled).toBe(true);
   });
-  it('UnlockedSources', function() {
-    expect(scope.UnlockedSources[0]).toBe('handi.ehrscape.com');
-  });
   it('Template exist', function() {
     expect(template).toBeDefined();
   });

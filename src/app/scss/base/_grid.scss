@@ -1,13 +1,13 @@
 .container,
 .container-fluid {
   padding: 0 $indent-wrapper-small;
-  @include respond-to(xs) {
+  @include respond-from(xs) {
     padding: 0 $indent-wrapper-big;
   }
 }
 .row {
   margin: 0 (-1)*$gutter-small;
-  @include respond-to(xs) {
+  @include respond-from(xs) {
     margin: 0 (-1)*$gutter-big;
   }
 }
@@ -27,7 +27,7 @@
   padding-left: $gutter-small;
   padding-right: $gutter-small;
 }
-@include respond-to(xs) {
+@include respond-from(xs) {
   @for $i from 1 to 13 {
     .col-xs-#{$i},
     .col-sm-#{$i},
@@ -43,7 +43,7 @@
     padding-right: $gutter-big;
   }
 }
-@include respond-to(md) {
+@include respond-from(md) {
   .col-panel-main  {width: 52.2%;}
   .col-panel-details {width: 47.8%;}
   .full-panel-main {
@@ -54,4 +54,28 @@
     .col-panel-main {display: none;}
     .col-panel-details  {width: 100%;}
   }
+
+  .expand-label {display: none;}
+
+  .full-panel {
+    .row-expand {
+      @include clearfix;
+    }
+    .col-expand-left {
+      float: left; 
+      width: 50%;
+      padding-right: 4.42%;
+    }
+    .col-expand-right {
+      float: right; 
+      width: 50%;
+      padding-left: 4.42%;
+    }
+    .expand-label {display: block;}
+
+    .hidden-expand {display: none !important;}
+    .visible-expand {display: block !important;}
+  }
+  .hidden-not-expand {display: none !important;}
+  .visible-not-expand {display: block !important;}
 }

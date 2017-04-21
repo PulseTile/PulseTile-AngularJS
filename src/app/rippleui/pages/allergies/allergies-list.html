@@ -14,22 +14,22 @@
   ~  limitations under the License.
   -->
 
-<div mc-full-panel class="panel panel-primary">
+<div mc-full-panel table-settings order="cause" filtering class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
-      <button class="btn btn-success btn-inverse btn-filter" ng-click="$ctrl.toggleFilter()"><i class="fa fa-filter"></i></button>
+      <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
     </div>
     <div class="control-group right" >
       <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')" ng-if="$ctrl.isShowExpandBtn"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
       <!--<button class="btn btn-success btn-inverse btn-dropdown-toggle btn-table"><i class="fa fa-table"></i></button>-->
     </div>
     <h3 class="panel-title" >Allergies</h3>
-    <div class="panel-filter" ng-if="$ctrl.isFilter" ng-class="{active : $ctrl.isFilter}">
+    <div class="panel-filter" ng-show="isFilterOpen">
       <div class="inner-addon addon-left">
         <div class="addon">
           <i class="fa fa-filter"></i>
         </div>
-        <input type="text" class="form-control" placeholder="Filter..." ng-model="$ctrl.query" />
+        <input type="text" id="filter" class="form-control" placeholder="Filter..." ng-model="queryFilter" />
       </div>
     </div>
   </div>
@@ -42,17 +42,17 @@
       </colgroup>
       <thead>
         <tr>
-            <th ng-click="$ctrl.sort('cause')" ng-class="$ctrl.sortClass('cause')">Cause</th>
-            <th ng-click="$ctrl.sort('reaction')" ng-class="$ctrl.sortClass('reaction')">Reaction</th>
-            <th ng-click="$ctrl.sort('source')" ng-class="$ctrl.sortClass('source')">Source</th>
+            <th ng-click="sort('cause')" ng-class="sortClass('cause')">Cause</th>
+            <th ng-click="sort('reaction')" ng-class="sortClass('reaction')">Reaction</th>
+            <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr dir-paginate="allergy in $ctrl.allergies | filter:$ctrl.query | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage" ng-click="$ctrl.go(allergy.sourceId, allergy.source)" ng-class="{info: $ctrl.selected(allergy.sourceId)}">
-          <td data-th="Cause" ng-class="$ctrl.sortClass('cause');">{{ allergy.cause }}</td>
-          <td data-th="Reaction" ng-class="$ctrl.sortClass('reaction')">{{ allergy.reaction }}</td>
-          <td data-th="Source" ng-class="$ctrl.sortClass('source')">{{ allergy.source }}</td>
+        <tr dir-paginate="allergy in $ctrl.allergies | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(allergy.sourceId, allergy.source)" ng-class="{info: selectedRow(allergy.sourceId)}">
+          <td data-th="Cause" ng-class="sortClass('cause');"><span>{{ allergy.cause }}</span></td>
+          <td data-th="Reaction" ng-class="sortClass('reaction')"><span>{{ allergy.reaction }}</span></td>
+          <td data-th="Source" ng-class="sortClass('source')"><span>{{ allergy.source }}</span></td>
         </tr>
 
         <tr ng-if="!$ctrl.allergies || !$ctrl.allergies.length">
@@ -66,7 +66,7 @@
     <div class="panel-control">
       <div class="wrap-control-group">
         <div class="control-group with-indent left">
-          <dir-pagination-controls max-size="5" on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
+          <dir-pagination-controls max-size="6" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
         </div>
         <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1 && $ctrl.isShowCreateBtn">
           <button class="btn btn-success btn-inverse btn-create" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> <span>Create</span></button>

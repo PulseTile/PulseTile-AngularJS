@@ -16,14 +16,10 @@
 let templateAllergiesList = require('./allergies-list.html');
 
 class AllergiesListController {
-  constructor($scope, $state, $stateParams, $ngRedux, allergiesActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, allergiesActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.currentPage = 1;
-
-    this.query = '';
-    this.isFilter = false;
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'allergies-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'allergies';
     
@@ -35,70 +31,26 @@ class AllergiesListController {
       }
       if (data.allergies.data) {
         this.allergies = data.allergies.data;
+
+        serviceFormatted.filteringKeys = ['cause', 'reaction', 'source'];
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
       }
     };
 
-    this.toggleFilter = function () {
-      this.isFilter = !this.isFilter;
-    };
-
-    this.sort = function (field) {
-      var reverse = this.reverse;
-      if (this.order === field) {
-        this.reverse = !reverse;
-      } else {
-        this.order = field;
-        this.reverse = false;
-      }
-    };
-
-    this.sortClass = function (field) {
-      if (this.order === field) {
-        return this.reverse ? 'sorted desc' : 'sorted asc';
-      }
-    };
-
-    this.order = serviceRequests.currentSort.order || 'cause';
-    this.reverse = serviceRequests.currentSort.reverse || false;
-    if (serviceRequests.filter) {
-      this.query = serviceRequests.filter;
-      this.isFilter = true;
-    }
-
-    this.pageChangeHandler = function (newPage) {
-      this.currentPage = newPage;
-    };
-
-    if ($stateParams.page) {
-      this.currentPage = $stateParams.page;
-    }
-
     this.go = function (id, allergySource) {
-      serviceRequests.currentSort.order = this.order;
-      serviceRequests.currentSort.reverse = this.reverse;
-      serviceRequests.filter = this.query || '';
-
       $state.go('allergies-detail', {
         patientId: $stateParams.patientId,
-        allergyIndex: id,
-        filter: this.query,
-        page: this.currentPage,
+        detailsIndex: id,
+        page: $scope.currentPage || 1,
         source: allergySource
       });
     };
 
-    this.selected = function ($index) {
-      return $index === $stateParams.allergyIndex;
-    };
-
     this.create = function () {
       $state.go('allergies-create', {
-        patientId: $stateParams.patientId,
-        filter: this.query,
-        page: this.currentPage
+        patientId: $stateParams.patientId
       });
     };
 
@@ -118,5 +70,5 @@ const AllergiesListComponent = {
   controller: AllergiesListController
 };
 
-AllergiesListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions', 'serviceRequests', 'usSpinnerService'];
+AllergiesListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default AllergiesListComponent;

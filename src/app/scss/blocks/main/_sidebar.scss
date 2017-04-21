@@ -8,7 +8,7 @@
   width: 165px;
   border-right: 1px solid #B7B7B7;
   background: #F7F7F7;
-  @include respond-to(sm) {
+  @include respond-from(sm) {
     position: static;
     float: left;
     overflow-y: initial;
@@ -26,8 +26,8 @@
   height: 34px;
   margin: 0 10px 0 0;
   padding: 6px 8px;
-  color: #fff;
-  border: 1px solid #fff;
+  color: $text-on-base-color;
+  border: 1px solid $text-on-base-color;
   background: transparent;
   cursor: pointer;
   outline: none;
@@ -44,31 +44,34 @@
   }
 }
 .showSidebar .btn-toggle-sidebar,
-.showSidebar .btn-toggle-sidebar:focus {
-  color: $secondary-color;
-  background: #fff;
+.showSidebar .btn-toggle-sidebar:focus,
+.showSidebar .btn-toggle-sidebar:hover {
+  color: $base-color;
+  background: $text-on-base-color;
 }
-@include respond-to(xs) {
+@include respond-from(xs) {
   .btn-toggle-sidebar,
-  .btn-toggle-sidebar:focus, {
+  .btn-toggle-sidebar:focus,
+  .btn-toggle-sidebar:hover, {
     margin-right: 18px;
     padding: 6px 14px 6px 11px;
     i {margin-right: 9px;}
     span {display: inline;}
   }
 }
-@include respond-to(sm) {
+@include respond-from(sm) {
   .btn-toggle-sidebar,
-  .btn-toggle-sidebar:focus, {
+  .btn-toggle-sidebar:focus,
+  .btn-toggle-sidebar:hover, {
     position: absolute;
     top: 50%;
     left: 0;
     transform: translateY(-50%);
     margin-right: 0;
   }
-  .btn-toggle-sidebar:hover {
-    color: $secondary-color;
-    background: #fff;
+  .is-not-touch-device .btn-toggle-sidebar:hover {
+    color: $base-color;
+    background: $text-on-base-color;
   }
 }
 
@@ -77,17 +80,20 @@
   padding-top: 1px;
   ul li {
     border-bottom: 1px solid #E7E7E7;
-    a {
+    a, a:hover {
       padding: 10px 15px;
       font-size: 14px;
       font-weight: 500;
       line-height: 19px;
-      color: #0C662E;
-      &:hover,
-      &.active {
-        color: #fff;
-        background-color: $secondary-color;
-      }
+      color: $base-color;
+    }
+    a.active {
+      color: $text-on-base-color;
+      background-color: $base-color;
     }
   }
+}
+.is-not-touch-device .sidebar-nav ul li a:hover {
+  color: $text-on-base-color;
+  background-color: $base-color;
 }

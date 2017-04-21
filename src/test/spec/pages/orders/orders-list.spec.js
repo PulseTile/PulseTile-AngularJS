@@ -42,22 +42,15 @@ describe('Orders List', function() {
 
     spyOn(fakeCall, 'callOrders');
 
-    spyOn(ctrl, 'pageChangeHandler');
     spyOn(ctrl, 'go');
-    spyOn(ctrl, 'selected');
     spyOn(ctrl, 'setCurrentPageData');
 
     fakeCall.callOrders({}, types.ORDERS);
 
-    ctrl.pageChangeHandler();
     ctrl.go();
-    ctrl.selected();
     ctrl.setCurrentPageData();
   });
 
-  it('currentPage is 1', function() {
-    expect(ctrl.currentPage).toBe(1);
-  });
   it('Template exist', function() {
     expect(template).toBeDefined();
   });
@@ -70,14 +63,8 @@ describe('Orders List', function() {
   it("Orders reducer was called", function() {
     expect(fakeCall.callOrders).toHaveBeenCalled();
   });
-  it("pageChangeHandler was called", function() {
-    expect(ctrl.pageChangeHandler).toHaveBeenCalled();
-  });
   it("route go was called", function() {
     expect(ctrl.go).toHaveBeenCalled();
-  });
-  it("selected was called", function() {
-    expect(ctrl.selected).toHaveBeenCalled();
   });
   it("setCurrentPageData was called", function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();

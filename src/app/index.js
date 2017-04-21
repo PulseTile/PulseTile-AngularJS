@@ -17,112 +17,66 @@
 import uiRouter from 'angular-ui-router';
 import ngAnimate from 'angular-animate';
 import uiBootstrap from 'angular-ui-bootstrap';
-// import 'bootstrap';
 import ngRedux from 'ng-redux';
 import dirPagination from 'angular-utils-pagination';
 import createLogger from 'redux-logger';
 import 'angular-loading-bar';
 import 'fullcalendar';
 import 'angular-ui-calendar';
-import 'jquery';
-
-import 'morrisjs';
-import cornerstoneJS from '../cornerstone/cornerstone';
-import cornerstoneMathJS from '../cornerstone/cornerstoneMath';
-import cornerstoneToolsJS from '../cornerstone/cornerstoneTools';
+import 'angularjs-slider';
+import 'angular-sanitize';
 import 'chart.js';
-
+import 'bootstrap/dist/js/bootstrap';
+import 'bootstrap-editable';
+import 'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar'
 import 'angular-spinner';
 import 'jquery-timepicker-jt';
 import 'angular-jquery-timepicker';
+import 'angular-xeditable';
+import 'ng-scrollbars';
 
 //commons
 import reducer from './redux/reducer';
 import actions from './actions';
 import httpMiddleware from './helpers/httpMiddleware';
 import Patient from './helpers/patient';
+import deviceDetector from './helpers/deviceDetector';
+import './helpers/polyfills';
 
 //components 
 import ProfileComponent from './rippleui/pages/profile/profile.component';
 import HeaderComponent from './rippleui/header-bar/header.component.js';
 import PatientsChartsComponent from './rippleui/pages/patients-charts/patients-charts.component';
-import PatientsComponent from './rippleui/pages/patients-list/patients.component';
 import PatientsSummaryComponent from './rippleui/pages/patient-summary/patients-summary.component';
 import PatientsListFullComponent from './rippleui/pages/patients-list-full/patients-list-full.component';
 import PatientsSidebarComponent from './rippleui/pages/patients-detail/patients-sidebar.component';
 import PatientsBannerComponent from './rippleui/pages/patients-detail/patients-banner.component';
 import SearchComponent from './rippleui/search/search.component';
+import SearchAdvancedComponent from './rippleui/search/search-advanced.component';
 import ReportChartComponent from './rippleui/search/report-chart.component';
-
-import DiagnosesListComponent from './rippleui/pages/diagnoses/diagnoses-list.component';
-import DiagnosesCreateComponent from './rippleui/pages/diagnoses/diagnoses-create.component';
-import DiagnosesDetailComponent from './rippleui/pages/diagnoses/diagnoses-detail.component';
-
-import AllergiesListComponent from './rippleui/pages/allergies/allergies-list.component';
-import AllergiesCreateComponent from './rippleui/pages/allergies/allergies-create.component';
-import AllergiesDetailComponent from './rippleui/pages/allergies/allergies-detail.component';
-
-import MedicationsListComponent from './rippleui/pages/medications/medications-list.component';
-import MedicationsCreateComponent from './rippleui/pages/medications/medications-create.component';
-import MedicationsDetailComponent from './rippleui/pages/medications/medications-detail.component';
-
-import ContactsListComponent from './rippleui/pages/contacts/contacts-list.component';
-import ContactsCreateComponent from './rippleui/pages/contacts/contacts-create.component';
-import ContactsDetailComponent from './rippleui/pages/contacts/contacts-detail.component';
-
-import VaccinationsListComponent from './rippleui/pages/vaccinations/vaccinations-list.component';
-import VaccinationsCreateComponent from './rippleui/pages/vaccinations/vaccinations-create.component';
-import VaccinationsDetailComponent from './rippleui/pages/vaccinations/vaccinations-detail.component';
-
-import VitalsListComponent from './rippleui/pages/vitals/vitals-list.component';
-import VitalsCreateComponent from './rippleui/pages/vitals/vitals-create.component';
-import VitalsDetailComponent from './rippleui/pages/vitals/vitals-detail.component';
-
-import OrdersListComponent from './rippleui/pages/orders/orders-list.component';
-import OrdersDetailComponent from './rippleui/pages/orders/orders-detail.component';
-import OrdersCreateComponent from './rippleui/pages/orders/orders-create.component';
-
-import ReferralsListComponent from './rippleui/pages/referrals/referrals-list.component';
-import ReferralsDetailComponent from './rippleui/pages/referrals/referrals-detail.component';
-import ReferralsCreateComponent from './rippleui/pages/referrals/referrals-create.component';
-
-import ProceduresListComponent from './rippleui/pages/procedures/procedures-list.component';
-import ProceduresDetailComponent from './rippleui/pages/procedures/procedures-detail.component';
-import ProceduresCreateComponent from './rippleui/pages/procedures/procedures-create.component';
-
-import ResultsListComponent from './rippleui/pages/results/results-list.component';
-import ResultsDetailComponent from './rippleui/pages/results/results-detail.component';
-import DocumentsListComponent from './rippleui/pages/documents/documents-list.component';
-import DocumentsDetailComponent from './rippleui/pages/documents/documents-detail.component';
-import AppointmentsListComponent from './rippleui/pages/appointments/appointments-list.component';
-import AppointmentsDetailComponent from './rippleui/pages/appointments/appointments-detail.component';
-import ImageListComponent from './rippleui/pages/dicom/image-list.component';
-import ImageDetailComponent from './rippleui/pages/dicom/image-detail.component';
-import EolcareplansListComponent from './rippleui/pages/care-plans/eolcareplans-list.component';
-import EolcareplansDetailComponent from './rippleui/pages/care-plans/eolcareplans-detail.component';
-import MainComponent from './helpers/main.component';
+import MainComponent from './rippleui/main-component/main.component';
 import HomeSidebarComponent from './rippleui/pages/patients-lookup/home-sidebar.component';
-
-import PersonalnotesListComponent from './rippleui/pages/personal-notes/personalnotes-list.component';
-import PersonalnotesCreateComponent from './rippleui/pages/personal-notes/personalnotes-create.component';
-import PersonalnotesDetailComponent from './rippleui/pages/personal-notes/personalnotes-detail.component';
-
-import HeightAndWeightListComponent from './rippleui/pages/height-and-weight/heightAndWeight-list.component';
-import HeightAndWeightDetailComponent from './rippleui/pages/height-and-weight/heightAndWeight-detail.component';
-
-import GenericMdtListComponent from './rippleui/pages/generic-mdt/generic-mdt-list.component';
-import GenericMdtDetailComponent from './rippleui/pages/generic-mdt/generic-mdt-detail.component';
-import GenericMdtCreateComponent from './rippleui/pages/generic-mdt/generic-mdt-create.component';
-
-import TransferOfCareListComponent from './rippleui/pages/transfer-of-care/transfer-of-care-list.component';
-import TransferOfCareDetailComponent from './rippleui/pages/transfer-of-care/transfer-of-care-detail.component';
-
 import ServiceRequests from './services/serviceRequests.js';
+import ServiceStateManager from './services/serviceStateManager.js';
+import ServiceVitalsSigns from './rippleui/pages/vitals/serviceVitalsSigns.js';
+import ServiceActions from './rippleui/pages/dicom/serviceActions.js';
+import ServiceFormatted from './services/serviceFormatted.js';
+import TemplateService from './services/TemplateService.js';
+
+import ScheduleModal from './rippleui/pages/events/schedule-modal';
+import ConfirmationModal from './rippleui/confirmation/confirmation';
+import ConfirmationDocsModal from './rippleui/confirmation/confirmation-documents';
 
 import routeConfig from 'app/index.route';
 import 'app/scss/core.scss';
 
-const app = angular
+import 'app/directives/index.js';
+import 'app/filters/index.js';
+import 'app/rippleui/pages/patients-list/index.js';
+
+import plugins from './plugins';
+
+let app = angular
     .module('ripple-ui', [
         uiRouter,
         ngAnimate,
@@ -130,91 +84,54 @@ const app = angular
         ngRedux,
         actions,
         dirPagination,
+        'ripple-ui.patients',
+        'ripple-ui.directives',
+        'ripple-ui.filters',
         'angularSpinner',
         'ui.calendar',
         'ui.timepicker',
-        'angular-loading-bar'
+        'angular-loading-bar',
+        'xeditable',
+        'ngScrollbars',
+        'rzModule',
+        'ngSanitize'
     ])
-    .factory('cornerstoneJS', cornerstoneJS)
-    .factory('cornerstoneMathJS', cornerstoneMathJS)
-    .factory('cornerstoneToolsJS', cornerstoneToolsJS)
+    .factory('ScheduleModal', ScheduleModal)
+    .factory('ConfirmationModal', ConfirmationModal)
+    .factory('ConfirmationDocsModal', ConfirmationDocsModal)
+
+    
     .factory('httpMiddleware', httpMiddleware)
     .factory('Patient', Patient)
+    .factory('deviceDetector', deviceDetector)
+
+    .service('templateService', TemplateService)
+    .service('serviceFormatted', ServiceFormatted)
     .service('serviceRequests', ServiceRequests)
+    .service('serviceStateManager', ServiceStateManager)
+    .service('serviceVitalsSigns', ServiceVitalsSigns)
+    .service('serviceActions', ServiceActions);
+
+  plugins.forEach((plugin)=>{
+    Object.keys(plugin.components).forEach((name)=>{
+      app = app.component(name, plugin.components[name]);
+    })
+  });
+
+  app  
     .component('profileComponent', ProfileComponent)
-    .component('patientsComponent', PatientsComponent)
     .component('headerComponent', HeaderComponent)
     .component('patientsChartsComponent', PatientsChartsComponent)
     .component('patientsSummaryComponent', PatientsSummaryComponent)
     .component('patientsSidebarComponent', PatientsSidebarComponent)
-    .component('patientsBannerComponent', PatientsBannerComponent)
-
-    .component('diagnosesListComponent', DiagnosesListComponent)
-    .component('diagnosesCreateComponent', DiagnosesCreateComponent)
-    .component('diagnosesDetailComponent', DiagnosesDetailComponent)
-
-    .component('allergiesListComponent', AllergiesListComponent)
-    .component('allergiesCreateComponent', AllergiesCreateComponent)
-    .component('allergiesDetailComponent', AllergiesDetailComponent)
-
-    .component('medicationsListComponent', MedicationsListComponent)
-    .component('medicationsCreateComponent', MedicationsCreateComponent)
-    .component('medicationsDetailComponent', MedicationsDetailComponent)
-
-    .component('contactsListComponent', ContactsListComponent)
-    .component('contactsCreateComponent', ContactsCreateComponent)
-    .component('contactsDetailComponent', ContactsDetailComponent)
-    
-    .component('vaccinationsListComponent', VaccinationsListComponent)
-    .component('vaccinationsCreateComponent', VaccinationsCreateComponent)
-    .component('vaccinationsDetailComponent', VaccinationsDetailComponent)
-
-    .component('vitalsListComponent', VitalsListComponent)
-    .component('vitalsCreateComponent', VitalsCreateComponent)
-    .component('vitalsDetailComponent', VitalsDetailComponent)
-
-    .component('ordersListComponent', OrdersListComponent)
-    .component('ordersDetailComponent', OrdersDetailComponent)
-    .component('ordersCreateComponent', OrdersCreateComponent)
-
-    .component('referralsListComponent', ReferralsListComponent)
-    .component('referralsDetailComponent', ReferralsDetailComponent)
-    .component('referralsCreateComponent', ReferralsCreateComponent)
-
-
-    .component('proceduresListComponent', ProceduresListComponent)
-    .component('proceduresDetailComponent', ProceduresDetailComponent)
-    .component('proceduresCreateComponent', ProceduresCreateComponent)
-
-    .component('patientsListFullComponent', PatientsListFullComponent)
-    .component('resultsListComponent', ResultsListComponent)
-    .component('resultsDetailComponent', ResultsDetailComponent)
-    .component('documentsListComponent', DocumentsListComponent)
-    .component('documentsDetailComponent', DocumentsDetailComponent)
-    .component('appointmentsListComponent', AppointmentsListComponent)
-    .component('appointmentsDetailComponent', AppointmentsDetailComponent)
-    .component('imageListComponent', ImageListComponent)
-    .component('imageDetailComponent', ImageDetailComponent)
-    .component('eolcareplansListComponent', EolcareplansListComponent)
-    .component('eolcareplansDetailComponent', EolcareplansDetailComponent)
+    .component('patientsBannerComponent', PatientsBannerComponent)   
+    .component('patientsListFullComponent', PatientsListFullComponent)    
     .component('mainComponent', MainComponent)
     .component('homeSidebarComponent', HomeSidebarComponent)
     .component('searchComponent', SearchComponent)
+    .component('searchAdvancedComponent', SearchAdvancedComponent)
     .component('reportChartComponent', ReportChartComponent)
-
-    .component('personalnotesListComponent', PersonalnotesListComponent)
-    .component('personalnotesCreateComponent', PersonalnotesCreateComponent)
-    .component('personalnotesDetailComponent', PersonalnotesDetailComponent)
-
-    .component('heightAndWeightListComponent', HeightAndWeightListComponent)
-    .component('heightAndWeightDetailComponent', HeightAndWeightDetailComponent)
     
-    .component('genericMdtListComponent', GenericMdtListComponent)
-    .component('genericMdtDetailComponent', GenericMdtDetailComponent)
-    .component('genericMdtCreateComponent', GenericMdtCreateComponent)
-    
-    .component('transferOfCareListComponent', TransferOfCareListComponent)
-    .component('transferOfCareDetailComponent', TransferOfCareDetailComponent)
     .config(routeConfig)
     .config(function (paginationTemplateProvider) {
         paginationTemplateProvider.setString(require('./rippleui/pagination/dirPagination.tpl.html'));
@@ -234,227 +151,36 @@ const app = angular
     .config(['cfpLoadingBarProvider', cfpLoadingBarProvider => {
         cfpLoadingBarProvider.includeSpinner = false;
     }])
-    .directive('focusElement', function($timeout) {
-      return {
-        link: function(scope, element, attrs) {
-          scope.$watch(attrs.focusElement, function(value) {
-            $timeout(function() {
-              if(value === true) {
-                jQuery(element).focus();
-              }
-            });
-          });
-        }
-      }
-    })
-    .directive('mcAccordion', function() {
-        /* istanbul ignore next  */
-        return {
-                link: function(scope, element, attrs) {
-                scope.panelOpen = '';
-
-                scope.openPanel = function (namePanel) {
-                    if (scope.panelOpen === namePanel) {
-                        scope.panelOpen = '';
-                    } else {
-                        scope.panelOpen = namePanel;
-                    }
-                };
-                scope.getOpenPanelClass = function (namePanel, openClass) {
-                    openClass = openClass ? openClass : 'open';
-                    return scope.panelOpen === namePanel ? openClass : '';
-                };
-                scope.$watch(attrs.mcOpenPanel, function() {
-                    scope.panelOpen = attrs.mcOpenPanel;
-                });
-            }
-        }
-    })
-    .directive('mcFullPanel', function() {
-        /* istanbul ignore next  */
-        return {
-            controller: ['$scope', 'serviceRequests', function($scope, serviceRequests) {
-                $scope.showPanel = '';
-                $scope.panelOpen = '';
-                $scope.getShowPanel = function (panelName) {
-                    if ($scope.showPanel === '') return true;
-
-                    return $scope.showPanel === panelName ? true : false;
-                };
-                $scope.changeFullPanel = function (fullPanelName, panelName) {
-                    if (panelName) {
-                        $scope.showPanel = $scope.showPanel === panelName ? '' : panelName;
-                        $scope.panelOpen = panelName;
-                    }
-                    serviceRequests.publisher('changeFullPanel', {panelName: fullPanelName});
-                };
-            }]
-        };
-    })
-    .directive('mcDropwrap', function() {
-        /* istanbul ignore next  */
-        return {
-            link: function(scope, element, attrs) {
-                scope.closeDropdown = function (ev) {
-                    var currentDropdown = angular.element(ev.target.closest('.dropdown'));
-                    var isOpenDropdown = currentDropdown.hasClass('open');
-                    
-                    angular.element('.dropdown').removeClass('open');
-
-                    if (isOpenDropdown) {
-                        currentDropdown.addClass('open');
-                    }
-                };
-            }
-        }
-    })
-    .directive('mcDropdown', function() {
-        /* istanbul ignore next  */
-        return {
-            link: function(scope, element, attrs) {
-                scope.toggleDropdown = function (ev) {
-                    ev.currentTarget.parentElement.classList.toggle('open');
-                };
-            }
-        }
-    })
-    .directive('diCom', function () {
-        /* istanbul ignore next  */
-        return {
-            // restrict: 'E',
-            template: require('./rippleui/pages/dicom/image-modal.html'),
-            controller: ['$scope', '$ngRedux', 'serviceRequests', function($scope, $ngRedux, serviceRequests) {
-               
-                var cornerstone = cornerstoneJS();
-                var element = $('#dicomImage').get(0);
-
-                $scope.modal = {title: 'View Image'};
-
-                $scope.zoomIn = function (ev) {
-                    var viewport = cornerstone.getViewport(element);
-                    viewport.scale += 0.25;
-                    cornerstone.setViewport(element, viewport);
-                };
-                $scope.zoomOut = function (ev) {
-                    var viewport = cornerstone.getViewport(element);
-                    viewport.scale -= 0.25;
-                    cornerstone.setViewport(element, viewport);
-                };
-                $scope.reset = function (ev) {
-                    cornerstone.reset(element);
-                };
-                $scope.close = function (ev) {
-                    serviceRequests.publisher('closeModal', {className: 'closeModal'});
-                };
-
-                this.setCurrentPageData = function (data) {
-                    if (data.patientsGet.data) {
-                        $scope.patient = data.patientsGet.data;
-                    }
-                };
-                
-                let unsubscribe = $ngRedux.connect(state => ({
-                    getStoreData: this.setCurrentPageData(state)
-                }))(this);
-
-                $scope.$on('$destroy', unsubscribe);
-            }]
-        }
-    })
-    .directive('cornerstoneImage', function () {
-        /* istanbul ignore next  */
-        return{
-            restrict: 'E',
-            template: '<div id="dicomImage" oncontextmenu="return false" unselectable="on" onselectstart="return false;" onmousedown="return false;" style="width: 100%; height: 512px; margin: auto"></div>',
-            scope: {
-                imageId: '@imageid'
+    .config(function (ScrollBarsProvider) {
+        // the following settings are defined for all scrollbars unless the
+        // scrollbar has local scope configuration
+        ScrollBarsProvider.defaults = {
+            scrollButtons: {
+                scrollAmount: 'auto', // scroll amount when button pressed
+                enable: false // enable scrolling buttons by default
             },
-            link: function(scope, element, attributes) {
-                var cornerstone = cornerstoneJS();
-                var cornerstoneTools = cornerstoneToolsJS();
-                var imgLoader = require('../cornerstone/exampleImageIdLoader.js');
-                
-                var imageId = scope.imageId;
-                var cornerstoneContainer = element[0];
-                var cornerstoneElement = cornerstoneContainer.querySelector("#dicomImage");
-                cornerstone.enable(cornerstoneElement);
-                cornerstone.loadImage(imageId).then(function (image) {
-                    cornerstone.displayImage(cornerstoneElement, image);
-                    cornerstoneTools.mouseInput.enable(cornerstoneElement);
-                    cornerstoneTools.mouseWheelInput.enable(cornerstoneElement);
-
-                    // Enable all tools we want to use with this element
-                    cornerstoneTools.wwwc.activate(cornerstoneElement, 2); // ww/wc is the default tool for left mouse button
-                    cornerstoneTools.pan.activate(cornerstoneElement, 1); // pan is the default tool for middle mouse button
-                    cornerstoneTools.zoom.activate(cornerstoneElement, 4); // zoom is the default tool for right mouse button
-                    cornerstoneTools.zoomWheel.activate(cornerstoneElement); // zoom is the default tool for middle mouse wheel
-                });
-            }
+            scrollInertia: 0, // adjust however you want
+            axis: 'y',
+            theme: 'dark-custom',
+            autoHideScrollbar: false,
+            mouseWheel:{ preventDefault: false }
         };
-
-    })
-    .directive('mcPopover', function() {
-        /* istanbul ignore next  */
-        return {
-            controller: ['$scope', '$element', '$window', function($scope, $element, $window) {
-                var popoverWidth = 266;
-                var page = angular.element(document);
-                
-                $scope.togglePopover = function (ev) {
-                    var placement;
-                    var popoverWrap = angular.element(ev.currentTarget.parentElement);
-                    var popover = popoverWrap.find('.popover');
-                    var pageWidth = page.width();
-                    var offsetPopoverWrap = popoverWrap.offset();
-                    var freePlaceRight = pageWidth - (offsetPopoverWrap.left + popoverWrap.width());
-                    var freePlaceLeft = offsetPopoverWrap.left;
-
-                    if (freePlaceRight > popoverWidth) {
-                        placement = 'right';
-                    } else if (freePlaceLeft > popoverWidth) {
-                        placement = 'left';
-                    } else {
-                        placement = 'top';
-                    }
-                    popover.removeClass('right left top')
-                    popover.addClass(placement);
-                    popover.toggleClass('in');
-                };
-                $window.addEventListener('resize', function () {
-                    angular.element('.popover').removeClass('in');
-                });
-                document.addEventListener('click', function (ev) {
-                    var currentPopoverWrap = angular.element(ev.target.closest('.popover-wrap'));
-                    var isOpenPopover = false;
-                    var currentPopover;
-
-                    if (currentPopoverWrap) {
-                        currentPopover = currentPopoverWrap.find('.popover');
-                        isOpenPopover = currentPopover.hasClass('in');
-                    }
-                    
-                    angular.element('.popover').removeClass('in');
-
-                    if (isOpenPopover) {
-                        currentPopover.addClass('in');
-                    }
-                });  
-            }]
-        }
-    })
-    .filter('formatNHSNumber', function() {
-        return function(number) {
-            if (number === undefined) {
-                return;
-            }
-
-            return number.slice(0,3) + " " + number.slice(3,6) + " " + number.slice(6);
-        };
-    })
-    .filter('formatMoment', function() {
-        return function(date) {
-            var m = moment(date);
-            return m.format('h:mma');
-        };
+    });
+    app.run(function(editableOptions, editableThemes) {
+      editableOptions.theme = 'bs3'; // bootstrap3 theme
+      editableThemes.bs3.inputClass = 'input-sm';
+      editableThemes.bs3.buttonsClass = 'btn-sm';
+    });
+    app.controller('mainCtrl', function ($scope, $timeout) {
+        // $timeout(function() {
+        //     $scope.updateScrollbar('scrollTo', 100, {
+        //     scrollInertia: 0
+        //   });
+        // });
+        // $scope.myScrollTo = function () {
+        //   $scope.updateScrollbar('scrollTo', 1000, {
+        //     scrollInertia: 0
+        //   });
+        // };
     });
 console.log('app start');

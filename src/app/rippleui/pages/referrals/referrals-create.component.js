@@ -39,14 +39,15 @@ class ReferralsCreateController {
 
 		this.setCurrentPageData = function (data) {
 		  if (data.patientsGet.data) {
-			this.currentPatient = data.patientsGet.data;
+        this.currentPatient = data.patientsGet.data;
 		  }
 		  if (data.referrals.dataGet) {
-			this.referral = data.referrals.dataGet;
-			usSpinnerService.stop('referralsDetail-spinner');
+        this.referral = data.referrals.dataGet;
+        usSpinnerService.stop('referralsDetail-spinner');
 		  }
 		  if (serviceRequests.currentUserData) {
-			$scope.currentUser = serviceRequests.currentUserData;
+        $scope.currentUser = serviceRequests.currentUserData;
+        $scope.referralsEdit.author = $scope.currentUser.email;
 		  }
 		};
 
@@ -54,38 +55,31 @@ class ReferralsCreateController {
       		getStoreData: this.setCurrentPageData(state)
 		}))(this);
 
-		this.edit = function () {
+		// this.edit = function () {
 
-			$scope.isEdit = true;
+		// 	$scope.isEdit = true;
 
-			$scope.currentUser = this.currentUser;
-			$scope.referralsEdit = Object.assign({}, this.referral);
-			$scope.patient = this.currentPatient;
+		// 	$scope.currentUser = this.currentUser;
+		// 	$scope.referralsEdit = Object.assign({}, this.referral);
+		// 	$scope.patient = this.currentPatient;
 
-			$scope.referralsEdit.dateCreated = new Date(this.clinicalNote.dateCreated).toISOString().slice(0, 10);
-		};
+		// 	$scope.referralsEdit.dateCreated = new Date(this.clinicalNote.dateCreated).toISOString().slice(0, 10);
+		// };
 
-		this.cancelEdit = function () {
-			$scope.isEdit = false;
-		};
+		// this.cancelEdit = function () {
+		// 	$scope.isEdit = false;
+		// };
 
-		$scope.openDatepicker = function ($event, name) {
-			$event.preventDefault();
-			$event.stopPropagation();
-
-			$scope[name] = true;
-		};
-
-		$scope.create = function (referralForm, referral) {
+		$scope.create = function (referralsForm, referral) {
 			$scope.formSubmitted = true;
 
-			if (referralForm.$valid) {
+			if (referralsForm.$valid) {
 
-				$scope.contactsCreate($scope.currentPatient.id, referral);
+				$scope.referralsCreate($scope.currentPatient.id, referral);
 			}
 		};
 
-		$scope.contactsCreate = referralsActions.create;
+		$scope.referralsCreate = referralsActions.create;
 
 
     $scope.$on('$destroy', unsubscribe);

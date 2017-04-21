@@ -16,42 +16,176 @@
 let templatePatients = require('./patients-list.html');
 
 class PatientsController {
-  constructor($scope, $state, $stateParams, $location, $ngRedux, patientsActions, serviceRequests, Patient) {
+  constructor($scope, $state, $stateParams, $location, $ngRedux, patientsActions, serviceRequests, Patient, serviceFormatted, $timeout, $uibModal, ConfirmationModal) {
     let vm = this;
 
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-list'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Lists', isShowTitle: true});
     
-    vm.query = '';
-    vm.isFilter = false;
-    
-    vm.toggleFilter = function () {
-      vm.isFilter = !vm.isFilter;
-    };
-
-    vm.sort = function (field) {
-      var reverse = vm.reverse;
-      
-      if (vm.order === field) {
-        vm.reverse = !reverse;
-      } else {
-        vm.order = field;
-        vm.reverse = false;
+    $scope.patientsTable = serviceRequests.patientsTable || {
+      info: {
+        title: 'PATIENT INFO',
+        settings: {
+          name: {
+            select: true,
+            title: 'Name',
+            disabled: true,
+            width: 150
+          },
+          address: {
+            select: true,
+            title: 'Address',
+            width: 300
+          },
+          dateOfBirth: {
+            select: true,
+            title: 'Born',
+            disabled: true,
+            width: 105
+          },
+          gender: {
+            select: true,
+            title: 'Gender',
+            disabled: true,
+            width: 90
+          }, 
+          nhsNumber: {
+            select: true,
+            title: 'NHS No.',
+            width: 115  
+          }
+        }
+      },
+      date: {
+        title: 'DATE / TIME',
+        settings: {
+          orders: {
+            select: false,
+            title: 'Orders',
+            width: 110
+          },
+          results: {
+            select: false,
+            title: 'Results',
+            width: 110
+          },
+          vitals: {
+            select: false,
+            title: 'Vitals',
+            width: 110
+          },
+          diagnosis: {
+            select: false,
+            title: 'Diagnosis',
+            width: 130
+          }
+        }
+      },
+      count: {
+        title: 'COUNT',
+        settings: {
+          orders: {
+            select: false,
+            title: 'Orders',
+            width: 100
+          },
+          results: {
+            select: false,
+            title: 'Results',
+            width: 100
+          },
+          vitals: {
+            select: false,
+            title: 'Vitals',
+            width: 100
+          },
+          diagnosis: {
+            select: false,
+            title: 'Diagnosis',
+            width: 120
+          }
+        }
       }
     };
+    $scope.patientsTableSettings = {};
 
-    vm.sortClass = function (field) {
-      if (vm.order === field) {
-        return vm.reverse ? 'sorted desc' : 'sorted asc';
-      }
+    if (serviceRequests.patientsTable) {
+      serviceRequests.patientsTable = $scope.patientsTable;
+    }
+
+    $scope.changeTableSettings = function () {
+      serviceRequests.patientsTable = $scope.patientsTable;
+      $scope.resizeFixedTables();
     };
 
+    $scope.hoveredTableRow = -1;
+    $scope.hoverTableRow = function (index) {
+      $scope.hoveredTableRow = index;
+    };
+    $scope.unHoverTableRow = function () {
+      $scope.hoveredTableRow = -1;
+    };
+    $scope.getHoveredTableRow = function (index) {
+      return $scope.hoveredTableRow == index;
+    };
 
-    vm.go = function (patient) {
-      $state.go('patients-summary', {
-        patientId: patient.id,
-        patientsList: vm.patients
+    $scope.getpatientsTableSettings = function () {
+      var newSettings = {};
+      for (var key in $scope.patientsTable.info.settings) {
+        newSettings[key] = $scope.patientsTable.info.settings[key];
+        newSettings[key].type = 'info';
+      }
+      for (var key in $scope.patientsTable.date.settings) {
+        newSettings[key + 'Date'] = $scope.patientsTable.date.settings[key];
+        newSettings[key + 'Date'].type = 'date';
+        newSettings[key + 'Count'] = $scope.patientsTable.count.settings[key];
+        newSettings[key + 'Count'].type = 'count';
+      }
+      $scope.patientsTableSettings = newSettings;
+    };
+    $scope.getpatientsTableSettings();
+
+    $scope.resizeFixedTables = function () {
+      $timeout(function () {
+        var $wrapTables = $('.wrap-patients-table');
+
+        var $tableNames = $wrapTables.find('.table-patients-name');
+        var $tableNamesRows = $tableNames.find('tr');
+
+        var $tableControls = $wrapTables.find('.table-patients-controls');
+        var $tableControlsRows = $tableControls.find('tr');
+
+        var $tableFullRows = $('.table-patients-full tr');
+        var $tds = $tableFullRows.eq(1).find('td');
+
+        $tableNames.width($tds.eq(0).outerWidth() + 1);
+        $tableControls.width($tds.eq($tds.length - 1).outerWidth());
+        $tableFullRows.each(function (i, row, rows) {
+          var height = $(row).height();
+          $tableNamesRows.eq(i).height(height);
+          $tableControlsRows.eq(i).height(height);
+        });
       });
+    };
+
+    $scope.selectAllSettings = function (key) {
+      var settings = $scope.patientsTable[key].settings;
+      var isSelectAll = true;
+
+      for (var item in settings) {
+        if (settings[item].select === false) {
+          isSelectAll = false;
+          break;
+        }
+      }
+
+      for (var item in settings) {
+        if (!settings[item].disabled) {
+          settings[item].select = !isSelectAll;
+        }
+      }
+
+      $scope.resizeFixedTables();
     };
 
     vm.patientFilter = function (patient) {
@@ -75,11 +209,20 @@ class PatientsController {
       });
 
       vm.patients = curPatients.slice();
+      serviceFormatted.formattingTablesDate(vm.patients, ['dateOfBirth'], serviceFormatted.formatCollection.DDMMMYYYY);
+      serviceFormatted.filteringKeys = ['name', 'address', 'dateOfBirth', 'gender', 'nhsNumber'];
+      
+      $scope.resizeFixedTables();
+    };
+    $(window).on('resize', function () {
+      $scope.resizeFixedTables();
+    });
+
+    vm.openModal = function (patient, state) {
+      ConfirmationModal.openModal(patient, state);
     };
 
     if ($stateParams.patientsList.length === 0 && !$stateParams.displayEmptyTable) {
-      vm.order = $stateParams.order || 'name';
-      vm.reverse = $stateParams.reverse === 'true';
       vm.filters = {
         department: $stateParams.department,
         ageRange: $stateParams.ageRange
@@ -104,7 +247,6 @@ class PatientsController {
       };
       vm.setPatients($stateParams.patientsList);
       $location.url($location.path());
-
     }
   }
 }
@@ -114,5 +256,5 @@ const PatientsComponent = {
   controller: PatientsController
 };
 
-PatientsController.$inject = ['$scope', '$state', '$stateParams', '$location', '$ngRedux', 'patientsActions', 'serviceRequests', 'Patient'];
+PatientsController.$inject = ['$scope', '$state', '$stateParams', '$location', '$ngRedux', 'patientsActions', 'serviceRequests', 'Patient', 'serviceFormatted', '$timeout', '$uibModal', 'ConfirmationModal'];
 export default PatientsComponent;

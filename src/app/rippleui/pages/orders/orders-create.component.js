@@ -18,7 +18,6 @@ let templateOrdersCreate= require('./orders-create.html');
 class OrdersCreateController {
     constructor($scope, $state, $stateParams, $ngRedux, ordersActions, serviceRequests) {
         $scope.order = {};
-        $scope.order.author = 'Dr John Smith';
         $scope.order.dateSubmitted = new Date();
         $scope.firstPage = true;
         $scope.chosenOrders = [];
@@ -41,6 +40,7 @@ class OrdersCreateController {
             }
             if (serviceRequests.currentUserData) {
                 $scope.currentUser = serviceRequests.currentUserData;
+                $scope.order.author = $scope.currentUser.email;
             }
         };
 
@@ -128,26 +128,26 @@ class OrdersCreateController {
             }
         };
         $scope.cancelAll = function () {
-            var d;
-            for (d = $scope.chosenOrders.length - 1; d >= 0; d--) {
+            for (var d = $scope.chosenOrders.length - 1; d >= 0; d--) {
                 $scope.suggestions.push($scope.chosenOrders[d]);
                 $scope.chosenOrders.splice(d, 1);
             }
         };
 
         $scope.pageTwo = function () {
-            $scope.firstPage = false;
+            if ($scope.chosenOrders.length) {
+                $scope.firstPage = false;
+            }
         };
 
         $scope.pageOne = function () {
             $scope.firstPage = true;
         };
 
-        $scope.openDatepicker = function ($event, name) {
-            $event.preventDefault();
-            $event.stopPropagation();
-
-            $scope[name] = true;
+        this.cancel = function () {
+            $state.go('orders', {
+                patientId: $stateParams.patientId,
+            });
         };
 
         let unsubscribe = $ngRedux.connect(state => ({

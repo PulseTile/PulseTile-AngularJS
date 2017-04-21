@@ -14,10 +14,11 @@
   "dependencies": {
     "moment": "^2.15.1",
     "spin.js": "^2.3.2",
-    "morrisjs": "~0.5.1",
     "angular-animate": "^1.5.8",
     "jquery-timepicker": "*",
     "jquery-timepicker-jt": "*",
-    "angular-jquery-timepicker": "^0.11.0"
+    "angular-jquery-timepicker": "^0.11.0",
+    "ng-scrollbars": "^0.0.11",
+    "angularjs-slider": "^6.1.0"
   }
 }

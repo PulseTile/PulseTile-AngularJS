@@ -16,79 +16,28 @@
 let templateMedicationsList = require('./medications-list.html');
 
 class MedicationsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.currentPage = 1;
-
-    this.query = '';
-    this.isFilter = false;
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'medications-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'medications';
 
-
-    this.pageChangeHandler = function (newPage) {
-      this.currentPage = newPage;
-    };
-
-    this.toggleFilter = function () {
-      this.isFilter = !this.isFilter;
-    };
-
-    if ($stateParams.page) {
-      this.currentPage = $stateParams.page;
-    }
-
-
-    this.sort = function (field) {
-      var reverse = this.reverse;
-      if (this.order === field) {
-        this.reverse = !reverse;
-      } else {
-        this.order = field;
-        this.reverse = false;
-      }
-    };
-
-    this.sortClass = function (field) {
-      if (this.order === field) {
-        return this.reverse ? 'sorted desc' : 'sorted asc';
-      }
-    };
-
-    this.order = serviceRequests.currentSort.order || 'name';
-    this.reverse = serviceRequests.currentSort.reverse || false;
-    if (serviceRequests.filter) {
-      this.query = serviceRequests.filter;
-      this.isFilter = true;
-    }
-
     this.go = function (id, medicationSource) {
-      serviceRequests.currentSort.order = this.order;
-      serviceRequests.currentSort.reverse = this.reverse;
-      serviceRequests.filter = this.query;
       $state.go('medications-detail', {
         patientId: $stateParams.patientId,
-        medicationIndex: id,
-        filter: this.query,
-        page: this.currentPage,
+        detailsIndex: id,
+        page: $scope.currentPage || 1,
         source: medicationSource
       });
     };
 
-    this.selected = function (medicationIndex) {
-      return medicationIndex === $stateParams.medicationIndex;
-    };
-
-
     this.create = function () {
       $state.go('medications-create', {
-        patientId: $stateParams.patientId,
-        filter: this.query,
-        page: this.currentPage
+        patientId: $stateParams.patientId
       });
     };
+
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
@@ -96,9 +45,9 @@ class MedicationsListController {
       }
       if (data.medication.data) {
         this.medications = data.medication.data;
-        // for (var i = 0; i < this.medications.length; i++) {
-        //   this.medications[i].startDate = moment(this.medications[i].startDate).format('DD-MMM-YYYY');
-        // }
+        
+        serviceFormatted.formattingTablesDate(this.medications, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['name', 'doseAmount', 'dateCreated', 'source'];
         /*
           TODO: Remove. Only for demo
         */
@@ -130,5 +79,5 @@ const MedicationsListComponent = {
   controller: MedicationsListController
 };
 
-MedicationsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'medicationsActions', 'serviceRequests', 'usSpinnerService'];
+MedicationsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'medicationsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default MedicationsListComponent;

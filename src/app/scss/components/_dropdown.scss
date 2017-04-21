@@ -16,9 +16,25 @@
   border-radius: 4px;
   box-shadow: 2px 3px 3px 0px rgba(0, 0, 0, 0.2);
   background-clip: padding-box;
+  &.dm-show { display: block; }
   &.dm-right {
     left: auto;
     right: 0;
+    box-shadow: -2px 3px 3px 0px rgba(0, 0, 0, 0.2);
+  }
+  &.dm-top-right {
+    left: auto;
+    top: auto;
+    right: 0;
+    bottom: 100%;
+  }
+  &.dm-top-left {
+    top: auto;
+    bottom: 100%;
+  }
+  &.dm-small {
+    font-size: 10px;
+    line-height: 12px;
   }
 }
 .dropdown.open .btn-inverse {
@@ -38,6 +54,10 @@
   padding: 20px 14px 14px;
   border-right: 4px;
   box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.2);
+  .dm-list {
+    margin-right: -14px;
+    margin-left: -14px;
+  }
   .heading {
     margin-bottom: 8px;
     padding-bottom: 5px;
@@ -51,33 +71,33 @@
 .dm-summery {
   width: 300px;
   padding: 15px 10px 19px 20px;
-  @include respond-to(xs) {
+  @include respond-from(xs) {
     width: 400px;
   }
-  @include respond-to(sm) {
+  @include respond-from(sm) {
     width: 470px;
   }
 }
 .dm-tables {
   width: 215px;
 }
+.dm-statements {
+  width: 100%;
+  max-width: 360px;
+}
 .dm-wrap-list {
   margin-bottom: -12px;
 }
 .dm-list {
-  margin: 0 -14px;
   margin-bottom: 12px;
   .dm-item {
-    padding: 0 14px;
+    padding: 5px 14px;
     font-size: 0;
     line-height: 0;
     cursor: pointer;
-    &:hover,
-    &.active {
-      background: #f3f3f3;
-    }
+    &.active { background: #f3f3f3; } 
     span, i {
-      line-height: 28px;
+      line-height: 18px;
       display: inline-block;
       vertical-align: middle;
     }
@@ -89,7 +109,27 @@
       width: 20px;
       margin-right: 12px;
       font-size: 16px;
-      color: #0d672f;
+      color: $base-color;
     }
+  }
+  
+}
+.is-not-touch-device .dm-list .dm-item:hover { background: #f3f3f3; }
+
+.dm-small {
+  padding: 10px;
+  .dm-list {
+    margin-right: -10px;
+    margin-left: -10px;
+    .dm-item {
+        padding-top: 4px;
+        padding-bottom: 4px;
+        span, i {
+          line-height: 14px;
+        }
+        span {
+          font-size: 14px;
+        }
+      }
   }
 }

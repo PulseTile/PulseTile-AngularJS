@@ -26,16 +26,12 @@ export default function posts(state = INITIAL_STATE, action) {
 
     var actions = {
         [types.SEARCH]: (state) => {
-          console.log('state');
-          console.log(state);
             return Object.assign({}, state, {
                 isFetching: true,
                 error: false
             });
         },
         [types.SEARCH_SUCCESS]: (state) => {
-          console.log('payload');
-          console.log(payload);
             return Object.assign({}, state, {
                 isFetching: false,
                 data: payload.response
@@ -46,7 +42,7 @@ export default function posts(state = INITIAL_STATE, action) {
                 isFetching: false,
                 error: payload.error
             });
-        },
+        }
     };
 
     return actions[action.type] ?

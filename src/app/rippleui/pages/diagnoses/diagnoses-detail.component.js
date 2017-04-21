@@ -59,13 +59,6 @@ class DiagnosesDetailController {
         $scope.diagnosesUpdate($scope.patient.id, toAdd);
       }
     }.bind(this);
-
-    $scope.openDatepicker = function ($event, name) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope[name] = true;
-    };
     
     $scope.UnlockedSources = [
       'handi.ehrscape.com'
@@ -98,7 +91,7 @@ class DiagnosesDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     this.diagnosesLoad = diagnosesActions.get;
-    this.diagnosesLoad($stateParams.patientId, $stateParams.diagnosisIndex, $stateParams.source);
+    this.diagnosesLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
     $scope.diagnosesUpdate = diagnosesActions.update;
   }
 }

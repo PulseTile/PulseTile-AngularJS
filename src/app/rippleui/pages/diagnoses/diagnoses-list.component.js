@@ -16,14 +16,10 @@
 let templateDiagnosesList = require('./diagnoses-list.html');
 
 class DiagnosesListController {
-  constructor($scope, $state, $stateParams, $ngRedux, diagnosesActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, diagnosesActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.currentPage = 1;
-
-    this.query = '';
-    this.isFilter = false;
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'diagnoses-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'diagnoses';
 
@@ -32,84 +28,32 @@ class DiagnosesListController {
         this.currentPatient = data.patientsGet.data;
         usSpinnerService.stop('patientSummary-spinner');
       }
+      
       if (data.diagnoses.data) {
         this.diagnoses = data.diagnoses.data;
-        for (var i = 0; i < this.diagnoses.length; i++) {
-          this.diagnoses[i].dateOfOnset = moment(this.diagnoses[i].dateOfOnset).format('DD-MMM-YYYY');
-        }
+        
+        serviceFormatted.formattingTablesDate(this.diagnoses, ['dateOfOnset'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['problem', 'dateOfOnset', 'source'];
       }
+      
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
       }
     };
-
-
-    this.toggleFilter = function () {
-      this.isFilter = !this.isFilter;
-    };
-
-    this.sort = function (field) {
-      var reverse = this.reverse;
-      if (this.order === field) {
-        this.reverse = !reverse;
-      } else {
-        this.order = field;
-        this.reverse = false;
-      }
-    };
-
-    this.sortClass = function (field) {
-      if (this.order === field) {
-        return this.reverse ? 'sorted desc' : 'sorted asc';
-      }
-    };
-
-    this.order = serviceRequests.currentSort.order || 'diagnoses';
-    this.reverse = serviceRequests.currentSort.reverse || false;
-    if (serviceRequests.filter) {
-      this.query = serviceRequests.filter;
-      this.isFilter = true;
-    }
     
-    this.pageChangeHandler = function (newPage) {
-      this.currentPage = newPage;
-    };
-
-    if ($stateParams.page) {
-      this.currentPage = $stateParams.page;
-    }
-
     this.go = function (id, diagnosisSource) {
-      serviceRequests.currentSort.order = this.order;
-      serviceRequests.currentSort.reverse = this.reverse;
-      serviceRequests.filter = this.query || '';
       $state.go('diagnoses-detail', {
         patientId: $stateParams.patientId,
-        diagnosisIndex: id,
-        filter: this.query,
-        page: this.currentPage,
+        detailsIndex: id,
+        page: $scope.currentPage || 1,
         source: diagnosisSource
       });
     };
 
     this.create = function () {
       $state.go('diagnoses-create', {
-        patientId: $stateParams.patientId,
-        filter: this.query,
-        page: this.currentPage
+        patientId: $stateParams.patientId
       });
-    };
-
-    this.selected = function (diagnosisIndex) {
-      return diagnosisIndex === $stateParams.diagnosisIndex;
-    };
-
-    this.search = function (row) {
-      return (
-          row.problem.toLowerCase().indexOf(this.query.toLowerCase() || '') !== -1 ||
-          row.dateOfOnset.toLowerCase().indexOf(this.query.toLowerCase() || '') !== -1 ||
-          row.source.toLowerCase().indexOf(this.query.toLowerCase() || '') !== -1
-      );
     };
 
     let unsubscribe = $ngRedux.connect(state => ({
@@ -128,5 +72,5 @@ const DiagnosesListComponent = {
   controller: DiagnosesListController
 };
 
-DiagnosesListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'diagnosesActions', 'serviceRequests', 'usSpinnerService'];
+DiagnosesListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'diagnosesActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default DiagnosesListComponent;

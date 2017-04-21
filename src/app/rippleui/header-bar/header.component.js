@@ -16,21 +16,78 @@
 let templateHeader = require('./header-bar.tmpl.html');
 
 class HeaderController {
-  constructor($rootScope, $scope, $state, $stateParams, $ngRedux, patientsActions, serviceRequests) {
+
+  constructor($rootScope, $scope, $state, $stateParams, $ngRedux, patientsActions, serviceRequests, $window) {
 
     var self = this;
-    $scope.title = {
-      role: '',
-      poc: ''
+    $scope.title = '';
+    $scope.isOpenSearch = false;
+
+    $scope.isToogleSearchShow = false;
+    $scope.searchShow = false;
+    
+    this.mainSearchEnabled = true;
+    this.showAdvancedSearch = false;
+
+    $scope.searchOption = null;
+    $scope.searchOptionsList = [
+      {
+        name: 'Patient Search - Advanced',
+        type: 'advanced'
+      }, {
+        name: 'Clinical Query',
+        type: 'clinicalQuery'
+      }
+    ];
+    
+    this.closeAdvancedSearch = function() {
+      $scope.isOpenSearch = false;
+      $scope.searchOption = null;
     };
 
+    this.openAdvancedSearch = function(index) {
+      /* istanbul ignore if  */
+      if (!$scope.searchOptionsList[index].type.length) return;
+      
+      /* istanbul ignore if  */
+      if (!$scope.searchOption || ($scope.searchOptionsList[index].type != $scope.searchOption.type)) {
+        $scope.isOpenSearch = true;
+        $scope.searchOption = $scope.searchOptionsList[index];
+        serviceRequests.publisher('clearSearchParams', {});
+        serviceRequests.publisher('openSearchPanel', {});
+      }
+    };
+
+    $scope.isActiveTypeSearch = function (type) {
+      if ($scope.searchOption && $scope.searchOption.type === type) {
+        return true;
+      }
+
+      return false;
+    }
+
+    $scope.checkIsToggleSearch = function () {
+      if (window.innerWidth < 768) {
+        $scope.isToogleSearchShow = true;
+      } else {
+        $scope.isToogleSearchShow = false;
+      }
+    };
+    $scope.isShowSearch = function () {
+      return $scope.searchShow || !$scope.isToogleSearchShow;
+    };
+    
+    $scope.checkIsToggleSearch();
+    
+    serviceRequests.subscriber('closeAdvancedSearch', this.closeAdvancedSearch);
+    
     this.goBack = function () {
       /* istanbul ignore if  */
-      if ($scope.title.role + ' ' +  $scope.title.poc === 'PHR POC') return;
+      if ($scope.title === 'PHR') return;
 
       switch ($state.router.globals.$current.name) {
         case 'patients-charts': 
-				  $state.go('main-search');
+				  
           break;
         case 'patients-summary': 
           $state.go('patients-list');
@@ -46,12 +103,15 @@ class HeaderController {
     };
     this.goChart = function () {
       /* istanbul ignore if  */
-      if ($scope.title.role + ' ' +  $scope.title.poc === 'PHR POC') return;
+      if ($scope.title === 'PHR') return;
 
       $state.go('patients-charts');
     };
     
     this.goPatientList = function () {
+      /* istanbul ignore if  */
+      if ($scope.title === 'PHR') return;
+      
       $state.go('patients-list');
     };
     
@@ -95,8 +155,7 @@ class HeaderController {
 
     $scope.setTitle = function (data) {
       if (data) {
-        $scope.title.role = data.role;
-        $scope.title.poc = 'POC';
+        $scope.title = data.role;
       }
       $scope.switchDirectByRole(data);
     };
@@ -110,6 +169,7 @@ class HeaderController {
       serviceRequests.login().then(function (result) {
         serviceRequests.currentUserData = result.data;
         $scope.setLoginData(result);
+
       });
     };
 
@@ -147,7 +207,6 @@ class HeaderController {
       $scope.login();
     });
 
-    $rootScope.searchExpression = '';
     $rootScope.searchMode = false;
     $rootScope.reportMode = false;
     $rootScope.settingsMode = false;
@@ -156,8 +215,9 @@ class HeaderController {
     $rootScope.reportTypeString = '';
 
     $scope.search = {};
-    $scope.search.searchExpression = $rootScope.searchExpression;
-    this.searchBarEnabled = !$state.is('main-search');
+    $scope.search.searchExpression = '';
+
+    // this.searchBarEnabled = !$state.is('main-search');
 
     this.containsReportString = function () {
       return $scope.search.searchExpression.indexOf('rp ') === 0;
@@ -216,7 +276,7 @@ class HeaderController {
     };
 
     this.checkExpression = function (expression) {
-      $scope.search.searchExpression = expression;
+      // $scope.search.searchExpression = expression.toLowerCase();
       /* istanbul ignore if  */
       if ($rootScope.searchMode) {
         if ($rootScope.reportMode && !$rootScope.reportTypeSet) {
@@ -257,23 +317,7 @@ class HeaderController {
 
     this.searchFunction = function () {
       /* istanbul ignore if  */
-      if ($rootScope.reportTypeSet && $scope.search.searchExpression !== '') {
-        var tempExpression = $rootScope.reportTypeString + ': ' + $scope.search.searchExpression;
-        $state.go('search-report', {
-          searchString: tempExpression
-        });
-      }
-      /* istanbul ignore if  */
-      if ($rootScope.settingsMode && $scope.search.searchExpression !== '') {
-        $state.go('patients-list-full', {
-          queryType: 'Setting: ',
-          searchString: $scope.search.searchExpression,
-          orderType: 'ASC',
-          pageNumber: '1'
-        });
-      }
-      /* istanbul ignore if  */
-      if ($rootScope.patientMode && $scope.search.searchExpression !== '') {
+      if ($scope.search.searchExpression !== '') {
         $state.go('patients-list-full', {
           queryType: 'Patient: ',
           searchString: $scope.search.searchExpression,
@@ -299,25 +343,6 @@ class HeaderController {
       $rootScope.reportTypeSet = false;
     };
 
-    this.currentNavTab = ''; // search, notifications or user
-
-    this.changeNavTab = function(newTab){
-
-      // Is tab already expanded?
-      /* istanbul ignore if  */
-      if( this.currentNavTab == newTab ){
-        this.currentNavTab = '';
-      } else {
-        this.currentNavTab = newTab;
-      }
-    };
-
-    this.activeNavTab = function(thisTab){
-      if( thisTab == this.currentNavTab ){
-        return 'active';
-      }
-    };
-
     this.getPageComponents = function (data) {
       $scope.userContextViewExists = ('banner' in data.state);
     };
@@ -328,19 +353,18 @@ class HeaderController {
     };
 
     this.getPopulateHeaderSearch = function (expression) {
-      $scope.search.searchExpression = expression.headerSearch;
+      $scope.search.searchExpression = expression.headerSearch.toLowerCase();;
       $scope.searchFocused = true;
-      self.searchBarEnabled = expression.headerSearchEnabled;
-      $scope.searchBar = expression.headerSearchEnabled;
-      self.currentNavTab = 'searchBar';
+      // self.searchBarEnabled = expression.headerSearchEnabled;
+      // $scope.searchBar = expression.headerSearchEnabled;
     };
     this.getPageHeader = function (data) {
       $scope.pageHeader = data.title;
       $scope.isPageHeader = data.isShowTitle;
-      $scope.searchBar = data.title === 'Welcome' ? false : true;
+      // $scope.searchBar = data.title === 'Welcome' ? false : true;
     };
     this.checkIsShowPreviousBtn = function () {
-      $scope.isShowPreviousBtn = $state.router.globals.$current.name !== 'main-search';
+      $scope.isShowPreviousBtn = $state.router.globals.$current.name !== 'patients-charts';
     };
 
     serviceRequests.subscriber('routeState', this.getPageComponents);
@@ -354,6 +378,10 @@ class HeaderController {
     $rootScope.$on('$locationChangeStart', function() {
       this.checkIsShowPreviousBtn()
     }.bind(this));
+
+    $window.addEventListener('resize', function () {
+      $scope.checkIsToggleSearch();
+    });
   }
 
 }
@@ -363,5 +391,5 @@ const HeaderComponent = {
   controller: HeaderController
 };
 
-HeaderController.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'serviceRequests'];
+HeaderController.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'serviceRequests', '$window'];
 export default HeaderComponent;

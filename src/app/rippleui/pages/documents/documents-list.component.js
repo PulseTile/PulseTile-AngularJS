@@ -16,41 +16,17 @@
 let templateDocumentsList = require('./documents-list.html');
 
 class DocumentsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, documentsActions, serviceRequests, usSpinnerService) {
-    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, name: 'patients-details'});
+  constructor($scope, $state, $stateParams, $ngRedux, documentsActions, serviceRequests, usSpinnerService, serviceFormatted, templateService) {
+    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.currentPage = 1;
-    this.query = '';
-
-    $scope.search = function (row) {
-      return (
-        angular.lowercase(row.documentType).indexOf(angular.lowercase($scope.query) || '') !== -1 ||
-        angular.lowercase(row.documentDate).indexOf(angular.lowercase($scope.query) || '') !== -1 ||
-        angular.lowercase(row.source).indexOf(angular.lowercase($scope.query) || '') !== -1
-      );
-    };
-
-    if ($stateParams.filter) {
-      this.query = $stateParams.filter;
-    }
-    
-    this.go = function (id, documentType, source) {
+    this.go = function (id, documentType) {
+      templateService.setTemplateType(documentType);
       $state.go('documents-detail', {
-        patientId: $scope.patient.id,
-        documentType: documentType,
-        documentIndex: id,
-        filter: $scope.query,
-        page: $scope.currentPage,
-        reportType: $stateParams.reportType,
-        searchString: $stateParams.searchString,
-        queryType: $stateParams.queryType,
-        source: source
+        patientId: $stateParams.patientId,
+        detailsIndex: id,
+        page: $scope.currentPage || 1
       });
-    };
-
-    $scope.selected = function (documentIndex) {
-      return documentIndex === $stateParams.documentIndex;
     };
 
     this.setCurrentPageData = function (data) {
@@ -59,6 +35,8 @@ class DocumentsListController {
       }
       if (data.documents.data) {
         this.documents = data.documents.data;
+        serviceFormatted.formattingTablesDate(this.documents, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['documentType', 'dateCreated', 'source'];
         usSpinnerService.stop('patientSummary-spinner');
       }
       if (serviceRequests.currentUserData) {
@@ -83,5 +61,5 @@ const DocumentsListComponent = {
   controller: DocumentsListController
 };
 
-DocumentsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'documentsActions', 'serviceRequests', 'usSpinnerService'];
+DocumentsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'documentsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted', 'templateService'];
 export default DocumentsListComponent;

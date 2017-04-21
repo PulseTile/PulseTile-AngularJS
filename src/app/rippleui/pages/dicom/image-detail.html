@@ -26,23 +26,37 @@
       <div class="panel-body-inner">
         <div class="form">
           <div class="form-group-wrapper">
-            <div class="form-group" ng-repeat="item in $ctrl.instance.series_images">
-              <div class="form-control-static" ng-click="$ctrl.toggleModal({className: 'openModal'})">
-                <img src="{{item.imageLink}}" alt="item.imgName">
+            <div class="form-group" ng-repeat="item in instanceIds track by $index">
+              <div class="form-control-static">
+                <!--<img src="http://ripple-orthanc.answerappcloud.com/instances/{{item}}/preview" alt="image">-->
+                <cornerstone-image imageId="http://138.68.134.7:8086/instances/{{item}}/preview"></cornerstone-image>
+                <!--<cornerstone-image imageId="example://1"></cornerstone-image>-->
               </div>
             </div>
           </div>
         </div>
-
+      </div>
+      <div class="panel-control">
+        <div class="control-group center" >
+          <button id="play" type="button" class="btn btn-inverse btn-success btn-none-border"><i class="fa fa-play"></i></button>
+          <button id="stop" type="button" class="btn btn-inverse btn-success btn-none-border"><i class="fa fa-stop"></i></button>
+          <div class="control-separate"></div>
+          <button id="zoomIn" type="button" class="btn btn-inverse btn-success btn-none-border" ng-click="zoomOut()"><i class="fa fa-search-minus"></i></button>
+          <button id="zoomOut" type="button" class="btn btn-inverse btn-success btn-none-border" ng-click="zoomIn()"><i class="fa fa-search-plus"></i></button>
+          <div class="control-separate"></div>
+          <button id="arrows" type="button" class="btn btn-inverse btn-success btn-none-border"><i class="fa fa-arrows"></i></button>
+          <button id="verticalArrows" type="button" class="btn btn-inverse btn-success btn-none-border"><i class="fa fa-arrows-v"></i></button>
+          <!--<button id="reset" type="button" class="btn btn-inverse btn-success" ng-click="reset()">Reset</button>-->
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="panel panel-secondary" ng-if="getShowPanel('details')" ng-class="getOpenPanelClass('details')">
+  <div class="panel panel-secondary" ng-if="getShowPanel('imgDetail')" ng-class="getOpenPanelClass('imgDetail')">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('series', 'details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('details')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'imgDetail')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('imgDetail')"><i class="fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Image Details</h3>
     </div>
@@ -52,35 +66,35 @@
           <div class="form-group-wrapper">
             <div class="form-group">
               <label class="control-label">Modality</label>
-              <div class="form-control-static">{{ $ctrl.instance.modality }}</div>
+              <div class="form-control-static">{{ series[0].modality }}</div>
             </div>
             <div class="form-group">
               <label class="control-label">Protocol Name</label>
-              <div class="form-control-static">{{ $ctrl.instance.protocol_name }}</div>
+              <div class="form-control-static">{{ series[0].protocolName }}</div>
             </div>
             <div class="form-group">
               <label class="control-label">Operator Name</label>
-              <div class="form-control-static">{{ $ctrl.instance.operator_name }}</div>
+              <div class="form-control-static">{{ series[0].operatorsName }}</div>
             </div>
             <div class="form-group">
               <label class="control-label">Series Date</label>
-              <div class="form-control-static">{{ $ctrl.instance.series_date }}</div>
+              <div class="form-control-static">{{ series[0].seriesDate }}</div>
             </div>
             <div class="form-group">
               <label class="control-label">Author</label>
-              <div class="form-control-static">{{ $ctrl.instance.author }}</div>
+              <div class="form-control-static">{{ series[0].author }}</div>
             </div>
             <div class="form-group">
               <label class="control-label">Station Name</label>
-              <div class="form-control-static">{{ $ctrl.instance.station }}</div>
+              <div class="form-control-static">{{ series[0].stationName }}</div>
             </div>
             <div class="form-group">
               <label class="control-label">Series Time</label>
-              <div class="form-control-static">{{ $ctrl.instance.time }}</div>
+              <div class="form-control-static">{{ series[0].seriesTime }}</div>
             </div>
             <div class="form-group">
-              <label class="control-label">Date</label>
-              <div class="form-control-static">{{ $ctrl.instance.date }}</div>
+              <label class="control-label">Series No:</label>
+              <div class="form-control-static">{{ series[0].seriesNumber }}</div>
             </div>
           </div>
         </div>
@@ -89,4 +103,3 @@
   </div>
   <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="patientSummary-spinner" spinner-start-active="true"></span>
 </div>
-<di-com ng-class="visibleModal"></di-com>

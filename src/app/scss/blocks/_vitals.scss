@@ -1,7 +1,8 @@
 $vitalsInputColor: (
   warning: #e3d19d,
   danger: #ca9193,
-  success: #94ceaa
+  success: #94ceaa,
+  normal: #ffffff
 );
 .vitals-group-wrapper {
   padding-top: 7px;
@@ -12,19 +13,32 @@ $vitalsInputColor: (
   position: relative;
   margin-bottom: 23px;
   padding-left: 12px;
+  margin-left: -11px;
+  .highlighter { width: 5px; }
+  .highlighter-not-vital {width: 3px;}
   .input-holder,
   .input-group {
     padding-bottom: 3px;
   }
 }
+@include respond-from(xs) {
+  .vitals-group {
+    margin-left: 0;
+    .highlighter { width: 4px; }
+    .highlighter-not-vital { width: 1px; }
+  }
+}
 .vitals-holder {
   width: 150px;
   .form-control {
-    width: 51px;
+    background-color: #fff;
+    width: 55px;
+    color: #000000;
   }
   .vitals-addon {
-    float: right;
-    width: 99px;
+    display: block;
+    overflow: hidden;
+    height: 30px;
     padding: 0 12px;
     font-size: 14px;
     font-weight: normal;
@@ -34,7 +48,9 @@ $vitalsInputColor: (
     border: 1px solid #c3c3c3;
     border-left: 0;
     border-radius: 0 2px 2px 0;
-    cursor: pointer;
+    &.popover-toggle {
+      cursor: pointer;
+    }
   }
 }
 @each $vitalInput, $color in $vitalsInputColor {
@@ -55,12 +71,12 @@ $vitalsInputColor: (
   font-size: 14px;
   line-height: 18px;
   font-weight: 400;
-  color: #303030;
+  color: $text-color;
 }
 
 .vitals-popover {
   display: block;
-  width: 266px;
+  width: 275px;
   padding: 0;
   border: 1px solid #c3c3c3;
   box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.3);
@@ -80,19 +96,8 @@ $vitalsInputColor: (
     border-bottom: 1px solid #c3c3c3;
   }
   .popover-content {
-    padding: 10px;
-  }
-  .range-vital-labels {
-    display: flex;
-    flex-direction: row;  
-    justify-content: space-between;
-    flex-wrap: nowrap;
-    margin-bottom: 10px;
-    font-size: 14px;
-    line-height: 16px;
-    color: #000000;
-    .range-vital-label {
-    }
+    position: relative;
+    padding: 0 12px;
   }
   & > .arrow {
       border-width: 6px;
@@ -164,16 +169,25 @@ $vitalsInputColor: (
   }
 }
 
-
-.wrap-chart {
-  margin-bottom: 6px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border: 1px solid #b4b4b4;
-  background-color : #eee; 
-  canvas {
-    width: 100% !important;
-    height: 441px !important;
-    background-color : #eee; 
-  }
+.range-vital-labels {
+  position: relative;
+  padding: 26px 0 23px;
+  font-size: 12px;
+  line-height: 14px;
+  color: #000000;
+}
+.range-vital-label {
+  position: absolute;
+  display: none;
+  white-space: nowrap;
+  &.place-1, &.place-2, &.place-3, 
+  &.place-4, &.place-5, &.place-6, &.place-7 {display: block;}
+  
+  &.place-1 {top: 10px; left: 0;}
+  &.place-2 {top: 39px; left: 16.67%; transform: translateX(-50%);}
+  &.place-3 {top: 10px; left: 33.34%; transform: translateX(-50%);}
+  &.place-4 {top: 39px; left: 50%;    transform: translateX(-50%);}
+  &.place-5 {top: 10px; left: 66.66%; transform: translateX(-50%);}
+  &.place-6 {top: 39px; left: 83.33%; transform: translateX(-50%);}
+  &.place-7 {top: 10px; right: 0;}
 }

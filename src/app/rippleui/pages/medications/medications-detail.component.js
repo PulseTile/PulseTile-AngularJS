@@ -17,9 +17,6 @@ let templateMedicationsDetail= require('./medications-detail.html');
 
 class MedicationsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, usSpinnerService, serviceRequests) {
-    $scope.UnlockedSources = [
-      'handi.ehrscape.com'
-    ];
 
     $scope.formDisabled = true;
     $scope.isShowSchedule = true;
@@ -47,7 +44,7 @@ class MedicationsDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     this.medicationsLoad = medicationsActions.get;
-    this.medicationsLoad($stateParams.patientId, $stateParams.medicationIndex, $stateParams.source);
+    this.medicationsLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
 
     //Edit Medication
 
@@ -77,7 +74,7 @@ class MedicationsDetailController {
     $scope.isPrescriptionEdit = false;
     this.editPrescription = function () {
       $scope.isPrescriptionEdit = true;
-      $scope.prescriptionForm = {
+      $scope.prescriptionEdit = {
         pStartDateTime: new Date(),
         finishCancelled: true,
         doseInterval: '',
@@ -85,12 +82,6 @@ class MedicationsDetailController {
       };
     };
 
-    $scope.openDatepicker = function ($event, name) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope[name] = true;
-    };
     this.cancelEditMedication = function () {
       $scope.isMedicationEdit = false;
     };

@@ -13,43 +13,56 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
-<div mc-full-panel mc-accordion mc-open-panel="problem" class="panel-group accordion">
-  <div class="panel panel-secondary" ng-if="getShowPanel('problem') && !isEdit" ng-class="getOpenPanelClass('problem')">
+<div mc-full-panel mc-datepicker class="panel-group">
+  <div class="panel panel-secondary" ng-if="!isEdit">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'problem')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('problem')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
       </div>
-      <h3 class="panel-title">Problem and Diagnosis</h3>
+      <h3 class="panel-title">Problem / Diagnosis</h3>
     </div>
     <div class="panel-body">
       <div class="panel-body-inner">
         <div class="form">
           <div class="form-group-wrapper">
             <div ng-if="!$ctrl.diagnosis.metaData">
-              <div class="form-group">
-                <label class="control-label">Problem / Diagnosis</label>
-                <div class="form-control-static">{{ $ctrl.diagnosis.problem }}</div>
+              <div class="row-expand">
+                <div class="col-expand-left">
+                  <div class="form-group">
+                    <label class="control-label">Problem / Diagnosis</label>
+                    <div class="form-control-static">{{ $ctrl.diagnosis.problem }}</div>
+                  </div>
+                </div>
+                <div class="col-expand-right">
+                  <div class="form-group">
+                    <label class="control-label">Date of Onset</label>
+                    <div class="form-control-static">{{ $ctrl.diagnosis.dateOfOnset | date: 'dd-MMM-yyyy' }}</div>
+                  </div>
+                </div>
               </div>
 
-              <div class="form-group">
-                <label class="control-label">Description</label>
-                <div class="form-control-static">{{ $ctrl.diagnosis.description }}</div>
+              <div class="row-expand">
+                <div class="col-expand-left">
+                  <div class="form-group">
+                    <label class="control-label">Description</label>
+                    <div class="form-control-static">{{ $ctrl.diagnosis.description }}</div>
+                  </div>
+                </div>
               </div>
 
-              <div class="form-group">
-                <label class="control-label">Date of Onset</label>
-                <div class="form-control-static">{{ $ctrl.diagnosis.dateOfOnset | date: 'dd-MMM-yyyy' }}</div>
-              </div>
-
-              <div class="form-group">
-                <label class="control-label">Terminology</label>
-                <div class="form-control-static">{{ $ctrl.diagnosis.terminology }}</div>
-              </div>
-
-              <div class="form-group">
-                <label class="control-label">Code</label>
-                <div class="form-control-static">{{ $ctrl.diagnosis.code }}</div>
+              <div class="row-expand">
+                <div class="col-expand-left">
+                  <div class="form-group">
+                    <label class="control-label">Terminology</label>
+                    <div class="form-control-static">{{ $ctrl.diagnosis.terminology }}</div>
+                  </div>
+                </div>
+                <div class="col-expand-right">
+                  <div class="form-group">
+                    <label class="control-label">Code</label>
+                    <div class="form-control-static">{{ $ctrl.diagnosis.code }}</div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -59,20 +72,44 @@
                 <div class="form-control-static">{{prop}}</div>
               </div>
             </div> -->
-
-            <div class="form-group">
-              <label class="control-label">Author</label>
-              <div class="form-control-static">{{ $ctrl.diagnosis.author }}</div>
+            
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Author</label>
+                  <div class="form-control-static">{{ $ctrl.diagnosis.author }}</div>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group">
+                  <label class="control-label">Date</label>
+                  <div class="form-control-static">{{ $ctrl.diagnosis.dateCreated | date:'dd-MMM-yyyy'}}</div>
+                </div>
+              </div>
             </div>
 
-            <div class="form-group">
-              <label class="control-label">Date</label>
-              <div class="form-control-static">{{ $ctrl.diagnosis.dateCreated | date:'dd-MMM-yyyy'}}</div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label">Source</label>
-              <div class="form-control-static">{{$ctrl.diagnosis.source}}</div>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Source</label>
+                  <div class="form-control-static">{{$ctrl.diagnosis.source}}</div>
+                </div>
+              </div>
+              
+              <div class="col-expand-right">
+                <div class="form-group">
+                  <label class="control-label">Is Imported</label>
+                  <div class="input-holder">
+                    <label class="switch">
+                      <input type="checkbox" name="isImport" ng-model="$ctrl.diagnosis.isImport" disabled>
+                      <div class="slider disabled">
+                        <span class="text text-check-true">Yes</span>
+                        <span class="text text-check-false">No</span>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -88,80 +125,98 @@
     </div>
   </div>
   
-  <div class="panel panel-secondary" ng-if="getShowPanel('problem') && isEdit" ng-class="getOpenPanelClass('problem')">
+  <div class="panel panel-secondary" ng-if="isEdit">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'problem')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('problem')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
       </div>
-      <h3 class="panel-title">Edit Problem and Diagnosis</h3>
+      <h3 class="panel-title">Edit Problem / Diagnosis</h3>
     </div>
     <div class="panel-body">
       <div class="panel-body-inner">
         <form name="diagnosisForm" class="form">
           <div class="form-group-wrapper">
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || diagnosisForm.problem.$dirty) && diagnosisForm.problem.$invalid, 'has-success': diagnosisForm.problem.$valid && diagnosisForm.problem.$dirty}">
-              <label for="text" class="control-label">Problem / Diagnosis</label>
-              <div class="input-holder">
-                <input type="text" class="form-control input-sm" id="problem" name="problem" ng-model="diagnosisEdit.problem" required />
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && diagnosisForm.problem.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || diagnosisForm.dateOfOnset.$dirty) && diagnosisForm.dateOfOnset.$invalid, 'has-success': diagnosisForm.dateOfOnset.$valid && diagnosisForm.dateOfOnset.$dirty}">
-              <label for="dateOfOnset" class="control-label rightColumnLabel">Date of Onset</label>
-              <div class="inner-addon addon-left">
-                <div class="addon">
-                  <i class="fa fa-calendar"></i>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || diagnosisForm.problem.$dirty) && diagnosisForm.problem.$invalid, 'has-success': diagnosisForm.problem.$valid && diagnosisForm.problem.$dirty}">
+                  <label for="text" class="control-label">Problem / Diagnosis</label>
+                  <div class="input-holder">
+                    <input type="text" class="form-control input-sm" id="problem" name="problem" ng-model="diagnosisEdit.problem" required />
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && diagnosisForm.problem.$error.required">You must enter a value.</span>
                 </div>
-                <input type="text" class="form-control" id="dateOfOnset" name="dateOfOnset" ng-model="diagnosisEdit.dateOfOnset" ng-click="openDatepicker($event, 'dateOfOnsetOpen')" uib-datepicker-popup="dd-MMM-y" is-open="dateOfOnsetOpen" required />
               </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && diagnosisForm.dateOfOnset.$error.required">You must enter a valid date.</span>
+              <div class="col-expand-right">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || diagnosisForm.dateOfOnset.$dirty) && diagnosisForm.dateOfOnset.$invalid, 'has-success': diagnosisForm.dateOfOnset.$valid && diagnosisForm.dateOfOnset.$dirty}">
+                  <label for="" class="control-label rightColumnLabel">Date of Onset</label>
+                  <div class="inner-addon addon-left">
+                    <div class="addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control" id="dateOfOnset" name="dateOfOnset" ng-model="diagnosisEdit.dateOfOnset" ng-click="openDatepicker($event, 'dateOfOnsetOpen')" uib-datepicker-popup="dd-MMM-y" is-open="datepickers.dateOfOnsetOpen" required readonly/>
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && diagnosisForm.dateOfOnset.$error.required">You must enter a valid date.</span>
+                </div>
+              </div>
             </div>
-
-            <div class="form-group">
-              <label for="text" class="control-label">Description</label>
-              <div class="input-holder">
-                <textarea class="form-control textarea-big input-sm" id="text" name="text" ng-model="diagnosisEdit.description"></textarea>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label for="text" class="control-label">Description</label>
+                  <div class="input-holder">
+                    <textarea class="form-control textarea-big input-sm" id="text" name="text" ng-model="diagnosisEdit.description"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group  mdtLinkGroup">
+                  <label class="control-label rightColumnLabel">NHS Choices Web Page URL</label>
+                  <div class="input-holder">
+                    <input type="text" class="form-control input-sm" placeholder="https://www.nhs.co.uk/Conditions/Hay-fever/Pages" aria-label="...">
+                  </div>
+                </div>
               </div>
             </div>
             
-            <div class="form-group  mdtLinkGroup">
-              <label class="control-label rightColumnLabel">NHS Choices Web Page URL</label>
-              <div class="input-holder">
-                <input type="text" class="form-control input-sm" placeholder="https://www.nhs.co.uk/Conditions/Hay-fever/Pages" aria-label="...">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="terminology" class="control-label">Terminology</label>
-              <div class="input-holder">
-                <input type="text" class="form-control" id="terminology" ng-model="diagnosisEdit.terminology" />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="code" class="control-label codeLabel">Terminology Code</label>
-              <div class="non-edit-value">{{ diagnosisEdit.code }}</div>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || diagnosisForm.author.$dirty) && diagnosisForm.author.$invalid, 'has-success': diagnosisForm.author.$valid && diagnosisForm.author.$dirty}">
-              <label for="author" class="control-label">Author</label>
-              <div class="input-holder">
-                <input type="text" value="{{currentUser.email}}" placeholder="{{currentUser.email}}" class="form-control input-sm" id="author" name="author" ng-model="diagnosisEdit.author" disabled />
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && diagnosisForm.author.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || diagnosisForm.datesubmitted.$dirty) && diagnosisForm.datesubmitted.$invalid, 'has-success': diagnosisForm.datesubmitted.$valid && diagnosisForm.datesubmitted.$dirty}">
-              <label for="Date" class="control-label">Date</label>
-              <div class="inner-addon addon-left">
-                <div class="addon">
-                  <i class="fa fa-calendar"></i>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label for="terminology" class="control-label">Terminology</label>
+                  <div class="input-holder">
+                    <input type="text" class="form-control" id="terminology" ng-model="diagnosisEdit.terminology" />
+                  </div>
                 </div>
-                <input type="text" class="form-control" id="datesubmitted" name="datesubmitted" value="{{diagnosis.dateSubmitted}}" ng-model="diagnosisEdit.dateSubmitted" uib-datepicker-popup="dd-MMM-y" required disabled/>
               </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && diagnosisForm.datesubmitted.$error.required">You must enter a valid date.</span>
+              <div class="col-expand-right">
+                <div class="form-group">
+                  <label for="code" class="control-label codeLabel">Terminology Code</label>
+                  <div class="non-edit-value">{{ diagnosisEdit.code }}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || diagnosisForm.author.$dirty) && diagnosisForm.author.$invalid, 'has-success': diagnosisForm.author.$valid && diagnosisForm.author.$dirty}">
+                  <label for="author" class="control-label">Author</label>
+                  <div class="input-holder">
+                    <input type="text" value="{{currentUser.email}}" placeholder="{{currentUser.email}}" class="form-control input-sm" id="author" name="author" ng-model="diagnosisEdit.author" disabled />
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && diagnosisForm.author.$error.required">You must enter a value.</span>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || diagnosisForm.datesubmitted.$dirty) && diagnosisForm.datesubmitted.$invalid, 'has-success': diagnosisForm.datesubmitted.$valid && diagnosisForm.datesubmitted.$dirty}">
+                  <label for="Date" class="control-label">Date</label>
+                  <div class="inner-addon addon-left">
+                    <div class="addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control" id="datesubmitted" name="datesubmitted" value="{{diagnosis.dateSubmitted}}" ng-model="diagnosisEdit.dateSubmitted" uib-datepicker-popup="dd-MMM-y" required disabled/>
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && diagnosisForm.datesubmitted.$error.required">You must enter a valid date.</span>
+                </div>
+              </div>
             </div>
           </div>
         </form>

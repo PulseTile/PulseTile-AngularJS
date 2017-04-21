@@ -14,22 +14,22 @@
   ~  limitations under the License.
   -->
 
-<div mc-full-panel class="panel panel-primary">
+<div mc-full-panel table-settings order="name" filtering class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
-      <button class="btn btn-success btn-inverse btn-filter" ng-click="$ctrl.toggleFilter()"><i class="fa fa-filter"></i></button>
+      <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
     </div>
     <div class="control-group right" >
       <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')" ng-if="$ctrl.isShowExpandBtn"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
       <!--<button class="btn btn-success btn-inverse btn-dropdown-toggle btn-table"><i class="fa fa-table"></i></button>-->
     </div>
     <h3 class="panel-title" >Contacts</h3>
-    <div class="panel-filter" ng-if="$ctrl.isFilter" ng-class="{active : $ctrl.isFilter}">
+    <div class="panel-filter" ng-show="isFilterOpen">
       <div class="inner-addon addon-left">
         <div class="addon">
           <i class="fa fa-filter"></i>
         </div>
-        <input type="text" class="form-control" placeholder="Filter..." ng-model="$ctrl.query[$ctrl.queryBy]" />
+        <input type="text" id="filter" class="form-control" placeholder="Filter..." ng-model="queryFilter" />
       </div>
     </div>
   </div>
@@ -43,19 +43,21 @@
       </colgroup>
       <thead>
         <tr>
-            <th ng-click="$ctrl.sort('name')" ng-class="$ctrl.sortClass('name')">Name</th>
-            <th ng-click="$ctrl.sort('relationship')" ng-class="$ctrl.sortClass('relationship')">Relationship</th>
-            <th ng-click="$ctrl.sort('next')" ng-class="$ctrl.sortClass('next')">Next of Kin</th>
-            <th ng-click="$ctrl.sort('source')" ng-class="$ctrl.sortClass('source')">Source</th>
+            <th ng-click="sort('name')" ng-class="sortClass('name')">Name</th>
+            <th ng-click="sort('relationship')" ng-class="sortClass('relationship')">Relationship</th>
+            <th ng-click="sort('next')" ng-class="sortClass('next')">Next of Kin</th>
+            <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr dir-paginate="contact in $ctrl.contacts | filter: $ctrl.query | orderBy:[$ctrl.order] : $ctrl.reverse | itemsPerPage: 10" current-page="$ctrl.currentPage" ng-click="$ctrl.go(contact.sourceId, this)" ng-class="{info: $ctrl.selected(contact.sourceId)}">
-          <td data-th="Name" ng-class="$ctrl.sortClass('name');">{{ contact.name }}</td>
-          <td data-th="Relationship" ng-class="$ctrl.sortClass('relationship')">{{ contact.relationship }}</td>
-          <td data-th="Next of Kin" ng-class="$ctrl.sortClass('next')"><span class="table-icon"><i class="fa fa-fw fa-check" ng-if="contact.nextOfKin"></i><i class="fa fa-fw fa-minus" ng-if="!contact.nextOfKin"></i></span></td>
-          <td data-th="Source" ng-class="$ctrl.sortClass('source')">{{ contact.source }}</td>
+        <tr dir-paginate="contact in $ctrl.contacts | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(contact.sourceId, this)" ng-class="{info: selectedRow(contact.sourceId)}">
+          <td data-th="Name" ng-class="sortClass('name')"><span>{{ contact.name }}</span></td>
+          <td data-th="Relationship" ng-class="sortClass('relationship')"><span>{{ contact.relationship }}</span></td>
+          <td data-th="Next of Kin" ng-class="sortClass('next')">
+            <span><span ng-if="contact.nextOfKin">Yes</span><span ng-if="!contact.nextOfKin">No</span></span>
+          </td>
+          <td data-th="Source" class="hidden-xs-cell" ng-class="sortClass('source')"><span>{{ contact.source }}</span></td>
         </tr>
 
         <tr ng-if="!$ctrl.contacts.length">
@@ -69,7 +71,7 @@
     <div class="panel-control">
       <div class="wrap-control-group">
         <div class="control-group with-indent left">
-          <dir-pagination-controls max-size="5" on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
+          <dir-pagination-controls max-size="6" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
         </div>
         <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1 && $ctrl.isShowCreateBtn">
           <button class="btn btn-success btn-inverse btn-create" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> <span>Create</span></button>

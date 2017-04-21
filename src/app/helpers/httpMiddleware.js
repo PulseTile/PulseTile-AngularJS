@@ -19,9 +19,10 @@ export default function httpMiddleware($http, $timeout) {
     config = angular.extend(config, {
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      url: encodeURI(config.url)
     });
-
+    
     return $http(config)
       .then(res => res.data);
   }

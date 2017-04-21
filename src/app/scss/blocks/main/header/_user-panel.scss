@@ -1,11 +1,15 @@
 .user-panel {
   float: right;
+  @include respond-from(sm) {
+    float: none;
+    order: 4;
+  }
   & > li {
     float: left;
     &.open .btn-header,
     &.active .btn-header {
       background: #fff;
-      color: #7cbe31;
+      color: $auxiliary-color;
       .count {display: none;}
     }
   }

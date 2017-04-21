@@ -13,12 +13,11 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
-<div mc-full-panel mc-accordion mc-open-panel="procedureCreate" class="panel-group accordion">
-  <div class="panel panel-secondary" ng-class="getOpenPanelClass('procedureCreate')">
+<div mc-full-panel mc-datepicker class="panel-group">
+  <div class="panel panel-secondary">
     <div class="panel-heading">
       <div class="control-group right">
         <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('procedureCreate')"><i class="fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Create Procedure</h3>
     </div>
@@ -26,85 +25,95 @@
       <div class="panel-body-inner">
         <form name="procedureForm" class="form">
           <div class="form-group-wrapper">
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.procedureName.$dirty) && procedureForm.procedureName.$invalid, 'has-success': procedureForm.procedureName.$valid && procedureForm.procedureName.$dirty}">
-              <label for="procedureName" class="control-label">Procedure Name:</label>
-              <div class="input-holder">
-                <input type="text" class="form-control input-sm" id="procedureName" name="procedureName" ng-model="procedureEdit.procedureName" required />
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.procedureName.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.notes.$dirty) && procedureForm.notes.$invalid, 'has-success': procedureForm.notes.$valid && procedureForm.notes.$dirty}">
-              <label for="notes" class="control-label">Procedure Notes:</label>
-              <div class="input-holder">
-                <textarea type="text" class="form-control textarea-big input-sm" id="notes" name="notes" ng-model="procedure.notes" required></textarea>
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.notes.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || procedureForm.date.$dirty) && procedureForm.date.$invalid, 'has-success': procedureForm.date.$valid && procedureForm.date.$dirty}">
-              <label for="date" class="control-label">Date of Procedure:</label>
-              <div class="inner-addon addon-left">
-                <div class="addon">
-                  <i class="fa fa-calendar"></i>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.procedureName.$dirty) && procedureForm.procedureName.$invalid, 'has-success': procedureForm.procedureName.$valid && procedureForm.procedureName.$dirty}">
+                  <label for="procedureName" class="control-label">Procedure Name</label>
+                  <div class="input-holder">
+                    <input type="text" class="form-control input-sm" id="procedureName" name="procedureName" ng-model="procedureEdit.procedureName" required />
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.procedureName.$error.required">You must enter a value.</span>
                 </div>
-                <input type="text" class="form-control" id="date" name="date" ng-model="procedure.date" ng-click="dateofSubmittedDatepicker($event, 'Date')" uib-datepicker-popup="dd-MMM-y" is-open="Date" required disabled />
               </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.datesubmitted.$error.required">You must enter a valid date.</span>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.procedureTerminology.$dirty) && procedureForm.procedureTerminology.$invalid, 'has-success': procedureForm.procedureTerminology.$valid && procedureForm.procedureTerminology.$dirty}">
-              <label for="procedureTerminology" class="control-label">Terminology:</label>
-              <div class="input-holder">
-                <input type="text" class="form-control input-sm" id="procedureTerminology" name="procedureTerminology" ng-model="procedure.procedureTerminology" required />
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.procedureTerminology.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.procedureCode.$dirty) && procedureForm.procedureCode.$invalid, 'has-success': procedureForm.procedureCode.$valid && procedureForm.procedureCode.$dirty}">
-              <label for="procedureTerminology" class="control-label">Code:</label>
-              <div class="input-holder">
-                <input type="text" class="form-control input-sm" id="procedureCode" name="procedureCode" ng-model="procedure.procedureCode" required />
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.procedureCode.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.performer.$dirty) && procedureForm.performer.$invalid, 'has-success': procedureForm.performer.$valid && procedureForm.performer.$dirty}">
-              <label for="performer" class="control-label">Procedure Performed By:</label>
-              <div class="input-holder">
-                <input type="text" class="form-control input-sm" id="performer" name="performer" ng-model="procedure.performer" required />
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.performer.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.author.$dirty) && procedureForm.author.$invalid, 'has-success': procedureForm.author.$valid && procedureForm.author.$dirty}">
-              <label for="author" class="control-label">Author:</label>
-              <div class="input-holder">
-                <input type="text" class="form-control input-sm" id="author" name="author" ng-model="procedure.author" required />
-              </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.author.$error.required">You must enter a value.</span>
-            </div>
-
-            <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || procedureForm.dateSubmitted.$dirty) && procedureForm.dateSubmitted.$invalid, 'has-success': procedureForm.dateSubmitted.$valid && procedureForm.dateSubmitted.$dirty}">
-              <label for="dateSubmitted" class="control-label">Date Created:</label>
-              <div class="inner-addon addon-left">
-                <div class="addon">
-                  <i class="fa fa-calendar"></i>
+              <div class="col-expand-right">
+                <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || procedureForm.date.$dirty) && procedureForm.date.$invalid, 'has-success': procedureForm.date.$valid && procedureForm.date.$dirty}">
+                  <label for="" class="control-label">Date of Procedure</label>
+                  <div class="inner-addon addon-left">
+                    <div class="addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control" id="date" name="date" ng-model="procedure.date" ng-click="openDatepicker($event, 'date')" ng-focus="removeFocus($event)" uib-datepicker-popup="dd-MMM-y" is-open="datepickers.date" required readonly/>
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.datesubmitted.$error.required">You must enter a valid date.</span>
                 </div>
-                <input type="text" class="form-control" id="dateSubmitted" name="dateSubmitted" ng-model="procedure.dateSubmitted" ng-click="dateofSubmittedDatepicker($event, 'DateSubmitted')" uib-datepicker-popup="dd-MMM-y" is-open="DateSubmitted" required disabled />
               </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.dateSubmitted.$error.required">You must enter a valid date.</span>
             </div>
 
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.source.$dirty) && procedureForm.source.$invalid, 'has-success': procedureForm.source.$valid && procedureForm.source.$dirty}">
-              <label for="source" class="control-label">Source:</label>
-              <div class="input-holder">
-                <input type="text" class="form-control input-sm" id="source" name="source" ng-model="procedure.source" required />
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.performer.$dirty) && procedureForm.performer.$invalid, 'has-success': procedureForm.performer.$valid && procedureForm.performer.$dirty}">
+                  <label for="performer" class="control-label">Procedure Performed By</label>
+                  <div class="input-holder">
+                    <input type="text" class="form-control input-sm" id="performer" name="performer" ng-model="procedure.performer" required />
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.performer.$error.required">You must enter a value.</span>
+                </div>
               </div>
-              <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.source.$error.required">You must enter a value.</span>
+              <div class="col-expand-right">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.notes.$dirty) && procedureForm.notes.$invalid, 'has-success': procedureForm.notes.$valid && procedureForm.notes.$dirty}">
+                  <label for="notes" class="control-label">Procedure Notes</label>
+                  <div class="input-holder">
+                    <textarea type="text" class="form-control textarea-big input-sm" id="notes" name="notes" ng-model="procedure.notes" required></textarea>
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.notes.$error.required">You must enter a value.</span>
+                </div>
+              </div>
             </div>
 
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.procedureTerminology.$dirty) && procedureForm.procedureTerminology.$invalid, 'has-success': procedureForm.procedureTerminology.$valid && procedureForm.procedureTerminology.$dirty}">
+                  <label for="procedureTerminology" class="control-label">Terminology</label>
+                  <div class="input-holder">
+                    <input type="text" class="form-control input-sm" id="procedureTerminology" name="procedureTerminology" ng-model="procedure.procedureTerminology" required />
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.procedureTerminology.$error.required">You must enter a value.</span>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.procedureCode.$dirty) && procedureForm.procedureCode.$invalid, 'has-success': procedureForm.procedureCode.$valid && procedureForm.procedureCode.$dirty}">
+                  <label for="procedureTerminology" class="control-label">Code</label>
+                  <div class="input-holder">
+                    <input type="text" class="form-control input-sm" id="procedureCode" name="procedureCode" ng-model="procedure.procedureCode" required />
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.procedureCode.$error.required">You must enter a value.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.author.$dirty) && procedureForm.author.$invalid, 'has-success': procedureForm.author.$valid && procedureForm.author.$dirty}">
+                  <label for="author" class="control-label">Author</label>
+                  <div class="input-holder">
+                    <input type="text" value="{{currentUser.email}}" placeholder="{{currentUser.email}}" class="form-control input-sm" id="author" name="author" ng-model="procedure.author" disabled />
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.author.$error.required">You must enter a value.</span>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || procedureForm.dateSubmitted.$dirty) && procedureForm.dateSubmitted.$invalid, 'has-success': procedureForm.dateSubmitted.$valid && procedureForm.dateSubmitted.$dirty}">
+                  <label for="dateSubmitted" class="control-label">Date</label>
+                  <div class="inner-addon addon-left">
+                    <div class="addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control" id="dateSubmitted" name="dateSubmitted" ng-model="procedure.dateSubmitted" ng-click="dateofSubmittedDatepicker($event, 'DateSubmitted')" uib-datepicker-popup="dd-MMM-y" is-open="DateSubmitted" required disabled />
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.dateSubmitted.$error.required">You must enter a valid date.</span>
+                </div>
+              </div>
+            </div>
           </div>
         </form>
       </div>

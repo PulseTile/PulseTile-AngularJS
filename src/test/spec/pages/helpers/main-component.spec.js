@@ -1,5 +1,5 @@
 'use strict';
-import MainComponent from '../../../../app/helpers/main.component.js';
+import MainComponent from '../../../../app/rippleui/main-component/main.component.js';
 import '../../../../app/index';
 
 describe('MainComponent', function() {
@@ -31,9 +31,6 @@ describe('MainComponent', function() {
         ctrl.getPageComponents();
     });
 
-    it('$scope.pageHeader exist', function() {
-        expect(scope.classShowSidebar).toBe('');
-    });
     it('$scope.mainWidth exist', function() {
         expect(scope.isSidebar).toBe(false);
     });

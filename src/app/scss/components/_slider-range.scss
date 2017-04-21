@@ -1,0 +1,96 @@
+.wrap-rzslider {
+  padding: 0 8px 0 13px;
+  border: 1px solid #d8d8d8;
+  border-bottom: 0;
+}
+.wrap-rzslider-search {
+  padding: 0 8px 0 13px;
+  border-bottom: 0;
+}
+
+.mc-rz-slider.rzslider {
+  height: 7px;
+  margin: 52px 0 41px;
+  width: 100%;
+  .rz-bar {
+    background: #f3f3f3;
+    height: 7px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .rz-selection { background: #0d672f; }
+  .rz-pointer {
+    width: 12px;
+    height: 12px;
+    top: -3px;
+    background-color: #0d672f;
+    border-radius: 2px;
+    outline: none !important;
+    &:focus {
+      background: #92c948;
+    }
+  }
+  .rz-tick-value {
+    color: #303030;
+    top: -22px;
+  }
+  .rz-pointer:after { display: none;}
+
+  .rz-bubble { bottom: 14px;}
+  .rz-limit {
+    font-size: 14px;
+    color: #303030;
+  }
+  
+  .rz-bubble:not(.rz-limit) {
+    bottom: 22px;
+    padding: 3px 8px;
+    font-size: 12px;
+    line-height: 16px;
+    background: #ffffff;
+    border: 1px solid #c3c3c3;
+    border-radius: 4px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  .rz-bubble:not(.rz-limit):before,
+  .rz-bubble:not(.rz-limit):after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-style: solid;
+    border-width: 6px 4px 0;
+    border-color: transparent;
+  }
+  .rz-bubble:not(.rz-limit):before {
+    margin-top: -1px;
+    border-top-color: #ffffff; 
+    z-index: 2; 
+  }
+  .rz-bubble:not(.rz-limit):after  {
+    border-top-color: #c3c3c3; 
+    z-index: 1; 
+  }
+
+  .rz-tick {
+    width: 1px;
+    height: 12px;
+    margin-left: 4px;
+    border-radius: 0;
+    background: #0d672f;
+    top: 0px;
+    // .rz-tick-value {display: none;}
+    .rz-tick-legend { 
+      white-space: nowrap; 
+      max-width: initial;
+    }
+    &:first-child .rz-tick-legend { display: none; transform: translate(0, 0);}
+    &:last-child  .rz-tick-legend { display: none; transform: translate(-100%, 0);}
+  }
+
+  .rz-tick.rz-selected {
+    background: #0d672f;
+    // .rz-tick-value {display: block}
+  }
+}

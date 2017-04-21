@@ -16,8 +16,191 @@
 let templatePatientsListFull = require('./patients-list-full.html');
 
 class PatientsListFullController {
-  constructor($scope, $window, $rootScope, $state, $stateParams, $ngRedux, searchReport, Patient, serviceRequests, patientsActions) {
+  constructor($scope, $window, $rootScope, $state, $stateParams, $ngRedux, searchReport, Patient, serviceRequests, patientsActions, $timeout, ConfirmationModal, serviceFormatted, searchActions) {
+    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-list-full'});
     serviceRequests.publisher('headerTitle', {title: 'Search results', isShowTitle: true});
+
+
+    $scope.patientsTable = serviceRequests.patientsTable || {
+      info: {
+        title: 'PATIENT INFO',
+        settings: {
+          name: {
+            select: true,
+            title: 'Name',
+            disabled: true,
+            width: 150
+          },
+          address: {
+            select: true,
+            title: 'Address',
+            width: 300
+          },
+          dateOfBirth: {
+            select: true,
+            title: 'Born',
+            disabled: true,
+            width: 105
+          },
+          gender: {
+            select: true,
+            title: 'Gender',
+            disabled: true,
+            width: 90
+          }, 
+          nhsNumber: {
+            select: true,
+            title: 'NHS No.',
+            width: 115  
+          }
+        }
+      },
+      date: {
+        title: 'DATE / TIME',
+        settings: {
+          orders: {
+            select: false,
+            title: 'Orders',
+            width: 110
+          },
+          results: {
+            select: false,
+            title: 'Results',
+            width: 110
+          },
+          vitals: {
+            select: false,
+            title: 'Vitals',
+            width: 110
+          },
+          diagnosis: {
+            select: false,
+            title: 'Diagnosis',
+            width: 130
+          }
+        }
+      },
+      count: {
+        title: 'COUNT',
+        settings: {
+          orders: {
+            select: false,
+            title: 'Orders',
+            width: 100
+          },
+          results: {
+            select: false,
+            title: 'Results',
+            width: 100
+          },
+          vitals: {
+            select: false,
+            title: 'Vitals',
+            width: 100
+          },
+          diagnosis: {
+            select: false,
+            title: 'Diagnosis',
+            width: 120
+          }
+        }
+      }
+    };
+    $scope.patientsTableSettings = {};
+
+    if (serviceRequests.patientsTable) {
+      serviceRequests.patientsTable = $scope.patientsTable;
+    }
+
+    $scope.changeTableSettings = function () {
+      serviceRequests.patientsTable = $scope.patientsTable;
+      $scope.resizeFixedTables();
+    };
+
+    $scope.hoveredTableRow = -1;
+    $scope.hoverTableRow = function (index) {
+      $scope.hoveredTableRow = index;
+    };
+    $scope.unHoverTableRow = function () {
+      $scope.hoveredTableRow = -1;
+    };
+    $scope.getHoveredTableRow = function (index) {
+      return $scope.hoveredTableRow == index;
+    };
+
+    $scope.getpatientsTableSettings = function () {
+      var newSettings = {};
+      for (var key in $scope.patientsTable.info.settings) {
+        newSettings[key] = $scope.patientsTable.info.settings[key];
+        newSettings[key].type = 'info';
+      }
+      for (var key in $scope.patientsTable.date.settings) {
+        newSettings[key + 'Date'] = $scope.patientsTable.date.settings[key];
+        newSettings[key + 'Date'].type = 'date';
+        newSettings[key + 'Count'] = $scope.patientsTable.count.settings[key];
+        newSettings[key + 'Count'].type = 'count';
+      }
+      $scope.patientsTableSettings = newSettings;
+    };
+    $scope.getpatientsTableSettings();
+
+    $scope.resizeFixedTables = function () {
+      $timeout(function () {
+        var $wrapTables = $('.wrap-patients-table');
+
+        var $tableNames = $wrapTables.find('.table-patients-name');
+        var $tableNamesRows = $tableNames.find('tr');
+
+        var $tableControls = $wrapTables.find('.table-patients-controls');
+        var $tableControlsRows = $tableControls.find('tr');
+
+        var $tableFullRows = $('.table-patients-full tr');
+        var $tds = $tableFullRows.eq(1).find('td');
+
+        $tableNames.width($tds.eq(0).outerWidth() + 1);
+        $tableControls.width($tds.eq($tds.length - 1).outerWidth());
+        $tableFullRows.each(function (i, row, rows) {
+          var height = $(row).height();
+          $tableNamesRows.eq(i).height(height);
+          $tableControlsRows.eq(i).height(height);
+        });
+      });
+    };
+
+    $(window).on('resize', function () {
+      $scope.resizeFixedTables();
+    });
+
+    $scope.selectAllSettings = function (key) {
+      var settings = $scope.patientsTable[key].settings;
+      var isSelectAll = true;
+
+      for (var item in settings) {
+        if (settings[item].select === false) {
+          isSelectAll = false;
+          break;
+        }
+      }
+
+      for (var item in settings) {
+        if (!settings[item].disabled) {
+          settings[item].select = !isSelectAll;
+        }
+      }
+
+      $scope.resizeFixedTables();
+    };
+
+    this.openModal = function (patient, state) {
+      ConfirmationModal.openModal({id: patient.nhsNumber }, state);
+    };
+
+
+
+
+
+
+
 
     var searchType;
 
@@ -32,8 +215,6 @@ class PatientsListFullController {
     this.tabName = 'Patient Info';
     this.patients = [];
     $rootScope.searchMode = true;
-    this.query = '';
-    this.isFilter = false;
 
     this.getPageInfo = function (info) {
       var from = (15 * info.page - 14);
@@ -54,6 +235,17 @@ class PatientsListFullController {
 
       var total = from + ' to ' + to + ' of ' + info.totalItems;
       return total;
+    };
+
+
+    $scope.searchByDetails = function (queryParams, queryType) {
+      /* istanbul ignore if */
+      if (queryParams.dateOfBirth) {
+        queryParams.dateOfBirth = new Date(queryParams.dateOfBirth.getTime() - (60000 * queryParams.dateOfBirth.getTimezoneOffset()));
+      }
+
+      this.searchResult = queryType === 'advanced' ? searchActions.advancedSearch : searchActions.querySearch;
+      this.searchResult(queryParams);
     };
 
     this.getData = function () {
@@ -95,37 +287,27 @@ class PatientsListFullController {
         $rootScope.settingsMode = false;
         $rootScope.reportTypeSet = false;
         $rootScope.patientMode = true;
-        $rootScope.subHeader = $stateParams.queryType + $stateParams.searchString;
-        var searchPatientQuery = {
-          orderType: $stateParams.orderType,
-          pageNumber: $stateParams.pageNumber,
-          searchString: $stateParams.searchString
-        };
+         
+        if ($stateParams.queryType === 'Patient: ') {
+          searchType = 'patient';
 
-        searchReport.searchByPatient(searchPatientQuery);
-        searchType = 'patient';
+          $rootScope.subHeader = $stateParams.queryType + $stateParams.searchString;
+          var searchPatientQuery = {
+            orderType: $stateParams.orderType,
+            pageNumber: $stateParams.pageNumber,
+            searchString: $stateParams.searchString
+          };
+
+          searchReport.searchByPatient(searchPatientQuery);
+
+        } else {
+          $rootScope.subHeader = 'Search Result';
+          searchType = 'advanced';
+
+          $scope.searchByDetails($stateParams.searchParams, $stateParams.queryType);
+        }
       }
     }
-
-    this.toggleFilter = function () {
-      this.isFilter = !this.isFilter;
-    };
-    this.sort = function (field) {
-      var reverse = this.reverse;
-      /* istanbul ignore if  */
-      if (this.order === field) {
-        this.reverse = !reverse;
-      } else {
-        this.order = field;
-        this.reverse = false;
-      }
-    };
-
-    this.sortClass = function (field) {
-      if (this.order === field) {
-        return this.reverse ? 'sorted desc' : 'sorted asc';
-      }
-    };
 
     this.processCounts = function (countString) {
       return countString === null ? 0 : countString;
@@ -179,7 +361,7 @@ class PatientsListFullController {
             if (this.pagingInfo.totalItems === 0) {
               this.noResults = 'There are no results that match your search criteria';
             } else {
-              this.processData();
+              // this.processData();
             }
 
             break;
@@ -191,7 +373,7 @@ class PatientsListFullController {
             if (this.pagingInfo.totalItems === 0) {
               this.noResults = 'There are no results that match your search criteria';
             } else {
-              this.processData();
+              // this.processData();
             }
 
             break;
@@ -208,18 +390,32 @@ class PatientsListFullController {
               this.patients = patients;
               this.pagingInfo.totalItems = result.data.totalPatients;
 
+              serviceFormatted.formattingTablesDate(this.patients, ['dateOfBirth'], serviceFormatted.formatCollection.DDMMMYYYY);
+              serviceFormatted.filteringKeys = ['name', 'address', 'dateOfBirth', 'gender', 'nhsNumber'];
+
               if (this.pagingInfo.totalItems === 0) {
                 this.noResults = 'There are no results that match your search criteria';
               } else {
-                this.processData();
+                // this.processData();
               }
             break;
+          }
+          case 'advanced': {
+            this.patients = result.data;
+
+            serviceFormatted.formattingTablesDate(this.patients, ['dateOfBirth'], serviceFormatted.formatCollection.DDMMMYYYY);
+            serviceFormatted.filteringKeys = ['name', 'address', 'dateOfBirth', 'gender', 'nhsNumber'];
+
+            if (this.pagingInfo.totalItems === 0) {
+              this.noResults = 'There are no results that match your search criteria';
+            }
           }
           default: {
             break;
           }
         }
       }
+      $scope.resizeFixedTables();
     };
 
     this.viewPatients = function () {
@@ -236,12 +432,6 @@ class PatientsListFullController {
       this.tab = 'counts';
       this.tabName = 'Counts';
     };
-
-    // $scope.$watch('this.pagingInfo.page', function (page) {
-    //   // this.pagingInfo.page = page;
-    //   $stateParams.pageNumber = page;
-    //   getData();
-    // });
 
     this.clickGetItem = false;
     this.go = function (patient) {
@@ -348,6 +538,8 @@ class PatientsListFullController {
       });
 
       this.patients = curPatients.slice();
+
+      $scope.resizeFixedTables();
     };
 
     this.getData();
@@ -359,5 +551,5 @@ const PatientsSummaryComponent = {
   controller: PatientsListFullController
 };
 
-PatientsListFullController.$inject = ['$scope', '$window', '$rootScope', '$state', '$stateParams', '$ngRedux', 'searchReport', 'Patient', 'serviceRequests', 'patientsActions'];
+PatientsListFullController.$inject = ['$scope', '$window', '$rootScope', '$state', '$stateParams', '$ngRedux', 'searchReport', 'Patient', 'serviceRequests', 'patientsActions', '$timeout', 'ConfirmationModal', 'serviceFormatted', 'searchActions'];
 export default PatientsSummaryComponent;

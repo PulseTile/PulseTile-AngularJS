@@ -1,8 +1,13 @@
-.header {}
 .header .navbar {
   margin: 0;
   border: 0;
   border-radius: 0;
+  @include respond-from(sm) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 @import 'logo';

@@ -24,7 +24,7 @@
           <div class="col-xs-6 col-sm-4" ng-repeat="(key, dashboard) in listsDashboards">
             <div class="wrap-fcustominp">
               <div class="fcustominp">
-                <input type="checkbox" id="dashboard-{{key}}" name="dashboard-{{key}}" ng-model="dashboard.show" />
+                <input type="checkbox" id="dashboard-{{key}}" ng-change="changeDashboards()" name="dashboard-{{key}}" ng-model="dashboard.show" />
                 <label for="dashboard-{{key}}"></label>
               </div>
               <label for="dashboard-{{key}}" class="fcustominp-label">{{ dashboard.title }}</label>
@@ -48,7 +48,7 @@
           <div class="board-body">
             <ul class="board-list">
               <li class="board-list-item" ng-repeat="dashboardItem in dashboard.array">
-                <span class="board-list-link" ng-if="dashboardItem.text" ng-click="go(dashboard.toState, dashboardItem.sourceId, dashboard.goNameIndex)">{{ dashboardItem.text }}</span>
+                <span class="board-list-link" ng-if="dashboardItem.text" ng-click="go(dashboard.toState, dashboardItem.sourceId)">{{ dashboardItem.text }}</span>
               </li>
             </ul>
           </div>

@@ -32,6 +32,7 @@ class ContactsCreateController {
       }
       if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;
+        $scope.contact.author = $scope.currentUser.email;
       }
     };
 
