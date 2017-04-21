@@ -350,8 +350,6 @@ class HeaderController {
 
     this.searchFunction = function () {
       /* istanbul ignore if  */
-      console.log('$scope.search.searchExpression');
-      console.log($scope.search.searchExpression);
       if ($scope.search.searchExpression !== '') {
         $state.go('patients-list-full', {
           queryType: 'Patient: ',

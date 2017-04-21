@@ -16,7 +16,7 @@
 let templatePatientsListFull = require('./patients-list-full.html');
 
 class PatientsListFullController {
-  constructor($scope, $window, $rootScope, $state, $stateParams, $ngRedux, searchReport, Patient, serviceRequests, patientsActions, $timeout, ConfirmationModal, serviceFormatted) {
+  constructor($scope, $window, $rootScope, $state, $stateParams, $ngRedux, searchReport, Patient, serviceRequests, patientsActions, $timeout, ConfirmationModal, serviceFormatted, searchActions) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-list-full'});
     serviceRequests.publisher('headerTitle', {title: 'Search results', isShowTitle: true});
 
@@ -237,6 +237,17 @@ class PatientsListFullController {
       return total;
     };
 
+
+    $scope.searchByDetails = function (queryParams, queryType) {
+      /* istanbul ignore if */
+      if (queryParams.dateOfBirth) {
+        queryParams.dateOfBirth = new Date(queryParams.dateOfBirth.getTime() - (60000 * queryParams.dateOfBirth.getTimezoneOffset()));
+      }
+
+      this.searchResult = queryType === 'advanced' ? searchActions.advancedSearch : searchActions.querySearch;
+      this.searchResult(queryParams);
+    };
+
     this.getData = function () {
       /* istanbul ignore if  */
       if ($stateParams.queryType === 'Setting: ') {
@@ -276,15 +287,25 @@ class PatientsListFullController {
         $rootScope.settingsMode = false;
         $rootScope.reportTypeSet = false;
         $rootScope.patientMode = true;
-        $rootScope.subHeader = $stateParams.queryType + $stateParams.searchString;
-        var searchPatientQuery = {
-          orderType: $stateParams.orderType,
-          pageNumber: $stateParams.pageNumber,
-          searchString: $stateParams.searchString
-        };
+         
+        if ($stateParams.queryType === 'Patient: ') {
+          searchType = 'patient';
 
-        searchReport.searchByPatient(searchPatientQuery);
-        searchType = 'patient';
+          $rootScope.subHeader = $stateParams.queryType + $stateParams.searchString;
+          var searchPatientQuery = {
+            orderType: $stateParams.orderType,
+            pageNumber: $stateParams.pageNumber,
+            searchString: $stateParams.searchString
+          };
+
+          searchReport.searchByPatient(searchPatientQuery);
+
+        } else {
+          $rootScope.subHeader = 'Search Result';
+          searchType = 'advanced';
+
+          $scope.searchByDetails($stateParams.searchParams, $stateParams.queryType);
+        }
       }
     }
 
@@ -378,6 +399,16 @@ class PatientsListFullController {
                 // this.processData();
               }
             break;
+          }
+          case 'advanced': {
+            this.patients = result.data;
+
+            serviceFormatted.formattingTablesDate(this.patients, ['dateOfBirth'], serviceFormatted.formatCollection.DDMMMYYYY);
+            serviceFormatted.filteringKeys = ['name', 'address', 'dateOfBirth', 'gender', 'nhsNumber'];
+
+            if (this.pagingInfo.totalItems === 0) {
+              this.noResults = 'There are no results that match your search criteria';
+            }
           }
           default: {
             break;
@@ -520,5 +551,5 @@ const PatientsSummaryComponent = {
   controller: PatientsListFullController
 };
 
-PatientsListFullController.$inject = ['$scope', '$window', '$rootScope', '$state', '$stateParams', '$ngRedux', 'searchReport', 'Patient', 'serviceRequests', 'patientsActions', '$timeout', 'ConfirmationModal', 'serviceFormatted'];
+PatientsListFullController.$inject = ['$scope', '$window', '$rootScope', '$state', '$stateParams', '$ngRedux', 'searchReport', 'Patient', 'serviceRequests', 'patientsActions', '$timeout', 'ConfirmationModal', 'serviceFormatted', 'searchActions'];
 export default PatientsSummaryComponent;

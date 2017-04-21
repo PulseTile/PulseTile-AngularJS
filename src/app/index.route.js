@@ -107,7 +107,8 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         url: '/patients-full-details?ageFrom&ageTo&orderType&pageNumber&reportType&searchString&queryType',
         views: {
           main: {template: '<patients-list-full-component><patients-list-full-component>'}
-        }
+        },
+        params: {searchParams: null},
       });          
       
   plugins.forEach((plugin)=>{
