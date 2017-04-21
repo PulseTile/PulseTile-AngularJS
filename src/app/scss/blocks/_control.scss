@@ -28,6 +28,14 @@
     & > * { display: inline-block; }
   }
   &.with-indent > * { margin-bottom: 5px; }
+  &.without-side-indent {
+    margin-left: 0;
+    margin-right: 0;
+    & > * {
+      margin-right: 0;
+      margin-left: 0;
+    }
+  }
   .control-separate {
     background: #ccc;
     display: inline-block;
