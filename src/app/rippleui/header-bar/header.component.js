@@ -21,7 +21,6 @@ class HeaderController {
 
     var self = this;
     $scope.title = '';
-    // $scope.searchActive = false;
     $scope.isOpenSearch = false;
 
     $scope.isToogleSearchShow = false;
@@ -32,11 +31,6 @@ class HeaderController {
 
     $scope.searchOption = null;
     $scope.searchOptionsList = [
-      // {
-      //   name: 'Patient Search',
-      //   // type: 'advanced'
-      //   type: ''
-      // }, 
       {
         name: 'Patient Search - Advanced',
         type: 'advanced'
@@ -52,18 +46,18 @@ class HeaderController {
     };
 
     this.openAdvancedSearch = function(index) {
+      /* istanbul ignore if  */
       if (!$scope.searchOptionsList[index].type.length) return;
       
-      if ($scope.searchOption && ($scope.searchOptionsList[index].type == $scope.searchOption.type)) {
-        this.closeAdvancedSearch();
-      } else {
+      /* istanbul ignore if  */
+      if (!$scope.searchOption || ($scope.searchOptionsList[index].type != $scope.searchOption.type)) {
         $scope.isOpenSearch = true;
         $scope.searchOption = $scope.searchOptionsList[index];
         serviceRequests.publisher('clearSearchParams', {});
         serviceRequests.publisher('openSearchPanel', {});
       }
-      
     };
+
     $scope.isActiveTypeSearch = function (type) {
       if ($scope.searchOption && $scope.searchOption.type === type) {
         return true;
@@ -323,6 +317,8 @@ class HeaderController {
 
     this.searchFunction = function () {
       /* istanbul ignore if  */
+      console.log('$scope.search.searchExpression');
+      console.log($scope.search.searchExpression);
       if ($scope.search.searchExpression !== '') {
         $state.go('patients-list-full', {
           queryType: 'Patient: ',
