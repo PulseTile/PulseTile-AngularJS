@@ -71,7 +71,6 @@ class EventsDetailController {
     this.eventsLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
 
 
-    //var socket = socketService.socket;
     var appointmentId = $stateParams.detailsIndex;
     var user = serviceRequests.currentUserData;
     var ROLE_DOCTOR = 'IDCR';
