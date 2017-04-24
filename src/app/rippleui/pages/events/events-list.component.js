@@ -103,6 +103,8 @@ class EventsListController {
         this.eventsFilterSteps = $scope.getFilterArray(this.events);
         serviceFormatted.formattingTablesDate(this.eventsFilterSteps, ['value', 'legend'], serviceFormatted.formatCollection.DDMMMYYYY);
         
+        console.log('this.eventsFilterSteps');
+        console.log(this.eventsFilterSteps);
         $scope.sliderRange = {
           minValue: filterTimelineData.rangeMin ? filterTimelineData.rangeMin : this.eventsFilterSteps[0].value,
           maxValue: filterTimelineData.rangeMax ? filterTimelineData.rangeMax : this.eventsFilterSteps[this.eventsFilterSteps.length - 1].value,
@@ -175,7 +177,7 @@ class EventsListController {
               if (index % Math.round(arr.length / countLabel) === 0 ||
                   index === arr.length - 1) {
 
-                newEl.legend = +el.dateOfAppointment;
+                newEl.legend = el.dateOfAppointment;
               }
               
               return newEl;

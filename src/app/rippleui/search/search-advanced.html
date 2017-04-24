@@ -19,7 +19,7 @@
         <div class="panel panel-secondary without-margin" ng-class="{open: isOpenPanelSearch}">
           <div class="panel-heading">
             <div class="control-group right">
-              <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="isOpenPanelSearch = !isOpenPanelSearch"><i class="fa fa-chevron-up"></i></button>
+              <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="isOpenPanelSearch = !isOpenPanelSearch; refreshSlider();"><i class="fa fa-chevron-up"></i></button>
             </div>
             <h3 class="panel-title"><span>{{$ctrl.option.name}}</span><span ng-bind-html="getSearchParams(searchParams)"></span></h3>
           </div>

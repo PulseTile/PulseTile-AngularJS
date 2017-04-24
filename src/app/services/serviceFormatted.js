@@ -28,13 +28,17 @@ class ServiceFormatted {
     /* istanbul ignore next  */
     this.formattingDate = function(date, format) {
       var dateType;
-
-      if (angular.isNumber(date)) {
-        return moment(date).format(format);
-      } else {
-        dateType = new Date(date).getTime();
-        return moment(dateType).format(format);
+      
+      if (date) {
+        if (angular.isNumber(date)) {
+          return moment(date).format(format);
+        } else {
+          dateType = new Date(date).getTime();
+          return moment(dateType).format(format);
+        }
       }
+
+      return;
     };
 
     /* istanbul ignore next  */
