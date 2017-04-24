@@ -135,30 +135,6 @@ class SearchAdvancedController {
     });
 
 
-
-    var changeState = function () {
-      // if ($scope.patients.constructor === Array && $scope.patients.length == 1) {
-        
-      //   ConfirmationModal.openModal($scope.patients[0]);
-      //   $scope.cancel();
-        
-      // } else 
-      if ($scope.patients.constructor === Array && $scope.patients.length > 1) {
-        $state.go('patients-list', {
-          patientsList: $scope.patients,
-          advancedSearchParams: $scope.searchParams
-        });
-      } else {
-        $state.go('patients-list', {
-          patientsList: $scope.patients,
-          advancedSearchParams: $scope.searchParams,
-          displayEmptyTable: true
-        });
-      }
-    };
-
-    
-
     var step;
     for (var i = 0; i < 100; i += 5) {
       step = {
@@ -208,14 +184,6 @@ class SearchAdvancedController {
     //   this.detailsFocused = true;
     // }
 
-    $scope.getResult = function (result) {
-      $scope.patients = result.data;
-
-      if ($scope.patients) {
-        changeState();
-      }
-    };
-
     $scope.ok = function (searchForm) {
       $scope.isOpenPanelSearch = false;
       $scope.formSubmitted = true;
@@ -227,13 +195,10 @@ class SearchAdvancedController {
           $scope.searchParams.nhsNumber = $scope.searchParams.nhsNumber.replace(/\s+/g, '');
         }
 
-        $scope.searchByDetails($scope.searchParams);
-
-        let unsubscribe = $ngRedux.connect(state => ({
-          setResult: $scope.getResult(state.search)
-        }))(this);
-
-        $scope.$on('$destroy', unsubscribe);
+        $state.go('patients-list-full', {
+          queryType: queryOption.type,
+          searchParams: $scope.searchParams,
+        });
       }
     };  
 
@@ -290,28 +255,15 @@ class SearchAdvancedController {
 
     var queryOption = this.option;
 
-    $scope.searchByDetails = function (queryParams) {
-      /* istanbul ignore if */
-      // if (queryParams.surname) {
-      //   queryParams.dateOfBirth = "2017-03-22T00:00:00.000Z";
-      // }
-      if (queryParams.dateOfBirth) {
-        queryParams.dateOfBirth = new Date(queryParams.dateOfBirth.getTime() - (60000 * queryParams.dateOfBirth.getTimezoneOffset()));
-      }
-      this.searchResult = queryOption.type === 'advanced' ? searchActions.advancedSearch : searchActions.querySearch;
-      this.searchResult(queryParams);
-    };
-
-
     $rootScope.$on('$locationChangeStart', function() {
       var currentState = $state.router.globals.$current.name;
       $scope.isOpenPanelSearch = false;
 
       if ($scope.isSearchCompleted &&
-          currentState !== 'patients-list-full' && 
-          currentState !== 'patients-summary') {
+          currentState !== 'patients-list-full') {
         $scope.isSearchCompleted = false;
         $scope.clearSearchParams();
+        serviceRequests.publisher('closeAdvancedSearch');
       }
     });
   }
