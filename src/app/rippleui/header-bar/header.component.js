@@ -376,7 +376,13 @@ class HeaderController {
     }.bind(this));
 
     $rootScope.$on('$locationChangeStart', function() {
-      this.checkIsShowPreviousBtn()
+      var currentState = $state.router.globals.$current.name;
+      
+      this.checkIsShowPreviousBtn();
+  
+      if (currentState !== 'patients-list-full') {
+        this.cancelSearchMode();
+      }
     }.bind(this));
 
     $window.addEventListener('resize', function () {

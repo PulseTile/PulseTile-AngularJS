@@ -101,10 +101,8 @@ class EventsListController {
         serviceFormatted.filteringKeys = ['serviceTeam', 'type', 'dateOfAppointment'];
 
         this.eventsFilterSteps = $scope.getFilterArray(this.events);
-        serviceFormatted.formattingTablesDate(this.eventsFilterSteps, ['value', 'legend'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.formattingTablesDate(this.eventsFilterSteps, ['value', 'legend'], serviceFormatted.formatCollection.DDMMMMYYYY);
         
-        console.log('this.eventsFilterSteps');
-        console.log(this.eventsFilterSteps);
         $scope.sliderRange = {
           minValue: filterTimelineData.rangeMin ? filterTimelineData.rangeMin : this.eventsFilterSteps[0].value,
           maxValue: filterTimelineData.rangeMax ? filterTimelineData.rangeMax : this.eventsFilterSteps[this.eventsFilterSteps.length - 1].value,

@@ -20,6 +20,7 @@ class ServiceFormatted {
   constructor () {
     this.formatCollection = {
       DDMMMYYYY: 'DD-MMM-YYYY',
+      DDMMMMYYYY: 'DD MMMM YYYY',
       HHmm: 'HH:mm'
     };
     this.filteringKeys = [];

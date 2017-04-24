@@ -35,7 +35,7 @@
       <div class="dropdown">
         <button mc-dropdown class="btn btn-success btn-inverse btn-dropdown-toggle btn-table" ng-click="toggleDropdown($event);">
           <i ng-if="isActiveView('table')" class="fa fa-table"></i>
-          <i ng-if="isActiveView('timeline')" class="fa fa-calendar-plus-o"></i>
+          <i ng-if="isActiveView('timeline')" class="fa fa-sliders"></i>
         </button>
         <div class="dropdown-menu dm-panel dm-right dm-tables">
           <div class="heading">TABLES</div>
@@ -45,7 +45,7 @@
           <div class="heading">TIMELINES</div>
           <div class="dm-wrap-list">
             <div class="dm-list">
-              <div class="dm-item" ng-class="{active: isActiveView('timeline')}" ng-click="changeActiveView('timeline')"><i class="fa fa-calendar-plus-o"></i><span>Events</span></div>
+              <div class="dm-item" ng-class="{active: isActiveView('timeline')}" ng-click="changeActiveView('timeline')"><i class="fa fa-sliders"></i><span>Events</span></div>
             </div>
           </div>
         </div>
