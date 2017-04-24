@@ -36,10 +36,12 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         views: {
           main: {template: '<profile-component></profile-component>'}
         },
-        breadcrumbs: [{
-          title: 'Patient Listings',
-          state: 'patients-list'
-        }, {
+        breadcrumbs: [
+        // {
+        //   title: 'Patient Listings',
+        //   state: 'patients-list'
+        // }, 
+        {
           title: 'Patient Information',
           state: 'profile'
         }]

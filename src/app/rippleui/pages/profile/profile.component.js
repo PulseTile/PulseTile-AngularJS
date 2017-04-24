@@ -20,9 +20,14 @@ class ProfileController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'profile'});
     serviceRequests.publisher('headerTitle', {title: 'Personal Information', isShowTitle: true});
 
+    $scope.isAppSettingsEdit = false;
     $scope.isPersonalEdit = false;
     $scope.isContactEdit = false;
- 
+    
+    this.appSettingsEdit = function () {
+      $scope.appSettingsEdit = Object.assign({}, this.appSettings);
+      $scope.isAppSettingsEdit = true;
+    };
     this.personalEdit = function () {
       $scope.personalEdit = Object.assign({}, this.profile);
       $scope.isPersonalEdit = true;
@@ -31,12 +36,23 @@ class ProfileController {
       $scope.contactEdit = Object.assign({}, this.profile);
       $scope.isContactEdit = true;
     };
+
+    this.cancelAppSettingsEdit = function () {
+      $scope.isAppSettingsEdit = false;
+    };
     this.cancelPersonalEdit = function () {
       $scope.isPersonalEdit = false;
     };
     this.cancelContactEdit = function () {
       $scope.isContactEdit = false;
     };
+
+    $scope.confirmAppSettingsEdit = function (appSettingsForm, appSettings) {
+      $scope.formSubmitted = true;
+      if (appSettingsForm.$valid) {
+        $scope.isAppSettingsEdit = false;
+      }
+    }.bind(this);
     $scope.confirmPersonalEdit = function (personalForm, personal) {
       $scope.formSubmitted = true;
       if (personalForm.$valid) {
@@ -83,6 +99,19 @@ class ProfileController {
           }
         ]
       };
+
+      this.appSettings = {
+        title: 'Application 1',
+        logoPath: 'logo_1985.jpg',
+        theme: {
+          name: 'Green Theme',
+          baseColor: '#0D672F',
+          lightColor: '#7cbe31',
+          lighterColor: '#A9D38E'
+        },
+        browserTitle: 'Ripple'
+      }
+
     };
 
     this.setCurrentPageData = function (data) {

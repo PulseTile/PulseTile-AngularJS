@@ -15,6 +15,133 @@
   -->
 
   <div mc-full-panel mc-datepicker mc-accordion mc-open-panel="personal" class="panel-group accordion">
+    <div class="panel panel-secondary" ng-if="getShowPanel('appSettings') && !isAppSettingsEdit" ng-class="getOpenPanelClass('appSettings')">
+      <div class="panel-heading">
+        <div class="control-group right">
+          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main', 'appSettings')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+          <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('appSettings')"><i class="fa fa-chevron-up"></i></button>
+        </div>
+        <h3 class="panel-title">Application preferences</h3>
+      </div>
+      <div class="panel-body">
+        <div class="panel-body-inner">
+          <div class="form">
+            <div class="form-group-wrapper">
+              <div class="row">
+                <div class="col-xs-12 col-md-6">
+                  <div class="row">
+                    <div class="col-md-11">
+                      <div class="form-group">
+                        <label class="control-label">Application Title</label>
+                        <div class="form-control-static">{{ $ctrl.appSettings.title }}</div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label">Application Logo File</label>
+                        <div class="form-control-static">{{ $ctrl.appSettings.logoPath }}</div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label class="control-label">Application Theme</label>
+                        <div class="palette-color">
+                          <span class="palette-color-icon" ng-style="{background: $ctrl.appSettings.theme.baseColor}"></span>
+                          <span class="palette-color-name">{{ $ctrl.appSettings.theme.name }}</span>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label">Browser Window Title</label>
+                        <div class="form-control-static">{{ $ctrl.appSettings.browserTitle }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
+          <div class="wrap-control-group">
+            <div class="control-group right">
+              <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.appSettingsEdit();"><i class="fa fa-edit"></i> Edit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-secondary" ng-if="getShowPanel('appSettings') && isAppSettingsEdit" ng-class="getOpenPanelClass('appSettings')">
+      <div class="panel-heading">
+        <div class="control-group right">
+          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main', 'appSettings')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+          <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('appSettings')"><i class="fa fa-chevron-up"></i></button>
+        </div>
+        <h3 class="panel-title">Application preferences</h3>
+      </div>
+      <div class="panel-body">
+        <div class="panel-body-inner">
+          <form name="appSettingsForm" class="form">
+            <div class="form-group-wrapper">
+              <div class="row">
+                <div class="col-xs-12 col-md-6">
+                  <div class="row">
+                    <div class="col-md-11">
+                      <div class="form-group" ng-class="{'has-error': (formSubmitted || appSettingsForm.title.$dirty) && appSettingsForm.title.$invalid, 'has-success': appSettingsForm.title.$valid && appSettingsForm.title.$dirty}">
+                        <label for="title" class="control-label">Application Title</label>
+                        <div class="input-holder">
+                          <input class="form-control input-sm" id="title" name="title" ng-model="appSettingsEdit.title" required />
+                        </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && appSettingsForm.title.$error.required">You must enter a value.</span>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label">Application Logo File</label>
+                        <div class="form-control-static">
+                          <button class="btn btn-success btn-inverse btn-normal-icon">
+                            <i class="fa fa-plus"></i>
+                            <span>Upload logo</span>
+                          </button>
+                          <span>logo_1985.jpg</span>
+                        </div>
+                      </div>
+                      
+                      <div class="form-group" ng-class="{'has-error': (formSubmitted || appSettingsForm.themes.$dirty) && appSettingsForm.themes.$invalid, 'has-success': appSettingsForm.themes.$valid && appSettingsForm.themes.$dirty}">
+                        <label for="themes" class="control-label">Application Themes</label>
+                        <div class="input-holder">
+                          <select class="form-control input-sm" id="themes" name="themes" ng-model="appSettingsEdit.themes" required>
+                              <option>Green Themes</option>
+                              <option>Red Themes</option>
+                          </select>
+                        </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && appSettingsForm.themes.$error.required">You must enter a value.</span>
+                      </div>
+
+                      <div class="form-group" ng-class="{'has-error': (formSubmitted || appSettingsForm.browseTitle.$dirty) && appSettingsForm.browseTitle.$invalid, 'has-success': appSettingsForm.browseTitle.$valid && appSettingsForm.browseTitle.$dirty}">
+                        <label for="browseTitle" class="control-label">Browser Window title</label>
+                        <div class="input-holder">
+                          <input class="form-control input-sm" id="browseTitle" name="browseTitle" ng-model="appSettingsEdit.browserTitle" required />
+                        </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && appSettingsForm.browseTitle.$error.required">You must enter a value.</span>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
+          <div class="wrap-control-group">
+            <div class="control-group right">
+              <button class="btn btn-danger" ng-click="$ctrl.cancelAppSettingsEdit()"><i class="fa fa-ban"></i> Cancel</button>
+              <button class="btn btn-success" ng-click="confirmAppSettingsEdit(appSettingsForm, appSettingsEdit)"><i class="fa fa-check"></i> Complete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <div class="panel panel-secondary" ng-if="getShowPanel('personal') && !isPersonalEdit" ng-class="getOpenPanelClass('personal')">
       <div class="panel-heading">
         <div class="control-group right">
