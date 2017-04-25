@@ -49,6 +49,7 @@ class PatientsSummaryController {
     };
     this.countPatientArr = 4;
 
+    /* istanbul ignore if  */
     if (serviceRequests.showListDashboards) {
       for (var dashboard in serviceRequests.showListDashboards) {
         $scope.listsDashboards[dashboard].show = serviceRequests.showListDashboards[dashboard];

@@ -1,6 +1,8 @@
 import EventsListComponent from '../../../../app/rippleui/pages/events/events-list.component';
 import '../../../../app/index';
 import '../../../../app/actions/index';
+import * as types from '../../../../app/constants/ActionTypes';
+import events from '../../../../app/rippleui/pages/referrals/referrals-reducer-all.js';
 
 describe('Events List', function() {
 
@@ -9,7 +11,8 @@ describe('Events List', function() {
     let scope,
         ctrl,
         controller,
-        template;
+        template,
+        fakeCall;
     
     beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _eventsActions_, _serviceRequests_, _usSpinnerService_, _serviceFormatted_, _$timeout_, _serviceStateManager_) => {
         controller = $controller;
@@ -33,6 +36,13 @@ describe('Events List', function() {
     }));
 
     beforeEach(function() {
+        fakeCall = {
+            callEvents: events
+        };
+
+        spyOn(fakeCall, 'callEvents');
+        fakeCall.callEvents({}, types.EVENTS);
+        
         spyOn(scope, 'toggleFilterTimeline');
         spyOn(scope, 'saveFilterTimelineParams');
         spyOn(scope, 'refreshSlider');
@@ -71,5 +81,8 @@ describe('Events List', function() {
     });
     it("go was called", function() {
         expect(ctrl.go).toHaveBeenCalled();
+    });
+    it("Events reducer was called", function() {
+        expect(fakeCall.callEvents).toHaveBeenCalled();
     });
 });
