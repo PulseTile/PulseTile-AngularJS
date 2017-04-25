@@ -26,8 +26,8 @@ describe('Patients List', function() {
         searchReport,
         $window,
         $rootScope;
-    // $scope, $window, $rootScope, $state, $stateParams, $ngRedux, searchReport, Patient, serviceRequests, patientsActions
-    beforeEach(inject(($injector, $controller, _$window_, _$rootScope_, _$state_, _$stateParams_, _$ngRedux_, _searchReport_, _Patient_, _serviceRequests_, _patientsActions_) => {
+    
+    beforeEach(inject(($injector, $controller, _$window_, _$rootScope_, _$state_, _$stateParams_, _$ngRedux_, _searchReport_, _Patient_, _serviceRequests_, _patientsActions_, _$timeout_, _ConfirmationModal_, _serviceFormatted_, _searchActions_) => {
         controller = $controller;
         scope = $injector.get('$rootScope').$new();
         $window = _$window_;
@@ -40,8 +40,6 @@ describe('Patients List', function() {
         serviceRequests = _serviceRequests_;
         patientsActions = _patientsActions_;
 
-        stateParams.patientsList = [];
-
         template = PatientsComponent.template;
         ctrl = controller(PatientsComponent.controller, {
             $scope: scope,
@@ -53,7 +51,11 @@ describe('Patients List', function() {
             searchReport: searchReport,
             Patient: Patient,
             serviceRequests: serviceRequests,
-            patientsActions: patientsActions
+            patientsActions: patientsActions,
+            $timeout: _$timeout_,
+            ConfirmationModal: _ConfirmationModal_,
+            serviceFormatted: _serviceFormatted_,
+            searchActions: _searchActions_
         });
 
         actions = $injector.get('patientsActions');
@@ -78,6 +80,8 @@ describe('Patients List', function() {
         spyOn(ctrl, 'viewCounts');
         spyOn(ctrl, 'goToSection');
         spyOn(ctrl, 'getItem');
+        spyOn(ctrl, 'getData');
+        spyOn(scope, 'searchByDetails');
 
         ctrl.go();
         ctrl.setPatients();
@@ -90,6 +94,8 @@ describe('Patients List', function() {
         ctrl.viewCounts();
         ctrl.goToSection();
         ctrl.getItem();
+        ctrl.getData();
+        scope.searchByDetails();
     });
 
     it('Template exist', function() {
@@ -136,5 +142,11 @@ describe('Patients List', function() {
     });
     it("getItem was called", function() {
         expect(ctrl.getItem).toHaveBeenCalled();
+    });
+    it("getData was called", function() {
+        expect(ctrl.getData).toHaveBeenCalled();
+    });
+    it("searchByDetails was called", function() {
+        expect(scope.searchByDetails).toHaveBeenCalled();
     });
 });

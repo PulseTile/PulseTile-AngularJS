@@ -195,13 +195,6 @@ class PatientsListFullController {
       ConfirmationModal.openModal({id: patient.nhsNumber }, state);
     };
 
-
-
-
-
-
-
-
     var searchType;
 
     this.pagingInfo = {
@@ -240,7 +233,8 @@ class PatientsListFullController {
 
     $scope.searchByDetails = function (queryParams, queryType) {
       /* istanbul ignore if */
-      if (queryParams.dateOfBirth) {
+      console.log('queryParams.dateOfBirth ', queryParams);
+      if (queryParams && queryParams.dateOfBirth) {
         queryParams.dateOfBirth = new Date(queryParams.dateOfBirth.getTime() - (60000 * queryParams.dateOfBirth.getTimezoneOffset()));
       }
 
