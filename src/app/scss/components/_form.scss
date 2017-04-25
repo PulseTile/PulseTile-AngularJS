@@ -179,7 +179,7 @@ select.textarea-big,
 
 .input-sm { font-size: 14px; }
 
-// Custom Inputs radio, checkbox
+// Start Custom Inputs radio, checkbox
   .wrap-fcustominps-inline {
     overflow: hidden;
     .wrap-fcustominp {
@@ -269,7 +269,24 @@ select.textarea-big,
       z-index: 1;
     }
   }
-//Custom Inputs
+// End Custom Inputs radio, checkbox
+
+// Start Custom Input file
+  .wrap-fcustomfile {
+    overflow: hidden;
+    align-items: center;
+    display: flex;
+    .fcustomfile-control {
+      float: left;
+      flex-grow: 0;
+      margin-right: 13px; 
+    }
+    .fcustomfile-text {
+      @include text-truncate;
+    }
+    input[type="file"] { display: none; }
+  }
+// End Custom Input file
 
 .uib-datepicker-popup.dropdown-menu { padding: 10px 0; }
 .input-container {

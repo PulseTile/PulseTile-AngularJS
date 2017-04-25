@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
 
-  <div mc-full-panel mc-datepicker mc-accordion mc-open-panel="personal" class="panel-group accordion">
+  <div mc-full-panel mc-datepicker mc-accordion mc-open-panel="appSettings" class="panel-group accordion">
     <div class="panel panel-secondary" ng-if="getShowPanel('appSettings') && !isAppSettingsEdit" ng-class="getOpenPanelClass('appSettings')">
       <div class="panel-heading">
         <div class="control-group right">
@@ -38,7 +38,7 @@
 
                       <div class="form-group">
                         <label class="control-label">Application Logo File</label>
-                        <div class="form-control-static">{{ $ctrl.appSettings.logoPath }}</div>
+                        <div class="form-control-static">{{ $ctrl.appSettings.logo.name }}</div>
                       </div>
                       
                       <div class="form-group">
@@ -95,13 +95,30 @@
 
                       <div class="form-group">
                         <label class="control-label">Application Logo File</label>
-                        <div class="form-control-static">
-                          <button class="btn btn-success btn-inverse btn-normal-icon">
-                            <i class="fa fa-plus"></i>
-                            <span>Upload logo</span>
-                          </button>
-                          <span>logo_1985.jpg</span>
+                        <div class="input-holder">
+                          <div class="wrap-fcustomfile">
+                            <div class="fcustomfile-control">
+                              <!-- onchange="angular.element(this).scope().fileNameChanged(this)" -->
+                              <input mc-uploadfile 
+                                uploadfile-text="appSettingsEdit.logo.name" 
+                                uploadfile-file="appSettingsEdit.logo.base64" 
+                                uploadfile-accept="image/jpeg,image/png,image/gif" 
+                                uploadfile-error="isErrorFileType" 
+                                type="file" 
+                                accept="image/jpeg,image/png,image/gif"
+                                name="logoPath"
+                                id="logoPath">
+                              <label for="logoPath" class="btn btn-success btn-inverse btn-normal-icon">
+                                <i class="fa fa-plus"></i>
+                                <span>Upload logo</span>
+                              </label>
+                            </div>
+                            <div class="fcustomfile-text" ng-bind='appSettingsEdit.logo.name'></div>
+                          </div>
                         </div>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && appSettingsForm.themes.$error.required">You must enter a value.</span>
+                        <span class="help-block animate-fade" ng-show="isErrorFileType">You must choise image file.</span>
+
                       </div>
                       
                       <div class="form-group" ng-class="{'has-error': (formSubmitted || appSettingsForm.themes.$dirty) && appSettingsForm.themes.$invalid, 'has-success': appSettingsForm.themes.$valid && appSettingsForm.themes.$dirty}">

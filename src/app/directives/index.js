@@ -415,4 +415,48 @@ angular.module('ripple-ui.directives', [])
             }
         }
     };
-  }]);
+  }])
+  .directive('mcInputFile', function() {
+    /* istanbul ignore next  */
+    return {
+      // scope: true,
+      link: function(scope, element, attrs) {
+        scope.clickInputFile = function (idInputFile) {
+          console.log("angular.element('#' + idInputFile)");
+          console.log(angular.element('#' + idInputFile));
+          // debugger
+          document.getElementById(idInputFile).click();
+        };
+      }
+    }
+  })
+  .directive('mcUploadfile', function () {
+      return {
+        restrict: 'A',
+        // scope: true,
+        scope: {
+          uploadfileText: '=',
+          typesFile: '@uploadfileAccept',
+          isErrorType: '=uploadfileError'
+        },
+        link: function(scope, element) {
+          scope.isErrorType = false;
+          var typesArr = scope.typesFile.replace(' ', '').split(',');
+          console.log('typesArr');
+          console.log(typesArr);
+
+          element.on('change', function (changeEvent) {
+            var loadFileParams = changeEvent.target.files[0];
+            var loadFileName = loadFileParams.name;
+            var loadFileType = loadFileParams.type;
+
+            if (true) {
+              scope.uploadfileText = loadFileName;
+              scope.isErrorType = false;
+            } else {
+              scope.isErrorType = true;
+            }
+          });
+        }
+      };
+  });
