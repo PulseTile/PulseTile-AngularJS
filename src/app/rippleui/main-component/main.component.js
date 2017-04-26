@@ -25,6 +25,7 @@ class MainController {
     $scope.breadcrumbs = [];
 
     $scope.setBreadcrumbs = function (breadcrumbs) {
+      /* istanbul ignore if  */
       if (serviceRequests.currentUserData.role === "PHR" && breadcrumbs) {
         breadcrumbs.shift();
       }
@@ -79,6 +80,7 @@ class MainController {
       }
     };
     this.hideSidebarOnMobile = function () {
+      /* istanbul ignore if  */
       if (window.innerWidth < 768) {
         $timeout(function() {
           $scope.isClassShowSidebar = false;

@@ -3,7 +3,6 @@ import ReferralsListComponent from '../../../../app/rippleui/pages/referrals/ref
 import '../../../../app/index';
 import * as types from '../../../../app/constants/ActionTypes';
 import referrals from '../../../../app/rippleui/pages/referrals/referrals-reducer-all.js';
-import '../../../../app/index';
 
 describe('Referrals List', function() {
 

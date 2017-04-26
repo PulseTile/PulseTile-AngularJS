@@ -26,9 +26,21 @@ describe('MainComponent', function() {
         });
     }));
     beforeEach(function() {
+        spyOn(scope, 'setBreadcrumbs');
+        spyOn(scope, 'getFullPanelClass');
+        spyOn(scope, 'getClasses');
         spyOn(ctrl, 'getPageComponents');
-
+        spyOn(ctrl, 'goBreadcrumb');
+        spyOn(ctrl, 'changeFullPanel');
+        spyOn(ctrl, 'hideSidebarOnMobile');
+        
         ctrl.getPageComponents();
+        scope.setBreadcrumbs();
+        scope.getFullPanelClass();
+        scope.getClasses();
+        ctrl.goBreadcrumb();
+        ctrl.changeFullPanel();
+        ctrl.hideSidebarOnMobile();
     });
 
     it('$scope.mainWidth exist', function() {
@@ -48,5 +60,23 @@ describe('MainComponent', function() {
     });
     it("getPageComponents was called", function() {
         expect(ctrl.getPageComponents).toHaveBeenCalled();
+    });
+    it("setBreadcrumbs was called", function() {
+        expect(scope.setBreadcrumbs).toHaveBeenCalled();
+    });
+    it("getFullPanelClass was called", function() {
+        expect(scope.getFullPanelClass).toHaveBeenCalled();
+    });
+    it("getClasses was called", function() {
+        expect(scope.getClasses).toHaveBeenCalled();
+    });
+    it("goBreadcrumb was called", function() {
+        expect(ctrl.goBreadcrumb).toHaveBeenCalled();
+    });
+    it("changeFullPanel was called", function() {
+        expect(ctrl.changeFullPanel).toHaveBeenCalled();
+    });
+    it("hideSidebarOnMobile was called", function() {
+        expect(ctrl.hideSidebarOnMobile).toHaveBeenCalled();
     });
 });
