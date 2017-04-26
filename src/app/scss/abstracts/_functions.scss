@@ -1,3 +1,0 @@
-@function img($path-images){
-  @return url($path-assets-images + $path-images);
-}
