@@ -12,32 +12,15 @@
     display: inline-block;
     width: auto;
     height: 38px;
-    margin-right: 10px;
     vertical-align: middle;
     cursor: pointer;
     .img {
       display: block;
       height: 38px;
-      width: 35px;
-      background: url(map-get($config-site, "logo-icon")) no-repeat center center;
-      background-size: contain;
+      width: auto;
     }
   }
-  .logo-text {
-    display: inline-block;
-    font-family: 'MyriadProRegular';
-    font-size: 23px;
-    color: $base-color;
-    line-height: 38px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    white-space: nowrap;
-    vertical-align: middle;
-    a, a:hover { color: $base-color; }
-  }
-  .logo-mobile-hidden { display: none; }
 }
-.is-not-touch-device .logo .logo-text a:hover { color: $auxiliary-color; }
 
 @include respond-from(sm) {
   .wrap-logo {
@@ -45,12 +28,5 @@
     float: none;
     padding-left: 9px;
     padding-right: 9px;
-  }
-  .logo .logo-mobile-hidden { 
-    display: inline; 
-    &:before {
-      display: inline; 
-      content: map-get($config-site, "logo-text");
-    }
   }
 }

@@ -87,7 +87,7 @@ class HeaderController {
 
       switch ($state.router.globals.$current.name) {
         case 'patients-charts': 
-				  
+        
           break;
         case 'patients-summary': 
           $state.go('patients-list');
@@ -101,18 +101,14 @@ class HeaderController {
           });
       }
     };
-    this.goChart = function () {
-      /* istanbul ignore if  */
-      if ($scope.title === 'PHR') return;
-
-      $state.go('patients-charts');
-    };
     
-    this.goPatientList = function () {
+    this.goLogo = function () {
       /* istanbul ignore if  */
-      if ($scope.title === 'PHR') return;
-      
-      $state.go('patients-list');
+      if ($scope.title === 'PHR') {
+        $state.go('profile');
+      } else {
+        $state.go('patients-list');
+      }
     };
     
     this.goProfile = function () {
@@ -157,7 +153,7 @@ class HeaderController {
       if (data) {
         $scope.title = data.role;
       }
-      // $scope.switchDirectByRole(data);
+      $scope.switchDirectByRole(data);
     };
 
     $scope.setLoginData = function (loginResult) {

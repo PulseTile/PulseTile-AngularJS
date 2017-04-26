@@ -9,7 +9,6 @@
 }
 .footer {
   width: 100%;
-  height: 56px;
   min-width: $min-width;
   padding: 13px 0 14px;
   font-size: 12px;
@@ -20,23 +19,26 @@
     position: fixed;
     bottom: 0;
     z-index: 1000;
+    height: 56px;
   }
-  .footer-povered {
-    float: right;
-    margin-left: 10px;
-    vertical-align: middle;
-    span {
-      display: inline-block;
-      margin-right: 5px;
-    }
-  }
-  .footer-logo {display: inline-block;}
-  .footer-logo-img {
-    display: inline-block;
-    height: 29px;
-  }
-  .footer-text {
-    margin: 0;
-  }
+}
+.footer-povered {
+  float: right;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+.footer-povered-text {
+  display: inline-block;
+  margin-right: 5px;
+}
+.footer-logo {display: inline-block;}
+.footer-logo-img {
+  display: inline-block;
+  height: 29px;
+}
+.footer-text {
+  margin: 0;
+  margin-right: 10px;
+  float: left;
 }
 
