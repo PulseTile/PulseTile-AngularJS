@@ -23,7 +23,7 @@ class ProfileController {
     $scope.isAppSettingsEdit = true;
     $scope.isPersonalEdit = false;
     $scope.isContactEdit = false;
-    $scope.logoFileParams;
+    $scope.logoFileParams = {};
     
     this.appSettingsEdit = function () {
       $scope.appSettingsEdit = Object.assign({}, this.appSettings);
