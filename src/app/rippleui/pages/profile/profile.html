@@ -120,15 +120,15 @@
 
                       </div>
                       
-                      <div class="form-group" ng-class="{'has-error': (formSubmitted || appSettingsForm.themes.$dirty) && appSettingsForm.themes.$invalid, 'has-success': appSettingsForm.themes.$valid && appSettingsForm.themes.$dirty}">
+                      <div class="form-group" ng-class="{'has-error': (formSubmitted || appSettingsForm.themeColor.$dirty) && appSettingsForm.themeColor.$invalid, 'has-success': appSettingsForm.themeColor.$valid && appSettingsForm.themeColor.$dirty}">
                         <label for="themes" class="control-label">Application Themes</label>
                         <div class="input-holder">
-                          <select class="form-control input-sm" id="themes" name="themes" ng-model="appSettingsEdit.themes" required>
+                          <select class="form-control input-sm" id="themes" name="themes" ng-model="appSettingsEdit.themeColor" required>
                               <option>Green Themes</option>
                               <option>Red Themes</option>
                           </select>
                         </div>
-                        <span class="help-block animate-fade" ng-show="formSubmitted && appSettingsForm.themes.$error.required">You must enter a value.</span>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && appSettingsForm.themeColor.$error.required">You must enter a value.</span>
                       </div>
 
                       <div class="form-group" ng-class="{'has-error': (formSubmitted || appSettingsForm.browseTitle.$dirty) && appSettingsForm.browseTitle.$invalid, 'has-success': appSettingsForm.browseTitle.$valid && appSettingsForm.browseTitle.$dirty}">

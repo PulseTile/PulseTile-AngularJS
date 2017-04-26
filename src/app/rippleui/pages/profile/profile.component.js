@@ -49,35 +49,29 @@ class ProfileController {
     };
 
     function getBase64Image(url, file, callback) {
-      var img = new Image();
-      img.crossOrigin = 'Anonymous';
-      img.onload = function() {
-        var canvas = document.createElement('CANVAS');
-        var ctx = canvas.getContext('2d');
-        var dataURL;
-        canvas.height = this.height;
-        canvas.width = this.width;
-        ctx.drawImage(this, 0, 0);
-        dataURL = canvas.toDataURL(file.type);
-        callback(dataURL);
-        canvas = null;
-      };
-      img.src = url;
-    }
+      if (file) {
+        upload(file).then(function(res){
+          callback(res);
+        });
+        
+      }
+    };
+    function upload(file) {
+        return new Promise(function (resolve, reject) {
+          var reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = function(e) {
+            resolve(e.target.result);
+          }
+        });
+    };
     
     $scope.confirmAppSettingsEdit = function (appSettingsForm, appSettings) {
       $scope.formSubmitted = true;
 
-      console.log('$scope.logoFileParams');
-      console.log($scope.logoFileParams);
-      debugger
-
       if ($scope.logoFileParams.name) {
         getBase64Image($scope.logoFileParams.path, $scope.logoFileParams.file, function (dataURL) {
-          appSettings.logo.base64 = dataURL;
-          
-          console.log('appSettings');
-          console.log(appSettings);
+          appSettings.logoB64 = dataURL;
 
           if (appSettingsForm.$valid) {
             $scope.isAppSettingsEdit = false;
@@ -101,9 +95,6 @@ class ProfileController {
 
     this.setProfileData = function () {
       let tempProfileData = serviceRequests.currentUserData;
-
-      console.log('tempProfileData');
-      console.log(tempProfileData);
 
       this.profile = {
         firstname: tempProfileData.given_name,
