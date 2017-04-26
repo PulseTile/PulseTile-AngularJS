@@ -23,6 +23,7 @@ class ProfileController {
     $scope.isAppSettingsEdit = true;
     $scope.isPersonalEdit = false;
     $scope.isContactEdit = false;
+    $scope.logoFileParams;
     
     this.appSettingsEdit = function () {
       $scope.appSettingsEdit = Object.assign({}, this.appSettings);
@@ -46,17 +47,44 @@ class ProfileController {
     this.cancelContactEdit = function () {
       $scope.isContactEdit = false;
     };
-    $scope.fileNameChanged = function (el) {
-      debugger
-    }
 
+    function getBase64Image(url, file, callback) {
+      var img = new Image();
+      img.crossOrigin = 'Anonymous';
+      img.onload = function() {
+        var canvas = document.createElement('CANVAS');
+        var ctx = canvas.getContext('2d');
+        var dataURL;
+        canvas.height = this.height;
+        canvas.width = this.width;
+        ctx.drawImage(this, 0, 0);
+        dataURL = canvas.toDataURL(file.type);
+        callback(dataURL);
+        canvas = null;
+      };
+      img.src = url;
+    }
+    
     $scope.confirmAppSettingsEdit = function (appSettingsForm, appSettings) {
       $scope.formSubmitted = true;
-      console.log('appSettings');
-      console.log(appSettings);
-      if (appSettingsForm.$valid) {
-        $scope.isAppSettingsEdit = false;
+
+      console.log('$scope.logoFileParams');
+      console.log($scope.logoFileParams);
+      debugger
+
+      if ($scope.logoFileParams.name) {
+        getBase64Image($scope.logoFileParams.path, $scope.logoFileParams.file, function (dataURL) {
+          appSettings.logo.base64 = dataURL;
+          
+          console.log('appSettings');
+          console.log(appSettings);
+
+          if (appSettingsForm.$valid) {
+            $scope.isAppSettingsEdit = false;
+          }
+        });
       }
+
     }.bind(this);
     $scope.confirmPersonalEdit = function (personalForm, personal) {
       $scope.formSubmitted = true;

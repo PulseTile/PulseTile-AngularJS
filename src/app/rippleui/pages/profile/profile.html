@@ -93,31 +93,30 @@
                         <span class="help-block animate-fade" ng-show="formSubmitted && appSettingsForm.title.$error.required">You must enter a value.</span>
                       </div>
 
-                      <div class="form-group">
+                      <div class="form-group" ng-class="{'has-error': logoFileParams.isErrorType}">
                         <label class="control-label">Application Logo File</label>
                         <div class="input-holder">
                           <div class="wrap-fcustomfile">
                             <div class="fcustomfile-control">
-                              <!-- onchange="angular.element(this).scope().fileNameChanged(this)" -->
+                                <!-- uploadfile-text="appSettingsEdit.logo.name" -->
+                                <!-- uploadfile-file="appSettingsEdit.logo.file" -->
                               <input mc-uploadfile 
-                                uploadfile-text="appSettingsEdit.logo.name" 
-                                uploadfile-file="appSettingsEdit.logo.base64" 
+                                uploadfile-params="logoFileParams"
                                 uploadfile-accept="image/jpeg,image/png,image/gif" 
-                                uploadfile-error="isErrorFileType" 
-                                type="file" 
                                 accept="image/jpeg,image/png,image/gif"
+                                type="file" 
                                 name="logoPath"
                                 id="logoPath">
+
                               <label for="logoPath" class="btn btn-success btn-inverse btn-normal-icon">
                                 <i class="fa fa-plus"></i>
                                 <span>Upload logo</span>
                               </label>
                             </div>
-                            <div class="fcustomfile-text" ng-bind='appSettingsEdit.logo.name'></div>
+                            <div class="fcustomfile-text" ng-bind='logoFileParams.name'></div>
                           </div>
                         </div>
-                        <span class="help-block animate-fade" ng-show="formSubmitted && appSettingsForm.themes.$error.required">You must enter a value.</span>
-                        <span class="help-block animate-fade" ng-show="isErrorFileType">You must choise image file.</span>
+                        <span class="help-block animate-fade" ng-show="logoFileParams.isErrorType">You must choise image file.</span>
 
                       </div>
                       

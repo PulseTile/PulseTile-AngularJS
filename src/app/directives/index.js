@@ -433,30 +433,94 @@ angular.module('ripple-ui.directives', [])
   .directive('mcUploadfile', function () {
       return {
         restrict: 'A',
-        // scope: true,
         scope: {
-          uploadfileText: '=',
+          params: '=uploadfileParams',
           typesFile: '@uploadfileAccept',
-          isErrorType: '=uploadfileError'
         },
         link: function(scope, element) {
-          scope.isErrorType = false;
+          function clearParams () { 
+            scope.params = {
+              path: '',
+              name: '',
+              file: null,
+              isErrorType: false
+            }
+          }
+          clearParams();
+
+          function errorInput () { 
+            clearParams();
+            scope.params.isErrorType = true;
+          }
+
+          scope.params.isErrorType = false;
           var typesArr = scope.typesFile.replace(' ', '').split(',');
-          console.log('typesArr');
-          console.log(typesArr);
+
 
           element.on('change', function (changeEvent) {
-            var loadFileParams = changeEvent.target.files[0];
-            var loadFileName = loadFileParams.name;
-            var loadFileType = loadFileParams.type;
+            if (changeEvent.target.files.length) {
 
-            if (true) {
-              scope.uploadfileText = loadFileName;
-              scope.isErrorType = false;
+              var loadFile = changeEvent.target.files[0];
+              var loadFileType = loadFile.type;
+
+              if (typesArr.indexOf(loadFileType) !== -1) {
+                scope.params.path = changeEvent.target.value;
+                scope.params.name = loadFile.name;
+                scope.params.file = loadFile;
+                scope.params.isErrorType = false;
+
+              } else {
+                changeEvent.target.value = '';
+                errorInput();
+              }
             } else {
-              scope.isErrorType = true;
+              errorInput();
             }
+            scope.$apply();
           });
         }
       };
   });
+  // .directive('fileSelect', ['$window', function ($window) {
+  //     return {
+  //         restrict: 'A',
+  //         require: 'ngModel',
+  //         link: function (scope, el, attr, ctrl) {
+  //             var fileReader = new $window.FileReader();
+
+  //             fileReader.onload = function () {
+  //                 ctrl.$setViewValue(fileReader.result);
+
+  //                 if ('fileLoaded' in attr) {
+  //                     scope.$eval(attr['fileLoaded']);
+  //                 }
+  //             };
+
+  //             fileReader.onprogress = function (event) {
+  //                 if ('fileProgress' in attr) {
+  //                     scope.$eval(attr['fileProgress'], 
+  //                     {'$total': event.total, '$loaded': event.loaded});
+  //                 }
+  //             };
+
+  //             fileReader.onerror = function () {
+  //                 if ('fileError' in attr) {
+  //                     scope.$eval(attr['fileError'], 
+  //                     {'$error': fileReader.error});
+  //                 }
+  //             };
+
+  //             var fileType = attr['fileSelect'];
+
+  //             el.bind('change', function (e) {
+  //                 var fileName = e.target.files[0];
+
+  //                 if (fileType === '' || fileType === 'text') {
+  //                     fileReader.readAsText(fileName);
+  //                 } else if (fileType === 'data') {
+  //                     fileReader.readAsDataURL(fileName);
+  //                 }
+  //             });
+  //         }
+  //     };
+  // }]);
