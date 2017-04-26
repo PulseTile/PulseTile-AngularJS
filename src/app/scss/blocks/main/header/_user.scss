@@ -1,77 +1,57 @@
-.user-drop {
-  width: 266px;
+.dropdown-user {
   padding: 10px 12px 9px 11px;
+  width: 266px;
   
   .user-profile-image {
+    background-color: #eef8e7;
+    border-radius: 4px;
+    color: $auxiliary-color;
     float: left;
-    overflow: hidden;
-    width: 80px;
-    margin: 0 10px 0 0;
     font-size: 60px;
     line-height: 80px;
-    color: $auxiliary-color;
+    margin: 0 10px 0 0;
+    overflow: hidden;
     text-align: center;
-    border-radius: 4px;
-    background-color: #eef8e7;
+    width: 80px;
     .img {
-      position: relative;
+      cursor: pointer;
       height: 0;
       padding-bottom: 100%;
-      cursor: pointer;
-      img {
+      position: relative;
+      & > img {
+        height: auto;
+        left: 0;
         position: absolute;
         top: 0;
-        left: 0;
         width: 100%;
-        height: auto;
         z-index: 1;
       }
     }
   }
-  
   .user-profile-info {
-    overflow: hidden;
+    color: $text-color;
     font-size: 14px;
     line-height: 18px;
-    color: $text-color;
+    overflow: hidden;
   }
   .name {
-    margin-bottom: 2px;
-    font-weight: 600;
     cursor: pointer;
+    font-weight: 600;
+    margin-bottom: 2px;
   }
   .specification {
+    border-bottom: 1px solid #d7d7d7;
     margin-bottom: 9px;
     padding-bottom: 4px;
-    border-bottom: 1px solid #d7d7d7;
     .item {
-      margin-bottom: 2px;
       line-height: 20px;
+      margin-bottom: 2px;
     }
-    .gray {color: lighten($text-color, 40%);}//#9c9c9c
+    .gray { color: lighten($text-color, 40%); }
   }
   .btn-signout i {
-    margin-left: 10px;
     font-size: 18px;
     font-weight: 400;
+    margin-left: 10px;
   }
-  // .user-type {
-  //   text-transform: uppercase;
-  //   display: block;
-  //   padding: 2px 5px 0px 5px;
-  //   float: right;
-  //   font-size: 12px;
-  //   &.superuser {
-  //     background-color: orange;
-  //     color: #fff;
-  //   }
-  //   &.clinician {
-  //     background-color: blue;
-  //     color: #fff;
-  //   }
-  //   &.patient {
-  //     background-color: green;
-  //     color: #fff;
-  //   }
-  // }
 }

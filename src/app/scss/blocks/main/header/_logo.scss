@@ -1,19 +1,19 @@
 .wrap-logo {
   float: left;
-  padding: 6px 9px;
-  margin: auto;
   margin-left: 0;
+  margin: auto;
+  padding: 6px 9px;
 }
 .logo {
   font-size: 0;
   line-height: 0;
   user-select: none;
   .logo-icon {
+    cursor: pointer;
     display: inline-block;
-    width: auto;
     height: 38px;
     vertical-align: middle;
-    cursor: pointer;
+    width: auto;
     .img {
       display: block;
       height: 38px;

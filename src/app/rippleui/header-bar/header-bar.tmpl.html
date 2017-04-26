@@ -27,10 +27,10 @@
     </div>
     
     <ul class="user-panel" role="tablist">
-      <li ng-class="{active: searchShow}" class="visible-xs"><a class="btn-header" ng-click="searchShow = !searchShow">
+      <li class="user-panel-item visible-xs" ng-class="{active: searchShow}"><a class="btn-header" ng-click="searchShow = !searchShow">
         <i class="fa fa-search"></i></a>
       </li>
-      <li uib-dropdown>
+      <li class="user-panel-item" uib-dropdown>
         <a class="btn-header btn-notification" uib-dropdown-toggle>
           <i class="fa fa-bell-o"></i>
           <span class="count">2</span>
@@ -38,12 +38,12 @@
         <div class="notifications-drop dm-right" id="tab-notifications" uib-dropdown-menu>
           <div class="notifications-header">Notifications (2)</div>
           <div class="notifications-body">
-            <ul>
-              <li>
+            <ul class="notifications-list">
+              <li class="notifications-list-item">
                 <div class="notification-info">Information from Liquid Logic (Social Care) is currently unavailable.</div>
                 <div class="notification-time"><em>10 minutes ago</em></div>
               </li>
-              <li>
+              <li class="notifications-list-item">
                 <div class="notification-info">Information from Liquid Logic (Social Care) is currently unavailable.</div>
                 <div class="notification-time"><em>15 minutes ago</em></div>
               </li>
@@ -51,11 +51,11 @@
           </div>
         </div>
       </li>
-      <li uib-dropdown>
+      <li class="user-panel-item" uib-dropdown>
         <a class="btn-header btn-user" uib-dropdown-toggle>
           <i class="fa fa-user"></i>
         </a>
-        <div class="user-drop dm-right" uib-dropdown-menu>
+        <div class="dropdown-user dm-right" uib-dropdown-menu>
           <div class="user-profile-image" ng-click="$ctrl.goProfile()">
             <!-- <i class="fa fa-user"></i> -->
             <div class="img">
@@ -122,8 +122,8 @@
     <div class="container-fluid">
       <div class="header-toolbar">
         <button ng-click="$ctrl.clickSidebarBtn()" class="btn-toggle-sidebar wrap-icon" data-toggle="collapse" data-target="#sidebar-nav" aria-expanded="false">
-          <i class="fa fa-bars"></i>
-          <span>Menu</span>
+          <i class="btn-icon fa fa-bars"></i>
+          <span class="btn-text">Menu</span>
         </button>
         <div ui-view="banner"></div>
       </div>

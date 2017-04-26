@@ -1,14 +1,11 @@
-.wrap-header-toolbar {
-  background: $base-color;
-}
-
+.wrap-header-toolbar { background: $base-color; }
 .header-toolbar {
-  position: relative;
-  min-height: 50px;
-  padding: 7px 0 10px;
+  color: $text-on-base-color;
   font-size: 15px;
   line-height: 20px;
-  color: $text-on-base-color;
+  min-height: 50px;
+  padding: 7px 0 10px;
+  position: relative;
   @include respond-from(xs) {
     min-height: 56px;
     padding: 11px 0;

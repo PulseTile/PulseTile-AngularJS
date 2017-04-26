@@ -1,53 +1,53 @@
+/*Styles for sidebar*/
 .sidebar {
   display: none;
-  position: absolute;
-  left: 0;
-  z-index: 2;
-  overflow-y: auto;
-  height: 100%;
-  width: 165px;
-  border-right: 1px solid #B7B7B7;
   background: #F7F7F7;
+  border-right: 1px solid #B7B7B7;
+  height: 100%;
+  left: 0;
+  overflow-y: auto;
+  position: absolute;
+  width: 165px;
+  z-index: 2;
   @include respond-from(sm) {
-    position: static;
     float: left;
-    overflow-y: initial;
     height: auto;
     margin-bottom: -10000px;
+    overflow-y: initial;
     padding-bottom: 10000px;
+    position: static;
   }
 }
-.showSidebar .sidebar {display: block;}
+.showSidebar .sidebar { display: block; }
 
-
+/*Styles for button of toggle show sidebar*/
 .btn-toggle-sidebar,
 .btn-toggle-sidebar:focus {
+  background: transparent;
+  border: 1px solid $text-on-base-color;
+  color: $text-on-base-color;
+  cursor: pointer;
   float: left;
   height: 34px;
   margin: 0 10px 0 0;
-  padding: 6px 8px;
-  color: $text-on-base-color;
-  border: 1px solid $text-on-base-color;
-  background: transparent;
-  cursor: pointer;
   outline: none;
-  i, span {
-    line-height: 20px;
-  }
-  i {
-    margin-right: 0;
+  padding: 6px 8px;
+  .btn-icon,
+  .btn-text { line-height: 20px; }
+  .btn-icon {
     font-size: 18px;
+    margin-right: 0;
   }
-  span {
-    font-size: 16px;
+  .btn-text {
     display: none;
+    font-size: 16px;
   }
 }
 .showSidebar .btn-toggle-sidebar,
 .showSidebar .btn-toggle-sidebar:focus,
 .showSidebar .btn-toggle-sidebar:hover {
-  color: $base-color;
   background: $text-on-base-color;
+  color: $base-color;
 }
 @include respond-from(xs) {
   .btn-toggle-sidebar,
@@ -55,45 +55,43 @@
   .btn-toggle-sidebar:hover, {
     margin-right: 18px;
     padding: 6px 14px 6px 11px;
-    i {margin-right: 9px;}
-    span {display: inline;}
+    .btn-icon { margin-right: 9px; }
+    .btn-text { display: inline; }
   }
 }
 @include respond-from(sm) {
   .btn-toggle-sidebar,
   .btn-toggle-sidebar:focus,
   .btn-toggle-sidebar:hover, {
+    left: 0;
+    margin-right: 0;
     position: absolute;
     top: 50%;
-    left: 0;
     transform: translateY(-50%);
-    margin-right: 0;
   }
   .is-not-touch-device .btn-toggle-sidebar:hover {
-    color: $base-color;
     background: $text-on-base-color;
+    color: $base-color;
   }
 }
 
-
-.sidebar-nav {
-  padding-top: 1px;
-  ul li {
-    border-bottom: 1px solid #E7E7E7;
-    a, a:hover {
-      padding: 10px 15px;
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 19px;
-      color: $base-color;
-    }
-    a.active {
-      color: $text-on-base-color;
-      background-color: $base-color;
-    }
-  }
+/*Styles for sidebar navigation*/
+.sidebar-nav { padding-top: 1px; }
+.sidebar-nav-item { border-bottom: 1px solid #E7E7E7; }
+.sidebar-nav-link, 
+.sidebar-nav-link:hover {
+  color: $base-color;
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 19px;
+  padding: 10px 15px;
 }
-.is-not-touch-device .sidebar-nav ul li a:hover {
-  color: $text-on-base-color;
+.sidebar-nav-link.active {
   background-color: $base-color;
+  color: $text-on-base-color;
+}
+.is-not-touch-device .sidebar-nav-link:hover {
+  background-color: $base-color;
+  color: $text-on-base-color;
 }
