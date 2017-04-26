@@ -4,39 +4,35 @@ html {
 
 html,
 body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  height: 100%;
 }
 
 body {
-  min-width: $min-width; 
   background: #fff;
   font-family: $font-family-main;
+  min-width: $min-width; 
 }
 
 
 *,
 *:before,
-*:after {
-  box-sizing: border-box;
-}
+*:after { box-sizing: border-box; }
 
 img {
-	display: block;
-	max-width: 100%;
-	height: auto;
+  display: block;
+  height: auto;
+  max-width: 100%;
 }
-textarea {
-  resize: vertical;
-}
+textarea { resize: vertical; }
 
 a,
 a:hover,
 a:focus {
   color: $text-color;
-  text-decoration: none;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .is-not-touch-device a:hover,
@@ -50,9 +46,8 @@ ul {
   padding: 0;
 }
 
-li {
-  list-style: none;
-}
+li { list-style: none; }
+
 textarea:hover, 
 input:hover, 
 textarea:active, 
@@ -69,48 +64,47 @@ label:focus,
   -webkit-appearance:none;
 }
 
-.wrap-overflow {overflow: hidden;}
-.without-shadow {box-shadow: none !important; }
+.wrap-overflow { overflow: hidden; }
+
+.without-shadow { box-shadow: none !important; }
+
 .wrap-icon {
   font-size: 0;
   i, span {
     display: inline-block;
     vertical-align: middle;
   }
-  i {margin-right: 3px;}
+  i { margin-right: 3px; }
 }
+
 .clearfix {
   @include clearfix;
 }
+
 .text-truncate {
   @include text-truncate;
 }
 
-
 .wrapper {
-  position: relative;
-  overflow: hidden;
   min-height: 100%;
+  overflow: hidden;
+  position: relative;
 }
-.content {
-  // position: relative;
-  // overflow: hidden;
-}
+
 .main {
   position: relative;
   z-index: 1;
-  // overflow: hidden;
 }
-.sidebar + .main {overflow: hidden;}
+.sidebar + .main { overflow: hidden; }
 
 #page-wrapper {
-  padding: 0;
   min-height: 0;
+  padding: 0;
 }
 
 .page-wrapper {
-  padding: 10px 0;
   background-color: transparent;
+  padding: 10px 0;
   @include respond-from(xs) {
     padding: $indent-wrapper-big;
   }
