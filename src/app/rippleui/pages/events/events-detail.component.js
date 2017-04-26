@@ -147,6 +147,7 @@ class EventsDetailController {
       openPopup($scope.appt.sourceId);
     };
 
+    /* istanbul ignore next  */
     function openPopup(id) {
       window.windowObjectReference = window.windowObjectReference || null;
       var center = popupCenter(972, 734);
@@ -160,6 +161,7 @@ class EventsDetailController {
       }
     }
 
+    /* istanbul ignore next  */
     function popupCenter(w, h) {
       var dualScreenLeft = (window.screenLeft != undefined) ? window.screenLeft : screen.left;
       var dualScreenTop = (window.screenTop != undefined) ? window.screenTop : screen.top;
@@ -180,6 +182,7 @@ class EventsDetailController {
     socket.on('appointment:close', onClose);
     socket.on('appointment:status', onStatus);
 
+    /* istanbul ignore next  */
     function onMessages(dt) {
       var data = JSON.parse(JSON.stringify(dt));
       usSpinnerService.stop('appointmentsDetail-spinner');
