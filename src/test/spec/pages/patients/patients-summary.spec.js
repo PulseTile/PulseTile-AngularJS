@@ -36,10 +36,12 @@ describe('Patients Summary', function() {
     spyOn(ctrl, 'goToSection');
     spyOn(ctrl, 'setCurrentPageData');
     spyOn(scope, 'go');
+    spyOn(scope, 'changeDashboards');
 
     ctrl.goToSection();
     ctrl.setCurrentPageData();
     scope.go();
+    scope.changeDashboards();
 
   });
      
@@ -57,5 +59,8 @@ describe('Patients Summary', function() {
   });
   it("route go was called", function() {
     expect(scope.go).toHaveBeenCalled();
+  });
+  it("changeDashboards was called", function() {
+    expect(scope.changeDashboards).toHaveBeenCalled();
   });
 });
