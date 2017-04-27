@@ -1,16 +1,16 @@
 .panel-body {
-  position: relative;
   padding: 7px 10px 3px 10px;
+  position: relative;
 }
 
 .panel-primary .panel-body {
-  padding: 0;
   border-radius: 0;
+  padding: 0;
 }
 .panel-secondary .panel-body {
-  padding: 0;
-  border-radius: 0;
   background: #fff;
+  border-radius: 0;
+  padding: 0;
 }
 .panel-body-inner {
   padding: 14px 10px;
@@ -18,12 +18,12 @@
     border-top: 1px solid #D8D8D8;
   }
   .panel-body-section + .panel-body-section {
+    border-top: 1px solid #D8D8D8;
     margin-top: 4px;
     padding-top: 24px;
-    border-top: 1px solid #D8D8D8;
   }
   .panel-subaccordion {
     margin: 0 -10px;
-    .panel-body-inner {padding-left: 25px;}
+    .panel-body-inner { padding-left: 25px; }
   }
 }

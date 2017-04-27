@@ -1,0 +1,19 @@
+.panel-group {
+  background: #fff;
+  border: 1px solid #D8D8D8;
+  .panel + .panel { margin-top: 1px; }
+  .panel {
+    border-radius: 0;
+    &.panel-primary,
+    &.panel-secondary {
+      border: 0;
+      margin-bottom: 0;
+    }
+  }
+}
+.panel-group.accordion > .panel,
+.panel.accordion {
+  & > .panel-body { display: none; }
+  &.open > .panel-body { display: block; }
+  &.open + .panel { margin-top: 0; }
+}
