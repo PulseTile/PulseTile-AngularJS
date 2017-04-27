@@ -75,6 +75,7 @@ class ProfileController {
 
           if (appSettingsForm.$valid) {
             $scope.isAppSettingsEdit = false;
+            serviceRequests.setAppTheme(appSettings);
           }
         });
       }
