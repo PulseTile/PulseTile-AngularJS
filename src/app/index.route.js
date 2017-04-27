@@ -31,6 +31,17 @@ function routeConfig($stateProvider, $urlRouterProvider) {
   // $urlRouterProvider.otherwise('/charts');
   
   $stateProvider
+      .state('ui-kit', {
+        url: '/ui-kit',
+        views: {
+          main: {template: '<ui-kit-component></ui-kit-component>'}
+        },
+        breadcrumbs: [
+          {
+            title: 'UI Kit',
+            state: 'ui-kit'
+          }]
+      })
       .state('profile', {
         url: '/profile',
         views: {
