@@ -49,7 +49,6 @@ label.control-label {
   padding: 0;
   em { color: #959595; }
   a {
-    // font-weight: 600;
     color: #000000;
     text-decoration: underline;
     &:hover { text-decoration: none; }
@@ -61,7 +60,6 @@ label.control-label {
   padding: 0 7px;
 }
 select.input-sm { line-height: 20px; }
-
 
 .non-edit-value {
   line-height: 30px;
@@ -116,145 +114,4 @@ select.textarea-big,
     input { padding-right: 30px; }
   }
 }
-
 .input-sm { font-size: 14px; }
-
-// Custom Inputs radio, checkbox
-  .wrap-fcustominps-inline {
-    overflow: hidden;
-    .wrap-fcustominp {
-      float: left;
-      margin-right: 20px;
-      & + .wrap-fcustominp { margin-top: 0; }
-    }
-  }
-  .wrap-fcustominp {
-    align-items: center;
-    display: flex;
-    overflow: hidden;
-    padding: 5px 0;
-    & + .wrap-fcustominp { margin-top: 5px; }
-    .fcustominp-state {
-      align-items: center;
-      display: flex;
-      margin: 0 -2px;
-      padding: 0 2px;
-      width: 100%;
-      &.disabled {
-        background: #f3f3f3;
-        opacity: 0.6;
-        .fcustominp label,
-        .fcustominp-label { cursor: default; }
-      }
-    }
-    .fcustominp-label {
-      color: #000000;
-      cursor: pointer;
-      float: left;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 20px;
-      margin: 0 0 0 5px;
-    }
-  }
-  .fcustominp {
-    flex: 0 0 18px;
-    float: left;
-    overflow: hidden;
-    padding: 0 1px;
-    width: 18px; height: 16px;
-    input { display: none; }
-    label {
-      background: #ffffff;
-      border-radius: 3px;
-      border: 1px solid #C9C9C9;
-      cursor: pointer;
-      display: block;
-      margin: 0;
-      position: relative;
-      transform: translateZ(0);
-      width: 100%; height: 100%;
-    }
-    input[type=checkbox]:checked + label:after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 1px; left: 4px;
-      /*Make it a small rectangle so the border will create an L-shape*/
-      width: 6px;
-      height: 10px;
-      /*Add a white border on the bottom and left, creating that 'L' */
-      border: solid #222222;
-      border-width: 0 2px 2px 0;
-      /*Rotate the L 45 degrees to turn it into a checkmark*/
-      transform: rotate(45deg);
-    }
-
-    input[type=radio] + label {
-      border-radius: 50%;
-      margin-top: 1px;
-      width: 14px; height: 14px;
-    }
-    input[type=radio]:checked + label {
-      background: #389dff;
-      border-color: #389dff;
-    }
-    input[type=radio]:checked + label:after {
-      background: #ffffff;
-      border-radius: 50%;
-      content: '';
-      position: absolute;
-      top: 4px; left: 4px;
-      width: 4px; height: 4px;
-      z-index: 1;
-    }
-  }
-//Custom Inputs
-
-.uib-datepicker-popup.dropdown-menu { padding: 10px 0; }
-.input-container {
-  font-size: 0;
-  padding: 0;
-  position: relative;
-}
-.form-contenteditable {
-  -webkit-appearance: none;
-}
-.input-contenteditable {
-  display: inline-block;
-  font-size: 14px;
-  height: 28px;
-  line-height: 28px;
-  min-width: 5px;
-  outline: none;
-  padding: 0 10px;
-  vertical-align: top;
-  width: 100%;
-}
-.input-container .input-tag:first-child { margin-left: 10px; }
-.input-tag {
-  background-color: $base-color;
-  border-radius: 2px;
-  color: $text-on-base-color;
-  float: left;
-  font-size: 16px;
-  font-weight: 400;
-  height: 26px;
-  left: 0;
-  line-height: 26px;
-  margin-right: 5px;
-  padding: 0 25px 0 8px;
-  position: relative;
-  top: 1px;
-  i {
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 400;
-    margin-top: -1px;
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-}
-.contenteditable-resize { resize: vertical; }

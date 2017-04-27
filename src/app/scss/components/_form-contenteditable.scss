@@ -1,0 +1,46 @@
+.input-container {
+  font-size: 0;
+  padding: 0;
+  position: relative;
+}
+.form-contenteditable {
+  -webkit-appearance: none;
+}
+.input-contenteditable {
+  display: inline-block;
+  font-size: 14px;
+  height: 28px;
+  line-height: 28px;
+  min-width: 5px;
+  outline: none;
+  padding: 0 10px;
+  vertical-align: top;
+  width: 100%;
+}
+.input-container .input-tag:first-child { margin-left: 10px; }
+.input-tag {
+  background-color: $base-color;
+  border-radius: 2px;
+  color: $text-on-base-color;
+  float: left;
+  font-size: 16px;
+  font-weight: 400;
+  height: 26px;
+  left: 0;
+  line-height: 26px;
+  margin-right: 5px;
+  padding: 0 25px 0 8px;
+  position: relative;
+  top: 1px;
+  i {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: -1px;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+.contenteditable-resize { resize: vertical; }
