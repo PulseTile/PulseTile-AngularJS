@@ -34,7 +34,6 @@ describe('HeaderComponent', function() {
         spyOn(scope, 'setLoginData');
         spyOn(scope, 'login');
         spyOn(ctrl, 'goBack');
-        spyOn(ctrl, 'goChart');
         spyOn(ctrl, 'goProfile');
         spyOn(ctrl, 'signout');
         spyOn(ctrl, 'containsReportString');
@@ -60,7 +59,6 @@ describe('HeaderComponent', function() {
         scope.setLoginData({data:{role: 'PHR'}});
         scope.login();
         ctrl.goBack();
-        ctrl.goChart();
         ctrl.goProfile();
         ctrl.signout();
         ctrl.containsReportString();
@@ -111,9 +109,6 @@ describe('HeaderComponent', function() {
     });
     it("goHome was called", function() {
         expect(ctrl.goBack).toHaveBeenCalled();
-    });
-    it("goChart was called", function() {
-        expect(ctrl.goChart).toHaveBeenCalled();
     });
     it("goProfile was called", function() {
         expect(ctrl.goProfile).toHaveBeenCalled();

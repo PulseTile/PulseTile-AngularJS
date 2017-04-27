@@ -1,16 +1,12 @@
-.wrap-header-title {
-  background: $base-color;
-}
+.wrap-header-title { background: $base-color; }
 .header-title {
-  padding: 15px 0;
+  color: $text-on-base-color;
   font-size: 15px;
   line-height: 22px;
-  color: $text-on-base-color;
+  padding: 15px 0;
   text-align: center;
-}
-@include respond-from(xs) {
-  .header-title {
-    padding: 10px 0;
+  @include respond-from(xs) {
     font-size: 18px;
+    padding: 10px 0;
   }
 }

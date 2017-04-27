@@ -3,15 +3,12 @@
 @import 'abstracts/variables';
 @import 'abstracts/colors';
 @import 'abstracts/settings';
-@import 'abstracts/functions';
 @import 'abstracts/mixins';
 
 @import 'base/fonts';
 @import 'base/typography';
 @import 'base/grid';
 
-
-// @import '../assets/foundation-icons/foundation-icons.css';
 @import '~angular-loading-bar/src/loading-bar.css';
 @import '~fullcalendar/dist/fullcalendar.min.css';
 @import '../../../bower_components/jquery-timepicker-jt/jquery.timepicker.css';
@@ -23,7 +20,6 @@
 @import url('https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css');
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
 
-// @import 'components/';
 @import 'components/btn';
 @import 'components/label';
 @import 'components/table';
@@ -43,7 +39,6 @@
 @import 'components/color-palette';
 
 @import 'base';
-// @import 'main';
 
 @import 'blocks/main/header/index';
 @import 'blocks/main/sidebar';
@@ -64,4 +59,3 @@
 @import 'blocks/dicom';
 @import 'blocks/timelines';
 @import 'blocks/patients-list';
-// @import 'blocks/sb-admin-2';

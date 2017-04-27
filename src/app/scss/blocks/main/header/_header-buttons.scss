@@ -1,41 +1,39 @@
 .btn-header {
-  position: relative;
-  display: block;
-  width: 45px;
-  height: 52px;
   background: #F7F7F7;
-  text-align: center;
-  line-height: 52px;
-  font-size: 19px;
-  color: $base-color;
   border: none;
+  color: $base-color;
+  display: block;
+  font-size: 19px;
+  height: 52px;
+  line-height: 52px;
   outline: none;
+  position: relative;
+  text-align: center;
+  width: 45px;
   @include respond-from(xs) {
     width: 52px;
   }
-  &.inverse {
-    background: #fff;
-  }
+  &.inverse { background: #fff; }
   &.secondary {
     background: $base-color;
     color: $text-on-base-color;
   }
   .count {
-    position: absolute;
-    top: 9px;
-    right: 0px;
-    font-size: 10px;
-    font-family: arial;
     background-color: $base-color;
+    border-radius: 50%;
     color: $text-on-base-color;
     display: block;
-    padding: 0;
-    width: 16px;
+    font-family: arial;
+    font-size: 10px;
+    font-weight: 400;
     height: 16px;
     line-height: 16px;
+    padding: 0;
+    position: absolute;
+    right: 0px;
     text-align: center;
-    border-radius: 50%;
-    font-weight: 400;
+    top: 9px;
+    width: 16px;
     @include respond-from(xs) {
       right: 3px;
     }
@@ -53,9 +51,7 @@
     order: 1;
   }
 }
-.btn-header.btn-user {
-  font-size: 21px;
-}
+.btn-header.btn-user { font-size: 21px; }
 .btn-notification {
   font-size: 18px;
   padding-right: 2px;
