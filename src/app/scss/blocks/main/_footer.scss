@@ -10,11 +10,14 @@
 .footer {
   background-color: #EEEEEE;
   color: #757584;
-  font-size: 12px;
+  font-size: 10px;
   line-height: 29px;
   min-width: $min-width;
   padding: 13px 0 14px;
   width: 100%;
+  @include respond-from(xs) {
+    font-size: 12px;
+  }
   @include respond-from(sm) {
     bottom: 0;
     height: 56px;

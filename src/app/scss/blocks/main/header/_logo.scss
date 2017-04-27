@@ -14,10 +14,19 @@
     height: 38px;
     vertical-align: middle;
     width: auto;
+    @include respond-to(xs) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
     .img {
       display: block;
-      height: 38px;
-      width: auto;
+      width: 100px;
+      height: auto;
+      @include respond-from(xs) {
+        height: 38px;
+        width: auto;
+      }
     }
   }
 }
