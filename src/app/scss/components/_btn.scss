@@ -138,13 +138,13 @@
 .has-error .input-group .input-group-btn .btn {
   border-color: map-get($colored-buttons, 'danger') !important;
 }
-.btn-toggle-rotate i {
+.btn-toggle-rotate .btn-icon {
   transform: rotate(0) translateY(-1px);
 }
-.panel.open .btn-toggle-rotate i {
+.panel.open .btn-toggle-rotate .btn-icon {
   transform: rotate(180deg) translateY(-2px);
 }
-.btn-table i {
+.btn-table .btn-icon {
   font-size: 20px;
   font-weight: 400;
 }

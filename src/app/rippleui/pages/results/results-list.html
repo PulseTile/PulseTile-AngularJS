@@ -22,12 +22,12 @@
       <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')" ng-if="$ctrl.isShowExpandBtn"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
       <!-- <div class="dropdown">
         <button mc-dropdown class="btn btn-success btn-inverse btn-dropdown-toggle btn-table" ng-click="toggleDropdown($event);"><i class="btn-icon fa fa-table"></i></button>
-        <div class="dropdown-menu dm-panel dm-right dm-tables">
+        <div class="dropdown-menu dropdown-menu-panel dropdown-menu-right dropdown-menu-small-size">
           <div class="heading">FILTERING</div>
-          <div class="dm-wrap-list">
-            <div class="dm-list">
-              <div class="dm-item" ng-class="{active: isFilterOpen}" ng-click="toggleFilter(); refreshSlider();"><span>Filter</span></div>
-              <div class="dm-item" ng-class="{active: isFilterTimelineOpen}" ng-click="toggleFilterTimeline(); refreshSlider();"><span>Timelines</span></div>
+          <div class="dropdown-menu-wrap-list">
+            <div class="dropdown-menu-list">
+              <div class="dropdown-menu-item" ng-class="{active: isFilterOpen}" ng-click="toggleFilter(); refreshSlider();"><span class="dropdown-menu-item-text">Filter</span></div>
+              <div class="dropdown-menu-item" ng-class="{active: isFilterTimelineOpen}" ng-click="toggleFilterTimeline(); refreshSlider();"><span class="dropdown-menu-item-text">Timelines</span></div>
             </div>
           </div>
         </div>

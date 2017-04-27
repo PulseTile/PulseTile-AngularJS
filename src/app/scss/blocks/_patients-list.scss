@@ -46,7 +46,7 @@
   }
 }
 @include respond-to(xs) {
-  .dropdown-menu.dm-patients {
+  .dropdown-menu.dropdown-menu-patients {
     right: -35px;
     width: 288px;
     .btn-smaller {
