@@ -49,11 +49,11 @@
           </div>
           
           <div class="form-group-section-list">
-            <div class="fgs-list-heading">
+            <div class="form-group-section-list-heading">
               <label class="control-label">Facility</label>
             </div>
             <div class="form-group-section" ng-if="$ctrl.clinicalDocument.facility">
-              <div class="fgs-body">
+              <div class="form-group-section-body">
                 <div class="form-group-wrapper">
                   <div class="row-expand">
                     <div class="col-expand-left">
@@ -70,11 +70,11 @@
           
           
           <div class="form-group-section-list">
-            <div class="fgs-list-heading">
+            <div class="form-group-section-list-heading">
               <label class="control-label">Patient Identifier</label>
             </div>
             <div class="form-group-section">
-              <div class="fgs-body">
+              <div class="form-group-section-body">
                 <div class="form-group-wrapper">
                   <div class="row-expand">
                     <div class="col-expand-left" ng-if="$ctrl.clinicalDocument.patientIdentifier_mrnType">
@@ -159,18 +159,18 @@
           </div>
           
           <div class="form-group-section-list" ng-if="$ctrl.clinicalDocument.diagnosisList">
-            <div class="fgs-list-heading">
+            <div class="form-group-section-list-heading">
               <label class="control-label">Diagnosis List</label>
             </div>
-            <div mc-sub-accordion class="form-group-section fgs-bordered fgs-primary accordion" ng-class="getOpenSubAccordion()" ng-repeat="diagnosisItem in $ctrl.clinicalDocument.diagnosisList">
-              <div class="fgs-heading">
+            <div mc-sub-accordion class="form-group-section form-group-section-bordered form-group-section-primary accordion" ng-class="getOpenSubAccordion()" ng-repeat="diagnosisItem in $ctrl.clinicalDocument.diagnosisList">
+              <div class="form-group-section-heading">
                 <div class="control-group without-side-indent right">
                     <button class="btn btn-primary" ng-click="importToCreate('diagnoses', diagnosisItem)"><span class="btn-text">Import Data</span></button>
-                    <button class="btn btn-primary btn-inverse btn-square btn-fgs-toggle" ng-click="toggleSubAccordion()"><i class="btn-icon fa fa-chevron-up"></i></button>
+                    <button class="btn btn-primary btn-inverse btn-square btn-form-group-section-toggle" ng-click="toggleSubAccordion()"><i class="btn-icon fa fa-chevron-up"></i></button>
                 </div>
                 <h3 class="panel-title">Problem: {{ diagnosisItem.problem }}</h3>
               </div>
-              <div class="fgs-body">
+              <div class="form-group-section-body">
                 <div class="form-group-wrapper">
                   <div class="row-expand">
                     <div class="col-expand-left">
@@ -201,7 +201,7 @@
                     </div>
                   </div>
                 </div>
-                <!-- <div class="fgs-control">
+                <!-- <div class="form-group-section-control">
                   <div class="wrap-control-group">
                     <div class="control-group right">
                       <button class="btn btn-primary" ng-click="importToCreate('diagnoses', diagnosisItem)"><span>Import Data</span></button>

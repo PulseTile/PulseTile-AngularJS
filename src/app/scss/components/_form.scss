@@ -4,66 +4,6 @@
   padding: 0;
 }
 
-.form-group-section-list {
-  margin-bottom: 20px;
-  padding-top: 12px;
-  .fgs-list-heading label.control-label { margin-bottom: 8px; }
-}
-.form-group-section {
-  border: 1px solid transparent;
-  & + .form-group-section {
-    margin-top: 5px;
-  }
-  .btn-fgs-toggle i {
-    transform: rotate(180deg) translateY(-2px);
-  }
-  &.open .btn-fgs-toggle i {
-    transform: rotate(0) translateY(-1px);
-  }
-  .fgs-heading { 
-    margin: -1px;
-    .panel-title {
-      font-size: 12px;
-      padding-left: 10px;
-    }
-  }
-  .fgs-body {
-    padding: 5px 19px;
-    position: relative;
-    .form-group-wrapper { margin-bottom: -12px; }
-    .form-group { margin-bottom: 12px; }
-    label.control-label {
-      margin-bottom: 2px;
-      line-height: 16px;
-    }
-    .form-control-static {
-      line-height: 16px;
-      min-height: 16px;
-    }
-    .fgs-control {
-      padding-top: 5px;
-      margin: 0 -19px -5px;
-    }
-  }
-  &.accordion {
-    .fgs-body { display: none; }
-    &.open .fgs-body { display: block; }
-  }
-  &.fgs-bordered {
-    // margin-bottom: 32px;
-    border-color: #ccc;
-    .fgs-body {
-      padding: 15px 19px;
-      .fgs-control {margin: 0 -19px -15px;}
-    }
-    @each $section, $color in $colored-buttons {
-      &.fgs-#{$section} { border-color: $color; }
-    }
-  }
-  &:last-child { margin-bottom: 0 !important; }
-}
-
-
 label.control-label {
   color: #949494;
   display: block;

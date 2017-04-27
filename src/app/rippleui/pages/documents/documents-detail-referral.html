@@ -50,11 +50,11 @@
             </div>
 
             <div class="form-group-section-list">
-              <div class="fgs-heading">
+              <div class="form-group-section-heading">
                 <label class="control-label">Facility</label>
               </div>
               <div class="form-group-section">
-                <div class="fgs-body">
+                <div class="form-group-section-body">
                   <div class="form-group-wrapper">
                     <div class="row-expand">
                       <div class="col-expand-left">
@@ -76,11 +76,11 @@
             </div>
 
             <div class="form-group-section-list">
-              <div class="fgs-heading">
+              <div class="form-group-section-heading">
                 <label class="control-label">Referral</label>
               </div>
               <div class="form-group-section">
-                <div class="fgs-body">
+                <div class="form-group-section-body">
                   <div class="form-group-wrapper">
                     <div class="row-expand">
                       <div class="col-expand-left">
@@ -152,11 +152,11 @@
             </div>
 
             <div class="form-group-section-list">
-              <div class="fgs-heading">
+              <div class="form-group-section-heading">
                 <label class="control-label">Organisation/Provider</label>
               </div>
               <div class="form-group-section">
-                <div class="fgs-body">
+                <div class="form-group-section-body">
                   <div class="form-group-wrapper">
                     <div class="row-expand">
                       <div class="col-expand-left">
@@ -202,11 +202,11 @@
             </div>
 
             <div class="form-group-section-list">
-              <div class="fgs-heading">
+              <div class="form-group-section-heading">
                 <label class="control-label">Referral Status</label>
               </div>
               <div class="form-group-section">
-                <div class="fgs-body">
+                <div class="form-group-section-body">
                   <div class="form-group-wrapper">
                     <div class="row-expand">
                       <div class="col-expand-left">
@@ -237,11 +237,11 @@
             </div>
 
             <div class="form-group-section-list">
-              <div class="fgs-heading">
+              <div class="form-group-section-heading">
                 <label class="control-label">Clinical Synopsis</label>
               </div>
               <div class="form-group-section">
-                <div class="fgs-body">
+                <div class="form-group-section-body">
                   <div class="form-group-wrapper">
                     <div class="row-expand">
                       <div class="col-expand-left">
@@ -278,11 +278,11 @@
             </div>
 
             <div class="form-group-section-list">
-              <div class="fgs-heading">
+              <div class="form-group-section-heading">
                 <label class="control-label">Past Illness</label>
               </div>
               <div class="form-group-section">
-                <div class="fgs-body">
+                <div class="form-group-section-body">
                   <div class="form-group-wrapper">
                     <div class="row-expand">
                       <div class="col-expand-left">
@@ -301,11 +301,11 @@
             </div>
 
             <div class="form-group-section-list">
-              <div class="fgs-heading">
+              <div class="form-group-section-heading">
                 <label class="control-label">Surgical Procedures</label>
               </div>
               <div class="form-group-section">
-                <div class="fgs-body">
+                <div class="form-group-section-body">
                   <div class="form-group-wrapper">
                     <div class="row-expand">
                       <div class="col-expand-left">
@@ -326,18 +326,18 @@
 
 
             <div class="form-group-section-list" ng-if="$ctrl.clinicalDocument.medications">
-              <div class="fgs-heading">
+              <div class="form-group-section-heading">
                 <label class="control-label">Medications</label>
               </div>
-              <div mc-sub-accordion class="form-group-section fgs-bordered fgs-primary accordion" ng-class="getOpenSubAccordion()" ng-repeat="medicationItem in $ctrl.clinicalDocument.medications">
-                <div class="fgs-heading">
+              <div mc-sub-accordion class="form-group-section form-group-section-bordered form-group-section-primary accordion" ng-class="getOpenSubAccordion()" ng-repeat="medicationItem in $ctrl.clinicalDocument.medications">
+                <div class="form-group-section-heading">
                   <div class="control-group without-side-indent right">
                       <button class="btn btn-primary" ng-click="importToCreate('medications', medicationItem)"><span class="btn-text">Import Data</span></button>
-                      <button class="btn btn-primary btn-inverse btn-square btn-fgs-toggle" ng-click="toggleSubAccordion()"><i class="btn-icon fa fa-chevron-up"></i></button>
+                      <button class="btn btn-primary btn-inverse btn-square btn-form-group-section-toggle" ng-click="toggleSubAccordion()"><i class="btn-icon fa fa-chevron-up"></i></button>
                   </div>
                   <h3 class="panel-title">Name: {{ medicationItem.name }}</h3>
                 </div>
-                <div class="fgs-body">
+                <div class="form-group-section-body">
                   <div class="form-group-wrapper">
                     <div class="row-expand">
                       <div class="col-expand-left">
@@ -451,18 +451,18 @@
 
 
             <div class="form-group-section-list" ng-if="$ctrl.clinicalDocument.allergies">
-              <div class="fgs-heading">
+              <div class="form-group-section-heading">
                 <label class="control-label">Allergies</label>
               </div>
-              <div mc-sub-accordion class="form-group-section fgs-bordered fgs-primary accordion" ng-class="getOpenSubAccordion()" ng-repeat="allergiesItem in $ctrl.clinicalDocument.allergies">
-                <div class="fgs-heading">
+              <div mc-sub-accordion class="form-group-section form-group-section-bordered form-group-section-primary accordion" ng-class="getOpenSubAccordion()" ng-repeat="allergiesItem in $ctrl.clinicalDocument.allergies">
+                <div class="form-group-section-heading">
                   <div class="control-group without-side-indent right">
                       <button class="btn btn-primary" ng-click="importToCreate('allergies', allergiesItem)"><span class="btn-text">Import Data</span></button>
-                      <button class="btn btn-primary btn-inverse btn-square btn-fgs-toggle" ng-click="toggleSubAccordion()"><i class="btn-icon fa fa-chevron-up"></i></button>
+                      <button class="btn btn-primary btn-inverse btn-square btn-form-group-section-toggle" ng-click="toggleSubAccordion()"><i class="btn-icon fa fa-chevron-up"></i></button>
                   </div>
                   <h3 class="panel-title">Cause: {{ allergiesItem.testName }}</h3>
                 </div>
-                <div class="fgs-body">
+                <div class="form-group-section-body">
                   <div class="form-group-wrapper">
                     <div class="row-expand">
                       <div class="col-expand-left">
@@ -557,11 +557,11 @@
             </div>
 
             <div class="form-group-section-list">
-              <div class="fgs-heading">
+              <div class="form-group-section-heading">
                 <label class="control-label">Measurements</label>
               </div>
               <div class="form-group-section">
-                <div class="fgs-body">
+                <div class="form-group-section-body">
                  <div class="form-group-wrapper">
                    <div class="row-expand">
                      <div class="col-expand-left">
