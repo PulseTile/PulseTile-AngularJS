@@ -34,7 +34,7 @@
             <ng-repeat
               ng-repeat="breadcrumb in breadcrumbs">
                <a ng-if="!$last" ng-click="$ctrl.goBreadcrumb(breadcrumb.state)" class="breadcrumb-link">{{ breadcrumb.title }}</a>
-              <span ng-if="$last"  class="breadcrumb-link">{{ breadcrumb.title }}</span>
+              <span ng-if="$last"  class="breadcrumb-link active">{{ breadcrumb.title }}</span>
               <span ng-if="!$last" class="breadcrumb-separate"></span>
             </ng-repeat>
           </div>

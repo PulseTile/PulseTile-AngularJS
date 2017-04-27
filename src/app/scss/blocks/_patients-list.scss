@@ -1,7 +1,7 @@
 .table thead tr th, 
 .table tbody tr td {
   &.patient-control {
-    &:before {display: none;}
+    &:before { display: none; }
     padding: 5px 4px 5px 7px;
     @include clearfix;
     @include respond-to(xs) { display: none; }
@@ -12,15 +12,15 @@
   float: right; 
   width: 80px;
   @include respond-from(xs) {
-    margin: 0 auto;
     float: none;
+    margin: 0 auto;
   }
   .btn { border-radius: 0; }
   .btn-view-patient { 
     padding-left: 0;
     padding-right: 0;
-    width: 100%;
     text-align: center;
+    width: 100%;
   }
   .btn-dropdown-toggle {
     float: right;
@@ -44,9 +44,7 @@
       }
     }
   }
-
 }
-
 @include respond-to(xs) {
   .dropdown-menu.dm-patients {
     right: -35px;
@@ -59,12 +57,12 @@
 }
 
 .wrap-patients-table {
-  width: 100%;
   max-width: initial;
   overflow-x: auto; 
+  width: 100%;
   .table {
-    min-width: 100%;
     max-width: none;
+    min-width: 100%;
     thead tr th,
     tbody tr td {
       @include respond-from(xs) { min-height: 40px; }
@@ -75,22 +73,22 @@
 
 .wrap-patients-table .table-patients-name,
 .wrap-patients-table .table-patients-controls {
+  min-width: 50px;
   position: absolute;
   top: 0;
-  min-width: 50px;
   z-index: 2;
   @include respond-to(xs) { display: none; }
 }
 .wrap-patients-table .table-patients-name { 
+  border-right: 0;
   left: 0; 
   width: auto;
-  border-right: 0;
   thead tr th:first-child, 
   tbody tr td:first-child {
     border-right: 1px solid #B4B5B4;
   }
 }
 .wrap-patients-table .table-patients-controls { 
-  right: 0; 
+  right: 0;
   width: auto;
 }

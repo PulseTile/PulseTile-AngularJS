@@ -1,30 +1,28 @@
-.wrap-breadcrumbs {
-	background: #F7F7F7;
-}
+.wrap-breadcrumbs { background: #F7F7F7; }
 .breadcrumbs {
-	padding: 9px 2px;
-	font-size: 0;
 	color: $text-color;
-	.breadcrumb-link,
-	.breadcrumb-separate {
-		display: inline-block;
-		vertical-align: middle;
-		margin-right: 8px;
-		font-size: 12px;
-		line-height: 20px;
-		@include respond-from(sm) {
-			font-size: 14px;
-		}
+	font-size: 0;
+	padding: 9px 2px;
+}
+.breadcrumb-link,
+.breadcrumb-separate {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 8px;
+	font-size: 12px;
+	line-height: 20px;
+	@include respond-from(sm) {
+		font-size: 14px;
 	}
-	span:not(.breadcrumb-separate) {
-		font-weight: 700;
-		letter-spacing: -1px;
-	}
-	.breadcrumb-separate {
-		width: 0; 
-		height: 0;
-		border-style: solid;
-		border-color: transparent transparent transparent #747484;
-		border-width: 4px 0 4px 5px;
-	}
+}
+.breadcrumb-link.active {
+	font-weight: 700;
+	letter-spacing: -1px;
+}
+.breadcrumb-separate {
+	border-color: transparent transparent transparent #747484;
+	border-style: solid;
+	border-width: 4px 0 4px 5px;
+	height: 0;
+	width: 0; 
 }

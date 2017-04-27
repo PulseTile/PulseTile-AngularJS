@@ -103,13 +103,13 @@
         <div class="timeline">
           <div class="timeline-inner">
             <div ng-repeat="(key, eventGroup) in eventsTimeline">
-              <div class="header">{{ key | date:'dd MMMM yyyy' }}</div>
-              <div class="date-group" >
-                <div class="date" ng-repeat="event in eventGroup" ng-class="event.sideDateInTimeline">
-                  <div class="date-content" ng-click="$ctrl.go(event.sourceId, event)" ng-class="{active: selectedRow(event.sourceId)}">
-                    <div class="title">{{ event.serviceTeam }}</div>
-                    <div class="subtitle">{{ event.type }}</div>
-                    <div class="text">{{ event.dateOfAppointment | date:'dd MMMM yyyy' }}<!-- , 10:00-10:59 --></div>
+              <div class="timeline-header">{{ key | date:'dd MMMM yyyy' }}</div>
+              <div class="timeline-date-group" >
+                <div class="timeline-date" ng-repeat="event in eventGroup" ng-class="event.sideDateInTimeline">
+                  <div class="timeline-date-content" ng-click="$ctrl.go(event.sourceId, event)" ng-class="{active: selectedRow(event.sourceId)}">
+                    <div class="timeline-date-title">{{ event.serviceTeam }}</div>
+                    <div class="timeline-date-subtitle">{{ event.type }}</div>
+                    <div class="timeline-date-text">{{ event.dateOfAppointment | date:'dd MMMM yyyy' }}<!-- , 10:00-10:59 --></div>
                   </div>
                 </div>
               </div>

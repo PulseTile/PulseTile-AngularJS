@@ -66,7 +66,7 @@
                   <label for="" class="control-label">Create Selected Orders?</label>
                   <ul class="orders-choosen-list" ng-repeat="chosenOrder in chosenOrders">
                     <li class="orders-choosen-item">
-                        <i class="fa fa-times-circle" ng-click="toggleSelectedItem(chosenOrder.code)"></i>
+                        <i class="orders-choosen-close fa fa-times-circle" ng-click="toggleSelectedItem(chosenOrder.code)"></i>
                         <span>{{chosenOrder.text}}</span>
                     </li>
                   </ul>

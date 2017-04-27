@@ -1,12 +1,3 @@
-.orderForm {
-  .wrap-control-group {
-    margin-top: 7px;
-  }
-  .orders-choosen-list {
-    .orders-choosen-item {
-      margin-bottom: 3px;
-      i { cursor: pointer; }
-    }
-  }
-}
-
+.orderForm .wrap-control-group { margin-top: 7px; }
+.orders-choosen-item { margin-bottom: 3px; }
+.orders-choosen-close { cursor: pointer; }
