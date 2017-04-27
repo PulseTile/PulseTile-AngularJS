@@ -16,7 +16,7 @@
 <div table-settings order="name" filtering class="panel panel-primary">
   <div ng-if="false" class="dropdown pull-right visible-xs">
     <button uib-dropdown-toggle class="btn btn-info btn-dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-      <span>{{$ctrl.tabName}}</span>
+      <span class="btn-text">{{$ctrl.tabName}}</span>
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -28,7 +28,7 @@
   <div class="panel-heading">
     <div class="control-group right">
       <div class="dropdown">
-        <button mc-dropdown class="btn btn-success btn-inverse btn-dropdown-toggle" ng-click="toggleDropdown($event);"><i class="fa fa-cog"></i></button>
+        <button mc-dropdown class="btn btn-success btn-inverse btn-dropdown-toggle" ng-click="toggleDropdown($event);"><i class="btn-icon fa fa-cog"></i></button>
         <div class="dropdown-menu dm-panel dm-right dm-summery">
           <div class="form-group-wrapper">
             <div ng-repeat="(itemKey, item) in patientsTable">
@@ -47,7 +47,7 @@
                     </div>
                   </div>
                   <div class="col-xs-6 col-sm-4">
-                    <button class="btn btn-success btn-inverse btn-bold btn-smaller" ng-click="selectAllSettings(itemKey)">Select All</button>
+                    <button class="btn btn-success btn-inverse btn-bold btn-smaller" ng-click="selectAllSettings(itemKey)"><span class="btn-text">Select All</span></button>
                   </div>
                 </div>
               </div>
@@ -55,7 +55,7 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
+      <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="btn-icon fa fa-filter"></i></button>
     </div>
     <h3 class="panel-title">{{$root.subHeader}}</h3>
     <div class="panel-filter" ng-show="isFilterOpen">

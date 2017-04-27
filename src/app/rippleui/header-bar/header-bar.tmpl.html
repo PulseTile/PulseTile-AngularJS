@@ -69,7 +69,7 @@
               <div class="item" ng-if="user.email">{{user.email}}</div>
               <div class="item gray"><em>10/05/2099</em></div>
             </div>
-            <a class="btn btn-success btn-block btn-signout" ng-click="$ctrl.signout()">Sign Out <i class="fa fa-sign-out"></i></a>
+            <a class="btn btn-success btn-block btn-signout" ng-click="$ctrl.signout()"><span class="brn-text">Sign Out</span> <i class="btn-icon fa fa-sign-out"></i></a>
           </div>
         </div>
       </li>
@@ -79,7 +79,7 @@
     <div class="wrap-search wrap-header-search ng-cloak" ng-cloak ng-show="isShowSearch();">
       <div class="header-search">
         <div uib-dropdown class="control-group left control-search-select dropdown">
-          <button uib-dropdown-toggle class="btn btn-success btn-inverse btn-dropdown-toggle btn-search-toggle"><i class="fa fa-bars"></i></button>
+          <button uib-dropdown-toggle class="btn btn-success btn-inverse btn-dropdown-toggle btn-search-toggle"><i class="btn-icon fa fa-bars"></i></button>
           <div uib-dropdown-menu class="dropdown-menu dropdown-menu-search-select dm-panel dm-left dm-tables">
             <div class="heading">Search Options</div>
             <div class="dm-wrap-list">
@@ -90,7 +90,7 @@
             </div>
           </div>
         </div>
-        <button ng-show="!isOpenSearch" class="btn btn-success btn-search" ng-click="$ctrl.searchFunction();"><i class="fa fa-search"></i></button>
+        <button ng-show="!isOpenSearch" class="btn btn-success btn-search" ng-click="$ctrl.searchFunction();"><i class="btn-icon fa fa-search"></i></button>
         <div ng-show="!isOpenSearch" class="wrap-search-holder">
           <div class="search-holder">
           <form ng-submit="$ctrl.searchFunction()">

@@ -17,8 +17,8 @@
   <div class="panel panel-secondary" ng-if="getShowPanel('series') " ng-class="getOpenPanelClass('series')">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'series')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('series')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'series')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('series')"><i class="btn-icon fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Image Series</h3>
     </div>
@@ -28,9 +28,7 @@
           <div class="form-group-wrapper">
             <div class="form-group" ng-repeat="item in instanceIds track by $index">
               <div class="form-control-static">
-                <!--<img src="http://ripple-orthanc.answerappcloud.com/instances/{{item}}/preview" alt="image">-->
                 <cornerstone-image imageId="http://138.68.134.7:8086/instances/{{item}}/preview"></cornerstone-image>
-                <!--<cornerstone-image imageId="example://1"></cornerstone-image>-->
               </div>
             </div>
           </div>
@@ -38,14 +36,14 @@
       </div>
       <div class="panel-control">
         <div class="control-group center" >
-          <button id="play" type="button" class="btn btn-inverse btn-success btn-none-border"><i class="fa fa-play"></i></button>
-          <button id="stop" type="button" class="btn btn-inverse btn-success btn-none-border"><i class="fa fa-stop"></i></button>
+          <button id="play" type="button" class="btn btn-inverse btn-success btn-none-border"><i class="btn-icon fa fa-play"></i></button>
+          <button id="stop" type="button" class="btn btn-inverse btn-success btn-none-border"><i class="btn-icon fa fa-stop"></i></button>
           <div class="control-separate"></div>
-          <button id="zoomIn" type="button" class="btn btn-inverse btn-success btn-none-border" ng-click="zoomOut()"><i class="fa fa-search-minus"></i></button>
-          <button id="zoomOut" type="button" class="btn btn-inverse btn-success btn-none-border" ng-click="zoomIn()"><i class="fa fa-search-plus"></i></button>
+          <button id="zoomIn" type="button" class="btn btn-inverse btn-success btn-none-border" ng-click="zoomOut()"><i class="btn-icon fa fa-search-minus"></i></button>
+          <button id="zoomOut" type="button" class="btn btn-inverse btn-success btn-none-border" ng-click="zoomIn()"><i class="btn-icon fa fa-search-plus"></i></button>
           <div class="control-separate"></div>
-          <button id="arrows" type="button" class="btn btn-inverse btn-success btn-none-border"><i class="fa fa-arrows"></i></button>
-          <button id="verticalArrows" type="button" class="btn btn-inverse btn-success btn-none-border"><i class="fa fa-arrows-v"></i></button>
+          <button id="arrows" type="button" class="btn btn-inverse btn-success btn-none-border"><i class="btn-icon fa fa-arrows"></i></button>
+          <button id="verticalArrows" type="button" class="btn btn-inverse btn-success btn-none-border"><i class="btn-icon fa fa-arrows-v"></i></button>
           <!--<button id="reset" type="button" class="btn btn-inverse btn-success" ng-click="reset()">Reset</button>-->
         </div>
       </div>
@@ -55,8 +53,8 @@
   <div class="panel panel-secondary" ng-if="getShowPanel('imgDetail')" ng-class="getOpenPanelClass('imgDetail')">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'imgDetail')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('imgDetail')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'imgDetail')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('imgDetail')"><i class="btn-icon fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Image Details</h3>
     </div>

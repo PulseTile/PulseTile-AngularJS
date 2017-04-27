@@ -17,7 +17,7 @@
   <div class="panel-heading">
     <div class="control-group right">
       <div class="dropdown">
-        <button mc-dropdown class="btn btn-success btn-inverse btn-dropdown-toggle" ng-click="toggleDropdown($event);"><i class="fa fa-cog"></i></button>
+        <button mc-dropdown class="btn btn-success btn-inverse btn-dropdown-toggle" ng-click="toggleDropdown($event);"><i class="btn-icon fa fa-cog"></i></button>
         <div class="dropdown-menu dm-panel dm-right dm-summery dm-patients">
           <div class="form-group-wrapper">
             <div ng-repeat="(itemKey, item) in patientsTable">
@@ -36,7 +36,7 @@
                     </div>
                   </div>
                   <div class="col-xs-6 col-sm-4">
-                    <button class="btn btn-success btn-inverse btn-bold btn-smaller" ng-click="selectAllSettings(itemKey)">Select All</button>
+                    <button class="btn btn-success btn-inverse btn-bold btn-smaller" ng-click="selectAllSettings(itemKey)"><span class="btn-text">Select All</span></button>
                   </div>
                 </div>
               </div>
@@ -44,7 +44,7 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
+      <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="btn-icon fa fa-filter"></i></button>
     </div>
     <h3 class="panel-title">
       Patient Info<span ng-if="$ctrl.filters.ageRange">. Age range: {{ $ctrl.filters.ageRange }}</span><span ng-if="$ctrl.filters.department">. Setting: {{$ctrl.filters.department}}</span>

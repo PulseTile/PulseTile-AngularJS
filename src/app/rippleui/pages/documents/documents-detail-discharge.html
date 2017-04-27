@@ -17,7 +17,7 @@
   <div class="panel panel-secondary" ng-if="getShowPanel('detail')" ng-class="getOpenPanelClass('detail')">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'detail')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'detail')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
       </div>
       <h3 class="panel-title">Document Details</h3>
     </div>
@@ -165,8 +165,8 @@
             <div mc-sub-accordion class="form-group-section fgs-bordered fgs-primary accordion" ng-class="getOpenSubAccordion()" ng-repeat="diagnosisItem in $ctrl.clinicalDocument.diagnosisList">
               <div class="fgs-heading">
                 <div class="control-group without-side-indent right">
-                    <button class="btn btn-primary" ng-click="importToCreate('diagnoses', diagnosisItem)"><span>Import Data</span></button>
-                    <button class="btn btn-primary btn-inverse btn-square btn-fgs-toggle" ng-click="toggleSubAccordion()"><i class="fa fa-chevron-up"></i></button>
+                    <button class="btn btn-primary" ng-click="importToCreate('diagnoses', diagnosisItem)"><span class="btn-text">Import Data</span></button>
+                    <button class="btn btn-primary btn-inverse btn-square btn-fgs-toggle" ng-click="toggleSubAccordion()"><i class="btn-icon fa fa-chevron-up"></i></button>
                 </div>
                 <h3 class="panel-title">Problem: {{ diagnosisItem.problem }}</h3>
               </div>

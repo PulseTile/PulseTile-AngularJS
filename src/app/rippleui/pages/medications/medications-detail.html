@@ -17,8 +17,8 @@
   <div class="panel panel-secondary" ng-if="getShowPanel('medication') && !isMedicationEdit" ng-class="getOpenPanelClass('medication');">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'medication')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('medication')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'medication')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('medication')"><i class="btn-icon fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Medication</h3>
     </div>
@@ -51,7 +51,7 @@
                 <div class="form-group">
                   <div class="wrap-control-group">
                     <div class="control-group left">
-                      <button type="button" class="btn btn-info btn-inverse" ng-click="openPanel('prescription')">Prescription</button>
+                      <button type="button" class="btn btn-info btn-inverse" ng-click="openPanel('prescription')"><span class="btn-text">Prescription</span></button>
                     </div>
                   </div>
                 </div>
@@ -117,12 +117,12 @@
       <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
         <div class="wrap-control-group hide-indent-bottom">
           <div class="control-group with-indent left hidden-xs">
-            <button class="btn btn-danger"><i class="fa fa-close"></i> Cancel</button>
-            <button class="btn btn-success btn-pause"><i class="fa fa-pause"></i> Suspend</button>
-            <button class="btn btn-success"><i class="fa fa-share"></i> Order</button>
+            <button class="btn btn-danger"><i class="btn-icon fa fa-close"></i> <span class="btn-text">Cancel</span></button>
+            <button class="btn btn-success btn-pause"><i class="btn-icon fa fa-pause"></i> <span class="btn-text">Suspend</span></button>
+            <button class="btn btn-success"><i class="btn-icon fa fa-share"></i> <span class="btn-text">Order</span></button>
           </div>
           <div class="control-group with-indent right">
-            <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.editMedication();"><i class="fa fa-edit"></i> Edit</button>
+            <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.editMedication();"><i class="btn-icon fa fa-edit"></i> <span class="btn-text">Edit</span></button>
           </div>
         </div>
       </div>
@@ -131,8 +131,8 @@
   <div class="panel panel-secondary" ng-if="getShowPanel('medication') && isMedicationEdit" ng-class="getOpenPanelClass('medication')">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'medication')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('medication')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'medication')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('medication')"><i class="btn-icon fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Edit Medication</h3>
     </div>
@@ -191,7 +191,7 @@
                 <div class="form-group">
                   <div class="wrap-control-group">
                     <div class="control-group left">
-                      <button type="button" class="btn btn-info btn-inverse" ng-click="openPanel('prescription')">Prescription</button>
+                      <button type="button" class="btn btn-info btn-inverse" ng-click="openPanel('prescription')"><span class="btn-text">Prescription</span></button>
                     </div>
                   </div>
                 </div>
@@ -256,8 +256,8 @@
       <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
         <div class="wrap-control-group">
           <div class="control-group right">
-            <button class="btn btn-danger" ng-click="$ctrl.cancelEditMedication()"><i class="fa fa-ban"></i> Cancel</button>
-            <button class="btn btn-success" ng-click="confirmEditMedication(medicationForm, medicationEdit)"><i class="fa fa-check"></i> Complete</button>
+            <button class="btn btn-danger" ng-click="$ctrl.cancelEditMedication()"><i class="btn-icon fa fa-ban"></i> <span class="btn-text">Cancel</span></button>
+            <button class="btn btn-success" ng-click="confirmEditMedication(medicationForm, medicationEdit)"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Complete</span></button>
           </div>
         </div>
       </div>
@@ -268,8 +268,8 @@
   <div class="panel panel-secondary" ng-if="getShowPanel('prescription') && !isPrescriptionEdit" ng-class="getOpenPanelClass('prescription')">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'prescription')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('prescription')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'prescription')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('prescription')"><i class="btn-icon fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Prescription (1)</h3>
     </div>
@@ -296,7 +296,7 @@
             <div class="form-group">
               <div class="wrap-control-group">
                 <div class="control-group left">
-                  <button type="button" class="btn btn-success btn-sm btn-inverse btn-icon-normal btn-dropdown-toggle btn-schedule" ng-click="toggleShowSchedule()"><i class="btn-icon fa fa-table"></i> Hourly Schedule</button>
+                  <button type="button" class="btn btn-success btn-sm btn-inverse btn-icon-normal btn-dropdown-toggle btn-schedule" ng-click="toggleShowSchedule()"><i class="btn-icon fa fa-table"></i> <span class="btn-text">Hourly Schedule</span></button>
                 </div>
               </div>
               <div ng-if="isShowSchedule" class="schedule-block">
@@ -357,7 +357,7 @@
       <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
         <div class="wrap-control-group hide-indent-bottom">
           <div class="control-group with-indent right">
-            <button class="btn btn-success btn-inverse" ng-click="$ctrl.editPrescription();"><i class="fa fa-edit"></i> Edit</button>
+            <button class="btn btn-success btn-inverse" ng-click="$ctrl.editPrescription();"><i class="btn-icon fa fa-edit"></i> <span class="btn-text">Edit</span></button>
           </div>
         </div>
       </div>
@@ -366,8 +366,8 @@
   <div class="panel panel-secondary" ng-if="getShowPanel('prescription') && isPrescriptionEdit" ng-class="getOpenPanelClass('prescription')">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'prescription')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('prescription')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'prescription')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('prescription')"><i class="btn-icon fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Edit Prescription (1)</h3>
     </div>
@@ -522,8 +522,8 @@
               <div class="wrap-control-group">
                 <div class="control-group left">
                   <button type="button" class="btn btn-success btn-icon-normal" ng-click="">
-                    <i class="fa fa-plus"></i>
-                    <span>Add Dosage</span>
+                    <i class="btn-icon fa fa-plus"></i>
+                    <span class="btn-text">Add Dosage</span>
                   </button>
                 </div>
               </div>
@@ -535,7 +535,7 @@
               <label class="control-label">Dose Timing:</label>
               <div class="non-edit-value">
                 <button type="button" class="btn btn-danger btn-sm btn-icon-normal btn-square" ng-click="">
-                  <i class="fa fa-ban"></i>
+                  <i class="btn-icon fa fa-ban"></i>
                 </button>
                 <span>2X each morning {{ $ctrl.medication.timing }}</span>
               </div>
@@ -543,7 +543,7 @@
             <div class="form-group">
               <div class="wrap-control-group">
                 <div class="control-group left">
-                  <button type="button" class="btn btn-success btn-sm btn-inverse btn-icon-normal btn-dropdown-toggle btn-schedule" ng-click="toggleShowSchedule()"><i class="btn-icon fa fa-table"></i> Hourly Schedule</button>
+                  <button type="button" class="btn btn-success btn-sm btn-inverse btn-icon-normal btn-dropdown-toggle btn-schedule" ng-click="toggleShowSchedule()"><i class="btn-icon fa fa-table"></i> <span class="btn-text">Hourly Schedule</span></button>
                 </div>
               </div>
               <div ng-if="isShowSchedule" class="schedule-block">
@@ -604,8 +604,8 @@
       <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
         <div class="wrap-control-group">
           <div class="control-group right">
-            <button class="btn btn-danger" ng-click="$ctrl.cancelEditPrescription()"><i class="fa fa-ban"></i> Cancel</button>
-            <button class="btn btn-success" ng-click="confirmEditPrescription(medicationForm, medicationEdit)"><i class="fa fa-check"></i> Complete</button>
+            <button class="btn btn-danger" ng-click="$ctrl.cancelEditPrescription()"><i class="btn-icon fa fa-ban"></i> <span class="btn-text">Cancel</span></button>
+            <button class="btn btn-success" ng-click="confirmEditPrescription(medicationForm, medicationEdit)"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Complete</span></button>
           </div>
         </div>
       </div>
@@ -616,8 +616,8 @@
   <div class="panel panel-secondary" ng-if="getShowPanel('warning')" ng-class="getOpenPanelClass('warning')">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'warning')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('warning')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'warning')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('warning')"><i class="btn-icon fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Warnings (2)</h3>
     </div>
@@ -654,8 +654,8 @@
   <div class="panel panel-secondary" ng-if="getShowPanel('history')" ng-class="getOpenPanelClass('history')">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'history')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('history')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'history')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('history')"><i class="btn-icon fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Change History (1)</h3>
     </div>

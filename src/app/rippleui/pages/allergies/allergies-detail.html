@@ -17,8 +17,8 @@
   <div class="panel panel-secondary" ng-if="getShowPanel('allergy') && !isEdit" ng-class="getOpenPanelClass('allergy')">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'allergy')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('allergy')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'allergy')"><i class="btn-icon fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('allergy')"><i class="btn-icon fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Allergy</h3>
     </div>
@@ -85,7 +85,7 @@
       <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
         <div class="wrap-control-group">
           <div class="control-group right">
-            <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.edit();"><i class="fa fa-edit"></i> Edit</button>
+            <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.edit();"><i class="btn-icon fa fa-edit"></i> <span class="btn-text">Edit</span></button>
           </div>
         </div>
       </div>
@@ -95,8 +95,8 @@
   <div class="panel panel-secondary" ng-if="getShowPanel('allergy') && isEdit" ng-class="getOpenPanelClass('allergy')">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'allergy')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('allergy')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'allergy')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('allergy')"><i class="btn-icon fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Edit Allergy</h3>
     </div>
@@ -153,8 +153,8 @@
       <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
         <div class="wrap-control-group">
           <div class="control-group right">
-            <button class="btn btn-danger" ng-click="$ctrl.cancelEdit()"><i class="fa fa-ban"></i> Cancel</button>
-            <button class="btn btn-success" ng-click="confirmEdit(allergyForm, allergyEdit)"><i class="fa fa-check"></i> Complete</button>
+            <button class="btn btn-danger" ng-click="$ctrl.cancelEdit()"><i class="btn-icon fa fa-ban"></i> <span class="btn-text">Cancel</span></button>
+            <button class="btn btn-success" ng-click="confirmEdit(allergyForm, allergyEdit)"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Complete</span></button>
           </div>
         </div>
       </div>
@@ -165,8 +165,8 @@
   <div class="panel panel-secondary" ng-if="getShowPanel('metadata') && !isEditMeta" ng-class="getOpenPanelClass('metadata')">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'metadata')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('metadata')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'metadata')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('metadata')"><i class="btn-icon fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Metadata</h3>
     </div>
@@ -194,7 +194,7 @@
       <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
         <div class="wrap-control-group">
           <div class="control-group right">
-            <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.editMeta();"><i class="fa fa-edit"></i> Edit</button>
+            <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.editMeta();"><i class="btn-icon fa fa-edit"></i> <span class="btn-text">Edit</span></button>
           </div>
         </div>
       </div>
@@ -203,8 +203,8 @@
   <div class="panel panel-secondary" ng-if="getShowPanel('metadata') && isEditMeta" ng-class="getOpenPanelClass('metadata')">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'metadata')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('metadata')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'metadata')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('metadata')"><i class="btn-icon fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Edit Metadata</h3>
     </div>
@@ -245,8 +245,8 @@
       <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
         <div class="wrap-control-group">
           <div class="control-group right">
-            <button class="btn btn-danger" ng-click="$ctrl.cancelEditMeta()"><i class="fa fa-ban"></i> Cancel</button>
-            <button class="btn btn-success" ng-click="confirmEditMeta(allergyFormMeta, allergyEditMeta)"><i class="fa fa-check"></i> Complete</button>
+            <button class="btn btn-danger" ng-click="$ctrl.cancelEditMeta()"><i class="btn-icon fa fa-ban"></i> <span class="btn-text">Cancel</span></button>
+            <button class="btn btn-success" ng-click="confirmEditMeta(allergyFormMeta, allergyEditMeta)"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Complete</span></button>
           </div>
         </div>
       </div>

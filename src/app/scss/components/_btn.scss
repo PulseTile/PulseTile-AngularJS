@@ -7,14 +7,15 @@
   padding-left: 10px;
   padding-right: 10px;
   vertical-align: top;
-  i { font-weight: 700; }
+  .btn-icon { font-weight: 700; }
 }
+.btn-icon-normal .btn-icon { font-weight: 400; }
 .btn-bold { font-weight: 700; }
 .btn-rounded { border-radius: 2px; }
 .btn-sm {
   height: 30px;
   line-height: 18px;
-  i { font-weight: 400; }
+  .btn-icon { font-weight: 400; }
 }
 .btn-smaller {
   font-size: 14px;
@@ -23,9 +24,8 @@
   margin: 2px 0;
   padding-bottom: 4px;
   padding-top: 4px;
-  i { font-weight: 400; }
+  .btn-icon { font-weight: 400; }
 }
-.btn.btn-icon-normal i {font-weight: 400;}
 
 @each $button, $color in $colored-buttons {
   .btn-#{$button},
@@ -151,20 +151,20 @@
 .btn-filter {
   width: 42px;
   &.btn-dropdown-toggle { width: auto; }
-  i {
+  .btn-icon {
     font-size: 19px;
     font-weight: 400;
   }
 }
 .btn-board-more { width: 43px; }
-.btn-pause i {
+.btn-pause .btn-icon {
   font-size: 15px;
   font-weight: 400;
 }
 
 .btn-edit {
   font-weight: 600;
-  i {
+  .btn-icon {
     font-size: 17px;
     font-weight: 400;
     margin-right: 3px;
@@ -177,7 +177,7 @@
   font-weight: 600;
   &:hover,
   &.active { background: #ffffff !important; }
-  i {
+  .btn-icon {
     font-size: 17px;
     font-weight: 400;
     margin-right: 3px;
@@ -199,4 +199,4 @@
 }
 .full-panel .btn-toggle-rotate { display: none; }
 
-.btn-back-doc span { margin-left: 4px; }
+.btn-back-doc .btn-text { margin-left: 4px; }
