@@ -1,31 +1,22 @@
 .tag {
   background: #fff;
-  padding: 3px 5px;
-  border-radius: 2px;
-  margin: 0 3px;
-  display: inline-block;
   border-bottom: 1px solid #aaa;
-}
-
-  .tag:hover {
+  border-radius: 2px;
+  display: inline-block;
+  margin: 0 3px;
+  padding: 3px 5px;
+  &:hover {
     background: #ddd;
     border-bottom: 1px solid #fff;
   }
-
-  .tag .remove {
-    cursor: pointer;
-  }
-
-  .tag .remove i {
+  .remove { cursor: pointer; }
+  .remove i {
     color: #0E682F;
     margin-left: 5px;
   }
-  
-  .tag .editable {
-    font-weight: 600;
+  .editable {
     cursor: pointer;
+    font-weight: 600;
   }
-  
-  .tag > .editable {
-    border-bottom: none;
-  }
+  & > .editable { border-bottom: none; }
+}

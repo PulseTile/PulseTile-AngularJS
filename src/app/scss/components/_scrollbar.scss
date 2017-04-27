@@ -11,14 +11,10 @@
     border-radius: 7px;
     margin: 0;
   }
-  .mCSB_draggerRail {
-    background-color: #f3f3f3; 
-  }
+  .mCSB_draggerRail { background-color: #f3f3f3; }
 
   .mCSB_dragger {
-    .mCSB_dragger_bar { 
-      background-color: rgba(217, 217, 217, 1); 
-    }
+    .mCSB_dragger_bar { background-color: rgba(217, 217, 217, 1); }
 
     &:hover .mCSB_dragger_bar { background-color: rgba(0,0,0,0.3); }
 
@@ -29,7 +25,7 @@
 
 .mCS-dark-custom.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar, 
 .mCS-dark-custom.mCSB_scrollTools_horizontal .mCSB_draggerRail {
-  width: 100%;
   height: 7px;
   margin: 5px 0;
+  width: 100%;
 }
