@@ -152,11 +152,11 @@ angular.module('ripple-ui.directives', [])
         
         cornerstone.loadImage(imageId).then(function(image) {
           cornerstone.displayImage(element, image);
-          cornerstoneTools.mouseInput.enable(element);
+          
           cornerstoneTools.mouseWheelInput.enable(element);
           
           // Enable all tools we want to use with this element
-          cornerstoneTools.wwwc.activate(element, 2); // ww/wc is the default tool for left mouse button
+          // ww/wc is the default tool for left mouse button
           cornerstoneTools.pan.activate(element, 1); // pan is the default tool for middle mouse button
         });
       }
