@@ -25,17 +25,20 @@
 @import 'components/table';
 @import 'components/pagination';
 @import 'components/form';
+@import 'components/form-section';
+@import 'components/form-custom-inputs';
+@import 'components/form-contenteditable';
 @import 'components/highlighter';
 @import 'components/dropdown';
 @import 'components/modal';
 @import 'components/switch';
-@import 'components/fieldset';
 @import 'components/datepicker';
 @import 'components/tag';
 @import 'components/scrollbar';
 @import 'components/selectable';
 @import 'components/fullcalendar';
 @import 'components/slider-range';
+@import 'components/panel/index';
 @import 'components/color-palette';
 
 @import 'base';
@@ -47,7 +50,6 @@
 @import 'blocks/breadcrumbs';
 @import 'blocks/patient-info';
 @import 'blocks/section';
-@import 'blocks/panel/index';
 @import 'blocks/spinner';
 @import 'blocks/control';
 @import 'blocks/dashboard';

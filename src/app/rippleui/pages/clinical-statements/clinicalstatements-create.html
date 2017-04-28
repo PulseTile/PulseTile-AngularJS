@@ -16,7 +16,7 @@
   <div class="panel panel-secondary" mc-full-panel>
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'clinicalStatementCreate')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'clinicalStatementCreate')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
       </div>
       <h3 class="panel-title">Create Clinical Statement</h3>
     </div>
@@ -50,28 +50,28 @@
                           <span class="input-contenteditable" tabindex="0" contenteditable="true" contenteditabled ng-model="queryFilter"></span>
                         </div>
                       </div>
-                      <div class="dropdown-menu dm-panel dm-statements dm-small dm-top-left" ng-if="!statements.length">
+                      <div class="dropdown-menu dropdown-menu-panel dropdown-menu-statements dropdown-menu-small dropdown-menu-top-left" ng-if="!statements.length">
                         <div class="heading wrap-overflow">
                           <div class="control-group right">
                             <dir-pagination-controls class="pagination-short" max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false" pagination-id="tags"></dir-pagination-controls>
                           </div>
                           <div class="pagination-heading">Tags</div>
                         </div>
-                        <div class="dm-wrap-list">
-                          <div class="dm-list">
-                            <div class="dm-item" ng-click="$ctrl.getTag(tag)" dir-paginate="tag in tags | filter: queryFilter | itemsPerPage: 5" pagination-id="tags"><span>{{tag}}</span></div>
+                        <div class="dropdown-menu-wrap-list">
+                          <div class="dropdown-menu-list">
+                            <div class="dropdown-menu-item" ng-click="$ctrl.getTag(tag)" dir-paginate="tag in tags | filter: queryFilter | itemsPerPage: 5" pagination-id="tags"><span class="dropdown-menu-item-text">{{tag}}</span></div>
                           </div>
                         </div>
                       </div>
-                      <div class="dropdown-menu dm-panel dm-statements dm-small dm-top-left hidden-expand" ng-if="statements.length">
+                      <div class="dropdown-menu dropdown-menu-panel dropdown-menu-statements dropdown-menu-small dropdown-menu-top-left hidden-expand" ng-if="statements.length">
                         <div class="heading wrap-overflow">
                           <div class="control-group right">
                             <dir-pagination-controls class="pagination-short" max-size="5" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false" pagination-id="phrase"></dir-pagination-controls>
                           </div>
                           <div class="pagination-heading">Statements</div>
                         </div>
-                        <div class="dm-wrap-list">
-                          <div class="dm-list">
+                        <div class="dropdown-menu-wrap-list">
+                          <div class="dropdown-menu-list">
                             <select multiple="" class="form-control not-bordered textarea-big ng-valid ng-dirty" ng-model="selectedStatements" ng-change="changeSelect(selectedStatements)">
                               <option value="{{item.index}}" dir-paginate="item in statementsText | filter: queryFiltering | itemsPerPage: 5" pagination-id="phrase">{{item.phrase}}</option>
                             </select>
@@ -133,8 +133,8 @@
       <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
         <div class="wrap-control-group">
           <div class="control-group right">
-            <button class="btn btn-danger" ng-click="$ctrl.cancelEdit()"><i class="fa fa-ban"></i> Cancel</button>
-            <button class="btn btn-success" ng-click="confirmEdit(clinicalStatementForm, clinicalStatementCreate)"><i class="fa fa-check"></i> Complete</button>
+            <button class="btn btn-danger" ng-click="$ctrl.cancelEdit()"><i class="btn-icon fa fa-ban"></i> <span class="btn-text">Cancel</span></button>
+            <button class="btn btn-success" ng-click="confirmEdit(clinicalStatementForm, clinicalStatementCreate)"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Complete</span></button>
           </div>
         </div>
       </div>

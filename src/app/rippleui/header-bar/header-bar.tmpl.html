@@ -35,7 +35,7 @@
           <i class="fa fa-bell-o"></i>
           <span class="count">2</span>
         </a>
-        <div class="notifications-drop dm-right" id="tab-notifications" uib-dropdown-menu>
+        <div class="notifications-drop dropdown-menu-right" id="tab-notifications" uib-dropdown-menu>
           <div class="notifications-header">Notifications (2)</div>
           <div class="notifications-body">
             <ul class="notifications-list">
@@ -55,7 +55,7 @@
         <a class="btn-header btn-user" uib-dropdown-toggle>
           <i class="fa fa-user"></i>
         </a>
-        <div class="dropdown-user dm-right" uib-dropdown-menu>
+        <div class="dropdown-user dropdown-menu-right" uib-dropdown-menu>
           <div class="user-profile-image" ng-click="$ctrl.goProfile()">
             <!-- <i class="fa fa-user"></i> -->
             <div class="img">
@@ -69,7 +69,7 @@
               <div class="item" ng-if="user.email">{{user.email}}</div>
               <div class="item gray"><em>10/05/2099</em></div>
             </div>
-            <a class="btn btn-success btn-block btn-signout" ng-click="$ctrl.signout()">Sign Out <i class="fa fa-sign-out"></i></a>
+            <a class="btn btn-success btn-block btn-signout" ng-click="$ctrl.signout()"><span class="brn-text">Sign Out</span> <i class="btn-icon fa fa-sign-out"></i></a>
           </div>
         </div>
       </li>
@@ -79,18 +79,18 @@
     <div class="wrap-search wrap-header-search ng-cloak" ng-cloak ng-show="isShowSearch();">
       <div class="header-search">
         <div uib-dropdown class="control-group left control-search-select dropdown">
-          <button uib-dropdown-toggle class="btn btn-success btn-inverse btn-dropdown-toggle btn-search-toggle"><i class="fa fa-bars"></i></button>
-          <div uib-dropdown-menu class="dropdown-menu dm-panel dm-left dm-tables dm-search-select">
+          <button uib-dropdown-toggle class="btn btn-success btn-inverse btn-dropdown-toggle btn-search-toggle"><i class="btn-icon fa fa-bars"></i></button>
+          <div uib-dropdown-menu class="dropdown-menu dropdown-menu-search-select dropdown-menu-panel dropdown-menu-left dropdown-menu-small-size">
             <div class="heading">Search Options</div>
-            <div class="dm-wrap-list">
-              <div class="dm-list">
-              <div class="dm-item" ng-click="$ctrl.closeAdvancedSearch()" ng-class="{active: !isOpenSearch}"><span>Patient Search - Basic</span></div>
-                <div class="dm-item" ng-repeat="item in searchOptionsList" ng-click="$ctrl.openAdvancedSearch($index)" ng-class="{active: isActiveTypeSearch(searchOptionsList[$index].type)}"><span>{{item.name}}</span></div>
+            <div class="dropdown-menu-wrap-list">
+              <div class="dropdown-menu-list">
+              <div class="dropdown-menu-item" ng-click="$ctrl.closeAdvancedSearch()" ng-class="{active: !isOpenSearch}"><span class="dropdown-menu-item-text">Patient Search - Basic</span></div>
+                <div class="dropdown-menu-item" ng-repeat="item in searchOptionsList" ng-click="$ctrl.openAdvancedSearch($index)" ng-class="{active: isActiveTypeSearch(searchOptionsList[$index].type)}"><span class="dropdown-menu-item-text">{{item.name}}</span></div>
               </div>
             </div>
           </div>
         </div>
-        <button ng-show="!isOpenSearch" class="btn btn-success btn-search" ng-click="$ctrl.searchFunction();"><i class="fa fa-search"></i></button>
+        <button ng-show="!isOpenSearch" class="btn btn-success btn-search" ng-click="$ctrl.searchFunction();"><i class="btn-icon fa fa-search"></i></button>
         <div ng-show="!isOpenSearch" class="wrap-search-holder">
           <div class="search-holder">
           <form ng-submit="$ctrl.searchFunction()">

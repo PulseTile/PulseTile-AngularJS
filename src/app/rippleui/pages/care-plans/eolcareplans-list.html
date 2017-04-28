@@ -34,7 +34,7 @@
     <tr dir-paginate="eolcareplan in $ctrl.eolcareplans | filter:$ctrl.search | itemsPerPage: 10" current-page="$ctrl.currentPage"  ng-click="$ctrl.go(eolcareplan.sourceId)" ng-class="{info: $ctrl.selected(eolcareplan.sourceId)}">
       <td data-th="Name"><span>{{ eolcareplan.name }}</span></td>
       <td data-th="Type"><span>{{ eolcareplan.type }}</span></td>
-      <td data-th="Date" class="dateTime"><span>{{ eolcareplan.date | date:'dd-MMM-yyyy'}}</span></td>
+      <td data-th="Date"><span>{{ eolcareplan.date | date:'dd-MMM-yyyy'}}</span></td>
       <td data-th="Source"><span>{{ eolcareplan.source }}</span></td>
     </tr>
 
@@ -52,9 +52,9 @@
 
 <div class="row" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
   <div class="col-md-6 hidden-xs"><div class="text-right"><dir-pagination-controls on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>
-  <div class="col-md-6 hidden-xs"><div class="text-right create-button"><button class="btn btn-info" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> Create</button></div></div>
+  <div class="col-md-6 hidden-xs"><div class="text-right create-button"><button class="btn btn-info" ng-click="$ctrl.create();"><i class="btn-icon fa fa-plus"></i> <span class="btn-text">Create</span></button></div></div>
 </div>
 <div class="row" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
   <div class="col-xs-6 hidden-sm hidden-md hidden-lg"><div class="text-right"><dir-pagination-controls on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>
-  <div class="col-xs-6 hidden-sm hidden-md hidden-lg"><div class="text-right create-button"><button class="btn btn-info" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> Create</button></div></div>
+  <div class="col-xs-6 hidden-sm hidden-md hidden-lg"><div class="text-right create-button"><button class="btn btn-info" ng-click="$ctrl.create();"><i class="btn-icon fa fa-plus"></i> <span class="btn-text">Create</span></button></div></div>
 </div>

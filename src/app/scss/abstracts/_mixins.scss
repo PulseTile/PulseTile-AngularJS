@@ -40,3 +40,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+@mixin list-reset {
+  margin: 0;
+  padding: 0;
+  & > li { list-style: none; }
+}

@@ -1,47 +1,43 @@
 .wrap-patient-info.show {
-  .patient-info {display: table;}
+  .patient-info { display: table; }
 }
 .patient-info-caption {
+  color: $text-on-base-color;
   display: block;
-  position: relative;
-  overflow: hidden;
-  height: 34px;
   font-size: 18px;
   font-weight: 700;
+  height: 34px;
   line-height: 34px;
-  color: $text-on-base-color;
+  overflow: hidden;
+  position: relative;
   .patient-info-caption-btn {
+    cursor: pointer;
     float: right;
     height: 34px;
     padding-right: 30px;
-    cursor: pointer;
     &:after { font-size: 14px; }
   }
 }
 .patient-info {
   display: none;
-  overflow: hidden;
-  width: 100%;
   margin-bottom: -5px;
+  overflow: hidden;
   padding-top: 10px;
+  width: 100%;
   .patient-info-group-1 {
-    overflow: hidden; 
     display: table-header-group;
+    overflow: hidden; 
   }
   .patient-info-group-2 {
-    margin-left: 5px;
     display: table-footer-group;
-    .patient-info-item {
-      white-space: nowrap;
-    }
+    margin-left: 5px;
+    .patient-info-item { white-space: nowrap; }
   }
   
 }
 @include respond-from(sm) {
-  .wrap-patient-info {
-    overflow: hidden;
-  }
-  .patient-info-caption {display: none;}
+  .wrap-patient-info { overflow: hidden; }
+  .patient-info-caption { display: none; }
   .patient-info {
     display: block;
     padding-top: 0;
@@ -66,24 +62,22 @@
   }
 }
 .patient-info-item {
-  margin-bottom: 10px;
   font-weight: 600;
+  margin-bottom: 10px;
   .key {
     display: block;
     font-size: 13px;
     font-weight: 400;
   }
   &.significant {
-    margin-bottom: 3px;
     font-size: 18px;
     font-weight: 400;
+    margin-bottom: 3px;
   }
 }
 @include respond-from(sm) {
   .patient-info-item {
     margin-bottom: 2px;
-    .key {
-      display: inline;
-    }
+    .key { display: inline; }
   }
 }

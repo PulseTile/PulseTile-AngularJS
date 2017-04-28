@@ -18,8 +18,8 @@
   <div class="panel panel-secondary" ng-if="getShowPanel('eventDetails') && !isEdit" ng-class="getOpenPanelClass('eventDetails');">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'eventDetails')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('eventDetails')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'eventDetails')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('eventDetails')"><i class="btn-icon fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Event - Appointment Details</h3>
     </div>
@@ -63,16 +63,16 @@
       <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
         <div class="wrap-control-group">
           <div class="control-group right">
-            <button class="btn btn-primary ng-cloak" ng-if="isShow" ng-cloak ng-click="startAppointment();" ng-show="canStartAppointment();">Start Appointment</button>
-            <button class="btn btn-primary ng-cloak" ng-if="isShow" ng-cloak ng-click="joinAppointment();" ng-show="canJoinAppointment();">Join Appointment</button>
-            <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.edit();"><i class="fa fa-edit"></i> Edit</button>
+            <button class="btn btn-primary ng-cloak" ng-if="isShow" ng-cloak ng-click="startAppointment();" ng-show="canStartAppointment();"><span class="btn-text">Start Appointment</span></button>
+            <button class="btn btn-primary ng-cloak" ng-if="isShow" ng-cloak ng-click="joinAppointment();" ng-show="canJoinAppointment();"><span class="btn-text">Join Appointment</span></button>
+            <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.edit();"><i class="btn-icon fa fa-edit"></i> <span class="btn-text">Edit</span></button>
           </div>
         </div>
       </div>
       <div class="panel-control" ng-if="currentUser.permissions.indexOf('WRITE') === -1">
         <div class="wrap-control-group" ng-if="isShow">
           <div class="control-group right">
-            <button class="btn btn-primary ng-cloak" ng-cloak ng-click="joinAppointment();" ng-if="$root.socketData.showJoinAppointment == appointment.sourceId">Join Appointment</button>
+            <button class="btn btn-primary ng-cloak" ng-cloak ng-click="joinAppointment();" ng-if="$root.socketData.showJoinAppointment == appointment.sourceId"><span class="btn-text">Join Appointment</span></button>
           </div>
         </div>
       </div>
@@ -82,8 +82,8 @@
   <div class="panel panel-secondary" ng-if="getShowPanel('eventDetails') && isEdit" ng-class="getOpenPanelClass('eventDetails');">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'eventDetails')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('eventDetails')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'eventDetails')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('eventDetails')"><i class="btn-icon fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Edit Event - Appointment Details</h3>
     </div>
@@ -155,8 +155,8 @@
       <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
         <div class="wrap-control-group">
           <div class="control-group right">
-            <button class="btn btn-danger" ng-click="$ctrl.cancelEdit()"><i class="fa fa-ban"></i> Cancel</button>
-            <button class="btn btn-success" ng-click="confirmEdit(eventForm, eventEdit)"><i class="fa fa-check"></i> Complete</button>
+            <button class="btn btn-danger" ng-click="$ctrl.cancelEdit()"><i class="btn-icon fa fa-ban"></i> <span class="btn-text">Cancel</span></button>
+            <button class="btn btn-success" ng-click="confirmEdit(eventForm, eventEdit)"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Complete</span></button>
           </div>
         </div>
       </div>
@@ -166,8 +166,8 @@
   <div class="panel panel-secondary" ng-if="getShowPanel('eventSchedule')" ng-class="getOpenPanelClass('eventSchedule');">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'eventSchedule')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('eventSchedule')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'eventSchedule')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('eventSchedule')"><i class="btn-icon fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Event - Appointment Schedule</h3>
     </div>
@@ -201,8 +201,8 @@
                   <div class="wrap-control-group">
                     <div class="control-group left">
                       <button type="button" class="btn btn-info btn-icon-normal" ng-click="$ctrl.openSchedule()">
-                        <i class="fa fa-calendar"></i>
-                        <span>Schedule</span>
+                        <i class="btn-icon fa fa-calendar"></i>
+                        <span class="btn-text">Schedule</span>
                       </button>
                     </div>
                   </div>
@@ -218,8 +218,8 @@
   <div class="panel panel-secondary" ng-if="getShowPanel('eventMetadata')" ng-class="getOpenPanelClass('eventMetadata');">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'eventMetadata')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('eventMetadata')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'eventMetadata')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('eventMetadata')"><i class="btn-icon fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Event - Appointment Metadata</h3>
     </div>
@@ -258,8 +258,8 @@
   <div class="panel panel-secondary" ng-if="getShowPanel('chat') " ng-class="getOpenPanelClass('chat')">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'chat')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('chat')"><i class="fa fa-chevron-up"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'chat')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('chat')"><i class="btn-icon fa fa-chevron-up"></i></button>
       </div>
       <h3 class="panel-title">Chat</h3>
     </div>
@@ -272,7 +272,7 @@
                 <div class="form-group">
                   <label class="control-label">Chat History:</label>
                   <div class="form-control-static">
-                    <ul ng-if="messages">
+                    <ul ng-if="messages list-reset">
                       <li ng-repeat="message in messages">{{message.timestamp}} - {{message.author}}: {{message.message}}</li>
                     </ul>
                   </div>

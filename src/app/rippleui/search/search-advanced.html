@@ -14,12 +14,12 @@
   ~  limitations under the License.
   -->
   <div mc-dropdown>
-    <div class="dropdown-menu dm-search dm-right" ng-class="{'without-shadow': !isOpenPanelSearch}">
+    <div class="dropdown-menu dropdown-menu-search dropdown-menu-right" ng-class="{'without-shadow': !isOpenPanelSearch}">
       <div mc-datepicker class="panel-group accordion">
         <div class="panel panel-secondary without-margin" ng-class="{open: isOpenPanelSearch}">
           <div class="panel-heading">
             <div class="control-group right">
-              <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="isOpenPanelSearch = !isOpenPanelSearch; refreshSlider();"><i class="fa fa-chevron-up"></i></button>
+              <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="isOpenPanelSearch = !isOpenPanelSearch; refreshSlider();"><i class="btn-icon fa fa-chevron-up"></i></button>
             </div>
             <h3 class="panel-title"><span>{{$ctrl.option.name}}</span><span ng-bind-html="getSearchParams(searchParams)"></span></h3>
           </div>
@@ -181,8 +181,8 @@
             <div class="panel-control">
               <div class="wrap-control-group hide-indent-bottom">
                 <div class="control-group with-indent right">
-                  <button class="btn btn-danger btn-icon-normal" ng-click="cancel()"><i class="fa fa-times"></i> Close</button>
-                  <button class="btn btn-success btn-icon-normal" ng-click="ok(advancedSearchForm)"><i class="fa fa-search"></i> Search</button>
+                  <button class="btn btn-danger btn-icon-normal" ng-click="cancel()"><i class="btn-icon fa fa-times"></i> <span class="btn-text">Close</span></button>
+                  <button class="btn btn-success btn-icon-normal" ng-click="ok(advancedSearchForm)"><i class="btn-icon fa fa-search"></i> <span class="btn-text">Search</span></button>
                 </div>
               </div>
             </div>

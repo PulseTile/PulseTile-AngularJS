@@ -17,11 +17,10 @@
 <div mc-full-panel table-settings order="dateOfReferral" filtering class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
-      <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
+      <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="btn-icon fa fa-filter"></i></button>
     </div>
     <div class="control-group right" >
-      <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')" ng-if="$ctrl.isShowExpandBtn"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-      <!--<button class="btn btn-success btn-inverse btn-dropdown-toggle btn-table"><i class="fa fa-table"></i></button>-->
+      <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')" ng-if="$ctrl.isShowExpandBtn"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
     </div>
     <h3 class="panel-title">Referrals</h3>
     <div class="panel-filter" ng-show="isFilterOpen">
@@ -52,7 +51,7 @@
 
       <tbody>
         <tr dir-paginate="referral in $ctrl.referrals | filter: queryFiltering | orderBy:[order] : reverse  | itemsPerPage: 10" current-page="currentPage"  ng-click="$ctrl.go(referral.sourceId)" ng-class="{info: selectedRow(referral.sourceId)}">
-          <td data-th="Date of Referral" ng-class="sortClass('dateOfReferral')" class="dateTime"><span>{{ referral.dateOfReferral}}</span></td>
+          <td data-th="Date of Referral" ng-class="sortClass('dateOfReferral')"><span>{{ referral.dateOfReferral}}</span></td>
           <td data-th="Referral From" ng-class="sortClass('referralFrom')"><span>{{ referral.referralFrom }}</span></td>
           <td data-th="Referral To" ng-class="sortClass('referralTo')"><span>{{ referral.referralTo }}</span></td>
           <td data-th="Source" ng-class="sortClass('source')"><span>{{ referral.source }}</span></td>
@@ -72,7 +71,7 @@
           <dir-pagination-controls max-size="6" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
         </div>
         <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1 && $ctrl.isShowCreateBtn">
-          <button class="btn btn-success btn-inverse btn-create" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> <span>Create</span></button>
+          <button class="btn btn-success btn-inverse btn-create" ng-click="$ctrl.create();"><i class="btn-icon fa fa-plus"></i> <span class="btn-text">Create</span></button>
         </div>
       </div>
     </div>

@@ -1,18 +1,16 @@
 .table {
-  width: 100%;
-  margin-bottom: 5px;
+  background: map-get($colored-table, 'row-odd-background');
+  border-radius: 0;
+  border: none;
+  color: map-get($colored-table, 'text');
   font-size: 11px;
   line-height: 20px;
-  color: map-get($colored-table, 'text');
-  border: none;
-  border-radius: 0;
-  background: map-get($colored-table, 'row-odd-background');
+  margin-bottom: 5px;
+  width: 100%;
   thead {
     background-color: map-get($colored-table, 'header-background');
     font-weight: 700;
-    i {
-      margin-left: 5px;
-    }
+    i { margin-left: 5px; }
   }
   thead tr th,
   tbody tr td {
@@ -27,19 +25,18 @@
     background: map-get($colored-table, 'selected-background');
   }
   tbody tr td.selected {
-    color: #ffffff;
     background: #b4b4b4;
-
+    color: #ffffff;
   }
-  &.clickable tbody tr {cursor: pointer;}
+  &.clickable tbody tr { cursor: pointer; }
   .dropdown-menu {
     left: auto;
     right: 0;
     li {
       width: 100%;
       i {
-        width: 18px;
         display: inline-block;
+        width: 18px;
       }
     }
   }
@@ -71,12 +68,10 @@
   background-color: map-get($colored-table, 'row-background-hover') !important;
 }
 .wrap-table-scrollX {
-  width: 100%;
   max-width: initial;
   overflow-x: scroll; 
-  .table {
-    width: 1px;
-  }
+  width: 100%;
+  .table { width: 1px; }
 }
 
 .table-fixedcol {
@@ -97,9 +92,8 @@
   }
 }
 tr[ng-click],
-td[ng-click] {
-  cursor: pointer;
-}
+td[ng-click] { cursor: pointer; }
+
 .is-not-touch-device .table-hover > tbody > tr > td.info:hover,
 .is-not-touch-device .table-hover > tbody > tr > th.info:hover,
 .is-not-touch-device .table-hover > tbody > tr.info:hover > td,
@@ -113,19 +107,14 @@ td[ng-click] {
 }
 
 .table-bordered {
-  border: 1px solid #B4B5B4;
   border-collapse: separate;
-  // @include respond-from(xs) {
-  //   border-collapse: collapse;
-  // }
+  border: 1px solid #B4B5B4;
   thead tr th,
   tbody tr td {
     border: none;
     @include respond-from(xs) {
       border-left: 1px solid #B4B5B4;
-      &:first-child {
-        border: none;
-      }
+      &:first-child { border: none; }
     }
   }
 }
@@ -133,9 +122,7 @@ td[ng-click] {
   thead tr th,
   tbody tr td {
     border-left: 1px solid #B4B5B4;
-    &:first-child {
-      border: none;
-    }
+    &:first-child { border: none; }
   }
 }
 @include respond-to(xs) {
@@ -146,25 +133,21 @@ td[ng-click] {
 }
 
 @include respond-to(xs) {
-  // Responsive Tables - http://codepen.io/geoffyuen/pen/FCBEg
   .rwd-table {
     display: block;
-    min-width: 300px; // adjust to your needs
-
-    th {
-      display: none; // for accessibility, use a visually hidden method here instead! Thanks, reddit!
-    }
-    & > tbody {display: block;}
+    min-width: 300px;
+    th { display: none; }
+    & > tbody { display: block; }
     & > tbody > tr {
-      position: relative;
       display: block;
       padding: 6px 0;
+      position: relative;
       & > td {
-        position: static;
         display: block;
-        padding: 0 10px;
         line-height: 20px;
         overflow: hidden;
+        padding: 0 10px;
+        position: static;
         &.cell-truncate {
           @include text-truncate;
         }
@@ -173,78 +156,65 @@ td[ng-click] {
           overflow: hidden;
         }
         &:before {
-          content: attr(data-th)": "; // who knew you could do this? The internet, that's who.
-          font-weight: bold;
-
-          // optional stuff to make it look nicer
-          width: 100px;
+          content: attr(data-th)": ";
           display: block;
           float: left;
+          font-weight: bold;
           padding-right: 10px;
-          // end options
+          width: 100px;
           @include respond-from(xs) {
             display: none;
           }
         }
       }
-      td.dateTime {
-        width: auto;
-      }
     }
-
 
     th, td {
       text-align: left;
-      
       @include respond-from(xs) {
         display: table-cell;
         padding: .25em .5em;
-
-        &:first-child {
-        }
       }
     }
   }
   .rwd-table td.hidden-xs-cell,
-  .hidden-xs-cell {
-    display: none ;
-  }
+  .hidden-xs-cell { display: none; }
 }
 
 .sort-asc:after {
+  content: '\25BC';
   padding-left: 5px;
-  content: '\25BC'
 }
 
 .sort-desc:after {
+  content: '\25B2';
   padding-left: 5px;
-  content: '\25B2'
 }
 @include respond-from(xs) {
   .table-sorted {
     thead tr th {
       cursor: pointer;
       &.sorted {
-        position: relative;
         background: map-get($colored-table, 'selected-background');
+        position: relative;
         &.asc,
-        &.desc {padding-right: 22px;}
+        &.desc { padding-right: 22px; }
         &.asc:after,
         &.desc:after {
+          border-style: solid;
           content: '';
           position: absolute;
-          top: 50%;
           right: 10px;
-          border-style: solid;
+          top: 50%;
           transform: translateY(-50%);
         }
         &.asc:after {
-          border-width: 5px 5px 0;
           border-color: #303030 transparent transparent;
+          border-width: 5px 5px 0;
         }
         &.desc:after {
-          border-width: 0 5px 5px;
           border-color: transparent transparent #303030;
+          border-width: 0 5px 5px;
         }
       }
     }
@@ -269,6 +239,4 @@ td[ng-click] {
   }
 }
 
-.table-icon {
-  color: #9493a1;
-}
+.table-icon { color: #9493a1; }

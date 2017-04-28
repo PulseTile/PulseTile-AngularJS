@@ -161,8 +161,8 @@
     <div class="panel panel-secondary" ng-if="getShowPanel('personal') && !isPersonalEdit" ng-class="getOpenPanelClass('personal')">
       <div class="panel-heading">
         <div class="control-group right">
-          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main', 'personal')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-          <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('personal')"><i class="fa fa-chevron-up"></i></button>
+          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main', 'personal')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+          <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('personal')"><i class="btn-icon fa fa-chevron-up"></i></button>
         </div>
         <h3 class="panel-title">Personal Information</h3>
       </div>
@@ -219,7 +219,7 @@
         <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
           <div class="wrap-control-group">
             <div class="control-group right">
-              <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.personalEdit();"><i class="fa fa-edit"></i> Edit</button>
+              <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.personalEdit();"><i class="btn-icon fa fa-edit"></i> <span class="btn-text">Edit</span></button>
             </div>
           </div>
         </div>
@@ -228,8 +228,8 @@
     <div class="panel panel-secondary" ng-if="getShowPanel('personal') && isPersonalEdit" ng-class="getOpenPanelClass('personal')">
       <div class="panel-heading">
         <div class="control-group right">
-          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main', 'personal')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-          <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('personal')"><i class="fa fa-chevron-up"></i></button>
+          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main', 'personal')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+          <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('personal')"><i class="btn-icon fa fa-chevron-up"></i></button>
         </div>
         <h3 class="panel-title">Personal Information</h3>
       </div>
@@ -309,8 +309,8 @@
         <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
           <div class="wrap-control-group">
             <div class="control-group right">
-              <button class="btn btn-danger" ng-click="$ctrl.cancelPersonalEdit()"><i class="fa fa-ban"></i> Cancel</button>
-              <button class="btn btn-success" ng-click="confirmPersonalEdit(personalForm, personalEdit)"><i class="fa fa-check"></i> Complete</button>
+              <button class="btn btn-danger" ng-click="$ctrl.cancelPersonalEdit()"><i class="btn-icon fa fa-ban"></i> <span class="btn-text">Cancel</span></button>
+              <button class="btn btn-success" ng-click="confirmPersonalEdit(personalForm, personalEdit)"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Complete</span></button>
             </div>
           </div>
         </div>
@@ -321,8 +321,8 @@
     <div class="panel panel-secondary" ng-if="getShowPanel('contact') && !isContactEdit" ng-class="getOpenPanelClass('contact')">
       <div class="panel-heading">
         <div class="control-group right">
-          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main', 'contact')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-          <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('contact')"><i class="fa fa-chevron-up"></i></button>
+          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main', 'contact')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+          <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('contact')"><i class="btn-icon fa fa-chevron-up"></i></button>
         </div>
         <h3 class="panel-title">Contact Information</h3>
       </div>
@@ -384,7 +384,7 @@
         <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
           <div class="wrap-control-group">
             <div class="control-group right">
-              <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.contactEdit();"><i class="fa fa-edit"></i> Edit</button>
+              <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.contactEdit();"><i class="btn-icon fa fa-edit"></i> <span class="btn-text">Edit</span></button>
             </div>
           </div>
         </div>
@@ -393,8 +393,8 @@
     <div class="panel panel-secondary" ng-if="getShowPanel('contact') && isContactEdit" ng-class="getOpenPanelClass('contact')">
       <div class="panel-heading">
         <div class="control-group right">
-          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main', 'contact')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-          <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('contact')"><i class="fa fa-chevron-up"></i></button>
+          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main', 'contact')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+          <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('contact')"><i class="btn-icon fa fa-chevron-up"></i></button>
         </div>
         <h3 class="panel-title">Contact Information</h3>
       </div>
@@ -483,8 +483,8 @@
         <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
           <div class="wrap-control-group">
             <div class="control-group right">
-              <button class="btn btn-danger" ng-click="$ctrl.cancelContactEdit()"><i class="fa fa-ban"></i> Cancel</button>
-              <button class="btn btn-success" ng-click="confirmContactEdit(contactForm, contactEdit)"><i class="fa fa-check"></i> Complete</button>
+              <button class="btn btn-danger" ng-click="$ctrl.cancelContactEdit()"><i class="btn-icon fa fa-ban"></i> <span class="btn-text">Cancel</span></button>
+              <button class="btn btn-success" ng-click="confirmContactEdit(contactForm, contactEdit)"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Complete</span></button>
             </div>
           </div>
         </div>
@@ -495,8 +495,8 @@
     <div class="panel panel-secondary" ng-if="getShowPanel('history')" ng-class="getOpenPanelClass('history')">
       <div class="panel-heading">
         <div class="control-group right">
-          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main', 'history')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
-          <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('history')"><i class="fa fa-chevron-up"></i></button>
+          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main', 'history')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+          <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('history')"><i class="btn-icon fa fa-chevron-up"></i></button>
         </div>
         <h3 class="panel-title">Change History</h3>
       </div>

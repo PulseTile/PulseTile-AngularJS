@@ -4,19 +4,20 @@ $highlighterColor: (
   danger: #ff2626,
   success: #00cc78
 );
+
 .highlighter-wrapper {
   position: relative;
   .highlighter { display: block; }
 }
 .highlighter {
+  background-color: map-get($highlighterColor, 'default');
+  direction: inherit;
   display: none;
+  height: 100%;
+  left: 0;
   position: absolute;
   top: 0;
-  left: 0;
   width: 4px;
-  height: 100%;
-  direction: inherit;
-  background-color: map-get($highlighterColor, 'default');
 }
 @each $highlighter, $color in $highlighterColor {
   .highlighter-#{$highlighter} {
@@ -26,6 +27,6 @@ $highlighterColor: (
 }
 .highlighter-not-vital {
   @extend .highlighter;
-  width: 1px;
   background-color: #dadada;
+  width: 1px;
 }

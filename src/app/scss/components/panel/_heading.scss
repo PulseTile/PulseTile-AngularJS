@@ -1,53 +1,52 @@
 .panel-default > .panel-heading {
+  background-color: $base-color;
+  border-bottom: 0;
+  border-radius: 0;
   color: $base-color;
   padding: 2px 8px 4px 8px;
-  background-color: $base-color;
-  border-radius: 0;
-  border-bottom: 0;
 }
 
 .panel-title {
-  padding: 0 5px;
-  font-size: 18px;
-  line-height: 34px;
-  font-weight: 700;
   color: $text-color;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 34px;
+  margin: 0;
+  padding: 0 5px;
   @include text-truncate;
 }
-.panel-title i.fa-bar-chart {font-size: 20px;}
+.panel-title i.fa-bar-chart { font-size: 20px; }
 
-.panel-default .panel-title {
-  color: $base-color;
-}
+.panel-default .panel-title { color: $base-color; }
 
 .panel-primary {
   .panel-heading {
-    margin-bottom: 5px;
-    padding: 5px;
-    color: $text-color;
-    border: 1px solid #D8D8D8;
     background: #E8E8E8;
     border-radius: 0;
+    border: 1px solid #D8D8D8;
+    color: $text-color;
+    margin-bottom: 5px;
+    padding: 5px;
     @include clearfix;
   }
 }
 
 .panel-secondary {
   .panel-heading {
-    padding: 5px;
-    color: $text-color;
     background: #E8E8E8;
     border-radius: 0;
+    color: $text-color;
+    padding: 5px;
     @include clearfix;
   }
 }
 
 .panel-small {
   .panel-heading {
-    padding: 3px;
-    color: $text-color;
     background: #E8E8E8;
     border-radius: 0;
+    color: $text-color;
+    padding: 3px;
     @include clearfix;
   }
   .panel-title {
@@ -61,19 +60,19 @@
     transform: translateY(-50%) rotate(0deg);
   }
   .panel-heading {
-    position: relative;
-    padding: 5px 25px 5px 6px;
-    color: $text-color;
     background: #E8E8E8;
     border-radius: 0;
+    color: $text-color;
     cursor: pointer;
+    padding: 5px 25px 5px 6px;
+    position: relative;
     @include clearfix;
     &:after {
       content: '\f078';
       font-family: 'FontAwesome';
       position: absolute;
-      top: 50%;
       right: 12px;
+      top: 50%;
       transform: translateY(-50%) rotate(-90deg);
     }
   }

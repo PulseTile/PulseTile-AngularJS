@@ -1,34 +1,30 @@
 .dashboard {
-  padding-top: 8px;
   font-size: 0;
   line-height: 0;
-  margin-right: (-1) * $gutter-small;
   margin-left: (-1) * $gutter-small;
+  margin-right: (-1) * $gutter-small;
   min-height: 300px;
+  padding-top: 8px;
   @include respond-from(xs) {
-    margin-right: (-1) * $gutter-big;
     margin-left: (-1) * $gutter-big;
+    margin-right: (-1) * $gutter-big;
   }
 }
 .dashboard-item {
   display: inline-block;
+  margin-bottom: 14px;
+  padding-left: $gutter-small;
+  padding-right: $gutter-small;
   vertical-align: top;
   width: 100%;
-  margin-bottom: 14px;
-  padding-right: $gutter-small;
-  padding-left: $gutter-small;
   @include respond-from(xs) {
-    padding-right: $gutter-big;
     padding-left: $gutter-big;
+    padding-right: $gutter-big;
   }
 }
 @include respond-from(md) {
-  .dashboard-item {
-    width: 25%;
-  }
-  .showSidebar .dashboard-item {
-    width: 33.333%
-  }
+  .dashboard-item { width: 25%; }
+  .showSidebar .dashboard-item { width: 33.333% }
 }
 @include respond-from(lg) {
   .showSidebar .dashboard-item {
@@ -37,42 +33,44 @@
 }
 
 .board {
-  width: 100%;
-  color: map-get($colored-table, 'text');
   border: 1px solid #B4B5B4;
+  color: map-get($colored-table, 'text');
+  width: 100%;
   @include respond-to(xs) {
     border-left: 0;
     border-right: 0;
   }
 }
 .board-header {
-  @include clearfix;
-  padding: 5px;
   background-color: map-get($colored-table, 'header-background');
+  padding: 5px;
+  @include clearfix;
 }
 .board-title {
-  @include text-truncate;
-  padding: 0 5px;
   font-size: 18px;
-  line-height: 34px;
   font-weight: 400;
+  line-height: 34px;
+  margin: 0;
+  padding: 0 5px;
+  @include text-truncate;
 }
-
+.board-list {
+  @include list-reset;
+}
 .board-list-item {
-  min-height: 40px;
   background: map-get($colored-table, 'row-odd-background');
+  min-height: 40px;
   &:nth-of-type(even) {
-
     background:  map-get($colored-table, 'background');
   }
 }
 .board-list-link {
-  @include text-truncate;
+  cursor: pointer;
   display: block;
-  padding: 10px;
   font-size: 14px;
   line-height: 20px;
-  cursor: pointer;
+  padding: 10px;
+  @include text-truncate;
 }
 .is-not-touch-device .board-list-link:hover {
   background: map-get($colored-table, 'row-background-hover');

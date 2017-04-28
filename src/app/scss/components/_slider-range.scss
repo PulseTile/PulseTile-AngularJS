@@ -1,11 +1,11 @@
 .wrap-rzslider {
-  padding: 0 8px 0 13px;
   border: 1px solid #d8d8d8;
   border-bottom: 0;
+  padding: 0 8px 0 13px;
 }
 .wrap-rzslider-search {
-  padding: 0 8px 0 13px;
   border-bottom: 0;
+  padding: 0 8px 0 13px;
 }
 
 .mc-rz-slider.rzslider {
@@ -14,83 +14,73 @@
   width: 100%;
   .rz-bar {
     background: #f3f3f3;
-    height: 7px;
     border-radius: 2px;
     cursor: pointer;
+    height: 7px;
   }
-  .rz-selection { background: #0d672f; }
+  .rz-selection { background: $base-color; }
   .rz-pointer {
-    width: 12px;
-    height: 12px;
-    top: -3px;
-    background-color: #0d672f;
+    background-color: $base-color;
     border-radius: 2px;
+    height: 12px;
     outline: none !important;
-    &:focus {
-      background: #92c948;
-    }
+    top: -3px;
+    width: 12px;
+    &:focus { background: $auxiliary-color; }
   }
   .rz-tick-value {
     color: #303030;
     top: -22px;
   }
-  .rz-pointer:after { display: none;}
-
-  .rz-bubble { bottom: 14px;}
+  .rz-pointer:after { display: none; }
+  .rz-bubble { bottom: 14px; }
   .rz-limit {
-    font-size: 14px;
     color: #303030;
+    font-size: 14px;
   }
-  
   .rz-bubble:not(.rz-limit) {
+    background: #ffffff;
+    border-radius: 4px;
+    border: 1px solid #c3c3c3;
     bottom: 22px;
-    padding: 3px 8px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     font-size: 12px;
     line-height: 16px;
-    background: #ffffff;
-    border: 1px solid #c3c3c3;
-    border-radius: 4px;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    padding: 3px 8px;
   }
   .rz-bubble:not(.rz-limit):before,
   .rz-bubble:not(.rz-limit):after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
+    border-color: transparent;
     border-style: solid;
     border-width: 6px 4px 0;
-    border-color: transparent;
+    content: '';
+    left: 50%;
+    position: absolute;
+    top: 100%;
+    transform: translateX(-50%);
   }
   .rz-bubble:not(.rz-limit):before {
-    margin-top: -1px;
     border-top-color: #ffffff; 
+    margin-top: -1px;
     z-index: 2; 
   }
   .rz-bubble:not(.rz-limit):after  {
     border-top-color: #c3c3c3; 
     z-index: 1; 
   }
-
   .rz-tick {
-    width: 1px;
+    background: $base-color;
+    border-radius: 0;
     height: 12px;
     margin-left: 4px;
-    border-radius: 0;
-    background: #0d672f;
     top: 0px;
-    // .rz-tick-value {display: none;}
+    width: 1px;
     .rz-tick-legend { 
-      white-space: nowrap; 
       max-width: initial;
+      white-space: nowrap; 
     }
-    &:first-child .rz-tick-legend { display: none; transform: translate(0, 0);}
-    &:last-child  .rz-tick-legend { display: none; transform: translate(-100%, 0);}
+    &:first-child .rz-tick-legend { display: none; transform: translate(0, 0); }
+    &:last-child  .rz-tick-legend { display: none; transform: translate(-100%, 0); }
   }
-
-  .rz-tick.rz-selected {
-    background: #0d672f;
-    // .rz-tick-value {display: block}
-  }
+  .rz-tick.rz-selected { background: $base-color; }
 }

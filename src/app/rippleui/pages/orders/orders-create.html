@@ -17,7 +17,7 @@
   <div class="panel panel-secondary">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
       </div>
       <h3 class="panel-title">Create Orders</h3>
     </div>
@@ -56,7 +56,7 @@
               </div>
               <div class="wrap-control-group">
                 <div class="control-group right">
-                  <button ng-class="{disabled: !chosenOrders.length}" class="btn btn-success btn-inverse btn-create" ng-click="pageTwo();"><i class="fa fa-plus"></i> <span>Create</span></button>
+                  <button ng-class="{disabled: !chosenOrders.length}" class="btn btn-success btn-inverse btn-create" ng-click="pageTwo();"><i class="btn-icon fa fa-plus"></i> <span class="btn-text">Create</span></button>
                 </div>
               </div>
             </div>
@@ -66,13 +66,13 @@
                   <label for="" class="control-label">Create Selected Orders?</label>
                   <ul class="orders-choosen-list" ng-repeat="chosenOrder in chosenOrders">
                     <li class="orders-choosen-item">
-                        <i class="fa fa-times-circle" ng-click="toggleSelectedItem(chosenOrder.code)"></i>
+                        <i class="orders-choosen-close fa fa-times-circle" ng-click="toggleSelectedItem(chosenOrder.code)"></i>
                         <span>{{chosenOrder.text}}</span>
                     </li>
                   </ul>
                   <div class="wrap-control-group">
                     <div class="control-group right">
-                      <button class="btn btn-info btn-inverse" ng-click="pageOne()"><i class="fa fa-angle-left"></i> <span>Back</span></button>
+                      <button class="btn btn-info btn-inverse" ng-click="pageOne()"><i class="btn-icon fa fa-angle-left"></i> <span class="btn-text">Back</span></button>
                     </div>
                   </div>
                 </div>
@@ -107,8 +107,8 @@
       <div class="panel-control">
         <div class="wrap-control-group">
           <div class="control-group right">
-            <button class="btn btn-danger" ng-click="$ctrl.cancel()"><i class="fa fa-ban"></i> Cancel</button>
-            <button class="btn btn-success" ng-click="create(orderForm, order)"><i class="fa fa-check"></i> Complete</button>
+            <button class="btn btn-danger" ng-click="$ctrl.cancel()"><i class="btn-icon fa fa-ban"></i> <span class="btn-text">Cancel</span></button>
+            <button class="btn btn-success" ng-click="create(orderForm, order)"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Complete</span></button>
           </div>
         </div>
       </div>

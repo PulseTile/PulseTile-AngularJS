@@ -5,35 +5,35 @@
     border-width: 2px;
   }
   &.panel-primary {
-    margin-bottom: 14px;
-    border: 0;
     background: transparent;
+    border: 0;
     box-shadow: none;
+    margin-bottom: 14px;
   }
   &.panel-secondary {
-    margin-bottom: 14px;
-    border: 1px solid #D8D8D8;
     background: transparent;
+    border: 1px solid #D8D8D8;
     box-shadow: none;
+    margin-bottom: 14px;
   }
   &.panel-subaccordion {
     background: #ffffff;
-    box-shadow: none;
     border: 0;
+    box-shadow: none;
   }
   &.panel-small {
-    margin-bottom: 0;
     background: #ffffff;
-    box-shadow: none;
     border: 1px solid #D8D8D8;
+    box-shadow: none;
+    margin-bottom: 0;
   }
-  &.without-margin {margin-bottom: 0;}
+  &.without-margin { margin-bottom: 0; }
 }
 .panel-table .table {
-  margin-bottom: 0;
-  border-right: 0;
   border-bottom: 0;
   border-left: 0;
+  border-right: 0;
+  margin-bottom: 0;
 }
 
 @import 'group';

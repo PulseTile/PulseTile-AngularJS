@@ -17,8 +17,8 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group left dropdown">
-      <button mc-dropdown class="btn btn-success btn-inverse btn-dropdown-toggle" ng-click="toggleDropdown($event);"><i class="fa fa-cog"></i></button>
-      <div class="dropdown-menu dm-panel dm-summery">
+      <button mc-dropdown class="btn btn-success btn-inverse btn-dropdown-toggle" ng-click="toggleDropdown($event);"><i class="btn-icon fa fa-cog"></i></button>
+      <div class="dropdown-menu dropdown-menu-panel dropdown-menu-summary">
         <div class="heading">SHOW</div>
         <div class="row">
           <div class="col-xs-6 col-sm-4" ng-repeat="(key, dashboard) in listsDashboards">
@@ -41,7 +41,7 @@
         <div class="board">
           <div class="board-header">
             <div class="control-group right">
-              <button class="btn btn-success btn-inverse btn-board-more" ng-click="$ctrl.goToSection(dashboard.toState)"><i class="fa fa-caret-right"></i></button>
+              <button class="btn btn-success btn-inverse btn-board-more" ng-click="$ctrl.goToSection(dashboard.toState)"><i class="btn-icon fa fa-caret-right"></i></button>
             </div>
             <h3 class="board-title">{{ dashboard.title }}</h3>
           </div>

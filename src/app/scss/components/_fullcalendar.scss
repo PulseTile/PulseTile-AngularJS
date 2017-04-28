@@ -1,7 +1,7 @@
 .fc-event .fc-bg { opacity: 0; }
 .fc th {
-  padding: 3px 2px;
   line-height: 21px;
+  padding: 3px 2px;
 }
 .fc-day-header { background: #c5e29f; }
 
@@ -16,26 +16,27 @@
   margin-bottom: 29px;
 }
 .fc-toolbar.fc-header-toolbar {
-  padding: 7px 15px;
   margin: 0;
+  padding: 7px 15px;
 }
 .fc-toolbar.fc-header-toolbar {
    h2 {
-    padding: 7px 0;
+    color: #303030;
     font-size: 14px;
     line-height: 20px;
-    color: #303030;
+    padding: 7px 0;
     text-align: center;
+    margin: 0;
   }
   button {
-    min-width: 30px;
-    height: 34px;
-    padding: 0 5px;
-    border-radius: 0;
-    color: #0d672f;
-    border: 1px solid #0d672f;
     background: #ffffff;
+    border-radius: 0;
+    border: 1px solid #0d672f;
     box-shadow: 0 0 0 rgb(0, 0, 0) !important;
+    color: #0d672f;
+    height: 34px;
+    min-width: 30px;
+    padding: 0 5px;
     &.fc-state-active {
       background: #0d672f;
       color: #ffffff;
@@ -49,9 +50,9 @@
 }
 
 .fc-timeslot {
-  padding: 9px 15px 0;
-  font-size: 13px;
   color: #959595;
+  font-size: 13px;
+  padding: 9px 15px 0;
 }
 
 .fc-unthemed td.fc-today { background: #ffffff; }

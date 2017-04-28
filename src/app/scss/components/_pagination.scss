@@ -1,5 +1,5 @@
 .pagination-short {
-  .pagination-block li {
+  .pagination-item {
     display: none;
     &.short-show {
       display: block;
@@ -7,65 +7,65 @@
   }
 }
 .pagination-block {
-  margin: 0;
   border: 0;
+  margin: 0;
   padding-right: 1px;
-  li {
-    float: left;
-    position: relative;
-    margin-right: -1px;
-    z-index: 1;
-    &.active  { z-index: 2; }
-    a, a:focus {
-      display: block;
-      min-width: 28px;
-      height: 34px;
-      padding: 4px;
-      font-size: 12px;
-      line-height: 24px;
-      color: #313131;
-      text-align: center;
-      text-decoration: none;
-      border: 1px solid #ddd;
-      background: #fff;
-      border-radius: 0 !important;
-    }
-    &.arrow a {
-      font-size: 24px;
-      line-height: 20px;
-    }
-    &.active a {
-      color: $text-on-base-color;
-      border-color: $base-color;
-      background-color: $base-color;
-      text-decoration: none;
-    }
-    &.disabled a {
-      color: #303030;
-      text-decoration: none;
-      background-color: #F4F3F3;
-      border-color: #ddd;
-      cursor: not-allowed;
-    }
+  @include list-reset;
+}
+.pagination-item {
+  float: left;
+  margin-right: -1px;
+  position: relative;
+  z-index: 1;
+  &.active  { z-index: 2; }
+  .pagination-link, 
+  .pagination-link:focus {
+    background: #fff;
+    border-radius: 0 !important;
+    border: 1px solid #ddd;
+    color: #313131;
+    display: block;
+    font-size: 12px;
+    height: 34px;
+    line-height: 24px;
+    min-width: 28px;
+    padding: 4px;
+    text-align: center;
+    text-decoration: none;
+  }
+  &.arrow .pagination-link {
+    font-size: 24px;
+    line-height: 20px;
+  }
+  &.active .pagination-link {
+    background-color: $base-color;
+    border-color: $base-color;
+    color: $text-on-base-color;
+    text-decoration: none;
+  }
+  &.disabled .pagination-link {
+    background-color: #F4F3F3;
+    border-color: #ddd;
+    color: #303030;
+    cursor: not-allowed;
+    text-decoration: none;
   }
 }
-.is-not-touch-device .pagination-block {
-  li {
-    &:not(.disabled):hover { z-index: 2; }
-    & a:hover,
-    &.active a:hover {
-      color: $text-on-base-color;
-      border-color: $base-color;
-      background-color: $base-color;
-      text-decoration: none;
-    }
-    &.disabled a:hover {
-      color: $text-color;
-      text-decoration: none;
-      background-color: #F4F3F3;
-      border-color: #ddd;
-      cursor: not-allowed;
-    }
+.is-not-touch-device .pagination-item {
+  &:not(.disabled):hover { z-index: 2; }
+  & .pagination-link:hover,
+  &.active .pagination-link:hover {
+    background-color: $base-color;
+    border-color: $base-color;
+    color: $text-on-base-color;
+    text-decoration: none;
+  }
+  &.disabled .pagination-link:hover {
+    background-color: #F4F3F3;
+    border-color: #ddd;
+    color: $text-color;
+    cursor: not-allowed;
+    text-decoration: none;
   }
 }
 .pagination-heading {

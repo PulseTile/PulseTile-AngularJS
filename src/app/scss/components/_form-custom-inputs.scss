@@ -1,0 +1,109 @@
+// Custom Inputs radio, checkbox
+  .wrap-fcustominps-inline {
+    overflow: hidden;
+    .wrap-fcustominp {
+      float: left;
+      margin-right: 20px;
+      & + .wrap-fcustominp { margin-top: 0; }
+    }
+  }
+  .wrap-fcustominp {
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+    padding: 5px 0;
+    & + .wrap-fcustominp { margin-top: 5px; }
+    .fcustominp-state {
+      align-items: center;
+      display: flex;
+      margin: 0 -2px;
+      padding: 0 2px;
+      width: 100%;
+      &.disabled {
+        background: #f3f3f3;
+        opacity: 0.6;
+        .fcustominp label,
+        .fcustominp-label { cursor: default; }
+      }
+    }
+    .fcustominp-label {
+      color: #000000;
+      cursor: pointer;
+      float: left;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      margin: 0 0 0 5px;
+    }
+  }
+  .fcustominp {
+    flex: 0 0 18px;
+    float: left;
+    overflow: hidden;
+    padding: 0 1px;
+    width: 18px; height: 16px;
+    input { display: none; }
+    label {
+      background: #ffffff;
+      border-radius: 3px;
+      border: 1px solid #C9C9C9;
+      cursor: pointer;
+      display: block;
+      margin: 0;
+      position: relative;
+      transform: translateZ(0);
+      width: 100%; height: 100%;
+    }
+    input[type=checkbox]:checked + label:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 1px; left: 4px;
+      /*Make it a small rectangle so the border will create an L-shape*/
+      width: 6px;
+      height: 10px;
+      /*Add a white border on the bottom and left, creating that 'L' */
+      border: solid #222222;
+      border-width: 0 2px 2px 0;
+      /*Rotate the L 45 degrees to turn it into a checkmark*/
+      transform: rotate(45deg);
+    }
+
+    input[type=radio] + label {
+      border-radius: 50%;
+      margin-top: 1px;
+      width: 14px; height: 14px;
+    }
+    input[type=radio]:checked + label {
+      background: #389dff;
+      border-color: #389dff;
+    }
+    input[type=radio]:checked + label:after {
+      background: #ffffff;
+      border-radius: 50%;
+      content: '';
+      position: absolute;
+      top: 4px; left: 4px;
+      width: 4px; height: 4px;
+      z-index: 1;
+    }
+  }
+//Custom Inputs
+
+
+// Start Custom Input file
+  .wrap-fcustomfile {
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+    .fcustomfile-control {
+      flex-grow: 0;
+      float: left;
+      margin-right: 13px; 
+    }
+    .fcustomfile-text {
+      @include text-truncate;
+    }
+    input[type="file"] { display: none; }
+  }
+// End Custom Input file

@@ -16,7 +16,7 @@
 <div table-settings order="name" filtering class="panel panel-primary">
   <div ng-if="false" class="dropdown pull-right visible-xs">
     <button uib-dropdown-toggle class="btn btn-info btn-dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-      <span>{{$ctrl.tabName}}</span>
+      <span class="btn-text">{{$ctrl.tabName}}</span>
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -28,8 +28,8 @@
   <div class="panel-heading">
     <div class="control-group right">
       <div class="dropdown">
-        <button mc-dropdown class="btn btn-success btn-inverse btn-dropdown-toggle" ng-click="toggleDropdown($event);"><i class="fa fa-cog"></i></button>
-        <div class="dropdown-menu dm-panel dm-right dm-summery">
+        <button mc-dropdown class="btn btn-success btn-inverse btn-dropdown-toggle" ng-click="toggleDropdown($event);"><i class="btn-icon fa fa-cog"></i></button>
+        <div class="dropdown-menu dropdown-menu-panel dropdown-menu-right dropdown-menu-summary">
           <div class="form-group-wrapper">
             <div ng-repeat="(itemKey, item) in patientsTable">
               <div class="heading">{{ item.title }}</div>
@@ -47,7 +47,7 @@
                     </div>
                   </div>
                   <div class="col-xs-6 col-sm-4">
-                    <button class="btn btn-success btn-inverse btn-bold btn-smaller" ng-click="selectAllSettings(itemKey)">Select All</button>
+                    <button class="btn btn-success btn-inverse btn-bold btn-smaller" ng-click="selectAllSettings(itemKey)"><span class="btn-text">Select All</span></button>
                   </div>
                 </div>
               </div>
@@ -55,7 +55,7 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
+      <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="btn-icon fa fa-filter"></i></button>
     </div>
     <h3 class="panel-title">{{$root.subHeader}}</h3>
     <div class="panel-filter" ng-show="isFilterOpen">
@@ -133,13 +133,13 @@
               <td class="patient-control">
                 <div uib-dropdown class="patient-buttons dropdown">
                   <button uib-dropdown-toggle class="btn btn-success btn-inverse btn-sm btn-dropdown-toggle" ng-click="toggleDropdown($event);"></button>
-                  <div uib-dropdown-menu class="dropdown-menu dm-right">
-                    <div class="dm-wrap-list">
-                      <div class="dm-list">
-                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'orders')"><span>Orders</span></div>
-                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'results')"><span>Results</span></div>
-                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'vitals')"><span>Vitals</span></div>
-                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'diagnoses')"><span>Diagnosis</span></div>
+                  <div uib-dropdown-menu class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-menu-wrap-list">
+                      <div class="dropdown-menu-list">
+                        <div class="dropdown-menu-item" ng-click="$ctrl.openModal(patient, 'orders')"><span class="dropdown-menu-item-text">Orders</span></div>
+                        <div class="dropdown-menu-item" ng-click="$ctrl.openModal(patient, 'results')"><span class="dropdown-menu-item-text">Results</span></div>
+                        <div class="dropdown-menu-item" ng-click="$ctrl.openModal(patient, 'vitals')"><span class="dropdown-menu-item-text">Vitals</span></div>
+                        <div class="dropdown-menu-item" ng-click="$ctrl.openModal(patient, 'diagnoses')"><span class="dropdown-menu-item-text">Diagnosis</span></div>
                       </div>
                     </div>
                   </div>
@@ -170,13 +170,13 @@
               <td class="patient-control">
                 <div uib-dropdown class="patient-buttons dropdown">
                   <button uib-dropdown-toggle class="btn btn-success btn-inverse btn-sm btn-dropdown-toggle" ng-click="toggleDropdown($event);"></button>
-                  <div uib-dropdown-menu class="dropdown-menu dm-right">
-                    <div class="dm-wrap-list">
-                      <div class="dm-list">
-                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'orders')"><span>Orders</span></div>
-                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'results')"><span>Results</span></div>
-                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'vitals')"><span>Vitals</span></div>
-                        <div class="dm-item" ng-click="$ctrl.openModal(patient, 'diagnoses')"><span>Diagnosis</span></div>
+                  <div uib-dropdown-menu class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-menu-wrap-list">
+                      <div class="dropdown-menu-list">
+                        <div class="dropdown-menu-item" ng-click="$ctrl.openModal(patient, 'orders')"><span class="dropdown-menu-item-text">Orders</span></div>
+                        <div class="dropdown-menu-item" ng-click="$ctrl.openModal(patient, 'results')"><span class="dropdown-menu-item-text">Results</span></div>
+                        <div class="dropdown-menu-item" ng-click="$ctrl.openModal(patient, 'vitals')"><span class="dropdown-menu-item-text">Vitals</span></div>
+                        <div class="dropdown-menu-item" ng-click="$ctrl.openModal(patient, 'diagnoses')"><span class="dropdown-menu-item-text">Diagnosis</span></div>
                       </div>
                     </div>
                   </div>

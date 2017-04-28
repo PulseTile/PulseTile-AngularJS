@@ -5,15 +5,15 @@
     button {
       padding: 0;
       &.active {
-        border-color: $base-color !important;
         background: $base-color !important;
+        border-color: $base-color !important;
         color: $text-on-base-color !important;
         span {
           color: $text-on-base-color;
         }
       }
-      &.btn-info {color: $text-on-base-color !important;}
-      .text-info {color: #0d672f;}
+      &.btn-info { color: $text-on-base-color !important; }
+      .text-info { color: $base-color; }
     }
   }
 }

@@ -19,7 +19,7 @@
   <div class="panel panel-secondary">
     <div class="panel-heading">
       <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
       </div>
       <h3 class="panel-title">Create Referral</h3>
     </div>
@@ -122,8 +122,8 @@
       <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
         <div class="wrap-control-group">
           <div class="control-group right">
-            <button class="btn btn-danger" ng-click="$ctrl.cancel()"><i class="fa fa-ban"></i> Cancel</button>
-            <button class="btn btn-success" ng-click="create(referralsForm, referralsEdit)"><i class="fa fa-check"></i> Complete</button>
+            <button class="btn btn-danger" ng-click="$ctrl.cancel()"><i class="btn-icon fa fa-ban"></i> <span class="btn-text">Cancel</span></button>
+            <button class="btn btn-success" ng-click="create(referralsForm, referralsEdit)"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Complete</span></button>
           </div>
         </div>
       </div>

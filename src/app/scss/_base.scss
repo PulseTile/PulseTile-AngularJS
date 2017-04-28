@@ -41,12 +41,7 @@ a:focus {
   text-decoration: none;
 }
 
-ul {
-  margin: 0;
-  padding: 0;
-}
-
-li { list-style: none; }
+.list-reset { @include list-reset; }
 
 textarea:hover, 
 input:hover, 

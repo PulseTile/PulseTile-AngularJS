@@ -17,24 +17,24 @@
 <div mc-full-panel table-settings order="id" filtering class="panel panel-primary">
   <div class="panel-heading">
     <div ng-if="isViewList('tableNews')" class="control-group right">
-      <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
+      <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="btn-icon fa fa-filter"></i></button>
     </div>
     <div class="control-group right" >
-      <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')" ng-if="$ctrl.isShowExpandBtn"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+      <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')" ng-if="$ctrl.isShowExpandBtn"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
       <div class="dropdown">
         <button mc-dropdown class="btn btn-success btn-inverse btn-dropdown-toggle btn-table" ng-click="toggleDropdown($event);">
-          <i ng-if="isViewList('tableNews')" class="fa fa-table"></i>
-          <i ng-if="isViewList('chartNews')" class="fa fa-area-chart"></i>
+          <i ng-if="isViewList('tableNews')" class="btn-icon fa fa-table"></i>
+          <i ng-if="isViewList('chartNews')" class="btn-icon fa fa-area-chart"></i>
         </button>
-        <div class="dropdown-menu dm-panel dm-right dm-tables">
+        <div class="dropdown-menu dropdown-menu-panel dropdown-menu-right dropdown-menu-small-size">
           <div class="heading">TABLES</div>
-          <div class="dm-list">
-            <div class="dm-item" ng-class="{active: isViewList('tableNews')}" ng-click="changeViewList('tableNews')"><i class="fa fa-table"></i><span>Vitals - NEWS</span></div>
+          <div class="dropdown-menu-list">
+            <div class="dropdown-menu-item" ng-class="{active: isViewList('tableNews')}" ng-click="changeViewList('tableNews')"><i class="dropdown-menu-item-icon fa fa-table"></i><span class="dropdown-menu-item-text">Vitals - NEWS</span></div>
           </div>
           <div class="heading">CHARTS</div>
-          <div class="dm-wrap-list">
-            <div class="dm-list">
-              <div class="dm-item" ng-class="{active: isViewList('chartNews')}" ng-click="changeViewList('chartNews')"><i class="fa fa-area-chart"></i><span>Vitals - NEWS</span></div>
+          <div class="dropdown-menu-wrap-list">
+            <div class="dropdown-menu-list">
+              <div class="dropdown-menu-item" ng-class="{active: isViewList('chartNews')}" ng-click="changeViewList('chartNews')"><i class="dropdown-menu-item-icon fa fa-area-chart"></i><span class="dropdown-menu-item-text">Vitals - NEWS</span></div>
             </div>
           </div>
         </div>
@@ -101,7 +101,7 @@
           <dir-pagination-controls max-size="6" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
         </div>
         <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1 && $ctrl.isShowCreateBtn">
-          <button class="btn btn-success btn-inverse btn-create" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> <span>Create</span></button>
+          <button class="btn btn-success btn-inverse btn-create" ng-click="$ctrl.create();"><i class="btn-icon fa fa-plus"></i> <span class="btn-text">Create</span></button>
         </div>
       </div>
     </div>

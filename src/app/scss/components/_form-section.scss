@@ -1,0 +1,58 @@
+.form-group-section-list {
+  margin-bottom: 20px;
+  padding-top: 12px;
+}
+.form-group-section-list-heading label.control-label { margin-bottom: 8px; }
+
+.form-group-section {
+  border: 1px solid transparent;
+  & + .form-group-section {
+    margin-top: 5px;
+  }
+  .btn-form-group-section-toggle .btn-icon {
+    transform: rotate(180deg) translateY(-2px);
+  }
+  &.open .btn-form-group-section-toggle .btn-icon {
+    transform: rotate(0) translateY(-1px);
+  }
+  &.accordion {
+    .form-group-section-body { display: none; }
+    &.open .form-group-section-body { display: block; }
+  }
+  &.form-group-section-bordered {
+    border-color: #ccc;
+    .form-group-section-body {
+      padding: 15px 19px;
+      .form-group-section-control {margin: 0 -19px -15px;}
+    }
+    @each $section, $color in $colored-buttons {
+      &.form-group-section-#{$section} { border-color: $color; }
+    }
+  }
+  &:last-child { margin-bottom: 0 !important; }
+}
+.form-group-section-heading { 
+  margin: -1px;
+  .panel-title {
+    font-size: 12px;
+    padding-left: 10px;
+  }
+}
+.form-group-section-body {
+  padding: 5px 19px;
+  position: relative;
+  .form-group-wrapper { margin-bottom: -12px; }
+  .form-group { margin-bottom: 12px; }
+  label.control-label {
+    margin-bottom: 2px;
+    line-height: 16px;
+  }
+  .form-control-static {
+    line-height: 16px;
+    min-height: 16px;
+  }
+  .form-group-section-control {
+    padding-top: 5px;
+    margin: 0 -19px -5px;
+  }
+}

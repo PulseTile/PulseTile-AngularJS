@@ -18,34 +18,34 @@
   <div class="panel-heading">
     <div class="control-group right">
       <div class="dropdown">
-        <button mc-dropdown class="btn btn-success btn-inverse btn-filter btn-dropdown-toggle" ng-click="toggleDropdown($event);"><i class="fa fa-filter"></i></button>
-        <div class="dropdown-menu dm-panel dm-right dm-tables">
+        <button mc-dropdown class="btn btn-success btn-inverse btn-filter btn-dropdown-toggle" ng-click="toggleDropdown($event);"><i class="btn-icon fa fa-filter"></i></button>
+        <div class="dropdown-menu dropdown-menu-panel dropdown-menu-right dropdown-menu-small-size">
           <div class="heading">FILTERING</div>
-          <div class="dm-wrap-list">
-            <div class="dm-list">
-              <div class="dm-item" ng-class="{active: isFilterOpen}" ng-click="toggleFilter(); refreshSlider();"><span>Filter</span></div>
-              <div class="dm-item" ng-class="{active: isFilterTimelineOpen}" ng-click="toggleFilterTimeline(); refreshSlider();"><span>Timelines</span></div>
+          <div class="dropdown-menu-wrap-list">
+            <div class="dropdown-menu-list">
+              <div class="dropdown-menu-item" ng-class="{active: isFilterOpen}" ng-click="toggleFilter(); refreshSlider();"><span class="dropdown-menu-item-text">Filter</span></div>
+              <div class="dropdown-menu-item" ng-class="{active: isFilterTimelineOpen}" ng-click="toggleFilterTimeline(); refreshSlider();"><span class="dropdown-menu-item-text">Timelines</span></div>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="control-group right" >
-      <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')" ng-if="$ctrl.isShowExpandBtn"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></button>
+      <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')" ng-if="$ctrl.isShowExpandBtn"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
       <div class="dropdown">
         <button mc-dropdown class="btn btn-success btn-inverse btn-dropdown-toggle btn-table" ng-click="toggleDropdown($event);">
-          <i ng-if="isActiveView('table')" class="fa fa-table"></i>
-          <i ng-if="isActiveView('timeline')" class="fa fa-sliders"></i>
+          <i ng-if="isActiveView('table')" class="btn-icon fa fa-table"></i>
+          <i ng-if="isActiveView('timeline')" class="btn-icon fa fa-sliders"></i>
         </button>
-        <div class="dropdown-menu dm-panel dm-right dm-tables">
+        <div class="dropdown-menu dropdown-menu-panel dropdown-menu-right dropdown-menu-small-size">
           <div class="heading">TABLES</div>
-          <div class="dm-list">
-            <div class="dm-item" ng-class="{active: isActiveView('table')}" ng-click="changeActiveView('table')"><i class="fa fa-table"></i><span>Events</span></div>
+          <div class="dropdown-menu-list">
+            <div class="dropdown-menu-item" ng-class="{active: isActiveView('table')}" ng-click="changeActiveView('table')"><i class="dropdown-menu-item-icon fa fa-table"></i><span class="dropdown-menu-item-text">Events</span></div>
           </div>
           <div class="heading">TIMELINES</div>
-          <div class="dm-wrap-list">
-            <div class="dm-list">
-              <div class="dm-item" ng-class="{active: isActiveView('timeline')}" ng-click="changeActiveView('timeline')"><i class="fa fa-sliders"></i><span>Events</span></div>
+          <div class="dropdown-menu-wrap-list">
+            <div class="dropdown-menu-list">
+              <div class="dropdown-menu-item" ng-class="{active: isActiveView('timeline')}" ng-click="changeActiveView('timeline')"><i class="dropdown-menu-item-icon fa fa-sliders"></i><span class="dropdown-menu-item-text">Events</span></div>
             </div>
           </div>
         </div>
@@ -103,13 +103,13 @@
         <div class="timeline">
           <div class="timeline-inner">
             <div ng-repeat="(key, eventGroup) in eventsTimeline">
-              <div class="header">{{ key | date:'dd MMMM yyyy' }}</div>
-              <div class="date-group" >
-                <div class="date" ng-repeat="event in eventGroup" ng-class="event.sideDateInTimeline">
-                  <div class="date-content" ng-click="$ctrl.go(event.sourceId, event)" ng-class="{active: selectedRow(event.sourceId)}">
-                    <div class="title">{{ event.serviceTeam }}</div>
-                    <div class="subtitle">{{ event.type }}</div>
-                    <div class="text">{{ event.dateOfAppointment | date:'dd MMMM yyyy' }}<!-- , 10:00-10:59 --></div>
+              <div class="timeline-header">{{ key | date:'dd MMMM yyyy' }}</div>
+              <div class="timeline-date-group" >
+                <div class="timeline-date" ng-repeat="event in eventGroup" ng-class="event.sideDateInTimeline">
+                  <div class="timeline-date-content" ng-click="$ctrl.go(event.sourceId, event)" ng-class="{active: selectedRow(event.sourceId)}">
+                    <div class="timeline-date-title">{{ event.serviceTeam }}</div>
+                    <div class="timeline-date-subtitle">{{ event.type }}</div>
+                    <div class="timeline-date-text">{{ event.dateOfAppointment | date:'dd MMMM yyyy' }}<!-- , 10:00-10:59 --></div>
                   </div>
                 </div>
               </div>
@@ -128,14 +128,14 @@
         </div>
         <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
           <div class="dropdown">
-            <button mc-dropdown class="btn btn-success btn-dropdown-toggle btn-table" ng-click="toggleDropdown($event);"><span>Create</span></button>
-            <div class="dropdown-menu dm-top-right dm-tables">
-              <div class="dm-wrap-list">
-                <div class="dm-list">
-                  <div class="dm-item" ng-class="{active: $ctrl.isActiveCreate('appointment')}" ng-click="$ctrl.create('appointment');"><span>Appointment</span></div>
-                  <div class="dm-item" ng-class="{active: $ctrl.isActiveCreate('admission')}" ng-click="$ctrl.create('admission');"><span>Admission</span></div>
-                  <div class="dm-item" ng-class="{active: $ctrl.isActiveCreate('transfer')}" ng-click="$ctrl.create('transfer');"><span>Transfer</span></div>
-                  <div class="dm-item" ng-class="{active: $ctrl.isActiveCreate('discharge')}" ng-click="$ctrl.create('discharge');"><span>Discharge</span></div>
+            <button mc-dropdown class="btn btn-success btn-dropdown-toggle btn-table" ng-click="toggleDropdown($event);"><span class="btn-text">Create</span></button>
+            <div class="dropdown-menu dropdown-menu-top-right dropdown-menu-small-size">
+              <div class="dropdown-menu-wrap-list">
+                <div class="dropdown-menu-list">
+                  <div class="dropdown-menu-item" ng-class="{active: $ctrl.isActiveCreate('appointment')}" ng-click="$ctrl.create('appointment');"><span class="dropdown-menu-item-text">Appointment</span></div>
+                  <div class="dropdown-menu-item" ng-class="{active: $ctrl.isActiveCreate('admission')}" ng-click="$ctrl.create('admission');"><span class="dropdown-menu-item-text">Admission</span></div>
+                  <div class="dropdown-menu-item" ng-class="{active: $ctrl.isActiveCreate('transfer')}" ng-click="$ctrl.create('transfer');"><span class="dropdown-menu-item-text">Transfer</span></div>
+                  <div class="dropdown-menu-item" ng-class="{active: $ctrl.isActiveCreate('discharge')}" ng-click="$ctrl.create('discharge');"><span class="dropdown-menu-item-text">Discharge</span></div>
                 </div>
               </div>
             </div>
