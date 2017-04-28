@@ -31,15 +31,28 @@ function routeConfig($stateProvider, $urlRouterProvider) {
   // $urlRouterProvider.otherwise('/charts');
   
   $stateProvider
+      .state('ui-kit', {
+        url: '/ui-kit',
+        views: {
+          main: {template: '<ui-kit-component></ui-kit-component>'}
+        },
+        breadcrumbs: [
+          {
+            title: 'UI Kit',
+            state: 'ui-kit'
+          }]
+      })
       .state('profile', {
         url: '/profile',
         views: {
           main: {template: '<profile-component></profile-component>'}
         },
-        breadcrumbs: [{
-          title: 'Patient Listings',
-          state: 'patients-list'
-        }, {
+        breadcrumbs: [
+        // {
+        //   title: 'Patient Listings',
+        //   state: 'patients-list'
+        // }, 
+        {
           title: 'Patient Information',
           state: 'profile'
         }]

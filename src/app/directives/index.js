@@ -415,4 +415,67 @@ angular.module('ripple-ui.directives', [])
             }
         }
     };
-  }]);
+  }])
+  .directive('mcInputFile', function() {
+    /* istanbul ignore next  */
+    return {
+      // scope: true,
+      link: function(scope, element, attrs) {
+        scope.clickInputFile = function (idInputFile) {
+          console.log("angular.element('#' + idInputFile)");
+          console.log(angular.element('#' + idInputFile));
+          // debugger
+          document.getElementById(idInputFile).click();
+        };
+      }
+    }
+  })
+  .directive('mcUploadfile', function () {
+      return {
+        restrict: 'A',
+        scope: {
+          params: '=uploadfileParams',
+          typesFile: '@uploadfileAccept',
+        },
+        link: function(scope, element) {
+          function clearParams () { 
+            scope.params.path = '';
+            scope.params.name = '';
+            scope.params.file = null;
+            scope.params.isErrorType = false;
+          }
+          clearParams();
+
+          function errorInput () { 
+            clearParams();
+            scope.params.isErrorType = true;
+          }
+
+          scope.params.isErrorType = false;
+          var typesArr = scope.typesFile.replace(' ', '').split(',');
+
+
+          element.on('change', function (changeEvent) {
+            if (changeEvent.target.files.length) {
+
+              var loadFile = changeEvent.target.files[0];
+              var loadFileType = loadFile.type;
+
+              if (typesArr.indexOf(loadFileType) !== -1) {
+                scope.params.path = changeEvent.target.value;
+                scope.params.name = loadFile.name;
+                scope.params.file = loadFile;
+                scope.params.isErrorType = false;
+
+              } else {
+                changeEvent.target.value = '';
+                errorInput();
+              }
+            } else {
+              errorInput();
+            }
+            scope.$apply();
+          });
+        }
+      };
+  });

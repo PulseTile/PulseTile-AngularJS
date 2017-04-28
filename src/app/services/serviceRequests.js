@@ -75,6 +75,23 @@ class ServiceRequests {
             };
             return $http(options);
         };
+
+        this.setAppTheme = function(data) {
+            var options = {
+                method: 'POST',
+                url: '/api/application',
+                data: data
+            };
+            return $http(options);
+        };
+        
+        this.getAppSettings = function() {
+            var options = {
+                method: 'GET',
+                url: '/api/application'
+            };
+            return $http(options);
+        };
     }
 }
 

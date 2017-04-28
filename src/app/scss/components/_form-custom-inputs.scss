@@ -89,3 +89,21 @@
     }
   }
 //Custom Inputs
+
+
+// Start Custom Input file
+  .wrap-fcustomfile {
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+    .fcustomfile-control {
+      flex-grow: 0;
+      float: left;
+      margin-right: 13px; 
+    }
+    .fcustomfile-text {
+      @include text-truncate;
+    }
+    input[type="file"] { display: none; }
+  }
+// End Custom Input file

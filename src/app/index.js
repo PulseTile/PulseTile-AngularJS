@@ -44,6 +44,7 @@ import deviceDetector from './helpers/deviceDetector';
 import './helpers/polyfills';
 
 //components 
+import UiKitComponent from './rippleui/pages/ui-kit/ui-kit.component';
 import ProfileComponent from './rippleui/pages/profile/profile.component';
 import HeaderComponent from './rippleui/header-bar/header.component.js';
 import PatientsChartsComponent from './rippleui/pages/patients-charts/patients-charts.component';
@@ -118,7 +119,8 @@ let app = angular
     })
   });
 
-  app  
+  app
+    .component('uiKitComponent', UiKitComponent)
     .component('profileComponent', ProfileComponent)
     .component('headerComponent', HeaderComponent)
     .component('patientsChartsComponent', PatientsChartsComponent)
