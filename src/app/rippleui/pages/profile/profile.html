@@ -98,8 +98,6 @@
                         <div class="input-holder">
                           <div class="wrap-fcustomfile">
                             <div class="fcustomfile-control">
-                                <!-- uploadfile-text="appSettingsEdit.logo.name" -->
-                                <!-- uploadfile-file="appSettingsEdit.logo.file" -->
                               <input mc-uploadfile 
                                 uploadfile-params="logoFileParams"
                                 uploadfile-accept="image/jpeg,image/png,image/gif" 
@@ -123,6 +121,16 @@
                       <div class="form-group" ng-class="{'has-error': (formSubmitted || appSettingsForm.themeColors.$dirty) && appSettingsForm.themeColors.$invalid, 'has-success': appSettingsForm.themeColors.$valid && appSettingsForm.themeColors.$dirty}">
                         <label for="themes" class="control-label">Application Themes</label>
                         <div class="input-holder">
+                          <ui-select ng-model="country.value">
+                              <ui-select-match>
+                                  <span ng-bind="$select.selected.name"></span>
+                              </ui-select-match>
+                              <ui-select-choices repeat="item in (countries | filter: $select.search) track by item.code">
+                                  <span ng-bind="item.name"></span>
+                              </ui-select-choices>
+                          </ui-select>
+                          qwerty
+
                           <select class="form-control input-sm" id="themes" name="themes" ng-model="appSettingsEdit.themeColors" required>
                               <option>Green Themes</option>
                               <option>Red Themes</option>

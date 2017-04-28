@@ -34,6 +34,7 @@ import 'jquery-timepicker-jt';
 import 'angular-jquery-timepicker';
 import 'angular-xeditable';
 import 'ng-scrollbars';
+import 'angular-ui-select';
 
 //commons
 import reducer from './redux/reducer';
@@ -95,7 +96,8 @@ let app = angular
         'xeditable',
         'ngScrollbars',
         'rzModule',
-        'ngSanitize'
+        'ngSanitize',
+        'ui.select'
     ])
     .factory('ScheduleModal', ScheduleModal)
     .factory('ConfirmationModal', ConfirmationModal)
@@ -167,6 +169,11 @@ let app = angular
             autoHideScrollbar: false,
             mouseWheel:{ preventDefault: false }
         };
+    })
+    .config(function(uiSelectConfig) {
+      uiSelectConfig.theme = 'bootstrap';
+      uiSelectConfig.resetSearchInput = false;
+      uiSelectConfig.appendToBody = true;
     });
     app.run(function(editableOptions, editableThemes) {
       editableOptions.theme = 'bs3'; // bootstrap3 theme
