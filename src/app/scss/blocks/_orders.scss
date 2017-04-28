@@ -1,3 +1,4 @@
 .orderForm .wrap-control-group { margin-top: 7px; }
+.orders-choosen-list { @include list-reset; }
 .orders-choosen-item { margin-bottom: 3px; }
 .orders-choosen-close { cursor: pointer; }

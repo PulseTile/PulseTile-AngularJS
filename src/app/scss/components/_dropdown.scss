@@ -16,6 +16,7 @@
   text-align: left;
   top: 100%;
   z-index: 1000;
+  @include list-reset;
   &.dm-show { display: block; }
   &.dropdown-menu-right {
     box-shadow: -2px 3px 3px 0px rgba(0, 0, 0, 0.2);

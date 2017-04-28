@@ -77,6 +77,9 @@
 
 /*Styles for sidebar navigation*/
 .sidebar-nav { padding-top: 1px; }
+.sidebar-nav-list {
+  @include list-reset;
+}
 .sidebar-nav-item { border-bottom: 1px solid #E7E7E7; }
 .sidebar-nav-link, 
 .sidebar-nav-link:hover {

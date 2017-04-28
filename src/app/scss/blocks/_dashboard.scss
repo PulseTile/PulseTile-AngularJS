@@ -54,6 +54,9 @@
   padding: 0 5px;
   @include text-truncate;
 }
+.board-list {
+  @include list-reset;
+}
 .board-list-item {
   background: map-get($colored-table, 'row-odd-background');
   min-height: 40px;

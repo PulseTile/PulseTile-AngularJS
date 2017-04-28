@@ -24,7 +24,7 @@
         <div class="col-md-9">
           <div class="form-control-static">
             <span ng-if="!$ctrl.problems.length">No problems selected</span>
-            <ul>
+            <ul class="list-reset">
               <li ng-repeat="(key,value) in $ctrl.problems">{{value.problem}}</li>
             </ul>
           </div>
@@ -36,7 +36,7 @@
         <div class="col-md-9">
           <div class="form-control-static">
             <span ng-if="!$ctrl.medications.length">No medication selected</span>
-            <ul>
+            <ul class="list-reset">
               <li ng-repeat="(key,value) in $ctrl.medications">{{value.medication}}</li>
             </ul>
           </div>
@@ -48,7 +48,7 @@
         <div class="col-md-9">
           <div class="form-control-static">
             <span ng-if="!$ctrl.allergies.length">No allergies selected</span>
-            <ul>
+            <ul class="list-reset">
               <li ng-repeat="(key,value) in $ctrl.allergies">{{value.allergy}}</li>
             </ul>
           </div>
@@ -60,7 +60,7 @@
         <div class="col-md-9">
           <div class="form-control-static">
             <span ng-if="!$ctrl.contacts.length">No contacts selected</span>
-            <ul>
+            <ul class="list-reset">
               <li ng-repeat="(key,value) in $ctrl.contacts">{{value.contactName}}</li>
             </ul>
           </div>

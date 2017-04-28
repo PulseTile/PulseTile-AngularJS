@@ -31,7 +31,7 @@
                   <label class="control-label">Service / Team</label>
                   <div class="form-control-static">
                     <span ng-if="!$ctrl.genericMdt.serviceTeam.length">No Multidisciplinary Team</span>
-                    <ul ng-if="$ctrl.genericMdt.serviceTeam">
+                    <ul class="list-reset" ng-if="$ctrl.genericMdt.serviceTeam">
                       <li>{{$ctrl.genericMdt.serviceTeam}}</li>
                     </ul>
                   </div>
@@ -42,7 +42,7 @@
                   <label class="control-label">Date of Request</label>
                   <div class="form-control-static">
                     <span ng-if="!$ctrl.genericMdt.dateOfRequest">No MDT date</span>
-                    <ul ng-if="$ctrl.genericMdt.dateOfRequest">
+                    <ul class="list-reset" ng-if="$ctrl.genericMdt.dateOfRequest">
                       <li>{{$ctrl.genericMdt.dateOfRequest | date:'dd-MMM-y' }}</li>
                     </ul>
                   </div>
@@ -56,7 +56,7 @@
                   <label class="control-label">Date of Meeting</label>
                   <div class="form-control-static">
                     <span ng-if="!$ctrl.genericMdt.dateOfMeeting">Not Available</span>
-                    <ul ng-if="$ctrl.genericMdt.dateOfMeeting">
+                    <ul class="list-reset" ng-if="$ctrl.genericMdt.dateOfMeeting">
                       <li>{{$ctrl.genericMdt.dateOfMeeting | date:'dd-MMM-y' }}</li>
                     </ul>
                   </div>
@@ -78,7 +78,7 @@
                   <label class="control-label">Question For MDT</label>
                   <div class="form-control-static">
                     <span ng-if="!$ctrl.genericMdt.question">No Question For MDT</span>
-                    <ul ng-if="$ctrl.genericMdt.question">
+                    <ul class="list-reset" ng-if="$ctrl.genericMdt.question">
                       <li>{{$ctrl.genericMdt.question}}</li>
                     </ul>
                   </div>
@@ -89,7 +89,7 @@
                   <label class="control-label">Meeting Discussion</label>
                   <div class="form-control-static">
                     <span ng-if="!$ctrl.genericMdt.notes.length">No Meeting Discussion</span>
-                    <ul ng-if="$ctrl.genericMdt.notes">
+                    <ul class="list-reset" ng-if="$ctrl.genericMdt.notes">
                       <li>{{$ctrl.genericMdt.notes}}</li>
                     </ul>
                   </div>
