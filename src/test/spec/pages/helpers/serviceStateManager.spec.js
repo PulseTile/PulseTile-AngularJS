@@ -17,10 +17,24 @@ describe('ServiceStateManager', function() {
     });
   }));
 
+  beforeEach(function() {
+    spyOn(ctrl, 'getFilter');
+    spyOn(ctrl, 'setFilter');
+
+    ctrl.getFilter();
+    ctrl.setFilter();
+  });
+
   it('tableSettings exist', function() {
     expect(ctrl.tableSettings).toBeDefined();
   });
   it('Controller exist', function() {
     expect(ctrl).toBeDefined();
+  });
+  it("getFilter was called", function() {
+    expect(ctrl.getFilter).toHaveBeenCalled();
+  });
+  it("setFilter was called", function() {
+    expect(ctrl.setFilter).toHaveBeenCalled();
   });
 });

@@ -64,9 +64,10 @@ class HeaderController {
       }
 
       return false;
-    }
+    };
 
     $scope.checkIsToggleSearch = function () {
+      /* istanbul ignore if  */
       if (window.innerWidth < 768) {
         $scope.isToogleSearchShow = true;
       } else {
@@ -149,18 +150,19 @@ class HeaderController {
       }
     };
 
+    /* istanbul ignore next  */
     $scope.setTitle = function (data) {
       if (data) {
         $scope.title = data.role;
       }
       $scope.switchDirectByRole(data);
     };
-
+    /* istanbul ignore next  */
     $scope.setLoginData = function (loginResult) {
       $scope.user = loginResult.data;
       $scope.setTitle(loginResult.data);
     };
-
+    /* istanbul ignore next  */
     $scope.login = function () {
       serviceRequests.login().then(function (result) {
         serviceRequests.currentUserData = result.data;

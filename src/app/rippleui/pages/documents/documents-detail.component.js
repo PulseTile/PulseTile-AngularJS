@@ -32,7 +32,7 @@ class DocumentsDetailController {
       ConfirmationDocsModal.openModal(function () {
         data.isImport = true;
         data.importURL = location.href;
-        
+        /* istanbul ignore if */
         if (typeCreate && data) {
           $state.go(typeCreate + '-create', {
             patientId: $stateParams.patientId,
