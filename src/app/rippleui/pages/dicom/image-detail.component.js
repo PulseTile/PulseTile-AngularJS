@@ -15,13 +15,16 @@
 */
 let templateImageDetail= require('./image-detail.html');
 import cornerstoneJS from '../../../../cornerstone/cornerstone';
+import cornerstoneToolsJS from '../../../../cornerstone/cornerstoneTools';
 
 class ImageDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, serviceActions, serviceRequests, usSpinnerService) {
     
     $scope.series = [];
+    $scope.isMove = false;
     
     var cornerstone = cornerstoneJS();
+    var cornerstoneTools = cornerstoneToolsJS();
     
     serviceActions.getAllSeriesInStudy($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source).then(function (result) {
       $scope.study = result.data;
@@ -64,7 +67,19 @@ class ImageDetailController {
       viewport.scale -= 0.25;
       cornerstone.setViewport(element, viewport);
     };
-
+    $scope.moveImg = function (ev) {
+      $scope.isMove = !$scope.isMove;
+      
+      var element = getImgBlock();
+      
+      if ($scope.isMove === false) {
+        cornerstoneTools.mouseInput.disable(element);
+        return;
+      };
+      
+      cornerstoneTools.mouseInput.enable(element);
+      cornerstoneTools.wwwc.activate(element, 2);
+    };
   }
 }
 
