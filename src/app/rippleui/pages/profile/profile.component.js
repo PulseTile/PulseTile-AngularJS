@@ -47,16 +47,17 @@ class ProfileController {
     this.cancelContactEdit = function () {
       $scope.isContactEdit = false;
     };
-
-    function getBase64Image(url, file, callback) {
+    
+    /* istanbul ignore next  */
+    this.getBase64Image = function (url, file, callback) {
       if (file) {
-        upload(file).then(function(res){
+        this.upload(file).then(function(res){
           callback(res);
         });
         
       }
     };
-    function upload(file) {
+    this.upload = function (file) {
         return new Promise(function (resolve, reject) {
           var reader = new FileReader();
           reader.readAsDataURL(file);
@@ -65,12 +66,13 @@ class ProfileController {
           }
         });
     };
-    
+
+    /* istanbul ignore next  */
     $scope.confirmAppSettingsEdit = function (appSettingsForm, appSettings) {
       $scope.formSubmitted = true;
 
       if ($scope.logoFileParams.name) {
-        getBase64Image($scope.logoFileParams.path, $scope.logoFileParams.file, function (dataURL) {
+        this.getBase64Image($scope.logoFileParams.path, $scope.logoFileParams.file, function (dataURL) {
           appSettings.logoB64 = dataURL;
 
           if (appSettingsForm.$valid) {

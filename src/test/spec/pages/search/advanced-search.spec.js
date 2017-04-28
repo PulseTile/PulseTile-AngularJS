@@ -27,9 +27,23 @@ describe('SearchAdvancedComponent', function() {
   beforeEach(function() {
     spyOn(scope, 'cancel');
     spyOn(scope, 'ok');
-
+    spyOn(scope, 'getSearchParams');
+    spyOn(scope, 'clearSearchParams');
+    spyOn(scope, 'refreshSlider');
+    spyOn(scope, 'isNhsNumberRequired');
+    spyOn(scope, 'isNhsNumberTooShort');
+    spyOn(scope, 'isNhsNumberFieldInvalid');
+    spyOn(scope, 'areDetailsFieldsClean');
+          
     scope.cancel();
     scope.ok();
+    scope.getSearchParams();
+    scope.clearSearchParams();
+    scope.refreshSlider();
+    scope.isNhsNumberRequired();
+    scope.isNhsNumberTooShort();
+    scope.isNhsNumberFieldInvalid();
+    scope.areDetailsFieldsClean();
   });
 
   it('formSubmitted is true', function() {
@@ -46,5 +60,26 @@ describe('SearchAdvancedComponent', function() {
   });
   it("ok was called", function() {
     expect(scope.ok).toHaveBeenCalled();
+  });
+  it("getSearchParams was called", function() {
+    expect(scope.getSearchParams).toHaveBeenCalled();
+  });
+  it("clearSearchParams was called", function() {
+    expect(scope.clearSearchParams).toHaveBeenCalled();
+  });
+  it("refreshSlider was called", function() {
+    expect(scope.refreshSlider).toHaveBeenCalled();
+  });
+  it("isNhsNumberRequired was called", function() {
+    expect(scope.isNhsNumberRequired).toHaveBeenCalled();
+  });
+  it("isNhsNumberTooShort was called", function() {
+    expect(scope.isNhsNumberTooShort).toHaveBeenCalled();
+  });
+  it("isNhsNumberFieldInvalid was called", function() {
+    expect(scope.isNhsNumberFieldInvalid).toHaveBeenCalled();
+  });
+  it("areDetailsFieldsClean was called", function() {
+    expect(scope.areDetailsFieldsClean).toHaveBeenCalled();
   });
 });

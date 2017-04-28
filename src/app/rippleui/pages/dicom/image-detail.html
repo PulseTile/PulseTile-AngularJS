@@ -20,7 +20,7 @@
         <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'series')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
         <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('series')"><i class="btn-icon fa fa-chevron-up"></i></button>
       </div>
-      <h3 class="panel-title">Image Series</h3>
+      <h3 class="panel-title">Image(s) Series</h3>
     </div>
     <div class="panel-body">
       <div class="panel-body-inner">
@@ -36,14 +36,14 @@
       </div>
       <div class="panel-control">
         <div class="control-group center" >
-          <button id="play" type="button" class="btn btn-inverse btn-success btn-none-border"><i class="btn-icon fa fa-play"></i></button>
-          <button id="stop" type="button" class="btn btn-inverse btn-success btn-none-border"><i class="btn-icon fa fa-stop"></i></button>
+          <button id="play" type="button" class="btn btn-inverse btn-success btn-none-border btn-icon-normal disabled"><i class="btn-icon fa fa-play"></i></button>
+          <button id="stop" type="button" class="btn btn-inverse btn-success btn-none-border btn-icon-normal disabled"><i class="btn-icon fa fa-stop"></i></button>
           <div class="control-separate"></div>
-          <button id="zoomIn" type="button" class="btn btn-inverse btn-success btn-none-border" ng-click="zoomOut()"><i class="btn-icon fa fa-search-minus"></i></button>
-          <button id="zoomOut" type="button" class="btn btn-inverse btn-success btn-none-border" ng-click="zoomIn()"><i class="btn-icon fa fa-search-plus"></i></button>
+          <button id="zoomIn" type="button" class="btn btn-inverse btn-success btn-none-border btn-icon-normal" ng-click="zoomOut()"><i class="btn-icon fa fa-search-minus"></i></button>
+          <button id="zoomOut" type="button" class="btn btn-inverse btn-success btn-none-border btn-icon-normal" ng-click="zoomIn()"><i class="btn-icon fa fa-search-plus"></i></button>
           <div class="control-separate"></div>
-          <button id="arrows" type="button" class="btn btn-inverse btn-success btn-none-border"><i class="btn-icon fa fa-arrows"></i></button>
-          <button id="verticalArrows" type="button" class="btn btn-inverse btn-success btn-none-border"><i class="btn-icon fa fa-arrows-v"></i></button>
+          <button id="arrows" type="button" class="btn btn-inverse btn-success btn-none-border btn-icon-normal"><i class="btn-icon fa fa-arrows"></i></button>
+          <button id="verticalArrows" type="button" class="btn btn-inverse btn-success btn-none-border btn-icon-normal"><i class="btn-icon fa fa-arrows-v"></i></button>
           <!--<button id="reset" type="button" class="btn btn-inverse btn-success" ng-click="reset()">Reset</button>-->
         </div>
       </div>
@@ -66,29 +66,41 @@
               <label class="control-label">Modality</label>
               <div class="form-control-static">{{ series[0].modality }}</div>
             </div>
-            <div class="form-group">
-              <label class="control-label">Protocol Name</label>
-              <div class="form-control-static">{{ series[0].protocolName }}</div>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Protocol Name</label>
+                  <div class="form-control-static">{{ series[0].protocolName }}</div>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group">
+                  <label class="control-label">Station Name</label>
+                  <div class="form-control-static">{{ series[0].stationName }}</div>
+                </div>
+              </div>
             </div>
             <div class="form-group">
               <label class="control-label">Operator Name</label>
               <div class="form-control-static">{{ series[0].operatorsName }}</div>
             </div>
-            <div class="form-group">
-              <label class="control-label">Series Date</label>
-              <div class="form-control-static">{{ series[0].seriesDate }}</div>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Series Date</label>
+                  <div class="form-control-static">{{ series[0].seriesDate }}</div>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group">
+                  <label class="control-label">Series Time</label>
+                  <div class="form-control-static">{{ series[0].seriesTime }}</div>
+                </div>
+              </div>
             </div>
             <div class="form-group">
               <label class="control-label">Author</label>
               <div class="form-control-static">{{ series[0].author }}</div>
-            </div>
-            <div class="form-group">
-              <label class="control-label">Station Name</label>
-              <div class="form-control-static">{{ series[0].stationName }}</div>
-            </div>
-            <div class="form-group">
-              <label class="control-label">Series Time</label>
-              <div class="form-control-static">{{ series[0].seriesTime }}</div>
             </div>
             <div class="form-group">
               <label class="control-label">Series No:</label>

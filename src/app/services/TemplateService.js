@@ -20,6 +20,7 @@ class TemplateService {
             Discharge: 'documents-detail-discharge.html',
             Referral: 'documents-detail-referral.html'
         };
+        /* istanbul ignore next */
         this.setTemplateType = function (type) {
             if (type.indexOf('Discharge') >= 0) {
                 this.templateType = 'Discharge';

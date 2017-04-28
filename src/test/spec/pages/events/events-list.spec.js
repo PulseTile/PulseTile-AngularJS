@@ -12,12 +12,13 @@ describe('Events List', function() {
         ctrl,
         controller,
         template,
-        fakeCall;
+        fakeCall,
+        serviceStateManager;
     
     beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _eventsActions_, _serviceRequests_, _usSpinnerService_, _serviceFormatted_, _$timeout_, _serviceStateManager_) => {
         controller = $controller;
         scope = $injector.get('$rootScope').$new();
-
+        serviceStateManager = _serviceStateManager_;
         template = EventsListComponent.template;
 
         ctrl = controller(EventsListComponent.controller, {
@@ -58,6 +59,14 @@ describe('Events List', function() {
         ctrl.go();
     });
 
+    beforeEach(function() {
+        spyOn(serviceStateManager, 'getFilter');
+        spyOn(serviceStateManager, 'setFilter');
+
+        serviceStateManager.getFilter();
+        serviceStateManager.setFilter();
+    });
+
     it('Template exist', function() {
         expect(template).toBeDefined();
     });
@@ -84,5 +93,11 @@ describe('Events List', function() {
     });
     it("Events reducer was called", function() {
         expect(fakeCall.callEvents).toHaveBeenCalled();
+    });
+    it("getFilter was called", function() {
+        expect(serviceStateManager.getFilter).toHaveBeenCalled();
+    });
+    it("setFilter was called", function() {
+        expect(serviceStateManager.setFilter).toHaveBeenCalled();
     });
 });

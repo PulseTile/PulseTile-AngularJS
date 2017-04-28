@@ -27,6 +27,7 @@ let _ = require('underscore');
 //   // removeTags('#clinicalNote');
 // });
 
+/* istanbul ignore next  */
 export function removeTags(userinput){
   // Bind remove events
   $(userinput).find('a.remove').each(function(){
@@ -44,6 +45,7 @@ export function removeTags(userinput){
 
 }
 
+/* istanbul ignore next  */
 export function setStructured(userinput, cb){
   // Parse the text box for all tags
   var tags = [];

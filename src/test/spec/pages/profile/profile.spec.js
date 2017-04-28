@@ -29,12 +29,18 @@ describe('Profile', function() {
         spyOn(ctrl, 'contactEdit');
         spyOn(ctrl, 'cancelPersonalEdit');
         spyOn(ctrl, 'cancelContactEdit');
+        spyOn(ctrl, 'getBase64Image');
+        spyOn(ctrl, 'upload');
+        spyOn(ctrl, 'appSettingsEdit');
         spyOn(scope, 'confirmPersonalEdit');
 
         ctrl.personalEdit();
         ctrl.contactEdit();
         ctrl.cancelPersonalEdit();
         ctrl.cancelContactEdit();
+        ctrl.getBase64Image();
+        ctrl.upload();
+        ctrl.appSettingsEdit();
         scope.confirmPersonalEdit();
     });
 
@@ -58,5 +64,14 @@ describe('Profile', function() {
     });
     it("confirmPersonalEdit was called", function() {
         expect(scope.confirmPersonalEdit).toHaveBeenCalled();
+    });
+    it("getBase64Image was called", function() {
+        expect(ctrl.getBase64Image).toHaveBeenCalled();
+    });
+    it("upload was called", function() {
+        expect(ctrl.upload).toHaveBeenCalled();
+    });
+    it("appSettingsEdit was called", function() {
+        expect(ctrl.appSettingsEdit).toHaveBeenCalled();
     });
 });

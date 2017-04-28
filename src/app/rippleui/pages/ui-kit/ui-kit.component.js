@@ -16,7 +16,7 @@
 let templateUiKit= require('./ui-kit.html');
 
 class UiKitController {
-    constructor($scope, $state, $stateParams, $ngRedux, usSpinnerService, serviceRequests) {
+    constructor($scope, $state, serviceRequests) {
 
 
     }
@@ -27,5 +27,5 @@ const UiKitComponent = {
     controller: UiKitController
 };
 
-UiKitController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'usSpinnerService', 'serviceRequests'];
+UiKitController.$inject = ['$scope', '$state', 'serviceRequests'];
 export default UiKitComponent;

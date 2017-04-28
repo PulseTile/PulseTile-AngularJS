@@ -34,6 +34,7 @@ class ClinicalstatementsCreateController {
     $scope.queryFilter = '';
     $scope.openSearch = false;
     
+    /* istanbul ignore next  */
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;

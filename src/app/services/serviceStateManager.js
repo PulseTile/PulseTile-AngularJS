@@ -35,13 +35,13 @@ class ServiceStateManager {
         this.viewsSettings = {
           activeView: ''
         };
-
+        /* istanbul ignore next */
         this.getFilter = function () {
           this.checkChangeState();
 
           return this.filter;
         };
-
+        /* istanbul ignore next */
         this.setFilter = function (filter) {
           if (typeof filter === "undefined") return;
 
@@ -56,13 +56,13 @@ class ServiceStateManager {
                 this.filter.query = '';
             }
         };
-
+        /* istanbul ignore next */
         this.getFilterTimeline = function () {
           this.checkChangeState();
 
           return this.filterTimeline;
         };
-
+        /* istanbul ignore next */
         this.setFilterTimeline = function (filterTimeline) {
           if (typeof filterTimeline === "undefined") return;
 
@@ -86,6 +86,7 @@ class ServiceStateManager {
         this.setTableSettings = function (tableSettings) {
           if (typeof tableSettings === "undefined") return;
 
+            /* istanbul ignore if */
           if (tableSettings.order) {
             this.tableSettings.order = tableSettings.order;
           }
@@ -124,11 +125,11 @@ class ServiceStateManager {
         };
 
         this.setViewsSettings = function (viewSettings) {
-          if (typeof viewSettings === "undefined") return;
-
-          if (viewSettings.activeView) {
-            this.viewsSettings.activeView = viewSettings.activeView;
-          }
+            if (typeof viewSettings === "undefined") return;
+            /* istanbul ignore if */
+            if (viewSettings.activeView) {
+              this.viewsSettings.activeView = viewSettings.activeView;
+            }
         };
 
         this.checkChangeState = function () {

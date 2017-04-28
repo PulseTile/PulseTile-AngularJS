@@ -70,7 +70,7 @@ class PatientsSummaryController {
         showListDashboards[dashboard] = $scope.listsDashboards[dashboard].show;
       }
       serviceRequests.showListDashboards = showListDashboards;
-    }
+    };
 
     $scope.go = function (state, sourceId) {
       var headerRequest = {};
@@ -87,6 +87,7 @@ class PatientsSummaryController {
       }
       return arr;
     }
+    /* istanbul ignore next  */
     this.setCurrentPageData = function (data) {
       /* istanbul ignore if  */
       if (!data || !data.nhsNumber) {

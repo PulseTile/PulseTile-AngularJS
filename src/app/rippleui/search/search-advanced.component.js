@@ -42,7 +42,7 @@ class SearchAdvancedController {
 
     serviceRequests.subscriber('clearSearchParams', $scope.clearSearchParams);
 
-
+    /* istanbul ignore next */
     $scope.getSearchParams = function (params) {
       var paramsText = '';
       var paramsArr = [];
@@ -123,7 +123,7 @@ class SearchAdvancedController {
       
 
       return paramsText.length ? ': ' + paramsText : '';
-    }
+    };
 
     this.typesList = [];
     this.queryList = ['contains' , 'excludes'];
@@ -205,7 +205,7 @@ class SearchAdvancedController {
     $scope.isNhsNumberRequired = function (advancedSearchForm) {
       var nhsNumber = $scope.advancedSearchForm.nhsNumber.$viewValue;
       var areDetailsFieldsClean = $scope.areDetailsFieldsClean(advancedSearchForm);
-
+      /* istanbul ignore if */
       if (nhsNumber === undefined && areDetailsFieldsClean) {
         return true;
       }
@@ -218,6 +218,7 @@ class SearchAdvancedController {
     };
 
     $scope.isNhsNumberTooShort = function (value) {
+      /* istanbul ignore if */
       if (value === undefined) {
         return false;
       }
