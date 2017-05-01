@@ -17,6 +17,8 @@ let templateUiKit= require('./ui-kit.html');
 
 class UiKitController {
     constructor($scope, $state, serviceRequests) {
+      serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: null, name: 'ui-kit'});
+      serviceRequests.publisher('headerTitle', {title: 'UI OVERVIEW', isShowTitle: true});
 
 
     }

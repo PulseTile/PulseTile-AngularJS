@@ -13,9 +13,58 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
-<div class="transbox">
-    <div class="innerTransbox">
-        <h3><strong>UI Kit</strong></h3>
+<div class="wrapper showSidebar">
+  <header-component></header-component>
 
+  <div class="content">
+    <!-- Sidebar-->
+    <div class="sidebar">
+        <div class="sidebar-nav">
+          <ul>
+            <li>qewdfqwe</li>
+            <li>qewdfqwe</li>
+            <li>qewdfqwe</li>
+            <li>qewdfqwe</li>
+          </ul>
+        </div>
     </div>
+    <!-- /.Sidebar-->
+
+    <div class="main">
+
+      <!-- Breadcrumbs-->
+      <!-- <div class="wrap-breadcrumbs" ng-if="breadcrumbs.length">
+        <div class="container-fluid">
+          <div class="breadcrumbs">
+            <ng-repeat
+              ng-repeat="breadcrumb in breadcrumbs">
+               <a ng-if="!$last" ng-click="$ctrl.goBreadcrumb(breadcrumb.state)" class="breadcrumb-link">{{ breadcrumb.title }}</a>
+              <span ng-if="$last"  class="breadcrumb-link active">{{ breadcrumb.title }}</span>
+              <span ng-if="!$last" class="breadcrumb-separate"></span>
+            </ng-repeat>
+          </div>
+        </div>
+      </div> -->
+      <!-- /.Breadcrumbs-->
+      
+      <!-- /page-wrapper -->
+      <div class="page-wrapper">
+        <div class="section" ng-class="getFullPanelClass()" ng-if="!isSecondPanel">
+          <div class="ui-wrapper">
+            <h3>UI-Kit</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<footer class="footer">
+  <div class="container-fluid">
+    <p class="footer-text">Transforming Usability</p>
+    <div class="footer-povered">
+      <span class="footer-povered-text">Supported by</span>
+      <a href="#" class="footer-logo"><img src="/app/assets/images/ripple-foundation-logo-footer.png" alt="Ripple Icon" class="footer-logo-img"></a>
+    </div>
+  </div>
+</footer>
