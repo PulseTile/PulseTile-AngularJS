@@ -118,25 +118,25 @@
 
                       </div>
                       
-                      <div class="form-group" ng-class="{'has-error': (formSubmitted || appSettingsForm.themeColors.$dirty) && appSettingsForm.themeColors.$invalid, 'has-success': appSettingsForm.themeColors.$valid && appSettingsForm.themeColors.$dirty}">
+                      <div class="form-group" ng-class="{'has-error': (formSubmitted || appSettingsForm.theme.$dirty) && appSettingsForm.theme.$invalid, 'has-success': appSettingsForm.theme.$valid && appSettingsForm.theme.$dirty}">
                         <label for="themes" class="control-label">Application Themes</label>
                         <div class="input-holder">
-                          <ui-select ng-model="country.value">
+                          <ui-select ng-model="appSettingsEdit.theme" name="theme" ng-required="true">
                               <ui-select-match>
-                                  <span ng-bind="$select.selected.name"></span>
+                                  <div class="palette-color">
+                                    <div class="palette-color-icon" ng-style="{background: $select.selected.baseColor}"></div>
+                                    <div class="palette-color-name">{{ $select.selected.name }}</div>
+                                  </div>
                               </ui-select-match>
-                              <ui-select-choices repeat="item in (countries | filter: $select.search) track by item.code">
-                                  <span ng-bind="item.name"></span>
+                              <ui-select-choices repeat="item in (themes | filter: $select.search) track by item.id">
+                                  <div class="palette-color">
+                                    <div class="palette-color-icon" ng-style="{background: item.baseColor}"></div>
+                                    <div class="palette-color-name">{{ item.name }}</div>
+                                  </div>
                               </ui-select-choices>
                           </ui-select>
-                          qwerty
-
-                          <select class="form-control input-sm" id="themes" name="themes" ng-model="appSettingsEdit.themeColors" required>
-                              <option>Green Themes</option>
-                              <option>Red Themes</option>
-                          </select>
                         </div>
-                        <span class="help-block animate-fade" ng-show="formSubmitted && appSettingsForm.themeColors.$error.required">You must enter a value.</span>
+                        <span class="help-block animate-fade" ng-show="formSubmitted && appSettingsForm.theme.$error.required">You must enter a value.</span>
                       </div>
 
                       <div class="form-group" ng-class="{'has-error': (formSubmitted || appSettingsForm.browseTitle.$dirty) && appSettingsForm.browseTitle.$invalid, 'has-success': appSettingsForm.browseTitle.$valid && appSettingsForm.browseTitle.$dirty}">

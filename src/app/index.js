@@ -171,9 +171,10 @@ let app = angular
         };
     })
     .config(function(uiSelectConfig) {
-      uiSelectConfig.theme = 'bootstrap';
-      uiSelectConfig.resetSearchInput = false;
-      uiSelectConfig.appendToBody = true;
+        uiSelectConfig.theme = 'bootstrap';
+        uiSelectConfig.resetSearchInput = false;
+        uiSelectConfig.appendToBody = true;
+        uiSelectConfig.searchEnabled = false;
     });
     app.run(function(editableOptions, editableThemes) {
       editableOptions.theme = 'bs3'; // bootstrap3 theme
