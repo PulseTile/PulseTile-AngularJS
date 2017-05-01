@@ -19,6 +19,7 @@
     "jquery-timepicker-jt": "*",
     "angular-jquery-timepicker": "^0.11.0",
     "ng-scrollbars": "^0.0.11",
-    "angularjs-slider": "^6.1.0"
+    "angularjs-slider": "^6.1.0",
+    "angular-swiper": "^0.4.0"
   }
 }

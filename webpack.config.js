@@ -70,7 +70,8 @@ const config = {
       'window.jQuery': 'jquery',
       "moment": "moment",
       Raphael: 'raphael',
-      io: 'socket.io-client'
+      io: 'socket.io-client',
+      swiper: 'swiper'
     })
   ],
 

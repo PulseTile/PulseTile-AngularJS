@@ -26,11 +26,26 @@
       <div class="panel-body-inner">
         <div class="form">
           <div class="form-group-wrapper">
-            <div class="form-group" ng-repeat="item in instanceIds track by $index">
-              <div class="form-control-static">
-                <cornerstone-image imageId="http://138.68.134.7:8086/instances/{{item}}/preview"></cornerstone-image>
-              </div>
-            </div>
+            <ks-swiper-container
+                    swiper="swiper"
+                    slides-per-view="1"
+                    slides-per-column="1"
+                    space-between="0"
+                    pagination-is-active="true"
+                    pagination-clickable="false"
+                    show-nav-buttons="true"
+                    loop="false"
+                    autoplay="5000"
+                    initial-slide="0"
+                    direction="horizontal">
+              <ks-swiper-slide class="swiper-slide" ng-repeat="item in instanceIds track by $index">
+                <div class="form-group">
+                  <div class="form-control-static">
+                    <cornerstone-image imageId="http://138.68.134.7:8086/instances/{{item}}/preview"></cornerstone-image>
+                  </div>
+                </div>
+              </ks-swiper-slide>
+            </ks-swiper-container>
           </div>
         </div>
       </div>
