@@ -98,7 +98,7 @@ let app = angular
         'xeditable',
         'ngScrollbars',
         'rzModule',
-        'ui.select'
+        'ui.select',
         'ksSwiper',
         'ngSanitize'
     ])
