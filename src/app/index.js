@@ -34,6 +34,7 @@ import 'jquery-timepicker-jt';
 import 'angular-jquery-timepicker';
 import 'angular-xeditable';
 import 'ng-scrollbars';
+import 'angular-ui-select';
 import 'angular-swiper';
 import 'swiper';
 
@@ -97,6 +98,7 @@ let app = angular
         'xeditable',
         'ngScrollbars',
         'rzModule',
+        'ui.select'
         'ksSwiper',
         'ngSanitize'
     ])
@@ -170,6 +172,12 @@ let app = angular
             autoHideScrollbar: false,
             mouseWheel:{ preventDefault: false }
         };
+    })
+    .config(function(uiSelectConfig) {
+        uiSelectConfig.theme = 'bootstrap';
+        uiSelectConfig.resetSearchInput = false;
+        uiSelectConfig.appendToBody = true;
+        uiSelectConfig.searchEnabled = false;
     });
     app.run(function(editableOptions, editableThemes) {
       editableOptions.theme = 'bs3'; // bootstrap3 theme

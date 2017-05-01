@@ -217,8 +217,6 @@ class HeaderController {
     $scope.search = {};
     $scope.search.searchExpression = '';
 
-    // this.searchBarEnabled = !$state.is('main-search');
-
     this.containsReportString = function () {
       return $scope.search.searchExpression.indexOf('rp ') === 0;
     };
@@ -276,7 +274,6 @@ class HeaderController {
     };
 
     this.checkExpression = function (expression) {
-      // $scope.search.searchExpression = expression.toLowerCase();
       /* istanbul ignore if  */
       if ($rootScope.searchMode) {
         if ($rootScope.reportMode && !$rootScope.reportTypeSet) {
@@ -355,14 +352,13 @@ class HeaderController {
     this.getPopulateHeaderSearch = function (expression) {
       $scope.search.searchExpression = expression.headerSearch.toLowerCase();;
       $scope.searchFocused = true;
-      // self.searchBarEnabled = expression.headerSearchEnabled;
-      // $scope.searchBar = expression.headerSearchEnabled;
     };
+
     this.getPageHeader = function (data) {
       $scope.pageHeader = data.title;
       $scope.isPageHeader = data.isShowTitle;
-      // $scope.searchBar = data.title === 'Welcome' ? false : true;
     };
+
     this.checkIsShowPreviousBtn = function () {
       $scope.isShowPreviousBtn = $state.router.globals.$current.name !== 'patients-charts';
     };

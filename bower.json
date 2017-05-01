@@ -21,5 +21,6 @@
     "ng-scrollbars": "^0.0.11",
     "angularjs-slider": "^6.1.0",
     "angular-swiper": "^0.4.0"
+    "angular-ui-select": "^0.19.8"
   }
 }
