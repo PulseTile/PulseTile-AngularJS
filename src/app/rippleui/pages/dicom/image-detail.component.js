@@ -22,6 +22,7 @@ class ImageDetailController {
     
     $scope.series = [];
     $scope.isMove = false;
+    $scope.isFade = false;
     
     var cornerstone = cornerstoneJS();
     var cornerstoneTools = cornerstoneToolsJS();
@@ -80,8 +81,27 @@ class ImageDetailController {
         cornerstoneTools.mouseInput.disable(element);
         return;
       };
-      
+      $scope.isFade = false;
+      cornerstoneTools.wwwc. deactivate(element, 2);
       cornerstoneTools.mouseInput.enable(element);
+      cornerstoneTools.pan.activate(element, 1);
+    };
+
+    $scope.fadeImg = function (ev) {
+      $scope.isFade = !$scope.isFade;
+
+      var element = getImgBlock();
+
+      /* istanbul ignore if  */
+      if ($scope.isFade === false) {
+        cornerstoneTools.mouseInput.disable(element);
+        cornerstoneTools.mouseWheelInput.disable(element);
+        return;
+
+      };
+      $scope.isMove = false;
+      cornerstoneTools.pan.deactivate(element, 1);
+      cornerstoneTools.mouseWheelInput.enable(element);
       cornerstoneTools.wwwc.activate(element, 2);
     };
   }
