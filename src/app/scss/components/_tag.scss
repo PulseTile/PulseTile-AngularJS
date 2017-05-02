@@ -19,4 +19,12 @@
     font-weight: 600;
   }
   & > .editable { border-bottom: none; }
+
+  .popover-title { font-weight: 700; }
+  .editable-submit,
+  .editable-cancel { 
+    font-size: 12px;
+    line-height: 14px;
+  }
+  .editable-cancel { border-color: #e6e6e6 !important; }
 }
