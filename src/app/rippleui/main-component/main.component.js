@@ -24,8 +24,8 @@ class MainController {
     $scope.isClassShowSidebar = false;
     $scope.breadcrumbs = [];
 
+    /* istanbul ignore next  */
     $scope.setBreadcrumbs = function (breadcrumbs) {
-      /* istanbul ignore if  */
       if (serviceRequests.currentUserData.role === "PHR" && breadcrumbs) {
         breadcrumbs.shift();
       }
@@ -50,11 +50,12 @@ class MainController {
     };
     serviceRequests.subscriber('routeState', this.getPageComponents);
 
+    /* istanbul ignore next  */
     $scope.getFullPanelClass = function () {
       return $scope.fullPanelClass ? 'full-panel full-panel-' + $scope.fullPanelClass : '';
     };
+    /* istanbul ignore next  */
     this.changeFullPanel = function (data) {
-      /* istanbul ignore if  */
       if ($scope.fullPanelClass === data.panelName) {
         $scope.fullPanelClass = '';
       } else {
@@ -79,8 +80,10 @@ class MainController {
         $scope.isClassShowSidebar = !$scope.isClassShowSidebar;
       }
     };
+
+    /* istanbul ignore next  */
     this.hideSidebarOnMobile = function () {
-      /* istanbul ignore if  */
+
       if (window.innerWidth < 768) {
         $timeout(function() {
           $scope.isClassShowSidebar = false;
@@ -98,7 +101,7 @@ class MainController {
       $scope.isSecondPanel = views.detail ? true : false;
       $scope.isSidebar = views.actions ? true : false;
 
-      
+      /* istanbul ignore if  */
       if ($scope.isSidebar === true && window.innerWidth > 767) {
         $scope.isClassShowSidebar = true;
       }
