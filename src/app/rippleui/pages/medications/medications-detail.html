@@ -277,14 +277,19 @@
       <div class="panel-body-inner">
         <div class="form">
           <div class="panel-body-section">
-            <div class="form-group">
-              <label class="control-label">Name</label>
-              <div class="form-control-static">{{ $ctrl.medication.name }}</div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label">Dose Amount</label>
-              <div class="form-control-static">{{ $ctrl.medication.doseAmount }}</div>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Name</label>
+                  <div class="form-control-static">{{ $ctrl.medication.name }}</div>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group">
+                  <label class="control-label">Dose Amount</label>
+                  <div class="form-control-static">{{ $ctrl.medication.doseAmount }}</div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="panel-body-section">
@@ -375,146 +380,171 @@
       <div class="panel-body-inner">
         <form name="prescriptionForm" class="form">
           <div class="panel-body-section">
-            <div class="form-group">
-              <label class="control-label">Name</label>
-              <div class="form-control-static">{{ $ctrl.medication.name }}</div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label">Dose Amount</label>
-              <div class="form-control-static">{{ $ctrl.medication.doseAmount }}</div>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Name</label>
+                  <div class="form-control-static">{{ $ctrl.medication.name }}</div>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group">
+                  <label class="control-label">Dose Amount</label>
+                  <div class="form-control-static">{{ $ctrl.medication.doseAmount }}</div>
+                </div>
+              </div>
             </div>
           </div>
-          
+          <div class="row-expand">
+            <div class="col-expand-left"></div>
+            <div class="col-expand-right"></div>
+          </div>
           <div class="panel-body-section">
-            <div class="form-group">
-              <label class="control-label">Dose Interval</label>
-              <div class="input-holder">
-                <div class="wrap-fcustominps-inline">
-                  <div class="wrap-fcustominp">
-                    <div class="fcustominp">
-                      <input type="radio" id="doseIntervalMorning" name="doseInterval" value="morning" ng-model="prescriptionEdit.doseInterval"/>
-                      <label for="doseIntervalMorning"></label>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Dose Interval</label>
+                  <div class="input-holder">
+                    <div class="wrap-fcustominps-inline">
+                      <div class="wrap-fcustominp">
+                        <div class="fcustominp">
+                          <input type="radio" id="doseIntervalMorning" name="doseInterval" value="morning" ng-model="prescriptionEdit.doseInterval"/>
+                          <label for="doseIntervalMorning"></label>
+                        </div>
+                        <label for="doseIntervalMorning" class="fcustominp-label">Morning</label>
+                      </div>
+                      <div class="wrap-fcustominp">
+                        <div class="fcustominp">
+                          <input type="radio" id="doseIntervalEvening" name="doseInterval" value="evening" ng-model="prescriptionEdit.doseInterval"/>
+                          <label for="doseIntervalEvening"></label>
+                        </div>
+                        <label for="doseIntervalEvening" class="fcustominp-label">Evening</label>
+                      </div>
+                      <div class="wrap-fcustominp">
+                        <div class="fcustominp">
+                          <input type="radio" id="doseIntervalSpecific" name="doseInterval" value="specific" ng-model="prescriptionEdit.doseInterval"/>
+                          <label for="doseIntervalSpecific"></label>
+                        </div>
+                        <label for="doseIntervalSpecific" class="fcustominp-label">Specific</label>
+                      </div>
                     </div>
-                    <label for="doseIntervalMorning" class="fcustominp-label">Morning</label>
                   </div>
-                  <div class="wrap-fcustominp">
-                    <div class="fcustominp">
-                      <input type="radio" id="doseIntervalEvening" name="doseInterval" value="evening" ng-model="prescriptionEdit.doseInterval"/>
-                      <label for="doseIntervalEvening"></label>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group">
+                  <label class="control-label">Dose Quantity</label>
+                  <div class="input-holder">
+                    <div class="wrap-fcustominps-inline">
+                      <div class="wrap-fcustominp">
+                        <div class="fcustominp">
+                          <input type="radio" id="doseQuantity1x" name="doseQuantity" value="1x" ng-model="prescriptionEdit.doseQuantity"/>
+                          <label for="doseQuantity1x"></label>
+                        </div>
+                        <label for="doseQuantity1x" class="fcustominp-label">1X</label>
+                      </div>
+                      <div class="wrap-fcustominp">
+                        <div class="fcustominp">
+                          <input type="radio" id="doseQuantity2x" name="doseQuantity" value="2x" ng-model="prescriptionEdit.doseQuantity"/>
+                          <label for="doseQuantity2x"></label>
+                        </div>
+                        <label for="doseQuantity2x" class="fcustominp-label">2X</label>
+                      </div>
+                      <div class="wrap-fcustominp">
+                        <div class="fcustominp">
+                          <input type="radio" id="doseQuantity3x" name="doseQuantity" value="3x" ng-model="prescriptionEdit.doseQuantity"/>
+                          <label for="doseQuantity3x"></label>
+                        </div>
+                        <label for="doseQuantity3x" class="fcustominp-label">3X</label>
+                      </div>
+                      <div class="wrap-fcustominp">
+                        <div class="fcustominp">
+                          <input type="radio" id="doseQuantity4x" name="doseQuantity" value="4x" ng-model="prescriptionEdit.doseQuantity"/>
+                          <label for="doseQuantity4x"></label>
+                        </div>
+                        <label for="doseQuantity4x" class="fcustominp-label">4X</label>
+                      </div>
+                      <div class="wrap-fcustominp">
+                        <div class="fcustominp">
+                          <input type="radio" id="doseQuantityOther" name="doseQuantity" value="other" ng-model="prescriptionEdit.doseQuantity"/>
+                          <label for="doseQuantityOther"></label>
+                        </div>
+                        <label for="doseQuantityOther" class="fcustominp-label">Other</label>
+                      </div>
+                     
                     </div>
-                    <label for="doseIntervalEvening" class="fcustominp-label">Evening</label>
-                  </div>
-                  <div class="wrap-fcustominp">
-                    <div class="fcustominp">
-                      <input type="radio" id="doseIntervalSpecific" name="doseInterval" value="specific" ng-model="prescriptionEdit.doseInterval"/>
-                      <label for="doseIntervalSpecific"></label>
-                    </div>
-                    <label for="doseIntervalSpecific" class="fcustominp-label">Specific</label>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="form-group">
-              <label class="control-label">Dose Quantity</label>
-              <div class="input-holder">
-                <div class="wrap-fcustominps-inline">
-                  <div class="wrap-fcustominp">
-                    <div class="fcustominp">
-                      <input type="radio" id="doseQuantity1x" name="doseQuantity" value="1x" ng-model="prescriptionEdit.doseQuantity"/>
-                      <label for="doseQuantity1x"></label>
-                    </div>
-                    <label for="doseQuantity1x" class="fcustominp-label">1X</label>
-                  </div>
-                  <div class="wrap-fcustominp">
-                    <div class="fcustominp">
-                      <input type="radio" id="doseQuantity2x" name="doseQuantity" value="2x" ng-model="prescriptionEdit.doseQuantity"/>
-                      <label for="doseQuantity2x"></label>
-                    </div>
-                    <label for="doseQuantity2x" class="fcustominp-label">2X</label>
-                  </div>
-                  <div class="wrap-fcustominp">
-                    <div class="fcustominp">
-                      <input type="radio" id="doseQuantity3x" name="doseQuantity" value="3x" ng-model="prescriptionEdit.doseQuantity"/>
-                      <label for="doseQuantity3x"></label>
-                    </div>
-                    <label for="doseQuantity3x" class="fcustominp-label">3X</label>
-                  </div>
-                  <div class="wrap-fcustominp">
-                    <div class="fcustominp">
-                      <input type="radio" id="doseQuantity4x" name="doseQuantity" value="4x" ng-model="prescriptionEdit.doseQuantity"/>
-                      <label for="doseQuantity4x"></label>
-                    </div>
-                    <label for="doseQuantity4x" class="fcustominp-label">4X</label>
-                  </div>
-                  <div class="wrap-fcustominp">
-                    <div class="fcustominp">
-                      <input type="radio" id="doseQuantityOther" name="doseQuantity" value="other" ng-model="prescriptionEdit.doseQuantity"/>
-                      <label for="doseQuantityOther"></label>
-                    </div>
-                    <label for="doseQuantityOther" class="fcustominp-label">Other</label>
-                  </div>
-                 
-                </div>
-              </div>
-            </div>
-            
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || prescriptionForm.route.$dirty) && prescriptionForm.route.$invalid, 'has-success': prescriptionForm.route.$valid && prescriptionForm.route.$dirty}">
-                <label for="route" class="control-label">Route</label>
-                <div class="input-holder">
-                    <select class="form-control input-sm" id="route" name="route" ng-model="prescriptionEdit.route" required>
-                        <option value="">-- Route --</option>
-                        <option>Po Per Oral</option>
-                        <option>IV Intra Venous</option>
-                        <option>IM Intra Muscular</option>
-                        <option>PN Per Nasal</option>
-                        <option>PR Per Rectum</option>
-                        <option>SL Sub Lingual</option>
-                        <option>SC Sub Cutaneous</option>
-                    </select>
-                </div>
-                <span class="help-block animate-fade" ng-show="formSubmitted && prescriptionForm.route.$error.required">You must enter a value.</span>
-            </div>
-            
-            <div ng-if="prescriptionEdit.doseQuantity && prescriptionEdit.doseInterval">
-              <div class="row">
-                <div class="col-xs-12 col-md-6">
-                  <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || prescriptionForm.pStartDateTime.$dirty) && prescriptionForm.pStartDateTime.$invalid, 'has-success': prescriptionForm.pStartDateTime.$valid && prescriptionForm.pStartDateTime.$dirty}">
-                      <label for="" class="control-label">Start</label>
-                      <div class="inner-addon addon-left">
-                        <div class="addon">
-                          <i class="fa fa-calendar"></i>
-                        </div>
-                        <input type="text" class="form-control" id="pStartDateTime" name="pStartDateTime" ng-model="prescriptionEdit.pStartDateTime" ng-click="openDatepicker($event, 'pStartDateTime')" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.pStartDateTime" required readonly/>
-                      </div>
-                      <span class="help-block animate-fade" ng-show="formSubmitted && prescriptionForm.pStartDateTime.$error.required">You must enter a valid date.</span>
-                  </div>
-                </div>
-                <div class="col-xs-12 col-md-6">
-                  <div class="form-group">
-                    <label class="control-label hidden-sm"></label>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || prescriptionForm.route.$dirty) && prescriptionForm.route.$invalid, 'has-success': prescriptionForm.route.$valid && prescriptionForm.route.$dirty}">
+                    <label for="route" class="control-label">Route</label>
                     <div class="input-holder">
-                      <div class="wrap-fcustominp">
-                        <div class="fcustominp">
-                          <input type="checkbox" id="finishCancelled" name="finishCancelled" ng-model="prescriptionEdit.finishCancelled"/>
-                          <label for="finishCancelled"></label>
+                        <select class="form-control input-sm" id="route" name="route" ng-model="prescriptionEdit.route" required>
+                            <option value="">-- Route --</option>
+                            <option>Po Per Oral</option>
+                            <option>IV Intra Venous</option>
+                            <option>IM Intra Muscular</option>
+                            <option>PN Per Nasal</option>
+                            <option>PR Per Rectum</option>
+                            <option>SL Sub Lingual</option>
+                            <option>SC Sub Cutaneous</option>
+                        </select>
+                    </div>
+                    <span class="help-block animate-fade" ng-show="formSubmitted && prescriptionForm.route.$error.required">You must enter a value.</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div ng-if="prescriptionEdit.doseQuantity && prescriptionEdit.doseInterval">
+                  <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                      <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || prescriptionForm.pStartDateTime.$dirty) && prescriptionForm.pStartDateTime.$invalid, 'has-success': prescriptionForm.pStartDateTime.$valid && prescriptionForm.pStartDateTime.$dirty}">
+                          <label for="" class="control-label">Start</label>
+                          <div class="inner-addon addon-left">
+                            <div class="addon">
+                              <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control" id="pStartDateTime" name="pStartDateTime" ng-model="prescriptionEdit.pStartDateTime" ng-click="openDatepicker($event, 'pStartDateTime')" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.pStartDateTime" required readonly/>
+                          </div>
+                          <span class="help-block animate-fade" ng-show="formSubmitted && prescriptionForm.pStartDateTime.$error.required">You must enter a valid date.</span>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                      <div class="form-group">
+                        <label class="control-label hidden-sm"></label>
+                        <div class="input-holder">
+                          <div class="wrap-fcustominp">
+                            <div class="fcustominp">
+                              <input type="checkbox" id="finishCancelled" name="finishCancelled" ng-model="prescriptionEdit.finishCancelled"/>
+                              <label for="finishCancelled"></label>
+                            </div>
+                            <label for="finishCancelled" class="fcustominp-label">Until Cancelled</label>
+                          </div>
                         </div>
-                        <label for="finishCancelled" class="fcustominp-label">Until Cancelled</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                      <div class="form-group form-group-sm" ng-if="!prescriptionEdit.finishCancelled" ng-class="{'has-error': (formSubmitted || prescriptionForm.pFinishDateTime.$dirty) && prescriptionForm.pFinishDateTime.$invalid, 'has-success': prescriptionForm.pFinishDateTime.$valid && prescriptionForm.pFinishDateTime.$dirty}">
+                          <label for="" class="control-label">Finish</label>
+                          <div class="inner-addon addon-left">
+                            <div class="addon">
+                              <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control" id="pFinishDateTime" name="pFinishDateTime" ng-model="prescriptionEdit.pFinishDateTime" ng-click="openDatepicker($event, 'pFinishDateTime')" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.pFinishDateTime" required readonly/>
+                          </div>
+                          <span class="help-block animate-fade" ng-show="formSubmitted && prescriptionForm.pFinishDateTime.$error.required">You must enter a valid date.</span>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="form-group form-group-sm" ng-show="!prescriptionForm.finishCancelled" ng-class="{'has-error': (formSubmitted || prescriptionForm.pFinishDateTime.$dirty) && prescriptionForm.pFinishDateTime.$invalid, 'has-success': prescriptionForm.pFinishDateTime.$valid && prescriptionForm.pFinishDateTime.$dirty}">
-                  <label for="" class="control-label">Finish</label>
-                  <div class="inner-addon addon-left">
-                    <div class="addon">
-                      <i class="fa fa-calendar"></i>
-                    </div>
-                    <input type="text" class="form-control" id="pFinishDateTime" name="pFinishDateTime" ng-model="prescriptionEdit.pFinishDateTime" ng-click="openDatepicker($event, 'pFinishDateTime')" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.pFinishDateTime" required readonly/>
-                  </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && prescriptionForm.pFinishDateTime.$error.required">You must enter a valid date.</span>
               </div>
             </div>
             
@@ -622,29 +652,41 @@
       <h3 class="panel-title">Warnings (2)</h3>
     </div>
     <div class="panel-body">
-      <div class="panel-body-inner highlighter-warning">
-        <div class="form">
-          <div class="form-group">
-            <label class="control-label">Warning #1</label>
-            <div class="form-control-static">Interaction found between <a>Furosemide</a> and <a>Latanoprost</a></div>
-          </div>
+      <div class="panel-expand-wrapper">
+        <div class="panel-expand-row">
+          <div class="panel-expand-item">
+            <div class="panel-body-inner highlighter-wrapper">
+              <span class="highlighter-warning" ng-if="true"></span>
+              <span class="highlighter-danger" ng-if="false"></span>
+              <div class="form">
+                <div class="form-group">
+                  <label class="control-label">Warning #1</label>
+                  <div class="form-control-static">Interaction found between <a>Furosemide</a> and <a>Latanoprost</a></div>
+                </div>
 
-          <div class="form-group">
-            <label class="control-label">Effects</label>
-            <div class="form-control-static">Anticonvulsant effect antagonised</div>
+                <div class="form-group">
+                  <label class="control-label">Effects</label>
+                  <div class="form-control-static">Anticonvulsant effect antagonised</div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="panel-body-inner highlighter-danger">
-        <div class="form">
-          <div class="form-group">
-            <label class="control-label">Warning #2</label>
-            <div class="form-control-static">Interaction found between <a>Furosemide</a> and <a>Digoxin</a></div>
-          </div>
+          <div class="panel-expand-item">
+            <div class="panel-body-inner highlighter-wrapper">
+              <span class="highlighter-warning" ng-if="false"></span>
+              <span class="highlighter-danger" ng-if="true"></span>
+              <div class="form">
+                <div class="form-group">
+                  <label class="control-label">Warning #2</label>
+                  <div class="form-control-static">Interaction found between <a>Furosemide</a> and <a>Digoxin</a></div>
+                </div>
 
-          <div class="form-group">
-            <label class="control-label">Effects</label>
-            <div class="form-control-static">May increase anticoagulant effect</div>
+                <div class="form-group">
+                  <label class="control-label">Effects</label>
+                  <div class="form-control-static">May increase anticoagulant effect</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -660,16 +702,22 @@
       <h3 class="panel-title">Change History (1)</h3>
     </div>
     <div class="panel-body">
-      <div class="panel-body-inner">
-        <div class="form">
-          <div class="form-group">
-            <label class="control-label">Change #1 Date</label>
-            <div class="form-control-static">11-Oct-2016 11:45</div>
-          </div>
+      <div class="panel-expand-wrapper">
+        <div class="panel-expand-row">
+          <div class="panel-expand-item">
+            <div class="panel-body-inner">
+              <div class="form">
+                <div class="form-group">
+                  <label class="control-label">Change #1 Date</label>
+                  <div class="form-control-static">11-Oct-2016 11:45</div>
+                </div>
 
-          <div class="form-group">
-            <label class="control-label">Changes</label>
-            <div class="form-control-static">Dose: <em>60mg</em>  <span class="next-separate"><i class="fa fa-caret-right"></i></span>  40-20mg</div>
+                <div class="form-group">
+                  <label class="control-label">Changes</label>
+                  <div class="form-control-static">Dose: <em>60mg</em>  <span class="next-separate"><i class="fa fa-caret-right"></i></span>  40-20mg</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
