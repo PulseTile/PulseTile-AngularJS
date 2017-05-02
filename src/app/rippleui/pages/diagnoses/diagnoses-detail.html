@@ -96,12 +96,12 @@
                 </div>
               </div>
               
-              <div class="col-expand-right">
+              <div class="col-expand-right" ng-if="$ctrl.diagnosis.isImported">
                 <div class="form-group">
                   <label class="control-label">Is Imported</label>
                   <div class="input-holder">
                     <label class="switch">
-                      <input type="checkbox" name="isImport" ng-model="$ctrl.diagnosis.isImport" disabled>
+                      <input type="checkbox" name="isImported" ng-model="$ctrl.diagnosis.isImported" disabled>
                       <div class="slider disabled">
                         <span class="text text-check-true">Yes</span>
                         <span class="text text-check-false">No</span>

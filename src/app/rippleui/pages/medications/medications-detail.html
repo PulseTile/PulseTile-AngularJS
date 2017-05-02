@@ -78,11 +78,11 @@
               </div>
             </div>
             
-            <div class="form-group">
+            <div class="form-group" ng-if="$ctrl.medication.isImported">
               <label class="control-label">Is Imported</label>
               <div class="input-holder">
                 <label class="switch">
-                  <input type="checkbox" name="isImport" ng-model="$ctrl.diagnosis.isImport" disabled>
+                  <input type="checkbox" name="isImported" ng-model="$ctrl.medication.isImported" disabled>
                   <div class="slider disabled">
                     <span class="text text-check-true">Yes</span>
                     <span class="text text-check-false">No</span>
