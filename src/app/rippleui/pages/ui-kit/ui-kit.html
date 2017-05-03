@@ -13,26 +13,343 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
-<div class="wrapper showSidebar">
-  <header-component></header-component>
 
-  <div class="content">
-    <!-- Sidebar-->
-    <div class="sidebar">
-        <div class="sidebar-nav">
-          <ul>
-            <li>qewdfqwe</li>
-            <li>qewdfqwe</li>
-            <li>qewdfqwe</li>
-            <li>qewdfqwe</li>
+<div class="ui-wrapper" ng-class="{showSidebar: isOpenSidebar, 'touch-device': isTouchDevice, 'is-not-touch-device': !isTouchDevice}">
+  <header class="ui-header" data-scroll-to-exclude="true">
+    <div class="ui-header-inner">
+      <button ng-click="toggleSidebar()" class="ui-btn-toggle-sidebar wrap-icon">
+        <i class="btn-icon fa fa-bars"></i>
+        <span class="btn-text">Menu</span>
+      </button>
+      <div class="ui-header-title">
+        <span>Ripple OSI - UI Kit</span>
+      </div>
+    </div>
+  </header>
+  <!-- Sidebar-->
+  <div class="ui-sidebar">
+      <div class="ui-sidebar-nav">
+        <ul>
+          <!-- <li>qewdfqwe</li> -->
+        </ul>
+      </div>
+  </div>
+  <!-- /.Sidebar-->
+
+  <div class="ui-main">
+    <div class="ui-content">
+
+      <div id="color-pallete" class="ui-section">
+        <h2 class="ui-main-title">Color Pallete</h2>
+        <div id="main-colors" class="ui-sub-section">
+          <strong class="ui-title">Main colors</strong>
+          <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <div class="ui-color-box ui-color-default">
+                <div class="ui-color-box-example"></div>
+                <div class="ui-color-heading">Default Color</div>
+                <div class="ui-color-box-hex"></div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <div class="ui-color-box ui-color-primary">
+                <div class="ui-color-box-example"></div>
+                <div class="ui-color-heading">Primary Color</div>
+                <div class="ui-color-box-hex"></div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <div class="ui-color-box ui-color-success">
+                <div class="ui-color-box-example"></div>
+                <div class="ui-color-heading">Success Color</div>
+                <div class="ui-color-box-hex"></div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <div class="ui-color-box ui-color-info">
+                <div class="ui-color-box-example"></div>
+                <div class="ui-color-heading">Info Color</div>
+                <div class="ui-color-box-hex"></div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <div class="ui-color-box ui-color-warning">
+                <div class="ui-color-box-example"></div>
+                <div class="ui-color-heading">Warning Color</div>
+                <div class="ui-color-box-hex"></div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <div class="ui-color-box ui-color-danger">
+                <div class="ui-color-box-example"></div>
+                <div class="ui-color-heading">Danger Color</div>
+                <div class="ui-color-box-hex"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="theme-colors" class="ui-sub-section">
+          <strong class="ui-title">Theme colors</strong>
+          <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <div class="ui-color-box ui-color-base-color">
+                <div class="ui-color-box-example"></div>
+                <div class="ui-color-heading">Base Color</div>
+                <div class="ui-color-box-hex"></div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <div class="ui-color-box ui-color-light-color">
+                <div class="ui-color-box-example"></div>
+                <div class="ui-color-heading">Light Color</div>
+                <div class="ui-color-box-hex"></div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <div class="ui-color-box ui-color-lighter-color">
+                <div class="ui-color-box-example"></div>
+                <div class="ui-color-heading">Lighter Color</div>
+                <div class="ui-color-box-hex"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="main-colors" class="ui-sub-section">
+          <strong class="ui-title">Black and White colors</strong>
+          <ul class="ui-list-colors list-reset">
+            <li class="ui-list-colors-item"><span class="ui-color" style="background: #ffffff;"></span><span class="ui-color-name">#ffffff</span></li>
+            <li class="ui-list-colors-item"><span class="ui-color" style="background: #f7f7f7;"></span><span class="ui-color-name">#f7f7f7</span></li>
+            <li class="ui-list-colors-item"><span class="ui-color" style="background: #f3f3f3;"></span><span class="ui-color-name">#f3f3f3</span></li>
+            <li class="ui-list-colors-item"><span class="ui-color" style="background: #eeeeee;"></span><span class="ui-color-name">#eeeeee</span></li>
+            <li class="ui-list-colors-item"><span class="ui-color" style="background: #e8e8e8;"></span><span class="ui-color-name">#e8e8e8</span></li>
+            <li class="ui-list-colors-item"><span class="ui-color" style="background: #d8d8d8;"></span><span class="ui-color-name">#d8d8d8</span></li>
+            <li class="ui-list-colors-item"><span class="ui-color" style="background: #cccccc;"></span><span class="ui-color-name">#cccccc</span></li>
+            <li class="ui-list-colors-item"><span class="ui-color" style="background: #bdbdbd;"></span><span class="ui-color-name">#bdbdbd</span></li>
+            <li class="ui-list-colors-item"><span class="ui-color" style="background: #aaaaaa;"></span><span class="ui-color-name">#aaaaaa</span></li>
+            <li class="ui-list-colors-item"><span class="ui-color" style="background: #949494;"></span><span class="ui-color-name">#949494</span></li>
+            <li class="ui-list-colors-item"><span class="ui-color" style="background: #303030;"></span><span class="ui-color-name">#303030</span></li>
+            <li class="ui-list-colors-item"><span class="ui-color" style="background: #222222;"></span><span class="ui-color-name">#222222</span></li>
+            <li class="ui-list-colors-item"><span class="ui-color" style="background: #000000;"></span><span class="ui-color-name">#000000</span></li>
           </ul>
         </div>
+      </div>
+
+      <div id="typography" class="ui-section">
+        <h2 class="ui-main-title">Typography</h2>
+        <div id="headings" class="ui-sub-section">
+          <strong class="ui-title">Headings</strong>
+          <h1>Heading 1</h1>
+          <h2>Heading 2</h2>
+          <h3>Heading 3</h3>
+          <h4>Heading 4</h4>
+          <h5>Heading 5</h5>
+          <h6>Heading 6</h6>
+        </div>
+
+        <div id="paragraphs" class="ui-sub-section">
+          <strong class="ui-title">Paragraphs</strong>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci cum eligendi, rem, expedita doloremque similique, laudantium quia quae officia nam voluptatum mollitia dolor non reiciendis dignissimos accusantium recusandae maxime inventore.</p>
+          <p><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus delectus provident hic perferendis alias quia assumenda cum beatae, quod quasi autem quisquam optio nostrum eaque! Ea ipsum consequuntur, aspernatur voluptate.</strong></p>
+          <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus delectus provident hic perferendis alias quia assumenda cum beatae, quod quasi autem quisquam optio nostrum eaque! Ea ipsum consequuntur, aspernatur voluptate.</em></p>
+          <p><a href="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus delectus provident hic perferendis alias quia assumenda cum beatae, quod quasi autem quisquam optio nostrum eaque! Ea ipsum consequuntur, aspernatur voluptate.</a></p>
+        </div>
+        
+        <div id="lists" class="ui-sub-section">
+          <strong class="ui-title">Lists</strong>
+          <div class="row">
+            <div class="col-xs-12 col-sm-4">
+              <strong class="ui-sub-title">Marked list</strong>
+              <ul>
+                <li>Lorem ipsum dolor sit amet</li>
+                <li>Lorem ipsum dolor sit amet</li>
+                <li>Lorem ipsum dolor sit amet</li>
+                <li>Lorem ipsum dolor sit amet</li>
+                <li>Lorem ipsum dolor sit amet</li>
+              </ul>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+              <strong class="ui-sub-title">Ordered list</strong>
+              <ol>
+                <li>Lorem ipsum dolor sit amet</li>
+                <li>Lorem ipsum dolor sit amet</li>
+                <li>Lorem ipsum dolor sit amet</li>
+                <li>Lorem ipsum dolor sit amet</li>
+                <li>Lorem ipsum dolor sit amet</li>
+              </ol>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+              <strong class="ui-sub-title">Cleared list</strong>
+              <ul class="list-reset">
+                <li>Lorem ipsum dolor sit amet</li>
+                <li>Lorem ipsum dolor sit amet</li>
+                <li>Lorem ipsum dolor sit amet</li>
+                <li>Lorem ipsum dolor sit amet</li>
+                <li>Lorem ipsum dolor sit amet</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      <div id="grid" class="ui-section">
+        <h2 class="ui-main-title">Grid System</h2>
+        <div class="ui-section">
+          <strong class="ui-title">Grid options</strong>
+          <strong class="ui-sub-title">Class prefix</strong>
+          <ul>
+            <li>.col-xs-*</li>
+            <li>.col-sm-*</li>
+            <li>.col-md-*</li>
+            <li>.col-lg-*</li>
+          </ul>
+          <strong class="ui-sub-title">Gutter width</strong>
+          <p>>= 480px - 16px (8px on each side of a column)</p>
+          <p><= 479px - 10px (5px on each side of a column)</p>
+        </div>
+
+        <div class="ui-sub-section">
+          <strong class="ui-sub-title">Columns width variations</strong>
+          <div class="row">
+            <div class="col-sm-12"><div class="ui-grid-block">.col-sm-12</div></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+            <div class="col-sm-11"><div class="ui-grid-block">.col-sm-11</div></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
+            <div class="col-sm-10"><div class="ui-grid-block">.col-sm-10</div></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3"><div class="ui-grid-block">.col-sm-3</div></div>
+            <div class="col-sm-9"><div class="ui-grid-block">.col-sm-9</div></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4"><div class="ui-grid-block">.col-sm-4</div></div>
+            <div class="col-sm-8"><div class="ui-grid-block">.col-sm-8</div></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-5"><div class="ui-grid-block">.col-sm-5</div></div>
+            <div class="col-sm-7"><div class="ui-grid-block">.col-sm-7</div></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6"><div class="ui-grid-block">.col-sm-6</div></div>
+            <div class="col-sm-6"><div class="ui-grid-block">.col-sm-6</div></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4"><div class="ui-grid-block">.col-sm-4</div></div>
+            <div class="col-sm-4"><div class="ui-grid-block">.col-sm-4</div></div>
+            <div class="col-sm-4"><div class="ui-grid-block">.col-sm-4</div></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3"><div class="ui-grid-block">.col-sm-3</div></div>
+            <div class="col-sm-3"><div class="ui-grid-block">.col-sm-3</div></div>
+            <div class="col-sm-3"><div class="ui-grid-block">.col-sm-3</div></div>
+            <div class="col-sm-3"><div class="ui-grid-block">.col-sm-3</div></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
+            <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
+            <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
+            <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
+            <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
+            <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+          </div>
+        </div>
+        <div class="ui-sub-section">
+          <strong class="ui-sub-title">Columns for modules with details information</strong>
+          <div class="row">
+            <div class="col-xs-12 col-panel-main"><div class="ui-grid-block">.col-panel-main</div></div>
+            <div class="col-xs-12 col-panel-details"><div class="ui-grid-block">.col-panel-details</div></div>
+          </div>
+        </div>
+
+        <div class="ui-sub-section">
+          <strong class="ui-sub-title">Columns for expanded blocks</strong>
+          <div class="ui-expanded-wrapper" ng-class="getFullPanelClass()">
+            <div class="row">
+              <div class="col-xs-12 col-panel-main">
+                <div class="panel panel-secondary">
+                  <div class="panel-heading">
+                    <div class="control-group right">
+                      <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="toggleFullPanelClass('main')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+                    </div>
+                    <h3 class="panel-title">.col-panel-main</h3>
+                  </div>
+                  <div class="panel-body">
+                    <div class="panel-body-inner">
+                      <div class="row-expand">
+                        <div class="col-expand-left"><div class="ui-grid-block">.col-expand-left</div></div>
+                        <div class="col-expand-right"><div class="ui-grid-block">.col-expand-right</div></div>
+                      </div>
+                      <div class="row-expand">
+                        <div class="col-expand-left"><div class="ui-grid-block">.col-expand-left</div></div>
+                        <div class="col-expand-right"><div class="ui-grid-block">.col-expand-right</div></div>
+                      </div>
+                      <div class="row-expand">
+                        <div class="col-expand-left">
+                          <div class="ui-grid-block hidden-expand">.hidden-expand</div>
+                          <div class="ui-grid-block visible-expand">.visible-expand</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-panel-details">
+                <div class="panel panel-secondary">
+                  <div class="panel-heading">
+                    <div class="control-group right">
+                      <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="toggleFullPanelClass('details')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+                    </div>
+                    <h3 class="panel-title">.col-panel-details</h3>
+                  </div>
+                  <div class="panel-body">
+                    <div class="panel-body-inner">
+                      <div class="row-expand">
+                        <div class="col-expand-left"><div class="ui-grid-block">.col-expand-left</div></div>
+                        <div class="col-expand-right"><div class="ui-grid-block">.col-expand-right</div></div>
+                      </div>
+                      <div class="row-expand">
+                        <div class="col-expand-left"><div class="ui-grid-block">.col-expand-left</div></div>
+                        <div class="col-expand-right"><div class="ui-grid-block">.col-expand-right</div></div>
+                      </div>
+                      <div class="row-expand">
+                        <div class="col-expand-left">
+                          <div class="ui-grid-block hidden-not-expand">.hidden-not-expand</div>
+                          <div class="ui-grid-block visible-not-expand">.visible-not-expand</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- /.Sidebar-->
+  </div>
+</div>
 
-    <div class="main">
-
-      <!-- Breadcrumbs-->
+    <!-- Breadcrumbs-->
       <!-- <div class="wrap-breadcrumbs" ng-if="breadcrumbs.length">
         <div class="container-fluid">
           <div class="breadcrumbs">
@@ -45,21 +362,8 @@
           </div>
         </div>
       </div> -->
-      <!-- /.Breadcrumbs-->
-      
-      <!-- /page-wrapper -->
-      <div class="page-wrapper">
-        <div class="section" ng-class="getFullPanelClass()" ng-if="!isSecondPanel">
-          <div class="ui-wrapper">
-            <h3>UI-Kit</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<footer class="footer">
+    <!-- /.Breadcrumbs-->
+<!-- <footer class="footer">
   <div class="container-fluid">
     <p class="footer-text">Transforming Usability</p>
     <div class="footer-povered">
@@ -67,4 +371,4 @@
       <a href="#" class="footer-logo"><img src="/app/assets/images/ripple-foundation-logo-footer.png" alt="Ripple Icon" class="footer-logo-img"></a>
     </div>
   </div>
-</footer>
+</footer> -->

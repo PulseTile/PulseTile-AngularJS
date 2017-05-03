@@ -29,13 +29,13 @@
     &:focus { background: $auxiliary-color; }
   }
   .rz-tick-value {
-    color: #303030;
+    color: $text-color;
     top: -22px;
   }
   .rz-pointer:after { display: none; }
   .rz-bubble { bottom: 14px; }
   .rz-limit {
-    color: #303030;
+    color: $text-color;
     font-size: 14px;
   }
   .rz-bubble:not(.rz-limit) {

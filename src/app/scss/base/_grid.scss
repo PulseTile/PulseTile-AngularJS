@@ -75,7 +75,11 @@
 
     .hidden-expand {display: none !important;}
     .visible-expand {display: block !important;}
+    .hidden-not-expand {display: block !important;}
+    .visible-not-expand {display: none !important;}
   }
+  .hidden-expand {display: block !important;}
+  .visible-expand {display: none !important;}
   .hidden-not-expand {display: none !important;}
   .visible-not-expand {display: block !important;}
 }

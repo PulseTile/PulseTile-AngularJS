@@ -16,10 +16,29 @@
 let templateUiKit= require('./ui-kit.html');
 
 class UiKitController {
-    constructor($scope, $state, serviceRequests) {
+    constructor($scope, $state, serviceRequests, deviceDetector) {
       serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: null, name: 'ui-kit'});
       serviceRequests.publisher('headerTitle', {title: 'UI OVERVIEW', isShowTitle: true});
 
+      $scope.isOpenSidebar = false;
+      $scope.isTouchDevice = deviceDetector.detectDevice();
+      $scope.fullPanelClass = '';
+
+      $scope.toggleSidebar = function () {
+        $scope.isOpenSidebar = !$scope.isOpenSidebar;
+      };
+
+      $scope.toggleFullPanelClass = function (panelName) {
+        if ($scope.fullPanelClass == panelName) {
+          $scope.fullPanelClass = '';
+        } else {
+          $scope.fullPanelClass = panelName;
+        }
+        return $scope.fullPanelClass ? 'full-panel full-panel-' + $scope.fullPanelClass : '';
+      };
+      $scope.getFullPanelClass = function () {
+        return $scope.fullPanelClass ? 'full-panel full-panel-' + $scope.fullPanelClass : '';
+      };
 
     }
 }
@@ -29,5 +48,5 @@ const UiKitComponent = {
     controller: UiKitController
 };
 
-UiKitController.$inject = ['$scope', '$state', 'serviceRequests'];
+UiKitController.$inject = ['$scope', '$state', 'serviceRequests', 'deviceDetector'];
 export default UiKitComponent;

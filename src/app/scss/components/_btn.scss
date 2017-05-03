@@ -43,7 +43,7 @@
   .btn-default,
   .btn-default:hover,
   .btn-default:focus,
-  .btn-default:active { color: #333333 !important; }
+  .btn-default:active { color: $text-color !important; }
   
   .is-not-touch-device {
    .btn-#{$button}:hover {

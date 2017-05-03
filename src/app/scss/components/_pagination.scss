@@ -23,7 +23,7 @@
     background: #fff;
     border-radius: 0 !important;
     border: 1px solid #ddd;
-    color: #313131;
+    color: $text-color;
     display: block;
     font-size: 12px;
     height: 34px;
@@ -46,7 +46,7 @@
   &.disabled .pagination-link {
     background-color: #F4F3F3;
     border-color: #ddd;
-    color: #303030;
+    color: $text-color;
     cursor: not-allowed;
     text-decoration: none;
   }

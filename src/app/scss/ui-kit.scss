@@ -1,10 +1,213 @@
-.ui-wrapper {
+@import 'abstracts/variables';
+@import 'abstracts/colors';
+@import 'abstracts/settings';
+@import 'abstracts/mixins';
 
+.ui-wrapper {
+  min-height: 100%;
+  min-width: 320px;
+  overflow: hidden;
+  padding: 60px 0;
+  position: relative;
 }
 .ui-header {
-
+  background-color: #0D672F;
+  color: #fff;
+  left: 0;
+  min-width: 320px;
+  padding: 0 15px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 16;
 }
+.ui-header-inner {
+  height: 60px;
+  padding: 0 40px;
+  position: relative;
+  @include respond-from(xs) {
+    padding: 0 100px;
+  }
+}
+.ui-header-title {
+  align-items: center;
+  display: flex;
+  font-size: 20px;
+  height: 100%;
+  line-height: 20px;
+  text-align: center;
+  justify-content: center;
+}
+
+.ui-btn-toggle-sidebar {
+  background: transparent;
+  border: 1px solid $text-on-base-color;
+  color: $text-on-base-color;
+  cursor: pointer;
+  height: 34px;
+  left: 0;
+  margin: 0;
+  outline: none;
+  padding: 6px 8px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  .btn-icon,
+  .btn-text { line-height: 20px; }
+  .btn-icon {
+    font-size: 18px;
+    margin-right: 0;
+  }
+  .btn-text {
+    display: none;
+    font-size: 16px;
+  }
+}
+.showSidebar .ui-btn-toggle-sidebar,
+.showSidebar .ui-btn-toggle-sidebar:focus,
+.showSidebar .ui-btn-toggle-sidebar:hover {
+  background: $text-on-base-color;
+  color: $base-color;
+}
+@include respond-from(xs) {
+  .ui-btn-toggle-sidebar,
+  .ui-btn-toggle-sidebar:focus,
+  .ui-btn-toggle-sidebar:hover, {
+    margin-right: 18px;
+    padding: 6px 14px 6px 11px;
+    .btn-icon { margin-right: 9px; }
+    .btn-text { display: inline; }
+  }
+}
+@include respond-from(sm) {
+  .is-not-touch-device .ui-btn-toggle-sidebar:hover {
+    background: $text-on-base-color;
+    color: $base-color;
+  }
+}
+
+
 .ui-sidebar {
-
+  background: #F7F7F7;
+  border-right: 1px solid #B7B7B7;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  top: 60px;
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+  width: 220px;
+  z-index: 2;
+  padding: 10px 0;
 }
-.hahaha {}
+.ui-sidebar-nav {
+  overflow-y: auto;
+  height: 100%;
+}
+.showSidebar .ui-sidebar { transform: translateX(0%); }
+
+.ui-main { transition: padding 0.6s; }
+.showSidebar .ui-main { padding-left: 235px; }
+
+.ui-content {
+  max-width: 990px;
+  margin: 0 auto;
+  padding: 30px 15px;
+}
+.ui-section {
+  margin-bottom: 30px;
+}
+.ui-sub-section {
+  margin-bottom: 20px;
+}
+
+.ui-main-title {
+  border-bottom: 1px solid #D8D8D8;
+  font-size: 30px;
+  margin: 0 0 20px;
+  padding: 0 0 15px;
+  text-align: center;
+}
+.ui-title,
+.ui-sub-title  {
+  display: block;
+  font-weight: 400;
+  margin: 0 0 15px;
+}
+.ui-title { font-size: 24px; }
+.ui-sub-title { font-size: 18px; }
+
+/*Color Pallete*/
+  .ui-color-box {
+    border: 1px solid #D8D8D8;
+    line-height: 25px;
+    margin: 10px;
+    overflow: hidden;
+    padding: 8px;
+    text-align: center;
+  }
+  .ui-color-box-example {
+    height: 50px;
+    width: 50px;
+    float: left;
+    border: 1px solid #D8D8D8
+  }
+  
+  @each $name, $color in $colored-buttons {
+    .ui-color-#{$name} {
+      .ui-color-heading { color: $color; }
+      .ui-color-box-example { background: $color;}
+      .ui-color-box-hex:after { content: '#{$color}'; }
+    }
+  }
+  .ui-color-default .ui-color-heading { color: #D8D8D8 }
+
+  @each $name, $color in $base-color-palette {
+    .ui-color-#{$name} {
+      .ui-color-heading { color: $color; }
+      .ui-color-box-example { background: $color;}
+      .ui-color-box-hex:after { content: '#{$color}'; }
+    }
+  }
+  
+  .ui-list-colors {
+    margin: 10px;
+  }
+  .ui-list-colors-item {
+    margin-bottom: 5px;
+  }
+  .ui-color {
+    display: inline-block;
+    vertical-align: middle;
+    width: 40px;
+    height: 20px;
+    margin-right: 15px;
+  }
+  .ui-color-name {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 20px;
+    color: $text-color;
+    font-size: 12px;
+    font-weight: 700;
+  }
+/*Color Pallete*/
+
+/*Grid system*/
+  .ui-grid-block {
+    background: #cccccc;
+    color: #303030;
+    border-radius: 4px;
+    padding: 10px 5px;
+    margin-bottom: 10px;
+    transition: background 0.3s, color 0.3s;
+    text-align: center;
+    &:hover {
+      color: #ffffff;
+      background: #303030;
+    }
+  }
+
+  .ui-expanded-wrapper {
+    
+  }
