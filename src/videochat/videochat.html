@@ -43,43 +43,49 @@
   </div>
   <div class="chat-wrapper">
     <div class="container">
-      <div class="col-xs-12 col-sm-7 col-sm-push-5 video-chat-wrapper">
-        <div class="video-wrapper">
-          <video id="remoteVideo" class="inactive" autoplay></video>
-          <video id="localVideo" class="inactive" autoplay muted></video>
-          <div class="video-controller">
-            <i class="fa fa-round fa-microphone" aria-hidden="true" id="muteAudio"></i>
-            <!--<i class="fa fa-round fa-video-camera" aria-hidden="true"id="muteVideo"></i>-->
-            <i class="fa fa-round fa-video-camera-2" aria-hidden="true" id="muteVideo"></i>
-          </div>
-          <i class="fa fa-volume-off fa-2x" aria-hidden="true" id="noSound" title="No sound"></i>
+      <div class="row height100">
+        <div class="col-xs-12 col-sm-7 col-sm-push-5 height100">
+          <div class="video-chat-wrapper">
+            <div class="video-wrapper">
+              <video id="remoteVideo" class="inactive" autoplay></video>
+              <video id="localVideo" class="inactive" autoplay muted></video>
+              <div class="video-controller">
+                <i class="fa fa-round fa-microphone" aria-hidden="true" id="muteAudio"></i>
+                <!--<i class="fa fa-round fa-video-camera" aria-hidden="true"id="muteVideo"></i>-->
+                <i class="fa fa-round fa-video-camera-2" aria-hidden="true" id="muteVideo"></i>
+              </div>
+              <i class="fa fa-volume-off fa-2x" aria-hidden="true" id="noSound" title="No sound"></i>
 
-        </div>
-        <div class="video-chat-controller">
-          <!--<p>Please press End Call to close this appointment when you are finished</p>-->
-          <button class="btn btn-danger" id="endCall"><i class="fa fa-phone"></i> End Call</button>
-          <button class="btn btn-danger" style="display: none;" id="closeWindow"><i class="fa fa-times-circle" aria-hidden="true"></i> Close Window</button>
-          <button class="btn btn-success" style="display: none;" id="restartCall">Restart the call</button>
-          <span id="callDuration">Connected - <span id="timer">00:00:00</span></span>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-5 col-sm-pull-7 messages-wrapper">
-        <div class="info">
-          <div class="row">
-            <div class="col-xs-5">Care Service Team</div>
-            <div class="col-xs-7" id="appointmentCst"></div>
-          </div>
-          <div class="row">
-            <div class="col-xs-5">Location</div>
-            <div class="col-xs-7" id="appointmentLocation"></div>
+            </div>
+            <div class="video-chat-controller">
+              <!--<p>Please press End Call to close this appointment when you are finished</p>-->
+              <button class="btn btn-danger" id="endCall"><i class="fa fa-phone"></i> End Call</button>
+              <button class="btn btn-danger" style="display: none;" id="closeWindow"><i class="fa fa-times-circle" aria-hidden="true"></i> Close Window</button>
+              <button class="btn btn-success" style="display: none;" id="restartCall">Restart the call</button>
+              <span id="callDuration">Connected - <span id="timer">00:00:00</span></span>
+            </div>
           </div>
         </div>
-        <ul class="list-unstyled list-messages">
-        </ul>
-        <form action="" id="sendMessage">
-          <textarea name="iMessage" id="iMessage" rows="3"></textarea>
-          <button class="btn btn-success"><i class="fa fa-send"></i> Send</button>
-        </form>
+        <div class="col-xs-12 col-sm-5 col-sm-pull-7 height100 messages-col">
+          <div class="messages-wrapper">
+            <div class="info">
+              <div class="row">
+                <div class="col-xs-5">Care Service Team</div>
+                <div class="col-xs-7" id="appointmentCst"></div>
+              </div>
+              <div class="row">
+                <div class="col-xs-5">Location</div>
+                <div class="col-xs-7" id="appointmentLocation"></div>
+              </div>
+            </div>
+            <ul class="list-unstyled list-messages">
+            </ul>
+            <form action="" id="sendMessage">
+              <textarea name="iMessage" id="iMessage" rows="3"></textarea>
+              <button class="btn btn-success"><i class="fa fa-send"></i> Send</button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
