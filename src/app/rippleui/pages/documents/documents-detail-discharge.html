@@ -31,7 +31,7 @@
                 <div class="form-control-static">{{ $ctrl.clinicalDocument.documentName }}</div>
               </div>
             </div>
-            <div class="col-expand-right" ng-if="$ctrl.clinicalDocument.documentDate">
+            <div ng-class="{'col-expand-right': $ctrl.clinicalDocument.documentName, 'col-expand-left':!$ctrl.clinicalDocument.documentName}" ng-if="$ctrl.clinicalDocument.documentDate">
               <div class="form-group">
                 <label class="control-label">Document Date</label>
                 <div class="form-control-static">{{ $ctrl.clinicalDocument.documentDate | date:'dd-MMM-y' }}</div>
