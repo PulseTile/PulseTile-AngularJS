@@ -39,8 +39,13 @@
   .control-separate {
     background: #ccc;
     display: inline-block;
-    height: 30px;
+    height: 34px;
     vertical-align: top;
     width: 1px;
+    &.control-separate-sm { height: 30px; }
+    &.control-separate-smaller { 
+      height: 26px; 
+      margin-top: 2px;
+    }
   }
 }

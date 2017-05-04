@@ -193,21 +193,596 @@
         </div>
         
       </div>
+      
+      <div id="components" class="ui-section">
+        <h2 class="ui-main-title">Components</h2>
+
+        <div id="buttons" class="ui-section">
+          <strong class="ui-title">Buttons</strong>
+
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Button color variations</strong>
+            <div class="wrap-control-group hide-indent-bottom">
+              <div class="control-group with-indent left">
+                <button class="btn"><span class="btn-text">Button text</span></button>
+                <button class="btn btn-default"><span class="btn-text">Button text</span></button>
+                <button class="btn btn-primary"><span class="btn-text">Button text</span></button>
+                <button class="btn btn-success"><span class="btn-text">Button text</span></button>
+                <button class="btn btn-info"><span class="btn-text">Button text</span></button>
+                <button class="btn btn-warning"><span class="btn-text">Button text</span></button>
+                <button class="btn btn-danger"><span class="btn-text">Button text</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Buttons inverse</strong>
+            <div class="wrap-control-group hide-indent-bottom">
+              <div class="control-group with-indent left">
+                <button class="btn btn-inverse"><span class="btn-text">Button text</span></button>
+                <button class="btn btn-inverse btn-default"><span class="btn-text">Button text</span></button>
+                <button class="btn btn-inverse btn-primary"><span class="btn-text">Button text</span></button>
+                <button class="btn btn-inverse btn-success"><span class="btn-text">Button text</span></button>
+                <button class="btn btn-inverse btn-info"><span class="btn-text">Button text</span></button>
+                <button class="btn btn-inverse btn-warning"><span class="btn-text">Button text</span></button>
+                <button class="btn btn-inverse btn-danger"><span class="btn-text">Button text</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Buttons without border</strong>
+            <div class="wrap-control-group hide-indent-bottom">
+              <div class="control-group with-indent left">
+                <button class="btn btn-inverse btn-none-border"><span class="btn-text">Button text</span></button>
+                <button class="btn btn-inverse btn-none-border btn-default"><span class="btn-text">Button text</span></button>
+                <button class="btn btn-inverse btn-none-border btn-primary"><span class="btn-text">Button text</span></button>
+                <button class="btn btn-inverse btn-none-border btn-success"><span class="btn-text">Button text</span></button>
+                <button class="btn btn-inverse btn-none-border btn-info"><span class="btn-text">Button text</span></button>
+                <button class="btn btn-inverse btn-none-border btn-warning"><span class="btn-text">Button text</span></button>
+                <button class="btn btn-inverse btn-none-border btn-danger"><span class="btn-text">Button text</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Buttons disabled</strong>
+            <div class="wrap-control-group hide-indent-bottom">
+              <div class="control-group with-indent left">
+                <button class="btn btn-success disabled"><span class="btn-text">Button text</span></button>
+                <button class="btn btn-success disabled btn-inverse"><span class="btn-text">Button text</span></button>
+                <button class="btn btn-success disabled btn-inverse btn-none-border"><span class="btn-text">Button text</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Buttons with icons</strong>
+            <div class="wrap-control-group hide-indent-bottom">
+              <div class="control-group with-indent left">
+                <button class="btn btn-success"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Button text</span></button>
+                <button class="btn btn-success btn-inverse"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Button text</span></button>
+                <button class="btn btn-success"><i class="btn-icon fa fa-filter"></i></button>
+                <button class="btn btn-success btn-inverse"><i class="btn-icon fa fa-filter"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Buttons for dropdown menu</strong>
+            <div class="wrap-control-group">
+              <div class="control-group with-indent left" ng-class="{open: isDropdownToggleopen}">
+                <button class="btn btn-success btn-inverse btn-dropdown-toggle" ng-click="isDropdownToggleopen = !isDropdownToggleopen"><span class="btn-text">Button text</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Buttons size</strong>
+            <div class="wrap-control-group">
+              <div class="control-group with-indent left">
+                <button class="btn btn-success btn-inverse"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Button text</span></button>
+                <button class="btn btn-success btn-inverse btn-sm"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Button text</span></button>
+                <button class="btn btn-success btn-inverse btn-smaller"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Button text</span></button>
+                <button class="btn btn-success btn-inverse btn-square"><i class="btn-icon fa fa-check"></i></button>
+                <button class="btn btn-success btn-inverse btn-square  btn-sm"><i class="btn-icon fa fa-check"></i></button>
+                <button class="btn btn-success btn-inverse btn-square  btn-smaller"><i class="btn-icon fa fa-check"></i></button>
+              </div>
+            </div>
+            <div class="wrap-control-group">
+              <button class="btn btn-success btn-inverse btn-block"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Button text</span></button>
+            </div>
+          </div>
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Buttons rounded</strong>
+            <div class="wrap-control-group hide-indent-bottom">
+              <div class="control-group with-indent left">
+                <button class="btn btn-success btn-inverse btn-rounded"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Button text</span></button>
+                <button class="btn btn-success btn-inverse btn-rounded btn-square"><i class="btn-icon fa fa-check"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Buttons text weight</strong>
+            <div class="wrap-control-group hide-indent-bottom">
+              <div class="control-group with-indent left">
+                <button class="btn btn-success btn-inverse"><i class="btn-icon fa fa-table"></i> <span class="btn-text">Button text</span></button>
+                <button class="btn btn-success btn-inverse btn-bold"><i class="btn-icon fa fa-table"></i> <span class="btn-text">Button text</span></button>
+                <button class="btn btn-success btn-inverse btn-icon-normal"><i class="btn-icon fa fa-table"></i> <span class="btn-text">Button text</span></button>
+                <button class="btn btn-success btn-inverse btn-icon-normal btn-bold"><i class="btn-icon fa fa-table"></i> <span class="btn-text">Button text</span></button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div>
+          <strong class="ui-title">Control Group</strong>
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Controls aligned to left</strong>
+            <div class="wrap-control-group hide-indent-bottom">
+              <div class="control-group with-indent left">
+                <button class="btn btn-danger"><i class="btn-icon fa fa-ban"></i> <span class="btn-text">Button text</span></button>
+                <button class="btn btn-success"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Button text</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Controls aligned to right</strong>
+            <div class="wrap-control-group hide-indent-bottom">
+              <div class="control-group with-indent right">
+                <button class="btn btn-danger"><i class="btn-icon fa fa-ban"></i> <span class="btn-text">Button text</span></button>
+                <button class="btn btn-success"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Button text</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Controls aligned to center</strong>
+            <div class="wrap-control-group hide-indent-bottom">
+              <div class="control-group with-indent center">
+                <button class="btn btn-danger"><i class="btn-icon fa fa-ban"></i> <span class="btn-text">Button text</span></button>
+                <button class="btn btn-success"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Button text</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Controls without indents</strong>
+            <div class="wrap-control-group hide-indent-bottom">
+              <div class="control-group without-side-indent left">
+                <button class="btn btn-danger"><i class="btn-icon fa fa-ban"></i> <span class="btn-text">Button text</span></button>
+                <button class="btn btn-success"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Button text</span></button>
+                <button class="btn btn-primary"><span class="btn-text">Button text</span></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Controls with separates</strong>
+            <div class="wrap-control-group">
+              <div class="control-group with-indent left">
+                <button class="btn btn-danger"><i class="btn-icon fa fa-ban"></i> <span class="btn-text">Button text</span></button>
+                <div class="control-separate"></div>
+                <button class="btn btn-success"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Button text</span></button>
+                <div class="control-separate"></div>
+                <button class="btn btn-primary"><span class="btn-text">Button text</span></button>
+              </div>
+            </div>
+            <div class="wrap-control-group">
+              <div class="control-group with-indent left">
+                <button class="btn btn-sm btn-danger"><i class="btn-icon fa fa-ban"></i> <span class="btn-text">Button text</span></button>
+                <div class="control-separate control-separate-sm"></div>
+                <button class="btn btn-sm btn-success"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Button text</span></button>
+                <div class="control-separate control-separate-sm"></div>
+                <button class="btn btn-sm btn-primary"><span class="btn-text">Button text</span></button>
+              </div>
+            </div>
+            <div class="wrap-control-group">
+              <div class="control-group with-indent left">
+                <button class="btn btn-smaller btn-danger"><i class="btn-icon fa fa-ban"></i> <span class="btn-text">Button text</span></button>
+                <div class="control-separate control-separate-smaller"></div>
+                <button class="btn btn-smaller btn-success"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Button text</span></button>
+                <div class="control-separate control-separate-smaller"></div>
+                <button class="btn btn-smaller btn-primary"><span class="btn-text">Button text</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div id="inputs" class="ui-section">
+          <strong class="ui-title">Inputs</strong>
+          <div class="form-group-wrapper">
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                  <label for="name" class="control-label">Input simple</label>
+                  <div class="input-holder">
+                    <input type="text" class="form-control input-sm">
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Input with addon</label>
+                    <div class="inner-addon addon-left">
+                      <div class="addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" class="form-control input-sm"/>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                  <label for="name" class="control-label">Input simple (disabled)</label>
+                  <div class="input-holder">
+                    <input type="text" class="form-control input-sm" value="text" disabled/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Input with addon (disabled)</label>
+                    <div class="inner-addon addon-left">
+                      <div class="addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" class="form-control input-sm" value="text" disabled/>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="select" class="ui-section">
+          <strong class="ui-title">Selects</strong>
+          <div class="form-group-wrapper">
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                  <label for="name" class="control-label">Select</label>
+                  <div class="input-holder">
+                    <select class="form-control input-sm" id="select1" name="select1">
+                        <option selected>Selct 1</option>
+                        <option>Selct 2</option>
+                        <option>Selct 3</option>
+                        <option>Selct 4</option>
+                        <option>Selct 5</option>
+                        <option>Selct 6</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                  <label for="name" class="control-label">Select (disabled)</label>
+                  <div class="input-holder">
+                    <select class="form-control input-sm" id="select2" name="select2" disabled>
+                        <option selected>Selct 1</option>
+                        <option>Selct 2</option>
+                        <option>Selct 3</option>
+                        <option>Selct 4</option>
+                        <option>Selct 5</option>
+                        <option>Selct 6</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="checkboxes" class="ui-section">
+          <strong class="ui-title">Checkboxes</strong>
+          <div class="form-group-wrapper">
+            <div class="form-group">
+              <div class="input-holder">
+                <div class="input-holder">
+                  <div class="wrap-fcustominp">
+                    <div class="fcustominp">
+                      <input type="checkbox" id="checkboxTest1">
+                      <label for="checkboxTest1"></label>
+                    </div>
+                    <label for="checkboxTest1" class="fcustominp-label">Checkbox Test 1</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-holder">
+                <div class="input-holder">
+                  <div class="wrap-fcustominp">
+                    <div class="fcustominp">
+                      <input type="checkbox" id="checkboxTest2">
+                      <label for="checkboxTest2"></label>
+                    </div>
+                    <label for="checkboxTest2" class="fcustominp-label">Checkbox Test 2</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-holder">
+                <div class="input-holder">
+                  <div class="wrap-fcustominp">
+                    <div class="fcustominp-state disabled">
+                      <div class="fcustominp">
+                        <input type="checkbox" id="checkboxTest6" disabled>
+                        <label for="radioTest6"></label>
+                      </div>
+                      <label for="radioTest6" class="fcustominp-label">Checkbox Test 3</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-holder">
+                <div class="input-holder">
+                  <div class="wrap-fcustominps-inline">
+                    <div class="wrap-fcustominp">
+                      <div class="fcustominp">
+                        <input type="checkbox" id="checkboxTest3">
+                        <label for="checkboxTest3"></label>
+                      </div>
+                      <label for="checkboxTest3" class="fcustominp-label">Checkbox Inline Test 1</label>
+                    </div>
+                    <div class="wrap-fcustominp">
+                      <div class="fcustominp">
+                        <input type="checkbox" id="checkboxTest4">
+                        <label for="checkboxTest4"></label>
+                      </div>
+                      <label for="checkboxTest4" class="fcustominp-label">Checkbox Inline Test 2</label>
+                    </div>
+                    <div class="wrap-fcustominp">
+                      <div class="fcustominp">
+                        <input type="checkbox" id="checkboxTest5">
+                        <label for="checkboxTest5"></label>
+                      </div>
+                      <label for="checkboxTest5" class="fcustominp-label">Checkbox Inline Test 3</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="checkboxes" class="ui-section">
+          <strong class="ui-title">Radio</strong>
+          <div class="form-group-wrapper">
+            <div class="form-group">
+              <div class="input-holder">
+                <div class="input-holder">
+                  <div class="wrap-fcustominp">
+                    <div class="fcustominp">
+                      <input type="radio" id="radioTest1" name="radio-test">
+                      <label for="radioTest1"></label>
+                    </div>
+                    <label for="radioTest1" class="fcustominp-label">Radio Test 1</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-holder">
+                <div class="input-holder">
+                  <div class="wrap-fcustominp">
+                    <div class="fcustominp">
+                      <input type="radio" id="radioTest2" name="radio-test">
+                      <label for="radioTest2"></label>
+                    </div>
+                    <label for="radioTest2" class="fcustominp-label">Radio Test 2</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-holder">
+                <div class="input-holder">
+                  <div class="wrap-fcustominp">
+                    <div class="fcustominp-state disabled">
+                      <div class="fcustominp">
+                        <input type="radio" id="radioTest6" name="radio-test" disabled>
+                        <label for="radioTest6"></label>
+                      </div>
+                      <label for="radioTest6" class="fcustominp-label">Radio Test 3</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-holder">
+                <div class="input-holder">
+                  <div class="wrap-fcustominps-inline">
+                    <div class="wrap-fcustominp">
+                      <div class="fcustominp">
+                        <input type="radio" id="radioTest3" name="radio-test-inline">
+                        <label for="radioTest3"></label>
+                      </div>
+                      <label for="radioTest3" class="fcustominp-label">Radio Test Inline 1</label>
+                    </div>
+                    <div class="wrap-fcustominp">
+                      <div class="fcustominp">
+                        <input type="radio" id="radioTest4" name="radio-test-inline">
+                        <label for="radioTest4"></label>
+                      </div>
+                      <label for="radioTest4" class="fcustominp-label">Radio Test Inline 2</label>
+                    </div>
+                    <div class="wrap-fcustominp">
+                      <div class="fcustominp">
+                        <input type="radio" id="radioTest5" name="radio-test-inline">
+                        <label for="radioTest5"></label>
+                      </div>
+                      <label for="radioTest5" class="fcustominp-label">Radio Test Inline 3</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div id="switch" class="ui-section">
+          <strong class="ui-title">Switch</strong>
+          <div class="form-group-wrapper">
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                  <label for="name" class="control-label">Enabled</label>
+                  <div class="input-holder">
+                    <div class="switch-group">
+                      <label class="switch">
+                          <input type="radio" name="switch1" value="1" checked>
+                        <div class="slider">
+                          <span class="text text-check-true">Yes</span>
+                          <span class="text text-check-false">No</span>
+                        </div>
+                      </label>
+                      <label class="switch">
+                          <input type="radio" name="switch1" value="2">
+                        <div class="slider">
+                          <span class="text text-check-true">Yes</span>
+                          <span class="text text-check-false">No</span>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Disabled</label>
+                    <div class="input-holder">
+                      <div class="switch-group">
+                        <label class="switch">
+                            <input type="radio" name="switch2" value="1" checked disabled>
+                          <div class="slider disabled">
+                            <span class="text text-check-true">Yes</span>
+                            <span class="text text-check-false">No</span>
+                          </div>
+                        </label>
+                        <label class="switch">
+                            <input type="radio" name="switch2" value="2" disabled>
+                          <div class="slider disabled">
+                            <span class="text text-check-true">Yes</span>
+                            <span class="text text-check-false">No</span>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="input-file" class="ui-section">
+          <strong class="ui-title">Input File</strong>
+          <div class="form-group-wrapper">
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                  <label for="name" class="control-label">Application File</label>
+                  <div class="input-holder">
+                    <div class="wrap-fcustomfile">
+                      <div class="fcustomfile-control">
+                        <input mc-uploadfile 
+                          uploadfile-params="logoFileParams"
+                          uploadfile-accept="image/jpeg,image/png,image/gif" 
+                          accept="image/jpeg,image/png,image/gif"
+                          type="file" 
+                          name="logoPath"
+                          id="logoPath">
+
+                        <label for="logoPath" class="btn btn-success btn-inverse btn-normal-icon">
+                          <i class="fa fa-plus"></i>
+                          <span>Upload file</span>
+                        </label>
+                      </div>
+                      <div class="fcustomfile-text" ng-bind='logoFileParams.name'></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div mc-datepicker id="datepicker" class="ui-section">
+          <strong class="ui-title">Date Picker</strong>
+          <div class="form-group-wrapper">
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group form-group-sm">
+                  <label for="" class="control-label">Select Data</label>
+                  <div class="inner-addon addon-left">
+                    <div class="addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" tabindex="4" class="form-control popupinputs" id="dateOfBirth" name="dateOfBirth" ng-model="searchParams.dateOfBirth" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.dateOfBirth" ng-focus="detailsFocused=true" ng-click="openDatepicker($event, 'dateOfBirth')" ui-date-format placeholder="03-Aug-1970" readonly/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group form-group-sm">
+                  <label for="" class="control-label">Select Data</label>
+                  <div class="inner-addon addon-left">
+                    <div class="addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" tabindex="4" class="form-control popupinputs" id="dateOfBirth2" name="dateOfBirth2" ng-model="searchParams.dateOfBirth2" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.dateOfBirth2" ng-focus="detailsFocused=true" ng-click="openDatepicker($event, 'dateOfBirth2')" ui-date-format placeholder="03-Aug-1970" disabled/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        
+
+
+        <div id="pagination" class="ui-section">
+          <strong class="ui-title" dir-paginate="item in paginateArr | itemsPerPage: 1">Pagination (page {{item}})</strong>
+          <div class="ui-sub-section">
+            <div class="ui-sub-title">Pagination normal</div>
+            <div class="wrap-control-group">
+              <div class="control-group with-indent center">
+                <dir-pagination-controls max-size="6"></dir-pagination-controls>
+              </div>
+            </div>
+          </div>
+          <div class="ui-sub-section">
+            <div class="ui-sub-title">Pagination short</div>
+            <div class="wrap-control-group">
+              <div class="control-group with-indent center">
+                <dir-pagination-controls max-size="6" class='pagination-short'></dir-pagination-controls>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
 
       <div id="grid" class="ui-section">
         <h2 class="ui-main-title">Grid System</h2>
+
         <div class="ui-section">
           <strong class="ui-title">Grid options</strong>
-          <strong class="ui-sub-title">Class prefix</strong>
-          <ul>
-            <li>.col-xs-*</li>
-            <li>.col-sm-*</li>
-            <li>.col-md-*</li>
-            <li>.col-lg-*</li>
-          </ul>
-          <strong class="ui-sub-title">Gutter width</strong>
-          <p>>= 480px - 16px (8px on each side of a column)</p>
-          <p><= 479px - 10px (5px on each side of a column)</p>
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Class prefix</strong>
+            <ul>
+              <li>.col-xs-*</li>
+              <li>.col-sm-*</li>
+              <li>.col-md-*</li>
+              <li>.col-lg-*</li>
+            </ul>
+          </div>
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Gutter width</strong>
+            <p>>= 480px - 16px (8px on each side of a column)</p>
+            <p><= 479px - 10px (5px on each side of a column)</p>
+          </div>
         </div>
 
         <div class="ui-sub-section">

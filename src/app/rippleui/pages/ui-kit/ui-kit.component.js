@@ -23,6 +23,12 @@ class UiKitController {
       $scope.isOpenSidebar = false;
       $scope.isTouchDevice = deviceDetector.detectDevice();
       $scope.fullPanelClass = '';
+      $scope.paginateArr = [];
+      $scope.logoFileParams = {};
+
+      for (var i = 0; i < 20; i++) {
+        $scope.paginateArr.push(i + 1);
+      }
 
       $scope.toggleSidebar = function () {
         $scope.isOpenSidebar = !$scope.isOpenSidebar;

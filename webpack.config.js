@@ -48,8 +48,7 @@ const config = {
       {test: /\.(ttf|eot|svg)/, loader: 'file?name=assets/fonts/[name].[ext]'},
       {test: /\.(jpg|png|jpeg|gif)$/, loader: 'url-loader?limit=25000/&name=assets/images/[name].[ext]' },
       {test: /\.css$/, loader: "style-loader!css-loader!"}
-    ],
-    rules: []
+    ]
   },
 
   plugins: [
@@ -103,29 +102,6 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION || ENV_PRODUCTION_EXTENSION) {
     ],
     vendor: './src/app/vendor'
   };
-
-  config.module.loaders.push(
-      {test: /ui-kit.scss$/, loader: 'style!css!postcss!sass'}
-  );
-
-  config.module.rules.push({
-    test: /ui-kit.css$/,
-    use: ExtractTextPlugin.extract({
-      fallback: "style-loader",
-      use: "css-loader"
-    })
-  });
-
-  config.plugins.push(
-    new ExtractTextPlugin("ui.css")
-  );
-
-
-
-
-
-
-
 
   if (ENV_PRODUCTION_EXTENSION) {
     config.entry.index[1] = './src/app/plugins-extension';

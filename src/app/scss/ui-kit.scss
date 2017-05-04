@@ -115,17 +115,17 @@
   padding: 30px 15px;
 }
 .ui-section {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 .ui-sub-section {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .ui-main-title {
   border-bottom: 1px solid #D8D8D8;
   font-size: 30px;
   margin: 0 0 20px;
-  padding: 0 0 15px;
+  padding: 30px 0 15px;
   text-align: center;
 }
 .ui-title,
@@ -134,7 +134,11 @@
   font-weight: 400;
   margin: 0 0 15px;
 }
-.ui-title { font-size: 24px; }
+.ui-title { 
+  font-size: 24px; 
+  background: #eeeeee;
+  padding: 5px 10px;
+}
 .ui-sub-title { font-size: 18px; }
 
 /*Color Pallete*/
