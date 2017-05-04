@@ -16,7 +16,7 @@
 let templatePatients = require('./patients-list.html');
 
 class PatientsController {
-  constructor($scope, $state, $stateParams, $location, $ngRedux, patientsActions, serviceRequests, Patient, serviceFormatted, $timeout, $uibModal, ConfirmationModal) {
+  constructor($scope, $state, $stateParams, $location, $ngRedux, patientsActions, serviceRequests, Patient, serviceFormatted, $timeout, $uibModal, ConfirmationDocsModal) {
     let vm = this;
 
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-list'});
@@ -219,7 +219,7 @@ class PatientsController {
     });
 
     vm.openModal = function (patient, state) {
-      ConfirmationModal.openModal(patient, state);
+      ConfirmationDocsModal.openModal(patient, state);
     };
 
     if ($stateParams.patientsList.length === 0 && !$stateParams.displayEmptyTable) {
@@ -256,5 +256,5 @@ const PatientsComponent = {
   controller: PatientsController
 };
 
-PatientsController.$inject = ['$scope', '$state', '$stateParams', '$location', '$ngRedux', 'patientsActions', 'serviceRequests', 'Patient', 'serviceFormatted', '$timeout', '$uibModal', 'ConfirmationModal'];
+PatientsController.$inject = ['$scope', '$state', '$stateParams', '$location', '$ngRedux', 'patientsActions', 'serviceRequests', 'Patient', 'serviceFormatted', '$timeout', '$uibModal', 'ConfirmationDocsModal'];
 export default PatientsComponent;

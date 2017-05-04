@@ -44,7 +44,7 @@
     default: #ffffff,
     primary: #337AB7,
     success: lighten(saturate(adjust-hue($base-color, 9.3005), 22.4138), 1.1765),
-    info: #347BB7,
+    info: #31b0d5,
     warning: #F0AD4E,
     danger: #DA534F
   );

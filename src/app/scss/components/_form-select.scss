@@ -12,6 +12,11 @@
         &:hover {
           background: #fff !important;
         }
+        &[disabled],
+        &[disabled]:hover {
+          background: #eee !important;
+          color: #555 !important
+        }
     }
   }
   .ui-select-choices-row > span {

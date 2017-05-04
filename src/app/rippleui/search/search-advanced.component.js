@@ -161,7 +161,6 @@ class SearchAdvancedController {
         showTicksValues: false,
         stepsArray: $scope.agesSteps
       },
-
     };
 
     $scope.refreshSlider = function () {

@@ -1,8 +1,15 @@
 .label {
+  display: inline-block;
   font-size: 100%;
   font-weight: 400;
 }
-.label-success {
-  background: $base-color;
-  color: $text-on-base-color;
+
+@each $section, $color in $colored-buttons {
+  .label-#{$section} {
+    background: $color;
+    color: #ffffff;
+  }
+}
+.label-default {
+  color: $text-color;
 }

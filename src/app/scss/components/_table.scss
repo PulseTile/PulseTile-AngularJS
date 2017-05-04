@@ -81,12 +81,19 @@
   background-color: map-get($colored-table, 'background');
   tbody {
     tr {
+      &:nth-of-type(odd) {
+        background-color: map-get($colored-table, 'row-odd-background');
+      }
+    }
+  }
+}
+.table-striped.table-hover {
+  background-color: map-get($colored-table, 'background');
+  tbody {
+    tr {
       &[ng-click]:hover td,
       &:hover td[ng-click] {
         background-color: map-get($colored-table, 'row-background-hover');
-      }
-      &:nth-of-type(odd) {
-        background-color: map-get($colored-table, 'row-odd-background');
       }
     }
   }

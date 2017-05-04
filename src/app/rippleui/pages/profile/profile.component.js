@@ -46,7 +46,7 @@ class ProfileController {
         id: 'yellow',
         name: 'Yellow Theme',
         baseColor: 'yellow',
-      },
+      }
     ];
     $scope.selectedTheme = {
       id: 'green',

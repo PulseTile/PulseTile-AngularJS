@@ -136,6 +136,7 @@
         </div>
       </div>
 
+
       <div id="typography" class="ui-section">
         <h2 class="ui-main-title">Typography</h2>
         <div id="headings" class="ui-sub-section">
@@ -191,9 +192,9 @@
             </div>
           </div>
         </div>
-        
       </div>
       
+
       <div id="components" class="ui-section">
         <h2 class="ui-main-title">Components</h2>
 
@@ -307,7 +308,6 @@
               </div>
             </div>
           </div>
-
         </div>
 
         <div>
@@ -382,6 +382,270 @@
           </div>
         </div>
         
+
+        <div id="form" class="ui-section">
+          <strong class="ui-title">Form</strong>
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <strong class="ui-sub-title">Form for reading values</strong>
+                <div class="form-group">
+                  <label for="name" class="control-label">Label for Input</label>
+                  <div class="form-control-static">Input text</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <strong class="ui-sub-title">Form for writting values</strong>
+                <div class="form-group">
+                  <label for="name" class="control-label">Label for Input</label>
+                  <div class="input-holder">
+                    <input type="text" class="form-control input-sm" value="Input text">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <strong class="ui-sub-title">Value entered successfully</strong>
+                <div class="form-group has-success">
+                  <label for="name" class="control-label">Label for Input</label>
+                  <div class="input-holder">
+                    <input type="text" class="form-control input-sm" value="Input text">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <strong class="ui-sub-title">Value entered error</strong>
+                <div class="form-group has-error">
+                  <label for="name" class="control-label">Label for Input</label>
+                  <div class="input-holder">
+                    <input type="text" class="form-control input-sm" value="">
+                  </div>
+                  <span class="help-block animate-fade" ng-show="true">You must enter a value.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="form" class="ui-section">
+          <strong class="ui-title">Form section</strong>
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <strong class="ui-sub-title">Form section simple</strong>
+              <div class="form-group-section-list">
+                <div class="form-group-section-list-heading">
+                  <label class="control-label">Section title</label>
+                </div>
+                <div class="form-group-section">
+                  <div class="form-group-section-body">
+                    <div class="form-group-wrapper">
+                      <div class="form-group">
+                        <label for="name" class="control-label">Label for Input</label>
+                        <div class="form-control-static">Input text</div>
+                      </div>
+                      <div class="form-group">
+                        <label for="name" class="control-label">Label for Input</label>
+                        <div class="form-control-static">Input text</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <strong class="ui-sub-title">Form section bordered</strong>
+              <div class="form-group-section-list">
+                <div class="form-group-section-list-heading">
+                  <label class="control-label">Section title</label>
+                </div>
+                <div class="form-group-section form-group-section-bordered form-group-section-primary">
+                  <div class="form-group-section-body">
+                    <div class="form-group-wrapper">
+                      <div class="form-group">
+                        <label for="name" class="control-label">Label for Input</label>
+                        <div class="form-control-static">Input text</div>
+                      </div>
+                      <div class="form-group">
+                        <label for="name" class="control-label">Label for Input</label>
+                        <div class="form-control-static">Input text</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <strong class="ui-sub-title">Form section collapsed</strong>
+              <div class="form-group-section-list">
+                <div class="form-group-section-list-heading">
+                  <label class="control-label">Section title</label>
+                </div>
+                <div mc-sub-accordion class="form-group-section form-group-section-bordered form-group-section-primary accordion" ng-class="getOpenSubAccordion()">
+                  <div class="form-group-section-heading">
+                    <div class="control-group without-side-indent right">
+                        <button class="btn btn-primary"><span class="btn-text">Button text</span></button>
+                        <button class="btn btn-primary btn-inverse btn-square btn-form-group-section-toggle" ng-click="toggleSubAccordion()"><i class="btn-icon fa fa-chevron-up"></i></button>
+                    </div>
+                    <h3 class="panel-title">Title</h3>
+                  </div>
+                  <div class="form-group-section-body">
+                    <div class="form-group-wrapper">
+                      <div class="form-group">
+                        <label for="name" class="control-label">Label for Input</label>
+                        <div class="form-control-static">Input text</div>
+                      </div>
+                      <div class="form-group">
+                        <label for="name" class="control-label">Label for Input</label>
+                        <div class="form-control-static">Input text</div>
+                      </div>
+                      <div class="form-group">
+                        <label for="name" class="control-label">Label for Input</label>
+                        <div class="form-control-static">Input text</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Form section color variations</strong>
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group-section-list">
+                  <div mc-sub-accordion class="form-group-section form-group-section-bordered form-group-section-primary accordion" ng-class="getOpenSubAccordion()">
+                    <div class="form-group-section-heading">
+                      <div class="control-group without-side-indent right">
+                          <button class="btn btn-primary btn-inverse btn-square btn-form-group-section-toggle" ng-click="toggleSubAccordion()"><i class="btn-icon fa fa-chevron-up"></i></button>
+                      </div>
+                      <h3 class="panel-title">Section title</h3>
+                    </div>
+                    <div class="form-group-section-body">
+                      <div class="form-group-wrapper">
+                        <div class="form-group">
+                          <label for="name" class="control-label">Label for Input</label>
+                          <div class="form-control-static">Input text</div>
+                        </div>
+                        <div class="form-group">
+                          <label for="name" class="control-label">Label for Input</label>
+                          <div class="form-control-static">Input text</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group-section-list">
+                  <div mc-sub-accordion class="form-group-section form-group-section-bordered form-group-section-success accordion" ng-class="getOpenSubAccordion()">
+                    <div class="form-group-section-heading">
+                      <div class="control-group without-side-indent right">
+                          <button class="btn btn-success btn-inverse btn-square btn-form-group-section-toggle" ng-click="toggleSubAccordion()"><i class="btn-icon fa fa-chevron-up"></i></button>
+                      </div>
+                      <h3 class="panel-title">Section title</h3>
+                    </div>
+                    <div class="form-group-section-body">
+                      <div class="form-group-wrapper">
+                        <div class="form-group">
+                          <label for="name" class="control-label">Label for Input</label>
+                          <div class="form-control-static">Input text</div>
+                        </div>
+                        <div class="form-group">
+                          <label for="name" class="control-label">Label for Input</label>
+                          <div class="form-control-static">Input text</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group-section-list">
+                  <div mc-sub-accordion class="form-group-section form-group-section-bordered form-group-section-info accordion" ng-class="getOpenSubAccordion()">
+                    <div class="form-group-section-heading">
+                      <div class="control-group without-side-indent right">
+                          <button class="btn btn-info btn-inverse btn-square btn-form-group-section-toggle" ng-click="toggleSubAccordion()"><i class="btn-icon fa fa-chevron-up"></i></button>
+                      </div>
+                      <h3 class="panel-title">Section title</h3>
+                    </div>
+                    <div class="form-group-section-body">
+                      <div class="form-group-wrapper">
+                        <div class="form-group">
+                          <label for="name" class="control-label">Label for Input</label>
+                          <div class="form-control-static">Input text</div>
+                        </div>
+                        <div class="form-group">
+                          <label for="name" class="control-label">Label for Input</label>
+                          <div class="form-control-static">Input text</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group-section-list">
+                  <div mc-sub-accordion class="form-group-section form-group-section-bordered form-group-section-warning accordion" ng-class="getOpenSubAccordion()">
+                    <div class="form-group-section-heading">
+                      <div class="control-group without-side-indent right">
+                          <button class="btn btn-warning btn-inverse btn-square btn-form-group-section-toggle" ng-click="toggleSubAccordion()"><i class="btn-icon fa fa-chevron-up"></i></button>
+                      </div>
+                      <h3 class="panel-title">Section title</h3>
+                    </div>
+                    <div class="form-group-section-body">
+                      <div class="form-group-wrapper">
+                        <div class="form-group">
+                          <label for="name" class="control-label">Label for Input</label>
+                          <div class="form-control-static">Input text</div>
+                        </div>
+                        <div class="form-group">
+                          <label for="name" class="control-label">Label for Input</label>
+                          <div class="form-control-static">Input text</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group-section-list">
+                  <div mc-sub-accordion class="form-group-section form-group-section-bordered form-group-section-danger accordion" ng-class="getOpenSubAccordion()">
+                    <div class="form-group-section-heading">
+                      <div class="control-group without-side-indent right">
+                          <button class="btn btn-danger btn-inverse btn-square btn-form-group-section-toggle" ng-click="toggleSubAccordion()"><i class="btn-icon fa fa-chevron-up"></i></button>
+                      </div>
+                      <h3 class="panel-title">Section title</h3>
+                    </div>
+                    <div class="form-group-section-body">
+                      <div class="form-group-wrapper">
+                        <div class="form-group">
+                          <label for="name" class="control-label">Label for Input</label>
+                          <div class="form-control-static">Input text</div>
+                        </div>
+                        <div class="form-group">
+                          <label for="name" class="control-label">Label for Input</label>
+                          <div class="form-control-static">Input text</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+
+
         <div id="inputs" class="ui-section">
           <strong class="ui-title">Inputs</strong>
           <div class="form-group-wrapper">
@@ -396,34 +660,34 @@
               </div>
               <div class="col-xs-12 col-sm-6">
                 <div class="form-group">
-                    <label class="control-label">Input with addon</label>
-                    <div class="inner-addon addon-left">
-                      <div class="addon">
-                        <i class="fa fa-calendar"></i>
-                      </div>
-                      <input type="text" class="form-control input-sm"/>
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-12 col-sm-6">
-                <div class="form-group">
                   <label for="name" class="control-label">Input simple (disabled)</label>
                   <div class="input-holder">
                     <input type="text" class="form-control input-sm" value="text" disabled/>
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="row">
               <div class="col-xs-12 col-sm-6">
                 <div class="form-group">
-                    <label class="control-label">Input with addon (disabled)</label>
-                    <div class="inner-addon addon-left">
-                      <div class="addon">
-                        <i class="fa fa-calendar"></i>
-                      </div>
-                      <input type="text" class="form-control input-sm" value="text" disabled/>
+                  <label class="control-label">Input with addon</label>
+                  <div class="inner-addon addon-left">
+                    <div class="addon">
+                      <i class="fa fa-filter"></i>
                     </div>
+                    <input type="text" class="form-control input-sm"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                  <label class="control-label">Input with addon (disabled)</label>
+                  <div class="inner-addon addon-left">
+                    <div class="addon">
+                      <i class="fa fa-filter"></i>
+                    </div>
+                    <input type="text" class="form-control input-sm" value="text" disabled/>
+                  </div>
                 </div>
               </div>
             </div>
@@ -461,6 +725,52 @@
                         <option>Selct 5</option>
                         <option>Selct 6</option>
                     </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                  <label for="name" class="control-label">Custom Select</label>
+                  <div class="input-holder">
+                    <div class="input-holder">
+                      <ui-select ng-model="selectedTheme" name="theme" ng-required="true">
+                        <ui-select-match>
+                            <div class="palette-color">
+                              <div class="palette-color-icon" ng-style="{background: $select.selected.baseColor}"></div>
+                              <div class="palette-color-name">{{ $select.selected.name }}</div>
+                            </div>
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in (themes | filter: $select.search) track by item.id">
+                            <div class="palette-color">
+                              <div class="palette-color-icon" ng-style="{background: item.baseColor}"></div>
+                              <div class="palette-color-name">{{ item.name }}</div>
+                            </div>
+                        </ui-select-choices>
+                      </ui-select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                  <label for="name" class="control-label">Select (disabled)</label>
+                  <div class="input-holder">
+                    <ui-select ng-model="selectedTheme" name="theme" ng-required="true" ng-disabled="true">
+                      <ui-select-match>
+                          <div class="palette-color">
+                            <div class="palette-color-icon" ng-style="{background: $select.selected.baseColor}"></div>
+                            <div class="palette-color-name">{{ $select.selected.name }}</div>
+                          </div>
+                      </ui-select-match>
+                      <ui-select-choices repeat="item in (themes | filter: $select.search) track by item.id">
+                          <div class="palette-color">
+                            <div class="palette-color-icon" ng-style="{background: item.baseColor}"></div>
+                            <div class="palette-color-name">{{ item.name }}</div>
+                          </div>
+                      </ui-select-choices>
+                    </ui-select>
                   </div>
                 </div>
               </div>
@@ -544,7 +854,7 @@
           </div>
         </div>
 
-        <div id="checkboxes" class="ui-section">
+        <div id="radio" class="ui-section">
           <strong class="ui-title">Radio</strong>
           <div class="form-group-wrapper">
             <div class="form-group">
@@ -735,33 +1045,804 @@
             </div>
           </div>
         </div>
-
-
-
         
-
-
-        <div id="pagination" class="ui-section">
-          <strong class="ui-title" dir-paginate="item in paginateArr | itemsPerPage: 1">Pagination (page {{item}})</strong>
-          <div class="ui-sub-section">
-            <div class="ui-sub-title">Pagination normal</div>
-            <div class="wrap-control-group">
-              <div class="control-group with-indent center">
-                <dir-pagination-controls max-size="6"></dir-pagination-controls>
-              </div>
-            </div>
-          </div>
-          <div class="ui-sub-section">
-            <div class="ui-sub-title">Pagination short</div>
-            <div class="wrap-control-group">
-              <div class="control-group with-indent center">
-                <dir-pagination-controls max-size="6" class='pagination-short'></dir-pagination-controls>
+        <div id="slider-range" class="ui-section">
+          <strong class="ui-title">Slider Range</strong>
+          <div class="form-group-wrapper">
+            <div class="form-group">
+              <label for="" class="control-label">Range (Years)</label>
+              <div class="wrap-rzslider-search">
+                  <rzslider class="mc-rz-slider"
+                            rz-slider-model="sliderRange.minValue"
+                            rz-slider-high="sliderRange.maxValue"
+                            rz-slider-options="sliderRange.options"></rzslider>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
+        <div id="scrollbar" class="ui-section">
+          <strong class="ui-title">Scrollbar</strong>
+          <div class="ui-scrollbar" ng-scrollbars ng-scrollbars-config="configScrollbar" ng-scrollbars-update=updateScrollbar>
+            <div class="ui-scrollbar-content">
+              <span class="ui-scrollbar-content-start">Scrollbar content start</span>
+              <span class="ui-scrollbar-content-end">Scrollbar content end</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="labels" class="ui-section">
+          <strong class="ui-title">Labels</strong>
+          <div class="form-group-wrapper">
+            <div class="form-group">
+              <div class="form-control-static">
+                <div class="control-group-wrapper">
+                  <div class="control-group width-indent">
+                    <span class="label label-default">label default</span>
+                    <span class="label label-primary">label primary</span>
+                    <span class="label label-success">label success</span>
+                    <span class="label label-info">label info</span>
+                    <span class="label label-warning">label warning</span>
+                    <span class="label label-danger">label danger</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="palette-color" class="ui-section">
+          <strong class="ui-title">Color Palette for Themes</strong>
+          <div class="form-group-wrapper">
+            <div class="row">
+              <div class="col-xs-6 col-sm-4">
+                <div class="form-group">
+                  <div class="palette-color">
+                    <span class="palette-color-icon" style="background: rgb(13, 103, 47);"></span>
+                    <span class="palette-color-name ng-binding">Green Theme</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-4">
+                <div class="form-group">
+                  <div class="palette-color">
+                    <span class="palette-color-icon" style="background: red;"></span>
+                    <span class="palette-color-name ng-binding">Red Theme</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-4">
+                <div class="form-group">
+                  <div class="palette-color">
+                    <span class="palette-color-icon" style="background: blue;"></span>
+                    <span class="palette-color-name ng-binding">Blue Theme</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-4">
+                <div class="form-group">
+                  <div class="palette-color">
+                    <span class="palette-color-icon" style="background: brown;"></span>
+                    <span class="palette-color-name ng-binding">Brown Theme</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-4">
+                <div class="form-group">
+                  <div class="palette-color">
+                    <span class="palette-color-icon" style="background: yellow;"></span>
+                    <span class="palette-color-name ng-binding">Yellow Theme</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-4">
+                <div class="form-group">
+                  <div class="palette-color">
+                    <span class="palette-color-icon" style="background: pink;"></span>
+                    <span class="palette-color-name ng-binding">Pink Theme</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="selectable" class="ui-section">
+          <strong class="ui-title">Selectable</strong>
+          <div class="form-group-wrapper">
+            <div class="form-group">
+              <div class="selectable">
+                <div class="selectable-col selectable-from">
+                  <label for="" class="control-label">Available Items</label>
+                  <div class="selectable-list">
+                    <div class="selectable-item" ng-repeat="suggestion in suggestions" ng-dblclick="toggleSelectedItem(suggestion.code)" ng-click="setSelectedLeft(suggestion.code)" ng-class="{selected: suggestion.code === idSelectedLeft}">
+                      <span>{{ suggestion.text }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="selectable-control">
+                  <div class="selectable-control-group">
+                    <div class="btn btn-inverse btn-success btn-order" ng-click="chooseItem()">&rsaquo;</div>
+                    <div class="btn btn-inverse btn-success btn-order" ng-click="chooseAll()">&raquo;</div>
+                  </div>
+                  <div class="selectable-control-group">
+                    <div class="btn btn-inverse btn-success btn-order" ng-click="cancelItem()">&lsaquo;</div>
+                    <div class="btn btn-inverse btn-success btn-order" ng-click="cancelAll()">&laquo;</div>
+                  </div>
+                </div>
+                <div class="selectable-col selectable-to">
+                  <label for="" class="control-label">Selected Items</label>
+                  <div class="selectable-list">
+                    <div class="selectable-item" ng-repeat="chosenOrder in chosenOrders" ng-dblclick="toggleSelectedItem(chosenOrder.code)" ng-click="setSelectedRight(chosenOrder.code)" ng-class="{selected: chosenOrder.code === idSelectedRight}">
+                      <span>{{ chosenOrder.text }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="highlighter" class="ui-section">
+          <strong class="ui-title">Highlighters</strong>
+          <div class="form-group-wrapper">
+            <div class="row">
+              <div class="col-xs-4">
+                <div class="highlighter-wrapper">
+                  <span class="highlighter-success"></span>
+                  <div class="ui-highlighter"></div>
+                </div>
+              </div>
+              <div class="col-xs-4">
+                <div class="highlighter-wrapper">
+                  <span class="highlighter-warning"></span>
+                  <div class="ui-highlighter"></div>
+                </div>
+              </div>
+              <div class="col-xs-4">
+                <div class="highlighter-wrapper">
+                  <span class="highlighter-danger"></span>
+                  <div class="ui-highlighter"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="spinner" class="ui-section">
+          <strong class="ui-title">Spinner</strong>
+          <div class="ui-spinner-wrap">
+            <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="patientSummary- spinner" spinner-start-active="true"></span>
+          </div>
+        </div>
+
+        <div id="pagination" class="ui-section">
+          <strong class="ui-title" dir-paginate="item in paginateArr | itemsPerPage: 1">Pagination (page {{item}})</strong>
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <div class="ui-sub-title">Pagination normal</div>
+                <div class="wrap-control-group">
+                  <div class="control-group with-indent left">
+                    <dir-pagination-controls max-size="6"></dir-pagination-controls>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <div class="ui-sub-title">Pagination short</div>
+                <div class="wrap-control-group">
+                  <div class="control-group with-indent left">
+                    <dir-pagination-controls max-size="6" class='pagination-short'></dir-pagination-controls>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="modal" class="ui-section">
+          <strong class="ui-title">Modal</strong>
+          <div class="wrap-control-group hide-indent-bottom">
+            <div class="control-group with-indent left">
+              <button class="btn btn-info" ng-click="$ctrl.openModal({})"><span class="btn-text">Open Modal Window</span></button>
+            </div>
+          </div>
+        </div>
+
+        <div id="dropdowns" class="ui-section">
+          <strong class="ui-title">Dropdowns</strong>
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <div class="ui-sub-title">Dropdown top-left</div>
+                <div class="wrap-control-group hide-indent-bottom">
+                  <div class="control-group with-indent left">
+                    <div uib-dropdown>
+                      <button uib-dropdown-toggle class="btn btn-primary btn-inverse"><span class="btn-text">Open dropdown</span></button>
+                      <div uib-dropdown-menu class="dropdown-menu dropdown-menu-panel dropdown-menu-top-left dropdown-menu-small-size">
+                        <div class="heading">Dropdown title</div>
+                        <div class="dropdown-menu-wrap-list">
+                          <div class="dropdown-menu-list">
+                            <div class="dropdown-menu-item active"><span class="dropdown-menu-item-text">Item 1</span></div>
+                            <div class="dropdown-menu-item"><span class="dropdown-menu-item-text">Item 2</span></div>
+                            <div class="dropdown-menu-item"><span class="dropdown-menu-item-text">Item 3</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <div class="ui-sub-title">Dropdown top-right</div>
+                <div class="wrap-control-group hide-indent-bottom">
+                  <div class="control-group with-indent right">
+                    <div uib-dropdown>
+                      <button uib-dropdown-toggle class="btn btn-primary btn-inverse"><span class="btn-text">Open dropdown</span></button>
+                      <div uib-dropdown-menu class="dropdown-menu dropdown-menu-panel dropdown-menu-top-right dropdown-menu-small-size">
+                        <div class="heading">Dropdown title</div>
+                        <div class="dropdown-menu-wrap-list">
+                          <div class="dropdown-menu-list">
+                            <div class="dropdown-menu-item active"><span class="dropdown-menu-item-text">Item 1</span></div>
+                            <div class="dropdown-menu-item"><span class="dropdown-menu-item-text">Item 2</span></div>
+                            <div class="dropdown-menu-item"><span class="dropdown-menu-item-text">Item 3</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <div class="ui-sub-title">Dropdown bottom-left</div>
+                <div class="wrap-control-group hide-indent-bottom">
+                  <div class="control-group with-indent left">
+                    <div uib-dropdown>
+                      <button uib-dropdown-toggle class="btn btn-primary btn-inverse"><span class="btn-text">Open dropdown</span></button>
+                      <div uib-dropdown-menu class="dropdown-menu dropdown-menu-panel dropdown-menu-small-size">
+                        <div class="heading">Dropdown title</div>
+                        <div class="dropdown-menu-wrap-list">
+                          <div class="dropdown-menu-list">
+                            <div class="dropdown-menu-item active"><span class="dropdown-menu-item-text">Item 1</span></div>
+                            <div class="dropdown-menu-item"><span class="dropdown-menu-item-text">Item 2</span></div>
+                            <div class="dropdown-menu-item"><span class="dropdown-menu-item-text">Item 3</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <div class="ui-sub-title">Dropdown bottom-right</div>
+                <div class="wrap-control-group hide-indent-bottom">
+                  <div class="control-group with-indent right">
+                    <div uib-dropdown>
+                      <button uib-dropdown-toggle class="btn btn-primary btn-inverse"><span class="btn-text">Open dropdown</span></button>
+                      <div uib-dropdown-menu class="dropdown-menu dropdown-menu-panel dropdown-menu-right dropdown-menu-small-size">
+                        <div class="heading">Dropdown title</div>
+                        <div class="dropdown-menu-wrap-list">
+                          <div class="dropdown-menu-list">
+                            <div class="dropdown-menu-item active"><span class="dropdown-menu-item-text">Item 1</span></div>
+                            <div class="dropdown-menu-item"><span class="dropdown-menu-item-text">Item 2</span></div>
+                            <div class="dropdown-menu-item"><span class="dropdown-menu-item-text">Item 3</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ui-sub-section">
+            <div class="ui-sub-title">Dropdown not hidden when click inside</div>
+            <div class="wrap-control-group hide-indent-bottom">
+              <div class="control-group with-indent left">
+                <div class="dropdown">
+                  <button mc-dropdown class="btn btn-success btn-inverse btn-filter btn-dropdown-toggle" ng-click="toggleDropdown($event);"><i class="btn-icon fa fa-filter"></i></button>
+                  <div class="dropdown-menu dropdown-menu-panel dropdown-menu-small-size">
+                    <div class="heading">FILTERING</div>
+                    <div class="dropdown-menu-wrap-list">
+                      <div class="dropdown-menu-list">
+                        <div class="dropdown-menu-item" ng-class="{active: isFilterOpen}" ng-click="toggleFilter(); refreshSlider();"><span class="dropdown-menu-item-text">Filter</span></div>
+                        <div class="dropdown-menu-item" ng-class="{active: isFilterTimelineOpen}" ng-click="toggleFilterTimeline(); refreshSlider();"><span class="dropdown-menu-item-text">Timelines</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="panels" class="ui-section">
+          <strong class="ui-title">Panels</strong>
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <div class="ui-sub-title">Panel primary</div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="control-group right" >
+                            <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+                        </div>
+                        <h3 class="panel-title">Panel title</h3>
+                    </div>
+                    <div class="panel-body">
+                      <div class="ui-panel-content">Panel Conten</div>
+                      <div class="panel-control">
+                          <div class="wrap-control-group hide-indent-bottom">
+                              <div class="control-group with-indent right">
+                                <button class="btn btn-success btn-inverse btn-create"><i class="btn-icon fa fa-plus"></i> <span class="btn-text">Create</span></button>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <div class="ui-sub-title">Panel secondary</div>
+                <div class="panel panel-secondary">
+                    <div class="panel-heading">
+                        <div class="control-group right" >
+                            <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+                        </div>
+                        <h3 class="panel-title">Panel title</h3>
+                    </div>
+                    <div class="panel-body">
+                      <div class="ui-panel-content">Panel Conten</div>
+                      <div class="panel-control">
+                          <div class="wrap-control-group hide-indent-bottom">
+                              <div class="control-group with-indent right">
+                                <button class="btn btn-success btn-inverse btn-create"><i class="btn-icon fa fa-plus"></i> <span class="btn-text">Create</span></button>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <div class="ui-sub-title">Panel secondary</div>
+                <div class="panel panel-secondary">
+                    <div class="panel-heading">
+                        <div class="control-group right" >
+                            <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+                        </div>
+                        <h3 class="panel-title">Panel title</h3>
+                    </div>
+                    <div class="panel-body">
+                      <div class="panel-body-inner">
+                        <div class="ui-panel-content">Panel Conten</div>
+                      </div>
+                      <div class="panel-control">
+                          <div class="wrap-control-group hide-indent-bottom">
+                              <div class="control-group with-indent right">
+                                <button class="btn btn-success btn-inverse btn-create"><i class="btn-icon fa fa-plus"></i> <span class="btn-text">Create</span></button>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <div class="ui-sub-title">Panel small</div>
+                <div class="panel panel-secondary panel-small">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Panel title</h3>
+                    </div>
+                    <div class="panel-body">
+                      <div class="ui-panel-content">Panel Conten</div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <div class="ui-sub-title">Panel accordion</div>
+                <div mc-accordion mc-open-panel="panel-accordion1" class="panel-group accordion">
+                  <div class="panel panel-secondary"  ng-class="getOpenPanelClass('panel-accordion1');">
+                      <div class="panel-heading">
+                          <div class="control-group right" >
+                              <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('panel-accordion1')"><i class="btn-icon fa fa-chevron-up"></i></button>
+                          </div>
+                          <h3 class="panel-title">Panel title 1</h3>
+                      </div>
+                      <div class="panel-body">
+                        <div class="ui-panel-content">Panel Conten 1</div>
+                        <div class="panel-control">
+                            <div class="wrap-control-group hide-indent-bottom">
+                                <div class="control-group with-indent right">
+                                  <button class="btn btn-success btn-inverse btn-create"><i class="btn-icon fa fa-plus"></i> <span class="btn-text">Create</span></button>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="panel panel-secondary"  ng-class="getOpenPanelClass('panel-accordion2');">
+                      <div class="panel-heading">
+                          <div class="control-group right" >
+                              <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('panel-accordion2')"><i class="btn-icon fa fa-chevron-up"></i></button>
+                          </div>  
+                          <h3 class="panel-title">Panel title 2</h3>
+                      </div>
+                      <div class="panel-body">
+                        <div class="ui-panel-content">Panel Conten 2</div>
+                        <div class="panel-control">
+                            <div class="wrap-control-group hide-indent-bottom">
+                                <div class="control-group with-indent right">
+                                  <button class="btn btn-success btn-inverse btn-create"><i class="btn-icon fa fa-plus"></i> <span class="btn-text">Create</span></button>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <div class="ui-sub-title">Panel sub-accordion</div>
+                
+                <div mc-sub-accordion class="panel panel-secondary panel-subaccordion accordion"  ng-class="getOpenSubAccordion();">
+                    <div class="panel-heading" ng-click="toggleSubAccordion()">
+                        <h3 class="panel-title">Panel title 1</h3>
+                    </div>
+                    <div class="panel-body">
+                      <div class="ui-panel-content">Panel Conten 1</div>
+                      <div class="panel-control">
+                          <div class="wrap-control-group hide-indent-bottom">
+                              <div class="control-group with-indent right">
+                                <button class="btn btn-success btn-inverse btn-create"><i class="btn-icon fa fa-plus"></i> <span class="btn-text">Create</span></button>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+                <div mc-sub-accordion class="panel panel-secondary panel-subaccordion accordion"  ng-class="getOpenSubAccordion();">
+                    <div class="panel-heading" ng-click="toggleSubAccordion()">
+                        <h3 class="panel-title">Panel title 2</h3>
+                    </div>
+                    <div class="panel-body">
+                      <div class="ui-panel-content">Panel Conten 2</div>
+                      <div class="panel-control">
+                          <div class="wrap-control-group hide-indent-bottom">
+                              <div class="control-group with-indent right">
+                                <button class="btn btn-success btn-inverse btn-create"><i class="btn-icon fa fa-plus"></i> <span class="btn-text">Create</span></button>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="tables" class="ui-section">
+          <strong class="ui-title">Tables</strong>
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <div class="ui-sub-title">Table Simple</div>
+                <table class="table">
+                  <thead>
+                    <tr>
+                        <th class="sorted asc">Cause</th>
+                        <th>Reaction</th>
+                        <th>Source</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 1</span></td>
+                      <td data-th="Reaction"><span>Reaction 1</span></td>
+                      <td data-th="Source"><span>Source 1</span></td>
+                    </tr>
+                    <tr>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 2</span></td>
+                      <td data-th="Reaction"><span>Reaction 2</span></td>
+                      <td data-th="Source"><span>Source 2</span></td>
+                    </tr>
+                    <tr>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 3</span></td>
+                      <td data-th="Reaction"><span>Reaction 3</span></td>
+                      <td data-th="Source"><span>Source 3</span></td>
+                    </tr>
+                    <tr>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 4</span></td>
+                      <td data-th="Reaction"><span>Reaction 4</span></td>
+                      <td data-th="Source"><span>Source 4</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <div class="ui-sub-title">Table Striped</div>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                        <th class="sorted asc">Cause</th>
+                        <th>Reaction</th>
+                        <th>Source</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 1</span></td>
+                      <td data-th="Reaction"><span>Reaction 1</span></td>
+                      <td data-th="Source"><span>Source 1</span></td>
+                    </tr>
+                    <tr>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 2</span></td>
+                      <td data-th="Reaction"><span>Reaction 2</span></td>
+                      <td data-th="Source"><span>Source 2</span></td>
+                    </tr>
+                    <tr>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 3</span></td>
+                      <td data-th="Reaction"><span>Reaction 3</span></td>
+                      <td data-th="Source"><span>Source 3</span></td>
+                    </tr>
+                    <tr>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 4</span></td>
+                      <td data-th="Reaction"><span>Reaction 4</span></td>
+                      <td data-th="Source"><span>Source 4</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <div class="ui-sub-title">Table Hovered</div>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                        <th class="sorted asc">Cause</th>
+                        <th>Reaction</th>
+                        <th>Source</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 1</span></td>
+                      <td data-th="Reaction"><span>Reaction 1</span></td>
+                      <td data-th="Source"><span>Source 1</span></td>
+                    </tr>
+                    <tr>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 2</span></td>
+                      <td data-th="Reaction"><span>Reaction 2</span></td>
+                      <td data-th="Source"><span>Source 2</span></td>
+                    </tr>
+                    <tr>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 3</span></td>
+                      <td data-th="Reaction"><span>Reaction 3</span></td>
+                      <td data-th="Source"><span>Source 3</span></td>
+                    </tr>
+                    <tr>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 4</span></td>
+                      <td data-th="Reaction"><span>Reaction 4</span></td>
+                      <td data-th="Source"><span>Source 4</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <div class="ui-sub-title">Table Bordered</div>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                        <th class="sorted asc">Cause</th>
+                        <th>Reaction</th>
+                        <th>Source</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 1</span></td>
+                      <td data-th="Reaction"><span>Reaction 1</span></td>
+                      <td data-th="Source"><span>Source 1</span></td>
+                    </tr>
+                    <tr>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 2</span></td>
+                      <td data-th="Reaction"><span>Reaction 2</span></td>
+                      <td data-th="Source"><span>Source 2</span></td>
+                    </tr>
+                    <tr>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 3</span></td>
+                      <td data-th="Reaction"><span>Reaction 3</span></td>
+                      <td data-th="Source"><span>Source 3</span></td>
+                    </tr>
+                    <tr>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 4</span></td>
+                      <td data-th="Reaction"><span>Reaction 4</span></td>
+                      <td data-th="Source"><span>Source 4</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <div class="ui-sub-title">Transform table on mobile devices</div>
+                <table class="table table-bordered table-striped rwd-table">
+                  <thead>
+                    <tr>
+                        <th class="sorted asc">Cause</th>
+                        <th>Reaction</th>
+                        <th>Source</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-click>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 1</span></td>
+                      <td data-th="Reaction"><span>Reaction 1</span></td>
+                      <td data-th="Source"><span>Source 1</span></td>
+                    </tr>
+                    <tr ng-click>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 2</span></td>
+                      <td data-th="Reaction"><span>Reaction 2</span></td>
+                      <td data-th="Source"><span>Source 2</span></td>
+                    </tr>
+                    <tr ng-click>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 3</span></td>
+                      <td data-th="Reaction"><span>Reaction 3</span></td>
+                      <td data-th="Source"><span>Source 3</span></td>
+                    </tr>
+                    <tr ng-click>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 4</span></td>
+                      <td data-th="Reaction"><span>Reaction 4</span></td>
+                      <td data-th="Source"><span>Source 4</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <div class="ui-sub-title">Table with fixed columns</div>
+                <table class="table table-bordered">
+                  <colgroup>
+                    <col style="width: 26%;">
+                    <col style="width: 55%;">
+                    <col style="width: 19%;">
+                  </colgroup>
+                  <thead>
+                    <tr>
+                        <th class="sorted asc">Cause</th>
+                        <th>Reaction</th>
+                        <th>Source</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 1</span></td>
+                      <td data-th="Reaction"><span>Reaction 1</span></td>
+                      <td data-th="Source"><span>Source 1</span></td>
+                    </tr>
+                    <tr>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 2</span></td>
+                      <td data-th="Reaction"><span>Reaction 2</span></td>
+                      <td data-th="Source"><span>Source 2</span></td>
+                    </tr>
+                    <tr>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 3</span></td>
+                      <td data-th="Reaction"><span>Reaction 3</span></td>
+                      <td data-th="Source"><span>Source 3</span></td>
+                    </tr>
+                    <tr>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 4</span></td>
+                      <td data-th="Reaction"><span>Reaction 4</span></td>
+                      <td data-th="Source"><span>Source 4</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <div class="ui-sub-title">Complete table settings</div>
+                <table class="table table-striped table-hover table-bordered rwd-table table-sorted">
+                  <colgroup>
+                    <col style="width: 26%;">
+                    <col style="width: 55%;">
+                    <col style="width: 19%;">
+                  </colgroup>
+                  <thead>
+                    <tr>
+                        <th class="sorted asc">Cause</th>
+                        <th>Reaction</th>
+                        <th>Source</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr ng-click>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 1</span></td>
+                      <td data-th="Reaction"><span>Reaction 1</span></td>
+                      <td data-th="Source"><span>Source 1</span></td>
+                    </tr>
+                    <tr ng-click>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 2</span></td>
+                      <td data-th="Reaction"><span>Reaction 2</span></td>
+                      <td data-th="Source"><span>Source 2</span></td>
+                    </tr>
+                    <tr ng-click>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 3</span></td>
+                      <td data-th="Reaction"><span>Reaction 3</span></td>
+                      <td data-th="Source"><span>Source 3</span></td>
+                    </tr>
+                    <tr ng-click>
+                      <td data-th="Cause" class="sorted asc"><span>Cause 4</span></td>
+                      <td data-th="Reaction"><span>Reaction 4</span></td>
+                      <td data-th="Source"><span>Source 4</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="ui-sub-section">
+                <div class="ui-sub-title">Empty table</div>
+                <table class="table table-striped table-hover table-bordered rwd-table table-sorted">
+                  <colgroup>
+                    <col style="width: 26%;">
+                    <col style="width: 55%;">
+                    <col style="width: 19%;">
+                  </colgroup>
+                  <thead>
+                    <tr>
+                        <th class="sorted asc">Cause</th>
+                        <th>Reaction</th>
+                        <th>Source</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td colspan="3"><span class="label label-default">No items</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
 
 
       <div id="grid" class="ui-section">
@@ -920,24 +2001,34 @@
           </div>
         </div>
       </div>
+
+
+      <div id="components" class="ui-section">
+        <h2 class="ui-main-title">Blocks</h2>
+        
+        <div id="buttons" class="ui-section">
+          <strong class="ui-title">Breadcrumbs</strong>
+
+          <div class="ui-sub-section">
+            <div class="wrap-breadcrumbs">
+              <div class="container-fluid">
+                <div class="breadcrumbs">
+                  <a class="breadcrumb-link">Patient Listings</a>
+                  <span class="breadcrumb-separate ng-scope"></span>
+                  <a ng-click="$ctrl.goBreadcrumb(breadcrumb.state)" class="breadcrumb-link">Patient Summary</a>
+                  <span class="breadcrumb-separate ng-scope"></span>
+                  <span class="breadcrumb-link active">Medications</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-    <!-- Breadcrumbs-->
-      <!-- <div class="wrap-breadcrumbs" ng-if="breadcrumbs.length">
-        <div class="container-fluid">
-          <div class="breadcrumbs">
-            <ng-repeat
-              ng-repeat="breadcrumb in breadcrumbs">
-               <a ng-if="!$last" ng-click="$ctrl.goBreadcrumb(breadcrumb.state)" class="breadcrumb-link">{{ breadcrumb.title }}</a>
-              <span ng-if="$last"  class="breadcrumb-link active">{{ breadcrumb.title }}</span>
-              <span ng-if="!$last" class="breadcrumb-separate"></span>
-            </ng-repeat>
-          </div>
-        </div>
-      </div> -->
-    <!-- /.Breadcrumbs-->
 <!-- <footer class="footer">
   <div class="container-fluid">
     <p class="footer-text">Transforming Usability</p>
