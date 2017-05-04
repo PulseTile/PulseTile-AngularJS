@@ -374,7 +374,8 @@ body:after {
 #chat {
   width: 100%;
   height: 100%;
-  padding: 15px 0; }
+  padding: 0 0 15px;
+  min-width: 320px; }
   #chat .panel-chat {
     margin: 0 5px 11px; }
     #chat .panel-chat .panel-heading {
@@ -401,13 +402,17 @@ body:after {
   #chat .chat-wrapper {
     height: 70%;
     background-color: rgba(255, 255, 255, 0.5);
-    padding: 10px;
+    padding: 10px 0;
     min-height: 16em; }
     #chat .chat-wrapper .container {
       height: 100%; }
       @media screen and (max-width: 991px) {
         #chat .chat-wrapper .container {
           width: 100%; } }
+    #chat .chat-wrapper .messages-col { padding-right: 0; }
+    @media screen and (max-width: 767px) {
+      #chat .chat-wrapper .messages-col { padding-right: 15px; }
+    }
     #chat .chat-wrapper .messages-wrapper {
       background-color: #f0f0f0;
       height: 100%;
@@ -415,6 +420,12 @@ body:after {
       text-align: left;
       border: 1px #cacaca solid;
       min-height: 20em; }
+      @media screen and (max-width: 767px) {
+        #chat .chat-wrapper .messages-wrapper {
+          margin-top: 15px;
+          height: 95%;
+        }
+      }
       #chat .chat-wrapper .messages-wrapper .info {
         height: 3em; }
         #chat .chat-wrapper .messages-wrapper .info > .row div:first-child {
@@ -447,7 +458,8 @@ body:after {
           border-top: none;
           font-size: 12px; }
     #chat .chat-wrapper .video-chat-wrapper {
-      height: 100%; }
+      height: 100%; 
+      position: relative; }
       @media screen and (min-width: 768px) {
         #chat .chat-wrapper .video-chat-wrapper {
           padding-right: 0; } }
@@ -2321,7 +2333,7 @@ div#age-chart div.morris-hover.morris-default-style {
 .wrap-patient-info {
   background: #0D672F;
   padding: 10px;
-  margin-bottom: 15px;
+  /*margin-bottom: 15px;*/
 }
 
 .wrap-patient-info.show .patient-info {
@@ -2468,3 +2480,5 @@ div#age-chart div.morris-hover.morris-default-style {
   background-color: #cb2f2b !important;
   border-color: #cb2f2b !important
 }
+
+.height100 { height: 100%; }

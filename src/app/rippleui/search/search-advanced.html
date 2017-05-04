@@ -21,7 +21,7 @@
             <div class="control-group right">
               <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="isOpenPanelSearch = !isOpenPanelSearch; refreshSlider();"><i class="btn-icon fa fa-chevron-up"></i></button>
             </div>
-            <h3 class="panel-title"><span>{{$ctrl.option.name}}</span><span ng-bind-html="getSearchParams(searchParams)"></span></h3>
+            <h3 class="panel-title"><span>{{$ctrl.option.name}}</span><span class="hidden-xs hidden-sm" ng-bind-html="getSearchParams(searchParams)"></span></h3>
           </div>
           <div class="panel-body">
             <div class="panel-body-inner">
@@ -30,7 +30,7 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-6" ng-if="$ctrl.option.type === 'advanced'">
                           <div class="form-group"
-                            ng-class="{'has-error': !$ctrl.detailsFocused && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) && areDetailsFieldsClean(advancedSearchForm),
+                            ng-class="{'has-error': !$ctrl.detailsFocused && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) && isNhsNumberRequired(advancedSearchForm),
                             'has-success': !$ctrl.detailsFocused && advancedSearchForm.nhsNumber.$valid && advancedSearchForm.nhsNumber.$dirty}">
                               <label for="nhsNumber" class="control-label">NHS Number</label>
                               <div class="input-holder">

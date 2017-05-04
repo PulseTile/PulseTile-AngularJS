@@ -35,6 +35,8 @@ import 'angular-jquery-timepicker';
 import 'angular-xeditable';
 import 'ng-scrollbars';
 import 'angular-ui-select';
+import 'angular-swiper';
+import 'swiper';
 
 //commons
 import reducer from './redux/reducer';
@@ -96,8 +98,9 @@ let app = angular
         'xeditable',
         'ngScrollbars',
         'rzModule',
-        'ngSanitize',
-        'ui.select'
+        'ui.select',
+        'ksSwiper',
+        'ngSanitize'
     ])
     .factory('ScheduleModal', ScheduleModal)
     .factory('ConfirmationModal', ConfirmationModal)

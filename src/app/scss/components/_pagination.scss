@@ -9,8 +9,8 @@
 .pagination-block {
   border: 0;
   margin: 0;
-  padding-right: 1px;
   @include list-reset;
+  padding-right: 1px;
 }
 .pagination-item {
   float: left;

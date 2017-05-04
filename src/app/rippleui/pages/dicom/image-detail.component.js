@@ -37,12 +37,14 @@ class ImageDetailController {
       usSpinnerService.stop('patientSummary-spinner');
     });
 
+    /* istanbul ignore next  */
     var findFirstInstanceId = function (seriesId, index) {
       serviceActions.getInstanceId($stateParams.patientId, seriesId, $stateParams.source).then(function (result) {
         $scope.instanceIds[index] = result.data.instanceId;
       });
     };
 
+    /* istanbul ignore next  */
     var findSeriesMetadata = function(seriesId, index) {
       serviceActions.getSeriesDetails($stateParams.patientId, seriesId).then(function (result) {
         $scope.series[index] = result.data;
@@ -50,7 +52,8 @@ class ImageDetailController {
         $scope.series[index].seriesTime = moment($scope.series[index].seriesTime).format('h:mma');
       });
     };
-    
+
+    /* istanbul ignore next  */
     function getImgBlock() {
       return $('#dicomImage').get(0);
     }
@@ -71,7 +74,8 @@ class ImageDetailController {
       $scope.isMove = !$scope.isMove;
       
       var element = getImgBlock();
-      
+
+      /* istanbul ignore if  */
       if ($scope.isMove === false) {
         cornerstoneTools.mouseInput.disable(element);
         return;

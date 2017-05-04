@@ -26,14 +26,36 @@ describe('Image Details', function() {
     });
   }));
 
+  beforeEach(function() {
+
+    spyOn(scope, 'zoomIn');
+    spyOn(scope, 'zoomOut');
+    spyOn(scope, 'moveImg');
+
+    scope.zoomIn();
+    scope.zoomOut();
+    scope.moveImg();
+  });
 
   it('series is empty', function() {
     expect(scope.series).toEqual([]);
+  });
+  it('isMove is empty', function() {
+    expect(scope.isMove).toEqual(false);
   });
   it('Template exist', function() {
     expect(template).toBeDefined();
   });
   it('Controller exist', function() {
     expect(ctrl).toBeDefined();
+  });
+  it("zoomIn was called", function() {
+    expect(scope.zoomIn).toHaveBeenCalled();
+  });
+  it("zoomOut was called", function() {
+    expect(scope.zoomOut).toHaveBeenCalled();
+  });
+  it("moveImg was called", function() {
+    expect(scope.moveImg).toHaveBeenCalled();
   });
 });

@@ -185,11 +185,11 @@ class SearchAdvancedController {
     // }
 
     $scope.ok = function (searchForm) {
-      $scope.isOpenPanelSearch = false;
       $scope.formSubmitted = true;
 
       /* istanbul ignore if */
       if (searchForm.$valid) {
+        $scope.formSubmitted = false;
         $scope.isSearchCompleted = true;
         if ($scope.searchParams.nhsNumber) {
           $scope.searchParams.nhsNumber = $scope.searchParams.nhsNumber.replace(/\s+/g, '');
@@ -204,9 +204,8 @@ class SearchAdvancedController {
 
     $scope.isNhsNumberRequired = function (advancedSearchForm) {
       var nhsNumber = $scope.advancedSearchForm.nhsNumber.$viewValue;
-      var areDetailsFieldsClean = $scope.areDetailsFieldsClean(advancedSearchForm);
       /* istanbul ignore if */
-      if (nhsNumber === undefined && areDetailsFieldsClean) {
+      if (nhsNumber === undefined) {
         return true;
       }
 
@@ -214,7 +213,7 @@ class SearchAdvancedController {
 
       var nhsNumberInvalid = isNaN(nhsNumber) || (advancedSearchForm.nhsNumber.$invalid && nhsNumber.length === 0);
 
-      return nhsNumberInvalid && areDetailsFieldsClean;
+      return nhsNumberInvalid;
     };
 
     $scope.isNhsNumberTooShort = function (value) {
@@ -242,17 +241,17 @@ class SearchAdvancedController {
       return nhsNumberField.$invalid || nhsNumberField.$pristine;
     };
 
-    $scope.areDetailsFieldsClean = function (advancedSearchForm) {
-      var surname = advancedSearchForm.surname;
-      var forename = advancedSearchForm.forename;
-      // var dateOfBirth = advancedSearchForm.dateOfBirth;
+    // $scope.areDetailsFieldsClean = function (advancedSearchForm) {
+    //   var surname = advancedSearchForm.surname;
+    //   var forename = advancedSearchForm.forename;
+    //   // var dateOfBirth = advancedSearchForm.dateOfBirth;
 
-      var surnameClean = surname.$invalid || !$scope.searchParams.surname || $scope.searchParams.surname === '';
-      var forenameClean = forename.$invalid || !$scope.searchParams.forename || $scope.searchParams.forename === '';
-      // var dateOfBirthClean = dateOfBirth.$invalid || !$scope.searchParams.dateOfBirth || $scope.searchParams.dateOfBirth === '';
+    //   var surnameClean = surname.$invalid || !$scope.searchParams.surname || $scope.searchParams.surname === '';
+    //   var forenameClean = forename.$invalid || !$scope.searchParams.forename || $scope.searchParams.forename === '';
+    //   // var dateOfBirthClean = dateOfBirth.$invalid || !$scope.searchParams.dateOfBirth || $scope.searchParams.dateOfBirth === '';
 
-      return surnameClean && forenameClean;
-    };
+    //   return surnameClean && forenameClean;
+    // };
 
     var queryOption = this.option;
 

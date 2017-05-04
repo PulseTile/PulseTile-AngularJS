@@ -96,28 +96,62 @@
       <h3 class="panel-title">Results ({{ $ctrl.result.testResults.length || 0 }})</h3>
     </div>
     <div class="panel-body">
-      <div class="panel-body-inner" ng-repeat="detail in $ctrl.result.testResults">
-        <div class="form">
-          <div class="form-group-wrapper">
-            <div class="form-group">
-              <label class="control-label">Results</label>
-              <div class="form-control-static">{{ detail.result }}</div>
+      <div class="panel-expand-wrapper">
+        <div class="panel-expand-row" ng-if="$even" ng-repeat="detail in $ctrl.result.testResults">
+          <div class="panel-expand-item" >
+            <div class="panel-body-inner">
+              <div class="form">
+                <div class="form-group-wrapper">
+                  <div class="form-group">
+                    <label class="control-label">Results</label>
+                    <div class="form-control-static">{{ $ctrl.result.testResults[$index].result }}</div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Value</label>
+                    <div class="form-control-static">{{ $ctrl.result.testResults[$index].value }}</div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Unit</label>
+                    <div class="form-control-static">{{ $ctrl.result.testResults[$index].unit }}</div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Normal Range</label>
+                    <div class="form-control-static">{{ $ctrl.result.testResults[$index].normalRange }}</div>
+                  </div>
+                  <div class="form-group" ng-if="$ctrl.result.testResults[$index].comment">
+                    <label class="control-label">Comment</label>
+                    <div class="form-control-static">{{ $ctrl.result.testResults[$index].comment }}</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-              <label class="control-label">Value</label>
-              <div class="form-control-static">{{ detail.value }}</div>
-            </div>
-            <div class="form-group">
-              <label class="control-label">Unit</label>
-              <div class="form-control-static">{{ detail.unit }}</div>
-            </div>
-            <div class="form-group">
-              <label class="control-label">Normal Range</label>
-              <div class="form-control-static">{{ detail.normalRange }}</div>
-            </div>
-            <div class="form-group" ng-if="detail.comment">
-              <label class="control-label">Comment</label>
-              <div class="form-control-static">{{ detail.comment }}</div>
+          </div>
+          <div class="panel-expand-item" ng-if="$ctrl.result.testResults[$index + 1]">
+            <div class="panel-body-inner">
+              <div class="form">
+                <div class="form-group-wrapper">
+                  <div class="form-group">
+                    <label class="control-label">Results</label>
+                    <div class="form-control-static">{{ $ctrl.result.testResults[$index + 1].result }}</div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Value</label>
+                    <div class="form-control-static">{{ $ctrl.result.testResults[$index + 1].value }}</div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Unit</label>
+                    <div class="form-control-static">{{ $ctrl.result.testResults[$index + 1].unit }}</div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Normal Range</label>
+                    <div class="form-control-static">{{ $ctrl.result.testResults[$index + 1].normalRange }}</div>
+                  </div>
+                  <div class="form-group" ng-if="$ctrl.result.testResults[$index + 1].comment">
+                    <label class="control-label">Comment</label>
+                    <div class="form-control-static">{{ $ctrl.result.testResults[$index + 1].comment }}</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

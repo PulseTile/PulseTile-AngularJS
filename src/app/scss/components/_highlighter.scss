@@ -18,6 +18,7 @@ $highlighterColor: (
   position: absolute;
   top: 0;
   width: 4px;
+  z-index: 1;
 }
 @each $highlighter, $color in $highlighterColor {
   .highlighter-#{$highlighter} {
