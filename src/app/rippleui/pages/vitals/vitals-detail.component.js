@@ -67,6 +67,8 @@ class VitalsDetailController {
     this.setCurrentPageData = function (data) {
       if (data.vitals.dataGet) {
         $scope.vital = serviceVitalsSigns.convertVitalCharacteristics(data.vitals.dataGet);
+        console.log('JSON.strigify($scope.vital)');
+        console.log(JSON.stringify($scope.vital));
 
         $scope.vitalStatuses = serviceVitalsSigns.setVitalStatuses($scope.vital);
 

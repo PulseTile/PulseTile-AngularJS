@@ -24,7 +24,7 @@ class PatientsChartsController {
     this.goToLookUp = function () {
       $state.go('patients-lookup');
     };
-    var getOption = function (borderColor, bagroundColor) {
+    var getOption = function (borderColor, backgroundColor) {
       var enabledTooltips = !$scope.isTouchDevice;
       return {
           capBezierPoints: false,
@@ -35,7 +35,7 @@ class PatientsChartsController {
           },
           elements: {
             rectangle: {
-              backgroundColor: bagroundColor,
+              backgroundColor: backgroundColor,
               borderColor: borderColor,
               borderWidth: 1
             }
@@ -110,7 +110,7 @@ class PatientsChartsController {
                   labels: labels,
                   datasets: [{data: datasets}]
                 },
-                options: getOption(options.borderColor, options.bagroundColor)
+                options: getOption(options.borderColor, options.backgroundColor)
             });
             if (options.onClick) {
               canvas.onclick = options.onClick(barChart);
@@ -181,7 +181,7 @@ class PatientsChartsController {
           id: "chart-age", 
           data: summaries.age, 
           borderColor: 'rgba(126, 41, 205,1)',
-          bagroundColor: 'rgba(126, 41, 205,0.3)',
+          backgroundColor: 'rgba(126, 41, 205,0.3)',
           onClick: function (chart) {
             return function (ev) {
               var activePoint = chart.getElementAtEvent(ev)[0];
@@ -197,7 +197,7 @@ class PatientsChartsController {
           id: "chart-department", 
           data: summaries.department, 
           borderColor: 'rgba(36, 161, 116,1)',
-          bagroundColor: 'rgba(36, 161, 116,0.3)',
+          backgroundColor: 'rgba(36, 161, 116,0.3)',
           onClick: function (chart) {
             return function (ev) {
               var activePoint = chart.getElementAtEvent(ev)[0];
@@ -213,7 +213,7 @@ class PatientsChartsController {
           id: "chart-geography", 
           data: summaries.department, 
           borderColor: 'rgba(255,99,132,1)',
-          bagroundColor: 'rgba(255,99,132,0.3)',
+          backgroundColor: 'rgba(255,99,132,0.3)',
           onClick: function (chart) {
             return function (ev) {
               var activePoint = chart.getElementAtEvent(ev)[0];

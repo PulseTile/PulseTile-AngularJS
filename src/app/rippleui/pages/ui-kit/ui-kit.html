@@ -14,23 +14,184 @@
   ~  limitations under the License.
   -->
 
-<div class="ui-wrapper" ng-class="{showSidebar: isOpenSidebar, 'touch-device': isTouchDevice, 'is-not-touch-device': !isTouchDevice}">
+<div id="ui-wrapper" class="ui-wrapper" ng-class="{'ui-showSidebar': isOpenSidebar, 'touch-device': isTouchDevice, 'is-not-touch-device': !isTouchDevice}">
   <header class="ui-header" data-scroll-to-exclude="true">
     <div class="ui-header-inner">
       <button ng-click="toggleSidebar()" class="ui-btn-toggle-sidebar wrap-icon">
         <i class="btn-icon fa fa-bars"></i>
         <span class="btn-text">Menu</span>
       </button>
+      <div class="ui-logo">
+        <a ng-click="scrollTo('ui-wrapper')" href="#">
+          <img src="../../../assets/images/ripple-foundation-logo.png" class="img" alt="logo">
+        </a>
+      </div>
       <div class="ui-header-title">
-        <span>Ripple OSI - UI Kit</span>
+        <span>UI Kit</span>
       </div>
     </div>
   </header>
   <!-- Sidebar-->
   <div class="ui-sidebar">
-      <div class="ui-sidebar-nav">
-        <ul>
-          <!-- <li>qewdfqwe</li> -->
+      <div class="ui-sidebar-inner">
+        <ul class="ui-sidebar-nav">
+          <li class="ui-sidebar-item">
+            <a ng-click="scrollTo('color-pallete')" href="#color-pallete" class="ui-sidebar-link">Color Pallete</a>
+
+            <ul class="ui-sidebar-sub-nav">
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('main-colors')" href="#main-colors" class="ui-sidebar-sub-link">Main colors</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('theme-colors')" href="#theme-colors" class="ui-sidebar-sub-link">Theme colors</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('black-white-colors')" href="#main-colors" class="ui-sidebar-sub-link">Black and White colors</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="ui-sidebar-item">
+            <a ng-click="scrollTo('typography')" href="#typography" class="ui-sidebar-link">Typography</a>
+
+            <ul class="ui-sidebar-sub-nav">
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('headings')" href="#headings" class="ui-sidebar-sub-link">Headings</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('paragraphs')" href="#paragraphs" class="ui-sidebar-sub-link">Paragraphs</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('lists')" href="#lists" class="ui-sidebar-sub-link">Lists</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="ui-sidebar-item">
+            <a ng-click="scrollTo('components')" href="#components" class="ui-sidebar-link">Components</a>
+
+            <ul class="ui-sidebar-sub-nav">
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('buttons')" href="#buttons" class="ui-sidebar-sub-link">Buttons</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('control-group')" href="#control-group" class="ui-sidebar-sub-link">Control Group</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('form')" href="#form" class="ui-sidebar-sub-link">Form</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('form-section')" href="#form-section" class="ui-sidebar-sub-link">Form section</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('inputs')" href="#inputs" class="ui-sidebar-sub-link">Inputs</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('select')" href="#select" class="ui-sidebar-sub-link">Selects</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('checkboxes')" href="#checkboxes" class="ui-sidebar-sub-link">Checkboxes</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('radio')" href="#radio" class="ui-sidebar-sub-link">Radio</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('switch')" href="#switch" class="ui-sidebar-sub-link">Switch</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('input-file')" href="#input-file" class="ui-sidebar-sub-link">Input File</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('datepicker')" href="#datepicker" class="ui-sidebar-sub-link">Date Picker</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('slider-range')" href="#slider-range" class="ui-sidebar-sub-link">Slider Range</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('scrollbar')" href="#scrollbar" class="ui-sidebar-sub-link">Scrollbar</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('labels')" href="#labels" class="ui-sidebar-sub-link">Labels</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('palette-color')" href="#palette-color" class="ui-sidebar-sub-link">Color Palette for Themes</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('selectable')" href="#selectable" class="ui-sidebar-sub-link">Selectable</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('highlighter')" href="#highlighter" class="ui-sidebar-sub-link">Highlighters</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('spinner')" href="#spinner" class="ui-sidebar-sub-link">Spinner</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('pagination')" href="#pagination" class="ui-sidebar-sub-link">Pagination</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('modal')" href="#modal" class="ui-sidebar-sub-link">Modal</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('dropdowns')" href="#dropdowns" class="ui-sidebar-sub-link">Dropdowns</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('panels')" href="#panels" class="ui-sidebar-sub-link">Panels</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('tables')" href="#tables" class="ui-sidebar-sub-link">Tables</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="ui-sidebar-item">
+            <a ng-click="scrollTo('grid')" href="#grid" class="ui-sidebar-link">Grid System</a>
+
+            <ul class="ui-sidebar-sub-nav">
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('grid-options')" href="#grid-system" class="ui-sidebar-sub-link">Grid Options</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('grid-examples')" href="#grid-examples" class="ui-sidebar-sub-link">Grid Examples</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="ui-sidebar-item">
+            <a ng-click="scrollTo('blocks')" href="#blocks" class="ui-sidebar-link">Blocks</a>
+
+            <ul class="ui-sidebar-sub-nav">
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('header')" href="#header" class="ui-sidebar-sub-link">Header</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('footer')" href="#footer" class="ui-sidebar-sub-link">Footer</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('patient-info')" href="#patient-info" class="ui-sidebar-sub-link">Info of patient</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('breadcrumbs')" href="#breadcrumbs" class="ui-sidebar-sub-link">Breadcrumbs</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('sidebar')" href="#sidebar" class="ui-sidebar-sub-link">Sidebar</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('panel-filter')" href="#panel-filter" class="ui-sidebar-sub-link">Panel heading with filter</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('dashboard')" href="#dashboard" class="ui-sidebar-sub-link">Patient Summary Dashboard</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('vitals-popover')" href="#vitals-popover" class="ui-sidebar-sub-link">Vitals - News Input and Popover</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('timeline')" href="#timeline" class="ui-sidebar-sub-link">Timeline</a>
+              </li>
+              <li class="ui-sidebar-sub-item">
+                <a ng-click="scrollTo('charts')" href="#charts" class="ui-sidebar-sub-link">Charts</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </div>
   </div>
@@ -116,7 +277,7 @@
           </div>
         </div>
 
-        <div id="main-colors" class="ui-sub-section">
+        <div id="black-white-colors" class="ui-sub-section">
           <strong class="ui-title">Black and White colors</strong>
           <ul class="ui-list-colors list-reset">
             <li class="ui-list-colors-item"><span class="ui-color" style="background: #ffffff;"></span><span class="ui-color-name">#ffffff</span></li>
@@ -310,7 +471,7 @@
           </div>
         </div>
 
-        <div>
+        <div id="control-group" class="ui-section">
           <strong class="ui-title">Control Group</strong>
           <div class="ui-sub-section">
             <strong class="ui-sub-title">Controls aligned to left</strong>
@@ -432,7 +593,7 @@
           </div>
         </div>
 
-        <div id="form" class="ui-section">
+        <div id="form-section" class="ui-section">
           <strong class="ui-title">Form section</strong>
           <div class="row">
             <div class="col-xs-12 col-sm-6">
@@ -1077,7 +1238,7 @@
             <div class="form-group">
               <div class="form-control-static">
                 <div class="control-group-wrapper">
-                  <div class="control-group width-indent">
+                  <div class="control-group with-indent">
                     <span class="label label-default">label default</span>
                     <span class="label label-primary">label primary</span>
                     <span class="label label-success">label success</span>
@@ -1840,16 +2001,15 @@
             </div>
           </div>
         </div>
-
-
       </div>
 
 
       <div id="grid" class="ui-section">
         <h2 class="ui-main-title">Grid System</h2>
 
-        <div class="ui-section">
+        <div id="grid-options" class="ui-section">
           <strong class="ui-title">Grid options</strong>
+          
           <div class="ui-sub-section">
             <strong class="ui-sub-title">Class prefix</strong>
             <ul>
@@ -1865,132 +2025,136 @@
             <p><= 479px - 10px (5px on each side of a column)</p>
           </div>
         </div>
-
-        <div class="ui-sub-section">
-          <strong class="ui-sub-title">Columns width variations</strong>
-          <div class="row">
-            <div class="col-sm-12"><div class="ui-grid-block">.col-sm-12</div></div>
-          </div>
-          <div class="row">
-            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
-            <div class="col-sm-11"><div class="ui-grid-block">.col-sm-11</div></div>
-          </div>
-          <div class="row">
-            <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
-            <div class="col-sm-10"><div class="ui-grid-block">.col-sm-10</div></div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3"><div class="ui-grid-block">.col-sm-3</div></div>
-            <div class="col-sm-9"><div class="ui-grid-block">.col-sm-9</div></div>
-          </div>
-          <div class="row">
-            <div class="col-sm-4"><div class="ui-grid-block">.col-sm-4</div></div>
-            <div class="col-sm-8"><div class="ui-grid-block">.col-sm-8</div></div>
-          </div>
-          <div class="row">
-            <div class="col-sm-5"><div class="ui-grid-block">.col-sm-5</div></div>
-            <div class="col-sm-7"><div class="ui-grid-block">.col-sm-7</div></div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6"><div class="ui-grid-block">.col-sm-6</div></div>
-            <div class="col-sm-6"><div class="ui-grid-block">.col-sm-6</div></div>
-          </div>
-          <div class="row">
-            <div class="col-sm-4"><div class="ui-grid-block">.col-sm-4</div></div>
-            <div class="col-sm-4"><div class="ui-grid-block">.col-sm-4</div></div>
-            <div class="col-sm-4"><div class="ui-grid-block">.col-sm-4</div></div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3"><div class="ui-grid-block">.col-sm-3</div></div>
-            <div class="col-sm-3"><div class="ui-grid-block">.col-sm-3</div></div>
-            <div class="col-sm-3"><div class="ui-grid-block">.col-sm-3</div></div>
-            <div class="col-sm-3"><div class="ui-grid-block">.col-sm-3</div></div>
-          </div>
-          <div class="row">
-            <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
-            <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
-            <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
-            <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
-            <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
-            <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
-          </div>
-          <div class="row">
-            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
-            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
-            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
-            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
-            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
-            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
-            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
-            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
-            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
-            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
-            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
-            <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
-          </div>
-        </div>
-        <div class="ui-sub-section">
-          <strong class="ui-sub-title">Columns for modules with details information</strong>
-          <div class="row">
-            <div class="col-xs-12 col-panel-main"><div class="ui-grid-block">.col-panel-main</div></div>
-            <div class="col-xs-12 col-panel-details"><div class="ui-grid-block">.col-panel-details</div></div>
-          </div>
-        </div>
-
-        <div class="ui-sub-section">
-          <strong class="ui-sub-title">Columns for expanded blocks</strong>
-          <div class="ui-expanded-wrapper" ng-class="getFullPanelClass()">
+        
+        <div id="grid-examples" class="ui-section">
+          <strong class="ui-title">Grid Examples</strong>
+          
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Columns width variations</strong>
             <div class="row">
-              <div class="col-xs-12 col-panel-main">
-                <div class="panel panel-secondary">
-                  <div class="panel-heading">
-                    <div class="control-group right">
-                      <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="toggleFullPanelClass('main')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+              <div class="col-sm-12"><div class="ui-grid-block">.col-sm-12</div></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+              <div class="col-sm-11"><div class="ui-grid-block">.col-sm-11</div></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
+              <div class="col-sm-10"><div class="ui-grid-block">.col-sm-10</div></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-3"><div class="ui-grid-block">.col-sm-3</div></div>
+              <div class="col-sm-9"><div class="ui-grid-block">.col-sm-9</div></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4"><div class="ui-grid-block">.col-sm-4</div></div>
+              <div class="col-sm-8"><div class="ui-grid-block">.col-sm-8</div></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-5"><div class="ui-grid-block">.col-sm-5</div></div>
+              <div class="col-sm-7"><div class="ui-grid-block">.col-sm-7</div></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><div class="ui-grid-block">.col-sm-6</div></div>
+              <div class="col-sm-6"><div class="ui-grid-block">.col-sm-6</div></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4"><div class="ui-grid-block">.col-sm-4</div></div>
+              <div class="col-sm-4"><div class="ui-grid-block">.col-sm-4</div></div>
+              <div class="col-sm-4"><div class="ui-grid-block">.col-sm-4</div></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-3"><div class="ui-grid-block">.col-sm-3</div></div>
+              <div class="col-sm-3"><div class="ui-grid-block">.col-sm-3</div></div>
+              <div class="col-sm-3"><div class="ui-grid-block">.col-sm-3</div></div>
+              <div class="col-sm-3"><div class="ui-grid-block">.col-sm-3</div></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
+              <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
+              <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
+              <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
+              <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
+              <div class="col-sm-2"><div class="ui-grid-block">.col-sm-2</div></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+              <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+              <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+              <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+              <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+              <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+              <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+              <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+              <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+              <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+              <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+              <div class="col-sm-1"><div class="ui-grid-block">.col-sm-1</div></div>
+            </div>
+          </div>
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Columns for modules with details information</strong>
+            <div class="row">
+              <div class="col-xs-12 col-panel-main"><div class="ui-grid-block">.col-panel-main</div></div>
+              <div class="col-xs-12 col-panel-details"><div class="ui-grid-block">.col-panel-details</div></div>
+            </div>
+          </div>
+
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Columns for expanded blocks</strong>
+            <div class="ui-expanded-wrapper" ng-class="getFullPanelClass()">
+              <div class="row">
+                <div class="col-xs-12 col-panel-main">
+                  <div class="panel panel-secondary">
+                    <div class="panel-heading">
+                      <div class="control-group right">
+                        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="toggleFullPanelClass('main')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+                      </div>
+                      <h3 class="panel-title">.col-panel-main</h3>
                     </div>
-                    <h3 class="panel-title">.col-panel-main</h3>
-                  </div>
-                  <div class="panel-body">
-                    <div class="panel-body-inner">
-                      <div class="row-expand">
-                        <div class="col-expand-left"><div class="ui-grid-block">.col-expand-left</div></div>
-                        <div class="col-expand-right"><div class="ui-grid-block">.col-expand-right</div></div>
-                      </div>
-                      <div class="row-expand">
-                        <div class="col-expand-left"><div class="ui-grid-block">.col-expand-left</div></div>
-                        <div class="col-expand-right"><div class="ui-grid-block">.col-expand-right</div></div>
-                      </div>
-                      <div class="row-expand">
-                        <div class="col-expand-left">
-                          <div class="ui-grid-block hidden-expand">.hidden-expand</div>
-                          <div class="ui-grid-block visible-expand">.visible-expand</div>
+                    <div class="panel-body">
+                      <div class="panel-body-inner">
+                        <div class="row-expand">
+                          <div class="col-expand-left"><div class="ui-grid-block">.col-expand-left</div></div>
+                          <div class="col-expand-right"><div class="ui-grid-block">.col-expand-right</div></div>
+                        </div>
+                        <div class="row-expand">
+                          <div class="col-expand-left"><div class="ui-grid-block">.col-expand-left</div></div>
+                          <div class="col-expand-right"><div class="ui-grid-block">.col-expand-right</div></div>
+                        </div>
+                        <div class="row-expand">
+                          <div class="col-expand-left">
+                            <div class="ui-grid-block hidden-expand">.hidden-expand</div>
+                            <div class="ui-grid-block visible-expand">.visible-expand</div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-xs-12 col-panel-details">
-                <div class="panel panel-secondary">
-                  <div class="panel-heading">
-                    <div class="control-group right">
-                      <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="toggleFullPanelClass('details')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+                <div class="col-xs-12 col-panel-details">
+                  <div class="panel panel-secondary">
+                    <div class="panel-heading">
+                      <div class="control-group right">
+                        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="toggleFullPanelClass('details')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+                      </div>
+                      <h3 class="panel-title">.col-panel-details</h3>
                     </div>
-                    <h3 class="panel-title">.col-panel-details</h3>
-                  </div>
-                  <div class="panel-body">
-                    <div class="panel-body-inner">
-                      <div class="row-expand">
-                        <div class="col-expand-left"><div class="ui-grid-block">.col-expand-left</div></div>
-                        <div class="col-expand-right"><div class="ui-grid-block">.col-expand-right</div></div>
-                      </div>
-                      <div class="row-expand">
-                        <div class="col-expand-left"><div class="ui-grid-block">.col-expand-left</div></div>
-                        <div class="col-expand-right"><div class="ui-grid-block">.col-expand-right</div></div>
-                      </div>
-                      <div class="row-expand">
-                        <div class="col-expand-left">
-                          <div class="ui-grid-block hidden-not-expand">.hidden-not-expand</div>
-                          <div class="ui-grid-block visible-not-expand">.visible-not-expand</div>
+                    <div class="panel-body">
+                      <div class="panel-body-inner">
+                        <div class="row-expand">
+                          <div class="col-expand-left"><div class="ui-grid-block">.col-expand-left</div></div>
+                          <div class="col-expand-right"><div class="ui-grid-block">.col-expand-right</div></div>
+                        </div>
+                        <div class="row-expand">
+                          <div class="col-expand-left"><div class="ui-grid-block">.col-expand-left</div></div>
+                          <div class="col-expand-right"><div class="ui-grid-block">.col-expand-right</div></div>
+                        </div>
+                        <div class="row-expand">
+                          <div class="col-expand-left">
+                            <div class="ui-grid-block hidden-not-expand">.hidden-not-expand</div>
+                            <div class="ui-grid-block visible-not-expand">.visible-not-expand</div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -2003,10 +2167,188 @@
       </div>
 
 
-      <div id="components" class="ui-section">
+      <div id="blocks" class="ui-section">
         <h2 class="ui-main-title">Blocks</h2>
+
+        <div id="header" class="ui-section">
+          <strong class="ui-title">Header</strong>
+
+          <div class="ui-sub-section">
+            <header class="header">
+              <nav class="navbar">
+                <a class="btn-header btn-header-prev"><i class="fa fa-arrow-left"></i></a>
+                <div class="wrap-logo">
+                  <div class="logo" >
+                    <div class="logo-icon">
+                      <a>
+                        <img src="../../../assets/images/ripple-foundation-logo.png" class="img" alt="logo">
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                
+                <ul class="user-panel" role="tablist">
+                  <li class="user-panel-item visible-xs" ng-class="{active: searchShow}"><a class="btn-header" ng-click="searchShow = !searchShow">
+                    <i class="fa fa-search"></i></a>
+                  </li>
+                  <li class="user-panel-item" uib-dropdown>
+                    <a class="btn-header btn-notification" uib-dropdown-toggle>
+                      <i class="fa fa-bell-o"></i>
+                      <span class="count">2</span>
+                    </a>
+                    <div class="notifications-drop dropdown-menu-right" id="tab-notifications" uib-dropdown-menu>
+                      <div class="notifications-header">Notifications (2)</div>
+                      <div class="notifications-body">
+                        <ul class="notifications-list">
+                          <li class="notifications-list-item">
+                            <div class="notification-info">Information from Liquid Logic (Social Care) is currently unavailable.</div>
+                            <div class="notification-time"><em>10 minutes ago</em></div>
+                          </li>
+                          <li class="notifications-list-item">
+                            <div class="notification-info">Information from Liquid Logic (Social Care) is currently unavailable.</div>
+                            <div class="notification-time"><em>15 minutes ago</em></div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="user-panel-item" uib-dropdown>
+                    <a class="btn-header btn-user" uib-dropdown-toggle>
+                      <i class="fa fa-user"></i>
+                    </a>
+                    <div class="dropdown-user dropdown-menu-right" uib-dropdown-menu>
+                      <div class="user-profile-image" ng-click="$ctrl.goProfile()">
+                        <div class="img">
+                          <img src="../../../assets/images/user.jpg" alt="">
+                        </div>
+                      </div>
+                      <div class="user-profile-info">
+                        <div class="name"  ng-click="$ctrl.goProfile()">Bob Smith</div>
+                        <div class="specification">
+                          <div class="item" ng-if="user.role"><em>IDCR</em></div>
+                          <div class="item" ng-if="user.email">bob.smith@gmail.com</div>
+                          <div class="item gray"><em>10/05/2099</em></div>
+                        </div>
+                        <a class="btn btn-success btn-block btn-signout"><span class="brn-text">Sign Out</span> <i class="btn-icon fa fa-sign-out"></i></a>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                
+                <!-- Nav Search -->
+                <div class="wrap-search wrap-header-search ng-cloak">
+                  <div class="header-search">
+                    <div uib-dropdown class="control-group left control-search-select dropdown">
+                      <button uib-dropdown-toggle class="btn btn-success btn-inverse btn-dropdown-toggle btn-search-toggle"><i class="btn-icon fa fa-bars"></i></button>
+                      <div uib-dropdown-menu class="dropdown-menu dropdown-menu-search-select dropdown-menu-panel dropdown-menu-left dropdown-menu-small-size">
+                        <div class="heading">Search Options</div>
+                        <div class="dropdown-menu-wrap-list">
+                          <div class="dropdown-menu-list">
+                          <div class="dropdown-menu-item" ng-click="$ctrl.closeAdvancedSearch()" ng-class="{active: !isOpenSearch}"><span class="dropdown-menu-item-text">Patient Search - Basic</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button ng-show="!isOpenSearch" class="btn btn-success btn-search"><i class="btn-icon fa fa-search"></i></button>
+                    <div ng-show="!isOpenSearch" class="wrap-search-holder">
+                      <div class="search-holder">
+                        <form ng-submit="$ctrl.searchFunction()">
+                          <input class="form-control" placeholder="Search" type="text"/>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div ng-if="isOpenSearch">
+                    <search-advanced-component option="searchOption"></search-advanced-component>
+                  </div>
+                </div>
+                <!-- / Nav Search -->
+
+                
+              </nav>
+
+              <!-- Header title -->
+              <div class="wrap-header-title" ng-if="isPageHeader">
+                <div class="container-fluid">
+                  <div class="header-title">{{pageHeader}}</div>
+                </div>
+              </div>
+              <!-- /.Header title -->
+
+              <!-- Header toolbar -->
+              <div class="wrap-header-toolbar" ng-if=userContextViewExists>
+                <div class="container-fluid">
+                  <div class="header-toolbar">
+                    <button ng-click="$ctrl.clickSidebarBtn()" class="btn-toggle-sidebar wrap-icon" data-toggle="collapse" data-target="#sidebar-nav" aria-expanded="false">
+                      <i class="btn-icon fa fa-bars"></i>
+                      <span class="btn-text">Menu</span>
+                    </button>
+                    <div ui-view="banner"></div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.Header toolbar-->
+            </header>
+          </div>
+        </div>
+
+        <div id="footer" class="ui-section">
+          <strong class="ui-title">Footer</strong>
+
+          <div class="ui-sub-section ui-footer">
+            <footer class="footer">
+              <div class="container-fluid">
+                <p class="footer-text">Transforming Usability</p>
+                <div class="footer-povered">
+                  <span class="footer-povered-text">Supported by</span>
+                  <a href="#" class="footer-logo"><img src="../../../assets/images/ripple-foundation-logo-footer.png" alt="Ripple Icon" class="footer-logo-img"></a>
+                </div>
+              </div>
+            </footer>
+          </div>
+        </div>
+
+        <div id="patient-info" class="ui-section">
+          <strong class="ui-title">Info of patient</strong>
+
+          <div class="ui-sub-section">
+            <div class="wrap-header-toolbar">
+              <div class="container-fluid">
+                <div class="header-toolbar">
+                  <button class="btn-toggle-sidebar wrap-icon">
+                    <i class="btn-icon fa fa-bars"></i>
+                    <span class="btn-text">Menu</span>
+                  </button>
+                  <div class="wrap-patient-info" ng-class="mobileShowInfo">
+                    <div class="patient-info-caption">
+                      <div class="patient-info-caption-btn btn-dropdown-toggle" ng-click="$ctrl.showInfo()"></div>
+                      <div class="patient-info-caption-text text-truncate">{{ patientInfo.name }}</div>
+                    </div>
+                    <div class="patient-info">
+                      <div class="patient-info-group-2">
+                        <div class="column-1">
+                          <div class="patient-info-item"><span class="key">D.O.B.</span> {{ patientInfo.dateOfBirth }}</div>
+                          <div class="patient-info-item"><span class="key">Phone:</span> {{ patientInfo.telephone }}</div>
+                        </div>
+                        <div class="column-2">
+                          <div class="patient-info-item"><span class="key">Gender:</span> {{ patientInfo.gender }}</div>
+                          <div class="patient-info-item"><span class="key">NHS No.</span> <span ng-bind="patientInfo.nhsNumber | formatNHSNumber"></span></div>
+                        </div>
+                      </div>
+                      <div class="patient-info-group-1">
+                        <div class="patient-info-item significant hidden-xs">{{ patientInfo.name }}</div>
+                        <div class="patient-info-item"><span class="key">Doctor:</span> {{ patientInfo.gpName }}</div>
+                      </div>
+                      <div class="patient-info-item"><span class="key">Address:</span> {{ patientInfo.gpAddress }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         
-        <div id="buttons" class="ui-section">
+        <div id="breadcrumbs" class="ui-section">
           <strong class="ui-title">Breadcrumbs</strong>
 
           <div class="ui-sub-section">
@@ -2022,19 +2364,270 @@
               </div>
             </div>
           </div>
-
         </div>
+
+        <div id="sidebar" class="showSidebar ui-section">
+          <strong class="ui-title">Sidebar</strong>
+
+          <div class="ui-sub-section">
+            <div class="ui-sidebar-content">
+              <div class="content">
+                <div class="sidebar">
+                    <div class="sidebar-nav">
+                      <ul class="sidebar-nav-list">
+                        <li class="sidebar-nav-item">
+                          <a class="sidebar-nav-link">Item</a>
+                        </li>
+                        <li class="sidebar-nav-item">
+                          <a class="sidebar-nav-link active">Item</a>
+                        </li>
+                        <li class="sidebar-nav-item">
+                          <a class="sidebar-nav-link">Item</a>
+                        </li>
+                        <li class="sidebar-nav-item">
+                          <a class="sidebar-nav-link">Item</a>
+                        </li>
+                      </ul>
+                    </div>
+                </div>
+                <div class="main">
+                  <div class="ui-main-content">
+                    Main Content
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+        <div id="panel-filter" class="ui-section">
+          <strong class="ui-title">Panel heading with filter</strong>
+
+          <div class="ui-sub-section">
+            <div filtering class="panel panel-primary">
+              <div class="panel-heading">
+                <div class="control-group right">
+                  <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="btn-icon fa fa-filter"></i></button>
+                </div>
+                <h3 class="panel-title">Panel title</h3>
+                <div class="panel-filter" ng-show="isFilterOpen">
+                  <div class="inner-addon addon-left">
+                    <div class="addon">
+                      <i class="fa fa-filter"></i>
+                    </div>
+                    <input type="text" id="filter" class="form-control" placeholder="Filter..." ng-model="queryFilter" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="dashboard" class="ui-section">
+          <strong class="ui-title">Patient Summary Dashboard</strong>
+
+          <div class="ui-sub-section">
+            <div class="dashboard">
+              <div class="dashboard-item">
+                <div class="board">
+                  <div class="board-header">
+                    <div class="control-group right">
+                      <button class="btn btn-success btn-inverse btn-board-more"><i class="btn-icon fa fa-caret-right"></i></button>
+                    </div>
+                    <h3 class="board-title">Dashboard title</h3>
+                  </div>
+                  <div class="board-body">
+                    <ul class="board-list">
+                      <li class="board-list-item">
+                        <span class="board-list-link">Dashboard item</span>
+                      </li>
+                      <li class="board-list-item">
+                        <span class="board-list-link">Dashboard item</span>
+                      </li>
+                      <li class="board-list-item">
+                        <span class="board-list-link">Dashboard item</span>
+                      </li>
+                      <li class="board-list-item">
+                        <span class="board-list-link">Dashboard item</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="dashboard-item">
+                <div class="board">
+                  <div class="board-header">
+                    <div class="control-group right">
+                      <button class="btn btn-success btn-inverse btn-board-more"><i class="btn-icon fa fa-caret-right"></i></button>
+                    </div>
+                    <h3 class="board-title">Dashboard title</h3>
+                  </div>
+                  <div class="board-body">
+                    <ul class="board-list">
+                      <li class="board-list-item">
+                        <span class="board-list-link">Dashboard item</span>
+                      </li>
+                      <li class="board-list-item">
+                        <span class="board-list-link">Dashboard item</span>
+                      </li>
+                      <li class="board-list-item">
+                        <span class="board-list-link">Dashboard item</span>
+                      </li>
+                      <li class="board-list-item"></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="dashboard-item">
+                <div class="board">
+                  <div class="board-header">
+                    <div class="control-group right">
+                      <button class="btn btn-success btn-inverse btn-board-more"><i class="btn-icon fa fa-caret-right"></i></button>
+                    </div>
+                    <h3 class="board-title">Dashboard title</h3>
+                  </div>
+                  <div class="board-body">
+                    <ul class="board-list">
+                      <li class="board-list-item">
+                        <span class="board-list-link">Dashboard item</span>
+                      </li>
+                      <li class="board-list-item">
+                        <span class="board-list-link">Dashboard item</span>
+                      </li>
+                      <li class="board-list-item"></li>
+                      <li class="board-list-item"></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="dashboard-item">
+                <div class="board">
+                  <div class="board-header">
+                    <div class="control-group right">
+                      <button class="btn btn-success btn-inverse btn-board-more"><i class="btn-icon fa fa-caret-right"></i></button>
+                    </div>
+                    <h3 class="board-title">Dashboard title</h3>
+                  </div>
+                  <div class="board-body">
+                    <ul class="board-list">
+                      <li class="board-list-item">
+                        <span class="board-list-link">Dashboard item</span>
+                      </li>
+                      <li class="board-list-item"></li>
+                      <li class="board-list-item"></li>
+                      <li class="board-list-item"></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div mc-popover id="vitals-popover" class="ui-section">
+          <strong class="ui-title">Vitals - News Input and Popover </strong>
+
+          <div class="ui-sub-section">
+            <div class="vitals-group-wrapper">
+              <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                  <div class="vitals-group highlighter-wrapper">
+                    <span class="highlighter-warning"></span>  
+                    <label class="vitals-label">Respiration Rate</label>
+                    <div class="input-group vitals-holder popover-wrap warning">
+                      <div class="form-control input-sm">{{vital.respirationRate}}</div>
+                      <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">resps/min</span>
+                      <mc-popover-vital title="Respiration Rate" labels="{{popoverLabels.respirationRate}}"></mc-popover-vital>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                  <div class="vitals-group highlighter-wrapper">
+                    <span class="highlighter-success"></span>  
+                    <label class="vitals-label">Heart Rate</label>
+                    <div class="input-group vitals-holder popover-wrap success">
+                      <div class="form-control input-sm">{{vital.heartRate}}</div>
+                      <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">bpm</span>
+                      <mc-popover-vital title="Respiration Rate" labels="{{popoverLabels.heartRate}}"></mc-popover-vital>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                  <div class="vitals-group highlighter-wrapper">
+                    <span class="highlighter-danger"></span>  
+                    <label class="vitals-label">NEWS Score</label>
+                    <div class="input-holder vitals-holder danger" ng-class="vitalStatuses.newsScore.type">
+                      <div class="form-control input-sm">{{vital.newsScore}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="timeline" class="ui-section">
+          <strong class="ui-title">Timeline</strong>
+
+          <div class="ui-sub-section">
+            <div class="wrap-timeline">
+              <div class="timeline-content-scroll" ng-scrollbars ng-scrollbars-config="configScrollbar" ng-scrollbars-update=updateScrollbar>
+                <div class="timeline">
+                  <div class="timeline-inner">
+                    <div ng-repeat="(key, eventGroup) in eventsTimeline">
+                      <div class="timeline-header">{{ key | date:'dd MMMM yyyy' }}</div>
+                      <div class="timeline-date-group" >
+                        <div class="timeline-date" ng-repeat="event in eventGroup" ng-class="event.sideDateInTimeline">
+                          <div class="timeline-date-content">
+                            <div class="timeline-date-title">{{ event.serviceTeam }}</div>
+                            <div class="timeline-date-subtitle">{{ event.type }}</div>
+                            <div class="timeline-date-text">{{ event.dateOfAppointment | date:'dd MMMM yyyy' }}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="charts" class="ui-section">
+          <strong class="ui-title">Charts</strong>
+
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Chart Bar</strong>
+            <div class="panel panel-secondary">
+              <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-bar-chart"></i> Patients By Setting</h3>
+              </div>
+              <div class="panel-body">
+                <div class="panel-body-inner">
+                  <div class="chart-block" ng-class="{hoverChart: hoverSettings}" ng-mouseenter="hoverSettings = true" ng-mouseleave="hoverSettings = false">
+                    <div class="chart-title-group">
+                      <h2 class="chart-title">Patients By Setting</h2>
+                      <p class="chart-subtitle">This is a brief description of patients by setting.</p>
+                    </div>
+                    <div class="wrap-chart chart-dashboard">
+                      <canvas id="chart-department" height="350" width="600"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-sub-section">
+            <strong class="ui-sub-title">Chart Lines</strong>
+            <div class="wrap-chart chart-vitals bordered">
+              <canvas id="vitalNewsChart" height="441" width="600"></canvas>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 </div>
-
-<!-- <footer class="footer">
-  <div class="container-fluid">
-    <p class="footer-text">Transforming Usability</p>
-    <div class="footer-povered">
-      <span class="footer-povered-text">Supported by</span>
-      <a href="#" class="footer-logo"><img src="/app/assets/images/ripple-foundation-logo-footer.png" alt="Ripple Icon" class="footer-logo-img"></a>
-    </div>
-  </div>
-</footer> -->

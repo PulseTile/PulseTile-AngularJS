@@ -3,16 +3,19 @@
 @import 'abstracts/settings';
 @import 'abstracts/mixins';
 
+$ui-color: #f26604;
+
 .ui-wrapper {
   min-height: 100%;
   min-width: 320px;
   overflow: hidden;
-  padding: 60px 0;
+  padding: 30px 0;
   position: relative;
 }
 .ui-header {
-  background-color: #0D672F;
-  color: #fff;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e1e1e1;
+  color: #555555;
   left: 0;
   min-width: 320px;
   padding: 0 15px;
@@ -21,35 +24,42 @@
   top: 0;
   z-index: 16;
 }
+
 .ui-header-inner {
-  height: 60px;
+  height: 44px;
   padding: 0 40px;
   position: relative;
   @include respond-from(xs) {
     padding: 0 100px;
   }
 }
+.ui-logo {
+  left: 0;
+  position: absolute;
+  top: 10px;
+  .img {
+    max-height: 22px;
+    width: auto; 
+  }
+}
 .ui-header-title {
-  align-items: center;
-  display: flex;
-  font-size: 20px;
+  font-size: 22px;
   height: 100%;
-  line-height: 20px;
+  line-height: 46px;
   text-align: center;
-  justify-content: center;
 }
 
 .ui-btn-toggle-sidebar {
   background: transparent;
-  border: 1px solid $text-on-base-color;
-  color: $text-on-base-color;
+  border: 1px solid $ui-color;
+  color: $ui-color;
   cursor: pointer;
   height: 34px;
-  left: 0;
   margin: 0;
   outline: none;
   padding: 6px 8px;
   position: absolute;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
   .btn-icon,
@@ -63,17 +73,17 @@
     font-size: 16px;
   }
 }
-.showSidebar .ui-btn-toggle-sidebar,
-.showSidebar .ui-btn-toggle-sidebar:focus,
-.showSidebar .ui-btn-toggle-sidebar:hover {
-  background: $text-on-base-color;
-  color: $base-color;
+.ui-showSidebar .ui-btn-toggle-sidebar,
+.ui-showSidebar .ui-btn-toggle-sidebar:focus,
+.ui-showSidebar .ui-btn-toggle-sidebar:hover {
+  background: $ui-color;
+  border-color: $ui-color;
+  color: #ffffff;
 }
 @include respond-from(xs) {
   .ui-btn-toggle-sidebar,
   .ui-btn-toggle-sidebar:focus,
   .ui-btn-toggle-sidebar:hover, {
-    margin-right: 18px;
     padding: 6px 14px 6px 11px;
     .btn-icon { margin-right: 9px; }
     .btn-text { display: inline; }
@@ -81,45 +91,116 @@
 }
 @include respond-from(sm) {
   .is-not-touch-device .ui-btn-toggle-sidebar:hover {
-    background: $text-on-base-color;
-    color: $base-color;
+    border-color: darken($ui-color, 5%);
+    color: darken($ui-color, 5%);
+  }
+  .is-not-touch-device.ui-showSidebar .ui-btn-toggle-sidebar:hover {
+    background: darken($ui-color, 5%);
+    border-color: darken($ui-color, 5%);
+    color: #fff;
   }
 }
 
-
 .ui-sidebar {
-  background: #F7F7F7;
-  border-right: 1px solid #B7B7B7;
+  background: #fcfcfc;
+  border-right: 1px solid #e1e1e1;
   bottom: 0;
   left: 0;
-  position: absolute;
-  top: 60px;
+  padding: 10px 0 20px;
+  position: fixed;
+  top: 45px;
   transform: translateX(-100%);
   transition: transform 0.6s;
   width: 220px;
   z-index: 2;
-  padding: 10px 0;
 }
-.ui-sidebar-nav {
-  overflow-y: auto;
+.ui-sidebar-inner {
   height: 100%;
+  overflow-y: auto;
 }
-.showSidebar .ui-sidebar { transform: translateX(0%); }
+.ui-showSidebar .ui-sidebar { transform: translateX(0%); }
 
 .ui-main { transition: padding 0.6s; }
-.showSidebar .ui-main { padding-left: 235px; }
+
+@include respond-from(sm) {
+  // .ui-showSidebar .ui-main { padding-left: 235px; }
+}
+
+.ui-sidebar-nav {
+  @include list-reset;
+  color: #555555;
+  font-size: 14px;
+  font-weight: 700;
+}
+.ui-sidebar-link,
+.is-not-touch-device .ui-sidebar-link:focus {
+  color: #555555;
+  display: block;
+  line-height: 20px;
+  padding: 10px;
+  position: relative;
+  &:before {
+    background: $ui-color;
+    bottom: 0;
+    content: '';
+    height: 3px;
+    left: 0;
+    position: absolute;
+    transition: width 0.3s ease;
+    width: 0;
+  }
+}
+
+.ui-sidebar-link.active,
+.is-not-touch-device .ui-sidebar-link:hover {
+  color: #555555;
+  &:before {
+    width: 45%;
+  }
+}
+
+.ui-sidebar-sub-nav {
+  @include list-reset;
+  color: #555555;
+  font-size: 14px;
+  font-weight: 400;
+  padding-left: 20px;
+}
+.ui-sidebar-sub-link,
+.is-not-touch-device .ui-sidebar-sub-link:focus {
+  color: #555555;
+  display: block;
+  line-height: 20px;
+  padding: 5px 10px;
+  position: relative;
+  &:before {
+    background: $ui-color;
+    bottom: 0;
+    content: '';
+    height: 2px;
+    left: 0;
+    position: absolute;
+    transition: width 0.3s ease;
+    width: 0;
+  }
+}
+
+.ui-sidebar-sub-link.active,
+.is-not-touch-device .ui-sidebar-sub-link:hover {
+  color: #555555;
+  &:before {
+    width: 45%;
+  }
+}
 
 .ui-content {
-  max-width: 990px;
   margin: 0 auto;
+  max-width: 990px;
   padding: 0px 15px 30px;
 }
-.ui-section {
-  margin-bottom: 40px;
-}
-.ui-sub-section {
-  margin-bottom: 25px;
-}
+
+.ui-section { margin-bottom: 40px; }
+.ui-sub-section {  margin-bottom: 25px; }
 
 .ui-main-title {
   border-bottom: 1px solid #D8D8D8;
@@ -128,17 +209,20 @@
   padding: 60px 0 15px;
   text-align: center;
 }
+
 .ui-title,
 .ui-sub-title  {
   display: block;
   font-weight: 400;
   margin: 0 0 15px;
 }
+
 .ui-title { 
-  font-size: 24px; 
   background: #eeeeee;
+  font-size: 24px; 
   padding: 5px 10px;
 }
+
 .ui-sub-title { font-size: 18px; }
 
 /*Color Pallete*/
@@ -151,10 +235,10 @@
     text-align: center;
   }
   .ui-color-box-example {
+    border: 1px solid #D8D8D8;
+    float: left;
     height: 50px;
     width: 50px;
-    float: left;
-    border: 1px solid #D8D8D8
   }
   
   @each $name, $color in $colored-buttons {
@@ -174,70 +258,80 @@
     }
   }
   
-  .ui-list-colors {
-    margin: 10px;
-  }
-  .ui-list-colors-item {
-    margin-bottom: 5px;
-  }
+  .ui-list-colors { margin: 10px; }
+
+  .ui-list-colors-item { margin-bottom: 5px; }
+
   .ui-color {
     display: inline-block;
-    vertical-align: middle;
-    width: 40px;
     height: 20px;
     margin-right: 15px;
+    vertical-align: middle;
+    width: 40px;
   }
   .ui-color-name {
-    display: inline-block;
-    vertical-align: middle;
-    line-height: 20px;
     color: $text-color;
+    display: inline-block;
     font-size: 12px;
     font-weight: 700;
+    line-height: 20px;
+    vertical-align: middle;
   }
 /*Color Pallete*/
 
 /*Grid system*/
   .ui-grid-block {
     background: #cccccc;
-    color: #303030;
     border-radius: 4px;
-    padding: 10px 5px;
+    color: #303030;
     margin-bottom: 10px;
-    transition: background 0.3s, color 0.3s;
+    padding: 10px 5px;
     text-align: center;
+    transition: background 0.3s, color 0.3s;
     &:hover {
-      color: #ffffff;
       background: #303030;
+      color: #ffffff;
     }
   }
 /*Grid system*/
 
 .ui-spinner-wrap { 
-  position: relative;
   height: 100px;
+  position: relative;
 }
 .ui-highlighter {
   height: 50px;
   margin-bottom: 5px;
 }
 .ui-panel-content {
+  background: #f0ffff;
   height: 100px;
   padding: 10px;
-  background: #f0ffff;
 }
 
 .ui-scrollbar { height: 150px; }
 .ui-scrollbar-content {
+  background: #f0ffff;
   height: 2000px; 
   padding: 50px 0;
-  background: #f0ffff;
 }
 .ui-scrollbar-content-start,
 .ui-scrollbar-content-end {
-  position: absolute;
-  line-height: 50px;
   left: 20px;
+  line-height: 50px;
+  position: absolute;
 }
 .ui-scrollbar-content-start { top: 0; }
 .ui-scrollbar-content-end { bottom: 0; }
+
+.ui-footer .footer { position: static; }
+
+.ui-sidebar-content {
+  height: 250px;
+  overflow: hidden;
+}
+.ui-main-content {
+  background: #f0ffff;
+  height: 100px;
+  padding: 10px;
+}
