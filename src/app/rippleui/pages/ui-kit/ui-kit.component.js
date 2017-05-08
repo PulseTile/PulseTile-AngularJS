@@ -20,15 +20,27 @@ class UiKitController {
       serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: null, name: 'ui-kit'});
       serviceRequests.publisher('headerTitle', {title: 'UI OVERVIEW', isShowTitle: true});
 
-      $scope.isOpenSidebar = true;
+      $scope.isOpenSidebar = false;
       $scope.isTouchDevice = deviceDetector.detectDevice();
       $scope.fullPanelClass = '';
       $scope.logoFileParams = {};
+
+      $scope.isMobileScreen = function () {
+        if (window.innerWidth > 767) {
+          return false;
+        }
+        
+        return true;
+      };
 
       $scope.scrollTo = function (id) {
         var $elm = $('#' + id);
         
         $("body").animate({scrollTop: $elm.offset().top - 60}, "slow");
+        
+        if ($scope.isMobileScreen()) {
+          $scope.isOpenSidebar = false;
+        }
       }
 
       // Pagination
@@ -387,6 +399,12 @@ class UiKitController {
             options: optionsChartLine
         });
       //Charts
+
+      angular.element(document).ready(function () {
+        if (!$scope.isMobileScreen()) {
+          $scope.isOpenSidebar = true;
+        }
+      }.bind(this));
     }
 }
 
