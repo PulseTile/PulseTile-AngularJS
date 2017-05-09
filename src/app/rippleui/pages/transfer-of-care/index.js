@@ -31,8 +31,8 @@ export default {
     transferOfCareActions
   },
   "sidebarInfo": {
-    // name: 'transfers',
-    // link: 'transferOfCare',
-    // title: 'Transfer of Care'
+    name: 'transfers',
+    link: 'transferOfCare',
+    title: 'Transfer of Care'
   }
 }

@@ -1,10 +1,10 @@
 <!--
   ~  Copyright 2016 Ripple Foundation C.I.C. Ltd
-  ~
+  ~  
   ~  Licensed under the Apache License, Version 2.0 (the "License");
   ~  you may not use this file except in compliance with the License.
   ~  You may obtain a copy of the License at
-  ~
+  ~  
   ~    http://www.apache.org/licenses/LICENSE-2.0
 
   ~  Unless required by applicable law or agreed to in writing, software
@@ -13,51 +13,70 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
-<h3><strong>Transfer of Care</strong></h3>
 
-<div class="inner-addon left-addon filterInput">
-    <i class="fa fa-filter"></i>
-    <input type="text" class="form-control" placeholder="Filter..." ng-model="$ctrl.query[queryBy]" />
-</div>
-
-<table class="table table-bordered table-striped table-hover rwd-table">
-  <thead>
-  <tr>
-    <th>Transfer</th>
-    <th>From (Site / Organisation)</th>
-    <th>To (Site / Organisation) </th>
-    <th>Date / Time</th>
-    <th>Source</th>
-  </tr>
-  </thead>
-
-  <tbody>
-
-  <tr dir-paginate="transfer in $ctrl.transferofCareComposition | filter:$ctrl.query | itemsPerPage: 6 " current-page="$ctrl.currentPage"  ng-click="$ctrl.go(transfer.sourceId)" ng-class="{info: $ctrl.selected(transfer.sourceId)}">
-    <td data-th="Transfer"><span>Transfer #{{($index + 1)}}</span></td>
-    <td data-th="From (Site / Organisation)"><span>{{transfer.siteFrom}}</span></td>
-    <td data-th="To (Site / Organisation)"><span>{{transfer.siteTo}}</span></td>
-    <td data-th="Date / Time"><span>{{transfer.dateOfTransfer}}</span></td>
-    <td data-th="Source"><span>local</span></td>
-  </tr>
-
-  <tr ng-if="!$ctrl.transferofCareComposition.length">
-    <td colspan="5"><span class="label label-default">No transfers</span></td>
-  </tr>
-  </tbody>
-</table>
-
-<div class="row">
-  <div class="col-md-12">
-    <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="patientSummary-spinner" spinner-start-active="true"></span>
+<div mc-full-panel table-settings order="transfer" filtering class="panel panel-primary">
+  <div class="panel-heading">
+    <div class="control-group right">
+      <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="btn-icon fa fa-filter"></i></button>
+    </div>
+    <div class="control-group right" >
+      <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('main')" ng-if="$ctrl.isShowExpandBtn"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+    </div>
+    <h3 class="panel-title">Transfer of Care</h3>
+    <div class="panel-filter" ng-show="isFilterOpen">
+      <div class="inner-addon addon-left">
+        <div class="addon">
+          <i class="fa fa-filter"></i>
+        </div>
+        <input type="text" id="filter" class="form-control" placeholder="Filter..." ng-model="queryFilter" />
+      </div>
+    </div>
   </div>
-</div>
+  <div class="panel-body">
+    <table class="table table-striped table-hover table-bordered rwd-table table-sorted table-fixedcol">
+      <colgroup>
+        <col style="width: 18%;">
+        <col style="width: 22%;">
+        <col style="width: 22%;">
+        <col style="width: 19%;">
+        <col style="width: 19%;">
+      </colgroup>
+      <thead>
+        <tr>
+          <th ng-click="sort('transfer')" ng-class="sortClass('transfer')">Transfer</th>
+          <th ng-click="sort('from')" ng-class="sortClass('from')">From (Site / Org)</th>
+          <th ng-click="sort('to')" ng-class="sortClass('to')">To (Site / Org)</th>
+          <th ng-click="sort('date')" ng-class="sortClass('date')">Date / Time</th>
+          <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
+        </tr>
+      </thead>
 
-<div class="row" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
-  <div class="col-md-6 hidden-xs"><div class="text-right"><dir-pagination-controls on-page-change="$ctrl.pageChangeHandler($ctrl.newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>
-  <div class="col-md-6 hidden-xs"><div class="text-right create-button"><button class="btn btn-info" ng-click="$ctrl.create();"><i class="btn-icon fa fa-plus"></i> <span class="btn-text">Create</span></button></div></div>
-</div>
-<div class="row" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
-  <div class="col-xs-6 hidden-sm hidden-md hidden-lg"><div class="text-right"><dir-pagination-controls on-page-change="$ctrl.pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls></div></div>
-  <div class="col-xs-6 hidden-sm hidden-md hidden-lg"><div class="text-right create-button"><button class="btn btn-info" ng-click="$ctrl.create();"><i class="btn-icon fa fa-plus"></i> <span class="btn-text">Create</span></button></div></div>
+      <tbody>
+        <tr dir-paginate="transferOfCare in $ctrl.transferOfCares | filter: queryFiltering | orderBy:[order] : reverse  | itemsPerPage: 10" current-page="currentPage"  ng-click="$ctrl.go(transferOfCare.sourceId)" ng-class="{info: selectedRow(transferOfCare.sourceId)}">
+          <td data-th="Transfer" ng-class="sortClass('transfer')"><span>{{transferOfCare.transfer}}</span></td>
+          <td data-th="From (Site / Org)" ng-class="sortClass('from')"><span>{{ transferOfCare.from }}</span></td>
+          <td data-th="To (Site / Org)" ng-class="sortClass('to')"><span>{{ transferOfCare.to }}</span></td>
+          <td data-th="Date / Time" ng-class="sortClass('date')"><span>{{ transferOfCare.date }}</span></td>
+          <td data-th="Source" ng-class="sortClass('source')"><span>{{ transferOfCare.source }}</span></td>
+        </tr>
+
+        <tr ng-if="!$ctrl.transferOfCares.length">
+          <td colspan="5"><span class="label label-default">No transfer of cares</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="patientSummary-spinner" spinner-start-active="true"></span>
+
+    <div class="panel-control">
+      <div class="wrap-control-group">
+        <div class="control-group with-indent left">
+          <dir-pagination-controls max-size="6" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
+        </div>
+        <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1 && $ctrl.isShowCreateBtn">
+          <button class="btn btn-success btn-inverse btn-create" ng-click="$ctrl.create();"><i class="btn-icon fa fa-plus"></i> <span class="btn-text">Create</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
