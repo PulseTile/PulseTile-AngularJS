@@ -53,7 +53,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         banner: {template: '<patients-banner-component></patients-banner-component>'},
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
         main: {template: '<transfer-of-care-list-component></transfer-of-care-list-component>'},
-        detail: {template: '<referrals-create-component></referrals-create-component>'}
+        detail: {template: '<transfer-of-care-create-component></transfer-of-care-create-component>'}
       },
       breadcrumbs: breadcrumbs
     })
