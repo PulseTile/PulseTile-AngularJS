@@ -37,6 +37,7 @@ import 'ng-scrollbars';
 import 'angular-ui-select';
 import 'angular-swiper';
 import 'swiper';
+import 'angular-drag-and-drop-lists';
 
 //commons
 import reducer from './redux/reducer';
@@ -100,7 +101,8 @@ let app = angular
         'rzModule',
         'ui.select',
         'ksSwiper',
-        'ngSanitize'
+        'ngSanitize',
+        'dndLists'
     ])
     .factory('ScheduleModal', ScheduleModal)
     .factory('ConfirmationModal', ConfirmationModal)

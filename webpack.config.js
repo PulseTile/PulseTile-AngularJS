@@ -35,8 +35,8 @@ const config = {
 
     root: path.resolve('./src'),
     alias: {
-      'morrisjs': '../../bower_components/morrisjs/morris.js',
-      'spin': 'spin.js'
+      // 'morrisjs': '../../bower_components/morrisjs/morris.js',
+      'spin': 'spin.js',
     }
   },
 
@@ -71,7 +71,7 @@ const config = {
       "moment": "moment",
       Raphael: 'raphael',
       io: 'socket.io-client',
-      swiper: 'swiper'
+      swiper: 'swiper',
     })
   ],
 

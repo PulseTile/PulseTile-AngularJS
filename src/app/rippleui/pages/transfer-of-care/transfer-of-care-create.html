@@ -51,58 +51,164 @@
               </div>
             </div>
 
-            <div class="form-group" ng-class="{'has-error': (formSubmitted || transferOfCareForm.type.$dirty) && transferOfCareForm.type.$invalid, 'has-success': transferOfCareForm.type.$valid && transferOfCareForm.type.$dirty}">
+            <div class="form-group">
                 <label for="type" class="control-label">Type</label>
                 <div class="input-holder">
-                    <select class="form-control input-sm" id="type" name="type" ng-model="transferOfCareEdit.type" required ng-options="item as item.title for item in typeRecords">
+                    <select class="form-control input-sm" id="type" name="type" ng-model="transferOfCareEdit.type" ng-options="key as item.title for (key, item) in typeRecords" ng-change="selectTypeRecords(transferOfCareEdit.type)">
                         <option value="">-- Select type --</option>
                     </select>
                 </div>
                 <span class="help-block animate-fade" ng-show="formSubmitted && transferOfCareForm.type.$error.required">You must enter a value.</span>
             </div>
 
-            <div ng-if="isShowTypeRecord(typeRecords.diagnosis)" class="form-group">
-                <label for="diagnosisId" class="control-label">Problems / Diagnosis</label>
+
+            <!-- Problems / Diagnosis Section -->
+            <div ng-if="isShowTypeRecord('diagnosis')" class="form-group">
+                <label for="typeRecordId" class="control-label">Problems / Diagnosis</label>
                 <div class="input-holder">
-                    <select class="form-control input-sm" id="diagnosisId" name="diagnosisId" ng-model="diagnosisSelected" ng-options="item for item in typeRecords.diagnosis" ng-change="addToRecords()">
+                    <select class="form-control input-sm" id="typeRecordId" name="typeRecordId" ng-model="selectedRecord" ng-options="item as item.problem for item in typeRecords.diagnosis.records" ng-change="addToRecords(selectedRecord)">
                         <option value="">-- Select Problems / Diagnosis --</option>
                     </select>
                 </div>
             </div>
 
+            <!-- Medications Section -->
+            <div ng-if="isShowTypeRecord('medications')" class="form-group">
+                <label for="typeRecordId" class="control-label">Medications</label>
+                <div class="input-holder">
+                    <select class="form-control input-sm" id="typeRecordId" name="typeRecordId" ng-model="selectedRecord" ng-options="item as item.name for item in typeRecords.medications.records" ng-change="addToRecords(selectedRecord)">
+                        <option value="">-- Select Medications --</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Medications Section -->
+            <div ng-if="isShowTypeRecord('events')">
+              <div  class="form-group">
+                  <label for="typeRecordId" class="control-label">Events</label>
+                  <div class="input-holder">
+                      <select class="form-control input-sm" id="typeRecordId" name="typeRecordId" ng-model="selectedRecord" ng-options="item as item.name for item in typeRecords.medications.records" ng-change="addToRecords(selectedRecord)">
+                          <option value="">-- Select Medications --</option>
+                      </select>
+                  </div>
+              </div>
+            </div>
+
+
+
+
+
+
             <div ng-if="!transferOfCareEdit.records.length" class="form-group">
               <div class="form-control-static">No records added</div>
             </div>
             
-            <table ng-if="transferOfCareEdit.records.length" class="table table-striped table-hover table-bordered rwd-table table-sorted table-fixedcol">
-              <colgroup>
-                <col style="width: 18%;">
-                <col style="width: 22%;">
-                <col style="width: 22%;">
-                <col style="width: 19%;">
-                <col style="width: 19%;">
-              </colgroup>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>Date</th>
-                  <th>Source</th>
-                  <th></th>
-                </tr>
-              </thead>
+            <div class="panel-body-inner-table">
+              <div class="form-group">
+                <table ng-if="transferOfCareEdit.records.length" class="table table-striped table-hover table-bordered rwd-table table-sorted table-fixedcol table-transferOfCare">
+                  <colgroup>
+                    <col>
+                    <col style="width: 22%;">
+                    <col style="width: 22%;">
+                    <col style="width: 19%;">
+                    <col style="width: 54px;">
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Date</th>
+                      <th>Source</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+<!-- ui-sortable="sortableOptions" ng-model="transferOfCareEdit.records" -->
+                  <tbody dnd-list="transferOfCareEdit.records">
+                    <tr ng-repeat="(index, record) in transferOfCareEdit.records" 
+                        ng-click=""
+                        dnd-draggable="record"
+                        dnd-moved="transferOfCareEdit.records.splice($index, 1)"
+                        dnd-effect-allowed="move">
+                      <td data-th="Name"><span>{{ record.name }}</span></td>
+                      <td data-th="Type"><span>{{ record.typeTitle }}</span></td>
+                      <td data-th="Date"><span>{{ record.date }}</span></td>
+                      <td data-th="Source"><span>{{ record.source }}</span></td>
+                      <td data-th=""><span><div ng-click="removeRecord(index)" class="btn btn-smaller btn-danger btn-icon-normal"><i class="btn-icon fa fa-times"></i></div></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
 
-              <tbody>
-                <tr ng-repeat="record in transferOfCareEdit.records" ng-click="">
-                  <td data-th="Name"><span>{{ record.name }}</span></td>
-                  <td data-th="Type"><span>{{ record.type }}</span></td>
-                  <td data-th="Date"><span>{{ record.date }}</span></td>
-                  <td data-th="Source"><span>{{ record.source }}</span></td>
-                  <td data-th=""><span><button class="btn btn-square btn-danger btn-icon-normal"><i class="btn-icon fa fa-times"></i></button></span></td>
-                </tr>
-              </tbody>
-            </table>
+            <style>
+              /**
+               * The dnd-list should always have a min-height,
+               * otherwise you can't drop to it once it's empty
+               */
+              .simpleDemo ul[dnd-list] {
+                  min-height: 42px;
+                  padding-left: 0px;
+              }
 
+              /**
+               * The dndDraggingSource class will be applied to
+               * the source element of a drag operation. It makes
+               * sense to hide it to give the user the feeling
+               * that he's actually moving it.
+               */
+              .simpleDemo ul[dnd-list] .dndDraggingSource {
+                  display: none;
+              }
+
+              /**
+               * An element with .dndPlaceholder class will be
+               * added to the dnd-list while the user is dragging
+               * over it.
+               */
+              .simpleDemo ul[dnd-list] .dndPlaceholder {
+                  background-color: #ddd;
+                  display: block;
+                  min-height: 42px;
+              }
+
+              .simpleDemo ul[dnd-list] li {
+                  background-color: #fff;
+                  border: 1px solid #ddd;
+                  border-top-right-radius: 4px;
+                  border-top-left-radius: 4px;
+                  display: block;
+                  padding: 10px 15px;
+                  margin-bottom: -1px;
+              }
+
+              /**
+               * Show selected elements in green
+               */
+              .simpleDemo ul[dnd-list] li.selected {
+                  background-color: #dff0d8;
+                  color: #3c763d;
+              }
+            </style>
+
+            <!-- The dnd-list directive allows to drop elements into it.
+                 The dropped data will be added to the referenced list -->
+            <!-- <div ng-repeat="(listName, list) in models.lists"></div> -->
+            <!-- <div>{{models.lists}}</div> -->
+            <ul dnd-list="models.lists">
+                <!-- The dnd-draggable directive makes an element draggable and will
+                     transfer the object that was assigned to it. If an element was
+                     dragged away, you have to remove it from the original list
+                     yourself using the dnd-moved attribute -->
+                <li ng-repeat="item in models.lists"
+                    dnd-draggable="item"
+                    dnd-moved="models.lists.splice($index, 1)"
+                    dnd-effect-allowed="move"
+                    dnd-selected="models.selected = item"
+                    ng-class="{'selected': models.selected === item}"
+                    >
+                    {{item.label}}
+                </li>
+            </ul>
 
 
 
@@ -147,4 +253,6 @@
       </div>
     </div>
   </div>
+
+  <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="transferCreate-spinner" spinner-start-active="false"></span>
 </div>
