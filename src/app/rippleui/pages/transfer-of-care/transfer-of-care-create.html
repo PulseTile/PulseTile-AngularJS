@@ -77,9 +77,18 @@
             <!-- Events Section -->
             <div ng-if="isShowTypeRecord('events')">
               <div  class="form-group">
+                  <label for="typeevents" class="control-label">Events Type</label>
+                  <div class="input-holder">
+                      <select class="form-control input-sm" id="typeevents" name="typeevents" ng-model="selectedTypeEvents" ng-options=" key as key for (key, item) in typeRecords.events.records">
+                          <option value="">-- Select Events Type --</option>
+                      </select>
+                  </div>
+              </div>
+            
+              <div  class="form-group">
                   <label for="typeRecordId" class="control-label">Events</label>
                   <div class="input-holder">
-                      <select class="form-control input-sm" id="typeRecordId" name="typeRecordId" ng-model="selectedRecord" ng-options="item as item.name for item in typeRecords.events.records" ng-change="addToRecords(selectedRecord)">
+                      <select class="form-control input-sm" id="typeRecordId" name="typeRecordId" ng-model="selectedRecord" ng-options="item as item.selectName for item in typeRecords.events.records[selectedTypeEvents]" ng-change="addToRecords(selectedRecord)">
                           <option value="">-- Select Events --</option>
                       </select>
                   </div>
@@ -87,12 +96,9 @@
             </div>
 
 
-
-
-
-
-            <div ng-if="!transferOfCareEdit.records.length" class="form-group">
+            <div ng-if="!transferOfCareEdit.records.length" class="form-group" ng-class="{'has-error': (formSubmitted || transferOfCareEdit.records.length)}">
               <div class="form-control-static">No records added</div>
+              <span class="help-block animate-fade" ng-show="formSubmitted && !transferOfCareEdit.records.length">You must select at least one record.</span>
             </div>
             
             <div class="panel-body-inner-table">
@@ -116,11 +122,11 @@
                   </thead>
                   <tbody dnd-list="transferOfCareEdit.records">
                     <tr ng-repeat="(index, record) in transferOfCareEdit.records" 
-                        ng-click=""
                         dnd-draggable="record"
-                        dnd-moved="transferOfCareEdit.records.splice($index, 1)"
+                        dnd-moved="transferOfCareEdit.records.splice($index, 1); closePopovers();"
                         dnd-effect-allowed="move"
-                        dnd-nodrag>
+                        dnd-nodrag
+                        ng-click="togglePopover($event, record);">
                       
                         <td data-th="Name" class="dnd-handle-wrapper">
                           <div dnd-handle class="dnd-handle"><i class="fa fa-bars"></i></div>
@@ -140,6 +146,7 @@
                     </tr>
                   </tbody>
                 </table>
+                <transfer-of-care-popover-component></transfer-of-care-popover-component>
               </div>
             </div>
 

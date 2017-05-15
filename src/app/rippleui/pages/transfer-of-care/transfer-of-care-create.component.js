@@ -16,8 +16,7 @@
 let templateCreate = require('./transfer-of-care-create.html');
 
 class TransferOfCareCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, transferOfCareActions, serviceRequests, serviceFormatted, usSpinnerService, 
-    diagnosesActions, eventsActions, vitalsActions, referralsActions, medicationsActions) {
+  constructor($scope, $state, $stateParams, $ngRedux, transferOfCareActions, serviceRequests, serviceTransferOfCare, serviceFormatted, usSpinnerService) {
 
     $scope.transferOfCareEdit = {};
     $scope.transferOfCareEdit.records = [{
@@ -40,42 +39,14 @@ class TransferOfCareCreateController {
       source: 'Type source'
     }];
 
-
     $scope.cities = [
       'Worcester Trust',
       'Kings Hospital',
       'Oxford NHS Trust',
-      'St James\' Hospital',
+      'St James\' Hospital'
     ];
 
-    $scope.typeRecords = {
-      diagnosis: {
-        title: 'Problems / Diagnosis',
-        actionsFunc: diagnosesActions.all,
-        records: null
-      },
-      medications: {
-        title: 'Medications',
-        actionsFunc: medicationsActions.all,
-        records: null
-      },
-      referrals: {
-        title: 'Referrals',
-        actionsFunc: referralsActions.all,
-        records: null,
-      },
-      events: {
-        title: 'Events',
-        actionsFunc: eventsActions.all,
-        records: null,
-        types: null
-      },
-      vitals: {
-        title: 'Vitals',
-        actionsFunc: vitalsActions.all,
-        records: null
-      }
-    };
+    $scope.typeRecords = serviceTransferOfCare.getConfig();
 
     $scope.selectTypeRecords = function (type) {
       for (var key in $scope.typeRecords) {
@@ -85,7 +56,7 @@ class TransferOfCareCreateController {
       if ($scope.typeRecords[type].records == null) {
         usSpinnerService.spin(type + '-spinner');
         
-        $scope.typeRecords[type].actionsFunc($stateParams.patientId);
+        $scope.typeRecords[type].actionsFuncAll($stateParams.patientId);
       }
     };
 
@@ -94,50 +65,31 @@ class TransferOfCareCreateController {
     };
 
     $scope.addToRecords = function (value) {
-      var record = {};
-      var valueForRecord = value;
+      if (value) {
+        var record = {};
 
-      record.name = value.tableName;
-      record.type = $scope.transferOfCareEdit.type;
-      record.typeTitle = $scope.typeRecords[$scope.transferOfCareEdit.type].title;
-      record.date = value.date;
-      record.source = value.source;
-      record.sourceId = value.sourceId;
+        record.name = value.tableName;
+        record.type = $scope.transferOfCareEdit.type;
+        record.typeTitle = $scope.typeRecords[$scope.transferOfCareEdit.type].title;
+        record.date = value.date;
+        record.source = value.source;
+        record.sourceId = value.sourceId;
 
-      // switch ($scope.transferOfCareEdit.type) {
-      //   case 'diagnosis': 
-      //       record.date = serviceFormatted.formattingDate(value.dateOfOnset, serviceFormatted.formatCollection.DDMMMYYYY);
-      //     break;
-      //   case 'medications': 
-      //     record.name = value.name;
-      //     record.date = serviceFormatted.formattingDate(value.dateCreated, serviceFormatted.formatCollection.DDMMMYYYY);
-      //     break;
-      //   case 'referrals': 
-      //     record.name = value.tableName;
-      //     record.date = serviceFormatted.formattingDate(value.dateOfReferral, serviceFormatted.formatCollection.DDMMMYYYY);
-      //     break;
-      //   case 'events': 
-      //     break;
-      //   case 'vitals': 
-      //     record.name = value.tableName;
-      //     record.date = serviceFormatted.formattingDate(value.dateCreate, serviceFormatted.formatCollection.DDMMMYYYY);
-      //     break;
-      //   // default: 
-      // }
+        $scope.transferOfCareEdit.records.push(record);
 
-
-      // console.log('record');
-      // console.log(record);
-      $scope.transferOfCareEdit.records.push(record);
-
-      $scope.selectedRecord = null;
+        $scope.selectedRecord = null;
+      }
     };
 
     $scope.removeRecord = function (index) {
-
       $scope.transferOfCareEdit.records.splice(index, 1);
     }
 
+    $scope.togglePopover = function ($event, record) {
+      console.log('record');
+      console.log(record);
+      serviceRequests.publisher('toggleTransferOfCarePopover', {$event: $event, record: record});
+    };
 
     this.goList = function () {
       $state.go('transferOfCare', {
@@ -157,28 +109,49 @@ class TransferOfCareCreateController {
 
       console.log('$scope.transferOfCareEdit');
       console.log($scope.transferOfCareEdit);
-      if (transferOfCareForm.$valid) {
+
+      if (transferOfCareForm.$valid && $scope.transferOfCareEdit.records) {
         let toAdd = {
-          sourceId: '',
-          cause: transferOfCare.cause,
-          causeCode: transferOfCare.causeCode,
-          causeTerminology: transferOfCare.causeTerminology,
-          reaction: transferOfCare.reaction,
-          isImport: transferOfCare.isImport,
-          source: transferOfCare.source
+          from: $scope.transferOfCareEdit.from,
+          to: $scope.transferOfCareEdit.to,
+          records: $scope.transferOfCareEdit.records,
+          clinicalSummary: $scope.transferOfCareEdit.clinicalSummary,
+          reasonForContact: $scope.transferOfCareEdit.reasonForContact
         };
         
-        $scope.transferOfCareCreate(this.currentPatient.id, toAdd);
+        $scope.transferOfCareCreate($stateParams.patientId, toAdd);
+        this.goList();
       }
     }.bind(this);
 
     $scope.changeArraysForTable = function (arr, name, date) {
       arr.map(function (el) {
-        el.data = serviceFormatted.formattingDate(el[date], serviceFormatted.formatCollection.DDMMMYYYY);
+        el.date = serviceFormatted.formattingDate(el[date], serviceFormatted.formatCollection.DDMMMYYYY);
         el.tableName = el[name];
         el.selectName = el[name];
         return el;
       });
+    };
+
+    $scope.modificateEventsArr = function (arr) {
+      // goto: Later types will come
+      arr = _.chain(arr)
+            .filter(function (value) {
+              return value.dateOfAppointment;
+            })
+            .each(function (value, index) {
+              value.type = 'Appointment';
+              value.date = serviceFormatted.formattingDate(value.dateOfAppointment, serviceFormatted.formatCollection.DDMMMYYYY);
+              value.tableName = value.serviceTeam;
+              value.selectName = value.serviceTeam;
+              return value;
+            })
+            .groupBy(function(value) {
+              return value.type;
+            })
+            .value();
+
+      return arr;
     };
 
     this.setCurrentPageData = function (data) {
@@ -202,33 +175,34 @@ class TransferOfCareCreateController {
 
       if (data.medication.data) {
         $scope.typeRecords.medications.records = data.medication.data;
-        $scope.changeArraysForTable($scope.typeRecords.medication.records, 'name', 'dateCreated');
+        $scope.changeArraysForTable($scope.typeRecords.medications.records, 'name', 'dateCreated');
         usSpinnerService.stop('medications-spinner');
       }
 
       if (data.referrals.data) {
         $scope.typeRecords.referrals.records = data.referrals.data;
         $scope.typeRecords.referrals.records.map(function (el) {
-          var data = serviceFormatted.formattingDate(el.dateOfOnset, serviceFormatted.formatCollection.DDMMMYYYY);
-          el.data = data;
-          el.tableName = data + ' ' + el.referralFrom + ' ' + el.referralTo;
-          el.selectName = data + ' - ' + el.referralFrom + ' -> ' + el.referralTo;
+          var date = serviceFormatted.formattingDate(el.dateOfReferral, serviceFormatted.formatCollection.DDMMMYYYY);
+          el.date = date;
+          el.tableName = date + ' ' + el.referralFrom + ' ' + el.referralTo;
+          el.selectName = date + ' - ' + el.referralFrom + ' -> ' + el.referralTo;
           return el;
         });
         usSpinnerService.stop('referrals-spinner');
-
       }
+
       if (data.events.data) {
-        $scope.typeRecords.events.records = data.events.data;
-        // console.log('$scope.typeRecords.events.records');
-        // console.log($scope.typeRecords.events.records);
+        // $scope.typeRecords.events.records = data.events.data;
+        $scope.typeRecords.events.records = $scope.modificateEventsArr(data.events.data);
+        
         usSpinnerService.stop('events-spinner');
       }
+
       if (data.vitals.data) {
         $scope.typeRecords.vitals.records = [];
         $scope.typeRecords.vitals.records.push(data.vitals.data[0]);
-        
-        $scope.typeRecords.vitals.records[0].data = serviceFormatted.formattingDate(el.dateCreate, serviceFormatted.formatCollection.DDMMMYYYY);;
+
+        $scope.typeRecords.vitals.records[0].date = serviceFormatted.formattingDate($scope.typeRecords.vitals.records[0].dateCreate, serviceFormatted.formatCollection.DDMMMYYYY);;
         $scope.typeRecords.vitals.records[0].selectName = 'Latest Vitals Data';
         $scope.typeRecords.vitals.records[0].tableName = 'Latest Vitals Data';
         usSpinnerService.stop('vitals-spinner');
@@ -252,6 +226,5 @@ const TransferOfCareCreateComponent = {
   controller: TransferOfCareCreateController
 };
 
-TransferOfCareCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'transferOfCareActions', 'serviceRequests', 'serviceFormatted', 'usSpinnerService', 
-                                          'diagnosesActions', 'eventsActions', 'vitalsActions', 'referralsActions', 'medicationsActions'];
+TransferOfCareCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'transferOfCareActions', 'serviceRequests', 'serviceTransferOfCare', 'serviceFormatted', 'usSpinnerService'];
 export default TransferOfCareCreateComponent;

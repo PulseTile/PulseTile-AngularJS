@@ -18,7 +18,9 @@ import reducer from "./transfer-of-care-reducer-all";
 import transferOfCareListComponent from './transfer-of-care-list.component';
 import transferOfCareDetailComponent from './transfer-of-care-detail.component';
 import transferOfCareCreateComponent from './transfer-of-care-create.component';
+import transferOfCarePopoverComponent from './transfer-of-care-popover.component';
 import transferOfCareActions from './transfer-of-care-actions';
+
 
 export default {
   "name": 'transferOfCare',
@@ -27,7 +29,8 @@ export default {
   "components": {
     transferOfCareListComponent,
     transferOfCareDetailComponent,
-    transferOfCareCreateComponent
+    transferOfCareCreateComponent,
+    transferOfCarePopoverComponent
   },
   "actions": {
     transferOfCareActions
