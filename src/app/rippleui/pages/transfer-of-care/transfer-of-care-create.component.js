@@ -154,9 +154,6 @@ class TransferOfCareCreateController {
     $scope.create = function (transferOfCareForm, transferOfCare) {
       $scope.formSubmitted = true;
 
-      console.log('$scope.transferOfCareEdit');
-      console.log($scope.transferOfCareEdit);
-
       if (transferOfCareForm.$valid && $scope.transferOfCareEdit.records) {
         let toAdd = {
           from: $scope.transferOfCareEdit.from,
@@ -239,7 +236,6 @@ class TransferOfCareCreateController {
       }
 
       if (data.events.data) {
-        // $scope.typeRecords.events.records = data.events.data;
         $scope.typeRecords.events.records = $scope.modificateEventsArr(data.events.data);
         
         usSpinnerService.stop('events-spinner');
@@ -251,7 +247,7 @@ class TransferOfCareCreateController {
 
         $scope.typeRecords.vitals.records[0].date = serviceFormatted.formattingDate($scope.typeRecords.vitals.records[0].dateCreate, serviceFormatted.formatCollection.DDMMMYYYY);;
         $scope.typeRecords.vitals.records[0].selectName = 'Latest Vitals Data';
-        $scope.typeRecords.vitals.records[0].tableName = 'Latest Vitals Data';
+        $scope.typeRecords.vitals.records[0].tableName = 'Latest Vitals Data ( News Score = ' + $scope.typeRecords.vitals.records[0].newsScore + ' )';
         usSpinnerService.stop('vitals-spinner');
       }
 

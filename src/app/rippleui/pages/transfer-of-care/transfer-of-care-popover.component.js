@@ -33,8 +33,7 @@ class TransferOfCarePopover {
     };
 
     this.setCurrentPageData = function (data) {
-      console.log('data');
-      console.log(data);
+      
       if (data.diagnoses.dataGet) {
         $scope.data.diagnosis = data.diagnoses.dataGet;
         serviceTransferOfCare.setInCache('diagnosis', $scope.data.diagnosis.sourceId, $scope.data.diagnosis);

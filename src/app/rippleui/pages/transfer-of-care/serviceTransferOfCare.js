@@ -58,7 +58,6 @@ class serviceTransferOfCare {
     };
 
     this.isInCache = function (type, id) {
-      console.log(this.cache);
       if (this.cache[type] && this.cache[type][id]) {
         return true;
       }
