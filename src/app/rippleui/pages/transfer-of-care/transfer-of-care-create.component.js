@@ -247,7 +247,7 @@ class TransferOfCareCreateController {
 
         $scope.typeRecords.vitals.records[0].date = serviceFormatted.formattingDate($scope.typeRecords.vitals.records[0].dateCreate, serviceFormatted.formatCollection.DDMMMYYYY);;
         $scope.typeRecords.vitals.records[0].selectName = 'Latest Vitals Data';
-        $scope.typeRecords.vitals.records[0].tableName = 'Latest Vitals Data ( News Score = ' + $scope.typeRecords.vitals.records[0].newsScore + ' )';
+        $scope.typeRecords.vitals.records[0].tableName = 'Latest Vitals Data (News Score = ' + $scope.typeRecords.vitals.records[0].newsScore + ')';
         usSpinnerService.stop('vitals-spinner');
       }
 
