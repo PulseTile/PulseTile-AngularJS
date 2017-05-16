@@ -1,31 +1,206 @@
-<div class="record-popover" ng-class="{open: openPopover}">
+<div class="record-popover" ng-show="openPopover">
   <div class="record-popover-header">
-    <div class="record-popover-title">qwdqwdw {{title}}</div>
+    <div class="record-popover-title">{{title}}</div>
   </div>
-  <div class="record-popover-body">
+  <div ng-if="type == 'diagnosis'" class="record-popover-body">
     <div class="record-popover-content">
       <div class="form-group-wrapper">
         <div class="row">
-          <div class="col-xs-12 col-sm-6">
+          <div class="col-xs-12 col-md-6">
             <div class="form-group">
               <label class="control-label">Problem / Diagnosis</label>
-              <div class="form-control-static">Vascula Dementua</div>
+              <div class="form-control-static">{{ data.diagnosis.problem }}</div>
             </div>
           </div>
-          <div class="col-xs-12 col-sm-6">
+          <div class="col-xs-12 col-md-6">
             <div class="form-group">
               <label class="control-label">Date of Onset</label>
-              <div class="form-control-static">17-Jun-2000</div>
+              <div class="form-control-static">{{ data.diagnosis.dateOfOnset | date: 'dd-MMM-yyyy' }}</div>
             </div>
           </div>
         </div>
         <div class="form-group">
           <label class="control-label">Description</label>
-          <div class="form-control-static">Vascula Dementua</div>
+          <div class="form-control-static">{{ data.diagnosis.description }}</div>
         </div>
         <div class="form-group">
-          <label class="control-label">NHS</label>
-          <div class="form-control-static">Vascula Dementua</div>
+          <label class="control-label">NHS Choices Web Page URL</label>
+          <div class="form-control-static">{{data.diagnosis.url}}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Terminology</label>
+              <div class="form-control-static">{{ data.diagnosis.terminology }}</div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Code</label>
+              <div class="form-control-static">{{ data.diagnosis.code }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- referrals
+  events
+  vitals -->
+  <div ng-if="type == 'medications'" class="record-popover-body">
+    <div class="record-popover-content">
+      <div class="form-group-wrapper">
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Problem / Diagnosis</label>
+              <div class="form-control-static">{{ data.diagnosis.problem }}</div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Date of Onset</label>
+              <div class="form-control-static">{{ data.diagnosis.dateOfOnset | date: 'dd-MMM-yyyy' }}</div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div ng-if="type == 'vitals'" class="record-popover-body">
+    <div class="record-popover-content">
+      <div class="vitals-group-wrapper">
+        <div class="row-expand">
+          <div class="col-expand-left">
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass('respirationRate')"></span>  
+                  <label class="vitals-label">Respiration Rate</label>
+                  <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.respirationRate.type">
+                    <div class="form-control input-sm">{{ data.vitals.respirationRate }}</div>
+                    <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">resps/min</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass('oxygenSaturation')"></span>  
+                  <label class="vitals-label">Oxygen Saturation</label>
+                  <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.oxygenSaturation.type">
+                    <div class="form-control input-sm">{{ data.vitals.oxygenSaturation }}</div>
+                    <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass('oxygenSupplemental')"></span>  
+                  <label class="vitals-label">Any Supplemental Oxygen</label>
+                  <div class="input-holder">
+                    <label class="switch">
+                      <input type="checkbox" name="oxygenSupplemental" ng-model="vital.oxygenSupplemental" disabled>
+                      <div class="slider disabled">
+                        <span class="text text-check-true">Yes</span>
+                        <span class="text text-check-false">No</span>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass('heartRate')"></span>  
+                  <label class="vitals-label">Heart Rate</label>
+                  <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.heartRate.type">
+                    <div class="form-control input-sm">{{ data.vitals.heartRate }}</div>
+                    <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">bpm</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-expand-right">
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass('systolicBP')"></span>  
+                  <label class="vitals-label">Systolic BP</label>
+                  <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.systolicBP.type">
+                    <div class="form-control input-sm">{{ data.vitals.systolicBP }}</div>
+                    <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">mmHg</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span class="highlighter-not-vital"></span>  
+                  <label class="vitals-label">Diastolic BP</label>
+                  <div class="input-group vitals-holder">
+                    <div class="form-control input-sm">{{ data.vitals.diastolicBP }}</div>
+                    <span class="vitals-addon">mmHg</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass('levelOfConsciousness')"></span>  
+                  <label for="levelOfConsciousness" class="vitals-label">Level of Consciousness</label>
+                  <div class="input-holder">
+                    <div class="switch-group">
+                      <label class="switch">
+                        <input id="levelOfConsciousnessA" type="radio" name="levelOfConsciousness" value="Alert" ng-model="vital.levelOfConsciousness" disabled>
+                        <div class="slider disabled"><span class="text">A</span></div>
+                      </label>
+                      <label class="switch">
+                        <input id="levelOfConsciousnessV" type="radio" name="levelOfConsciousness" value="Verbal" ng-model="vital.levelOfConsciousness" disabled>
+                        <div class="slider disabled"><span class="text">V</span></div>
+                      </label>
+                      <label class="switch">
+                        <input id="levelOfConsciousnessP" type="radio" name="levelOfConsciousness" value="Pain" ng-model="vital.levelOfConsciousness" disabled>
+                        <div class="slider disabled"><span class="text">P</span></div>
+                      </label>
+                      <label class="switch">
+                        <input id="levelOfConsciousnessU" type="radio" name="levelOfConsciousness" value="Unresponsive" ng-model="vital.levelOfConsciousness" disabled>
+                        <div class="slider disabled"><span class="text">U</span></div>
+                      </label>
+                    </div>
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && vitalForm.levelOfConsciousness.$error.required">You must enter a value.</span>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass('temperature')"></span>  
+                  <label class="vitals-label">Temperature</label>
+                  <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.temperature.type">
+                    <div class="form-control input-sm">{{ data.vitals.temperature }}</div>
+                    <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">c</span>
+                  </div>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.temperature.$error.required || vitalForm.temperature.$invalid)">You must enter a correct value.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row-expand">
+          <div class="col-expand-left">
+            <div class="vitals-group highlighter-wrapper">
+              <span ng-class="getHighlighterClass('newsScore')"></span>  
+              <label class="vitals-label">NEWS Score</label>
+              <div class="input-holder vitals-holder" ng-class="vitalStatuses.newsScore.type">
+                <div class="form-control input-sm">{{ data.vitals.newsScore }}</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -16,28 +16,29 @@
 let templateCreate = require('./transfer-of-care-create.html');
 
 class TransferOfCareCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, transferOfCareActions, serviceRequests, serviceTransferOfCare, serviceFormatted, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, transferOfCareActions, serviceRequests, serviceTransferOfCare, serviceFormatted, usSpinnerService, $window) {
 
     $scope.transferOfCareEdit = {};
-    $scope.transferOfCareEdit.records = [{
-      name: 'name 1',
-      typeTitle: 'Medications',
-      type: 'medications',
-      date: serviceFormatted.formattingDate(new Date(), serviceFormatted.formatCollection.DDMMMYYYY),
-      source: 'Type source'
-    }, {
-      name: 'name 2',
-      typeTitle: 'Medications',
-      type: 'medications',
-      date: serviceFormatted.formattingDate(new Date(), serviceFormatted.formatCollection.DDMMMYYYY),
-      source: 'Type source'
-    }, {
-      name: 'name 3',
-      typeTitle: 'Problems / Diagnosis',
-      type: 'diagnosis',
-      date: serviceFormatted.formattingDate(new Date(), serviceFormatted.formatCollection.DDMMMYYYY),
-      source: 'Type source'
-    }];
+    $scope.transferOfCareEdit.records = [];
+    // {
+    //   name: 'name 1',
+    //   typeTitle: 'Medications',
+    //   type: 'medications',
+    //   date: serviceFormatted.formattingDate(new Date(), serviceFormatted.formatCollection.DDMMMYYYY),
+    //   source: 'Type source'
+    // }, {
+    //   name: 'name 2',
+    //   typeTitle: 'Medications',
+    //   type: 'medications',
+    //   date: serviceFormatted.formattingDate(new Date(), serviceFormatted.formatCollection.DDMMMYYYY),
+    //   source: 'Type source'
+    // }, {
+    //   name: 'name 3',
+    //   typeTitle: 'Problems / Diagnosis',
+    //   type: 'diagnosis',
+    //   date: serviceFormatted.formattingDate(new Date(), serviceFormatted.formatCollection.DDMMMYYYY),
+    //   source: 'Type source'
+    // }
 
     $scope.cities = [
       'Worcester Trust',
@@ -86,10 +87,56 @@ class TransferOfCareCreateController {
     }
 
     $scope.togglePopover = function ($event, record) {
-      console.log('record');
-      console.log(record);
-      serviceRequests.publisher('toggleTransferOfCarePopover', {$event: $event, record: record});
+      var $tr = $($event.currentTarget);
+      var $wrapper = $tr.closest('.record-popover-wrapper');
+      var $trs = $wrapper.find('tr');
+      var $popover = $wrapper.find('.record-popover');
+      var topPostion;
+
+      if ($tr.hasClass('info')) {
+        $tr.removeClass('info');
+        $wrapper.removeClass('open');
+        serviceRequests.publisher('closeTransferOfCarePopover');
+
+      } else {
+        topPostion = ($tr.height() + $tr.offset().top) - $wrapper.offset().top;
+        $popover.css('top', topPostion);
+
+
+        serviceRequests.publisher('openTransferOfCarePopover', {record: record});
+
+        $wrapper.addClass('open');
+        $trs.removeClass('info');
+        $tr.addClass('info');
+      }
+
+
+
     };
+
+    $scope.closePopovers = function () {
+      var $wrapper = $(document).find('.record-popover-wrapper');
+      var $trs = $wrapper.find('tr');
+    
+      $trs.removeClass('info');
+      $wrapper.removeClass('open');
+      serviceRequests.publisher('closeTransferOfCarePopover');
+    
+    };
+
+    $window.addEventListener('resize', function () {
+      $scope.closePopovers();
+    });
+
+    document.addEventListener('click', function (ev) {
+      var $target = $(ev.target);
+      var $tr = $target.closest('tr');
+      var $popover = $target.closest('.record-popover');
+
+      if (!$popover.length && (!$tr.length || ($tr.length && !$tr.hasClass('info')))) {
+        $scope.closePopovers();
+      }
+    });
 
     this.goList = function () {
       $state.go('transferOfCare', {
@@ -226,5 +273,5 @@ const TransferOfCareCreateComponent = {
   controller: TransferOfCareCreateController
 };
 
-TransferOfCareCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'transferOfCareActions', 'serviceRequests', 'serviceTransferOfCare', 'serviceFormatted', 'usSpinnerService'];
+TransferOfCareCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'transferOfCareActions', 'serviceRequests', 'serviceTransferOfCare', 'serviceFormatted', 'usSpinnerService', '$window'];
 export default TransferOfCareCreateComponent;

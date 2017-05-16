@@ -103,50 +103,52 @@
             
             <div class="panel-body-inner-table">
               <div class="form-group">
-                <table ng-if="transferOfCareEdit.records.length" class="table table-striped table-hover table-bordered rwd-table table-sorted table-fixedcol table-transferOfCare">
-                  <colgroup>
-                    <col>
-                    <col style="width: 22%;">
-                    <col style="width: 22%;">
-                    <col style="width: 19%;">
-                    <col style="width: 54px;">
-                  </colgroup>
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Date</th>
-                      <th>Source</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody dnd-list="transferOfCareEdit.records">
-                    <tr ng-repeat="(index, record) in transferOfCareEdit.records" 
-                        dnd-draggable="record"
-                        dnd-moved="transferOfCareEdit.records.splice($index, 1); closePopovers();"
-                        dnd-effect-allowed="move"
-                        dnd-nodrag
-                        ng-click="togglePopover($event, record);">
-                      
-                        <td data-th="Name" class="dnd-handle-wrapper">
-                          <div dnd-handle class="dnd-handle"><i class="fa fa-bars"></i></div>
-                          <span>{{ record.name }}</span>
-                        </td>
-                        <td data-th="Type"><span>{{ record.typeTitle }}</span></td>
-                        <td data-th="Date"><span>{{ record.date }}</span></td>
-                        <td data-th="Source"><span>{{ record.source }}</span></td>
-                        <td data-th=""><span><div ng-click="removeRecord(index)" class="btn btn-smaller btn-danger btn-icon-normal"><i class="btn-icon fa fa-times"></i></div></span></td>
-                    </tr>
-                    <tr class="dndPlaceholder">
-                      <td><span></span></td>
-                      <td><span></span></td>
-                      <td><span></span></td>
-                      <td><span></span></td>
-                      <td><span></span></td>
-                    </tr>
-                  </tbody>
-                </table>
-                <transfer-of-care-popover-component></transfer-of-care-popover-component>
+                <div class="record-popover-wrapper">
+                  <table ng-if="transferOfCareEdit.records.length" class="table table-striped table-hover table-bordered rwd-table table-sorted table-fixedcol table-transferOfCare">
+                    <colgroup>
+                      <col>
+                      <col style="width: 22%;">
+                      <col style="width: 22%;">
+                      <col style="width: 19%;">
+                      <col style="width: 54px;">
+                    </colgroup>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>Source</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody dnd-list="transferOfCareEdit.records">
+                      <tr ng-repeat="(index, record) in transferOfCareEdit.records" 
+                          dnd-draggable="record"
+                          dnd-moved="transferOfCareEdit.records.splice($index, 1); closePopovers();"
+                          dnd-effect-allowed="move"
+                          dnd-nodrag
+                          ng-click="togglePopover($event, record);">
+                        
+                          <td data-th="Name" class="dnd-handle-wrapper">
+                            <div dnd-handle class="dnd-handle"><i class="fa fa-bars"></i></div>
+                            <span>{{ record.name }}</span>
+                          </td>
+                          <td data-th="Type"><span>{{ record.typeTitle }}</span></td>
+                          <td data-th="Date"><span>{{ record.date }}</span></td>
+                          <td data-th="Source"><span>{{ record.source }}</span></td>
+                          <td data-th=""><span><div ng-click="removeRecord(index)" class="btn btn-smaller btn-danger btn-icon-normal"><i class="btn-icon fa fa-times"></i></div></span></td>
+                      </tr>
+                      <tr class="dndPlaceholder">
+                        <td><span></span></td>
+                        <td><span></span></td>
+                        <td><span></span></td>
+                        <td><span></span></td>
+                        <td><span></span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <transfer-of-care-popover-component></transfer-of-care-popover-component>
+                </div>
               </div>
             </div>
 

@@ -50,10 +50,33 @@ class serviceTransferOfCare {
       }
     }
 
+    this.cache = {};
+
     /* istanbul ignore next */
     this.getConfig = function () {
       return this.config;
-    }
+    };
+
+    this.isInCache = function (type, id) {
+      console.log(this.cache);
+      if (this.cache[type] && this.cache[type][id]) {
+        return true;
+      }
+
+      return false;
+    };
+
+    this.setInCache = function (type, id, data) {
+      if (typeof this.cache[type] === 'undefined') {
+        this.cache[type] = {};
+      }
+
+      this.cache[type][id] = data;
+    };
+
+    this.getInCache = function (type, id) {
+      return this.cache[type][id];
+    };
   }
 }
 serviceTransferOfCare.$inject = ['diagnosesActions', 'eventsActions', 'vitalsActions', 'referralsActions', 'medicationsActions'];

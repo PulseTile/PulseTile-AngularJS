@@ -20,6 +20,7 @@ class TransferOfCarePopover {
   constructor($scope, $state, $stateParams, $ngRedux, serviceRequests, serviceTransferOfCare, usSpinnerService, $window) {
     $scope.data = {};
     $scope.openPopover = false;
+    $scope.currentParent = null;
 
     $scope.typeRecords = serviceTransferOfCare.getConfig();
 
@@ -28,68 +29,41 @@ class TransferOfCarePopover {
         $scope.data = data.findReferral.data;
       }
       if (data.diagnoses.dataGet) {
-        debugger
-        this.diagnosis = data.diagnoses.dataGet;
+        $scope.data.diagnosis = data.diagnoses.dataGet;
+        serviceTransferOfCare.setInCache('diagnosis', $scope.data.diagnosis.sourceId, $scope.data.diagnosis);
         usSpinnerService.stop('diagnosisDetail-spinner');
       }
-      usSpinnerService.stop('documentssDetail-spinner');
-    };
-
-    this.togglePopover = function (data) {
-      var $event =  data.$event;
-      var record = data.record;
-      var $tr = $($event.currentTarget);
-      // var $wrapper = $tr.closest('.record-popover-wrapper');
-      // var $trs = $wrapper.find('tr');
-      // var $popover = $wrapper.find('.record-popover');
-      // var topPostion;
-      $scope.openPopover = true;
-      console.log('record');
-      console.log(record);
-      console.log('$stateParams.patientId');
-      console.log($stateParams.patientId);
-
-      $scope.typeRecords[record.type].actionsFuncOne($stateParams.patientId, record.sourceId);
-
-      if ($tr.hasClass('info')) {
-        $tr.removeClass('info');
-        $wrapper.removeClass('open');
-        serviceRequests.publisher('closeTransferOfCarePopover');
-      
-      } else {
-        // topPostion = ($tr.height() + $tr.offset().top) - $wrapper.offset().top;
-        // $popover.css('top', topPostion);
-
-
-
-        // $wrapper.addClass('open');
-        // $trs.removeClass('info');
-        // $tr.addClass('info');
+      if (data.vitals.dataGet) {
+        $scope.data.vitals = data.vitals.dataGet;
+        serviceTransferOfCare.setInCache('vitals', $scope.data.vitals.sourceId, $scope.data.vitals);
       }
-
     };
 
-    // $scope.closePopovers = function () {
-    //   var $trs = $wrapper.find('tr');
+    $scope.changeTypePopover = function (type) {
+      $scope.title = $scope.typeRecords[type].title;
+      $scope.type = type;
+    };
 
-    //   $trs.removeClass('info');
-    //   $wrapper.removeClass('open');
+    this.openPopover = function (data) {
+      var record = data.record;
+      $scope.openPopover = true;
 
-    // };
-    // $window.addEventListener('resize', function () {
-    //   $scope.closePopovers();
-    // });
-    // document.addEventListener('click', function (ev) {
-    //   var $tr = $(ev.target).closest('tr');
-    //   if (!$tr.length || ($tr.length && !$tr.hasClass('info'))) {
-    //     $scope.closePopovers();
-    //     // goto: if is popover
-    //   }
-    // });
+      $scope.changeTypePopover(record.type);
 
+      if (serviceTransferOfCare.isInCache(record.type, record.sourceId)) {
+        $scope.data[type] = serviceTransferOfCare.getInCache(record.type, record.sourceId);
 
+      } else {
+        $scope.typeRecords[record.type].actionsFuncOne($stateParams.patientId, record.sourceId, record.source);
+      }
+     
+    };
+    serviceRequests.subscriber('openTransferOfCarePopover', this.openPopover);
 
-    serviceRequests.subscriber('toggleTransferOfCarePopover', this.togglePopover);
+    this.closePopover = function (data) {
+      $scope.openPopover = false;
+    };
+    serviceRequests.subscriber('closeTransferOfCarePopover', this.closePopover);
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
