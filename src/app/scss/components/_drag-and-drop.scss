@@ -3,22 +3,28 @@
   min-height: 30px;
 }
 .dnd-handle-wrapper {
-  padding-left: 30px !important;
   position: relative;
+  @include respond-from(xs) {
+    padding-left: 30px !important;
+  }
 }
 .dnd-handle {
+  color: #bcbcc5;
+  cursor: move;
+  display: none;
   height: 100%;
   left: 0;
   position: absolute;
   text-align: center;
   top: 0;
   width: 25px;
-  color: #bcbcc5;
-  cursor: move;
   i {
+    left: 50%;
     position: absolute;
     top: 50%;
-    left: 50%;
     transform: translate(-50%, -50%);
+  }
+  @include respond-from(xs) {
+    display: block;
   }
 }

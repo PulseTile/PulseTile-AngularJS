@@ -247,7 +247,7 @@ class TransferOfCareCreateController {
 
       if (data.vitals.data) {
         $scope.typeRecords.vitals.records = [];
-        $scope.typeRecords.vitals.records.push(data.vitals.data[0]);
+        $scope.typeRecords.vitals.records.push(data.vitals.data[1]);
 
         $scope.typeRecords.vitals.records[0].date = serviceFormatted.formattingDate($scope.typeRecords.vitals.records[0].dateCreate, serviceFormatted.formatCollection.DDMMMYYYY);;
         $scope.typeRecords.vitals.records[0].selectName = 'Latest Vitals Data';

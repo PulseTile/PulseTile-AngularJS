@@ -17,26 +17,58 @@
 let transferOfCarePopoverTemplate = require('./transfer-of-care-popover.html');
 
 class TransferOfCarePopover {
-  constructor($scope, $state, $stateParams, $ngRedux, serviceRequests, serviceTransferOfCare, usSpinnerService, $window) {
+  constructor($scope, $state, $stateParams, $ngRedux, serviceRequests, serviceTransferOfCare, usSpinnerService, serviceVitalsSigns, $window) {
     $scope.data = {};
     $scope.openPopover = false;
     $scope.currentParent = null;
+    $scope.tempSourceId = '';
+    $scope.vitalStatuses = {};
 
     $scope.typeRecords = serviceTransferOfCare.getConfig();
 
-    this.setCurrentPageData = function (data) {
-      if (data.documents.data) {
-        $scope.data = data.findReferral.data;
+    $scope.stopSpinner = function (type, sourceId) {
+      if (!$scope.tempSourceId.length || $scope.tempSourceId == sourceId) {
+        usSpinnerService.stop(type + '-popover-spinner');
       }
+    };
+
+    this.setCurrentPageData = function (data) {
+      console.log('data');
+      console.log(data);
       if (data.diagnoses.dataGet) {
         $scope.data.diagnosis = data.diagnoses.dataGet;
         serviceTransferOfCare.setInCache('diagnosis', $scope.data.diagnosis.sourceId, $scope.data.diagnosis);
-        usSpinnerService.stop('diagnosisDetail-spinner');
+        $scope.stopSpinner('diagnosis', $scope.data.diagnosis.sourceId);
       }
+
+      if (data.medication.dataGet) {
+        $scope.data.medications = data.medication.dataGet;
+        serviceTransferOfCare.setInCache('medications', $scope.data.medications.sourceId, $scope.data.medications);
+        $scope.stopSpinner('medications', $scope.data.medications.sourceId);
+      }
+
+      if (data.referrals.dataGet) {
+        $scope.data.referrals = data.referrals.dataGet;
+        serviceTransferOfCare.setInCache('referrals', $scope.data.referrals.sourceId, $scope.data.referrals);
+        $scope.stopSpinner('referrals', $scope.data.referrals.sourceId);
+      }
+
+      if (data.events.dataGet) {
+        $scope.data.events = data.events.dataGet;
+        serviceTransferOfCare.setInCache('events', $scope.data.events.sourceId, $scope.data.events);
+        $scope.stopSpinner('events', $scope.data.events.sourceId);
+      }
+
       if (data.vitals.dataGet) {
         $scope.data.vitals = data.vitals.dataGet;
         serviceTransferOfCare.setInCache('vitals', $scope.data.vitals.sourceId, $scope.data.vitals);
+        $scope.vitalStatuses = serviceVitalsSigns.setVitalStatuses($scope.data.vitals);
+        $scope.stopSpinner('vitals', $scope.data.vitals.sourceId);
       }
+    };
+
+    $scope.getHighlighterClass = function (vitalName) {
+      return serviceVitalsSigns.getHighlighterClass($scope.vitalStatuses[vitalName]);
     };
 
     $scope.changeTypePopover = function (type) {
@@ -50,10 +82,16 @@ class TransferOfCarePopover {
 
       $scope.changeTypePopover(record.type);
 
+      for (var key in $scope.typeRecords) {
+        usSpinnerService.stop(key + '-popover-spinner');
+      }
+
       if (serviceTransferOfCare.isInCache(record.type, record.sourceId)) {
-        $scope.data[type] = serviceTransferOfCare.getInCache(record.type, record.sourceId);
+        $scope.data[record.type] = serviceTransferOfCare.getInCache(record.type, record.sourceId);
 
       } else {
+        usSpinnerService.spin(record.type + '-popover-spinner');
+        $scope.tempSourceId = record.sourceId;
         $scope.typeRecords[record.type].actionsFuncOne($stateParams.patientId, record.sourceId, record.source);
       }
      
@@ -78,5 +116,5 @@ const TransferOfCarePopoverComponent = {
   controller: TransferOfCarePopover
 };
 
-TransferOfCarePopover.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'serviceRequests', 'serviceTransferOfCare', 'usSpinnerService', '$window'];
+TransferOfCarePopover.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'serviceRequests', 'serviceTransferOfCare', 'usSpinnerService', 'serviceVitalsSigns', '$window'];
 export default TransferOfCarePopoverComponent;
