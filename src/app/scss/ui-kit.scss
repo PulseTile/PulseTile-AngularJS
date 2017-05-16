@@ -202,6 +202,9 @@ $ui-color: #f26604;
   max-width: 990px;
   padding: 0px 15px 30px;
 }
+@include respond-to(xs) {
+  .ui-content-backset { margin: 0 -15px; }
+}
 
 .ui-section { margin-bottom: 40px; }
 .ui-sub-section {  margin-bottom: 25px; }
@@ -328,7 +331,10 @@ $ui-color: #f26604;
 .ui-scrollbar-content-start { top: 0; }
 .ui-scrollbar-content-end { bottom: 0; }
 
-.ui-footer .footer { position: static; }
+.ui-footer .footer { 
+  position: static; 
+  min-width: initial;
+}
 
 .ui-sidebar-content {
   height: 250px;

@@ -7,6 +7,7 @@
   padding-left: 10px;
   padding-right: 10px;
   vertical-align: top;
+  background: #dddddd;
   .btn-icon { font-weight: 700; }
 }
 .btn-icon-normal .btn-icon { font-weight: 400; }
@@ -129,11 +130,18 @@
   color: #c3c3c3 !important;
 }
 
-.is-not-touch-device .btn-inverse,
-.is-not-touch-device .btn-inverse.disabled,
-.is-not-touch-device .btn-inverse[disabled] {
+.btn.btn-inverse,
+.btn.btn-inverse.disabled,
+.btn.btn-inverse[disabled] {
   &.btn-none-border {
     border-color: transparent !important;
+  }
+}
+
+.is-not-touch-device .btn.btn-inverse,
+.is-not-touch-device .btn.btn-inverse.disabled,
+.is-not-touch-device .btn.btn-inverse[disabled] {
+  &.btn-none-border {
     &:hover,
     &:focus,
     &:active {
