@@ -39,39 +39,19 @@ class TransferOfCareListController {
     };
 
     this.setCurrentPageData = function (data) {
-      // if (data.transferOfCare.data) {
-      //   this.transferOfCares = data.transferOfCare.data;
-
-        this.transferOfCares = [{
-          sourceId: 1,
-          from: 'Worcester Trust',
-          to: 'Kings Hospital',
-          date: new Date(),
-          source: 'Marand'
-        }, {
-          sourceId: 2,
-          from: 'Worcester Trust',
-          to: 'Oxford NHS Trust',
-          date: new Date(),
-          source: 'EtherCIS'
-        }, {
-          sourceId: 3,
-          from: 'Worcester Trust',
-          to: 'St James\' Hospital',
-          date: new Date(),
-          source: 'Marand'
-        }];
+      if (data.transferOfCare.data) {
+        this.transferOfCares = data.transferOfCare.data;
 
         this.transferOfCares = this.transferOfCares.map(function (el, index) {
           el.transfer = "Transfer #" + (index + 1);
           return el; 
         });
 
-        serviceFormatted.formattingTablesDate(this.transferOfCares, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
-        serviceFormatted.filteringKeys = ['transfer', 'from', 'to', 'date', 'source'];
+        serviceFormatted.formattingTablesDate(this.transferOfCares, ['transferDateTime'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['transfer', 'from', 'to', 'transferDateTime', 'source'];
 
         usSpinnerService.stop('patientSummary-spinner');
-      // }
+      }
       
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;

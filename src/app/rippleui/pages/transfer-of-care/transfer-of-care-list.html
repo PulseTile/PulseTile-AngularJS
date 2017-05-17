@@ -46,17 +46,17 @@
           <th ng-click="sort('transfer')" ng-class="sortClass('transfer')">Transfer</th>
           <th ng-click="sort('from')" ng-class="sortClass('from')">From (Site / Org)</th>
           <th ng-click="sort('to')" ng-class="sortClass('to')">To (Site / Org)</th>
-          <th ng-click="sort('date')" ng-class="sortClass('date')">Date / Time</th>
+          <th ng-click="sort('transferDateTime')" ng-class="sortClass('transferDateTime')">Date / Time</th>
           <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr dir-paginate="transferOfCare in $ctrl.transferOfCares | filter: queryFiltering | orderBy:[order] : reverse  | itemsPerPage: 10" current-page="currentPage"  ng-click="$ctrl.go(transferOfCare.sourceId)" ng-class="{info: selectedRow(transferOfCare.sourceId)}">
+        <tr dir-paginate="transferOfCare in $ctrl.transferOfCares | filter: queryFiltering | orderBy:[order] : reverse  | itemsPerPage: 10" current-page="currentPage"  ng-click="$ctrl.go(transferOfCare.sourceId, transferOfCare)" ng-class="{info: selectedRow(transferOfCare.sourceId, transferOfCare)}">
           <td data-th="Transfer" ng-class="sortClass('transfer')"><span>{{transferOfCare.transfer}}</span></td>
-          <td data-th="From (Site / Org)" ng-class="sortClass('from')"><span>{{ transferOfCare.from }}</span></td>
-          <td data-th="To (Site / Org)" ng-class="sortClass('to')"><span>{{ transferOfCare.to }}</span></td>
-          <td data-th="Date / Time" ng-class="sortClass('date')"><span>{{ transferOfCare.date }}</span></td>
+          <td data-th="From (Site/Org)" ng-class="sortClass('from')"><span>{{ transferOfCare.from }}</span></td>
+          <td data-th="To (Site/Org)" ng-class="sortClass('to')"><span>{{ transferOfCare.to }}</span></td>
+          <td data-th="Date/Time" ng-class="sortClass('transferDateTime')"><span>{{ transferOfCare.transferDateTime }}</span></td>
           <td data-th="Source" ng-class="sortClass('source')"><span>{{ transferOfCare.source }}</span></td>
         </tr>
 

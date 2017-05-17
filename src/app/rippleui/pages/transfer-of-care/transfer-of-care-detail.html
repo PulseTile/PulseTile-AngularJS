@@ -15,7 +15,7 @@
   -->
   
 <div mc-full-panel mc-datepicker class="panel-group">
-  <div class="panel panel-secondary" ng-if="!isEdit">
+  <div class="panel panel-secondary">
     <div class="panel-heading">
       <div class="control-group right">
         <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
@@ -31,44 +31,55 @@
               <div class="col-expand-right"></div>
             </div>
 
-            <div class="form-group">
-              <label class="control-label">Problems</label>
-              <div class="form-control-static">
-                <span ng-if="!$ctrl.problems.length">No problems selected</span>
-                <ul class="list-reset">
-                  <li ng-repeat="(key,value) in $ctrl.problems">{{value.problem}}</li>
-                </ul>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">From (Site / Org)</label>
+                  <div class="form-control-static">{{ $ctrl.transferOfCare.from }}</div>
+                </div>
               </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label">Medications</label>
-              <div class="form-control-static">
-                <span ng-if="!$ctrl.medication.length">No medication selected</span>
-                <ul class="list-reset">
-                  <li ng-repeat="(key,value) in $ctrl.medications">{{value.medication}}</li>
-                </ul>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label">Allergies</label>
-              <div class="form-control-static">
-                <span ng-if="!$ctrl.allergies.length">No allergy selected</span>
-                <ul class="list-reset">
-                  <li ng-repeat="(key,value) in $ctrl.allergies">{{value.allergy}}</li>
-                </ul>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label">Contacts</label>
-              <div class="form-control-static">
-                <span ng-if="!$ctrl.problems.length">No problems selected</span>
-                <ul class="list-reset">
-                  <li ng-repeat="(key,value) in $ctrl.problems">{{value.problem}}</li>
-                </ul>
+              <div class="col-expand-right">
+                <div class="form-group">
+                  <label class="control-label">To (Site / Org)</label>
+                  <div class="form-control-static">{{ $ctrl.transferOfCare.to }}</div>
+                </div>
               </div>
             </div>
             
+
+            <div ng-if="!$ctrl.transferOfCare.records.length" class="form-group">
+              <label class="control-label">Records</label>
+              <div class="form-control-static">No records added</div>
+            </div>
+
+            <div ng-if="$ctrl.transferOfCare.records.length" class="form-group">
+              <label class="control-label">Records</label>
+              <table class="table table-striped table-hover table-bordered rwd-table table-fixedcol">
+                <colgroup>
+                  <col>
+                  <col style="width: 22%;">
+                  <col style="width: 22%;">
+                  <col style="width: 19%;">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Source</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="record in $ctrl.transferOfCare.records">
+                      <td data-th="Name" class="dnd-handle-wrapper"><span>{{ record.name }}</span></td>
+                      <td data-th="Type"><span>{{ record.typeTitle }}</span></td>
+                      <td data-th="Date"><span>{{ record.date }}</span></td>
+                      <td data-th="Source"><span>{{ record.source }}</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
             <div class="row-expand">
               <div class="col-expand-left">
                 <div class="form-group">
@@ -84,34 +95,14 @@
               </div>
             </div>
             
-            <div class="row-expand">
-              <div class="col-expand-left">
-                <div class="form-group">
-                  <label class="control-label">From (Site / Org)</label>
-                  <div class="form-control-static">{{ $ctrl.transferOfCare.from }}</div>
-                </div>
-              </div>
-              <div class="col-expand-right">
-                <div class="form-group">
-                  <label class="control-label">To (Site / Org)</label>
-                  <div class="form-control-static">{{ $ctrl.transferOfCare.to }}</div>
-                </div>
-              </div>
-            </div>
+            <!-- <div class="form-group">
+              <label class="control-label">Author</label>
+              <div class="form-control-static">{{ $ctrl.transferOfCare.author }}</div>
+            </div> -->
 
-            <div class="row-expand">
-              <div class="col-expand-left">
-                <div class="form-group">
-                  <label class="control-label">Author</label>
-                  <div class="form-control-static">{{ $ctrl.transferOfCare.author }}</div>
-                </div>
-              </div>
-              <div class="col-expand-right">
-                <div class="form-group">
-                  <label class="control-label">Date of Transfer</label>
-                  <div class="form-control-static">{{ $ctrl.transferOfCare.date | date:'dd-MMM-yyyy'}}</div>
-                </div>
-              </div>
+            <div class="form-group">
+              <label class="control-label">Date of Transfer</label>
+              <div class="form-control-static">{{ $ctrl.transferOfCare.transferDateTime | date:'dd-MMM-yyyy'}}</div>
             </div>
             
             <div class="form-group">
@@ -123,120 +114,8 @@
         </div>
         
       </div>
-      <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
-        <div class="wrap-control-group">
-          <div class="control-group right">
-            <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.edit();"><i class="btn-icon fa fa-edit"></i> <span class="btn-text">Edit</span></button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
-  
-  <div class="panel panel-secondary" ng-if="isEdit">
-    <div class="panel-heading">
-      <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
-      </div>
-      <h3 class="panel-title">Edit Vaccination</h3>
-    </div>
-    <div class="panel-body">
-      <div class="panel-body-inner">
-        <form name="vaccinationForm" class="form">
-          <div class="form-group-wrapper">
-            <div class="row-expand">
-              <div class="col-expand-left">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || vaccinationForm.vaccinationName.$dirty) && vaccinationForm.vaccinationName.$invalid, 'has-success': vaccinationForm.vaccinationName.$valid && vaccinationForm.vaccinationName.$dirty}">
-                  <label for="name" class="control-label">Vaccination Name</label>
-                  <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="name" name="name" ng-model="vaccinationEdit.vaccinationName" required />
-                  </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && vaccinationForm.vaccinationName.$error.required">You must enter a value.</span>
-                </div>
-              </div>
-              <div class="col-expand-right">
-                <div class="row">
-                  <div class="col-xs-12 col-md-6">
-                    <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || vaccinationForm.vaccinationDateTime.$dirty) && vaccinationForm.vaccinationDateTime.$invalid, 'has-success': vaccinationForm.vaccinationDateTime.$valid && vaccinationForm.vaccinationDateTime.$dirty}">
-                        <label for="" class="control-label">Vaccination Date</label>
-                        <div class="inner-addon addon-left">
-                            <div class="addon">
-                              <i class="fa fa-calendar"></i>
-                            </div>
-                            <input type="text" class="form-control" id="date" name="date" ng-model="vaccinationEdit.vaccinationDateTime" ng-click="openDatepicker($event, 'vaccinationDateTime')" ng-focus="removeFocus($event)" uib-datepicker-popup="dd-MMM-yyyy" is-open="datepickers.vaccinationDateTime" required readonly/>
-                        </div>
-                        <span class="help-block animate-fade" ng-show="formSubmitted && vaccinationForm.vaccinationDateTime.$error.required">You must enter a valid date.</span>
-                    </div>
-                  </div>
-                  <div class="col-xs-12 col-md-6">
-                    <div class="form-group">
-                      <label class="control-label">Vaccination Source</label>
-                      <div class="non-edit-value">{{ vaccinationEdit.source }}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row-expand">
-              <div class="col-expand-left">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || vaccinationForm.series.$dirty) && vaccinationForm.series.$invalid, 'has-success': vaccinationForm.series.$valid && vaccinationForm.series.$dirty}">
-                  <label for="seriesNumber" class="control-label">Series Number</label>
-                  <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="seriesNumber" name="seriesNumber" ng-model="vaccinationEdit.series" required />
-                  </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && vaccinationForm.series.$error.required">You must enter a value.</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="row-expand">
-              <div class="col-expand-left">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || vaccinationForm.comment.$dirty) && vaccinationForm.comment.$invalid, 'has-success': vaccinationForm.comment.$valid && vaccinationForm.comment.$dirty}">
-                  <label for="comment" class="control-label">Comment</label>
-                  <div class="input-holder">
-                    <textarea type="text" class="form-control textarea-big input-sm" id="comment" name="comment" ng-model="vaccinationEdit.comment" required></textarea>
-                  </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && vaccinationForm.comment.$error.required">You must enter a value.</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="row-expand">
-              <div class="col-expand-left">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || vaccinationForm.author.$dirty) && vaccinationForm.author.$invalid, 'has-success': vaccinationForm.author.$valid && vaccinationForm.author.$dirty}">
-                  <label for="author" class="control-label">Author</label>
-                  <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="author" name="author" ng-model="vaccinationEdit.author" required disabled />
-                  </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && vaccinationForm.author.$error.required">You must enter a value.</span>
-                </div>
-              </div>
-              <div class="col-expand-right">
-                <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || vaccinationForm.dateCreated.$dirty) && vaccinationForm.dateCreated.$invalid, 'has-success': vaccinationForm.dateCreated.$valid && vaccinationForm.dateCreated.$dirty}">
-                  <label for="Date" class="control-label">Date</label>
-                  <div class="inner-addon addon-left">
-                    <div class="addon">
-                      <i class="fa fa-calendar"></i>
-                    </div>
-                    <input type="text" class="form-control" id="dateCreate" name="dateCreate" ng-model="vaccinationEdit.dateCreated" ng-click="dateofSubmittedDatepicker($event, 'dateCreated')" uib-datepicker-popup="dd-MMM-y" is-open="dateCreated" required disabled />
-                  </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && vaccinationForm.dateCreated.$error.required">You must enter a valid date.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
-        <div class="wrap-control-group">
-          <div class="control-group right">
-            <button class="btn btn-danger" ng-click="$ctrl.cancelEdit()"><i class="btn-icon fa fa-ban"></i> <span class="btn-text">Cancel</span></button>
-            <button class="btn btn-success" ng-click="confirmEdit(vaccinationForm, vaccinationEdit)"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Complete</span></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="transferDetail-spinner" spinner-start-active="true"></span> -->
+ 
+  <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="transferDetail-spinner" spinner-start-active="true"></span>
 </div>

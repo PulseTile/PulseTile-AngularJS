@@ -101,10 +101,10 @@
               <span class="help-block animate-fade" ng-show="formSubmitted && !transferOfCareEdit.records.length">You must select at least one record.</span>
             </div>
             
-            <div class="panel-body-inner-table">
+            <div ng-if="transferOfCareEdit.records.length" class="panel-body-inner-table">
               <div class="form-group">
                 <div class="record-popover-wrapper">
-                  <table ng-if="transferOfCareEdit.records.length" class="table table-striped table-hover table-bordered rwd-table table-fixedcol table-transferOfCare">
+                  <table class="table table-striped table-hover table-bordered rwd-table table-fixedcol table-transferOfCare">
                     <colgroup>
                       <col>
                       <col style="width: 22%;">

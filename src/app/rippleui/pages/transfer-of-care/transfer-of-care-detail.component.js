@@ -21,6 +21,8 @@ class TransferOfCareDetailController {
     $scope.formDisabled = true;
 
     this.setCurrentPageData = function (data) {
+      console.log('data');
+      console.log(data);
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
@@ -45,7 +47,7 @@ class TransferOfCareDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     this.transferOfCareLoad = transferOfCareActions.get;
-    this.transferOfCareLoad($stateParams.patientId, $stateParams.transferOfCareIndex);
+    this.transferOfCareLoad($stateParams.patientId, $stateParams.detailsIndex);
   }
 }
 
