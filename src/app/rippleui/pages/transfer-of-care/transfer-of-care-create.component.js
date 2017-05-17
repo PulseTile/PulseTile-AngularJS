@@ -19,26 +19,8 @@ class TransferOfCareCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, transferOfCareActions, serviceRequests, serviceTransferOfCare, serviceFormatted, usSpinnerService, $window) {
 
     $scope.transferOfCareEdit = {};
+    $scope.transferOfCareEdit.transferDateTime = new Date();
     $scope.transferOfCareEdit.records = [];
-    // {
-    //   name: 'name 1',
-    //   typeTitle: 'Medications',
-    //   type: 'medications',
-    //   date: serviceFormatted.formattingDate(new Date(), serviceFormatted.formatCollection.DDMMMYYYY),
-    //   source: 'Type source'
-    // }, {
-    //   name: 'name 2',
-    //   typeTitle: 'Medications',
-    //   type: 'medications',
-    //   date: serviceFormatted.formattingDate(new Date(), serviceFormatted.formatCollection.DDMMMYYYY),
-    //   source: 'Type source'
-    // }, {
-    //   name: 'name 3',
-    //   typeTitle: 'Problems / Diagnosis',
-    //   type: 'diagnosis',
-    //   date: serviceFormatted.formattingDate(new Date(), serviceFormatted.formatCollection.DDMMMYYYY),
-    //   source: 'Type source'
-    // }
 
     $scope.cities = [
       'Worcester Trust',
@@ -102,16 +84,12 @@ class TransferOfCareCreateController {
         topPostion = ($tr.height() + $tr.offset().top) - $wrapper.offset().top;
         $popover.css('top', topPostion);
 
-
         serviceRequests.publisher('openTransferOfCarePopover', {record: record});
 
         $wrapper.addClass('open');
         $trs.removeClass('info');
         $tr.addClass('info');
       }
-
-
-
     };
 
     $scope.closePopovers = function () {
@@ -121,7 +99,6 @@ class TransferOfCareCreateController {
       $trs.removeClass('info');
       $wrapper.removeClass('open');
       serviceRequests.publisher('closeTransferOfCarePopover');
-    
     };
 
     $window.addEventListener('resize', function () {
@@ -160,11 +137,11 @@ class TransferOfCareCreateController {
           to: $scope.transferOfCareEdit.to,
           records: $scope.transferOfCareEdit.records,
           clinicalSummary: $scope.transferOfCareEdit.clinicalSummary,
-          reasonForContact: $scope.transferOfCareEdit.reasonForContact
+          reasonForContact: $scope.transferOfCareEdit.reasonForContact,
+          transferDateTime: $scope.transferOfCareEdit.transferDateTime
         };
         
         $scope.transferOfCareCreate($stateParams.patientId, toAdd);
-        this.goList();
       }
     }.bind(this);
 
