@@ -26,12 +26,14 @@ class TransferOfCarePopover {
 
     $scope.typeRecords = serviceTransferOfCare.getConfig();
 
+    /* istanbul ignore next */
     $scope.stopSpinner = function (type, sourceId) {
       if (!$scope.tempSourceId.length || $scope.tempSourceId == sourceId) {
         usSpinnerService.stop(type + '-popover-spinner');
       }
     };
 
+    /* istanbul ignore next */
     this.setCurrentPageData = function (data) {
       
       if (data.diagnoses.dataGet) {
@@ -66,15 +68,18 @@ class TransferOfCarePopover {
       }
     };
 
+    /* istanbul ignore next */
     $scope.getHighlighterClass = function (vitalName) {
       return serviceVitalsSigns.getHighlighterClass($scope.vitalStatuses[vitalName]);
     };
 
+    /* istanbul ignore next */
     $scope.changeTypePopover = function (type) {
       $scope.title = $scope.typeRecords[type].title;
       $scope.type = type;
     };
 
+    /* istanbul ignore next */
     this.openPopover = function (data) {
       var record = data.record;
       $scope.openPopover = true;
@@ -97,6 +102,7 @@ class TransferOfCarePopover {
     };
     serviceRequests.subscriber('openTransferOfCarePopover', this.openPopover);
 
+    /* istanbul ignore next */
     this.closePopover = function (data) {
       $scope.openPopover = false;
     };

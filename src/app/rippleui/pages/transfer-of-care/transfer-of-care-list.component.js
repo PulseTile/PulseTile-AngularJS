@@ -23,12 +23,14 @@ class TransferOfCareListController {
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'transferOfcare-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'transferOfcare';
 
+    /* istanbul ignore next */
     this.create = function () {
       $state.go('transferOfCare-create', {
         patientId: $stateParams.patientId
       });
     };
 
+    /* istanbul ignore next */
     this.go = function (id, source) {
       $state.go('transferOfCare-detail', {
         patientId: $stateParams.patientId,
@@ -38,6 +40,7 @@ class TransferOfCareListController {
       });
     };
 
+    /* istanbul ignore next */
     this.setCurrentPageData = function (data) {
       if (data.transferOfCare.data) {
         this.transferOfCares = data.transferOfCare.data;

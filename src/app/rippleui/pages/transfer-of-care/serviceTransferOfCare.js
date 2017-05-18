@@ -56,7 +56,8 @@ class serviceTransferOfCare {
     this.getConfig = function () {
       return this.config;
     };
-
+    
+    /* istanbul ignore next */
     this.isInCache = function (type, id) {
       if (this.cache[type] && this.cache[type][id]) {
         return true;
@@ -65,6 +66,7 @@ class serviceTransferOfCare {
       return false;
     };
 
+    /* istanbul ignore next */
     this.setInCache = function (type, id, data) {
       if (typeof this.cache[type] === 'undefined') {
         this.cache[type] = {};
@@ -73,6 +75,7 @@ class serviceTransferOfCare {
       this.cache[type][id] = data;
     };
 
+    /* istanbul ignore next */
     this.getInCache = function (type, id) {
       return this.cache[type][id];
     };

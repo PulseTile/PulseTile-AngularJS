@@ -48,6 +48,7 @@ export function get(patientId, compositionId) {
     }
   };
 }
+/* istanbul ignore next */
 export function create(patientId, composition) {
   return {
     types: [types.TRANSFEROFCARE_CREATE, types.TRANSFEROFCARE_CREATE_SUCCESS, types.TRANSFEROFCARE_CREATE_ERROR],

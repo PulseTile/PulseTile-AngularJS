@@ -31,6 +31,7 @@ class TransferOfCareCreateController {
 
     $scope.typeRecords = serviceTransferOfCare.getConfig();
 
+    /* istanbul ignore next */
     $scope.selectTypeRecords = function (type) {
       for (var key in $scope.typeRecords) {
         usSpinnerService.stop(key + '-spinner');
@@ -43,10 +44,12 @@ class TransferOfCareCreateController {
       }
     };
 
+    /* istanbul ignore next */
     $scope.isShowTypeRecord = function (type) {
       return type === $scope.transferOfCareEdit.type;
     };
 
+    /* istanbul ignore next */
     $scope.addToRecords = function (value) {
       if (value) {
         var record = {};
@@ -64,10 +67,12 @@ class TransferOfCareCreateController {
       }
     };
 
+    /* istanbul ignore next */
     $scope.removeRecord = function (index) {
       $scope.transferOfCareEdit.records.splice(index, 1);
     }
 
+    /* istanbul ignore next */
     $scope.togglePopover = function ($event, record) {
       var $tr = $($event.currentTarget);
       var $wrapper = $tr.closest('.record-popover-wrapper');
@@ -92,6 +97,7 @@ class TransferOfCareCreateController {
       }
     };
 
+    /* istanbul ignore next */
     $scope.closePopovers = function () {
       var $wrapper = $(document).find('.record-popover-wrapper');
       var $trs = $wrapper.find('tr');
@@ -101,10 +107,12 @@ class TransferOfCareCreateController {
       serviceRequests.publisher('closeTransferOfCarePopover');
     };
 
+    /* istanbul ignore next */
     $window.addEventListener('resize', function () {
       $scope.closePopovers();
     });
 
+    /* istanbul ignore next */
     document.addEventListener('click', function (ev) {
       var $target = $(ev.target);
       var $tr = $target.closest('tr');
@@ -115,6 +123,7 @@ class TransferOfCareCreateController {
       }
     });
 
+    /* istanbul ignore next */
     this.goList = function () {
       $state.go('transferOfCare', {
         patientId: $stateParams.patientId,
@@ -124,10 +133,12 @@ class TransferOfCareCreateController {
       });
     };
 
+    /* istanbul ignore next */
     this.cancel = function () {
       this.goList();
     };
     
+    /* istanbul ignore next */
     $scope.create = function (transferOfCareForm, transferOfCare) {
       $scope.formSubmitted = true;
 
@@ -145,6 +156,7 @@ class TransferOfCareCreateController {
       }
     }.bind(this);
 
+    /* istanbul ignore next */
     $scope.changeArraysForTable = function (arr, name, date) {
       arr.map(function (el) {
         el.date = serviceFormatted.formattingDate(el[date], serviceFormatted.formatCollection.DDMMMYYYY);
@@ -154,6 +166,7 @@ class TransferOfCareCreateController {
       });
     };
 
+    /* istanbul ignore next */
     $scope.modificateEventsArr = function (arr) {
       // goto: Later types will come
       arr = _.chain(arr)
@@ -175,6 +188,7 @@ class TransferOfCareCreateController {
       return arr;
     };
 
+    /* istanbul ignore next */
     this.setCurrentPageData = function (data) {
       if (data.transferOfCare.dataCreate !== null) {
         this.goList();
