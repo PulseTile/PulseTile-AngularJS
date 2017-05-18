@@ -129,7 +129,6 @@ export function pasteHtmlAtCaret(html, target) {
       }
       
       range.insertNode(frag);
-      //console.log( range );
 
       // Preserve the selection
       if (lastNode) {
@@ -154,8 +153,6 @@ export function strip(html, cb){
   if (typeof cb === 'function') {
     cb(tmp.innerHTML);
   }
-  
-  console.log( tmp.textContent||tmp.innerText );
   
   return tmp.textContent||tmp.innerText;
 

@@ -21,8 +21,6 @@ class TransferOfCareDetailController {
     $scope.formDisabled = true;
 
     this.setCurrentPageData = function (data) {
-      console.log('data');
-      console.log(data);
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }

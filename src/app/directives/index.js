@@ -422,9 +422,6 @@ angular.module('ripple-ui.directives', [])
       // scope: true,
       link: function(scope, element, attrs) {
         scope.clickInputFile = function (idInputFile) {
-          console.log("angular.element('#' + idInputFile)");
-          console.log(angular.element('#' + idInputFile));
-          // debugger
           document.getElementById(idInputFile).click();
         };
       }

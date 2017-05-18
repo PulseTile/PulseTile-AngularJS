@@ -233,7 +233,6 @@ class PatientsListFullController {
 
     $scope.searchByDetails = function (queryParams, queryType) {
       /* istanbul ignore if */
-      console.log('queryParams.dateOfBirth ', queryParams);
       if (queryParams && queryParams.dateOfBirth) {
         queryParams.dateOfBirth = new Date(queryParams.dateOfBirth.getTime() - (60000 * queryParams.dateOfBirth.getTimezoneOffset()));
       }

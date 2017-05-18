@@ -13,10 +13,10 @@
  ~  See the License for the specific language governing permissions and
  ~  limitations under the License.
  */
-let templateUiKit= require('./ui-kit.html');
+let templateUiKit = require('./ui-kit.html');
 
 class UiKitController {
-    constructor($scope, $state, serviceRequests, deviceDetector, ConfirmationDocsModal, serviceVitalsSigns) {
+    constructor($scope, $state, serviceRequests, deviceDetector, ConfirmationDocsModal, serviceVitalsSigns, $window) {
       serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: null, name: 'ui-kit'});
       serviceRequests.publisher('headerTitle', {title: 'UI OVERVIEW', isShowTitle: true});
 
@@ -286,50 +286,55 @@ class UiKitController {
       
       // Charts
         // Bar
-        var ctx = document.getElementById("chart-department");
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ["Community Care","Hospital","Mental Health","Neighbourhood","Primary Care"],
-                datasets: [{data: [25, 16, 9, 20, 29]}]
-            },
-            options: {
-              capBezierPoints: false,
-              responsive: true,
-              maintainAspectRatio: false,
-              legend: {
-                display: false
+        /* istanbul ignore next  */
+        var canvas = document.getElementById("chart-department");
+        
+        if (canvas) {
+          var ctx = canvas.getContext("2d");
+          var myChart = new $window.Chart(ctx, {
+              type: 'bar',
+              data: {
+                  labels: ["Community Care","Hospital","Mental Health","Neighbourhood","Primary Care"],
+                  datasets: [{data: [25, 16, 9, 20, 29]}]
               },
-              elements: {
-                rectangle: {
-                  borderColor: 'rgba(36, 161, 116,1)',
-                  backgroundColor: 'rgba(36, 161, 116,0.3)',
-                  borderWidth: 1
-                }
-              },
-              tooltips: {
-                enabled: true,
-                mode: 'label',
-                titleMarginBottom: 15,
-                bodySpacing: 10,
-                xPadding: 10,
-                yPadding: 10,
-                callbacks: {
-                  label: function(tooltipItem) {
-                    return '  Patients : ' + tooltipItem.yLabel;
+              options: {
+                capBezierPoints: false,
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                  display: false
+                },
+                elements: {
+                  rectangle: {
+                    borderColor: 'rgba(36, 161, 116,1)',
+                    backgroundColor: 'rgba(36, 161, 116,0.3)',
+                    borderWidth: 1
                   }
+                },
+                tooltips: {
+                  enabled: true,
+                  mode: 'label',
+                  titleMarginBottom: 15,
+                  bodySpacing: 10,
+                  xPadding: 10,
+                  yPadding: 10,
+                  callbacks: {
+                    label: function(tooltipItem) {
+                      return '  Patients : ' + tooltipItem.yLabel;
+                    }
+                  }
+                },
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
                 }
-              },
-              scales: {
-                  xAxes: [{
-                      stacked: true
-                  }],
-                  yAxes: [{
-                      stacked: true
-                  }]
               }
-            }
-        });
+          });
+        }
         
         // Line
         var dataChartLine = {
@@ -390,14 +395,17 @@ class UiKitController {
               }]
             }
         };
+        /* istanbul ignore next  */
+        var canvas2 = document.getElementById("vitalNewsChart");
 
-        var canvas = document.getElementById("vitalNewsChart");
-        var ctx = canvas.getContext("2d");
-        var myLineChart = new window.Chart(ctx, {
-            type: 'line',
-            data: dataChartLine,
-            options: optionsChartLine
-        });
+        if (canvas2) {
+          var ctx2 = canvas.getContext("2d");
+          var myLineChart = new $window.Chart(ctx2, {
+              type: 'line',
+              data: dataChartLine,
+              options: optionsChartLine
+          });
+        }
       //Charts
 
       angular.element(document).ready(function () {
@@ -413,5 +421,5 @@ const UiKitComponent = {
     controller: UiKitController
 };
 
-UiKitController.$inject = ['$scope', '$state', 'serviceRequests', 'deviceDetector', 'ConfirmationDocsModal', 'serviceVitalsSigns'];
+UiKitController.$inject = ['$scope', '$state', 'serviceRequests', 'deviceDetector', 'ConfirmationDocsModal', 'serviceVitalsSigns', '$window'];
 export default UiKitComponent;
