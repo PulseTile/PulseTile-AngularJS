@@ -38,6 +38,6 @@ export default {
   "sidebarInfo": {
     name: 'transfers',
     link: 'transferOfCare',
-    title: 'Transfer of Care'
+    title: 'Transfers of Care'
   }
 }

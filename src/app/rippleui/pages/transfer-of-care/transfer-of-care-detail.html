@@ -99,15 +99,20 @@
               <label class="control-label">Author</label>
               <div class="form-control-static">{{ $ctrl.transferOfCare.author }}</div>
             </div> -->
-
-            <div class="form-group">
-              <label class="control-label">Date of Transfer</label>
-              <div class="form-control-static">{{ $ctrl.transferOfCare.transferDateTime | date:'dd-MMM-yyyy'}}</div>
-            </div>
             
-            <div class="form-group">
-              <label class="control-label">Source</label>
-              <div class="form-control-static">{{ $ctrl.transferOfCare.source }}</div>
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Date of Transfer</label>
+                  <div class="form-control-static">{{ $ctrl.transferOfCare.transferDateTime | date:'dd-MMM-yyyy'}}</div>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group">
+                  <label class="control-label">Source</label>
+                  <div class="form-control-static">{{ $ctrl.transferOfCare.source }}</div>
+                </div>
+              </div>
             </div>
 
           </div>
