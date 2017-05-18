@@ -25,6 +25,7 @@ class UiKitController {
       $scope.fullPanelClass = '';
       $scope.logoFileParams = {};
 
+      /* istanbul ignore next */
       $scope.isMobileScreen = function () {
         if (window.innerWidth > 767) {
           return false;
@@ -33,6 +34,7 @@ class UiKitController {
         return true;
       };
 
+      /* istanbul ignore next */
       $scope.scrollTo = function (id) {
         var $elm = $('#' + id);
         
@@ -81,10 +83,12 @@ class UiKitController {
         };
       // Custom Select
 
+      /* istanbul ignore next */
       $scope.toggleSidebar = function () {
         $scope.isOpenSidebar = !$scope.isOpenSidebar;
       };
 
+      /* istanbul ignore next */
       $scope.toggleFullPanelClass = function (panelName) {
         if ($scope.fullPanelClass == panelName) {
           $scope.fullPanelClass = '';
@@ -93,6 +97,7 @@ class UiKitController {
         }
         return $scope.fullPanelClass ? 'full-panel full-panel-' + $scope.fullPanelClass : '';
       };
+      /* istanbul ignore next */
       $scope.getFullPanelClass = function () {
         return $scope.fullPanelClass ? 'full-panel full-panel-' + $scope.fullPanelClass : '';
       };
@@ -118,16 +123,19 @@ class UiKitController {
         $scope.idSelectedLeft = null;
         $scope.idSelectedRight = null;
 
+        /* istanbul ignore next */
         $scope.setSelectedLeft = function (idSelectedLeft) {
             $scope.idSelectedRight = null;
             $scope.idSelectedLeft = idSelectedLeft;
         };
 
+        /* istanbul ignore next */
         $scope.setSelectedRight = function (idSelectedRight) {
             $scope.idSelectedLeft = null;
             $scope.idSelectedRight = idSelectedRight;
         };
 
+        /* istanbul ignore next */
         $scope.toggleSelectedItem = function (idSelected) {
             if ($scope.isInSuggestionsList(idSelected)) {
                 $scope.setSelectedLeft(idSelected);
@@ -151,6 +159,7 @@ class UiKitController {
             }
         };
 
+        /* istanbul ignore next */
         $scope.isInSuggestionsList = function (idSelected) {
             for (var b = 0; b < $scope.suggestions.length; b++) {
                 if ($scope.suggestions[b].code === idSelected) {
@@ -160,6 +169,7 @@ class UiKitController {
             return false;
         };
 
+        /* istanbul ignore next */
         $scope.chooseItem = function () {
             for (var d = 0; d < $scope.suggestions.length; d++) {
                 if ($scope.suggestions[d].code === $scope.idSelectedLeft) {
@@ -168,6 +178,7 @@ class UiKitController {
                 }
             }
         };
+        /* istanbul ignore next */
         $scope.chooseAll = function () {
             var d;
             for (d = $scope.suggestions.length - 1; d >= 0; d--) {
@@ -175,6 +186,7 @@ class UiKitController {
                 $scope.suggestions.splice(d, 1);
             }
         };
+        /* istanbul ignore next */
         $scope.cancelItem = function () {
             for (var c = 0; c < $scope.chosenOrders.length; c++) {
                 if ($scope.chosenOrders[c].code === $scope.idSelectedRight) {
@@ -183,6 +195,7 @@ class UiKitController {
                 }
             }
         };
+        /* istanbul ignore next */
         $scope.cancelAll = function () {
             for (var d = $scope.chosenOrders.length - 1; d >= 0; d--) {
                 $scope.suggestions.push($scope.chosenOrders[d]);
@@ -193,6 +206,7 @@ class UiKitController {
 
 
       // Modal
+        /* istanbul ignore next */
         this.openModal = function (patient, state) {
           ConfirmationDocsModal.openModal(function () {});
         };
@@ -258,6 +272,7 @@ class UiKitController {
           heartRate: 45,
           newsScore: 12
         }
+        /* istanbul ignore next */
         $scope.getHighlighterClass = function (vitalName) {
           return serviceVitalsSigns.getHighlighterClass($scope.vitalStatuses[vitalName]);
         };
@@ -275,6 +290,7 @@ class UiKitController {
         } 
         $scope.mobileShowInfo = '';
 
+        /* istanbul ignore next */
         this.showInfo = function() {
           if ($scope.mobileShowInfo === 'show') {
             $scope.mobileShowInfo = '';
@@ -287,11 +303,12 @@ class UiKitController {
       // Charts
         // Bar
         /* istanbul ignore next  */
-        var canvas = document.getElementById("chart-department");
+        var canvas, ctx, myChart;
+        canvas = document.getElementById("chart-department");
         
         if (canvas) {
-          var ctx = canvas.getContext("2d");
-          var myChart = new $window.Chart(ctx, {
+          ctx = canvas.getContext("2d");
+          myChart = new $window.Chart(ctx, {
               type: 'bar',
               data: {
                   labels: ["Community Care","Hospital","Mental Health","Neighbourhood","Primary Care"],
@@ -320,6 +337,7 @@ class UiKitController {
                   yPadding: 10,
                   callbacks: {
                     label: function(tooltipItem) {
+                      /* istanbul ignore next */
                       return '  Patients : ' + tooltipItem.yLabel;
                     }
                   }
@@ -377,6 +395,7 @@ class UiKitController {
               caretSize: 0,
               callbacks: {
                 label: function(tooltipItem, data) {
+                  /* istanbul ignore next */
                   return '  ' + data.datasets[tooltipItem.datasetIndex].label + ' : ' + tooltipItem.yLabel;
                 }
               }
@@ -396,11 +415,13 @@ class UiKitController {
             }
         };
         /* istanbul ignore next  */
-        var canvas2 = document.getElementById("vitalNewsChart");
+        var canvasLineChart, ctxLineChart, myLineChart
 
-        if (canvas2) {
-          var ctx2 = canvas.getContext("2d");
-          var myLineChart = new $window.Chart(ctx2, {
+        canvasLineChart = document.getElementById("vitalNewsChart");
+
+        if (canvasLineChart) {
+          ctxLineChart = canvas.getContext("2d");
+          myLineChart = new $window.Chart(ctx2, {
               type: 'line',
               data: dataChartLine,
               options: optionsChartLine
@@ -411,6 +432,8 @@ class UiKitController {
       angular.element(document).ready(function () {
         if (!$scope.isMobileScreen()) {
           $scope.isOpenSidebar = true;
+        } else {
+          $scope.isOpenSidebar = false;
         }
       }.bind(this));
     }
