@@ -40,7 +40,6 @@ class EventsDetailController {
       }
       // if (data.user.data) {
       //   this.currentUser = serviceRequests.currentUserData;
-      //   console.log('currentUser: ', this.currentUser);
       // }
     };
 

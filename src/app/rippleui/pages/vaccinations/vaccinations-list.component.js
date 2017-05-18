@@ -56,10 +56,6 @@ class VaccinationsListController {
       }
     };
 
-    if ($stateParams.page) {
-      this.currentPage = $stateParams.page;
-    }
-
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);

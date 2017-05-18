@@ -33,7 +33,6 @@ describe('SearchAdvancedComponent', function() {
     spyOn(scope, 'isNhsNumberRequired');
     spyOn(scope, 'isNhsNumberTooShort');
     spyOn(scope, 'isNhsNumberFieldInvalid');
-    spyOn(scope, 'areDetailsFieldsClean');
           
     scope.cancel();
     scope.ok();
@@ -43,7 +42,6 @@ describe('SearchAdvancedComponent', function() {
     scope.isNhsNumberRequired();
     scope.isNhsNumberTooShort();
     scope.isNhsNumberFieldInvalid();
-    scope.areDetailsFieldsClean();
   });
 
   it('formSubmitted is true', function() {
@@ -78,8 +76,5 @@ describe('SearchAdvancedComponent', function() {
   });
   it("isNhsNumberFieldInvalid was called", function() {
     expect(scope.isNhsNumberFieldInvalid).toHaveBeenCalled();
-  });
-  it("areDetailsFieldsClean was called", function() {
-    expect(scope.areDetailsFieldsClean).toHaveBeenCalled();
   });
 });

@@ -16,27 +16,48 @@
 let templateTransferOfCareList = require('./transfer-of-care-list.html');
 
 class TransferOfCareListController {
-  constructor($scope, $state, $stateParams, $ngRedux, transferOfCareActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, transferOfCareActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
-    this.go = function (id, transferfCareSource) {
-      $state.go('transferOfCare-detail', {
-        patientId: $stateParams.patientId,
-        transferOfCareIndex: id,
-        filter: this.query,
-        page: this.currentPage,
-        source: transferfCareSource
+    this.isShowCreateBtn = $state.router.globals.$current.name !== 'transferOfcare-create';
+    this.isShowExpandBtn = $state.router.globals.$current.name !== 'transferOfcare';
+
+    /* istanbul ignore next */
+    this.create = function () {
+      $state.go('transferOfCare-create', {
+        patientId: $stateParams.patientId
       });
     };
 
+    /* istanbul ignore next */
+    this.go = function (id, source) {
+      $state.go('transferOfCare-detail', {
+        patientId: $stateParams.patientId,
+        detailsIndex: id,
+        page: $scope.currentPage || 1,
+        source: source
+      });
+    };
+
+    /* istanbul ignore next */
     this.setCurrentPageData = function (data) {
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
+      if (data.transferOfCare.data) {
+        this.transferOfCares = data.transferOfCare.data;
+
+        this.transferOfCares = this.transferOfCares.map(function (el, index) {
+          el.transfer = "Transfer #" + (index + 1);
+          return el; 
+        });
+
+        serviceFormatted.formattingTablesDate(this.transferOfCares, ['transferDateTime'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['transfer', 'from', 'to', 'transferDateTime', 'source'];
+
         usSpinnerService.stop('patientSummary-spinner');
       }
-      if (data.transferOfCare.data) {
-        this.transferofCareComposition = data.transferOfCare.data;
+      
+      if (data.patientsGet.data) {
+        this.currentPatient = data.patientsGet.data;
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
@@ -49,8 +70,8 @@ class TransferOfCareListController {
 
     $scope.$on('$destroy', unsubscribe);
 
-    this.transferofCareLoad = transferOfCareActions.all;
-    this.transferofCareLoad($stateParams.patientId);
+    this.transferOfCareLoad = transferOfCareActions.all;
+    this.transferOfCareLoad($stateParams.patientId);
   }
 }
 
@@ -59,5 +80,5 @@ const TransferOfCareListComponent = {
   controller: TransferOfCareListController
 };
 
-TransferOfCareListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'transferOfCareActions', 'serviceRequests', 'usSpinnerService'];
+TransferOfCareListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'transferOfCareActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default TransferOfCareListComponent;

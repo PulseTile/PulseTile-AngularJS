@@ -2,26 +2,31 @@
 import TransferOfCareDetailComponent from '../../../../app/rippleui/pages/transfer-of-care/transfer-of-care-detail.component';
 import '../../../../app/index';
 
-describe('Vaccinations List', function() {
+describe('Transfer Of Care Details', function() {
 
     beforeEach(angular.mock.module('ripple-ui'));
 
-    let scope, ctrl, controller, template, state;
+    let scope, ctrl, controller, template, state, stateParams, ngRedux, transferOfCareActions, usSpinnerService, serviceRequests;
     
-    beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _transferOfCareActions_, _serviceRequests_, _usSpinnerService_) => {
+    beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _transferOfCareActions_, _usSpinnerService_, _serviceRequests_) => {
         controller = $controller;
         scope = $injector.get('$rootScope').$new();
         state = _$state_;
+        stateParams = _$stateParams_;
+        ngRedux = _$ngRedux_;
+        transferOfCareActions = _transferOfCareActions_;
+        usSpinnerService = _usSpinnerService_;
+        serviceRequests = _serviceRequests_;
 
         template = TransferOfCareDetailComponent.template;
         ctrl = controller(TransferOfCareDetailComponent.controller, {
             $scope: scope,
             $state: state,
-            $stateParams: _$stateParams_,
-            $ngRedux: _$ngRedux_,
-            transferOfCareActions: _transferOfCareActions_,
-            serviceRequests: _serviceRequests_,
-            usSpinnerService: _usSpinnerService_
+            $stateParams: stateParams,
+            $ngRedux: ngRedux,
+            transferOfCareActions: transferOfCareActions,
+            usSpinnerService: usSpinnerService,
+            serviceRequests: serviceRequests
         });
     }));
 
@@ -32,10 +37,14 @@ describe('Vaccinations List', function() {
 
     });
 
-    it("setCurrentPageData was called", function() {
-        expect(ctrl.setCurrentPageData).toHaveBeenCalled();
+    it("Controller exist", function() {
+        expect(ctrl).toBeDefined();
     });
     it('Template exist', function() {
         expect(template).toBeDefined();
+    });
+
+    it("setCurrentPageData was called", function() {
+        expect(ctrl.setCurrentPageData).toHaveBeenCalled();
     });
 });

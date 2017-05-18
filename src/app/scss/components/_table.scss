@@ -247,3 +247,11 @@ td[ng-click] { cursor: pointer; }
 }
 
 .table-icon { color: #9493a1; }
+
+.table-transferOfCare {
+  border-left: 0px !important;
+  border-right: 0px !important;
+  @include respond-from(xs) {
+    border-top: 0px !important;
+  }
+}

@@ -12,7 +12,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-export default function ConfirmationModal($uibModal, $ngRedux, patientsActions) {
+export default function ConfirmationModal($uibModal, $ngRedux) {
   var isModalClosed = true;
 
   var openModal = function (patient, state) {
@@ -38,8 +38,6 @@ export default function ConfirmationModal($uibModal, $ngRedux, patientsActions) 
               });
             }
 
-            patientsActions.getPatient(patient.id);
-
             $uibModalInstance.dismiss('cancel');
           };
 
@@ -60,4 +58,4 @@ export default function ConfirmationModal($uibModal, $ngRedux, patientsActions) 
     openModal: openModal
   };
 }
-ConfirmationModal.$inject = ['$uibModal', '$ngRedux', 'patientsActions'];
+ConfirmationModal.$inject = ['$uibModal', '$ngRedux'];

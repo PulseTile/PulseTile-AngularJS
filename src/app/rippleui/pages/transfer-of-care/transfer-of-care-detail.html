@@ -1,10 +1,10 @@
 <!--
   ~  Copyright 2016 Ripple Foundation C.I.C. Ltd
-  ~
+  ~  
   ~  Licensed under the Apache License, Version 2.0 (the "License");
   ~  you may not use this file except in compliance with the License.
   ~  You may obtain a copy of the License at
-  ~
+  ~  
   ~    http://www.apache.org/licenses/LICENSE-2.0
 
   ~  Unless required by applicable law or agreed to in writing, software
@@ -13,118 +13,109 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
-<div class="transbox">
-  <div class="innerTransbox">
-    <h3><strong>Transfer of care</strong></h3>
+  
+<div mc-full-panel mc-datepicker class="panel-group">
+  <div class="panel panel-secondary">
+    <div class="panel-heading">
+      <div class="control-group right">
+        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+      </div>
+      <h3 class="panel-title">Transfer of Care</h3>
+    </div>
+    <div class="panel-body">
+      <div class="panel-body-inner">
+        <div class="form">
+          <div class="form-group-wrapper">
+            <div class="row-expand">
+              <div class="col-expand-left"></div>
+              <div class="col-expand-right"></div>
+            </div>
 
-    <div class="form-horizontal text-left">
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">From (Site / Org)</label>
+                  <div class="form-control-static">{{ $ctrl.transferOfCare.from }}</div>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group">
+                  <label class="control-label">To (Site / Org)</label>
+                  <div class="form-control-static">{{ $ctrl.transferOfCare.to }}</div>
+                </div>
+              </div>
+            </div>
+            
 
-      <div class="form-group">
-        <label class="control-label col-md-3">Problems:</label>
-        <div class="col-md-9">
-          <div class="form-control-static">
-            <span ng-if="!$ctrl.problems.length">No problems selected</span>
-            <ul class="list-reset">
-              <li ng-repeat="(key,value) in $ctrl.problems">{{value.problem}}</li>
-            </ul>
+            <div ng-if="!$ctrl.transferOfCare.records.length" class="form-group">
+              <label class="control-label">Records</label>
+              <div class="form-control-static">No records added</div>
+            </div>
+
+            <div ng-if="$ctrl.transferOfCare.records.length" class="form-group">
+              <label class="control-label">Records</label>
+              <table class="table table-striped table-hover table-bordered rwd-table table-fixedcol">
+                <colgroup>
+                  <col>
+                  <col style="width: 22%;">
+                  <col style="width: 22%;">
+                  <col style="width: 19%;">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Source</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="record in $ctrl.transferOfCare.records">
+                      <td data-th="Name" class="dnd-handle-wrapper"><span>{{ record.name }}</span></td>
+                      <td data-th="Type"><span>{{ record.typeTitle }}</span></td>
+                      <td data-th="Date"><span>{{ record.date }}</span></td>
+                      <td data-th="Source"><span>{{ record.source }}</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="row-expand">
+              <div class="col-expand-left">
+                <div class="form-group">
+                  <label class="control-label">Reason for contact</label>
+                  <div class="form-control-static">{{ $ctrl.transferOfCare.reasonForContact }}</div>
+                </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group">
+                  <label class="control-label">Clinical Summary</label>
+                  <div class="form-control-static">{{ $ctrl.transferOfCare.clinicalSummary }}</div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- <div class="form-group">
+              <label class="control-label">Author</label>
+              <div class="form-control-static">{{ $ctrl.transferOfCare.author }}</div>
+            </div> -->
+
+            <div class="form-group">
+              <label class="control-label">Date of Transfer</label>
+              <div class="form-control-static">{{ $ctrl.transferOfCare.transferDateTime | date:'dd-MMM-yyyy'}}</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="control-label">Source</label>
+              <div class="form-control-static">{{ $ctrl.transferOfCare.source }}</div>
+            </div>
+
           </div>
         </div>
+        
       </div>
-
-      <div class="form-group">
-        <label class="control-label col-md-3">Medications:</label>
-        <div class="col-md-9">
-          <div class="form-control-static">
-            <span ng-if="!$ctrl.medications.length">No medication selected</span>
-            <ul class="list-reset">
-              <li ng-repeat="(key,value) in $ctrl.medications">{{value.medication}}</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="control-label col-md-3">Allergies:</label>
-        <div class="col-md-9">
-          <div class="form-control-static">
-            <span ng-if="!$ctrl.allergies.length">No allergies selected</span>
-            <ul class="list-reset">
-              <li ng-repeat="(key,value) in $ctrl.allergies">{{value.allergy}}</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="control-label col-md-3">Contacts:</label>
-        <div class="col-md-9">
-          <div class="form-control-static">
-            <span ng-if="!$ctrl.contacts.length">No contacts selected</span>
-            <ul class="list-reset">
-              <li ng-repeat="(key,value) in $ctrl.contacts">{{value.contactName}}</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="control-label col-md-3">Reason for contact:</label>
-        <div class="col-md-9">
-          <div class="form-control-static">
-            {{$ctrl.transferOfCare.reasonForContact}}
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-12">
-          <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="transferDetail-spinner" spinner-start-active="true"></span>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="control-label col-md-3">Clinical Summary:</label>
-        <div class="col-md-9">
-          <div class="form-control-static">
-            {{$ctrl.transferOfCare.clinicalSummary}}
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="control-label col-md-3">From (Site / Org):</label>
-        <div class="col-md-9">
-          <div class="form-control-static">
-            {{$ctrl.transferOfCare.siteFrom}}
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="control-label col-md-3">To (Site / Org):</label>
-        <div class="col-md-9">
-          <div class="form-control-static">
-            {{$ctrl.transferOfCare.siteTo}}
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="control-label col-md-3">Date of Transfer:</label>
-        <div class="col-md-9">
-          <div class="form-control-static">
-            {{$ctrl.transferOfCare.dateOfTransfer | date:'dd-MMM-y' }}
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="control-label col-md-3">Source:</label>
-        <div class="col-md-9">
-          <div class="form-control-static">local</div>
-        </div>
-      </div>
-
     </div>
   </div>
+ 
+  <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="transferDetail-spinner" spinner-start-active="true"></span>
 </div>

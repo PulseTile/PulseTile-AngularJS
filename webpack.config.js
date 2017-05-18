@@ -21,7 +21,8 @@ const ENV_PRODUCTION_EXTENSION = NODE_ENV === 'extension';
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 9000;
 
-const API_URL =  'http://138.68.134.7';
+const API_URL =  'http://178.62.6.217';
+// const API_URL =  'http://138.68.134.7';
 // const API_URL =  'http://139.59.187.100';
 
 
@@ -35,8 +36,8 @@ const config = {
 
     root: path.resolve('./src'),
     alias: {
-      'morrisjs': '../../bower_components/morrisjs/morris.js',
-      'spin': 'spin.js'
+      // 'morrisjs': '../../bower_components/morrisjs/morris.js',
+      'spin': 'spin.js',
     }
   },
 
@@ -71,7 +72,7 @@ const config = {
       "moment": "moment",
       Raphael: 'raphael',
       io: 'socket.io-client',
-      swiper: 'swiper'
+      swiper: 'swiper',
     })
   ],
 

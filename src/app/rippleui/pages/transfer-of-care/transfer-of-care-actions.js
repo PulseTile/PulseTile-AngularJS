@@ -24,10 +24,10 @@ export function all(patientId) {
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/transfers-of-care'
+      url: '/api/patients/' + patientId + '/events/toc'
     },
 
-    meta: {
+    d: {
       timestamp: Date.now()
     }
   };
@@ -40,14 +40,15 @@ export function get(patientId, compositionId) {
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/transfers-of-care/' + compositionId
+      url: '/api/patients/' + patientId + '/events/toc/' + compositionId
     },
 
-    meta: {
+    d: {
       timestamp: Date.now()
     }
   };
 }
+/* istanbul ignore next */
 export function create(patientId, composition) {
   return {
     types: [types.TRANSFEROFCARE_CREATE, types.TRANSFEROFCARE_CREATE_SUCCESS, types.TRANSFEROFCARE_CREATE_ERROR],
@@ -56,11 +57,11 @@ export function create(patientId, composition) {
 
     config: {
       method: 'post',
-      url: '/api/patients/' + patientId + '/transfers-of-care',
+      url: '/api/patients/' + patientId + '/events/toc',
       data: composition
     },
 
-    meta: {
+    d: {
       timestamp: Date.now()
     }
   };

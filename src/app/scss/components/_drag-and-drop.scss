@@ -1,0 +1,30 @@
+.dndPlaceholder td span {
+  display: block;
+  min-height: 30px;
+}
+.dnd-handle-wrapper {
+  position: relative;
+  @include respond-from(xs) {
+    padding-left: 30px !important;
+  }
+}
+.dnd-handle {
+  color: #bcbcc5;
+  cursor: move;
+  display: none;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 25px;
+  i {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  @include respond-from(xs) {
+    display: block;
+  }
+}

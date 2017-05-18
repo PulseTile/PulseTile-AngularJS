@@ -1,0 +1,48 @@
+.record-popover-wrapper {
+  position: relative;
+  &.open .record-popover { display: block; }
+}
+.record-popover {
+  display: none;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  left: 10px;
+  margin-top: 8px;
+  position: absolute;
+  right: 10px;
+  z-index: 10;
+  &:after {
+    border-color: transparent transparent $base-color;
+    border-style: solid;
+    border-width: 0 13px 13px;
+    bottom: 100%;
+    content: '';
+    left: 50%;
+    position: absolute;
+  }
+}
+.record-popover-header {
+  background: $base-color;
+  border-radius: 8px 8px 0 0;
+  color: $text-on-base-color;
+  padding: 7px;
+}
+.record-popover-body {
+  border-radius: 0 0 8px 8px;
+  padding: 14px;
+}
+.record-popover-content {
+  height: 235px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+}
+.record-popover-title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 34px;
+  margin: 0;
+  padding: 0 5px;
+  @include text-truncate;
+}

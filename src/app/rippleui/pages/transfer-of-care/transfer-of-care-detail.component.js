@@ -20,6 +20,7 @@ class TransferOfCareDetailController {
 
     $scope.formDisabled = true;
 
+    /* istanbul ignore next */
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
@@ -45,7 +46,7 @@ class TransferOfCareDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     this.transferOfCareLoad = transferOfCareActions.get;
-    this.transferOfCareLoad($stateParams.patientId, $stateParams.transferOfCareIndex);
+    this.transferOfCareLoad($stateParams.patientId, $stateParams.detailsIndex);
   }
 }
 

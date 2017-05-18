@@ -37,6 +37,7 @@ import 'ng-scrollbars';
 import 'angular-ui-select';
 import 'angular-swiper';
 import 'swiper';
+import 'angular-drag-and-drop-lists';
 
 //commons
 import reducer from './redux/reducer';
@@ -66,6 +67,7 @@ import ServiceVitalsSigns from './rippleui/pages/vitals/serviceVitalsSigns.js';
 import ServiceActions from './rippleui/pages/dicom/serviceActions.js';
 import ServiceFormatted from './services/serviceFormatted.js';
 import TemplateService from './services/TemplateService.js';
+import serviceTransferOfCare from './rippleui/pages/transfer-of-care/serviceTransferOfCare.js';
 
 import ScheduleModal from './rippleui/pages/events/schedule-modal';
 import ConfirmationModal from './rippleui/confirmation/confirmation';
@@ -100,7 +102,8 @@ let app = angular
         'rzModule',
         'ui.select',
         'ksSwiper',
-        'ngSanitize'
+        'ngSanitize',
+        'dndLists'
     ])
     .factory('ScheduleModal', ScheduleModal)
     .factory('ConfirmationModal', ConfirmationModal)
@@ -112,6 +115,7 @@ let app = angular
     .factory('deviceDetector', deviceDetector)
 
     .service('templateService', TemplateService)
+    .service('serviceTransferOfCare', serviceTransferOfCare)
     .service('serviceFormatted', ServiceFormatted)
     .service('serviceRequests', ServiceRequests)
     .service('serviceStateManager', ServiceStateManager)

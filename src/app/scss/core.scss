@@ -44,6 +44,7 @@
 @import 'components/slider-range';
 @import 'components/panel/index';
 @import 'components/color-palette';
+@import 'components/drag-and-drop';
 
 @import 'base';
 
@@ -64,5 +65,6 @@
 @import 'blocks/dicom';
 @import 'blocks/timelines';
 @import 'blocks/patients-list';
+@import 'blocks/record-popover';
 
 @import 'ui-kit';

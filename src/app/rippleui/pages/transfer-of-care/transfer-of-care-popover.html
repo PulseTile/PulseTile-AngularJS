@@ -1,0 +1,307 @@
+<div class="record-popover" ng-show="openPopover">
+  <div class="record-popover-header">
+    <div class="record-popover-title">{{title}}</div>
+  </div>
+
+  <div class="record-popover-body">
+    <div class="record-popover-content">
+      
+      <div ng-if="type == 'diagnosis'" class="form-group-wrapper">
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Problem / Diagnosis</label>
+              <div class="form-control-static">{{ data.diagnosis.problem }}</div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Date of Onset</label>
+              <div class="form-control-static">{{ data.diagnosis.dateOfOnset | date: 'dd-MMM-yyyy' }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Description</label>
+          <div class="form-control-static">{{ data.diagnosis.description }}</div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">NHS Choices Web Page URL</label>
+          <div class="form-control-static">{{data.diagnosis.url}}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Terminology</label>
+              <div class="form-control-static">{{ data.diagnosis.terminology }}</div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Code</label>
+              <div class="form-control-static">{{ data.diagnosis.code }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="type == 'medications'" class="form-group-wrapper">
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Name</label>
+              <div class="form-control-static">{{ data.medications.name }}</div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Dose Amount</label>
+              <div class="form-control-static">{{ data.medications.doseAmount }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Dose Timing</label>
+              <div class="form-control-static">{{ data.medications.doseTiming }}</div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Dose Directions</label>
+              <div class="form-control-static">{{ data.medications.doseDirections }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-expand-right">
+          <div class="form-group">
+            <label class="control-label">Date</label>
+            <div class="form-control-static">{{ data.medications.startDate | date:'dd-MMM-yyyy' }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="type == 'referrals'" class="form-group-wrapper">
+
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Referral From</label>
+              <div class="form-control-static">{{ data.referrals.referralFrom }}</div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Referral To</label>
+              <div class="form-control-static">{{ data.referrals.referralTo }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label">Date of Referral</label>
+          <div class="form-control-static">{{ data.referrals.dateOfReferral | date:'dd-MMM-y'}}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Reason for Referral</label>
+              <div class="form-control-static">{{ data.referrals.reason }}</div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Clinical Summary</label>
+              <div class="form-control-static">{{ data.referrals.clinicalSummary }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label">Date</label>
+          <div class="form-control-static">{{ data.referrals.referralStateDate | date:'dd-MMM-y' }}</div>
+        </div>
+      </div>
+
+      <div ng-if="type == 'events'" class="form-group-wrapper">
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Event Name</label>
+              <div class="form-control-static">{{ data.events.serviceTeam }}</div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Event Type</label>
+              <div class="form-control-static">{{ data.events.type }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label">Notes</label>
+          <div class="form-control-static">{{ data.events.note }}</div>
+        </div>
+        
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Location</label>
+              <div class="form-control-static">{{ data.events.location }}</div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Event Date</label>
+              <div class="form-control-static">{{ data.events.dateOfAppointment | date:'dd-MMM-yyyy' }}</div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div ng-if="type == 'vitals'" class="vitals-group-wrapper">
+        <div class="row-expand">
+          <div class="col-expand-left">
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass('respirationRate')"></span>  
+                  <label class="vitals-label">Respiration Rate</label>
+                  <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.respirationRate.type">
+                    <div class="form-control input-sm">{{ data.vitals.respirationRate }}</div>
+                    <span class="vitals-addon">resps/min</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass('oxygenSaturation')"></span>  
+                  <label class="vitals-label">Oxygen Saturation</label>
+                  <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.oxygenSaturation.type">
+                    <div class="form-control input-sm">{{ data.vitals.oxygenSaturation }}</div>
+                    <span class="vitals-addon">%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass('oxygenSupplemental')"></span>  
+                  <label class="vitals-label">Any Supplemental Oxygen</label>
+                  <div class="input-holder">
+                    <label class="switch">
+                      <input type="checkbox" name="oxygenSupplemental" ng-model="vital.oxygenSupplemental" disabled>
+                      <div class="slider disabled">
+                        <span class="text text-check-true">Yes</span>
+                        <span class="text text-check-false">No</span>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass('heartRate')"></span>  
+                  <label class="vitals-label">Heart Rate</label>
+                  <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.heartRate.type">
+                    <div class="form-control input-sm">{{ data.vitals.heartRate }}</div>
+                    <span class="vitals-addon">bpm</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-expand-right">
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass('systolicBP')"></span>  
+                  <label class="vitals-label">Systolic BP</label>
+                  <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.systolicBP.type">
+                    <div class="form-control input-sm">{{ data.vitals.systolicBP }}</div>
+                    <span class="vitals-addon">mmHg</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span class="highlighter-not-vital"></span>  
+                  <label class="vitals-label">Diastolic BP</label>
+                  <div class="input-group vitals-holder">
+                    <div class="form-control input-sm">{{ data.vitals.diastolicBP }}</div>
+                    <span class="vitals-addon">mmHg</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass('levelOfConsciousness')"></span>  
+                  <label for="levelOfConsciousness" class="vitals-label">Level of Consciousness</label>
+                  <div class="input-holder">
+                    <div class="switch-group">
+                      <label class="switch">
+                        <input id="levelOfConsciousnessA" type="radio" name="levelOfConsciousness" value="Alert" ng-model="data.vitals.levelOfConsciousness" disabled>
+                        <div class="slider disabled"><span class="text">A</span></div>
+                      </label>
+                      <label class="switch">
+                        <input id="levelOfConsciousnessV" type="radio" name="levelOfConsciousness" value="Verbal" ng-model="data.vitals.levelOfConsciousness" disabled>
+                        <div class="slider disabled"><span class="text">V</span></div>
+                      </label>
+                      <label class="switch">
+                        <input id="levelOfConsciousnessP" type="radio" name="levelOfConsciousness" value="Pain" ng-model="data.vitals.levelOfConsciousness" disabled>
+                        <div class="slider disabled"><span class="text">P</span></div>
+                      </label>
+                      <label class="switch">
+                        <input id="levelOfConsciousnessU" type="radio" name="levelOfConsciousness" value="Unresponsive" ng-model="data.vitals.levelOfConsciousness" disabled>
+                        <div class="slider disabled"><span class="text">U</span></div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <div class="vitals-group highlighter-wrapper">
+                  <span ng-class="getHighlighterClass('temperature')"></span>  
+                  <label class="vitals-label">Temperature</label>
+                  <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.temperature.type">
+                    <div class="form-control input-sm">{{ data.vitals.temperature }}</div>
+                    <span class="vitals-addon">c</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row-expand">
+          <div class="col-expand-left">
+            <div class="vitals-group highlighter-wrapper">
+              <span ng-class="getHighlighterClass('newsScore')"></span>  
+              <label class="vitals-label">NEWS Score</label>
+              <div class="input-holder vitals-holder" ng-class="vitalStatuses.newsScore.type">
+                <div class="form-control input-sm">{{ data.vitals.newsScore }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <span ng-repeat="(key, item) in typeRecords" class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="{{key}}-popover-spinner" spinner-start-active="false"></span>
+    </div>
+  </div>
+
+  
+
+
+
+</div>
