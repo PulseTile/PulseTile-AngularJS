@@ -139,7 +139,7 @@ class TransferOfCareCreateController {
     };
     
     /* istanbul ignore next */
-    $scope.create = function (transferOfCareForm, transferOfCare) {
+    this.create = function (transferOfCareForm, transferOfCare) {
       $scope.formSubmitted = true;
 
       if (transferOfCareForm.$valid && $scope.transferOfCareEdit.records) {
@@ -157,38 +157,6 @@ class TransferOfCareCreateController {
     }.bind(this);
 
     /* istanbul ignore next */
-    $scope.changeArraysForTable = function (arr, name, date) {
-      arr.map(function (el) {
-        el.date = serviceFormatted.formattingDate(el[date], serviceFormatted.formatCollection.DDMMMYYYY);
-        el.tableName = el[name];
-        el.selectName = el[name];
-        return el;
-      });
-    };
-
-    /* istanbul ignore next */
-    $scope.modificateEventsArr = function (arr) {
-      // goto: Later types will come
-      arr = _.chain(arr)
-            .filter(function (value) {
-              return value.dateOfAppointment;
-            })
-            .each(function (value, index) {
-              value.type = 'Appointment';
-              value.date = serviceFormatted.formattingDate(value.dateOfAppointment, serviceFormatted.formatCollection.DDMMMYYYY);
-              value.tableName = value.serviceTeam;
-              value.selectName = value.serviceTeam;
-              return value;
-            })
-            .groupBy(function(value) {
-              return value.type;
-            })
-            .value();
-
-      return arr;
-    };
-
-    /* istanbul ignore next */
     this.setCurrentPageData = function (data) {
       if (data.transferOfCare.dataCreate !== null) {
         this.goList();
@@ -203,42 +171,27 @@ class TransferOfCareCreateController {
 
       // For type Records
       if (data.diagnoses.data) {
-        $scope.typeRecords.diagnosis.records = data.diagnoses.data;
-        $scope.changeArraysForTable($scope.typeRecords.diagnosis.records, 'problem', 'dateOfOnset');
+        serviceTransferOfCare.setDiagnosisRecords(data.diagnoses.data);
         usSpinnerService.stop('diagnosis-spinner');
       }
 
       if (data.medication.data) {
-        $scope.typeRecords.medications.records = data.medication.data;
-        $scope.changeArraysForTable($scope.typeRecords.medications.records, 'name', 'dateCreated');
+        serviceTransferOfCare.setMedicationRecords(data.medication.data);
         usSpinnerService.stop('medications-spinner');
       }
 
       if (data.referrals.data) {
-        $scope.typeRecords.referrals.records = data.referrals.data;
-        $scope.typeRecords.referrals.records.map(function (el) {
-          var date = serviceFormatted.formattingDate(el.dateOfReferral, serviceFormatted.formatCollection.DDMMMYYYY);
-          el.date = date;
-          el.tableName = date + ' ' + el.referralFrom + ' ' + el.referralTo;
-          el.selectName = date + ' - ' + el.referralFrom + ' -> ' + el.referralTo;
-          return el;
-        });
+        serviceTransferOfCare.setReferralsRecords(data.referrals.data);
         usSpinnerService.stop('referrals-spinner');
       }
 
       if (data.events.data) {
-        $scope.typeRecords.events.records = $scope.modificateEventsArr(data.events.data);
-        
+        serviceTransferOfCare.setEventsRecords(data.events.data);
         usSpinnerService.stop('events-spinner');
       }
 
       if (data.vitals.data) {
-        $scope.typeRecords.vitals.records = [];
-        $scope.typeRecords.vitals.records.push(data.vitals.data[1]);
-
-        $scope.typeRecords.vitals.records[0].date = serviceFormatted.formattingDate($scope.typeRecords.vitals.records[0].dateCreate, serviceFormatted.formatCollection.DDMMMYYYY);;
-        $scope.typeRecords.vitals.records[0].selectName = 'Latest Vitals Data';
-        $scope.typeRecords.vitals.records[0].tableName = 'Latest Vitals Data (News Score = ' + $scope.typeRecords.vitals.records[0].newsScore + ')';
+        serviceTransferOfCare.setVitalsRecords(data.vitals.data);
         usSpinnerService.stop('vitals-spinner');
       }
 

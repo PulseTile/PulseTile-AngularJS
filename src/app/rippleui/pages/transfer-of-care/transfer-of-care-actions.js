@@ -67,9 +67,27 @@ export function create(patientId, composition) {
   };
 }
 
+export function update(patientId, composition) {
+  return {
+    types: [types.TRANSFEROFCARE_UPDATE, types.TRANSFEROFCARE_UPDATE_SUCCESS, types.TRANSFEROFCARE_UPDATE_ERROR],
+
+    shouldCallAPI: (state) => !state.referrals.response,
+
+    config: {
+      method: 'put',
+      url: '/api/patients/' + patientId + '/events/toc',
+      data: composition
+    },
+
+    d: {
+      timestamp: Date.now()
+    }
+  };
+}
+
 export default function transferOfCareActions($ngRedux) {
   let actionCreator = {
-    all, get, create
+    all, get, create, update
   };
 
   return bindActionCreators(actionCreator, $ngRedux.dispatch);
