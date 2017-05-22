@@ -1,4 +1,4 @@
-html {
+  html {
   box-sizing: border-box;
 }
 
@@ -41,9 +41,9 @@ a:focus {
   text-decoration: none;
 }
 
-.is-touch-device a,
-.is-touch-device a:hover,
-.is-touch-device a:focus, {
+.touch-device a,
+.touch-device a:hover,
+.touch-device a:focus, {
   color: $auxiliary-color;
   text-decoration: none;
 }

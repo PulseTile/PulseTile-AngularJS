@@ -246,6 +246,10 @@ $ui-color: #f26604;
     float: left;
     height: 50px;
     width: 50px;
+    @media screen and (max-width: 480px) {
+      float: none;
+      margin: 0 auto 10px;
+    }
   }
   
   @each $name, $color in $colored-buttons {

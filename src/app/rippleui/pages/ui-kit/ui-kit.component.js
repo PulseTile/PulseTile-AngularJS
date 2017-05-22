@@ -421,7 +421,7 @@ class UiKitController {
 
         if (canvasLineChart) {
           ctxLineChart = canvas.getContext("2d");
-          myLineChart = new $window.Chart(ctx2, {
+          myLineChart = new $window.Chart(ctxLineChart, {
               type: 'line',
               data: dataChartLine,
               options: optionsChartLine
