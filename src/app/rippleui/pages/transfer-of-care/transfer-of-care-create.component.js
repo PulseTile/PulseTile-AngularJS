@@ -204,7 +204,6 @@ class TransferOfCareCreateController {
     $scope.$on('$destroy', unsubscribe);
 
     $scope.transferOfCareCreate = transferOfCareActions.create;
-    // $scope.transferOfCareLoad = transferOfCareActions.all;
   }
 }
 
