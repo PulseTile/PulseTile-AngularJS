@@ -17,21 +17,24 @@ class TemplateService {
     constructor () {
         this.templateType = '';
         this.templatesCollection = {
-            Discharge: 'documents-detail-discharge.html',
-            Referral: 'documents-detail-referral.html'
+            discharge: 'documents-detail-discharge.html',
+            referral: 'documents-detail-referral.html'
         };
         /* istanbul ignore next */
         this.setTemplateType = function (type) {
             if (type.indexOf('Discharge') >= 0) {
-                this.templateType = 'Discharge';
+                this.templateType = 'discharge';
             }
             if (type.indexOf('Referral') >= 0) {
-                this.templateType = 'Referral';
+                this.templateType = 'referral';
             }
         };
         this.getTemplate = function () {
             let templateDocumentsType = this.templatesCollection[this.templateType];
             return templateDocumentsType;
+        };
+        this.getTemplateType = function () {
+            return this.templateType;
         };
     }
 }

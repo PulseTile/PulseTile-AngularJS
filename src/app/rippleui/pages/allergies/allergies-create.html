@@ -70,12 +70,12 @@
               </div>
             </div>
 
-            <div class="form-group form-group-sm" ng-if="allergy.isImport" ng-class="{'has-error': (formSubmitted || allergyForm.importURL.$dirty) && allergyForm.importURL.$invalid, 'has-success': allergyForm.importURL.$valid && allergyForm.importURL.$dirty}">
-                <label for="importURL" class="control-label">Import URL</label>
+            <div class="form-group form-group-sm" ng-if="allergy.isImport" ng-class="{'has-error': (formSubmitted || allergyForm.originalSource.$dirty) && allergyForm.originalSource.$invalid, 'has-success': allergyForm.originalSource.$valid && allergyForm.originalSource.$dirty}">
+                <label for="originalSource" class="control-label">Import URL</label>
                 <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="importURL" name="importURL" ng-model="allergy.importURL" disabled />
+                    <input type="text" class="form-control input-sm" id="originalSource" name="originalSource" ng-model="allergy.originalSource" disabled />
                 </div>
-                <span class="help-block animate-fade" ng-show="formSubmitted && allergyForm.importURL.$error.required">You must enter a value.</span>
+                <span class="help-block animate-fade" ng-show="formSubmitted && allergyForm.originalSource.$error.required">You must enter a value.</span>
             </div>
             
             <div class="form-group hidden">

@@ -84,8 +84,10 @@ class AllergiesCreateController {
           causeCode: allergies.causeCode,
           causeTerminology: allergies.causeTerminology,
           reaction: allergies.reaction,
+          source: allergies.source,
           isImport: allergies.isImport,
-          source: allergies.source
+          originalSource: allergies.originalSource,
+          originalComposition: allergies.originalComposition
         };
         
         $scope.allergiesCreate(this.currentPatient.id, toAdd);

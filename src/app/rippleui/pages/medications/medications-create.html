@@ -115,12 +115,12 @@
               <input type="hidden" id="isImport" name="isImport" ng-model="medication.isImport" disabled />
             </div>
 
-            <div class="form-group form-group-sm" ng-if="medication.isImport" ng-class="{'has-error': (formSubmitted || medicationForm.importURL.$dirty) && medicationForm.importURL.$invalid, 'has-success': medicationForm.importURL.$valid && medicationForm.importURL.$dirty}">
-                <label for="importURL" class="control-label">Import URL</label>
+            <div class="form-group form-group-sm" ng-if="medication.isImport" ng-class="{'has-error': (formSubmitted || medicationForm.originalSource.$dirty) && medicationForm.originalSource.$invalid, 'has-success': medicationForm.originalSource.$valid && medicationForm.originalSource.$dirty}">
+                <label for="originalSource" class="control-label">Import URL</label>
                 <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="importURL" name="importURL" ng-model="medication.importURL" disabled />
+                    <input type="text" class="form-control input-sm" id="originalSource" name="originalSource" ng-model="medication.originalSource" disabled />
                 </div>
-                <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.importURL.$error.required">You must enter a value.</span>
+                <span class="help-block animate-fade" ng-show="formSubmitted && medicationForm.originalSource.$error.required">You must enter a value.</span>
             </div>
             
             <div class="row-expand">

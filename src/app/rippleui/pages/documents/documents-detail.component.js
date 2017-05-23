@@ -14,7 +14,7 @@
   ~  limitations under the License.
 */
 class DocumentsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, documentsActions, usSpinnerService, ConfirmationDocsModal) {
+  constructor($scope, $state, $stateParams, $ngRedux, documentsActions, usSpinnerService, ConfirmationDocsModal, templateService) {
 
     // $scope.documentType = $stateParams.documentType;
 
@@ -31,7 +31,8 @@ class DocumentsDetailController {
     $scope.importToCreate = function (typeCreate, data) {
       ConfirmationDocsModal.openModal(function () {
         data.isImport = true;
-        data.importURL = location.href;
+        data.originalSource = location.href;
+        data.originalComposition = templateService.getTemplateType();
         /* istanbul ignore if */
         if (typeCreate && data) {
           $state.go(typeCreate + '-create', {
@@ -65,5 +66,5 @@ const DocumentsDetailComponent = {
   controller: DocumentsDetailController
 };
 
-DocumentsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'documentsActions', 'usSpinnerService', 'ConfirmationDocsModal'];
+DocumentsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'documentsActions', 'usSpinnerService', 'ConfirmationDocsModal', 'templateService'];
 export default DocumentsDetailComponent;

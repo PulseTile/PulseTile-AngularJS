@@ -98,9 +98,14 @@ class MedicationsCreateController {
           startDate: medication.startDate,
           startTime: medication.startTime,
           author: medication.author,
+          dateCreated: medication.dateCreated,
           isImport: medication.isImport,
-          dateCreated: medication.dateCreated
+          originalSource: medication.originalSource,
+          originalComposition: medication.originalComposition
         };
+        console.log('toAdd');
+        console.log(toAdd);
+        debugger
 
         $scope.medicationsCreate($scope.patient.id, toAdd);
 

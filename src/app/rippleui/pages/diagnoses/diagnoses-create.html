@@ -92,12 +92,12 @@
               <input type="hidden" id="isImport" name="isImport" ng-model="diagnosis.isImport" disabled />
             </div>
             
-            <div class="form-group form-group-sm" ng-if="diagnosis.isImport" ng-class="{'has-error': (formSubmitted || diagnosisForm.importURL.$dirty) && diagnosisForm.importURL.$invalid, 'has-success': diagnosisForm.importURL.$valid && diagnosisForm.importURL.$dirty}">
-                <label for="importURL" class="control-label">Import URL</label>
+            <div class="form-group form-group-sm" ng-if="diagnosis.isImport" ng-class="{'has-error': (formSubmitted || diagnosisForm.originalSource.$dirty) && diagnosisForm.originalSource.$invalid, 'has-success': diagnosisForm.originalSource.$valid && diagnosisForm.originalSource.$dirty}">
+                <label for="originalSource" class="control-label">Import URL</label>
                 <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="importURL" name="importURL" ng-model="diagnosis.importURL" disabled />
+                    <input type="text" class="form-control input-sm" id="originalSource" name="originalSource" ng-model="diagnosis.originalSource" disabled />
                 </div>
-                <span class="help-block animate-fade" ng-show="formSubmitted && diagnosisForm.importURL.$error.required">You must enter a value.</span>
+                <span class="help-block animate-fade" ng-show="formSubmitted && diagnosisForm.originalSource.$error.required">You must enter a value.</span>
             </div>
 
             <div class="row-expand">

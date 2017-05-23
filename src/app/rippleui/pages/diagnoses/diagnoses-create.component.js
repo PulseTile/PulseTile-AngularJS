@@ -64,7 +64,7 @@ class DiagnosesCreateController {
       this.goList();
     };
 
-    $scope.create = function (diagnosisForm, diagnosis) {
+    $scope.create = function (diagnosisForm, ) {
       $scope.formSubmitted = true;
 
       if (diagnosisForm.$valid) {
@@ -75,8 +75,10 @@ class DiagnosesCreateController {
           problem: diagnosis.problem,
           source: diagnosis.source,
           sourceId: '',
+          terminology: diagnosis.terminology,
           isImport: diagnosis.isImport,
-          terminology: diagnosis.terminology
+          originalSource: diagnosis.originalSource,
+          originalComposition: diagnosis.originalComposition
         };
           
         $scope.diagnosesCreate(this.currentPatient.id, toAdd);
