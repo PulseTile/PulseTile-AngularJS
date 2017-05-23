@@ -68,6 +68,7 @@ import ServiceActions from './rippleui/pages/dicom/serviceActions.js';
 import ServiceFormatted from './services/serviceFormatted.js';
 import TemplateService from './services/TemplateService.js';
 import serviceTransferOfCare from './rippleui/pages/transfer-of-care/serviceTransferOfCare.js';
+import servicePatients from './rippleui/pages/patients-list/servicePatients.js';
 
 import ScheduleModal from './rippleui/pages/events/schedule-modal';
 import ConfirmationModal from './rippleui/confirmation/confirmation';
@@ -116,6 +117,7 @@ let app = angular
 
     .service('templateService', TemplateService)
     .service('serviceTransferOfCare', serviceTransferOfCare)
+    .service('servicePatients', servicePatients)
     .service('serviceFormatted', ServiceFormatted)
     .service('serviceRequests', ServiceRequests)
     .service('serviceStateManager', ServiceStateManager)

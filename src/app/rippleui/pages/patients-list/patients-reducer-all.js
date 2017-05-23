@@ -43,7 +43,7 @@ export default function patients(state = INITIAL_STATE, action) {
                 error: payload.error
             });
         },
-    };
+    }
 
     return actions[action.type] ?
         actions[action.type](state) :

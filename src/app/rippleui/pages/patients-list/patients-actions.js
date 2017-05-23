@@ -48,7 +48,7 @@ export function getPatient(id) {
         // Configure $http
         config: {
             method: 'get',
-            url: 'api/patients/'+id
+            url: 'api/patients/' + id
         },
 
         // Metadata to inject in begin/end actions

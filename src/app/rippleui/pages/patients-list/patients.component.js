@@ -16,8 +16,9 @@
 let templatePatients = require('./patients-list.html');
 
 class PatientsController {
-  constructor($scope, $state, $stateParams, $location, $ngRedux, patientsActions, serviceRequests, Patient, serviceFormatted, $timeout, $uibModal, ConfirmationModal) {
+  constructor($scope, $state, $stateParams, $location, $ngRedux, patientsActions, serviceRequests, Patient, serviceFormatted, $timeout, $uibModal, ConfirmationModal, servicePatients) {
     let vm = this;
+    $scope.patientsCounts = servicePatients.cachePatientsCounts;
 
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-list'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Lists', isShowTitle: true});
@@ -74,7 +75,7 @@ class PatientsController {
             title: 'Vitals',
             width: 110
           },
-          diagnosis: {
+          diagnoses: {
             select: false,
             title: 'Diagnosis',
             width: 130
@@ -99,7 +100,7 @@ class PatientsController {
             title: 'Vitals',
             width: 100
           },
-          diagnosis: {
+          diagnoses: {
             select: false,
             title: 'Diagnosis',
             width: 120
@@ -112,6 +113,12 @@ class PatientsController {
     if (serviceRequests.patientsTable) {
       serviceRequests.patientsTable = $scope.patientsTable;
     }
+
+    $scope.getCounts = function (patient) {
+      if (servicePatients.isQueryPatientsCounts(patient.nhsNumber)) {
+        servicePatients.queryPatientCounts(patient.nhsNumber, patient);
+      }
+    };
 
     $scope.changeTableSettings = function () {
       serviceRequests.patientsTable = $scope.patientsTable;
@@ -129,8 +136,9 @@ class PatientsController {
       return $scope.hoveredTableRow == index;
     };
 
-    $scope.getpatientsTableSettings = function () {
+    $scope.getPatientsTableSettings = function () {
       var newSettings = {};
+
       for (var key in $scope.patientsTable.info.settings) {
         newSettings[key] = $scope.patientsTable.info.settings[key];
         newSettings[key].type = 'info';
@@ -143,7 +151,7 @@ class PatientsController {
       }
       $scope.patientsTableSettings = newSettings;
     };
-    $scope.getpatientsTableSettings();
+    $scope.getPatientsTableSettings();
 
     $scope.resizeFixedTables = function () {
       $timeout(function () {
@@ -200,20 +208,24 @@ class PatientsController {
       return true;
     };
 
-    vm.setPatients = function (patients) {
-      var curPatients = [];
-
-      angular.forEach(patients, function (patient) {
-        var curPatient = new Patient.patient(patient);
-        curPatients.push(curPatient);
-      });
-
-      vm.patients = curPatients.slice();
-      serviceFormatted.formattingTablesDate(vm.patients, ['dateOfBirth'], serviceFormatted.formatCollection.DDMMMYYYY);
-      serviceFormatted.filteringKeys = ['name', 'address', 'dateOfBirth', 'gender', 'nhsNumber'];
-      
-      $scope.resizeFixedTables();
+    vm.setCurrentPageData = function (data) {
+      // console.log('data');
+      // console.log(data);
+      if (data.patients.data) {
+        var curPatients = [];
+        angular.forEach(data.patients.data, function (patient) {
+          var curPatient = new Patient.patient(patient);
+          curPatients.push(curPatient);
+        });
+        
+        vm.patients = curPatients.slice();
+        serviceFormatted.formattingTablesDate(vm.patients, ['dateOfBirth'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['name', 'address', 'dateOfBirth', 'gender', 'nhsNumber'];
+        
+        $scope.resizeFixedTables();
+      }
     };
+
     $(window).on('resize', function () {
       $scope.resizeFixedTables();
     });
@@ -232,7 +244,7 @@ class PatientsController {
         isFetching: state.patients.isFetching,
         error: state.patients.error,
         // patients: state.patients.data,
-        getPatients: vm.setPatients(state.patients.data)
+        getPatients: vm.setCurrentPageData(state)
       }))(this);
 
       $scope.$on('$destroy', unsubscribe);
@@ -245,7 +257,12 @@ class PatientsController {
         advancedSearch: true,
         advancedSearchParams: $stateParams.advancedSearchParams
       };
-      vm.setPatients($stateParams.patientsList);
+      var data = {
+        patients: {
+          data: $stateParams.patientsList
+        }
+      }
+      vm.setCurrentPageData(data);
       $location.url($location.path());
     }
   }
@@ -256,5 +273,5 @@ const PatientsComponent = {
   controller: PatientsController
 };
 
-PatientsController.$inject = ['$scope', '$state', '$stateParams', '$location', '$ngRedux', 'patientsActions', 'serviceRequests', 'Patient', 'serviceFormatted', '$timeout', '$uibModal', 'ConfirmationModal'];
+PatientsController.$inject = ['$scope', '$state', '$stateParams', '$location', '$ngRedux', 'patientsActions', 'serviceRequests', 'Patient', 'serviceFormatted', '$timeout', '$uibModal', 'ConfirmationModal', 'servicePatients'];
 export default PatientsComponent;
