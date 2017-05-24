@@ -18,13 +18,13 @@ import * as types from '../../../constants/ActionTypes';
 
 export function all(patientId) {
   return {
-    types: [types.TRANSFEROFCARE, types.TRANSFEROFCARE_SUCCESS, types.TRANSFEROFCARE_ERROR],
+    types: [types.DRAWINGS, types.DRAWINGS_SUCCESS, types.DRAWINGS_ERROR],
 
-    shouldCallAPI: (state) => !state.transferOfCare.response,
+    shouldCallAPI: (state) => !state.drawings.response,
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/events/toc'
+      url: '/api/patients/' + patientId + '/drawings'
     },
 
     d: {
@@ -34,13 +34,13 @@ export function all(patientId) {
 }
 export function get(patientId, compositionId) {
   return {
-    types: [types.TRANSFEROFCARE_GET, types.TRANSFEROFCARE_GET_SUCCESS, types.TRANSFEROFCARE_GET_ERROR],
+    types: [types.DRAWINGS_GET, types.DRAWINGS_GET_SUCCESS, types.DRAWINGS_GET_ERROR],
 
-    shouldCallAPI: (state) => !state.transferOfCare.response,
+    shouldCallAPI: (state) => !state.drawings.response,
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/events/toc/' + compositionId
+      url: '/api/patients/' + patientId + '/drawings/' + compositionId
     },
 
     d: {
@@ -51,13 +51,13 @@ export function get(patientId, compositionId) {
 /* istanbul ignore next */
 export function create(patientId, composition) {
   return {
-    types: [types.TRANSFEROFCARE_CREATE, types.TRANSFEROFCARE_CREATE_SUCCESS, types.TRANSFEROFCARE_CREATE_ERROR],
+    types: [types.DRAWINGS_CREATE, types.DRAWINGS_CREATE_SUCCESS, types.DRAWINGS_CREATE_ERROR],
 
-    shouldCallAPI: (state) => !state.transferOfCare.response,
+    shouldCallAPI: (state) => !state.drawings.response,
 
     config: {
       method: 'post',
-      url: '/api/patients/' + patientId + '/events/toc',
+      url: '/api/patients/' + patientId + '/drawings',
       data: composition
     },
 
@@ -69,13 +69,13 @@ export function create(patientId, composition) {
 
 export function update(patientId, composition) {
   return {
-    types: [types.TRANSFEROFCARE_UPDATE, types.TRANSFEROFCARE_UPDATE_SUCCESS, types.TRANSFEROFCARE_UPDATE_ERROR],
+    types: [types.DRAWINGS_UPDATE, types.DRAWINGS_UPDATE_SUCCESS, types.DRAWINGS_UPDATE_ERROR],
 
-    shouldCallAPI: (state) => !state.transferOfCare.response,
+    shouldCallAPI: (state) => !state.drawings.response,
 
     config: {
       method: 'put',
-      url: '/api/patients/' + patientId + '/events/toc',
+      url: '/api/patients/' + patientId + '/drawings',
       data: composition
     },
 
@@ -85,7 +85,7 @@ export function update(patientId, composition) {
   };
 }
 
-export default function transferOfCareActions($ngRedux) {
+export default function drawingsActions($ngRedux) {
   let actionCreator = {
     all, get, create, update
   };
@@ -93,4 +93,4 @@ export default function transferOfCareActions($ngRedux) {
   return bindActionCreators(actionCreator, $ngRedux.dispatch);
 }
 
-transferOfCareActions.$inject = ['$ngRedux'];
+drawingsActions.$inject = ['$ngRedux'];

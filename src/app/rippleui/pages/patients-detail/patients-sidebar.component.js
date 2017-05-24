@@ -29,6 +29,8 @@ class PatientsSidebarController {
     plugins.forEach((plugin)=>{
       /* istanbul ignore if  */
       if (!Object.keys(plugin.sidebarInfo).length) return;
+      console.log('plugin.sidebarInfo');
+      console.log(plugin.sidebarInfo);
       this.linksCollection.push(plugin.sidebarInfo);
     });
     

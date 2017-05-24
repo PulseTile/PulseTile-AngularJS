@@ -20,15 +20,14 @@ const INITIAL_STATE = {
   error: false,
   data: null,
   dataGet: null,
-  dataCreate: null,
-  dataUpdate: null
+  dataCreate: null
 };
 
-export default function transferOfCare(state = INITIAL_STATE, action) {
+export default function drawing(state = INITIAL_STATE, action) {
   const {payload} = action;
 
   var actions = {
-    [types.TRANSFEROFCARE]: (state) => {
+    [types.DRAWINGS]: (state) => {
       state.dataCreate = null;
       state.dataUpdate = null;
       return Object.assign({}, state, {
@@ -36,70 +35,49 @@ export default function transferOfCare(state = INITIAL_STATE, action) {
         error: false
       });
     },
-    [types.TRANSFEROFCARE_SUCCESS]: (state) => {
+    [types.DRAWINGS_SUCCESS]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         data: payload.response
       });
     },
-    [types.TRANSFEROFCARE_ERROR]: (state) => {
+    [types.DRAWINGS_ERROR]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         error: payload.error
       });
     },
-
-    [types.TRANSFEROFCARE_GET]: (state) => {
+    [types.DRAWINGS_GET]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
         error: false
       });
     },
-    [types.TRANSFEROFCARE_GET_SUCCESS]: (state) => {
+    [types.DRAWINGS_GET_SUCCESS]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         dataGet: payload.response
       });
     },
-    [types.TRANSFEROFCARE_GET_ERROR]: (state) => {
+    [types.DRAWINGS_GET_ERROR]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         error: payload.error
       });
     },
-
-    [types.TRANSFEROFCARE_CREATE]: (state) => {
+    [types.DRAWINGS_CREATE]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
         error: false
       });
     },
-    [types.TRANSFEROFCARE_CREATE_SUCCESS]: (state) => {
+    [types.DRAWINGS_CREATE_SUCCESS]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         dataCreate: payload.response
       });
     },
-    [types.TRANSFEROFCARE_CREATE_ERROR]: (state) => {
-      return Object.assign({}, state, {
-        isFetching: false,
-        error: payload.error
-      });
-    },
-
-    [types.TRANSFEROFCARE_UPDATE]: (state) => {
-      return Object.assign({}, state, {
-        isFetching: true,
-        error: false
-      });
-    },
-    [types.TRANSFEROFCARE_UPDATE_SUCCESS]: (state) => {
-      return Object.assign({}, state, {
-        isFetching: false,
-        dataUpdate: payload.response
-      });
-    },
-    [types.TRANSFEROFCARE_UPDATE_ERROR]: (state) => {
+    [types.DRAWINGS_CREATE_ERROR]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         error: payload.error

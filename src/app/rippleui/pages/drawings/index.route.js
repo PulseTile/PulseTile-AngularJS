@@ -23,37 +23,37 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         title: 'Patient Summary',
         state: 'patients-summary'
       }, {
-        title: 'Transfers Of Care',
-        state: 'transferOfCare'
+        title: 'Drawings',
+        state: 'drawings'
       }];
 
   $stateProvider
-    .state('transferOfCare', {
-      url: '/patients/{patientId:int}/transfer-of-care?reportType&searchString&queryType',
+    .state('drawings', {
+      url: '/patients/{patientId:int}/drawings?reportType&searchString&queryType',
       views: {
         banner: {template: '<patients-banner-component></patients-banner-component>'},
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-        main: {template: '<transfer-of-care-list-component></transfer-of-care-list-component>'}
+        main: {template: '<drawings-list-component></drawings-list-component>'}
       },
       breadcrumbs: breadcrumbs
     })
-    .state('transferOfCare-detail', {
-      url: '/patients/{patientId:int}/transfer-of-care/{detailsIndex}?page&reportType&searchString&queryType',
+    .state('drawings-detail', {
+      url: '/patients/{patientId:int}/drawings/{detailsIndex}?page&reportType&searchString&queryType',
       views: {
         banner: {template: '<patients-banner-component></patients-banner-component>'},
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-        main: {template: '<transfer-of-care-list-component></transfer-of-care-list-component>'},
-        detail: {template: '<transfer-of-care-detail-component></transfer-of-care-detail-component>'}
+        main: {template: '<drawings-list-component></drawings-list-component>'},
+        detail: {template: '<drawings-detail-component></drawings-detail-component>'}
       },
       breadcrumbs: breadcrumbs
     })
-    .state('transferOfCare-create', {
-      url: '/patients/{patientId:int}/transfer-of-care/create?reportType&searchString&queryType',
+    .state('drawings-create', {
+      url: '/patients/{patientId:int}/drawings/create?reportType&searchString&queryType',
       views: {
         banner: {template: '<patients-banner-component></patients-banner-component>'},
         actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
-        main: {template: '<transfer-of-care-list-component></transfer-of-care-list-component>'},
-        detail: {template: '<transfer-of-care-create-component></transfer-of-care-create-component>'}
+        main: {template: '<drawings-list-component></drawings-list-component>'},
+        detail: {template: '<drawings-create-component></drawings-create-component>'}
       },
       breadcrumbs: breadcrumbs
     })
