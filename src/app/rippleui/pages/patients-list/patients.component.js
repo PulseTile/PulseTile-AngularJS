@@ -18,6 +18,8 @@ let templatePatients = require('./patients-list.html');
 class PatientsController {
   constructor($scope, $state, $stateParams, $location, $ngRedux, patientsActions, serviceRequests, Patient, serviceFormatted, $timeout, $uibModal, ConfirmationModal, servicePatients) {
     let vm = this;
+    
+    servicePatients.clearCache();
     $scope.patientsCounts = servicePatients.cachePatientsCounts;
 
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-list'});

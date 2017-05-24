@@ -120,15 +120,15 @@
               ng-click="$ctrl.openModal(patient)"
               ng-mouseenter="hoverTableRow(index);" 
               ng-mouseleave="unHoverTableRow(index);"
-              ng-class="{hovered: getHoveredTableRow(index)}">
+              ng-class="{hovered: getHoveredTableRow(index), count: getCounts(patient)}">
               <td ng-repeat="(key, item) in patientsTableSettings"
                   data-th='{{ item.title + (item.type === "count" ? " #" : "") + (item.type === "date" ? " Date" : "")}}'
                   ng-class="{'text-center': key != 'name' && key != 'address', sorted: sortClass(key) }"
                   ng-if="item.select">
                   <span ng-if="item.type === 'info' && key === 'nhsNumber'">{{ patient[key] | formatNHSNumber }}</span>
                   <span ng-if="item.type === 'info' && key !== 'nhsNumber'">{{ patient[key] }}</span>
-                  <span ng-if="item.type === 'date'">27-Jan-1947</span>
-                  <span ng-if="item.type === 'count'">123</span>
+                  <span ng-if="item.type === 'count'">{{ patient[key] ? patient[key] : '-'  }}</span>
+                  <span ng-if="item.type === 'date'">{{ patient[key] ? (patient[key] | date:'dd-MMM-y') : '-' }}</span>
               </td>
               <td class="patient-control">
                 <div uib-dropdown class="patient-buttons dropdown">

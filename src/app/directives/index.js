@@ -20,6 +20,7 @@ import cornerstoneToolsJS from '../../cornerstone/cornerstoneTools';
 angular.module('ripple-ui.directives', [])
 
   .directive('focusElement', function($timeout) {
+    /* istanbul ignore next  */
     return {
       link: function(scope, element, attrs) {
         scope.$watch(attrs.focusElement, function(value) {
@@ -384,6 +385,7 @@ angular.module('ripple-ui.directives', [])
       }
   })
   .directive('contenteditabled', ['$sce', function($sce) {
+    /* istanbul ignore next  */
     return {
         restrict: 'A',
         require: '?ngModel',
@@ -424,6 +426,7 @@ angular.module('ripple-ui.directives', [])
     }
   })
   .directive('mcUploadfile', function () {
+      /* istanbul ignore next  */
       return {
         restrict: 'A',
         scope: {

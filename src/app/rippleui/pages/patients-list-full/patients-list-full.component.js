@@ -16,10 +16,12 @@
 let templatePatientsListFull = require('./patients-list-full.html');
 
 class PatientsListFullController {
-  constructor($scope, $window, $rootScope, $state, $stateParams, $ngRedux, searchReport, Patient, serviceRequests, patientsActions, $timeout, ConfirmationModal, serviceFormatted, searchActions) {
+  constructor($scope, $window, $rootScope, $state, $stateParams, $ngRedux, searchReport, Patient, serviceRequests, patientsActions, $timeout, ConfirmationModal, serviceFormatted, searchActions, servicePatients) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-list-full'});
     serviceRequests.publisher('headerTitle', {title: 'Search results', isShowTitle: true});
 
+    servicePatients.clearCache();
+    $scope.patientsCounts = servicePatients.cachePatientsCounts;
 
     $scope.patientsTable = serviceRequests.patientsTable || {
       info: {
@@ -73,7 +75,7 @@ class PatientsListFullController {
             title: 'Vitals',
             width: 110
           },
-          diagnosis: {
+          diagnoses: {
             select: false,
             title: 'Diagnosis',
             width: 130
@@ -98,7 +100,7 @@ class PatientsListFullController {
             title: 'Vitals',
             width: 100
           },
-          diagnosis: {
+          diagnoses: {
             select: false,
             title: 'Diagnosis',
             width: 120
@@ -107,6 +109,12 @@ class PatientsListFullController {
       }
     };
     $scope.patientsTableSettings = {};
+
+    $scope.getCounts = function (patient) {
+      if (servicePatients.isQueryPatientsCounts(patient.nhsNumber)) {
+        servicePatients.queryPatientCounts(patient.nhsNumber, patient);
+      }
+    };
 
     if (serviceRequests.patientsTable) {
       serviceRequests.patientsTable = $scope.patientsTable;
@@ -544,5 +552,5 @@ const PatientsSummaryComponent = {
   controller: PatientsListFullController
 };
 
-PatientsListFullController.$inject = ['$scope', '$window', '$rootScope', '$state', '$stateParams', '$ngRedux', 'searchReport', 'Patient', 'serviceRequests', 'patientsActions', '$timeout', 'ConfirmationModal', 'serviceFormatted', 'searchActions'];
+PatientsListFullController.$inject = ['$scope', '$window', '$rootScope', '$state', '$stateParams', '$ngRedux', 'searchReport', 'Patient', 'serviceRequests', 'patientsActions', '$timeout', 'ConfirmationModal', 'serviceFormatted', 'searchActions', 'servicePatients'];
 export default PatientsSummaryComponent;

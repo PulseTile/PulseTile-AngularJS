@@ -13,6 +13,11 @@ class servicePatients {
     };
 
     /* istanbul ignore next */
+    this.clearCache = function (id) {
+      this.isQueryCache = {};
+    };
+
+    /* istanbul ignore next */
     this.queryPatientCounts = function (id, patient) {
       if (this.isQueryPatientsCounts(id)) {
         this.isQueryCache[id] = true;
