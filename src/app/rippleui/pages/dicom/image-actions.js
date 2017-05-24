@@ -24,7 +24,7 @@ export function allStudies(patientId) {
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/dicom/' + 'studies'
+      url: '/api/patients/' + patientId + '/instances'
     },
 
     meta: {
@@ -40,7 +40,7 @@ export function getAllSeriesInStudy(patientId, studyId, source) {
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/dicom/' + 'studies/' + studyId + '/series' + '?source=' + source
+      url: '/api/patients/' + patientId + '/instances/' + studyId + '/series' + '?source=' + source
     },
 
     meta: {
@@ -56,7 +56,7 @@ export function getSeriesDetails(patientId, seriesId, source) {
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/dicom/' + 'series/' + seriesId + '?source=' + source
+      url: '/api/patients/' + patientId + '/instances/' + seriesId + '?source=' + source
     },
 
     meta: {
@@ -72,7 +72,7 @@ export function getInstanceId(patientId, seriesId, source) {
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/dicom/' + 'series/' + seriesId + '/instance' + '?source=' + source
+      url: '/api/patients/' + patientId + '/instances/' + seriesId + '/instance' + '?source=' + source
     },
 
     meta: {
@@ -88,7 +88,7 @@ export function getInstance(patientId, instanceId, source) {
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/dicom/' + 'instances/' + instanceId + '?source=' + source
+      url: '/api/patients/' + patientId + '/instances/' + instanceId + '?source=' + source
     },
 
     meta: {
