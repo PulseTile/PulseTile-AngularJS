@@ -209,8 +209,6 @@ class PatientsController {
     };
 
     vm.setCurrentPageData = function (data) {
-      // console.log('data');
-      // console.log(data);
       if (data.patients.data) {
         var curPatients = [];
         angular.forEach(data.patients.data, function (patient) {

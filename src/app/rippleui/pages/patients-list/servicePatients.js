@@ -21,16 +21,11 @@ class servicePatients {
             method: 'GET',
             url: '/api/patients/'+ id + '/counts'
         };
-        console.log(' ----------> ' + id);
 
         $http(options).then(function (responce) {
-          console.log(responce);
-          console.log(patient);
-          console.log(id);
           if (responce.data.length) {
             patient = Object.assign(patient, responce.data[0]);
           }
-          // debugger
         }.bind(this));
       }
     };

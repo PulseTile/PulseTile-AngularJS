@@ -118,8 +118,8 @@
                   ng-if="item.select">
                   <span ng-if="item.type === 'info' && key === 'nhsNumber'">{{ patient[key] | formatNHSNumber }}</span>
                   <span ng-if="item.type === 'info' && key !== 'nhsNumber'">{{ patient[key] }}</span>
-                  <!-- <span ng-if="item.type === 'date'">{{patient.}}</span> -->
-                  <span ng-if="item.type === 'count'">{{patientsCounts[patient.nhsNumber][key]}}</span>
+                  <span ng-if="item.type === 'count'">{{ patient[key] ? patient[key] : '-'  }}</span>
+                  <span ng-if="item.type === 'date'">{{ patient[key] ? (patient[key] | date:'dd-MMM-y') : '-' }}</span>
               </td>
               <td class="patient-control">
                 <div uib-dropdown class="patient-buttons dropdown">
