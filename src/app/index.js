@@ -38,6 +38,7 @@ import 'angular-ui-select';
 import 'angular-swiper';
 import 'swiper';
 import 'angular-drag-and-drop-lists';
+import 'fabric.js';
 
 //commons
 import reducer from './redux/reducer';

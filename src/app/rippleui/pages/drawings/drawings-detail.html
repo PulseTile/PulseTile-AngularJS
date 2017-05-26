@@ -17,17 +17,15 @@
     <div class="panel panel-secondary" ng-if="getShowPanel('drawing') && !isEdit" ng-class="getOpenPanelClass('drawing')">
       <div class="panel-heading">
         <div class="control-group right">
-          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'drawing')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'drawing'); resizeDrawing();"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
           <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('drawing')"><i class="btn-icon fa fa-chevron-up"></i></button>
         </div>
         <h3 class="panel-title">Drawing</h3>
       </div>
       <div class="panel-body">
-        <div class="panel-body-inner">
-          
-          <!-- HERE content -->
-          
-        </div>
+      
+        <drawings-drawing-component></drawings-drawing-component>
+        
         <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
           <div class="wrap-control-group">
             <div class="control-group right">
@@ -40,7 +38,7 @@
     <div class="panel panel-secondary" ng-if="getShowPanel('drawing') && isEdit" ng-class="getOpenPanelClass('drawing')">
       <div class="panel-heading">
         <div class="control-group right">
-          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'drawing')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+          <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'drawing'); resizeDrawing();"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
           <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('drawing')"><i class="btn-icon fa fa-chevron-up"></i></button>
         </div>
         <h3 class="panel-title">Edit Drawing</h3>

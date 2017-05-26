@@ -1,0 +1,115 @@
+.drawing-wrapper {
+  padding: 12px 9px 15px;
+}
+.drawing-canvas-holder {
+  border: 1px solid #848484;
+  overflow: hidden;
+  // .canvas-container {
+  //   width: 100% !important;
+  // }
+}
+.drawing-canvas {
+  height: 406px;
+  width: 100% !important;
+}
+.drawing-control-header {
+  background: #f1f1f1;
+}
+.drawing-control-body {
+  padding: 6px 10px 5px;
+  border-bottom: 1px solid #e4e4e4;
+}
+.btn.btn-drawing {
+  background: transparent;
+  border: 0;
+  box-shadow: 0 0 rgb(0, 0, 0) !important;
+  color: #828282;
+  font-size: 18px;
+  height: 40px;
+  width: 44px;
+  &.active {
+    background: $base-color;
+    color: $text-on-base-color;
+  }
+}
+.is-not-touch-device .btn.btn-drawing:hover {
+  background: $base-color;
+  color: $text-on-base-color;
+}
+.drawing-form-group,
+.drawing-form {
+  @include clearfix;
+}
+.drawing-label {
+  color: #828282;
+  float: left;
+  font-size: 14px;
+  height: 32px;
+  line-height: 32px;
+  margin-right: 10px;
+}
+.drawing-holder {
+  overflow: hidden;
+}
+
+.btn-drawing-browse {
+  font-size: 14px;
+  height: 32px;
+  line-height: 18px;
+  padding-left: 16px;
+  padding-right: 14px;
+}
+.btn-drawing-upload {
+  float: right;
+  font-size: 14px;
+  height: 32px;
+  line-height: 18px;
+}
+.drawing-fcustomfile {
+  .fcustomfile-control {
+    margin-right: 0;
+  }
+  .fcustomfile-text {
+    border-color: #bababa;
+    border-style: solid;
+    border-width: 1px 0;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 5px;
+    width: 100%;
+  }
+}
+
+.drawing-colors {
+  padding: 3px 0;
+  @include clearfix;
+}
+
+.drawing-colors-group {
+  float: left;
+  overflow: hidden;
+  margin-right: 12px;
+}
+
+.drawing-color {
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  display: block;
+  float: left;
+  height: 24px;
+  margin-right: 2px;
+  margin-bottom: 2px;
+  width: 24px;
+  cursor: pointer;
+}
+.drawing-form-middle { width: 146px; }
+.drawing-form-small { width: 80px; }
+
+.drawing-form-left {
+  float: left;
+  margin-right: 17px;
+}
+.drawing-form-left:last-child { margin-right: 0; }
+.drawing-form-size {
+  float: right;
+}

@@ -24,7 +24,7 @@ export function allStudies(patientId) {
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/instances'
+      url: '/api/patients/' + patientId + '/dicom/studies'
     },
 
     meta: {

@@ -435,10 +435,14 @@ angular.module('ripple-ui.directives', [])
         },
         link: function(scope, element) {
           function clearParams () { 
+            if (!scope.params) {
+              scope.params = {};
+            }
             scope.params.path = '';
             scope.params.name = '';
             scope.params.file = null;
             scope.params.isErrorType = false;
+            scope.params.imgencode = '';
           }
           clearParams();
 
@@ -462,6 +466,7 @@ angular.module('ripple-ui.directives', [])
                 scope.params.name = loadFile.name;
                 scope.params.file = loadFile;
                 scope.params.isErrorType = false;
+                scope.params.imgencode = changeEvent.target.result;
 
               } else {
                 changeEvent.target.value = '';

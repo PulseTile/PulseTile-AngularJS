@@ -18,10 +18,8 @@ import reducer from "./drawings-reducer-all";
 import drawingsListComponent from './drawings-list.component';
 import drawingsDetailComponent from './drawings-detail.component';
 import drawingsCreateComponent from './drawings-create.component';
+import drawingsDrawingComponent from './drawings-drawing.component';
 import drawingsActions from './drawings-actions';
-
-console.log('123');
-console.log(123);
 
 export default {
   "name": 'drawings',
@@ -30,7 +28,8 @@ export default {
   "components": {
     drawingsListComponent,
     drawingsDetailComponent,
-    drawingsCreateComponent
+    drawingsCreateComponent,
+    drawingsDrawingComponent
   },
   "actions": {
     drawingsActions

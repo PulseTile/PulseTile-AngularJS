@@ -38,6 +38,10 @@ class ImageDetailController {
       usSpinnerService.stop('patientSummary-spinner');
     });
 
+    $scope.getURLtoImage = function(id) {
+      return 'http://46.101.95.245/orthanc/instances/' + id + '/preview';
+    };
+
     /* istanbul ignore next  */
     var findFirstInstanceId = function (seriesId, index) {
       serviceActions.getInstanceId($stateParams.patientId, seriesId, $stateParams.source).then(function (result) {

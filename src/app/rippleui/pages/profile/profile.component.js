@@ -86,7 +86,6 @@ class ProfileController {
         this.upload(file).then(function(res){
           callback(res);
         });
-        
       }
     };
     this.upload = function (file) {
