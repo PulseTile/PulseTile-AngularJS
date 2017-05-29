@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
   <div mc-full-panel mc-accordion mc-open-panel="drawing" class="panel-group accordion">
-    <div class="panel panel-secondary" ng-if="getShowPanel('drawing') && !isEdit" ng-class="getOpenPanelClass('drawing')">
+    <div class="panel panel-secondary" ng-show="getShowPanel('drawing') && !isEdit" ng-class="getOpenPanelClass('drawing')">
       <div class="panel-heading">
         <div class="control-group right">
           <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'drawing'); resizeDrawing();"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-    <div class="panel panel-secondary" ng-if="getShowPanel('drawing') && isEdit" ng-class="getOpenPanelClass('drawing')">
+    <div class="panel panel-secondary" ng-show="getShowPanel('drawing') && isEdit" ng-class="getOpenPanelClass('drawing')">
       <div class="panel-heading">
         <div class="control-group right">
           <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'drawing'); resizeDrawing();"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>

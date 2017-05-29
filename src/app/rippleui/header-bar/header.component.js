@@ -347,6 +347,7 @@ class HeaderController {
     this.clickSidebarBtn = function () {
       serviceRequests.publisher('setHeightSidebar');
       serviceRequests.publisher('changeStateSidebar', {click: true});
+      serviceRequests.publisher('resizeDrawing', {});
     };
 
     this.getPopulateHeaderSearch = function (expression) {

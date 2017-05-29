@@ -31,6 +31,10 @@
     background: $base-color;
     color: $text-on-base-color;
   }
+  &.btn-drawing-delete {
+    background: map-get($colored-buttons, 'danger') !important;
+    color: $text-on-base-color !important;
+  }
 }
 .is-not-touch-device .btn.btn-drawing:hover {
   background: $base-color;
@@ -59,12 +63,21 @@
   padding-left: 16px;
   padding-right: 14px;
 }
+
+.btn-drawing-add {
+  float: right;
+  font-size: 14px;
+  height: 30px;
+  line-height: 16px;
+}
+
 .btn-drawing-upload {
   float: right;
   font-size: 14px;
   height: 32px;
   line-height: 18px;
 }
+
 .drawing-fcustomfile {
   .fcustomfile-control {
     margin-right: 0;
@@ -101,6 +114,9 @@
   margin-bottom: 2px;
   width: 24px;
   cursor: pointer;
+  &.active {
+    border-color: $base-color;
+  }
 }
 .drawing-form-middle { width: 146px; }
 .drawing-form-small { width: 80px; }
@@ -112,4 +128,10 @@
 .drawing-form-left:last-child { margin-right: 0; }
 .drawing-form-size {
   float: right;
+}
+
+.drawing-form-text {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 0;
 }

@@ -16,112 +16,11 @@
 let templateCreate = require('./drawings-create.html');
 
 class DrawingsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, drawingsActions, serviceRequests, serviceDrawings, serviceFormatted, usSpinnerService, $window) {
+  constructor($scope, $state, $stateParams, $ngRedux, drawingsActions, serviceRequests, serviceFormatted, usSpinnerService, $window) {
 
-    $scope.drawingsEdit = {};
-    $scope.drawingsEdit.transferDateTime = new Date();
-    $scope.drawingsEdit.records = [];
-
-    $scope.cities = [
-      'Worcester Trust',
-      'Kings Hospital',
-      'Oxford NHS Trust',
-      'St James\' Hospital'
-    ];
-
-    $scope.typeRecords = serviceDrawings.getConfig();
-
-    /* istanbul ignore next */
-    $scope.selectTypeRecords = function (type) {
-      for (var key in $scope.typeRecords) {
-        usSpinnerService.stop(key + '-spinner');
-      }
-
-      if ($scope.typeRecords[type].records == null) {
-        usSpinnerService.spin(type + '-spinner');
-        
-        $scope.typeRecords[type].actionsFuncAll($stateParams.patientId);
-      }
-    };
-
-    /* istanbul ignore next */
-    $scope.isShowTypeRecord = function (type) {
-      return type === $scope.drawingsEdit.type;
-    };
-
-    /* istanbul ignore next */
-    $scope.addToRecords = function (value) {
-      if (value) {
-        var record = {};
-
-        record.name = value.tableName;
-        record.type = $scope.drawingsEdit.type;
-        record.typeTitle = $scope.typeRecords[$scope.drawingsEdit.type].title;
-        record.date = value.date;
-        record.source = value.source;
-        record.sourceId = value.sourceId;
-
-        $scope.drawingsEdit.records.push(record);
-
-        $scope.selectedRecord = null;
-      }
-    };
-
-    /* istanbul ignore next */
-    $scope.removeRecord = function (index) {
-      $scope.drawingsEdit.records.splice(index, 1);
-    }
-
-    /* istanbul ignore next */
-    $scope.togglePopover = function ($event, record) {
-      var $tr = $($event.currentTarget);
-      var $wrapper = $tr.closest('.record-popover-wrapper');
-      var $trs = $wrapper.find('tr');
-      var $popover = $wrapper.find('.record-popover');
-      var topPostion;
-
-      if ($tr.hasClass('info')) {
-        $tr.removeClass('info');
-        $wrapper.removeClass('open');
-        serviceRequests.publisher('closeDrawingsPopover');
-
-      } else {
-        topPostion = ($tr.height() + $tr.offset().top) - $wrapper.offset().top;
-        $popover.css('top', topPostion);
-
-        serviceRequests.publisher('openDrawingsPopover', {record: record});
-
-        $wrapper.addClass('open');
-        $trs.removeClass('info');
-        $tr.addClass('info');
-      }
-    };
-
-    /* istanbul ignore next */
-    $scope.closePopovers = function () {
-      var $wrapper = $(document).find('.record-popover-wrapper');
-      var $trs = $wrapper.find('tr');
-    
-      $trs.removeClass('info');
-      $wrapper.removeClass('open');
-      serviceRequests.publisher('closeDrawingsPopover');
-    };
-
-    /* istanbul ignore next */
-    $window.addEventListener('resize', function () {
-      $scope.closePopovers();
-    });
-
-    /* istanbul ignore next */
-    document.addEventListener('click', function (ev) {
-      var $target = $(ev.target);
-      var $tr = $target.closest('tr');
-      var $popover = $target.closest('.record-popover');
-
-      if (!$popover.length && (!$tr.length || ($tr.length && !$tr.hasClass('info')))) {
-        $scope.closePopovers();
-      }
-    });
+    $scope.drawingEdit = {};
+    $scope.drawingEdit.date = new Date();
+    $scope.drawingEdit.image64 = null;
 
     /* istanbul ignore next */
     this.goList = function () {
@@ -139,22 +38,30 @@ class DrawingsCreateController {
     };
     
     /* istanbul ignore next */
-    this.create = function (drawingsForm, drawings) {
+    this.create = function (drawingForm, drawingEdit) {
       $scope.formSubmitted = true;
 
-      if (drawingsForm.$valid && $scope.drawingsEdit.records) {
-        let toAdd = {
-          from: $scope.drawingsEdit.from,
-          to: $scope.drawingsEdit.to,
-          records: $scope.drawingsEdit.records,
-          clinicalSummary: $scope.drawingsEdit.clinicalSummary,
-          reasonForContact: $scope.drawingsEdit.reasonForContact,
-          transferDateTime: $scope.drawingsEdit.transferDateTime
-        };
+      if (drawingForm.$valid && $scope.drawingEdit.image64) {
+        // console.log('$scope.drawingEdit.image64');
+        // console.log($scope.drawingEdit.image64);
+        window.open($scope.drawingEdit.image64);
         
-        $scope.drawingsCreate($stateParams.patientId, toAdd);
+        // let toAdd = {
+        //   image64: drawingEdit.image64,
+        //   name: drawingEdit.name,
+        //   author: drawingEdit.author,
+        //   date: drawingEdit.date
+        // };
+        
+        // $scope.drawingsCreate($stateParams.patientId, toAdd);
       }
     }.bind(this);
+
+    $scope.getCanvasImage64 = function (data) {
+      $scope.drawingEdit.image64 = data.image64;
+    };
+    serviceRequests.subscriber('drawingCanvasChanged', $scope.getCanvasImage64);
+
 
     /* istanbul ignore next */
     this.setCurrentPageData = function (data) {
@@ -166,35 +73,8 @@ class DrawingsCreateController {
       }
       if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;
-        $scope.drawingsEdit.author = $scope.currentUser.email;
+        $scope.drawingEdit.author = $scope.currentUser.email;
       }
-
-      // For type Records
-      if (data.diagnoses.data) {
-        serviceDrawings.setDiagnosisRecords(data.diagnoses.data);
-        usSpinnerService.stop('diagnosis-spinner');
-      }
-
-      if (data.medication.data) {
-        serviceDrawings.setMedicationRecords(data.medication.data);
-        usSpinnerService.stop('medications-spinner');
-      }
-
-      if (data.referrals.data) {
-        serviceDrawings.setReferralsRecords(data.referrals.data);
-        usSpinnerService.stop('referrals-spinner');
-      }
-
-      if (data.events.data) {
-        serviceDrawings.setEventsRecords(data.events.data);
-        usSpinnerService.stop('events-spinner');
-      }
-
-      if (data.vitals.data) {
-        serviceDrawings.setVitalsRecords(data.vitals.data);
-        usSpinnerService.stop('vitals-spinner');
-      }
-
     };
 
     let unsubscribe = $ngRedux.connect(state => ({
@@ -212,5 +92,5 @@ const DrawingsCreateComponent = {
   controller: DrawingsCreateController
 };
 
-DrawingsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'drawingsActions', 'serviceRequests', 'serviceDrawings', 'serviceFormatted', 'usSpinnerService', '$window'];
+DrawingsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'drawingsActions', 'serviceRequests', 'serviceFormatted', 'usSpinnerService', '$window'];
 export default DrawingsCreateComponent;

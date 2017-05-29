@@ -35,30 +35,35 @@ class DrawingsDrawingController {
       },
       sizes: [1, 2, 4, 6, 10, 16, 24, 30]
     };
-
-
+    $scope.fontsSettings = {
+      fontSizes: [10, 12, 14, 16, 18, 20, 24, 26, 30, 40, 70],
+      fontFamilies: ['Arial', 'Calibri', 'Times New Roman', 'Verdana'],
+      fills: ['#ee0000', '#f36900', '#ffff00', '#84ff00', '#1e67ff', '#4affff', '#4bff62', '#97fa00', '#0000ff']
+    };
+       
     $scope.uploadParams = null;
     $scope.brushColor = $scope.brushSettings.colors.base[0];
     $scope.brushSize = $scope.brushSettings.sizes[0];
+    $scope.addTextObject = null;
+    $scope.textParams;
 
     /* istanbul ignore next */
     $scope.setModeBrush = function () {
-      console.log('$scope.setModeBrush');
       $scope.canvas.isDrawingMode = true;
       $scope.canvas.freeDrawingBrush = new fabric['PencilBrush']($scope.canvas);
       $scope.canvas.freeDrawingBrush.color = $scope.brushColor;
       $scope.canvas.freeDrawingBrush.width = $scope.brushSize;
     }
+
     /* istanbul ignore next */
     $scope.setModeFont = function () {
-      console.log('$scope.setModeFont');
       $scope.canvas.isDrawingMode = false;
-    }
+    };
+
     /* istanbul ignore next */
     $scope.setModePicture = function () {
-      console.log('$scope.setModePicture');
       $scope.canvas.isDrawingMode = false;
-    }
+    };
 
     /* istanbul ignore next */
     $scope.setModeDrawing = function (mode) {
@@ -81,30 +86,85 @@ class DrawingsDrawingController {
       $scope.brushColor = color;
       $scope.canvas.freeDrawingBrush.color = color;
     };
+
+    /* istanbul ignore next */
+    $scope.isActiveColour = function (color) {
+      return $scope.brushColor === color;
+    };
     
     /* istanbul ignore next */
     $scope.changeBrushSize = function (size) {
       $scope.canvas.freeDrawingBrush.width = size;
     };
 
+
+    $scope.clearTextParams = function () {
+      $scope.textParams = {
+        // left: 10, top: 10,
+        text: 'New text',
+        fill: $scope.fontsSettings.fills[0],
+        fontSize: $scope.fontsSettings.fontSizes[2],
+        fontWeight: 'normal',
+        fontFamily: $scope.fontsSettings.fontFamilies[0],
+      }
+    };
+    $scope.clearTextParams();
+
+    $scope.setTextObject = function (object) {
+      if (object instanceof fabric.Text) {
+        $scope.addTextObject = object;
+        $scope.textParams.fill = object.fill;
+        $scope.textParams.text = object.text;
+        $scope.textParams.fontSize = object.fontSize;
+        $scope.textParams.fontFamily = object.fontFamily;
+      } else {
+        $scope.addTextObject = null;
+        $scope.clearTextParams();
+      }
+    };
+
+    /* istanbul ignore next */
+    $scope.addNewText = function (text) {
+      $scope.addTextObject = new fabric.Text(text, $scope.textParams);
+      $scope.canvas.add($scope.addTextObject);
+    };
+
+    $scope.isTextObject = function () {
+      if ($scope.addTextObject) {
+        return true;
+      }
+      return false
+    };
+
+    $scope.textChange = function (text) {
+      if ($scope.isTextObject()) {
+        $scope.addTextObject.text = text;
+        $scope.canvas.add($scope.addTextObject);
+      }
+    };
+
+    $scope.changeFontParams = function (textParams) {
+      if ($scope.isTextObject && $scope.addTextObject) {
+        $scope.addTextObject.setText(textParams.text);
+        $scope.addTextObject.setFill(textParams.fill);
+        $scope.addTextObject.setFontSize(textParams.fontSize);
+        $scope.addTextObject.setFontFamily(textParams.fontFamily);
+        $scope.canvas.renderAll();
+      }
+    };
+
+
     /* istanbul ignore next */
     $scope.uploadPicture = function (uploadParams) {
       var file, reader, imgData = {};
 
-      if (uploadParams) {
-        console.log('uploadParams');
-        console.log(uploadParams);
+      if (uploadParams && uploadParams.file) {
         imgData = uploadParams.file;
-        console.log('file upload ', imgData);
         reader = new FileReader();
 
         reader.onload = function(event) {
-          console.log('reader.onload');
           var image64 = event.target.result;
-          // This stores the image to scope
           imgData.imgencode = image64;
-          // console.log('---1111 ', event, imgData);
-          //image
           fabric.util.loadImage(image64, function(img) {
               var object = new fabric.Image(img);
               object.hasRotatingPoint = true;
@@ -123,11 +183,36 @@ class DrawingsDrawingController {
       }
     };
 
+    
+    /* istanbul ignore next */
+    $scope.isCanDelete = function () {
+      if (  $scope.canvas &&
+            !$scope.canvas.isDrawingMode &&
+            ($scope.canvas.getActiveObject() || $scope.canvas.getActiveGroup()) ) {
+          return true;
+      }
+      return false;
+    };
 
+    /* istanbul ignore next */
+    $scope.deleteObject = function (uploadParams) {
+      var selectedObject = $scope.canvas.getActiveObject();
+      var selectedMultipleObjects = $scope.canvas.getActiveGroup();
 
-
-
-
+      if (selectedObject) {
+        selectedObject.remove();
+        
+      } else {
+        selectedMultipleObjects._objects.forEach(function (object) {
+          object.remove();
+          selectedMultipleObjects.removeWithUpdate(object);
+        });
+      }
+      $timeout(function() {
+        $scope.canvas.discardActiveGroup();
+        $scope.canvas.renderAll();
+      }, 0)
+    };
 
 
     /* istanbul ignore next */
@@ -143,8 +228,8 @@ class DrawingsDrawingController {
     function resizeCanvas() {
       $timeout(function() {
         $scope.setCanvasWidth();
-      }.bind(this), 0);
-    }
+      }.bind(this), 100);
+    };
 
     $window.addEventListener('resize', resizeCanvas);
     serviceRequests.subscriber('resizeDrawing', resizeCanvas);
@@ -154,13 +239,36 @@ class DrawingsDrawingController {
       $window.removeEventListener('resize', resizeCanvas);
     });
 
+    $scope.getCanvasImage64 = function () {
+      var data = {};
+      if (!fabric.Canvas.supports('toDataURL')) {
+         console.log('This browser doesn\'t provide means to serialize canvas to an image');
+      } else {
+        // window.open($scope.canvas.toDataURL('png'));
+        data.image64 = $scope.canvas.toDataURL('png');
+        return data;
+      }
+      return null;
+    };
+
+    function publishCanvasData () {
+      serviceRequests.publisher('drawingCanvasChanged', $scope.getCanvasImage64());
+    }
     /* istanbul ignore next */
     this.initCanvasDrawing = function () {
       $scope.canvasEl = document.getElementById($scope.canvasId);
       $scope.canvas = new fabric.Canvas($scope.canvasId, $scope.canvasSettings);
+      $scope.canvas.on('object:selected', function (object) {
+        $scope.setTextObject(object.target);
+      });
+
+      $scope.canvas.on('object:modified', publishCanvasData);
+      $scope.canvas.on('object:added', publishCanvasData);
+      $scope.canvas.on('object:removed', publishCanvasData);
+      
       $scope.setCanvasWidth();
       $scope.setModeBrush();
-    }
+    };
 
     /* istanbul ignore next */
     $timeout(function() {

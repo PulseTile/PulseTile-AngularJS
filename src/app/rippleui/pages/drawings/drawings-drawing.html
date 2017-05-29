@@ -17,6 +17,12 @@
 <div mc-multi-views default-view="brush" class="drawing-control-panel">
   <div class="drawing-control-header">
     <div class="wrap-control-group">
+      <div class="control-group without-side-indent right">
+        <button class="btn btn-icon-normal btn-drawing btn-drawing-delete" 
+                ng-show="isCanDelete()" 
+                ng-click="deleteObject();"><i class="btn-icon fa fa-times"></i></button>
+
+      </div>
       <div class="control-group without-side-indent left">
         <button class="btn btn-icon-normal btn-drawing" 
                 ng-class="{active: isActiveView('brush')}" 
@@ -50,6 +56,7 @@
               <div ng-repeat="pointColors in brushSettings.colors" class="drawing-colors-group">
                 <div  ng-repeat="color in pointColors" 
                       class="drawing-color" 
+                      ng-class="{active: isActiveColour(color)}"
                       ng-style="{background: color}"
                       ng-click="changeBrushColor(color)"></div>
               </div>
@@ -63,40 +70,43 @@
         <div class="drawing-form drawing-form-left">
           <div class="drawing-label">Font:</div>
           <div class="drawing-holder">
-            <select class="drawing-form-middle form-control input-sm" id="from" name="from">
-                <option value="Arial" selected>Arial</option>
-                <option value="Times_New_Romal">Times New Romal</option>
-                <option value="Calibri">Calibri</option>
-                <option value="Verdana">Verdana</option>
+            <select class="drawing-form-middle form-control input-sm" id="fontFamily" name="fontFamily"
+                    ng-options="size for size in fontsSettings.fontFamilies"
+                    ng-model="textParams.fontFamily"
+                    ng-change="changeFontParams(textParams)">
             </select>
           </div>
         </div>
         <div class="drawing-form drawing-form-left">
           <div class="drawing-label">Size:</div>
           <div class="drawing-holder">
-            <select class="drawing-form-small form-control input-sm" id="from" name="from">
-                <option value="10">10pt</option>
-                <option value="12">12pt</option>
-                <option value="14" selected>14pt</option>
-                <option value="16">16pt</option>
-                <option value="18">18pt</option>
-                <option value="20">20pt</option>
-                <option value="24">24pt</option>
-                <option value="26">26pt</option>
-                <option value="30">30pt</option>
-                <option value="40">40pt</option>
+            <select class="drawing-form-small form-control input-sm" id="fontSize" name="fontSize"
+                    ng-options="size + 'pt' for size in fontsSettings.fontSizes"
+                    ng-model="textParams.fontSize"
+                    ng-change="changeFontParams(textParams)">
             </select>
           </div>
         </div>
         <div class="drawing-form drawing-form-left">
           <div class="drawing-label">Colour:</div>
           <div class="drawing-holder">
-            <select class="drawing-form-small form-control input-sm" id="from" name="from">
-                <option value="red" selected>red</option>
-                <option value="blue">blue</option>
-                <option value="green">green</option>
-                <option value="brouwn">brouwn</option>
+            <select class="drawing-form-small form-control input-sm" id="fontFill" name="fontFill"
+                    ng-options="size for size in fontsSettings.fills"
+                    ng-model="textParams.fill"
+                    ng-change="changeFontParams(textParams)">
             </select>
+          </div>
+        </div>
+      </div>
+      <div class="drawing-form-group">
+        <div class="drawing-form">
+          <div class="drawing-label">Text:</div>
+          <div class="drawing-holder">
+            <button class="btn btn-success btn-drawing-add"
+                    ng-click="addNewText(addText)">Add</button>
+            <div class="wrap-overflow">
+              <input class="form-control input-sm" type="text" name="addText" id="addText" ng-change="changeFontParams(textParams)" ng-model="textParams.text">
+            </div>
           </div>
         </div>
       </div>
