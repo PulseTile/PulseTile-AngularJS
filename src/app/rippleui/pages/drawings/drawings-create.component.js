@@ -42,16 +42,12 @@ class DrawingsCreateController {
       $scope.formSubmitted = true;
 
       if (drawingForm.$valid && $scope.drawingEdit.image64) {
-        // console.log('$scope.drawingEdit.image64');
-        // console.log($scope.drawingEdit.image64);
-        window.open($scope.drawingEdit.image64);
-        
-        // let toAdd = {
-        //   image64: drawingEdit.image64,
-        //   name: drawingEdit.name,
-        //   author: drawingEdit.author,
-        //   date: drawingEdit.date
-        // };
+        let toAdd = {
+          image64: drawingEdit.image64,
+          name: drawingEdit.name,
+          author: drawingEdit.author,
+          date: drawingEdit.date
+        };
         
         // $scope.drawingsCreate($stateParams.patientId, toAdd);
       }
@@ -62,6 +58,9 @@ class DrawingsCreateController {
     };
     serviceRequests.subscriber('drawingCanvasChanged', $scope.getCanvasImage64);
 
+    $scope.resizeDrawing = function () {
+      serviceRequests.publisher('resizeDrawing', {});
+    };
 
     /* istanbul ignore next */
     this.setCurrentPageData = function (data) {

@@ -49,11 +49,11 @@ class DrawingsDetailController {
     this.edit = function () {
       $scope.isEdit = true;
 
-      $scope.currentUser = this.currentUser;
-      $scope.drawingEdit = Object.assign({}, this.drawing);
-      $scope.patient = this.currentPatient;
+      // $scope.currentUser = this.currentUser;
+      // $scope.drawingEdit = Object.assign({}, this.drawing);
+      // $scope.patient = this.currentPatient;
 
-      $scope.drawingEdit.date = new Date();
+      // $scope.drawingEdit.date = new Date();
     };
 
     /* istanbul ignore next */
@@ -82,11 +82,11 @@ class DrawingsDetailController {
     /* istanbul ignore next */
     this.editDetail = function () {
       $scope.isEditDetail = true;
-      // $scope.currentUser = this.currentUser;
-      // $scope.drawingEdit = Object.assign({}, this.drawing);
-      // $scope.patient = this.currentPatient;
+      $scope.currentUser = this.currentUser;
+      $scope.drawingEdit = Object.assign({}, this.drawing);
+      $scope.patient = this.currentPatient;
 
-      // $scope.drawingEdit.date = new Date();
+      $scope.drawingEdit.date = new Date();
     };
 
     /* istanbul ignore next */

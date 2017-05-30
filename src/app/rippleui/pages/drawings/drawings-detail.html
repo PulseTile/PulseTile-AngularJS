@@ -23,9 +23,11 @@
         <h3 class="panel-title">Drawing</h3>
       </div>
       <div class="panel-body">
-      
-        <drawings-drawing-component></drawings-drawing-component>
-        
+        <div class="drawing-wrapper">
+          <div class="drawing-canvas-holder">
+            <img src="../../../assets/images/drawing-test.png" alt="">
+          </div>
+        </div>
         <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
           <div class="wrap-control-group">
             <div class="control-group right">
@@ -44,13 +46,9 @@
         <h3 class="panel-title">Edit Drawing</h3>
       </div>
       <div class="panel-body">
-        <div class="panel-body-inner">
-          <!-- <form name="drawingForm" class="form">
-            <div class="form-group-wrapper">
-              
-            </div>
-          </form> -->
-        </div>
+        
+        <drawings-drawing-component></drawings-drawing-component>
+
         <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
           <div class="wrap-control-group">
             <div class="control-group right">
@@ -134,16 +132,6 @@
                       <input type="text" class="form-control input-sm" id="name" name="name" ng-model="drawingEdit.name" required />
                     </div>
                     <span class="help-block animate-fade" ng-show="formSubmitted && drawingForm.name.$error.required">You must enter a value.</span>
-                  </div>
-                </div>
-
-                <div class="col-expand-right">
-                  <div class="form-group" ng-class="{'has-error': (formSubmitted || drawingForm.source.$dirty) && drawingForm.source.$invalid, 'has-success': drawingForm.source.$valid && drawingForm.source.$dirty}">
-                    <label for="source" class="control-label">Source</label>
-                    <div class="input-holder">
-                      <input type="text" class="form-control input-sm" id="source" name="source" ng-model="drawingEdit.source" required />
-                    </div>
-                    <span class="help-block animate-fade" ng-show="formSubmitted && drawingForm.source.$error.required">You must enter a value.</span>
                   </div>
                 </div>
               </div>
