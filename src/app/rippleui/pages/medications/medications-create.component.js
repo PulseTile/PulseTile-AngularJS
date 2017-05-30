@@ -103,9 +103,6 @@ class MedicationsCreateController {
           originalSource: medication.originalSource,
           originalComposition: medication.originalComposition
         };
-        console.log('toAdd');
-        console.log(toAdd);
-        debugger
 
         $scope.medicationsCreate($scope.patient.id, toAdd);
 
