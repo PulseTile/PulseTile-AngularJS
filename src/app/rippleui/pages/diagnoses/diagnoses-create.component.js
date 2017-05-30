@@ -64,7 +64,7 @@ class DiagnosesCreateController {
       this.goList();
     };
 
-    $scope.create = function (diagnosisForm, ) {
+    $scope.create = function (diagnosisForm, diagnosis) {
       $scope.formSubmitted = true;
 
       if (diagnosisForm.$valid) {
