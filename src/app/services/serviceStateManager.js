@@ -89,16 +89,15 @@ class ServiceStateManager {
 
         this.setTableSettings = function (tableSettings) {
           if (typeof tableSettings === "undefined") return;
-
-            /* istanbul ignore if */
+          /* istanbul ignore if */
             
-          if (tableSettings.order) {
+          if (tableSettings.order !== undefined) {
             this.tableSettings.order = tableSettings.order;
           }
-          if (tableSettings.reverse) {
+          if (tableSettings.reverse !== undefined) {
             this.tableSettings.reverse = tableSettings.reverse;
           }
-          if (tableSettings.currentPage) {
+          if (tableSettings.currentPage !== undefined) {
             this.tableSettings.currentPage = tableSettings.currentPage;
           }
         };
