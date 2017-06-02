@@ -105,31 +105,45 @@
             <button class="btn btn-success btn-drawing-add"
                     ng-click="addNewText(addText)">Add</button>
             <div class="wrap-overflow">
-              <input class="form-control input-sm" type="text" name="addText" id="addText" ng-change="changeFontParams(textParams)" ng-model="textParams.text">
+              <input class="form-control input-sm input-with-btn" type="text" name="addText" id="addText" ng-change="changeFontParams(textParams)" ng-model="textParams.text">
             </div>
           </div>
         </div>
       </div>
     </div>
     <div ng-show="isActiveView('picture')">
-      <div class="drawing-form">
-        <div class="drawing-label">Select Image:</div>
-        <div class="drawing-holder">
-          <button class="btn btn-success btn-drawing-upload"
-                  ng-click="uploadPicture(uploadParams)">Upload</button>
-          <div class="wrap-fcustomfile drawing-fcustomfile">
-            <div class="fcustomfile-control">
-              <input mc-uploadfile 
-                uploadfile-params="uploadParams"
-                uploadfile-accept="image/jpeg,image/png,image/gif" 
-                accept="image/jpeg,image/png,image/gif"
-                type="file" 
-                name="logoPath"
-                id="logoPath">
+      <div class="drawing-form-group">
+        <div class="drawing-form">
+          <div class="drawing-label">Select Image:</div>
+          <div class="drawing-holder">
+            <button class="btn btn-success btn-drawing-upload-file"
+                    ng-click="uploadPicture(uploadParams)">Upload</button>
+            <div class="wrap-fcustomfile drawing-fcustomfile">
+              <div class="fcustomfile-control">
+                <input mc-uploadfile 
+                  uploadfile-params="uploadParams"
+                  uploadfile-accept="image/jpeg,image/png,image/gif" 
+                  accept="image/jpeg,image/png,image/gif"
+                  type="file" 
+                  name="logoPath"
+                  id="logoPath">
 
-              <label for="logoPath" class="btn btn-success btn-inverse btn-drawing-browse"><span>Browse...</span></label>
+                <label for="logoPath" class="btn btn-success btn-inverse btn-drawing-browse"><span>Browse...</span></label>
+              </div>
+              <div class="fcustomfile-text" ng-bind='uploadParams.name'></div>
             </div>
-            <div class="fcustomfile-text" ng-bind='uploadParams.name'></div>
+          </div>
+        </div>
+      </div>
+      <div class="drawing-form-group">
+        <div class="drawing-form">
+          <div class="drawing-label">Input URL Image:</div>
+          <div class="drawing-holder">
+            <button class="btn btn-success btn-drawing-upload"
+                    ng-click="uploadPictureURL(uploadImageURL)">Upload</button>
+            <div class="wrap-overflow">
+              <input class="form-control input-sm" type="text" name="urlImage" id="urlImage" ng-model="uploadImageURL">
+            </div>
           </div>
         </div>
       </div>

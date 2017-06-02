@@ -4,9 +4,6 @@
 .drawing-canvas-holder {
   border: 1px solid #848484;
   overflow: hidden;
-  // .canvas-container {
-  //   width: 100% !important;
-  // }
 }
 .drawing-canvas {
   height: 406px;
@@ -44,6 +41,10 @@
 .drawing-form {
   @include clearfix;
 }
+.drawing-form-group {
+  & + .drawing-form-group { margin-top: 4px; }
+}
+
 .drawing-label {
   color: #828282;
   float: left;
@@ -71,10 +72,15 @@
   line-height: 16px;
 }
 
-.btn-drawing-upload {
+.btn-drawing-upload,
+.btn-drawing-upload-file {
   float: right;
   font-size: 14px;
-  height: 32px;
+  height: 30px;
+  line-height: 16px;
+}
+.btn-drawing-upload-file { 
+  height: 32px; 
   line-height: 18px;
 }
 
@@ -107,13 +113,13 @@
 .drawing-color {
   background: #ffffff;
   border: 1px solid #e4e4e4;
+  cursor: pointer;
   display: block;
   float: left;
   height: 24px;
-  margin-right: 2px;
   margin-bottom: 2px;
+  margin-right: 2px;
   width: 24px;
-  cursor: pointer;
   &.active {
     border-color: $base-color;
   }
@@ -130,7 +136,7 @@
   float: right;
 }
 
-.drawing-form-text {
+.input-with-btn {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-right: 0;

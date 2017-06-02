@@ -42,6 +42,7 @@ class DrawingsDrawingController {
     };
        
     $scope.uploadParams = null;
+    $scope.uploadImageURL = '';
     $scope.brushColor = $scope.brushSettings.colors.base[0];
     $scope.brushSize = $scope.brushSettings.sizes[0];
     $scope.addTextObject = null;
@@ -155,6 +156,20 @@ class DrawingsDrawingController {
 
 
     /* istanbul ignore next */
+    $scope.addPictureToCanvas = function (base64) {
+      fabric.util.loadImage(base64, function(img) {
+          var object = new fabric.Image(img);
+          // var canvasWidth = $scope.canvas.width;
+          // var canvasHeight = $scope.canvas.height;
+          object.hasRotatingPoint = true;
+          object.scaleX = object.scaleY = .25;
+          object.isDrawingMode = true;
+          $scope.canvas.add(object);
+          $scope.canvas.renderAll();
+      }, null, {crossOrigin: 'Anonymous'});
+    };
+
+    /* istanbul ignore next */
     $scope.uploadPicture = function (uploadParams) {
       var file, reader, imgData = {};
 
@@ -165,16 +180,7 @@ class DrawingsDrawingController {
         reader.onload = function(event) {
           var image64 = event.target.result;
           imgData.imgencode = image64;
-          fabric.util.loadImage(image64, function(img) {
-              var object = new fabric.Image(img);
-              object.hasRotatingPoint = true;
-              object.scaleX = object.scaleY = .25;
-              object.isDrawingMode = true;
-              $scope.canvas.add(object);
-              $scope.canvas.renderAll();
-          }, null, {crossOrigin: 'Anonymous'});
-
-          $scope.canvas.renderAll();
+          $scope.addPictureToCanvas(image64);
         };
 
         // when the file is read it triggers the onload event above.
@@ -183,7 +189,32 @@ class DrawingsDrawingController {
       }
     };
 
-    
+    // function getDataUri(url, callback) {
+    //     var image = new Image();
+    //     image.onload = function () {
+    //         var canvas = document.createElement('canvas');
+    //         canvas.width = this.naturalWidth; // or 'width' if you want a special/scaled size
+    //         canvas.height = this.naturalHeight; // or 'height' if you want a special/scaled size
+
+    //         canvas.getContext('2d').drawImage(this, 0, 0);
+
+    //         // Get raw image data
+    //         // callback(canvas.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, ''));
+    //         callback(canvas.toDataURL('image/png'));
+    //     };
+
+    //     image.src = url;
+    // }
+
+    /* istanbul ignore next */
+    $scope.uploadPictureURL = function (imageURL) {
+      console.log('imageURL');
+      console.log(imageURL);
+      getDataUri(imageURL, function(image64) {
+        $scope.addPictureToCanvas(image64);
+      });
+    };
+
     /* istanbul ignore next */
     $scope.isCanDelete = function () {
       if (  $scope.canvas &&
@@ -216,19 +247,22 @@ class DrawingsDrawingController {
 
 
     /* istanbul ignore next */
-    $scope.setCanvasWidth = function () {
+    $scope.setCanvasSize = function () {
+      var ratio = 0.5625; // 9/16
       var holder = $scope.canvasEl.closest('.drawing-canvas-holder');
+      var width = holder.offsetWidth - 2;
 
       if (holder) {
-        $scope.canvas.setWidth(holder.offsetWidth - 2);
+        $scope.canvas.setWidth(width);
+        $scope.canvas.setHeight(width * ratio);
       }
     };
 
     /* istanbul ignore next */
     function resizeCanvas() {
       $timeout(function() {
-        $scope.setCanvasWidth();
-      }.bind(this), 100);
+        $scope.setCanvasSize();
+      }.bind(this), 10);
     };
 
     $window.addEventListener('resize', resizeCanvas);
@@ -245,7 +279,7 @@ class DrawingsDrawingController {
          console.log('This browser doesn\'t provide means to serialize canvas to an image');
       } else {
         // window.open($scope.canvas.toDataURL('png'));
-        data.image64 = $scope.canvas.toDataURL('png');
+          data.image64 = $scope.canvas.toDataURL('png');
         return data;
       }
       return null;
@@ -266,7 +300,7 @@ class DrawingsDrawingController {
       $scope.canvas.on('object:added', publishCanvasData);
       $scope.canvas.on('object:removed', publishCanvasData);
       
-      $scope.setCanvasWidth();
+      $scope.setCanvasSize();
       $scope.setModeBrush();
     };
 
