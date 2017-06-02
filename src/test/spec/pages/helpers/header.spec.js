@@ -6,23 +6,29 @@ describe('HeaderComponent', function() {
 
     beforeEach(angular.mock.module('ripple-ui'));
 
-    let scope, ctrl, controller, template, state, rootScope, ngRedux, serviceRequests, patientsActions;
+    let scope, ctrl, controller, template, state, rootScope, stateParams, ngRedux, patientsActions, serviceRequests, $window;
     
-    beforeEach(inject(($injector, $controller, _$rootScope_, _$state_, _$stateParams_,_$ngRedux_, _patientsActions_, _serviceRequests_) => {
+    beforeEach(inject(($injector, $controller, _$rootScope_, _$state_, _$stateParams_, _$ngRedux_, _patientsActions_, _serviceRequests_, _$window_) => {
         controller = $controller;
         scope = $injector.get('$rootScope').$new();
-        state = _$state_;
-        serviceRequests = _serviceRequests_;
         rootScope = _$rootScope_;
+        state = _$state_;
+        stateParams = _$stateParams_;
+        ngRedux = _$ngRedux_;
+        patientsActions = _patientsActions_;
+        serviceRequests = _serviceRequests_;
+        $window = _$window_;
 
         template = HeaderComponent.template;
         ctrl = controller(HeaderComponent.controller, {
             $scope: scope,
+            $rootScope: rootScope,
             $state: state,
-            $stateParams: _$stateParams_,
-            $ngRedux: _$ngRedux_,
-            patientsActions: _patientsActions_,
-            serviceRequests: serviceRequests
+            $stateParams: stateParams,
+            $ngRedux: ngRedux,
+            patientsActions: patientsActions,
+            serviceRequests: serviceRequests,
+            $window: $window
         });
     }));
     beforeEach(function() {
@@ -33,6 +39,9 @@ describe('HeaderComponent', function() {
         spyOn(scope, 'switchDirectByRole');
         spyOn(scope, 'setLoginData');
         spyOn(scope, 'login');
+        spyOn(scope, 'isActiveTypeSearch');
+        spyOn(scope, 'checkIsToggleSearch');
+        spyOn(scope, 'isShowSearch');
         spyOn(ctrl, 'goBack');
         spyOn(ctrl, 'goProfile');
         spyOn(ctrl, 'signout');
@@ -53,11 +62,19 @@ describe('HeaderComponent', function() {
         spyOn(ctrl, 'getPopulateHeaderSearch');
         spyOn(ctrl, 'getPageHeader');
         spyOn(ctrl, 'checkIsShowPreviousBtn');
+        spyOn(ctrl, 'closeAdvancedSearch');
+        spyOn(ctrl, 'openAdvancedSearch');
+        spyOn(ctrl, 'goLogo');
+
+
 
         scope.setTitle();
         scope.switchDirectByRole({role: 'PHR'});
         scope.setLoginData({data:{role: 'PHR'}});
         scope.login();
+        scope.isActiveTypeSearch();
+        scope.checkIsToggleSearch();
+        scope.isShowSearch();
         ctrl.goBack();
         ctrl.goProfile();
         ctrl.signout();
@@ -78,6 +95,9 @@ describe('HeaderComponent', function() {
         ctrl.getPopulateHeaderSearch();
         ctrl.getPageHeader();
         ctrl.checkIsShowPreviousBtn();
+        ctrl.closeAdvancedSearch();
+        ctrl.openAdvancedSearch();
+        ctrl.goLogo();
     });
 
     it('Controller exist', function() {
@@ -106,6 +126,15 @@ describe('HeaderComponent', function() {
     });
     it("login was called", function() {
         expect(scope.login).toHaveBeenCalled();
+    });
+    it("isActiveTypeSearch was called", function() {
+        expect(scope.isActiveTypeSearch).toHaveBeenCalled();
+    });
+    it("checkIsToggleSearch was called", function() {
+        expect(scope.checkIsToggleSearch).toHaveBeenCalled();
+    });
+    it("isShowSearch was called", function() {
+        expect(scope.isShowSearch).toHaveBeenCalled();
     });
     it("goHome was called", function() {
         expect(ctrl.goBack).toHaveBeenCalled();
@@ -169,5 +198,14 @@ describe('HeaderComponent', function() {
     });
     it("checkIsShowPreviousBtn was called", function() {
         expect(ctrl.checkIsShowPreviousBtn).toHaveBeenCalled();
+    });
+    it("closeAdvancedSearch was called", function() {
+        expect(ctrl.closeAdvancedSearch).toHaveBeenCalled();
+    });
+    it("openAdvancedSearch was called", function() {
+        expect(ctrl.openAdvancedSearch).toHaveBeenCalled();
+    });
+    it("goLogo was called", function() {
+        expect(ctrl.goLogo).toHaveBeenCalled();
     });
 });

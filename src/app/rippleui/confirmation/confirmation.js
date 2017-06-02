@@ -15,6 +15,7 @@
 export default function ConfirmationModal($uibModal, $ngRedux) {
   var isModalClosed = true;
 
+  /* istanbul ignore next */
   var openModal = function (patient, state) {
     /* istanbul ignore if  */
     if (isModalClosed) {
@@ -45,6 +46,7 @@ export default function ConfirmationModal($uibModal, $ngRedux) {
       });
     }
 
+    /* istanbul ignore next */
     modalInstance.result.then(function() {
       isModalClosed = true;
     }, function() {

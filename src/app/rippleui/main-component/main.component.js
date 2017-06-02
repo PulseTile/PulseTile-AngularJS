@@ -24,7 +24,7 @@ class MainController {
     $scope.isClassShowSidebar = false;
     $scope.breadcrumbs = [];
 
-    /* istanbul ignore next  */
+    /* istanbul ignore next */
     $scope.setBreadcrumbs = function (breadcrumbs) {
       if (serviceRequests.currentUserData.role === "PHR" && breadcrumbs) {
         breadcrumbs.shift();
@@ -32,6 +32,7 @@ class MainController {
       $scope.breadcrumbs = breadcrumbs || [];
     };
 
+    /* istanbul ignore next */
     this.goBreadcrumb = function (state) {
       var requestHeader = {
         patientId: $stateParams.patientId,
@@ -43,6 +44,7 @@ class MainController {
       $state.go(state, requestHeader);
     };
     
+    /* istanbul ignore next */
     this.getPageComponents = function (data) {
       $scope.setBreadcrumbs(data.breadcrumbs);
       // $scope.userContextViewExists = ('banner' in data.state);
@@ -54,6 +56,7 @@ class MainController {
     $scope.getFullPanelClass = function () {
       return $scope.fullPanelClass ? 'full-panel full-panel-' + $scope.fullPanelClass : '';
     };
+
     /* istanbul ignore next  */
     this.changeFullPanel = function (data) {
       if ($scope.fullPanelClass === data.panelName) {
@@ -64,16 +67,19 @@ class MainController {
     };
     serviceRequests.subscriber('changeFullPanel', this.changeFullPanel);
 
+    /* istanbul ignore next */
     $scope.detectDevice = function () {
       return  $scope.isTouchDevice ? 'touch-device' : 'is-not-touch-device';
     };
 
+    /* istanbul ignore next */
     $scope.getClasses = function () {
       var classTouchDevice = $scope.isTouchDevice ? 'touch-device' : 'is-not-touch-device';
       var classShowSidebar = $scope.isClassShowSidebar ? 'showSidebar' : '';
       return  classTouchDevice + ' ' + classShowSidebar;
     };
 
+    /* istanbul ignore next */
     this.changeisClassShowSidebar = function (data) {
       /* istanbul ignore if  */
       if (data.click) {
@@ -81,7 +87,7 @@ class MainController {
       }
     };
 
-    /* istanbul ignore next  */
+    /* istanbul ignore next */
     this.hideSidebarOnMobile = function () {
 
       if (window.innerWidth < 768) {
@@ -93,7 +99,8 @@ class MainController {
     };
     serviceRequests.subscriber('changeStateSidebar', this.changeisClassShowSidebar);
 
-    this.checkIsViews = function() {
+    /* istanbul ignore next */
+    this.checkIsViews = function () {
       let views = $state.router.globals.$current.views;
 
       if (!views) return;
@@ -107,7 +114,8 @@ class MainController {
       }
     };
 
-    this.setHeightSidebarForMobile = function() {
+    /* istanbul ignore next */
+    this.setHeightSidebarForMobile = function () {
       var page = angular.element(document);
 
       if (!page.find('.wrapper').length) return;
@@ -132,15 +140,18 @@ class MainController {
       this.setHeightSidebarForMobile();
     }.bind(this));
     
+    /* istanbul ignore next */
     $window.addEventListener('resize', function () {
       this.setHeightSidebarForMobile();
     }.bind(this));
 
+    /* istanbul ignore next */
     $window.addEventListener('orientationchange', function () {
       $scope.fullPanelClass = '';
       serviceRequests.publisher('resetFullPanel');
     }.bind(this));
 
+    /* istanbul ignore next */
     $rootScope.$on('$locationChangeStart', function(e) {
       $scope.fullPanelClass = '';
       this.hideSidebarOnMobile();

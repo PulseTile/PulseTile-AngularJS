@@ -6,41 +6,54 @@ describe('MainComponent', function() {
 
     beforeEach(angular.mock.module('ripple-ui'));
 
-    let scope, ctrl, controller, template, rootScope, $window, state, serviceRequests, foo, fetchedBar, bar;
+    let scope, ctrl, controller, template, rootScope, $window, state, stateParams, serviceRequests, foo, fetchedBar, bar, timeout, deviceDetector;
     
-    beforeEach(inject(($injector, $controller, _$rootScope_, _$window_, _$state_, _serviceRequests_) => {
+    beforeEach(inject(($injector, $controller, _$window_, _$rootScope_, _$state_, _$stateParams_, _serviceRequests_, _$timeout_, _deviceDetector_) => {
         controller = $controller;
         scope = $injector.get('$rootScope').$new();
-        serviceRequests = _serviceRequests_;
-        rootScope = _$rootScope_;
         $window = _$window_;
+        rootScope = _$rootScope_;
         state = _$state_;
+        stateParams = _$stateParams_;
+        serviceRequests = _serviceRequests_;
+        timeout = _$timeout_;
+        deviceDetector = _deviceDetector_;
 
         template = MainComponent.template;
         ctrl = controller(MainComponent.controller, {
             $scope: scope,
-            $rootScope: rootScope,
             $window: $window,
+            $rootScope: rootScope,
             $state: state,
-            serviceRequests: serviceRequests
+            $stateParams: stateParams,
+            $timeout: timeout,
+            deviceDetector: deviceDetector
         });
     }));
     beforeEach(function() {
         spyOn(scope, 'setBreadcrumbs');
         spyOn(scope, 'getFullPanelClass');
         spyOn(scope, 'getClasses');
+        spyOn(scope, 'detectDevice');
         spyOn(ctrl, 'getPageComponents');
         spyOn(ctrl, 'goBreadcrumb');
         spyOn(ctrl, 'changeFullPanel');
         spyOn(ctrl, 'hideSidebarOnMobile');
+        spyOn(ctrl, 'changeisClassShowSidebar');
+        spyOn(ctrl, 'checkIsViews');
+        spyOn(ctrl, 'setHeightSidebarForMobile');
         
         ctrl.getPageComponents();
         scope.setBreadcrumbs();
         scope.getFullPanelClass();
         scope.getClasses();
+        scope.detectDevice();
         ctrl.goBreadcrumb();
         ctrl.changeFullPanel();
         ctrl.hideSidebarOnMobile();
+        ctrl.changeisClassShowSidebar();
+        ctrl.checkIsViews();
+        ctrl.setHeightSidebarForMobile();
     });
 
     it('$scope.mainWidth exist', function() {
@@ -76,7 +89,19 @@ describe('MainComponent', function() {
     it("changeFullPanel was called", function() {
         expect(ctrl.changeFullPanel).toHaveBeenCalled();
     });
+    it("detectDevice was called", function() {
+        expect(scope.detectDevice).toHaveBeenCalled();
+    });
     it("hideSidebarOnMobile was called", function() {
         expect(ctrl.hideSidebarOnMobile).toHaveBeenCalled();
+    });
+    it("changeisClassShowSidebar was called", function() {
+        expect(ctrl.changeisClassShowSidebar).toHaveBeenCalled();
+    });
+    it("checkIsViews was called", function() {
+        expect(ctrl.checkIsViews).toHaveBeenCalled();
+    });
+    it("setHeightSidebarForMobile was called", function() {
+        expect(ctrl.setHeightSidebarForMobile).toHaveBeenCalled();
     });
 });

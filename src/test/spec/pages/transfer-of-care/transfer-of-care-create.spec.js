@@ -45,9 +45,7 @@ describe('Transfer Of Care Create', function() {
         spyOn(scope, 'closePopovers');
         spyOn(ctrl, 'goList');
         spyOn(ctrl, 'cancel');
-        spyOn(scope, 'create');
-        spyOn(scope, 'changeArraysForTable');
-        spyOn(scope, 'modificateEventsArr');
+        spyOn(ctrl, 'create');
         spyOn(ctrl, 'setCurrentPageData');
 
         scope.selectTypeRecords();
@@ -58,9 +56,7 @@ describe('Transfer Of Care Create', function() {
         scope.closePopovers();
         ctrl.goList();
         ctrl.cancel();
-        scope.create();
-        scope.changeArraysForTable();
-        scope.modificateEventsArr();
+        ctrl.create();
         ctrl.setCurrentPageData();
     });
 
@@ -99,13 +95,7 @@ describe('Transfer Of Care Create', function() {
         expect(ctrl.cancel).toHaveBeenCalled();
     });
     it("create was called", function() {
-        expect(scope.create).toHaveBeenCalled();
-    });
-    it("changeArraysForTable was called", function() {
-        expect(scope.changeArraysForTable).toHaveBeenCalled();
-    });
-    it("modificateEventsArr was called", function() {
-        expect(scope.modificateEventsArr).toHaveBeenCalled();
+        expect(ctrl.create).toHaveBeenCalled();
     });
     it("setCurrentPageData was called", function() {
         expect(ctrl.setCurrentPageData).toHaveBeenCalled();

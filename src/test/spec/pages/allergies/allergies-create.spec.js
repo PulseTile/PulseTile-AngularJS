@@ -5,21 +5,24 @@ describe('Allergies Create', function() {
 
     beforeEach(angular.mock.module('ripple-ui'));
 
-    let scope, ctrl, controller, template, state, tempObj;
+    let scope, ctrl, controller, template, state, tempObj, ngRedux, allergiesActions, serviceRequests;
     
     beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _allergiesActions_, _serviceRequests_) => {
         controller = $controller;
         scope = $injector.get('$rootScope').$new();
         state = _$state_;
+        ngRedux = _$ngRedux_;
+        allergiesActions = _allergiesActions_;
+        serviceRequests = _serviceRequests_;
 
         template = AllergiesCreateComponent.template;
         ctrl = controller(AllergiesCreateComponent.controller, {
             $scope: scope,
             $state: state,
             $stateParams: _$stateParams_,
-            $ngRedux: _$ngRedux_,
-            allergiesActions: _allergiesActions_,
-            serviceRequests: _serviceRequests_
+            $ngRedux: ngRedux,
+            allergiesActions: allergiesActions,
+            serviceRequests: serviceRequests
         });
     }));
 
@@ -27,6 +30,7 @@ describe('Allergies Create', function() {
         spyOn(ctrl, 'setCurrentPageData');
         spyOn(ctrl, 'goList');
         spyOn(ctrl, 'cancel');
+        spyOn(ctrl, 'backToDocs');
         spyOn(scope, 'allergiesCreate');
         spyOn(scope, 'allergiesLoad');
         spyOn(scope, 'create');
@@ -34,6 +38,7 @@ describe('Allergies Create', function() {
         ctrl.setCurrentPageData();
         ctrl.goList();
         ctrl.cancel();
+        ctrl.backToDocs();
         scope.allergiesCreate();
         scope.allergiesLoad();
         scope.create();
@@ -51,6 +56,9 @@ describe('Allergies Create', function() {
     });
     it("cancel was called", function() {
         expect(ctrl.cancel).toHaveBeenCalled();
+    });
+    it("backToDocs was called", function() {
+        expect(ctrl.backToDocs).toHaveBeenCalled();
     });
     it("allergiesCreate was called", function() {
         expect(scope.allergiesCreate).toHaveBeenCalled();

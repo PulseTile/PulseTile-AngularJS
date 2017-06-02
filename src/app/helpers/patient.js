@@ -14,11 +14,11 @@
   ~  limitations under the License.
 */
 export default function Patient($window) {
+  /* istanbul ignore next */
   var patient = function (attributes) {
     var self = this;
     
     _.extend(this, attributes);
-    /* istanbul ignore next */
     self.age = function () {
       self.age = moment().diff(self.dateOfBirth, 'years');
       return moment().diff(self.dateOfBirth, 'years');

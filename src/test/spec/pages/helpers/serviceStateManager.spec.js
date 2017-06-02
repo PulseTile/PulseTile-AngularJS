@@ -20,9 +20,25 @@ describe('ServiceStateManager', function() {
   beforeEach(function() {
     spyOn(ctrl, 'getFilter');
     spyOn(ctrl, 'setFilter');
+    spyOn(ctrl, 'getFilterTimeline');
+    spyOn(ctrl, 'setFilterTimeline');
+    spyOn(ctrl, 'getTableSettings');
+    spyOn(ctrl, 'setTableSettings');
+    spyOn(ctrl, 'clearData');
+    spyOn(ctrl, 'getViewsSettings');
+    spyOn(ctrl, 'setViewsSettings');
+    spyOn(ctrl, 'checkChangeState');
 
     ctrl.getFilter();
     ctrl.setFilter();
+    ctrl.getFilterTimeline();
+    ctrl.setFilterTimeline();
+    ctrl.getTableSettings();
+    ctrl.setTableSettings();
+    ctrl.clearData();
+    ctrl.getViewsSettings();
+    ctrl.setViewsSettings();
+    ctrl.checkChangeState();
   });
 
   it('tableSettings exist', function() {
@@ -36,5 +52,29 @@ describe('ServiceStateManager', function() {
   });
   it("setFilter was called", function() {
     expect(ctrl.setFilter).toHaveBeenCalled();
+  });
+  it("getFilterTimeline was called", function() {
+      expect(ctrl.getFilterTimeline).toHaveBeenCalled();
+  });
+  it("setFilterTimeline was called", function() {
+      expect(ctrl.setFilterTimeline).toHaveBeenCalled();
+  });
+  it("getTableSettings was called", function() {
+      expect(ctrl.getTableSettings).toHaveBeenCalled();
+  });
+  it("setTableSettings was called", function() {
+      expect(ctrl.setTableSettings).toHaveBeenCalled();
+  });
+  it("clearData was called", function() {
+      expect(ctrl.clearData).toHaveBeenCalled();
+  });
+  it("getViewsSettings was called", function() {
+      expect(ctrl.getViewsSettings).toHaveBeenCalled();
+  });
+  it("setViewsSettings was called", function() {
+      expect(ctrl.setViewsSettings).toHaveBeenCalled();
+  });
+  it("checkChangeState was called", function() {
+      expect(ctrl.checkChangeState).toHaveBeenCalled();
   });
 });

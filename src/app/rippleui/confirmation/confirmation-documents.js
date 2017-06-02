@@ -15,6 +15,7 @@
 export default function ConfirmationDocsModal($uibModal, $stateParams) {
   var isModalClosed = true;
 
+  /* istanbul ignore next */
   var openModal = function (agreeFunc) {
     /* istanbul ignore if  */
     if (isModalClosed) {
@@ -37,6 +38,7 @@ export default function ConfirmationDocsModal($uibModal, $stateParams) {
       });
     }
 
+    /* istanbul ignore next */
     modalInstance.result.then(function() {
       isModalClosed = true;
     }, function() {

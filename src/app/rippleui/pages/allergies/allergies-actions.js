@@ -16,6 +16,7 @@
 import {bindActionCreators} from 'redux';
 import * as types from '../../../constants/ActionTypes';
 
+/* istanbul ignore next */
 export function all(patientId) {
   return {
     types: [types.ALLERGIES, types.ALLERGIES_SUCCESS, types.ALLERGIES_ERROR],
@@ -32,6 +33,7 @@ export function all(patientId) {
     }
   };
 }
+/* istanbul ignore next */
 export function get(patientId, compositionId, source) {
   return {
     types: [types.ALLERGIES_GET, types.ALLERGIES_GET_SUCCESS, types.ALLERGIES_GET_ERROR],
@@ -48,6 +50,7 @@ export function get(patientId, compositionId, source) {
     }
   };
 }
+/* istanbul ignore next */
 export function create(patientId, composition) {
   return {
     types: [types.ALLERGIES_CREATE, types.ALLERGIES_CREATE_SUCCESS, types.ALLERGIES_CREATE_ERROR],
@@ -65,6 +68,7 @@ export function create(patientId, composition) {
     }
   };
 }
+/* istanbul ignore next */
 export function update(patientId, composition) {
   return {
     types: [types.ALLERGIES_UPDATE, types.ALLERGIES_UPDATE_SUCCESS, types.ALLERGIES_UPDATE_ERROR],
@@ -83,6 +87,7 @@ export function update(patientId, composition) {
   };
 }
 
+/* istanbul ignore next */
 export default function allergiesActions($ngRedux) {
   let actionCreator = {
     all, get, create, update

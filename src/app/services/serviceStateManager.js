@@ -81,12 +81,14 @@ class ServiceStateManager {
           }
         };
 
+        /* istanbul ignore next */
         this.getTableSettings = function () {
           this.checkChangeState();
 
           return this.tableSettings;
         };
 
+        /* istanbul ignore next */
         this.setTableSettings = function (tableSettings) {
           if (typeof tableSettings === "undefined") return;
           /* istanbul ignore if */
@@ -102,6 +104,7 @@ class ServiceStateManager {
           }
         };
 
+        /* istanbul ignore next */
         this.clearData = function () {
           this.tableSettings = {
             order: '',
@@ -122,12 +125,14 @@ class ServiceStateManager {
           };
         };
 
+        /* istanbul ignore next */
         this.getViewsSettings = function () {
           this.checkChangeState();
 
           return this.viewsSettings;
         };
 
+        /* istanbul ignore next */
         this.setViewsSettings = function (viewSettings) {
             if (typeof viewSettings === "undefined") return;
             
@@ -137,6 +142,7 @@ class ServiceStateManager {
             }
         };
 
+        /* istanbul ignore next */
         this.checkChangeState = function () {
           var nameState = $state.router.globals.$current.name.replace(/-(detail|create)/, '');
           if (this.state !== nameState) {

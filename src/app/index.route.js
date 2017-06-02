@@ -17,6 +17,7 @@ import plugins from './plugins';
 routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 function routeConfig($stateProvider, $urlRouterProvider) {
+  /* istanbul ignore next  */
   $urlRouterProvider.rule(function($injector, $location) {
     var path = $location.path();
     var hasTrailingSlash = path[path.length-1] === '/';

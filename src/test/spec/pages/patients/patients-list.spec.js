@@ -62,12 +62,12 @@ describe('Patients List', function() {
 
     spyOn(scope, 'selectAllSettings');
     spyOn(ctrl, 'patientFilter');
-    spyOn(ctrl, 'setPatients');
+    spyOn(ctrl, 'setCurrentPageData');
     spyOn(Patient, 'patient');
 
     scope.selectAllSettings();
     ctrl.patientFilter();
-    ctrl.setPatients();
+    ctrl.setCurrentPageData();
     Patient.patient();
   
   });
@@ -90,8 +90,8 @@ describe('Patients List', function() {
   it("patientFilter was called", function() {
     expect(ctrl.patientFilter).toHaveBeenCalled();
   });
-  it("setPatients was called", function() {
-    expect(ctrl.setPatients).toHaveBeenCalled();
+  it("setCurrentPageData was called", function() {
+    expect(ctrl.setCurrentPageData).toHaveBeenCalled();
   });
   it('patient  exist', function() {
     expect(Patient.patient).toHaveBeenCalled();

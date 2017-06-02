@@ -23,7 +23,7 @@ class AllergiesListController {
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'allergies-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'allergies';
     
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
@@ -39,6 +39,7 @@ class AllergiesListController {
       }
     };
 
+    /* istanbul ignore next */
     this.go = function (id, allergySource) {
       $state.go('allergies-detail', {
         patientId: $stateParams.patientId,
@@ -48,6 +49,7 @@ class AllergiesListController {
       });
     };
 
+    /* istanbul ignore next */
     this.create = function () {
       $state.go('allergies-create', {
         patientId: $stateParams.patientId

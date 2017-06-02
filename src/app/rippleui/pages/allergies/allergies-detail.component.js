@@ -20,6 +20,7 @@ class AllergiesDetailController {
     $scope.isEdit = false;
     $scope.isEditMeta = false;
     
+    /* istanbul ignore next */
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
@@ -33,14 +34,17 @@ class AllergiesDetailController {
       }
     };
     
+    /* istanbul ignore next */
     this.edit = function () {
       $scope.isEdit = true;
       $scope.allergyEdit = Object.assign({}, this.allergy);
       $scope.allergyEdit.dateCreated = new Date(this.allergy.dateCreated);
     };
+    /* istanbul ignore next */
     this.cancelEdit = function () {
       $scope.isEdit = false;
     };
+    /* istanbul ignore next */
     $scope.confirmEdit = function (allergyForm, allergies) {
       $scope.formSubmitted = true;
 
@@ -60,6 +64,7 @@ class AllergiesDetailController {
       }
     }.bind(this);
 
+    /* istanbul ignore next */
     this.editMeta = function () {
       $scope.isEditMeta = true;
       /*
@@ -67,9 +72,11 @@ class AllergiesDetailController {
       */
       $scope.allergyEditMeta = Object.assign({}, this.allergy);
     };
+    /* istanbul ignore next */
     this.cancelEditMeta = function () {
       $scope.isEditMeta = false;
     };
+    /* istanbul ignore next */
     $scope.confirmEditMeta = function (allergyForm, allergies) {
       $scope.formSubmitted = true;
 

@@ -40,16 +40,16 @@ class HeaderController {
       }
     ];
     
+    /* istanbul ignore next */
     this.closeAdvancedSearch = function() {
       $scope.isOpenSearch = false;
       $scope.searchOption = null;
     };
 
+    /* istanbul ignore next */
     this.openAdvancedSearch = function(index) {
-      /* istanbul ignore if  */
       if (!$scope.searchOptionsList[index].type.length) return;
       
-      /* istanbul ignore if  */
       if (!$scope.searchOption || ($scope.searchOptionsList[index].type != $scope.searchOption.type)) {
         $scope.isOpenSearch = true;
         $scope.searchOption = $scope.searchOptionsList[index];
@@ -58,6 +58,7 @@ class HeaderController {
       }
     };
 
+    /* istanbul ignore next */
     $scope.isActiveTypeSearch = function (type) {
       if ($scope.searchOption && $scope.searchOption.type === type) {
         return true;
@@ -66,14 +67,15 @@ class HeaderController {
       return false;
     };
 
+    /* istanbul ignore next */
     $scope.checkIsToggleSearch = function () {
-      /* istanbul ignore if  */
       if (window.innerWidth < 768) {
         $scope.isToogleSearchShow = true;
       } else {
         $scope.isToogleSearchShow = false;
       }
     };
+    /* istanbul ignore next */
     $scope.isShowSearch = function () {
       return $scope.searchShow || !$scope.isToogleSearchShow;
     };
@@ -82,8 +84,8 @@ class HeaderController {
     
     serviceRequests.subscriber('closeAdvancedSearch', this.closeAdvancedSearch);
     
+    /* istanbul ignore next */
     this.goBack = function () {
-      /* istanbul ignore if  */
       if ($scope.title === 'PHR') return;
 
       switch ($state.router.globals.$current.name) {
@@ -103,8 +105,8 @@ class HeaderController {
       }
     };
     
+    /* istanbul ignore next */
     this.goLogo = function () {
-      /* istanbul ignore if  */
       if ($scope.title === 'PHR') {
         $state.go('profile');
       } else {
@@ -112,20 +114,23 @@ class HeaderController {
       }
     };
     
+    /* istanbul ignore next */
     this.goProfile = function () {
       $state.go('profile');
     };
 
-    /* istanbul ignore next  */
+    /* istanbul ignore next */
     function deleteCookie(name) {
       document.cookie = name +
         '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
     }
+    /* istanbul ignore next */
     this.signout = function () {
       deleteCookie('JSESSIONID');
       location.reload();
     };
 
+    /* istanbul ignore next */
     $scope.switchDirectByRole = function (currentUser) {
       /* istanbul ignore if  */
       if (!currentUser) return;
@@ -150,19 +155,19 @@ class HeaderController {
       }
     };
 
-    /* istanbul ignore next  */
+    /* istanbul ignore next */
     $scope.setTitle = function (data) {
       if (data) {
         $scope.title = data.role;
       }
       $scope.switchDirectByRole(data);
     };
-    /* istanbul ignore next  */
+    /* istanbul ignore next */
     $scope.setLoginData = function (loginResult) {
       $scope.user = loginResult.data;
       $scope.setTitle(loginResult.data);
     };
-    /* istanbul ignore next  */
+    /* istanbul ignore next */
     $scope.login = function () {
       serviceRequests.login().then(function (result) {
         serviceRequests.currentUserData = result.data;
@@ -177,7 +182,7 @@ class HeaderController {
 
     serviceRequests.initialise().then(function (result){
 
-      /* istanbul ignore if  */
+      /* istanbul ignore next */
       if (result.data.token) {
         // reset the JSESSIONID cookie with the new incoming cookie
 
@@ -185,7 +190,7 @@ class HeaderController {
         location.reload();
         return;
       }
-      /* istanbul ignore if  */
+      /* istanbul ignore next */
       if (result.data.redirectTo === 'auth0') {
         console.log('running in UAT mode, so now login via auth0');
 
@@ -197,12 +202,14 @@ class HeaderController {
 
       }
 
+      /* istanbul ignore if */
       if (result.data.ok) {
         console.log('Cookie was for a valid session, so fetch the simulated user');
         $scope.login();
       }
 
     }, function (error){
+      /* istanbul ignore next */
       //for dev and testing
       $scope.login();
     });
@@ -217,20 +224,23 @@ class HeaderController {
     $scope.search = {};
     $scope.search.searchExpression = '';
 
+    /* istanbul ignore next */
     this.containsReportString = function () {
       return $scope.search.searchExpression.indexOf('rp ') === 0;
     };
 
+    /* istanbul ignore next */
     this.containsSettingString = function () {
       return $scope.search.searchExpression.lastIndexOf('st ') === 0;
     };
 
+    /* istanbul ignore next */
     this.containsPatientString = function () {
       return $scope.search.searchExpression.lastIndexOf('pt ') === 0;
     };
 
+    /* istanbul ignore next */
     this.containsReportTypeString = function () {
-      /* istanbul ignore next  */
       for (var i = 0; i < this.reportTypes.length; i++) {
         if ($scope.search.searchExpression.lastIndexOf(this.reportTypes[i]) !== -1) {
           return true;
@@ -240,8 +250,8 @@ class HeaderController {
       return false;
     };
 
+    /* istanbul ignore next */
     this.processReportTypeMode = function () {
-      /* istanbul ignore next  */
       for (var i = 0; i < this.reportTypes.length; i++) {
         if ($scope.search.searchExpression.lastIndexOf(this.reportTypes[i]) !== -1) {
           var arr = $scope.search.searchExpression.split(':');
@@ -255,26 +265,30 @@ class HeaderController {
       this.reportTypes = [];
     };
 
+    /* istanbul ignore next */
     this.processReportMode = function () {
       if ($scope.search.searchExpression === 'rp ') {
         $scope.search.searchExpression = '';
       }
     };
 
+    /* istanbul ignore next */
     this.processSettingMode = function () {
       if ($scope.search.searchExpression === 'st ') {
         $scope.search.searchExpression = '';
       }
     };
 
+    /* istanbul ignore next */
     this.processPatientMode = function () {
       if ($scope.search.searchExpression === 'pt ') {
         $scope.search.searchExpression = '';
       }
     };
 
+    /* istanbul ignore next */
     this.checkExpression = function (expression) {
-      /* istanbul ignore if  */
+      /* istanbul ignore if */
       if ($rootScope.searchMode) {
         if ($rootScope.reportMode && !$rootScope.reportTypeSet) {
           this.reportTypes = [
@@ -294,7 +308,7 @@ class HeaderController {
         $rootScope.settingsMode = this.containsSettingString();
         $rootScope.patientMode = this.containsPatientString();
 
-        /* istanbul ignore if  */
+        /* istanbul ignore if */
         if ($rootScope.reportMode) {
           if (this.containsReportTypeString) {
             this.processReportTypeMode();
@@ -312,8 +326,9 @@ class HeaderController {
       }
     };
 
+    /* istanbul ignore next */
     this.searchFunction = function () {
-      /* istanbul ignore if  */
+      /* istanbul ignore if */
       if ($scope.search.searchExpression !== '') {
         $state.go('patients-list-full', {
           queryType: 'Patient: ',
@@ -324,6 +339,7 @@ class HeaderController {
       }
     };
 
+    /* istanbul ignore next */
     this.cancelSearchMode = function () {
       $rootScope.reportMode = false;
       $rootScope.searchMode = false;
@@ -335,31 +351,37 @@ class HeaderController {
       $rootScope.reportTypeString = '';
     };
 
+    /* istanbul ignore next */
     this.cancelReportType = function () {
       $rootScope.reportTypeString = '';
       $rootScope.reportTypeSet = false;
     };
 
+    /* istanbul ignore next */
     this.getPageComponents = function (data) {
       $scope.userContextViewExists = ('banner' in data.state);
     };
 
+    /* istanbul ignore next */
     this.clickSidebarBtn = function () {
       serviceRequests.publisher('setHeightSidebar');
       serviceRequests.publisher('changeStateSidebar', {click: true});
       serviceRequests.publisher('resizeDrawing', {});
     };
 
+    /* istanbul ignore next */
     this.getPopulateHeaderSearch = function (expression) {
       $scope.search.searchExpression = expression.headerSearch.toLowerCase();;
       $scope.searchFocused = true;
     };
 
+    /* istanbul ignore next */
     this.getPageHeader = function (data) {
       $scope.pageHeader = data.title;
       $scope.isPageHeader = data.isShowTitle;
     };
 
+    /* istanbul ignore next */
     this.checkIsShowPreviousBtn = function () {
       $scope.isShowPreviousBtn = $state.router.globals.$current.name !== 'patients-charts';
     };
@@ -372,6 +394,7 @@ class HeaderController {
       this.checkIsShowPreviousBtn()
     }.bind(this));
 
+    /* istanbul ignore next */
     $rootScope.$on('$locationChangeStart', function() {
       var currentState = $state.router.globals.$current.name;
       
@@ -382,6 +405,7 @@ class HeaderController {
       }
     }.bind(this));
 
+    /* istanbul ignore next */
     $window.addEventListener('resize', function () {
       $scope.checkIsToggleSearch();
     });
