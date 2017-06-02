@@ -55,20 +55,24 @@
               </div>
             </div>
 
-            <div class="row-expand">
+            <div class="form-group">
+              <label class="control-label">Source</label>
+              <div class="form-control-static">{{ $ctrl.allergy.source }}</div>
+            </div>
+
+            <div class="row-expand" ng-if="$ctrl.allergy.originalSource.length">
               <div class="col-expand-left">
                 <div class="form-group">
-                  <label class="control-label">Source</label>
-                  <div class="form-control-static">{{ $ctrl.allergy.source }}</div>
+                  <label class="control-label">Original Source</label>
+                  <div class="form-control-static">{{ $ctrl.allergy.originalSource }}</div>
                 </div>
               </div>
-
-              <div class="col-expand-right" ng-if="$ctrl.allergy.isImported">
+              <div class="col-expand-right">
                 <div class="form-group">
                   <label class="control-label">Is Imported</label>
                   <div class="input-holder">
                     <label class="switch">
-                      <input type="checkbox" name="isImported" ng-model="$ctrl.allergy.isImported" disabled>
+                      <input type="checkbox" name="isImported" ng-model="true" disabled>
                       <div class="slider disabled">
                         <span class="text text-check-true">Yes</span>
                         <span class="text text-check-false">No</span>
