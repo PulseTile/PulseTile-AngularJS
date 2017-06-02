@@ -72,7 +72,7 @@
         <tbody>
           <tr dir-paginate="vital in vitals | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="go(vital.sourceId, vital)" ng-class="{info: selectedRow(vital.sourceId)}">
             <td data-th="#" ng-class="sortClass('id');"><span>{{ vital.id }}</span></td>
-            <td data-th="Date" ng-class="sortClass('date')"><span>{{ vital.dateCreate | date:'dd-MMM-yyyy' }}</span></td>
+            <td data-th="Date" ng-class="sortClass('date')"><span>{{ vital.dateCreated | date:'dd-MMM-yyyy' }}</span></td>
             <td data-th="NEWS Score" ng-class="sortClass('news')" class="highlighter-wrapper">
               <span>
                 <span ng-if="vital.statusNewsScore" ng-class="'highlighter-' + vital.statusNewsScore"></span>
