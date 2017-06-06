@@ -99,6 +99,7 @@ class DrawingsDrawingController {
     };
 
 
+    /* istanbul ignore next */
     $scope.clearTextParams = function () {
       $scope.textParams = {
         // left: 10, top: 10,
@@ -111,6 +112,7 @@ class DrawingsDrawingController {
     };
     $scope.clearTextParams();
 
+    /* istanbul ignore next */
     $scope.setTextObject = function (object) {
       if (object instanceof fabric.Text) {
         $scope.addTextObject = object;
@@ -130,6 +132,7 @@ class DrawingsDrawingController {
       $scope.canvas.add($scope.addTextObject);
     };
 
+    /* istanbul ignore next */
     $scope.isTextObject = function () {
       if ($scope.addTextObject) {
         return true;
@@ -137,6 +140,7 @@ class DrawingsDrawingController {
       return false
     };
 
+    /* istanbul ignore next */
     $scope.textChange = function (text) {
       if ($scope.isTextObject()) {
         $scope.addTextObject.text = text;
@@ -144,6 +148,7 @@ class DrawingsDrawingController {
       }
     };
 
+    /* istanbul ignore next */
     $scope.changeFontParams = function (textParams) {
       if ($scope.isTextObject && $scope.addTextObject) {
         $scope.addTextObject.setText(textParams.text);
@@ -177,6 +182,7 @@ class DrawingsDrawingController {
         imgData = uploadParams.file;
         reader = new FileReader();
 
+        /* istanbul ignore next */
         reader.onload = function(event) {
           var image64 = event.target.result;
           imgData.imgencode = image64;
@@ -273,6 +279,7 @@ class DrawingsDrawingController {
       $window.removeEventListener('resize', resizeCanvas);
     });
 
+    /* istanbul ignore next */
     $scope.getCanvasImage64 = function () {
       var data = {};
       if (!fabric.Canvas.supports('toDataURL')) {
@@ -285,9 +292,11 @@ class DrawingsDrawingController {
       return null;
     };
 
+    /* istanbul ignore next */
     function publishCanvasData () {
       serviceRequests.publisher('drawingCanvasChanged', $scope.getCanvasImage64());
     }
+    
     /* istanbul ignore next */
     this.initCanvasDrawing = function () {
       $scope.canvasEl = document.getElementById($scope.canvasId);

@@ -67,9 +67,6 @@ describe('Transfer Of Care Create', function() {
         expect(template).toBeDefined();
     });
 
-    it("setCurrentPageData was called", function() {
-        expect(ctrl.setCurrentPageData).toHaveBeenCalled();
-    });
     it("selectTypeRecords was called", function() {
         expect(scope.selectTypeRecords).toHaveBeenCalled();
     });

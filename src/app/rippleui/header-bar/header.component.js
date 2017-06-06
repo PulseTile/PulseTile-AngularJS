@@ -190,6 +190,7 @@ class HeaderController {
         location.reload();
         return;
       }
+
       /* istanbul ignore next */
       if (result.data.redirectTo === 'auth0') {
         console.log('running in UAT mode, so now login via auth0');
@@ -199,17 +200,15 @@ class HeaderController {
           connections: result.data.connections
         });
         return;
-
       }
-
+      
       /* istanbul ignore if */
-      if (result.data.ok) {
+      if (result.data && result.data.ok) {
         console.log('Cookie was for a valid session, so fetch the simulated user');
         $scope.login();
       }
 
     }, function (error){
-      /* istanbul ignore next */
       //for dev and testing
       $scope.login();
     });

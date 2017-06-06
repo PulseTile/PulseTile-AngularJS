@@ -53,11 +53,13 @@ class DrawingsCreateController {
       }
     }.bind(this);
 
+    /* istanbul ignore next */
     $scope.getCanvasImage64 = function (data) {
       $scope.drawingEdit.image64 = data.image64;
     };
     serviceRequests.subscriber('drawingCanvasChanged', $scope.getCanvasImage64);
 
+    /* istanbul ignore next */
     $scope.resizeDrawing = function () {
       serviceRequests.publisher('resizeDrawing', {});
     };

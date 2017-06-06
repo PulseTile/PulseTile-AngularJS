@@ -112,6 +112,7 @@ class DrawingsDetailController {
       }
     }.bind(this);
 
+    /* istanbul ignore next */
     $scope.resizeDrawing = function () {
       serviceRequests.publisher('resizeDrawing', {});
     };
