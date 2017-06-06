@@ -16,7 +16,7 @@
 let templateUiKit = require('./ui-kit.html');
 
 class UiKitController {
-    constructor($scope, $state, serviceRequests, deviceDetector, ConfirmationDocsModal, serviceVitalsSigns, $window) {
+    constructor($scope, $state, serviceRequests, deviceDetector, ConfirmationDocsModal, serviceVitalsSigns, $window, $timeout) {
       serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: null, name: 'ui-kit'});
       serviceRequests.publisher('headerTitle', {title: 'UI OVERVIEW', isShowTitle: true});
 
@@ -430,11 +430,13 @@ class UiKitController {
       //Charts
 
       angular.element(document).ready(function () {
-        if (!$scope.isMobileScreen()) {
-          $scope.isOpenSidebar = true;
-        } else {
-          $scope.isOpenSidebar = false;
-        }
+        $timeout(function() {
+          if (!$scope.isMobileScreen()) {
+            $scope.isOpenSidebar = true;
+          } else {
+            $scope.isOpenSidebar = false;
+          }
+        }, 100);
       }.bind(this));
     }
 }
@@ -444,5 +446,5 @@ const UiKitComponent = {
     controller: UiKitController
 };
 
-UiKitController.$inject = ['$scope', '$state', 'serviceRequests', 'deviceDetector', 'ConfirmationDocsModal', 'serviceVitalsSigns', '$window'];
+UiKitController.$inject = ['$scope', '$state', 'serviceRequests', 'deviceDetector', 'ConfirmationDocsModal', 'serviceVitalsSigns', '$window', '$timeout'];
 export default UiKitComponent;

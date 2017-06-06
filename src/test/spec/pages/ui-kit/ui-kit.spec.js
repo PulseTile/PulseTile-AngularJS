@@ -6,9 +6,9 @@ describe('Ui Kit Component', function() {
 
     beforeEach(angular.mock.module('ripple-ui'));
 
-    let scope, ctrl, controller, template, state, serviceRequests, deviceDetector, ConfirmationDocsModal, serviceVitalsSigns, $window;
+    let scope, ctrl, controller, template, state, serviceRequests, deviceDetector, ConfirmationDocsModal, serviceVitalsSigns, $window, $timeout;
 
-    beforeEach(inject(($injector, $controller, _$state_, _serviceRequests_, _deviceDetector_, _ConfirmationDocsModal_, _serviceVitalsSigns_, _$window_) => {
+    beforeEach(inject(($injector, $controller, _$state_, _serviceRequests_, _deviceDetector_, _ConfirmationDocsModal_, _serviceVitalsSigns_, _$window_, _$timeout_) => {
         controller = $controller;
         scope = $injector.get('$rootScope').$new();
         state = _$state_;
@@ -17,6 +17,7 @@ describe('Ui Kit Component', function() {
         ConfirmationDocsModal = _ConfirmationDocsModal_;
         serviceVitalsSigns = _serviceVitalsSigns_;
         $window = _$window_;
+        $timeout = _$timeout;
 
         template = UiKitComponent.template;
 
@@ -27,7 +28,8 @@ describe('Ui Kit Component', function() {
             deviceDetector: _deviceDetector_,
             ConfirmationDocsModal: _ConfirmationDocsModal_,
             serviceVitalsSigns: _serviceVitalsSigns_,
-            $window: _$window_
+            $window: _$window_,
+            $timeout: _$timeout
         });
     }));
 
