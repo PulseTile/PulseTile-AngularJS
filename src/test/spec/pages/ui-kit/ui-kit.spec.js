@@ -17,7 +17,7 @@ describe('Ui Kit Component', function() {
         ConfirmationDocsModal = _ConfirmationDocsModal_;
         serviceVitalsSigns = _serviceVitalsSigns_;
         $window = _$window_;
-        $timeout = _$timeout;
+        $timeout = _$timeout_;
 
         template = UiKitComponent.template;
 
@@ -28,8 +28,8 @@ describe('Ui Kit Component', function() {
             deviceDetector: _deviceDetector_,
             ConfirmationDocsModal: _ConfirmationDocsModal_,
             serviceVitalsSigns: _serviceVitalsSigns_,
-            $window: _$window_,
-            $timeout: _$timeout
+            $window: $window,
+            $timeout: $timeout
         });
     }));
 
