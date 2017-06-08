@@ -1,0 +1,36 @@
+.panel {
+  &.panel-default {
+    border-color: $base-color;
+  }
+  &.panel-secondary {
+    border-color: #D8D8D8;
+  }
+  &.panel-subaccordion {
+    background: #ffffff;
+  }
+  &.panel-small {
+    background: #ffffff;
+    border-color: #D8D8D8;
+  }
+}
+.panel-expand-item + .panel-expand-item {
+  border-top-color: #D8D8D8;
+}
+@include respond-from(md) {
+  .full-panel {
+    .panel-expand-wrapper {
+      &:after {
+        background: #D8D8D8;
+      }
+    }
+    .panel-expand-row + .panel-expand-row{
+      border-top-color: #D8D8D8;
+    }
+  }
+}
+
+@import 'group';
+@import 'heading';
+@import 'body';
+@import 'control';
+@import 'filter';

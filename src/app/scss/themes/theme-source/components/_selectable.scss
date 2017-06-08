@@ -1,0 +1,10 @@
+.selectable-list {
+  border-color: #D8D8D8;
+  .selectable-item {
+    border-bottom-color: #D8D8D8;
+    &.selected {
+      background: $base-color;
+      color: $text-on-base-color;
+    }
+  }
+}

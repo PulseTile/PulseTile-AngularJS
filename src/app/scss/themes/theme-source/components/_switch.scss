@@ -1,0 +1,22 @@
+.switch {
+  .slider {
+    background-color: #e8e8e8;
+    border-color: #c3c3c3;
+    &:before {
+      background-color: white;
+    }
+    .text {
+      color: $text-color;
+    }
+  }
+  input:checked + .slider {
+    background-color: $base-color;
+    border-color: $base-color;
+    .text {
+      color: $text-on-base-color;
+    }
+  }
+  input:focus + .slider {
+    box-shadow: 0 0 1px $base-color;
+  }
+}

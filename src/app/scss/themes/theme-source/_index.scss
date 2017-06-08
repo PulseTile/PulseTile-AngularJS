@@ -1,0 +1,35 @@
+@import 'components/panel/index';
+@import 'components/btn';
+@import 'components/color-palette';
+@import 'components/datepicker';
+@import 'components/dropdown';
+@import 'components/form';
+@import 'components/form-contenteditable';
+@import 'components/form-custom-inputs';
+@import 'components/form-select';
+@import 'components/fullcalendar';
+@import 'components/highlighter';
+@import 'components/label';
+@import 'components/modal';
+@import 'components/pagination';
+@import 'components/selectable';
+@import 'components/slider-range';
+@import 'components/switch';
+@import 'components/table';
+@import 'components/tag';
+
+@import 'base/base';
+
+@import 'blocks/breadcrumbs';
+@import 'blocks/chart';
+@import 'blocks/dashboard';
+@import 'blocks/drawings';
+@import 'blocks/main/footer';
+@import 'blocks/main/header/index';
+@import 'blocks/main/sidebar';
+@import 'blocks/patient-info';
+@import 'blocks/patients-list';
+@import 'blocks/record-popover';
+@import 'blocks/search';
+@import 'blocks/timelines';
+@import 'blocks/vitals';

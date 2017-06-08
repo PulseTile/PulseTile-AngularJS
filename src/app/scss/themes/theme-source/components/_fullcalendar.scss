@@ -1,0 +1,30 @@
+.fc-day-header { background: #c5e29f; }
+
+.fc-widget-content tr { background: #ffffff; }
+.fc-widget-content tr:nth-child(4n-1),
+.fc-widget-content tr:nth-child(4n) { background: #f3f3f3; }
+
+.fc-toolbar.fc-header-toolbar {
+   h2 {
+    color: $text-color;
+  }
+  button {
+    background: #ffffff;
+    border-color: #0d672f;
+    color: #0d672f;
+    &.fc-state-active {
+      background: #0d672f;
+      color: #ffffff;
+    }
+  }
+}
+.is-not-touch-device .fc-toolbar.fc-header-toolbar button:hover {
+  background: #0d672f;
+  color: #ffffff;
+}
+
+.fc-timeslot {
+  color: #959595;
+}
+
+.fc-unthemed td.fc-today { background: #ffffff; }

@@ -1,0 +1,7 @@
+.user-panel-item {
+  &.open .btn-header,
+  &.active .btn-header {
+    background: #ffffff;
+    color: $auxiliary-color;
+  }
+}

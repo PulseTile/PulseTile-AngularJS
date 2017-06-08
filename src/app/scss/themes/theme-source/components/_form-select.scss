@@ -1,0 +1,15 @@
+.ui-select-bootstrap {
+  & > .ui-select-match {
+    & > .btn {
+        border-color: !important;
+        &:hover {
+          background: #fff !important;
+        }
+        &[disabled],
+        &[disabled]:hover {
+          background: #eee !important;
+          color: #555 !important
+        }
+    }
+  }
+}

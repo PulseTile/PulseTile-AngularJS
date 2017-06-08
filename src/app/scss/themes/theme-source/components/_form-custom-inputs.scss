@@ -1,0 +1,25 @@
+.wrap-fcustominp {
+  .fcustominp-state {
+    &.disabled {
+      background: #f3f3f3;
+    }
+  }
+  .fcustominp-label { color: #000000; }
+}
+.fcustominp {
+  label {
+    background: #ffffff;
+    border-color: #C9C9C9;
+  }
+  input[type=checkbox]:checked + label:after {
+    border-color: #222222;
+  }
+
+  input[type=radio]:checked + label {
+    background: #389dff;
+    border-color: #389dff;
+  }
+  input[type=radio]:checked + label:after {
+    background: #ffffff;
+  }
+}

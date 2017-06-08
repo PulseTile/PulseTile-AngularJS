@@ -1,0 +1,16 @@
+.uib-datepicker-popup.dropdown-menu {
+  table {
+    button {
+      &.active {
+        background: $base-color !important;
+        border-color: $base-color !important;
+        color: $text-on-base-color !important;
+        span {
+          color: $text-on-base-color;
+        }
+      }
+      &.btn-info { color: $text-on-base-color !important; }
+      .text-info { color: $base-color; }
+    }
+  }
+}

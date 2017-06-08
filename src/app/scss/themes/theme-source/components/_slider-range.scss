@@ -1,0 +1,35 @@
+.wrap-rzslider {
+  border-color: #d8d8d8;
+}
+
+.mc-rz-slider.rzslider {
+  .rz-bar {
+    background: #f3f3f3;
+  }
+  .rz-selection { background: $base-color; }
+  .rz-pointer {
+    background-color: $base-color;
+    &:focus { background: $auxiliary-color; }
+  }
+  .rz-tick-value {
+    color: $text-color;
+  }
+  .rz-limit {
+    color: $text-color;
+  }
+  .rz-bubble:not(.rz-limit) {
+    background: #ffffff;
+    border-color: #c3c3c3;
+  }
+
+  .rz-bubble:not(.rz-limit):before {
+    border-top-color: #ffffff; 
+  }
+  .rz-bubble:not(.rz-limit):after  {
+    border-top-color: #c3c3c3; 
+  }
+  .rz-tick {
+    background: $base-color;
+  }
+  .rz-tick.rz-selected { background: $base-color; }
+}

@@ -1,0 +1,12 @@
+.tag {
+  background: #fff;
+  border-bottom-color: #aaa;
+  &:hover {
+    background: #ddd;
+    border-bottom-color: #fff;
+  }
+  .remove i {
+    color: #0E682F;
+  }
+  .editable-cancel { border-color: #e6e6e6 !important; }
+}

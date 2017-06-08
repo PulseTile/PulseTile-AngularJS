@@ -1,0 +1,12 @@
+.patient-buttons {
+  &.dropdown.open {
+    .btn-dropdown-toggle,
+    .btn-dropdown-toggle:hover,
+    .btn-dropdown-toggle:focus {
+      background: $base-color !important;
+      &:after {
+        color: $text-on-base-color
+      }
+    }
+  }
+}

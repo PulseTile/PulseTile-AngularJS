@@ -1,0 +1,9 @@
+@each $section, $color in $colored-buttons {
+  .label-#{$section} {
+    background: $color;
+    color: #ffffff;
+  }
+}
+.label-default {
+  color: $text-color;
+}

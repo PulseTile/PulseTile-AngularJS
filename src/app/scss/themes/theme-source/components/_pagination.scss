@@ -1,0 +1,32 @@
+.pagination-item {
+  .pagination-link, 
+  .pagination-link:focus {
+    background: #fff;
+    border-color: #ddd;
+    color: $text-color;
+  }
+  &.active .pagination-link {
+    background-color: $base-color;
+    border-color: $base-color;
+    color: $text-on-base-color;
+  }
+  &.disabled .pagination-link {
+    background-color: #F4F3F3;
+    border-color: #ddd;
+    color: $text-color;
+  }
+}
+.is-not-touch-device .pagination-item {
+  &:not(.disabled):hover { z-index: 2; }
+  & .pagination-link:hover,
+  &.active .pagination-link:hover {
+    background-color: $base-color;
+    border-color: $base-color;
+    color: $text-on-base-color;
+  }
+  &.disabled .pagination-link:hover {
+    background-color: #F4F3F3;
+    border-color: #ddd;
+    color: $text-color;
+  }
+}

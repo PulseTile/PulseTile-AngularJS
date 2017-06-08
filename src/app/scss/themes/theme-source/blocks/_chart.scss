@@ -1,0 +1,15 @@
+.chart-block {
+  .chart-inner {
+    background-color: #fff;
+    border-color: #bdbdbd;
+  }
+}
+.chart-title-group {
+  color: $text-color;
+}
+.chart-title {
+  color: $text-color;
+}
+.chart-subtitle {
+  color: lighten($text-color, 30%);
+}

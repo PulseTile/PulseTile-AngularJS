@@ -1,0 +1,15 @@
+.btn-header {
+  background: #F7F7F7;
+  color: $base-color;
+  &.inverse { background: #fff; }
+  &.secondary {
+    background: $base-color;
+    color: $text-on-base-color;
+  }
+  .count {
+    background-color: $base-color;
+    color: $text-on-base-color;
+  }
+}  
+.btn-header:hover { color: $base-color; }
+.is-not-touch-device .btn-header:hover { color: $auxiliary-color; }

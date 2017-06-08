@@ -1,0 +1,11 @@
+.panel-secondary .panel-body {
+  background: #fff;
+}
+.panel-body-inner {
+  & + .panel-body-inner {
+    border-top-color: #D8D8D8;
+  }
+  .panel-body-section + .panel-body-section {
+    border-top-color: #D8D8D8;
+  }
+}

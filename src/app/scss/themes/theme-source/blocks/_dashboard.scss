@@ -1,0 +1,18 @@
+.board {
+  border-color: #B4B5B4;
+  color: map-get($colored-table, 'text');
+}
+.board-header {
+  background-color: map-get($colored-table, 'header-background');
+}
+
+
+.board-list-item {
+  background: map-get($colored-table, 'row-odd-background');
+  &:nth-of-type(even) {
+    background:  map-get($colored-table, 'background');
+  }
+}
+.is-not-touch-device .board-list-link:hover {
+  background: map-get($colored-table, 'row-background-hover');
+}

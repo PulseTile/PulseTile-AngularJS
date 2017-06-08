@@ -1,0 +1,40 @@
+$vitalsInputColor: (
+  warning: #e3d19d,
+  danger: #ca9193,
+  success: #94ceaa,
+  normal: #ffffff
+);
+
+.vitals-holder {
+  .form-control {
+    background-color: #fff;
+    color: #000000;
+  }
+  .vitals-addon {
+    background-color: #e8e8e8;
+    border-color: #c3c3c3;
+    color: #000000;
+  }
+}
+@each $vitalInput, $color in $vitalsInputColor {
+  .vitals-holder.#{$vitalInput} .form-control {
+    background-color: $color;
+  }
+}
+
+.vitals-label { color: #959595; }
+.vitals-static { color: $text-color; }
+.vitals-popover {
+  border-color: #c3c3c3;
+ 
+  .popover-title {
+    background: #e8e8e8;
+    border-bottom-color: #c3c3c3;
+    color: #000000;
+  }
+  
+  &.right > .arrow {
+    border-right-color: #c3c3c3;
+  }
+}
+.range-vital-labels { color: #000000; }

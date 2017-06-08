@@ -1,0 +1,20 @@
+$highlighterColor: (
+  default: #ccc,
+  warning: #ffbf00,
+  danger: #ff2626,
+  success: #00cc78
+);
+
+.highlighter {
+  background-color: map-get($highlighterColor, 'default');
+}
+@each $highlighter, $color in $highlighterColor {
+  .highlighter-#{$highlighter} {
+    @extend .highlighter;
+    background-color: $color;
+  }
+}
+.highlighter-not-vital {
+  @extend .highlighter;
+  background-color: #dadada;
+}

@@ -1,0 +1,13 @@
+.dropdown-user {
+  .user-profile-image {
+    background-color: #eef8e7;
+    color: $auxiliary-color;
+  }
+  .user-profile-info {
+    color: $text-color;
+  }
+  .specification {
+    border-bottom-color: #d7d7d7;
+    .gray { color: lighten($text-color, 40%); }
+  }
+}

@@ -1,0 +1,106 @@
+.table {
+  background: map-get($colored-table, 'row-odd-background');
+  color: map-get($colored-table, 'text');
+  thead {
+    background-color: map-get($colored-table, 'header-background');
+  }
+  thead tr th.selected {
+    background: map-get($colored-table, 'selected-background');
+  }
+  tbody tr td.selected {
+    background: #b4b4b4;
+    color: #ffffff;
+  }
+}
+.is-not-touch-device .table .view .btn-dropdown-toggle:hover {
+  background-color: #7dbe31;
+  border-color: #7dbe31;
+  & > li > a:hover {
+    background-color: #d0e8af;
+  }
+}
+.table > thead > tr > td.info,
+.table > tbody > tr > td.info,
+.table > tfoot > tr > td.info,
+.table > thead > tr > th.info,
+.table > tbody > tr > th.info,
+.table > tfoot > tr > th.info,
+.table > thead > tr.info > td,
+.table > tbody > tr.info > td,
+.table > tfoot > tr.info > td,
+.table > thead > tr.info > th,
+.table > tbody > tr.info > th,
+.table > tfoot > tr.info > th,
+.table > tbody > tr.info {
+  background-color: map-get($colored-table, 'row-background-hover') !important;
+}
+
+.table-striped {
+  background-color: map-get($colored-table, 'background');
+  tbody {
+    tr {
+      &:nth-of-type(odd) {
+        background-color: map-get($colored-table, 'row-odd-background');
+      }
+    }
+  }
+}
+.table-striped.table-hover {
+  background-color: map-get($colored-table, 'background');
+  tbody {
+    tr {
+      &[ng-click]:hover td,
+      &:hover td[ng-click] {
+        background-color: map-get($colored-table, 'row-background-hover');
+      }
+    }
+  }
+}
+.is-not-touch-device .table-hover > tbody > tr > td.info:hover,
+.is-not-touch-device .table-hover > tbody > tr > th.info:hover,
+.is-not-touch-device .table-hover > tbody > tr.info:hover > td,
+.is-not-touch-device .table-hover > tbody > tr:hover > .info,
+.is-not-touch-device .table-hover > tbody > tr.info:hover > th,
+.is-not-touch-device .table-hover > tbody > tr[ng-click]:hover > td,
+.is-not-touch-device .table-hover > tbody > tr:hover > td[ng-click],
+.is-not-touch-device .table-hover > tbody > tr[ng-click]:hover,
+.is-not-touch-device .table-hover > tbody > tr.hovered {
+  background-color: map-get($colored-table, 'row-background-hover');
+}
+
+
+@include respond-from(xs) {
+  .table-sorted {
+    thead tr th {
+      &.sorted {
+        background: map-get($colored-table, 'selected-background');
+      
+        &.asc:after {
+          border-color: #303030 transparent transparent;
+        }
+        &.desc:after {
+          border-color: transparent transparent #303030;
+        }
+      }
+    }
+    tbody tr td.sorted {
+      background: map-get($colored-table, 'sorted-background');
+    }
+    &.table-striped {
+      tbody {
+        tr:nth-of-type(odd) td.sorted {
+          background-color: map-get($colored-table, 'sorted-background-odd');
+        }
+      }
+    }
+    &.table-striped.table-hover {
+      tbody {
+        tr.hovered td.sorted,
+        tr:hover td.sorted {
+          background-color: map-get($colored-table, 'row-background-hover');
+        }
+      }
+    }
+  }
+}
+// .table-icon { color: #9493a1; }

@@ -1,0 +1,10 @@
+.record-popover {
+  background: #fff;
+  &:after {
+    border-color: transparent transparent $base-color;
+  }
+}
+.record-popover-header {
+  background: $base-color;
+  color: $text-on-base-color;
+}

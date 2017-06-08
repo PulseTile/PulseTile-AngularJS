@@ -1,0 +1,34 @@
+.sidebar {
+  background: #F7F7F7;
+  border-right-color: #B7B7B7;
+}
+.btn-toggle-sidebar,
+.btn-toggle-sidebar:focus {
+  border-color: $text-on-base-color;
+  color: $text-on-base-color;
+}
+.showSidebar .btn-toggle-sidebar,
+.showSidebar .btn-toggle-sidebar:focus,
+.showSidebar .btn-toggle-sidebar:hover {
+  background: $text-on-base-color;
+  color: $base-color;
+}
+@include respond-from(sm) {
+  .is-not-touch-device .btn-toggle-sidebar:hover {
+    background: $text-on-base-color;
+    color: $base-color;
+  }
+}
+.sidebar-nav-item { border-bottom-color: #E7E7E7; }
+.sidebar-nav-link, 
+.sidebar-nav-link:hover {
+  color: $base-color;
+}
+.sidebar-nav-link.active {
+  background-color: $base-color;
+  color: $text-on-base-color;
+}
+.is-not-touch-device .sidebar-nav-link:hover {
+  background-color: $base-color;
+  color: $text-on-base-color;
+}

@@ -1,0 +1,32 @@
+.drawing-control-header {
+  background: #f1f1f1;
+}
+.drawing-control-body {
+  border-bottom-color: #e4e4e4;
+}
+.btn.btn-drawing {
+  color: #828282;
+  &.active {
+    background: $base-color;
+    color: $text-on-base-color;
+  }
+  &.btn-drawing-delete {
+    background: map-get($colored-buttons, 'danger') !important;
+    color: $text-on-base-color !important;
+  }
+}
+.is-not-touch-device .btn.btn-drawing:hover {
+  background: $base-color;
+  color: $text-on-base-color;
+}
+.drawing-label {
+  color: #828282;
+}
+
+.drawing-color {
+  background: #ffffff;
+  border-color: #e4e4e4;
+  &.active {
+    border-color: $base-color;
+  }
+}
