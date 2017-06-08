@@ -1,6 +1,34 @@
 $base-color: #f2f2f2;
 $text-color: #53555a;
 
+$auxiliary-color: lighten($base-color, 20%);
+
+$table-color: lighten($base-color, 40%);
+$colored-table: (
+  background: #F3F3F3,
+  header-background: lighten(saturate(adjust-hue($table-color, -10.5516), 9.6510), 6.2745),
+  row-odd-background: #FDFDFD,
+  row-background-hover: lighten(desaturate(adjust-hue($table-color, -9.8551), 7.9490), 20.9804),
+  selected-background: $table-color,
+  sorted-background: lighten(desaturate(adjust-hue($table-color, -9.8551), 7.9490), 20.9804),
+  sorted-background-odd: lighten(saturate(adjust-hue($table-color, -9.8551), 8.9921), 24.1176)
+);
+
+$text-color: #303030;
+$text-on-base-color: #ffffff;
+
+$colored-buttons: (
+  default: #ffffff,
+  primary: #337AB7,
+  success: #46484e,
+  info: #31b0d5,
+  warning: #F0AD4E,
+  danger: #DA534F
+);
+
 body.themeGray {
+  .header .navbar {
+    background: #f3f3f3;
+  }
   @import 'theme-source/index';
 }
