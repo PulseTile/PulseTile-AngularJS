@@ -17,11 +17,13 @@ let templateHeader = require('./header-bar.tmpl.html');
 
 class HeaderController {
 
-  constructor($rootScope, $scope, $state, $stateParams, $ngRedux, patientsActions, serviceRequests, $window) {
+  constructor($rootScope, $scope, $state, $stateParams, $ngRedux, patientsActions, serviceRequests, serviceThemes, $window) {
 
     var self = this;
     $scope.title = '';
     $scope.isOpenSearch = false;
+
+    $scope.logoB64 = serviceThemes.getLogoB64();
 
     $scope.isToogleSearchShow = false;
     $scope.searchShow = false;
@@ -39,6 +41,12 @@ class HeaderController {
         type: 'clinicalQuery'
       }
     ];
+
+    /* istanbul ignore next */
+    $scope.changeLogo = function (data) {
+      $scope.logoB64 = data.logoB64;
+    };
+    serviceRequests.subscriber('changeLogo', $scope.changeLogo);
     
     /* istanbul ignore next */
     this.closeAdvancedSearch = function() {
@@ -174,6 +182,9 @@ class HeaderController {
         $scope.setLoginData(result);
         serviceRequests.getAppSettings().then(function (res) {
           console.log('getAppSettings ', res);
+          if (res.data) {
+            serviceThemes.setDataApplication(res.data);
+          }
         });
       });
     };
@@ -417,5 +428,5 @@ const HeaderComponent = {
   controller: HeaderController
 };
 
-HeaderController.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'serviceRequests', '$window'];
+HeaderController.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'serviceRequests', 'serviceThemes', '$window'];
 export default HeaderComponent;

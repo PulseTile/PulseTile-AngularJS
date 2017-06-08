@@ -34,9 +34,6 @@ class servicePatients {
         }.bind(this));
       }
     };
-
-    this.getAppSettings = function() {
-    };
     
   }
 }

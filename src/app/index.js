@@ -68,6 +68,7 @@ import ServiceVitalsSigns from './rippleui/pages/vitals/serviceVitalsSigns.js';
 import ServiceActions from './rippleui/pages/dicom/serviceActions.js';
 import ServiceFormatted from './services/serviceFormatted.js';
 import TemplateService from './services/TemplateService.js';
+import ServiceThemes from './services/serviceThemes.js';
 import ServiceTransferOfCare from './rippleui/pages/transfer-of-care/serviceTransferOfCare.js';
 import ServicePatients from './rippleui/pages/patients-list/servicePatients.js';
 
@@ -117,6 +118,7 @@ let app = angular
     .factory('deviceDetector', deviceDetector)
 
     .service('templateService', TemplateService)
+    .service('serviceThemes', ServiceThemes)
     .service('serviceTransferOfCare', ServiceTransferOfCare)
     .service('servicePatients', ServicePatients)
     .service('serviceFormatted', ServiceFormatted)

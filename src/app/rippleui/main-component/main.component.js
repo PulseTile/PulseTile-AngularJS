@@ -16,7 +16,9 @@
 let templateMain = require('./main.html');
 
 class MainController {
-  constructor($window, $rootScope, $scope, $state, $stateParams, serviceRequests, $timeout, deviceDetector) {
+  constructor($window, $rootScope, $scope, $state, $stateParams, serviceRequests, $timeout, deviceDetector, serviceThemes) {
+    $rootScope.themeClass = serviceThemes.getActiveThemeClass();
+    
     $scope.isTouchDevice = deviceDetector.detectDevice();
     $scope.isSidebar = false;
     $scope.isSecondPanel = false;
@@ -78,6 +80,12 @@ class MainController {
       var classShowSidebar = $scope.isClassShowSidebar ? 'showSidebar' : '';
       return  classTouchDevice + ' ' + classShowSidebar;
     };
+
+    /* istanbul ignore next */
+    $scope.changeActiveTheme = function (data) {
+      $rootScope.themeClass = serviceThemes.getThemeClassById(data.themeId);
+    };
+    serviceRequests.subscriber('changeActiveTheme', $scope.changeActiveTheme);
 
     /* istanbul ignore next */
     this.changeisClassShowSidebar = function (data) {
@@ -168,5 +176,5 @@ const MainComponent = {
   controller: MainController
 };
 
-MainController.$inject = ['$window', '$rootScope', '$scope',  '$state', '$stateParams', 'serviceRequests', '$timeout', 'deviceDetector'];
+MainController.$inject = ['$window', '$rootScope', '$scope',  '$state', '$stateParams', 'serviceRequests', '$timeout', 'deviceDetector', 'serviceThemes'];
 export default MainComponent;

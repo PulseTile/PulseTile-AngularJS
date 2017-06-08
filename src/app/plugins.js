@@ -58,3 +58,27 @@ export default [
   clinicalstatements,
   events
 ]
+
+// export default [
+//   // clinicalnotes,
+//   allergies,
+//   // eolcareplans,
+//   contacts,
+//   // diagnoses,
+//   // dicom,
+//   // documents,
+//   // genericmdt,
+//   // heightAndWeight,
+//   medication,
+//   // orders,
+//   // personalnotes,
+//   // procedures,
+//   // referrals,
+//   // results,
+//   // transferOfCare,
+//   // drawings,
+//   // vaccinations,
+//   // vitals,
+//   // clinicalstatements,
+//   // events
+// ]
