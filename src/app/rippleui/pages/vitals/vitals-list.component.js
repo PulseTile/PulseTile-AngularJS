@@ -83,7 +83,7 @@ class VitalsListController {
 
       /* istanbul ignore next  */
       for (var i = 0; i < vitals.length; i++) {
-        tempDate = formatDate(new Date(+vitals[i].dateCreate));
+        tempDate = formatDate(new Date(+vitals[i].dateCreated));
 
         if (lastDate === tempDate.date) {
           dataChart.labels.push(tempDate.time);
@@ -239,8 +239,8 @@ class VitalsListController {
         $scope.dateForChart = serviceVitalsSigns.modificateVitalsArr(data.vitals.data);
         $scope.vitals = angular.copy(data.vitals.data);
         
-        serviceFormatted.formattingTablesDate($scope.vitals, ['dateCreate'], serviceFormatted.formatCollection.DDMMMYYYY);
-        serviceFormatted.filteringKeys = ['id', 'dateCreate', 'newsScore', 'source'];
+        serviceFormatted.formattingTablesDate($scope.vitals, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['id', 'dateCreated', 'newsScore', 'source'];
         
         usSpinnerService.stop('patientSummary-spinner');
 

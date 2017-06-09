@@ -361,7 +361,7 @@ class ServiceVitalsSigns {
           let _ = require('underscore');
           
           arr = _.sortBy(arr, function (value) {
-            return value.dateCreate;
+            return value.dateCreated;
           });
 
           for (var i = 0; i < arr.length; i++) {
