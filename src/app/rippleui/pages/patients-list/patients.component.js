@@ -232,6 +232,16 @@ class PatientsController {
     vm.openModal = function (patient, state) {
       ConfirmationModal.openModal(patient, state);
     };
+    vm.openModalCell = function (patient, key) {
+      var reg = /Count|Date/;
+      var state = undefined;
+
+      if (reg.test(key)) {
+        state = key.replace(/Count|Date/, '');
+      } 
+
+      vm.openModal(patient, state);
+    };
 
     if ($stateParams.patientsList.length === 0 && !$stateParams.displayEmptyTable) {
       vm.filters = {
