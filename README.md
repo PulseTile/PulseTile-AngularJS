@@ -30,7 +30,7 @@ bower install
 
 ## Building & Deployment
 
-Org-Ripple-UI uses Webpack to build and launch the development environment. After you have installed all dependencies, you may run the app. Running `npm start` will bundle the app with `webpack`, launch a development server, and watch all files. The port will be displayed in the terminal.
+PulseTile uses Webpack to build and launch the development environment. After you have installed all dependencies, you may run the app. Running `npm start` will bundle the app with `webpack`, launch a development server, and watch all files. The port will be displayed in the terminal.
 
 Just simply run `npm start` - this will also watch changes.
 
@@ -47,7 +47,7 @@ Here's a list of available scripts:
 
 ## Built With
 
-Org-Ripple-UI uses Webpack together for its build system.
+PulseTile uses Webpack together for its build system.
 
 `Webpack` handles all file-related concerns:
 * Transpiling from ES6 to ES5 with `Babel`
