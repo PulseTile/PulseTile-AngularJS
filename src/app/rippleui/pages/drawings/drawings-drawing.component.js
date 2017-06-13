@@ -33,7 +33,7 @@ class DrawingsDrawingController {
         base: ['#010101', '#ffffff'],
         additional: ['#ee0000', '#f36900', '#ffff00', '#84ff00', '#1e67ff', '#4affff', '#4bff62', '#97fa00', '#0000ff']
       },
-      sizes: [1, 2, 4, 6, 10, 16, 24, 30]
+      sizes: [1, 2, 4, 6, 10, 16, 24, 30, 100]
     };
     $scope.fontsSettings = {
       fontSizes: [10, 12, 14, 16, 18, 20, 24, 26, 30, 40, 70],
@@ -149,6 +149,24 @@ class DrawingsDrawingController {
     };
 
     /* istanbul ignore next */
+    $scope.cackScale = function (parentWidth, parentHeight, childWidth, childHeight) {
+      var scale = 1;
+      var parentRatio = parentHeight / parentWidth; // 9 / 16 (56.25%)
+      var childRatio = childHeight / childWidth;
+
+      if (childWidth > parentWidth || childHeight > parentHeight) {
+
+        if ( childRatio > parentRatio) {
+          scale = childHeight / parentHeight;
+        } else {
+          scale = childWidth / parentWidth;
+        }
+      }
+
+      return scale;
+    };
+
+    /* istanbul ignore next */
     $scope.changeFontParams = function (textParams) {
       if ($scope.isTextObject && $scope.addTextObject) {
         $scope.addTextObject.setText(textParams.text);
@@ -162,16 +180,20 @@ class DrawingsDrawingController {
 
     /* istanbul ignore next */
     $scope.addPictureToCanvas = function (base64) {
-      fabric.util.loadImage(base64, function(img) {
-          var object = new fabric.Image(img);
-          // var canvasWidth = $scope.canvas.width;
-          // var canvasHeight = $scope.canvas.height;
-          object.hasRotatingPoint = true;
-          object.scaleX = object.scaleY = .25;
-          object.isDrawingMode = true;
-          $scope.canvas.add(object);
-          $scope.canvas.renderAll();
-      }, null, {crossOrigin: 'Anonymous'});
+      resizeCanvas();
+      $timeout(function() {
+        fabric.util.loadImage(base64, function(img) {
+            var object = new fabric.Image(img);
+            var scale = $scope.cackScale($scope.canvas.width, $scope.canvas.height, object.width, object.height);
+
+            object.hasRotatingPoint = true;
+            object.scaleX = object.scaleY = scale;
+            object.isDrawingMode = true;
+            $scope.canvas.add(object);
+            $scope.canvas.renderAll();
+        }, null, {crossOrigin: 'Anonymous'});
+      }.bind(this), 11);
+
     };
 
     /* istanbul ignore next */
@@ -214,8 +236,6 @@ class DrawingsDrawingController {
 
     /* istanbul ignore next */
     $scope.uploadPictureURL = function (imageURL) {
-      console.log('imageURL');
-      console.log(imageURL);
       getDataUri(imageURL, function(image64) {
         $scope.addPictureToCanvas(image64);
       });

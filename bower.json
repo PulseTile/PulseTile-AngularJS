@@ -22,6 +22,6 @@
     "angularjs-slider": "^6.1.0",
     "angular-swiper": "^0.4.0",
     "angular-ui-select": "^0.19.8",
-    "fabric.js": "fabric#^1.7.11"
+    "fabric.js": "fabric#^1.7.12"
   }
 }

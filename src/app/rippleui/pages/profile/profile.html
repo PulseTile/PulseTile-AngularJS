@@ -40,7 +40,7 @@
                         <label class="control-label">Application Logo File</label>
                         <div class="form-control-static">
                           <div ng-if="$ctrl.appSettings.logoB64">
-                            <img src="{{ $ctrl.appSettings.logoB64 }}" alt="">
+                            <img ng-src="{{ $ctrl.appSettings.logoB64 }}" alt="">
                           </div>
                         </div>
                       </div>

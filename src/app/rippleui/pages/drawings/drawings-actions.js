@@ -67,7 +67,7 @@ export function create(patientId, composition) {
   };
 }
 
-export function update(patientId, composition) {
+export function update(patientId, compositionId, composition) {
   return {
     types: [types.DRAWINGS_UPDATE, types.DRAWINGS_UPDATE_SUCCESS, types.DRAWINGS_UPDATE_ERROR],
 
@@ -75,7 +75,7 @@ export function update(patientId, composition) {
 
     config: {
       method: 'put',
-      url: '/api/pictures/' + patientId,
+      url: '/api/pictures/' + patientId + '/' + compositionId,
       data: composition
     },
 
