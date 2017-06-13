@@ -19,7 +19,6 @@ class PatientsController {
   constructor($scope, $state, $stateParams, $location, $ngRedux, patientsActions, serviceRequests, Patient, serviceFormatted, $timeout, $uibModal, ConfirmationModal, servicePatients) {
     let vm = this;
     
-    servicePatients.clearCache();
     $scope.patientsCounts = servicePatients.cachePatientsCounts;
 
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-list'});
@@ -130,7 +129,7 @@ class PatientsController {
     $scope.hoveredTableRow = -1;
     $scope.hoverTableRow = function (index) {
       $scope.hoveredTableRow = index;
-    };
+    }.bind(this);
     $scope.unHoverTableRow = function () {
       $scope.hoveredTableRow = -1;
     };
@@ -217,7 +216,7 @@ class PatientsController {
           var curPatient = new Patient.patient(patient);
           curPatients.push(curPatient);
         });
-        
+        servicePatients.clearCache();
         vm.patients = curPatients.slice();
         serviceFormatted.formattingTablesDate(vm.patients, ['dateOfBirth'], serviceFormatted.formatCollection.DDMMMYYYY);
         serviceFormatted.filteringKeys = ['name', 'address', 'dateOfBirth', 'gender', 'nhsNumber'];
