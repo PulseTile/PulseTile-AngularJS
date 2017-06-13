@@ -42,7 +42,7 @@
       <thead>
         <tr>
           <th ng-click="sort('name')" ng-class="sortClass('name')">Name</th>
-          <th ng-click="sort('transferDateTime')" ng-class="sortClass('transferDateTime')">Date / Time</th>
+          <th ng-click="sort('dateCreated')" ng-class="sortClass('dateCreated')">Date / Time</th>
           <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
         </tr>
       </thead>
@@ -50,7 +50,7 @@
       <tbody>
         <tr dir-paginate="drawing in $ctrl.drawings | filter: queryFiltering | orderBy:[order] : reverse  | itemsPerPage: 10" current-page="currentPage"  ng-click="$ctrl.go(drawing.sourceId, drawing)" ng-class="{info: selectedRow(drawing.sourceId, drawing)}">
           <td data-th="Name" ng-class="sortClass('name')"><span>{{ drawing.name }}</span></td>
-          <td data-th="Date/Time" ng-class="sortClass('date')"><span>{{ drawing.date }}</span></td>
+          <td data-th="Date/Time" ng-class="sortClass('dateCreated')"><span>{{ drawing.dateCreated }}</span></td>
           <td data-th="Source" ng-class="sortClass('source')"><span>{{ drawing.source }}</span></td>
         </tr>
 

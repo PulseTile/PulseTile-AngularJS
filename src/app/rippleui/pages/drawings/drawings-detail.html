@@ -24,8 +24,8 @@
       </div>
       <div class="panel-body">
         <div class="drawing-wrapper">
-          <div class="drawing-canvas-holder">
-            <img src="../../../assets/images/drawing-test.png" alt="">
+          <div class="drawing-canvas-holder" ng-if="$ctrl.drawing.drawingBase64">
+            <img src="{{ $ctrl.drawing.drawingBase64 }}" alt="">
           </div>
         </div>
         <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
@@ -53,7 +53,7 @@
           <div class="wrap-control-group">
             <div class="control-group right">
               <button class="btn btn-danger" ng-click="$ctrl.cancelEdit()"><i class="btn-icon fa fa-ban"></i> <span class="btn-text">Cancel</span></button>
-              <button class="btn btn-success" ng-click="confirmEdit(drawingForm, drawingEdit)"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Complete</span></button>
+              <button class="btn btn-success" ng-click="confirmEdit()"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Complete</span></button>
             </div>
           </div>
         </div>
@@ -96,7 +96,7 @@
                 <div class="col-expand-right">
                   <div class="form-group">
                     <label class="control-label">Date</label>
-                    <div class="form-control-static">{{ $ctrl.drawing.date | date:'dd-MMM-yyyy' }}</div>
+                    <div class="form-control-static">{{ $ctrl.drawing.dateCreated | date:'dd-MMM-yyyy' }}</div>
                   </div>
                 </div>
               </div>

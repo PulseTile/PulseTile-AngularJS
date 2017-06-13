@@ -19,8 +19,8 @@ class DrawingsCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, drawingsActions, serviceRequests, serviceFormatted, usSpinnerService, $window) {
 
     $scope.drawingEdit = {};
-    $scope.drawingEdit.date = new Date();
-    $scope.drawingEdit.image64 = null;
+    $scope.drawingEdit.dateCreated = new Date();
+    $scope.drawingEdit.drawingBase64 = null;
 
     /* istanbul ignore next */
     this.goList = function () {
@@ -41,21 +41,20 @@ class DrawingsCreateController {
     this.create = function (drawingForm, drawingEdit) {
       $scope.formSubmitted = true;
 
-      if (drawingForm.$valid && $scope.drawingEdit.image64) {
+      if (drawingForm.$valid && $scope.drawingEdit.drawingBase64) {
         let toAdd = {
-          image64: drawingEdit.image64,
+          drawingBase64: drawingEdit.drawingBase64,
           name: drawingEdit.name,
           author: drawingEdit.author,
-          date: drawingEdit.date
         };
         
-        // $scope.drawingsCreate($stateParams.patientId, toAdd);
+        $scope.drawingsCreate($stateParams.patientId, toAdd);
       }
     }.bind(this);
 
     /* istanbul ignore next */
     $scope.getCanvasImage64 = function (data) {
-      $scope.drawingEdit.image64 = data.image64;
+      $scope.drawingEdit.drawingBase64 = data.image64;
     };
     serviceRequests.subscriber('drawingCanvasChanged', $scope.getCanvasImage64);
 

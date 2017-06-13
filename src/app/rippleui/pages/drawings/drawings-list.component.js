@@ -42,30 +42,30 @@ class DrawingsListController {
 
     /* istanbul ignore next */
     this.setCurrentPageData = function (data) {
-      // if (data.drawings.data) {
-      //   this.drawings = data.drawings.data;
-        this.drawings = [{
-          sourceId: 1,
-          name: 'Cardiac Catherization',
-          date: new Date(),
-          source: 'Marand'
-        }, {
-          sourceId: 2,
-          name: 'Chest',
-          date: new Date(),
-          source: 'ethecis'
-        }, {
-          sourceId: 3,
-          name: 'Echocardioram 1',
-          date: new Date(),
-          source: 'Marand'
-        }];
+      if (data.drawings.data) {
+        this.drawings = data.drawings.data;
+        // this.drawings = [{
+        //   sourceId: 1,
+        //   name: 'Cardiac Catherization',
+        //   date: new Date(),
+        //   source: 'Marand'
+        // }, {
+        //   sourceId: 2,
+        //   name: 'Chest',
+        //   date: new Date(),
+        //   source: 'ethecis'
+        // }, {
+        //   sourceId: 3,
+        //   name: 'Echocardioram 1',
+        //   date: new Date(),
+        //   source: 'Marand'
+        // }];
 
-        serviceFormatted.formattingTablesDate(this.drawings, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.formattingTablesDate(this.drawings, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
         serviceFormatted.filteringKeys = ['name', 'date', 'source'];
 
         usSpinnerService.stop('patientSummary-spinner');
-      // }
+      }
       
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;

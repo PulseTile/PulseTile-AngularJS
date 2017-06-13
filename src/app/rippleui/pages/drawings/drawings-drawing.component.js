@@ -250,6 +250,19 @@ class DrawingsDrawingController {
         $scope.canvas.renderAll();
       }, 0)
     };
+    /* istanbul ignore next */
+    $scope.clearCanvas = function () {
+      $scope.canvas.clear();
+    };
+    /* istanbul ignore next */
+    $scope.showEditCanvas = function (data) {
+      $scope.clearCanvas();
+      if (data.drawingBase64) {
+        $scope.addPictureToCanvas(data.drawingBase64);
+      }
+    };
+    serviceRequests.subscriber('showEditCanvas', $scope.showEditCanvas);
+
 
 
     /* istanbul ignore next */
