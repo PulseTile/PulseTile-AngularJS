@@ -12,8 +12,9 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-export default function ConfirmationModal($uibModal, $ngRedux) {
+export default function ConfirmationModal($uibModal, $ngRedux, patientsActions) {
   var isModalClosed = true;
+  // this.loadPatient = patientsActions.getPatient;
 
   /* istanbul ignore next */
   var openModal = function (patient, state) {
@@ -39,12 +40,16 @@ export default function ConfirmationModal($uibModal, $ngRedux) {
               });
             }
 
+            patientsActions.getPatient(patient.id);
+            
             $uibModalInstance.dismiss('cancel');
           };
 
         }
       });
     }
+
+    
 
     /* istanbul ignore next */
     modalInstance.result.then(function() {
@@ -60,4 +65,4 @@ export default function ConfirmationModal($uibModal, $ngRedux) {
     openModal: openModal
   };
 }
-ConfirmationModal.$inject = ['$uibModal', '$ngRedux'];
+ConfirmationModal.$inject = ['$uibModal', '$ngRedux', 'patientsActions'];

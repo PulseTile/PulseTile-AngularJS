@@ -20,7 +20,6 @@ class PatientsListFullController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-list-full'});
     serviceRequests.publisher('headerTitle', {title: 'Search results', isShowTitle: true});
 
-    servicePatients.clearCache();
     $scope.patientsCounts = servicePatients.cachePatientsCounts;
 
     $scope.patientsTable = serviceRequests.patientsTable || {
@@ -202,7 +201,7 @@ class PatientsListFullController {
     this.openModal = function (patient, state) {
       ConfirmationModal.openModal({id: patient.nhsNumber }, state);
     };
-    vm.openModalCell = function (patient, key) {
+    this.openModalCell = function (patient, key) {
       var reg = /Count|Date/;
       var state = undefined;
 
@@ -210,7 +209,7 @@ class PatientsListFullController {
         state = key.replace(/Count|Date/, '');
       } 
 
-      vm.openModal(patient, state);
+      this.openModal(patient, state);
     };
 
     var searchType;
@@ -364,6 +363,8 @@ class PatientsListFullController {
     this.setDataRequest = function (result) {
       /* istanbul ignore if  */
       if (result.data) {
+        servicePatients.clearCache();
+        
         switch (searchType) {
           case 'settings': {
             this.patients = result.data.patientDetails;

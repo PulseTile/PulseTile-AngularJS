@@ -128,7 +128,7 @@ class PatientsSummaryController {
     $scope.$on('$destroy', unsubscribe);
     
     this.loadPatient = patientsActions.getPatient;
-    this.loadPatient($stateParams.patientId);
+    // this.loadPatient($stateParams.patientId);
   }
 }
 
