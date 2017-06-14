@@ -202,6 +202,16 @@ class PatientsListFullController {
     this.openModal = function (patient, state) {
       ConfirmationModal.openModal({id: patient.nhsNumber }, state);
     };
+    vm.openModalCell = function (patient, key) {
+      var reg = /Count|Date/;
+      var state = undefined;
+
+      if (reg.test(key)) {
+        state = key.replace(/Count|Date/, '');
+      } 
+
+      vm.openModal(patient, state);
+    };
 
     var searchType;
 

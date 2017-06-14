@@ -117,11 +117,11 @@
 
         <tbody>
           <tr dir-paginate="(index, patient) in $ctrl.patients | filter:queryFiltering | filter: $ctrl.patientFilter | orderBy:[order] : reverse | itemsPerPage: 10" 
-              ng-click="$ctrl.openModal(patient)"
               ng-mouseenter="hoverTableRow(index);" 
               ng-mouseleave="unHoverTableRow(index);"
               ng-class="{hovered: getHoveredTableRow(index), count: getCounts(patient)}">
               <td ng-repeat="(key, item) in patientsTableSettings"
+                  ng-click="$ctrl.openModalCell(patient, key)" 
                   data-th='{{ item.title + (item.type === "count" ? " #" : "") + (item.type === "date" ? " Date" : "")}}'
                   ng-class="{'text-center': key != 'name' && key != 'address', sorted: sortClass(key) }"
                   ng-if="item.select">
