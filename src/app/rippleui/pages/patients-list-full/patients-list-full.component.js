@@ -364,7 +364,7 @@ class PatientsListFullController {
       /* istanbul ignore if  */
       if (result.data) {
         servicePatients.clearCache();
-        
+
         switch (searchType) {
           case 'settings': {
             this.patients = result.data.patientDetails;

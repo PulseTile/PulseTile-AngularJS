@@ -166,7 +166,7 @@ class SearchAdvancedController {
     $scope.refreshSlider = function () {
       $timeout(function () {
         $scope.$broadcast('rzSliderForceRender');
-      });
+      }, 100);
     };
 
     $scope.refreshSlider();
@@ -193,10 +193,10 @@ class SearchAdvancedController {
         if ($scope.searchParams.nhsNumber) {
           $scope.searchParams.nhsNumber = $scope.searchParams.nhsNumber.replace(/\s+/g, '');
         }
-
         $state.go('patients-list-full', {
           queryType: queryOption.type,
           searchParams: $scope.searchParams,
+          searchString: JSON.stringify($scope.searchParams),
         });
       }
     };  
