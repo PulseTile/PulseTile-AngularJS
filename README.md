@@ -8,6 +8,14 @@
 
 PulseTile is a clinically led UX UI framework for healthcare.
 
+See [PulseTile Documentation here](http://docs.pulsetile.com/)
+
+This repo includes the Core UI Framework and "Core Tiles"
+
+See this repo for other [PulseTile "Plugin Tiles"](https://github.com/PulseTile-Plugins)
+
+---
+
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
