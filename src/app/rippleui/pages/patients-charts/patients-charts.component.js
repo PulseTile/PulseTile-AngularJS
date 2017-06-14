@@ -209,22 +209,6 @@ class PatientsChartsController {
           }
         });
 
-        createChart({
-          id: "chart-geography", 
-          data: summaries.department, 
-          borderColor: 'rgba(255,99,132,1)',
-          backgroundColor: 'rgba(255,99,132,0.3)',
-          onClick: function (chart) {
-            return function (ev) {
-              var activePoint = chart.getElementAtEvent(ev)[0];
-
-              if (activePoint) {
-                goToPatients(summaries.department[activePoint._index], 'summary');
-              }
-            }
-          }
-        });
-
         return summaries;
       } else {
         return true;
