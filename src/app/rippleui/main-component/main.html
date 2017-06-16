@@ -18,6 +18,7 @@
 
   <div class="content">
     <!-- Sidebar-->
+    <div class="sidebar-underlay" ng-click="$ctrl.hideSidebar()"></div>
     <div class="sidebar" ng-if="isSidebar" role="navigation" >
         <div class="sidebar-nav">
           <div side-menu ui-view="actions"></div>

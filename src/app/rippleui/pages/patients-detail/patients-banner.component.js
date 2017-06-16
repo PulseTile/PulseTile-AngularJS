@@ -16,7 +16,7 @@
 let templatePatientsBanner = require('./patients-banner.html');
 
 class PatientsBannerController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions) {
+  constructor($scope, $state, $stateParams, serviceRequests, $ngRedux, patientsActions) {
     
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
@@ -39,6 +39,8 @@ class PatientsBannerController {
       } else {
         $scope.mobileShowInfo = 'show';
       }
+      
+      serviceRequests.publisher('changePositionSidebar');
     }
   }
 }
@@ -48,5 +50,5 @@ const PatientsBannerComponent = {
   controller: PatientsBannerController
 };
 
-PatientsBannerController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions'];
+PatientsBannerController.$inject = ['$scope', '$state', '$stateParams','serviceRequests', '$ngRedux', 'patientsActions'];
 export default PatientsBannerComponent;

@@ -95,14 +95,17 @@ class MainController {
       }
     };
 
+    this.hideSidebar = function () {
+      $timeout(function() {
+        $scope.isClassShowSidebar = false;
+        angular.element(document).find('.wrapper').removeClass('showSidebar');
+      }, 0);
+    };
+
     /* istanbul ignore next */
     this.hideSidebarOnMobile = function () {
-
       if (window.innerWidth < 768) {
-        $timeout(function() {
-          $scope.isClassShowSidebar = false;
-          angular.element(document).find('.wrapper').removeClass('showSidebar');
-        }, 0);
+        this.hideSidebar();
       }
     };
     serviceRequests.subscriber('changeStateSidebar', this.changeisClassShowSidebar);
@@ -123,34 +126,56 @@ class MainController {
     };
 
     /* istanbul ignore next */
-    this.setHeightSidebarForMobile = function () {
-      var page = angular.element(document);
+    this.setPositionForSidebar = function () {
+        var page = angular.element(document);
 
-      if (!page.find('.wrapper').length) return;
+        if (!page.find('.wrapper').length) return;
 
-      var wrapperHeight = page.find('.wrapper').outerHeight();
-      var headerHeight = page.find('.header').outerHeight();
-      var sidebar = page.find('.sidebar');
+        // var wrapperHeight = page.find('.wrapper').outerHeight();
+        var headerHeight = page.find('.header').outerHeight();
+        var footerHeight = page.find('.footer').outerHeight();
+        var sidebar = page.find('.sidebar');
+        var sidebarUnderlay = page.find('.sidebar-underlay');
+        var scrollPageTop = document.body.scrollTop;
+        var sidebarTop = headerHeight - scrollPageTop;
 
-      /* istanbul ignore if  */
-      if ($scope.isSidebar) {
-        if (window.innerWidth < 768) {
-          sidebar.css('height', wrapperHeight - headerHeight + 'px');
-        } else {
-          sidebar.css('height', 'auto');
+        sidebarTop = sidebarTop > 0 ? sidebarTop : 0;
+
+        sidebar.css('top', sidebarTop + 'px');
+        sidebarUnderlay.css('top', sidebarTop + 'px');
+
+        /* istanbul ignore if  */
+        if ($scope.isSidebar) {
+          if (window.innerWidth < 768) {
+            // sidebar.css('height', wrapperHeight - headerHeight + 'px');
+            sidebar.css('bottom', 0);
+            sidebarUnderlay.css('bottom', 0);
+          } else {
+            sidebar.css('bottom', footerHeight + 'px');
+            sidebarUnderlay.css('bottom', footerHeight + 'px');
+          }
         }
-      }
     };
-    serviceRequests.subscriber('setHeightSidebar', this.setHeightSidebarForMobile);
+    serviceRequests.subscriber('changePositionSidebar', function() {
+      $timeout(function() {
+        console.log('changePositionSidebar-setPositionForSidebar');
+        this.setPositionForSidebar();
+      }.bind(this), 0);
+    }.bind(this));
     
     angular.element(document).ready(function () {
       this.checkIsViews();
-      this.setHeightSidebarForMobile();
+      $timeout(function() {
+        this.setPositionForSidebar();
+      }.bind(this), 0);
     }.bind(this));
     
     /* istanbul ignore next */
     $window.addEventListener('resize', function () {
-      this.setHeightSidebarForMobile();
+      this.setPositionForSidebar();
+    }.bind(this));
+    $window.addEventListener('scroll', function () {
+      this.setPositionForSidebar();
     }.bind(this));
 
     /* istanbul ignore next */

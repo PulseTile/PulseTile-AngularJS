@@ -96,8 +96,13 @@ label:focus,
 .main {
   position: relative;
   z-index: 1;
+  margin-left: 0;
 }
-.sidebar + .main { overflow: hidden; }
+@include respond-from(sm) {
+  .showSidebar .sidebar + .main {
+    margin-left: 185px;
+  }
+}
 
 #page-wrapper {
   min-height: 0;
