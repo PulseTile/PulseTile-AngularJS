@@ -41,7 +41,7 @@ describe('MainComponent', function() {
         spyOn(ctrl, 'hideSidebarOnMobile');
         spyOn(ctrl, 'changeisClassShowSidebar');
         spyOn(ctrl, 'checkIsViews');
-        spyOn(ctrl, 'setHeightSidebarForMobile');
+        spyOn(ctrl, 'setPositionForSidebar');
         
         ctrl.getPageComponents();
         scope.setBreadcrumbs();
@@ -53,7 +53,7 @@ describe('MainComponent', function() {
         ctrl.hideSidebarOnMobile();
         ctrl.changeisClassShowSidebar();
         ctrl.checkIsViews();
-        ctrl.setHeightSidebarForMobile();
+        ctrl.setPositionForSidebar();
     });
 
     it('$scope.mainWidth exist', function() {
@@ -101,7 +101,7 @@ describe('MainComponent', function() {
     it("checkIsViews was called", function() {
         expect(ctrl.checkIsViews).toHaveBeenCalled();
     });
-    it("setHeightSidebarForMobile was called", function() {
-        expect(ctrl.setHeightSidebarForMobile).toHaveBeenCalled();
+    it("setPositionForSidebar was called", function() {
+        expect(ctrl.setPositionForSidebar).toHaveBeenCalled();
     });
 });

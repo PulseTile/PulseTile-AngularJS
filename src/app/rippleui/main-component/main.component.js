@@ -131,7 +131,6 @@ class MainController {
 
         if (!page.find('.wrapper').length) return;
 
-        // var wrapperHeight = page.find('.wrapper').outerHeight();
         var headerHeight = page.find('.header').outerHeight();
         var footerHeight = page.find('.footer').outerHeight();
         var sidebar = page.find('.sidebar');
@@ -147,7 +146,6 @@ class MainController {
         /* istanbul ignore if  */
         if ($scope.isSidebar) {
           if (window.innerWidth < 768) {
-            // sidebar.css('height', wrapperHeight - headerHeight + 'px');
             sidebar.css('bottom', 0);
             sidebarUnderlay.css('bottom', 0);
           } else {
@@ -158,7 +156,6 @@ class MainController {
     };
     serviceRequests.subscriber('changePositionSidebar', function() {
       $timeout(function() {
-        console.log('changePositionSidebar-setPositionForSidebar');
         this.setPositionForSidebar();
       }.bind(this), 0);
     }.bind(this));
