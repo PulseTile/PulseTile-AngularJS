@@ -61,8 +61,8 @@ class ReferralsDetailController {
 					referralFrom: referrals.referralFrom,
 					referralTo: referrals.referralTo,
 					dateOfReferral: referrals.dateOfReferral,
-					reason: referrals.reason,
-					clinicalSummary: referrals.clinicalSummary,
+					referralReason: referrals.referralReason,
+					referralSummary: referrals.referralSummary,
 					author: referrals.author,
 					dateCreated: referrals.dateCreated,
 					source: referrals.source

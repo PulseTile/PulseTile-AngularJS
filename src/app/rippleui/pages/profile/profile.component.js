@@ -28,28 +28,34 @@ class ProfileController {
 
     $scope.themes = serviceThemes.getThemesAsArray();
 
+    /* istanbul ignore next  */
     this.appSettingsEdit = function () {
       $scope.appSettingsEdit = Object.assign({}, this.appSettings);
       $scope.isAppSettingsEdit = true;
     };
+    /* istanbul ignore next  */
     this.personalEdit = function () {
       $scope.personalEdit = Object.assign({}, this.profile);
       $scope.isPersonalEdit = true;
     };
+    /* istanbul ignore next  */
     this.contactEdit = function () {
       $scope.contactEdit = Object.assign({}, this.profile);
       $scope.isContactEdit = true;
     };
 
+    /* istanbul ignore next  */
     this.cancelAppSettingsEdit = function () {
       $scope.isAppSettingsEdit = false;
       $scope.formSubmitted = false;
       serviceRequests.publisher('changeActiveTheme', {themeId: serviceThemes.getActiveTheme()});
     };
+    /* istanbul ignore next  */
     this.cancelPersonalEdit = function () {
       $scope.isPersonalEdit = false;
       $scope.formSubmitted = false;
     };
+    /* istanbul ignore next  */
     this.cancelContactEdit = function () {
       $scope.isContactEdit = false;
       $scope.formSubmitted = false;
@@ -63,6 +69,7 @@ class ProfileController {
         });
       }
     };
+    /* istanbul ignore next  */
     this.upload = function (file) {
         return new Promise(function (resolve, reject) {
           var reader = new FileReader();
@@ -112,12 +119,14 @@ class ProfileController {
       }
 
     }.bind(this);
+    /* istanbul ignore next  */
     $scope.confirmPersonalEdit = function (personalForm, personal) {
       $scope.formSubmitted = true;
       if (personalForm.$valid) {
         $scope.isPersonalEdit = false;
       }
     }.bind(this);
+    /* istanbul ignore next  */
     $scope.confirmContactEdit = function (contactForm, contact) {
       $scope.formSubmitted = true;
       if (contactForm.$valid) {
@@ -125,6 +134,7 @@ class ProfileController {
       }
     }.bind(this);
 
+    /* istanbul ignore next  */
     this.setProfileData = function () {
       let tempProfileData = serviceRequests.currentUserData;
 
@@ -190,6 +200,7 @@ class ProfileController {
 
     $scope.$on('$destroy', unsubscribe);
 
+    /* istanbul ignore next  */
     let setActiveThemeOnSite = function () {
       serviceRequests.publisher('changeActiveTheme', {themeId: serviceThemes.getActiveTheme()});
     };

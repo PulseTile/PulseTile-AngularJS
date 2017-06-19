@@ -67,21 +67,21 @@
 
             <div class="row-expand">
               <div class="col-expand-left">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.reason.$dirty) && referralsForm.reason.$invalid, 'has-success': referralsForm.reason.$valid && referralsForm.reason.$dirty}">
-                  <label for="reason" class="control-label">Reason for Referral</label>
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.referralReason.$dirty) && referralsForm.referralReason.$invalid, 'has-success': referralsForm.referralReason.$valid && referralsForm.referralReason.$dirty}">
+                  <label for="referralReason" class="control-label">Reason for Referral</label>
                   <div class="input-holder">
-                    <textarea type="text" class="form-control textarea-big input-sm" id="reason" name="reason" ng-model="referralsEdit.reason" required></textarea>
+                    <textarea type="text" class="form-control textarea-big input-sm" id="referralReason" name="referralReason" ng-model="referralsEdit.referralReason" required></textarea>
                   </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.reason.$error.required">You must enter a value.</span>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.referralReason.$error.required">You must enter a value.</span>
                 </div>
               </div>
               <div class="col-expand-right">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.clinicalSummary.$dirty) && referralsForm.clinicalSummary.$invalid, 'has-success': referralsForm.clinicalSummary.$valid && referralsForm.clinicalSummary.$dirty}">
-                  <label for="clinicalSummary" class="control-label">Clinical Summary</label>
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || referralsForm.referralSummary.$dirty) && referralsForm.referralSummary.$invalid, 'has-success': referralsForm.referralSummary.$valid && referralsForm.referralSummary.$dirty}">
+                  <label for="referralSummary" class="control-label">Clinical Summary</label>
                   <div class="input-holder">
-                    <textarea type="text" class="form-control textarea-big input-sm" id="clinicalSummary" name="clinicalSummary" ng-model="referralsEdit.clinicalSummary" required></textarea>
+                    <textarea type="text" class="form-control textarea-big input-sm" id="referralSummary" name="referralSummary" ng-model="referralsEdit.referralSummary" required></textarea>
                   </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.clinicalSummary.$error.required">You must enter a value.</span>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && referralsForm.referralSummary.$error.required">You must enter a value.</span>
                 </div>
               </div>
             </div>

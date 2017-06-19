@@ -374,7 +374,7 @@ class HeaderController {
 
     /* istanbul ignore next */
     this.clickSidebarBtn = function () {
-      serviceRequests.publisher('setHeightSidebar');
+      serviceRequests.publisher('changePositionSidebar');
       serviceRequests.publisher('changeStateSidebar', {click: true});
       serviceRequests.publisher('resizeDrawing', {});
     };
