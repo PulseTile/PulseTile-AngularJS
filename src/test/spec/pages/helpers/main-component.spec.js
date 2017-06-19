@@ -31,6 +31,7 @@ describe('MainComponent', function() {
         });
     }));
     beforeEach(function() {
+        spyOn(scope, 'changeActiveTheme');
         spyOn(scope, 'setBreadcrumbs');
         spyOn(scope, 'getFullPanelClass');
         spyOn(scope, 'getClasses');
@@ -38,18 +39,21 @@ describe('MainComponent', function() {
         spyOn(ctrl, 'getPageComponents');
         spyOn(ctrl, 'goBreadcrumb');
         spyOn(ctrl, 'changeFullPanel');
+        spyOn(ctrl, 'hideSidebar');
         spyOn(ctrl, 'hideSidebarOnMobile');
         spyOn(ctrl, 'changeisClassShowSidebar');
         spyOn(ctrl, 'checkIsViews');
         spyOn(ctrl, 'setPositionForSidebar');
-        
-        ctrl.getPageComponents();
+           
+        scope.changeActiveTheme();
         scope.setBreadcrumbs();
         scope.getFullPanelClass();
         scope.getClasses();
         scope.detectDevice();
+        ctrl.getPageComponents();
         ctrl.goBreadcrumb();
         ctrl.changeFullPanel();
+        ctrl.hideSidebar();
         ctrl.hideSidebarOnMobile();
         ctrl.changeisClassShowSidebar();
         ctrl.checkIsViews();
@@ -71,8 +75,9 @@ describe('MainComponent', function() {
     it("serviceRequests exist", function() {
         expect(serviceRequests).toBeDefined();
     });
-    it("getPageComponents was called", function() {
-        expect(ctrl.getPageComponents).toHaveBeenCalled();
+
+    it("changeActiveTheme was called", function() {
+        expect(scope.changeActiveTheme).toHaveBeenCalled();
     });
     it("setBreadcrumbs was called", function() {
         expect(scope.setBreadcrumbs).toHaveBeenCalled();
@@ -83,14 +88,20 @@ describe('MainComponent', function() {
     it("getClasses was called", function() {
         expect(scope.getClasses).toHaveBeenCalled();
     });
+    it("detectDevice was called", function() {
+        expect(scope.detectDevice).toHaveBeenCalled();
+    });    
+    it("getPageComponents was called", function() {
+        expect(ctrl.getPageComponents).toHaveBeenCalled();
+    });
     it("goBreadcrumb was called", function() {
         expect(ctrl.goBreadcrumb).toHaveBeenCalled();
     });
     it("changeFullPanel was called", function() {
         expect(ctrl.changeFullPanel).toHaveBeenCalled();
     });
-    it("detectDevice was called", function() {
-        expect(scope.detectDevice).toHaveBeenCalled();
+    it("hideSidebar was called", function() {
+        expect(ctrl.hideSidebar).toHaveBeenCalled();
     });
     it("hideSidebarOnMobile was called", function() {
         expect(ctrl.hideSidebarOnMobile).toHaveBeenCalled();

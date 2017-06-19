@@ -95,6 +95,7 @@ class MainController {
       }
     };
 
+    /* istanbul ignore next */
     this.hideSidebar = function () {
       $timeout(function() {
         $scope.isClassShowSidebar = false;

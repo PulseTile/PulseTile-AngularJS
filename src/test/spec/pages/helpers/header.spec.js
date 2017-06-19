@@ -6,9 +6,9 @@ describe('HeaderComponent', function() {
 
     beforeEach(angular.mock.module('ripple-ui'));
 
-    let scope, ctrl, controller, template, state, rootScope, stateParams, ngRedux, patientsActions, serviceRequests, $window;
+    let scope, ctrl, controller, template, state, rootScope, stateParams, ngRedux, patientsActions, serviceRequests, serviceThemes, $window;
     
-    beforeEach(inject(($injector, $controller, _$rootScope_, _$state_, _$stateParams_, _$ngRedux_, _patientsActions_, _serviceRequests_, _$window_) => {
+    beforeEach(inject(($injector, $controller, _$rootScope_, _$state_, _$stateParams_, _$ngRedux_, _patientsActions_, _serviceRequests_, _serviceThemes_, _$window_) => {
         controller = $controller;
         scope = $injector.get('$rootScope').$new();
         rootScope = _$rootScope_;
@@ -17,6 +17,7 @@ describe('HeaderComponent', function() {
         ngRedux = _$ngRedux_;
         patientsActions = _patientsActions_;
         serviceRequests = _serviceRequests_;
+        serviceThemes = _serviceThemes_;
         $window = _$window_;
 
         template = HeaderComponent.template;
@@ -28,6 +29,7 @@ describe('HeaderComponent', function() {
             $ngRedux: ngRedux,
             patientsActions: patientsActions,
             serviceRequests: serviceRequests,
+            serviceThemes: serviceThemes,
             $window: $window
         });
     }));
@@ -36,6 +38,7 @@ describe('HeaderComponent', function() {
         rootScope.searchMode = false;
         
         spyOn(scope, 'setTitle');
+        spyOn(scope, 'changeLogo');
         spyOn(scope, 'switchDirectByRole');
         spyOn(scope, 'setLoginData');
         spyOn(scope, 'login');
@@ -67,7 +70,7 @@ describe('HeaderComponent', function() {
         spyOn(ctrl, 'goLogo');
 
 
-
+        scope.changeLogo();
         scope.setTitle();
         scope.switchDirectByRole({role: 'PHR'});
         scope.setLoginData({data:{role: 'PHR'}});
@@ -111,6 +114,10 @@ describe('HeaderComponent', function() {
     });
     it("$scope.title exist", function() {
         expect(scope.title).toBeDefined();
+    });
+    
+    it("changeLogo was called", function() {
+        expect(scope.changeLogo).toHaveBeenCalled();
     });
     it("setTitle was called", function() {
         expect(scope.setTitle).toHaveBeenCalled();

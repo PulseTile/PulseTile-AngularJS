@@ -8,8 +8,6 @@ describe('Drawings Drawing', function() {
 
     let scope, ctrl, controller, template, state, stateParams, serviceRequests, usSpinnerService, $timeout, $window;
     
-    $scope, $state, $stateParams, serviceRequests, usSpinnerService, $timeout, $window
-
     beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _serviceRequests_, _usSpinnerService_, _$timeout_, _$window_) => {
         controller = $controller;
         scope = $injector.get('$rootScope').$new();
@@ -45,12 +43,15 @@ describe('Drawings Drawing', function() {
         spyOn(scope, 'addNewText');
         spyOn(scope, 'isTextObject');
         spyOn(scope, 'textChange');
+        spyOn(scope, 'cackScale');
         spyOn(scope, 'changeFontParams');
         spyOn(scope, 'addPictureToCanvas');
         spyOn(scope, 'uploadPicture');
         spyOn(scope, 'uploadPictureURL');
         spyOn(scope, 'isCanDelete');
         spyOn(scope, 'deleteObject');
+        spyOn(scope, 'clearCanvas');
+        spyOn(scope, 'showEditCanvas');
         spyOn(scope, 'setCanvasSize');
         spyOn(scope, 'getCanvasImage64');
         spyOn(ctrl, 'initCanvasDrawing');
@@ -67,12 +68,15 @@ describe('Drawings Drawing', function() {
         scope.addNewText();
         scope.isTextObject();
         scope.textChange();
+        scope.cackScale();
         scope.changeFontParams();
         scope.addPictureToCanvas();
         scope.uploadPicture();
         scope.uploadPictureURL();
         scope.isCanDelete();
         scope.deleteObject();
+        scope.clearCanvas();
+        scope.showEditCanvas();
         scope.setCanvasSize();
         scope.getCanvasImage64();
         ctrl.initCanvasDrawing();
@@ -121,6 +125,9 @@ describe('Drawings Drawing', function() {
     it("textChange was called", function() {
         expect(scope.textChange).toHaveBeenCalled();
     });
+    it("cackScale was called", function() {
+        expect(scope.cackScale).toHaveBeenCalled();
+    });    
     it("changeFontParams was called", function() {
         expect(scope.changeFontParams).toHaveBeenCalled();
     });
@@ -138,6 +145,12 @@ describe('Drawings Drawing', function() {
     });
     it("deleteObject was called", function() {
         expect(scope.deleteObject).toHaveBeenCalled();
+    });
+    it("clearCanvas was called", function() {
+        expect(scope.clearCanvas).toHaveBeenCalled();
+    });
+    it("showEditCanvas was called", function() {
+        expect(scope.showEditCanvas).toHaveBeenCalled();
     });
     it("setCanvasSize was called", function() {
         expect(scope.setCanvasSize).toHaveBeenCalled();
