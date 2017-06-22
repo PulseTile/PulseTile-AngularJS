@@ -69,4 +69,4 @@ PulseTile uses Webpack together for its build system.
 
 `Angular 1.5` use for modular structure.
 
-Additional information on such topics as data structure we're using is available on (Documentation portal)[http://docs.pulsetile.com/]
+Additional information on such topics as data structure we're using is available on [Documentation portal](http://docs.pulsetile.com/)
