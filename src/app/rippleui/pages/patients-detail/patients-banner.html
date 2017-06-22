@@ -17,23 +17,23 @@
 <div class="wrap-patient-info" ng-class="mobileShowInfo">
   <div class="patient-info-caption">
     <div class="patient-info-caption-btn btn-dropdown-toggle" ng-click="$ctrl.showInfo()"></div>
-    <div class="patient-info-caption-text text-truncate">{{ $ctrl.patient.name }}</div>
+    <div class="patient-info-caption-text text-truncate">{{ patient.name }}</div>
   </div>
   <div class="patient-info">
     <div class="patient-info-group-2">
       <div class="column-1">
-        <div class="patient-info-item"><span class="key">D.O.B.</span> {{ $ctrl.patient.dateOfBirth | date:'dd-MMM-yyyy' }}</div>
-        <div class="patient-info-item"><span class="key">Phone:</span> {{ $ctrl.patient.telephone }}</div>
+        <div class="patient-info-item"><span class="key">D.O.B.</span> {{ patient.dateOfBirth | date:'dd-MMM-yyyy' }}</div>
+        <div class="patient-info-item"><span class="key">Phone:</span> {{ patient.telephone }}</div>
       </div>
       <div class="column-2">
-        <div class="patient-info-item"><span class="key">Gender:</span> {{ $ctrl.patient.gender }}</div>
-        <div class="patient-info-item"><span class="key">NHS No.</span> <span ng-bind="$ctrl.patient.nhsNumber | formatNHSNumber"></span></div>
+        <div class="patient-info-item"><span class="key">Gender:</span> {{ patient.gender }}</div>
+        <div class="patient-info-item"><span class="key">NHS No.</span> <span ng-bind="patient.nhsNumber | formatNHSNumber"></span></div>
       </div>
     </div>
     <div class="patient-info-group-1">
-      <div class="patient-info-item significant hidden-xs">{{ $ctrl.patient.name }}</div>
-      <div class="patient-info-item"><span class="key">Doctor:</span> {{ $ctrl.patient.gpName }}</div>
+      <div class="patient-info-item significant hidden-xs">{{ patient.name }}</div>
+      <div class="patient-info-item"><span class="key">Doctor:</span> {{ patient.gpName }}</div>
     </div>
-    <div class="patient-info-item"><span class="key">Address:</span> {{ $ctrl.patient.gpAddress }}</div>
+    <div class="patient-info-item"><span class="key">Address:</span> {{ patient.gpAddress }}</div>
   </div>
 </div>

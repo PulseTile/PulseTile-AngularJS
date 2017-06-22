@@ -17,11 +17,15 @@ let templatePatientsBanner = require('./patients-banner.html');
 
 class PatientsBannerController {
   constructor($scope, $state, $stateParams, serviceRequests, $ngRedux, patientsActions) {
-    
+    $scope.patient = {};
+
     this.setCurrentPageData = function (data) {
+      console.log('data');
+      console.log(data);
       if (data.patientsGet.data) {
-        this.patient = data.patientsGet.data;
+        $scope.patient = data.patientsGet.data;
       }
+      serviceRequests.publisher('changePositionSidebar');
     };
 
 
@@ -42,6 +46,9 @@ class PatientsBannerController {
       
       serviceRequests.publisher('changePositionSidebar');
     }
+
+    this.loadPatient = patientsActions.getPatient;
+    this.loadPatient($stateParams.patientId);
   }
 }
 

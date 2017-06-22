@@ -118,7 +118,7 @@ class HeaderController {
       if ($scope.title === 'PHR') {
         $state.go('profile');
       } else {
-        $state.go('patients-list');
+        $state.go('patients-charts');
       }
     };
     
@@ -168,7 +168,6 @@ class HeaderController {
       if (data) {
         $scope.title = data.role;
       }
-      $scope.switchDirectByRole(data);
     };
     /* istanbul ignore next */
     $scope.setLoginData = function (loginResult) {
@@ -178,6 +177,7 @@ class HeaderController {
     /* istanbul ignore next */
     $scope.login = function () {
       serviceRequests.login().then(function (result) {
+        // debugger
         serviceRequests.currentUserData = result.data;
         $scope.setLoginData(result);
         serviceRequests.getAppSettings().then(function (res) {
@@ -192,7 +192,8 @@ class HeaderController {
     var auth0;
 
     serviceRequests.initialise().then(function (result){
-
+      // $scope.switchDirectByRole(data);
+      // debugger
       /* istanbul ignore next */
       if (result.data.token) {
         // reset the JSESSIONID cookie with the new incoming cookie
