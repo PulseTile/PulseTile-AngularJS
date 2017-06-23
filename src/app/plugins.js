@@ -36,25 +36,32 @@ import events from './rippleui/pages/events/index';
 import drawings from './rippleui/pages/drawings/index';
 
 export default [
-  clinicalnotes,
-  allergies,
-  eolcareplans,
-  contacts,
   diagnoses,
-  dicom,
-  documents,
-  genericmdt,
-  heightAndWeight,
   medication,
+  allergies,
+  contacts,
+  
+  events,
+  documents,
+  
   orders,
-  personalnotes,
-  procedures,
-  referrals,
   results,
-  transferOfCare,
-  drawings,
+  procedures,
+  
+  clinicalnotes,
+  clinicalstatements,
+  personalnotes,
+
   vaccinations,
   vitals,
-  clinicalstatements,
-  events
+
+  dicom,
+  drawings,
+  
+  referrals,
+  genericmdt,
+  transferOfCare,
+  
+  eolcareplans,
+  heightAndWeight
 ]
