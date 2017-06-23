@@ -1,5 +1,7 @@
-$base-color: #e8bcfc;
-$text-color: #4b1f5f;
+$purple: #59056e;
+$purple-light: #6a1e7c;
+
+$base-color: $purple;
 
 $auxiliary-color: lighten($base-color, 20%);
 
@@ -26,9 +28,42 @@ $colored-buttons: (
   danger: #DA534F
 );
 
+/**
+  * COLORS for header
+  */
+
+  $header-bg: $purple;
+  $header-btn: (
+    bg: $purple,
+    color: $text-on-base-color,
+    bg-hover: $purple-light,
+    color-hover: $text-on-base-color,
+    bg-active: $purple-light,
+    color-active: $text-on-base-color
+  );
+  $header-toolbar: (
+    bg: $purple-light,
+    color: $text-on-base-color,
+  );
+
+/**
+  * COLORS for search
+  */
+  $search-btn: (
+    bg: #000000,
+    color: #ffffff,
+    bg-hover: #000000,
+    color-hover: #ffffff
+  );
+  $search-btn-toggle: (
+    bg: #000000,
+    color: #ffffff,
+    bg-hover: #000000,
+    color-hover: #ffffff,
+    border: #000000,
+    border-hover: #000000
+  );
+
 body.themePurple {
-  .header .navbar {
-    background: #f6f1f8;
-  }
   @import 'theme-source/index';
 }

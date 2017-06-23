@@ -11,3 +11,43 @@
     color: map-get($colored-buttons, 'danger');
   }
 }
+
+.btn-search-toggle,
+.btn-search-toggle:hover,
+.btn-search-toggle:focus,
+.btn-search-toggle:active {
+  color: map-get($search-btn-toggle, 'color') !important;
+  background-color: map-get($search-btn-toggle, 'bg') !important;
+  border-color: map-get($search-btn-toggle, 'border') !important;
+  &.active {
+    background-color: map-get($search-btn-toggle, 'bg') !important;
+    border-color: map-get($search-btn-toggle, 'border') !important;
+  }
+}
+.is-not-touch-device {
+ .btn-search-toggle:hover {
+    background-color: map-get($search-btn-toggle, 'bg-hover') !important;
+    border-color: map-get($search-btn-toggle, 'border-hover') !important;
+    color: map-get($search-btn-toggle, 'color-hover') !important;
+  }
+}
+
+.btn-search,
+.btn-search:hover,
+.btn-search:focus,
+.btn-search:active {
+  color: map-get($search-btn, 'color') !important;
+  background-color: map-get($search-btn, 'bg') !important;
+  border-color: map-get($search-btn, 'bg') !important;
+  &.active {
+    background-color: map-get($search-btn, 'bg') !important;
+    border-color: map-get($search-btn, 'bg') !important;
+  }
+}
+.is-not-touch-device {
+ .btn-search:hover {
+    background-color: map-get($search-btn, 'bg-hover') !important;
+    border-color: map-get($search-btn, 'bg-hover') !important;
+    color: map-get($search-btn, 'color-hover') !important;
+  }
+}

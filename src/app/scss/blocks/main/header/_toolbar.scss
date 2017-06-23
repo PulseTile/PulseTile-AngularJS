@@ -1,6 +1,6 @@
-.wrap-header-toolbar { background: $base-color; }
+.wrap-header-toolbar { background: map-get($header-toolbar, 'bg'); }
 .header-toolbar {
-  color: $text-on-base-color;
+  color: map-get($header-toolbar, 'color');
   font-size: 15px;
   line-height: 20px;
   min-height: 50px;

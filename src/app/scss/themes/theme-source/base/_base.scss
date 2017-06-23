@@ -8,9 +8,3 @@ a:focus {
 .is-not-touch-device a:focus, {
   color: $auxiliary-color;
 }
-
-.touch-device a,
-.touch-device a:hover,
-.touch-device a:focus, {
-  color: $auxiliary-color;
-}

@@ -41,13 +41,6 @@ a:focus {
   text-decoration: none;
 }
 
-.touch-device a,
-.touch-device a:hover,
-.touch-device a:focus, {
-  color: $auxiliary-color;
-  text-decoration: none;
-}
-
 .list-reset { @include list-reset; }
 
 textarea:hover, 

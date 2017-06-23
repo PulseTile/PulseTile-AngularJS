@@ -1,4 +1,2 @@
-.wrap-header-toolbar { background: $base-color; }
-.header-toolbar {
-  color: $text-on-base-color;
-}
+.wrap-header-toolbar { background: map-get($header-toolbar, 'bg'); }
+.header-toolbar { color: map-get($header-toolbar, 'color'); }

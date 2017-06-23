@@ -1,4 +1,2 @@
-.wrap-header-title { background: $base-color; }
-.header-title {
-  color: $text-on-base-color;
-}
+.wrap-header-title { background: map-get($header-toolbar, 'bg'); }
+.header-title { color: map-get($header-toolbar, 'color'); }

@@ -1,15 +1,13 @@
 .btn-header {
-  background: #F7F7F7;
-  color: $base-color;
-  &.inverse { background: #fff; }
-  &.secondary {
-    background: $base-color;
-    color: $text-on-base-color;
-  }
+  background: map-get($header-btn, 'bg');
+  color: map-get($header-btn, 'color');
   .count {
-    background-color: $base-color;
-    color: $text-on-base-color;
+    background-color: map-get($header-btn, 'color');
+    color:  map-get($header-btn, 'bg');
   }
 }  
-.btn-header:hover { color: $base-color; }
-.is-not-touch-device .btn-header:hover { color: $auxiliary-color; }
+.btn-header:hover { color: map-get($header-btn, 'color'); }
+.is-not-touch-device .btn-header:hover { 
+  background: map-get($header-btn, 'bg-hover'); 
+  color: map-get($header-btn, 'color-hover');
+}

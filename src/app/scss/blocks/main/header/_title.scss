@@ -1,6 +1,6 @@
-.wrap-header-title { background: $base-color; }
+.wrap-header-title { background: map-get($header-toolbar, 'bg'); }
 .header-title {
-  color: $text-on-base-color;
+  color: map-get($header-toolbar, 'color');
   font-size: 15px;
   line-height: 22px;
   padding: 15px 0;
