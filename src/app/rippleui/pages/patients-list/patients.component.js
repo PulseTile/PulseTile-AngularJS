@@ -62,12 +62,12 @@ class PatientsController {
         title: 'DATE / TIME',
         settings: {
           orders: {
-            select: false,
+            select: true,
             title: 'Orders',
             width: 110
           },
           results: {
-            select: false,
+            select: true,
             title: 'Results',
             width: 110
           },
@@ -87,12 +87,12 @@ class PatientsController {
         title: 'COUNT',
         settings: {
           orders: {
-            select: false,
+            select: true,
             title: 'Orders',
             width: 100
           },
           results: {
-            select: false,
+            select: true,
             title: 'Results',
             width: 100
           },
