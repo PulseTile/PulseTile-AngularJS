@@ -177,7 +177,6 @@ class HeaderController {
     /* istanbul ignore next */
     $scope.login = function () {
       serviceRequests.login().then(function (result) {
-        // debugger
         serviceRequests.currentUserData = result.data;
         $scope.setLoginData(result);
         serviceRequests.getAppSettings().then(function (res) {
@@ -193,19 +192,25 @@ class HeaderController {
 
     serviceRequests.initialise().then(function (result){
       // $scope.switchDirectByRole(data);
-      // debugger
       /* istanbul ignore next */
       if (result.data.token) {
         // reset the JSESSIONID cookie with the new incoming cookie
-
         document.cookie = "JSESSIONID=" + result.data.token;
+
         location.reload();
+
         return;
       }
 
       /* istanbul ignore next */
       if (result.data.redirectTo === 'auth0') {
         console.log('running in UAT mode, so now login via auth0');
+        
+        /*Set URL to localStorage*/
+        var locationHrefBeforeLogin = localStorage.getItem('locationHrefBeforeLogin');
+        if (!locationHrefBeforeLogin) {
+          localStorage.setItem('locationHrefBeforeLogin', location.href);
+        }
 
         if (!auth0) auth0 = new Auth0(result.data.config);
         auth0.login({
@@ -216,6 +221,12 @@ class HeaderController {
       
       /* istanbul ignore if */
       if (result.data && result.data.ok) {
+        var locationHrefBeforeLogin = localStorage.getItem('locationHrefBeforeLogin');
+        if (locationHrefBeforeLogin) {
+          /*Go to URL from localStorage*/
+          localStorage.removeItem('locationHrefBeforeLogin');
+          location.href = locationHrefBeforeLogin;
+        }
         console.log('Cookie was for a valid session, so fetch the simulated user');
         $scope.login();
       }
