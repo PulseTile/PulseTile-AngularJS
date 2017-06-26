@@ -18,6 +18,7 @@ import plugins from '../../plugins';
 
 class SearchAdvancedController {
   constructor($scope, $http, $ngRedux, serviceRequests, searchActions, $state, $timeout, ConfirmationModal, $rootScope, serviceFormatted) {
+    $scope.typeOfGroupOfFieldsOfSearches = '';
     $scope.selectAgeField = 'range';
     $scope.isOpenPanelSearch = true;
     $scope.isSearchCompleted = false;
@@ -26,6 +27,10 @@ class SearchAdvancedController {
     this.detailsFocused = false;
     $scope.searchParams = {};
     $scope.agesSteps = [];
+
+    $scope.changeParams = function (type) {
+      $scope.typeOfGroupOfFieldsOfSearches = type;
+    }
 
     $scope.cancel = function () {
       serviceRequests.publisher('closeAdvancedSearch', {});
@@ -184,19 +189,57 @@ class SearchAdvancedController {
     // }
 
     $scope.ok = function (searchForm) {
+      var sendData = {};
+
       $scope.formSubmitted = true;
 
       /* istanbul ignore if */
       if (searchForm.$valid) {
         $scope.formSubmitted = false;
         $scope.isSearchCompleted = true;
+
         if ($scope.searchParams.nhsNumber) {
           $scope.searchParams.nhsNumber = $scope.searchParams.nhsNumber.replace(/\s+/g, '');
         }
+        if (!$scope.searchParams.sexMale) {
+          $scope.searchParams.sexMale = false;
+        }
+        if (!$scope.searchParams.sexFemale) {
+          $scope.searchParams.sexFemale = false;
+        }
+
+        if ($scope.typeOfGroupOfFieldsOfSearches === 'nhsNumber') {
+
+          sendData.nhsNumber = $scope.searchParams.nhsNumber;
+
+        } else {
+
+          if ($scope.typeOfGroupOfFieldsOfSearches === 'advanced') {
+            sendData.forename = $scope.searchParams.forename;
+            sendData.surname = $scope.searchParams.surname;
+
+          } else if ($scope.typeOfGroupOfFieldsOfSearches === 'clinicalQuery') {
+            sendData.type = $scope.sliderRange.type;
+            sendData.query = $scope.sliderRange.query;
+            sendData.queryNext = $scope.searchParams.queryNext;
+          }
+
+          if ($scope.selectAgeField === 'range') {
+            
+            sendData.minValue = $scope.sliderRange.minValue;
+            sendData.maxValue = $scope.sliderRange.maxValue;
+          } else {
+            sendData.dateOfBirth = $scope.searchParams.dateOfBirth;
+          }
+          
+          sendData.sexMale = $scope.searchParams.sexMale;
+          sendData.sexFemale = $scope.searchParams.sexFemale;
+        }
+
         $state.go('patients-list-full', {
           queryType: queryOption.type,
-          searchParams: $scope.searchParams,
-          searchString: JSON.stringify($scope.searchParams),
+          searchParams: sendData,
+          searchString: JSON.stringify(sendData),
         });
       }
     };  
@@ -265,6 +308,13 @@ class SearchAdvancedController {
         serviceRequests.publisher('closeAdvancedSearch');
       }
     });
+
+    $scope.$watch('sliderRange.minValue', function() {
+      $scope.changeParams(this.option.type);
+    }.bind(this));
+    $scope.$watch('sliderRange.maxValue', function() {
+      $scope.changeParams(this.option.type);
+    }.bind(this));
   }
 }
 
