@@ -20,8 +20,6 @@ class PatientsBannerController {
     $scope.patient = {};
 
     this.setCurrentPageData = function (data) {
-      console.log('data');
-      console.log(data);
       if (data.patientsGet.data) {
         $scope.patient = data.patientsGet.data;
       }

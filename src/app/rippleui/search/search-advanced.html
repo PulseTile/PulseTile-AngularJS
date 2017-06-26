@@ -186,8 +186,7 @@
                                     ng-click="openDatepicker($event, 'dateOfBirth')" 
                                     placeholder="03-Aug-1970" 
                                     ui-date-format 
-                                    ng-required="$ctrl.detailsFocused || $ctrl.option.type === 'clinicalQuery'"
-                                    readonly/>
+                                    ng-required="$ctrl.detailsFocused || $ctrl.option.type === 'clinicalQuery'"/>
                             <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.dateOfBirth.$error.required">You must enter a value.</span>
                           </div>
                         </div>

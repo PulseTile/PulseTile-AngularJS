@@ -43,7 +43,7 @@ describe('Drawings Drawing', function() {
         spyOn(scope, 'addNewText');
         spyOn(scope, 'isTextObject');
         spyOn(scope, 'textChange');
-        spyOn(scope, 'cackScale');
+        spyOn(scope, 'calckScale');
         spyOn(scope, 'changeFontParams');
         spyOn(scope, 'addPictureToCanvas');
         spyOn(scope, 'uploadPicture');
@@ -68,7 +68,7 @@ describe('Drawings Drawing', function() {
         scope.addNewText();
         scope.isTextObject();
         scope.textChange();
-        scope.cackScale();
+        scope.calckScale();
         scope.changeFontParams();
         scope.addPictureToCanvas();
         scope.uploadPicture();
@@ -125,8 +125,8 @@ describe('Drawings Drawing', function() {
     it("textChange was called", function() {
         expect(scope.textChange).toHaveBeenCalled();
     });
-    it("cackScale was called", function() {
-        expect(scope.cackScale).toHaveBeenCalled();
+    it("calckScale was called", function() {
+        expect(scope.calckScale).toHaveBeenCalled();
     });    
     it("changeFontParams was called", function() {
         expect(scope.changeFontParams).toHaveBeenCalled();

@@ -149,17 +149,16 @@ class DrawingsDrawingController {
     };
 
     /* istanbul ignore next */
-    $scope.cackScale = function (parentWidth, parentHeight, childWidth, childHeight) {
+    $scope.calckScale = function (parentWidth, parentHeight, childWidth, childHeight) {
       var scale = 1;
       var parentRatio = parentHeight / parentWidth; // 9 / 16 (56.25%)
       var childRatio = childHeight / childWidth;
 
       if (childWidth > parentWidth || childHeight > parentHeight) {
-
         if ( childRatio > parentRatio) {
-          scale = childHeight / parentHeight;
+          scale = parentHeight / childHeight;
         } else {
-          scale = childWidth / parentWidth;
+          scale = parentWidth / childWidth;
         }
       }
 
@@ -184,8 +183,8 @@ class DrawingsDrawingController {
       $timeout(function() {
         fabric.util.loadImage(base64, function(img) {
             var object = new fabric.Image(img);
-            var scale = $scope.cackScale($scope.canvas.width, $scope.canvas.height, object.width, object.height);
-
+            var scale = $scope.calckScale($scope.canvas.width, $scope.canvas.height, object.width, object.height);
+            
             object.hasRotatingPoint = true;
             object.scaleX = object.scaleY = scale;
             object.isDrawingMode = true;
