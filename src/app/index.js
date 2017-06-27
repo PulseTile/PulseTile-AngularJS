@@ -205,4 +205,111 @@ let app = angular
         //   });
         // };
     });
+
 console.log('app start');
+
+/*Project initialise*/
+app.run(function($state, serviceRequests, serviceThemes) {
+    var classLoadingPage = 'loading';
+    var body = angular.element('body');
+
+    body.addClass(classLoadingPage);
+
+    /* istanbul ignore next */
+    var switchDirectByRole = function (currentUser) {
+      /* istanbul ignore if  */
+      if (!currentUser) return;
+      // Direct different roles to different pages at login
+      /* istanbul ignore next  */
+      switch (currentUser.role) {
+        case 'IDCR':
+          $state.go('patients-charts');
+          break;
+        case 'PHR':
+          //Trick for PHR user login
+          loadPatient = patientsActions.getPatient;
+          loadPatient(currentUser.nhsNumber);
+          $state.go('patients-summary', {
+            patientId: currentUser.nhsNumber
+          });
+          break;
+        default:
+          $state.go('patients-summary', {
+            patientId: currentUser.nhsNumber
+          });
+      }
+    };
+
+    /* istanbul ignore next */
+    var setLoginData = function (loginResult) {
+      serviceRequests.publisher('setUserData', {userData: loginResult.data});
+      // switchDirectByRole(loginResult.data);
+    };
+    
+    /* istanbul ignore next */
+    var login = function () {
+      serviceRequests.login().then(function (result) {
+        serviceRequests.currentUserData = result.data;
+        setLoginData(result);
+        serviceRequests.getAppSettings().then(function (res) {
+          console.log('getAppSettings ', res);
+
+          if (res.data) {
+            serviceThemes.setDataApplication(res.data);
+          }
+
+          body.removeClass(classLoadingPage);
+        });
+      });
+    };
+
+    var auth0;
+
+
+    serviceRequests.initialise().then(function (result){
+      /* istanbul ignore next */
+      if (result.data.token) {
+        // reset the JSESSIONID cookie with the new incoming cookie
+        document.cookie = "JSESSIONID=" + result.data.token;
+
+        location.reload();
+
+        return;
+      }
+
+      /* istanbul ignore next */
+      if (result.data.redirectTo === 'auth0') {
+        console.log('running in UAT mode, so now login via auth0');
+        
+        /*Set URL to localStorage*/
+        var locationHrefBeforeLogin = localStorage.getItem('locationHrefBeforeLogin');
+        if (!locationHrefBeforeLogin) {
+          localStorage.setItem('locationHrefBeforeLogin', location.href);
+        }
+
+        if (!auth0) auth0 = new Auth0(result.data.config);
+        auth0.login({
+          connections: result.data.connections
+        });
+        return;
+      }
+      
+      /* istanbul ignore if */
+      if (result.data && result.data.ok) {
+        var locationHrefBeforeLogin = localStorage.getItem('locationHrefBeforeLogin');
+        if (locationHrefBeforeLogin) {
+          /*Go to URL from localStorage*/
+          localStorage.removeItem('locationHrefBeforeLogin');
+          location.href = locationHrefBeforeLogin;
+        }
+        console.log('Cookie was for a valid session, so fetch the simulated user');
+        login();
+      }
+
+    }, function (error){
+      //for dev and testing
+      login();
+    });
+});
+
+

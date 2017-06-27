@@ -42,6 +42,13 @@ class HeaderController {
       }
     ];
 
+
+    /* istanbul ignore next */
+    $scope.setUserData = function (data) {
+      $scope.user = data.userData;
+    };
+    serviceRequests.subscriber('setUserData', $scope.setUserData);
+
     /* istanbul ignore next */
     $scope.changeLogo = function (data) {
       $scope.logoB64 = data.logoB64;
@@ -138,103 +145,7 @@ class HeaderController {
       location.reload();
     };
 
-    /* istanbul ignore next */
-    $scope.switchDirectByRole = function (currentUser) {
-      /* istanbul ignore if  */
-      if (!currentUser) return;
-      // Direct different roles to different pages at login
-      /* istanbul ignore next  */
-      switch (currentUser.role) {
-        case 'IDCR':
-          $state.go('patients-charts');
-          break;
-        case 'PHR':
-          //Trick for PHR user login
-          $scope.loadPatient = patientsActions.getPatient;
-          $scope.loadPatient(currentUser.nhsNumber);
-          $state.go('patients-summary', {
-            patientId: currentUser.nhsNumber
-          });
-          break;
-        default:
-          $state.go('patients-summary', {
-            patientId: currentUser.nhsNumber
-          });
-      }
-    };
 
-    /* istanbul ignore next */
-    $scope.setTitle = function (data) {
-      if (data) {
-        $scope.title = data.role;
-      }
-    };
-    /* istanbul ignore next */
-    $scope.setLoginData = function (loginResult) {
-      $scope.user = loginResult.data;
-      $scope.setTitle(loginResult.data);
-    };
-    /* istanbul ignore next */
-    $scope.login = function () {
-      serviceRequests.login().then(function (result) {
-        serviceRequests.currentUserData = result.data;
-        $scope.setLoginData(result);
-        serviceRequests.getAppSettings().then(function (res) {
-          console.log('getAppSettings ', res);
-          if (res.data) {
-            serviceThemes.setDataApplication(res.data);
-          }
-        });
-      });
-    };
-
-    var auth0;
-
-    serviceRequests.initialise().then(function (result){
-      // $scope.switchDirectByRole(data);
-      /* istanbul ignore next */
-      if (result.data.token) {
-        // reset the JSESSIONID cookie with the new incoming cookie
-        document.cookie = "JSESSIONID=" + result.data.token;
-
-        location.reload();
-
-        return;
-      }
-
-      /* istanbul ignore next */
-      if (result.data.redirectTo === 'auth0') {
-        console.log('running in UAT mode, so now login via auth0');
-        
-        /*Set URL to localStorage*/
-        var locationHrefBeforeLogin = localStorage.getItem('locationHrefBeforeLogin');
-        if (!locationHrefBeforeLogin) {
-          localStorage.setItem('locationHrefBeforeLogin', location.href);
-        }
-
-        if (!auth0) auth0 = new Auth0(result.data.config);
-        auth0.login({
-          connections: result.data.connections
-        });
-        return;
-      }
-      
-      /* istanbul ignore if */
-      if (result.data && result.data.ok) {
-        var locationHrefBeforeLogin = localStorage.getItem('locationHrefBeforeLogin');
-        if (locationHrefBeforeLogin) {
-          /*Go to URL from localStorage*/
-          localStorage.removeItem('locationHrefBeforeLogin');
-          location.href = locationHrefBeforeLogin;
-        }
-        console.log('Cookie was for a valid session, so fetch the simulated user');
-        $scope.login();
-      }
-
-    }, function (error){
-      //for dev and testing
-      $scope.login();
-    });
 
     $rootScope.searchMode = false;
     $rootScope.reportMode = false;

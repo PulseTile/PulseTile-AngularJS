@@ -192,6 +192,11 @@ class MainController {
       }.bind(this), 0);
       
     }.bind(this));
+
+
+
+
+    
   }
 }
 const MainComponent = {
