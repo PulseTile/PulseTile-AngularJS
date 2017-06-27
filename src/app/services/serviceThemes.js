@@ -54,6 +54,16 @@ class ServiceThemes {
           if (data.logoB64) {
             this.setLogoB64(data.logoB64);
           }
+          if (data.browserTitle) {
+            this.setBrowserTitle(data.browserTitle);
+          }
+        };
+
+        /* istanbul ignore next */
+        this.setBrowserTitle = function (browserTitle) {
+          if (browserTitle) {
+            document.title = browserTitle;
+          }
         };
 
         /* istanbul ignore next */
