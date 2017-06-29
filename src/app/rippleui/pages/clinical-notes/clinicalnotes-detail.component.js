@@ -63,7 +63,7 @@ class ClinicalnotesDetailController {
       /* istanbul ignore if  */
       if (clinicalNoteForm.$valid) {
         let toUpdate = {
-          noteType: clinicalNote.clinicalNotesType,
+          clinicalNotesType: clinicalNote.clinicalNotesType,
           notes: clinicalNote.note,
           author: clinicalNote.author,
           source: clinicalNote.source,
