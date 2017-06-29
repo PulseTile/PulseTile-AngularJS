@@ -29,10 +29,10 @@
           <div class="form-group-wrapper">
             <div class="row-expand">
               <div class="col-expand-left">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalNoteForm.noteType.$dirty) && clinicalNoteForm.noteType.$invalid, 'has-success': clinicalNoteForm.noteType.$valid && clinicalNoteForm.noteType.$dirty}">
-                  <label for="noteType" class="control-label">Type</label>
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalNoteForm.clinicalNotesType.$dirty) && clinicalNoteForm.clinicalNotesType.$invalid, 'has-success': clinicalNoteForm.clinicalNotesType.$valid && clinicalNoteForm.clinicalNotesType.$dirty}">
+                  <label for="clinicalNotesType" class="control-label">Type</label>
                   <div class="input-holder">
-                    <input class="form-control input-sm" id="noteType" name="noteType" ng-model="clinicalNote.noteType" required />
+                    <input class="form-control input-sm" id="clinicalNotesType" name="clinicalNotesType" ng-model="clinicalNote.clinicalNotesType" required />
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && clinicalNoteForm.type.$error.required">You must enter a value.</span>
                 </div>

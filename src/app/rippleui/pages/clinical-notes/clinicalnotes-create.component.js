@@ -52,7 +52,7 @@ class ClinicalnotesCreateController {
 
       if (clinicalNoteForm.$valid) {
         let toAdd = {
-          noteType: clinicalNote.noteType,
+          clinicalNotesType: clinicalNote.clinicalNotesType,
           notes: clinicalNote.notes,
           dateCreated: clinicalNote.dateCreated,
           author: clinicalNote.author,

@@ -14,7 +14,7 @@
   ~  limitations under the License.
   -->
 
-<div mc-full-panel table-settings order="type" filtering class="panel panel-primary">
+<div mc-full-panel table-settings order="clinicalNotesType" filtering class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="btn-icon fa fa-filter"></i></button>
@@ -43,18 +43,18 @@
       </colgroup>
       <thead>
         <tr>
-          <th ng-click="sort('type')" ng-class="sortClass('type')">Type</th>
+          <th ng-click="sort('clinicalNotesType')" ng-class="sortClass('clinicalNotesType')">Type</th>
           <th ng-click="sort('author')" ng-class="sortClass('author')">Author</th>
-          <th ng-click="sort('date')" ng-class="sortClass('date')">Date Created</th>
+          <th ng-click="sort('dateCreated')" ng-class="sortClass('dateCreated')">Date Created</th>
           <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
         </tr>
       </thead>
 
       <tbody>
         <tr dir-paginate="clinicalNote in $ctrl.clinicalNotes| filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(clinicalNote.sourceId, clinicalNote.source)" ng-class="{info: selectedRow(clinicalNote.sourceId)}">
-          <td data-th="Type"  ng-class="sortClass('type')"><span>{{ clinicalNote.noteType }}</span></td>
+          <td data-th="Type"  ng-class="sortClass('clinicalNotesType')"><span>{{ clinicalNote.clinicalNotesType }}</span></td>
           <td data-th="Author"ng-class="sortClass('author')"><span>{{ clinicalNote.author }}</span></td>
-          <td data-th="Date"  ng-class="sortClass('date')"><span>{{ clinicalNote.dateCreated }}</span></td>
+          <td data-th="Date"  ng-class="sortClass('dateCreated')"><span>{{ clinicalNote.dateCreated }}</span></td>
           <td data-th="Source" ng-class="sortClass('source')" class="hidden-xs-cell"><span>{{ clinicalNote.source }}</span></td>
         </tr>
 
