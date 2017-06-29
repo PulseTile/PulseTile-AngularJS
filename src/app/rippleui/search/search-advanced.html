@@ -180,11 +180,11 @@
                                     name="dateOfBirth" 
                                     ng-model="searchParams.dateOfBirth" 
                                     ng-change="changeParams($ctrl.option.type)"
-                                    uib-datepicker-popup="dd-MMM-yyyy" 
+                                    uib-datepicker-popup="dd/MM/yyyy" 
                                     is-open="datepickers.dateOfBirth" 
                                     ng-focus="detailsFocused=true" 
                                     ng-click="openDatepicker($event, 'dateOfBirth')" 
-                                    placeholder="03-Aug-1970" 
+                                    placeholder="03/08/1970" 
                                     ui-date-format 
                                     ng-required="$ctrl.detailsFocused || $ctrl.option.type === 'clinicalQuery'"/>
                             <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.dateOfBirth.$error.required">You must enter a value.</span>
