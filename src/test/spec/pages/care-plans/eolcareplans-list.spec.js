@@ -1,9 +1,9 @@
 'use strict';
-import EolcareplansListComponent from '../../../../app/rippleui/pages/care-plans/eolcareplans-list.component';
+import EolcareplansListComponent from '../../../../app/pulsetileui/pages/care-plans/eolcareplans-list.component';
 import '../../../../app/index';
 import '../../../../app/actions/index';
 import * as types from '../../../../app/constants/ActionTypes';
-import eolcareplans from '../../../../app/rippleui/pages/care-plans/eolcareplans-reducer-all.js';
+import eolcareplans from '../../../../app/pulsetileui/pages/care-plans/eolcareplans-reducer-all.js';
 
 describe('Care Plans List', function() {
 

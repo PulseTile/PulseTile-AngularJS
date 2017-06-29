@@ -1,5 +1,5 @@
 'use strict';
-import TransferOfCarePopoverComponent from '../../../../app/rippleui/pages/transfer-of-care/transfer-of-care-popover.component';
+import TransferOfCarePopoverComponent from '../../../../app/pulsetileui/pages/transfer-of-care/transfer-of-care-popover.component';
 import '../../../../app/index';
 
 describe('Transfer Of Care Popover', function() {

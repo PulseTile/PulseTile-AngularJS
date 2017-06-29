@@ -1,5 +1,5 @@
 'use strict';
-import HeaderComponent from '../../../../app/rippleui/header-bar/header.component.js';
+import HeaderComponent from '../../../../app/pulsetileui/header-bar/header.component.js';
 import '../../../../app/index';
 
 describe('HeaderComponent', function() {

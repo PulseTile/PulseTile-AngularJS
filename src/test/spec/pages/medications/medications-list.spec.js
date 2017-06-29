@@ -1,8 +1,8 @@
 'use strict';
-import MedicationsListComponent from '../../../../app/rippleui/pages/medications/medications-list.component.js';
+import MedicationsListComponent from '../../../../app/pulsetileui/pages/medications/medications-list.component.js';
 import '../../../../app/index';
 import * as types from '../../../../app/constants/ActionTypes';
-import medications from '../../../../app/rippleui/pages/medications/medication-reducer-all.js';
+import medications from '../../../../app/pulsetileui/pages/medications/medication-reducer-all.js';
 import '../../../../app/index';
 
 describe('Medications List', function() {

@@ -1,5 +1,5 @@
 'use strict';
-import PatientsBannerComponent from '../../../../app/rippleui/pages/patients-detail/patients-banner.component';
+import PatientsBannerComponent from '../../../../app/pulsetileui/pages/patients-detail/patients-banner.component';
 import '../../../../app/index';
 
 describe('Patients Banner', function() {

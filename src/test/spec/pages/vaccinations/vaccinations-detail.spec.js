@@ -1,5 +1,5 @@
 'use strict';
-import VaccinationsDetailComponent from '../../../../app/rippleui/pages/vaccinations/vaccinations-detail.component';
+import VaccinationsDetailComponent from '../../../../app/pulsetileui/pages/vaccinations/vaccinations-detail.component';
 import '../../../../app/index';
 
 describe('Vaccinations Details', function() {

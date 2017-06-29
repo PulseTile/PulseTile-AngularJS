@@ -217,7 +217,7 @@ angular.module('ripple-ui.directives', [])
       scope: {
         popoverLabels: '@'
       },
-      template: require('./../rippleui/pages/vitals/vitals-popover.html'),
+      template: require('./../pulsetileui/pages/vitals/vitals-popover.html'),
       link: function(scope, element, attrs) {
         scope.title = attrs.title;
         scope.popoverLabels = [];

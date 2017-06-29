@@ -1,5 +1,5 @@
 'use strict';
-import ContactsDetailComponent from '../../../../app/rippleui/pages/contacts/contacts-detail.component.js';
+import ContactsDetailComponent from '../../../../app/pulsetileui/pages/contacts/contacts-detail.component.js';
 import '../../../../app/index';
 
 describe('Contacts Details', function() {

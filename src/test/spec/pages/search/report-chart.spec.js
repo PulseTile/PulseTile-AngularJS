@@ -1,5 +1,5 @@
 'use strict';
-import ReportChartComponent from '../../../../app/rippleui/search/report-chart.component';
+import ReportChartComponent from '../../../../app/pulsetileui/search/report-chart.component';
 import '../../../../app/index';
 
 describe('ReportChartComponent', function() {

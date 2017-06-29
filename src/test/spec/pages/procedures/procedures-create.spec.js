@@ -1,4 +1,4 @@
-import ProceduresCreateComponent from '../../../../app/rippleui/pages/procedures/procedures-create.component';
+import ProceduresCreateComponent from '../../../../app/pulsetileui/pages/procedures/procedures-create.component';
 import '../../../../app/index';
 
 describe('Procedures Create', function() {

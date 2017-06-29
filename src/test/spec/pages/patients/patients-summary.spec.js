@@ -1,5 +1,5 @@
 'use strict';
-import PatientsSummaryComponent from '../../../../app/rippleui/pages/patient-summary/patients-summary.component';
+import PatientsSummaryComponent from '../../../../app/pulsetileui/pages/patient-summary/patients-summary.component';
 import '../../../../app/index';
 
 describe('Patients Summary', function() {

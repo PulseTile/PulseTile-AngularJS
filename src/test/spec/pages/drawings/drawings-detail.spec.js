@@ -1,5 +1,5 @@
 'use strict';
-import DrawingsComponent from '../../../../app/rippleui/pages/drawings/drawings-detail.component';
+import DrawingsComponent from '../../../../app/pulsetileui/pages/drawings/drawings-detail.component';
 import '../../../../app/index';
 
 describe('Drawings Details', function() {

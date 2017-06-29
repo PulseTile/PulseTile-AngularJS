@@ -1,4 +1,4 @@
-import EventsCreateComponent from '../../../../app/rippleui/pages/events/events-create.component';
+import EventsCreateComponent from '../../../../app/pulsetileui/pages/events/events-create.component';
 import '../../../../app/index';
 import '../../../../app/actions/index';
 

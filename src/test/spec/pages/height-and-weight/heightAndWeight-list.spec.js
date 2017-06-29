@@ -1,8 +1,8 @@
 'use strict';
-import HeightAndWeightListComponent from '../../../../app/rippleui/pages/height-and-weight/heightAndWeight-list.component.js';
+import HeightAndWeightListComponent from '../../../../app/pulsetileui/pages/height-and-weight/heightAndWeight-list.component.js';
 import '../../../../app/index';
 import * as types from '../../../../app/constants/ActionTypes';
-import heightAndWeight from '../../../../app/rippleui/pages/height-and-weight/heightAndWeight-reducer-all.js';
+import heightAndWeight from '../../../../app/pulsetileui/pages/height-and-weight/heightAndWeight-reducer-all.js';
 import '../../../../app/index';
 
 describe('HeightAndWeight List', function() {

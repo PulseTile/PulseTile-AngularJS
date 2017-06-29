@@ -1,8 +1,8 @@
 'use strict';
-import ProceduresListComponent from '../../../../app/rippleui/pages/procedures/procedures-list.component.js';
+import ProceduresListComponent from '../../../../app/pulsetileui/pages/procedures/procedures-list.component.js';
 import '../../../../app/index';
 import * as types from '../../../../app/constants/ActionTypes';
-import procedures from '../../../../app/rippleui/pages/procedures/procedures-reducer-all.js';
+import procedures from '../../../../app/pulsetileui/pages/procedures/procedures-reducer-all.js';
 import '../../../../app/index';
 
 describe('Procedures List', function() {

@@ -1,5 +1,5 @@
 'use strict';
-import ResultsDetailComponent from '../../../../app/rippleui/pages/results/results-detail.component.js';
+import ResultsDetailComponent from '../../../../app/pulsetileui/pages/results/results-detail.component.js';
 import '../../../../app/index';
 
 describe('Results Details', function() {

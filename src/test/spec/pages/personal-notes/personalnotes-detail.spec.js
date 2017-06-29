@@ -1,5 +1,5 @@
 'use strict';
-import PersonalnotesDetailComponent from '../../../../app/rippleui/pages/personal-notes/personalnotes-detail.component.js';
+import PersonalnotesDetailComponent from '../../../../app/pulsetileui/pages/personal-notes/personalnotes-detail.component.js';
 import '../../../../app/index';
 
 describe('Personalnotes Details', function() {

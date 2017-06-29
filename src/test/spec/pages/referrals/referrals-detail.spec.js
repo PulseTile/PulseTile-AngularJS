@@ -1,5 +1,5 @@
 'use strict';
-import ReferralsDetailComponent from '../../../../app/rippleui/pages/referrals/referrals-detail.component.js';
+import ReferralsDetailComponent from '../../../../app/pulsetileui/pages/referrals/referrals-detail.component.js';
 import '../../../../app/index';
 
 describe('Referrals Details', function() {

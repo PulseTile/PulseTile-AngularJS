@@ -1,5 +1,5 @@
 'use strict';
-import MainComponent from '../../../../app/rippleui/main-component/main.component.js';
+import MainComponent from '../../../../app/pulsetileui/main-component/main.component.js';
 import '../../../../app/index';
 
 describe('MainComponent', function() {

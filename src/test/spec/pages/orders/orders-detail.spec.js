@@ -1,5 +1,5 @@
 'use strict';
-import OrdersDetailComponent from '../../../../app/rippleui/pages/orders/orders-detail.component.js';
+import OrdersDetailComponent from '../../../../app/pulsetileui/pages/orders/orders-detail.component.js';
 import '../../../../app/index';
 
 describe('Orders Details', function() {

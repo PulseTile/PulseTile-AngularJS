@@ -1,4 +1,4 @@
-import DiagnosesCreateComponent from '../../../../app/rippleui/pages/diagnoses/diagnoses-create.component';
+import DiagnosesCreateComponent from '../../../../app/pulsetileui/pages/diagnoses/diagnoses-create.component';
 import '../../../../app/index';
 
 describe('Diagnoses Create', function() {

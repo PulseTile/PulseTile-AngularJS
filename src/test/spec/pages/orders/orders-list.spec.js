@@ -1,8 +1,8 @@
 'use strict';
-import OrdersListComponent from '../../../../app/rippleui/pages/orders/orders-list.component.js';
+import OrdersListComponent from '../../../../app/pulsetileui/pages/orders/orders-list.component.js';
 import '../../../../app/index';
 import * as types from '../../../../app/constants/ActionTypes';
-import orders from '../../../../app/rippleui/pages/orders/orders-reducer-all.js';
+import orders from '../../../../app/pulsetileui/pages/orders/orders-reducer-all.js';
 import '../../../../app/index';
 
 describe('Orders List', function() {

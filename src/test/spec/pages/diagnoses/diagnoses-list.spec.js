@@ -1,9 +1,9 @@
 'use strict';
-import DiagnosesListComponent from '../../../../app/rippleui/pages/diagnoses/diagnoses-list.component.js';
+import DiagnosesListComponent from '../../../../app/pulsetileui/pages/diagnoses/diagnoses-list.component.js';
 import '../../../../app/index';
 import '../../../../app/actions/index';
 import * as types from '../../../../app/constants/ActionTypes';
-import diagnoses from '../../../../app/rippleui/pages/diagnoses/diagnoses-reducer-all.js';
+import diagnoses from '../../../../app/pulsetileui/pages/diagnoses/diagnoses-reducer-all.js';
 
 describe('Diagnoses List', function() {
 

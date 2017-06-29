@@ -1,8 +1,8 @@
 'use strict';
-import ReferralsListComponent from '../../../../app/rippleui/pages/referrals/referrals-list.component.js';
+import ReferralsListComponent from '../../../../app/pulsetileui/pages/referrals/referrals-list.component.js';
 import '../../../../app/index';
 import * as types from '../../../../app/constants/ActionTypes';
-import referrals from '../../../../app/rippleui/pages/referrals/referrals-reducer-all.js';
+import referrals from '../../../../app/pulsetileui/pages/referrals/referrals-reducer-all.js';
 
 describe('Referrals List', function() {
 

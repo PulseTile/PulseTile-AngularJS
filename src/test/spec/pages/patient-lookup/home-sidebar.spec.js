@@ -1,5 +1,5 @@
 'use strict';
-import HomeSidebarComponent from '../../../../app/rippleui/pages/patients-lookup/home-sidebar.component.js'
+import HomeSidebarComponent from '../../../../app/pulsetileui/pages/patients-lookup/home-sidebar.component.js'
 import '../../../../app/index';
 
 describe('HomeSidebar', function() {

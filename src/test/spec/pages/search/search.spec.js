@@ -1,5 +1,5 @@
 'use strict';
-import SearchComponent from '../../../../app/rippleui/search/search.component.js';
+import SearchComponent from '../../../../app/pulsetileui/search/search.component.js';
 import '../../../../app/index';
 
 describe('SearchComponent', function() {

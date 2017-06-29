@@ -1,9 +1,9 @@
 'use strict';
-import PersonalnotesListComponent from '../../../../app/rippleui/pages/personal-notes/personalnotes-list.component.js';
+import PersonalnotesListComponent from '../../../../app/pulsetileui/pages/personal-notes/personalnotes-list.component.js';
 import '../../../../app/index';
 import '../../../../app/actions/index';
 import * as types from '../../../../app/constants/ActionTypes';
-import personalnotes from '../../../../app/rippleui/pages/personal-notes/personalnotes-reducer-all.js';
+import personalnotes from '../../../../app/pulsetileui/pages/personal-notes/personalnotes-reducer-all.js';
 
 describe('Personalnotes List', function() {
 

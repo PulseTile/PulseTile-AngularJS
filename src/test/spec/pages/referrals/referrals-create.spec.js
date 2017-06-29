@@ -1,4 +1,4 @@
-import ReferralsCreateComponent from '../../../../app/rippleui/pages/referrals/referrals-create.component';
+import ReferralsCreateComponent from '../../../../app/pulsetileui/pages/referrals/referrals-create.component';
 import '../../../../app/index';
 
 describe('Referrals Create', function() {

@@ -1,4 +1,4 @@
-import PersonalnotesCreateComponent from '../../../../app/rippleui/pages/personal-notes/personalnotes-create.component';
+import PersonalnotesCreateComponent from '../../../../app/pulsetileui/pages/personal-notes/personalnotes-create.component';
 import '../../../../app/index';
 
 describe('Personalnotes Create', function() {

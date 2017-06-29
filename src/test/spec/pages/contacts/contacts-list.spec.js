@@ -1,9 +1,9 @@
 'use strict';
-import ContactsListComponent from '../../../../app/rippleui/pages/contacts/contacts-list.component.js';
+import ContactsListComponent from '../../../../app/pulsetileui/pages/contacts/contacts-list.component.js';
 import '../../../../app/index';
 import '../../../../app/actions/index';
 import * as types from '../../../../app/constants/ActionTypes';
-import contacts from '../../../../app/rippleui/pages/contacts/contacts-reducer-all.js';
+import contacts from '../../../../app/pulsetileui/pages/contacts/contacts-reducer-all.js';
 
 describe('Contacts List', function() {
 

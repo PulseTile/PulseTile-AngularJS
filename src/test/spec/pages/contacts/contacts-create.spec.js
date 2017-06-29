@@ -1,4 +1,4 @@
-import ContactsCreateComponent from '../../../../app/rippleui/pages/contacts/contacts-create.component';
+import ContactsCreateComponent from '../../../../app/pulsetileui/pages/contacts/contacts-create.component';
 import '../../../../app/index';
 
 describe('Contacts Create', function() {

@@ -1,9 +1,9 @@
 'use strict';
-import ImageListComponent from '../../../../app/rippleui/pages/dicom/image-list.component.js';
+import ImageListComponent from '../../../../app/pulsetileui/pages/dicom/image-list.component.js';
 import '../../../../app/index';
 import '../../../../app/actions/index';
 import * as types from '../../../../app/constants/ActionTypes';
-import series from '../../../../app/rippleui/pages/dicom/series-reducer-all.js';
+import series from '../../../../app/pulsetileui/pages/dicom/series-reducer-all.js';
 
 describe('Image List', function() {
 

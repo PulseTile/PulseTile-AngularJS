@@ -15,15 +15,15 @@
 */
 import { combineReducers } from 'redux';
 
-import patients from '../rippleui/pages/patients-list/patients-reducer-all';
-import patientsGet from '../rippleui/pages/patients-list/patients-reducer-get';
-import search from '../rippleui/search/search-reducer-all';
-import chart from '../rippleui/search/chart-reducer-get';
-import studies from '../rippleui/pages/dicom/studies-reducer-all';
-import series from '../rippleui/pages/dicom/series-reducer-all';
-import instanceGet from '../rippleui/pages/dicom/instance-reducer-get';
-import instanceIdGet from '../rippleui/pages/dicom/instance-id-reducer-get';
-import findReferral from '../rippleui/pages/documents/documents-reducer-find-referral';
+import patients from '../pulsetileui/pages/patients-list/patients-reducer-all';
+import patientsGet from '../pulsetileui/pages/patients-list/patients-reducer-get';
+import search from '../pulsetileui/search/search-reducer-all';
+import chart from '../pulsetileui/search/chart-reducer-get';
+import studies from '../pulsetileui/pages/dicom/studies-reducer-all';
+import series from '../pulsetileui/pages/dicom/series-reducer-all';
+import instanceGet from '../pulsetileui/pages/dicom/instance-reducer-get';
+import instanceIdGet from '../pulsetileui/pages/dicom/instance-id-reducer-get';
+import findReferral from '../pulsetileui/pages/documents/documents-reducer-find-referral';
 
 import plugins from '../plugins';
 

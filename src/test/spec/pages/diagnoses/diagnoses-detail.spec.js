@@ -1,5 +1,5 @@
 'use strict';
-import DiagnosesDetailComponent from '../../../../app/rippleui/pages/diagnoses/diagnoses-detail.component.js';
+import DiagnosesDetailComponent from '../../../../app/pulsetileui/pages/diagnoses/diagnoses-detail.component.js';
 import '../../../../app/index';
 
 describe('Diagnoses Details', function() {

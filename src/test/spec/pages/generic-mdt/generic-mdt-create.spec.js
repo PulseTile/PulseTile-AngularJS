@@ -1,4 +1,4 @@
-import GenericMdtCreateComponent from '../../../../app/rippleui/pages/generic-mdt/generic-mdt-create.component';
+import GenericMdtCreateComponent from '../../../../app/pulsetileui/pages/generic-mdt/generic-mdt-create.component';
 import '../../../../app/index';
 
 describe('GenericMdt Create', function() {

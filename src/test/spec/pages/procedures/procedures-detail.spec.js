@@ -1,5 +1,5 @@
 'use strict';
-import ProceduresDetailComponent from '../../../../app/rippleui/pages/procedures/procedures-detail.component.js';
+import ProceduresDetailComponent from '../../../../app/pulsetileui/pages/procedures/procedures-detail.component.js';
 import '../../../../app/index';
 
 describe('Procedures Details', function() {

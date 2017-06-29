@@ -1,5 +1,5 @@
 'use strict';
-import VitalsDetailComponent from '../../../../app/rippleui/pages/vitals/vitals-detail.component';
+import VitalsDetailComponent from '../../../../app/pulsetileui/pages/vitals/vitals-detail.component';
 import '../../../../app/index';
 
 describe('VitalsDetailComponent', function() {

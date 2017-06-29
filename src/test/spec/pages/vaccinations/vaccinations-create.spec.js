@@ -1,5 +1,5 @@
 'use strict';
-import VaccinationsCreateComponent from '../../../../app/rippleui/pages/vaccinations/vaccinations-create.component';
+import VaccinationsCreateComponent from '../../../../app/pulsetileui/pages/vaccinations/vaccinations-create.component';
 import '../../../../app/index';
 
 describe('Vaccinations Create', function() {

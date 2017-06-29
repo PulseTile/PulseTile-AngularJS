@@ -1,4 +1,4 @@
-import ClinicalnotesCreateComponent from '../../../../app/rippleui/pages/clinical-notes/clinicalnotes-create.component';
+import ClinicalnotesCreateComponent from '../../../../app/pulsetileui/pages/clinical-notes/clinicalnotes-create.component';
 import '../../../../app/index';
 
 describe('Clinicalnotes Create', function() {

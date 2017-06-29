@@ -1,8 +1,8 @@
 'use strict';
-import AllergiesListComponent from '../../../../app/rippleui/pages/allergies/allergies-list.component.js';
+import AllergiesListComponent from '../../../../app/pulsetileui/pages/allergies/allergies-list.component.js';
 import '../../../../app/actions/index';
 import * as types from '../../../../app/constants/ActionTypes';
-import allergies from '../../../../app/rippleui/pages/allergies/allergies-reducer-all.js';
+import allergies from '../../../../app/pulsetileui/pages/allergies/allergies-reducer-all.js';
 import '../../../../app/index';
 
 describe('Allergies List', function() {

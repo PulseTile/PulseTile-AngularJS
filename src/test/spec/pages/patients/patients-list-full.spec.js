@@ -1,9 +1,9 @@
 'use strict';
-import PatientsComponent from '../../../../app/rippleui/pages/patients-list-full/patients-list-full.component';
+import PatientsComponent from '../../../../app/pulsetileui/pages/patients-list-full/patients-list-full.component';
 import '../../../../app/index';
 import '../../../../app/actions/index';
 import * as types from '../../../../app/constants/ActionTypes';
-import patients from '../../../../app/rippleui/pages/patients-list/patients-reducer-all';
+import patients from '../../../../app/pulsetileui/pages/patients-list/patients-reducer-all';
 
 describe('Patients List', function() {
 

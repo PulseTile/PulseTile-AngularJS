@@ -1,5 +1,5 @@
 'use strict';
-import UiKitComponent from '../../../../app/rippleui/pages/ui-kit/ui-kit.component';
+import UiKitComponent from '../../../../app/pulsetileui/pages/ui-kit/ui-kit.component';
 import '../../../../app/index';
 
 describe('Ui Kit Component', function() {

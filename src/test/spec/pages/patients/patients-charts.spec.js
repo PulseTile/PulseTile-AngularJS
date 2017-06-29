@@ -1,5 +1,5 @@
 'use strict';
-import PatientsChartsComponent from '../../../../app/rippleui/pages/patients-charts/patients-charts.component';
+import PatientsChartsComponent from '../../../../app/pulsetileui/pages/patients-charts/patients-charts.component';
 import '../../../../app/index';
 
 describe('Patients Charts', function() {

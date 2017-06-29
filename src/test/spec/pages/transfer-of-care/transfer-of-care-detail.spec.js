@@ -1,5 +1,5 @@
 'use strict';
-import TransferOfCareDetailComponent from '../../../../app/rippleui/pages/transfer-of-care/transfer-of-care-detail.component';
+import TransferOfCareDetailComponent from '../../../../app/pulsetileui/pages/transfer-of-care/transfer-of-care-detail.component';
 import '../../../../app/index';
 
 describe('Transfer Of Care Details', function() {

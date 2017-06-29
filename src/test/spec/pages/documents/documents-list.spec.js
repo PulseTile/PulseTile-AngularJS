@@ -1,9 +1,9 @@
 'use strict';
-import DocumentsListComponent from '../../../../app/rippleui/pages/documents/documents-list.component.js';
+import DocumentsListComponent from '../../../../app/pulsetileui/pages/documents/documents-list.component.js';
 import '../../../../app/index';
 import '../../../../app/actions/index';
 import * as types from '../../../../app/constants/ActionTypes';
-import documents from '../../../../app/rippleui/pages/documents/documents-reducer-all.js';
+import documents from '../../../../app/pulsetileui/pages/documents/documents-reducer-all.js';
 
 describe('Documents List', function() {
 

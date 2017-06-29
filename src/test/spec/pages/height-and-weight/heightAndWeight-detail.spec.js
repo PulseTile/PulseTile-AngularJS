@@ -1,5 +1,5 @@
 'use strict';
-import HeightAndWeightDetailComponent from '../../../../app/rippleui/pages/height-and-weight/heightAndWeight-detail.component.js';
+import HeightAndWeightDetailComponent from '../../../../app/pulsetileui/pages/height-and-weight/heightAndWeight-detail.component.js';
 import '../../../../app/index';
 
 describe('HeightAndWeight Details', function() {

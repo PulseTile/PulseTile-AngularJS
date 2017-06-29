@@ -1,5 +1,5 @@
 'use strict';
-import ClinicalstatementsCreateComponent from '../../../../app/rippleui/pages/clinical-statements/clinicalstatements-create.component';
+import ClinicalstatementsCreateComponent from '../../../../app/pulsetileui/pages/clinical-statements/clinicalstatements-create.component';
 import '../../../../app/index';
 import '../../../../app/actions/index';
 

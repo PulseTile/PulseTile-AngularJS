@@ -1,5 +1,5 @@
 'use strict';
-import OrdersCreateComponent from '../../../../app/rippleui/pages/orders/orders-create.component.js';
+import OrdersCreateComponent from '../../../../app/pulsetileui/pages/orders/orders-create.component.js';
 import '../../../../app/index';
 
 describe('Orders Create', function() {

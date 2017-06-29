@@ -1,5 +1,5 @@
 'use strict';
-import ImageDetailComponent from '../../../../app/rippleui/pages/dicom/image-detail.component.js';
+import ImageDetailComponent from '../../../../app/pulsetileui/pages/dicom/image-detail.component.js';
 import '../../../../app/index';
 
 describe('Image Details', function() {

@@ -1,5 +1,5 @@
 'use strict';
-import SearchAdvancedComponent from '../../../../app/rippleui/search/search-advanced.component';
+import SearchAdvancedComponent from '../../../../app/pulsetileui/search/search-advanced.component';
 import '../../../../app/index';
 
 describe('SearchAdvancedComponent', function() {

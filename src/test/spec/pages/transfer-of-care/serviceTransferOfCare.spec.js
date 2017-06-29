@@ -1,5 +1,5 @@
 'use strict';
-import serviceTransferOfCare from '../../../../app/rippleui/pages/transfer-of-care/serviceTransferOfCare.js';
+import serviceTransferOfCare from '../../../../app/pulsetileui/pages/transfer-of-care/serviceTransferOfCare.js';
 import '../../../../app/index';
 
 describe('serviceTransferOfCare', function() {

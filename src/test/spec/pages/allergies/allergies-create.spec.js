@@ -1,4 +1,4 @@
-import AllergiesCreateComponent from '../../../../app/rippleui/pages/allergies/allergies-create.component';
+import AllergiesCreateComponent from '../../../../app/pulsetileui/pages/allergies/allergies-create.component';
 import '../../../../app/index';
 
 describe('Allergies Create', function() {

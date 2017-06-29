@@ -1,5 +1,5 @@
 'use strict';
-import AllergiesActions from '../../../../app/rippleui/pages/allergies/allergies-actions.js';
+import AllergiesActions from '../../../../app/pulsetileui/pages/allergies/allergies-actions.js';
 // import '../../../../app/index';
 
 describe('Allergies Actions', function() {

@@ -1,5 +1,5 @@
 'use strict';
-import GenericMdtDetailComponent from '../../../../app/rippleui/pages/generic-mdt/generic-mdt-detail.component.js';
+import GenericMdtDetailComponent from '../../../../app/pulsetileui/pages/generic-mdt/generic-mdt-detail.component.js';
 import '../../../../app/index';
 
 describe('GenericMdt Details', function() {

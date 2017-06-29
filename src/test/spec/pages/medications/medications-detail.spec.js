@@ -1,5 +1,5 @@
 'use strict';
-import MedicationsDetailComponent from '../../../../app/rippleui/pages/medications/medications-detail.component.js';
+import MedicationsDetailComponent from '../../../../app/pulsetileui/pages/medications/medications-detail.component.js';
 import '../../../../app/index';
 
 describe('Medications Details', function() {

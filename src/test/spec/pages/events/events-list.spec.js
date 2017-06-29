@@ -1,8 +1,8 @@
-import EventsListComponent from '../../../../app/rippleui/pages/events/events-list.component';
+import EventsListComponent from '../../../../app/pulsetileui/pages/events/events-list.component';
 import '../../../../app/index';
 import '../../../../app/actions/index';
 import * as types from '../../../../app/constants/ActionTypes';
-import events from '../../../../app/rippleui/pages/referrals/referrals-reducer-all.js';
+import events from '../../../../app/pulsetileui/pages/referrals/referrals-reducer-all.js';
 
 describe('Events List', function() {
 

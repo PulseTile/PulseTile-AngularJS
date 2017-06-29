@@ -1,9 +1,9 @@
 'use strict';
-import ClinicalnotesListComponent from '../../../../app/rippleui/pages/clinical-notes/clinicalnotes-list.component.js';
+import ClinicalnotesListComponent from '../../../../app/pulsetileui/pages/clinical-notes/clinicalnotes-list.component.js';
 import '../../../../app/index';
 import '../../../../app/actions/index';
 import * as types from '../../../../app/constants/ActionTypes';
-import clinicalnotes from '../../../../app/rippleui/pages/clinical-notes/clinicalnotes-reducer-all.js';
+import clinicalnotes from '../../../../app/pulsetileui/pages/clinical-notes/clinicalnotes-reducer-all.js';
 
 describe('Clinicalnotes List', function() {
 

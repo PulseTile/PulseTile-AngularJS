@@ -1,5 +1,5 @@
 'use strict';
-import DrawingsCreateComponent from '../../../../app/rippleui/pages/drawings/drawings-create.component';
+import DrawingsCreateComponent from '../../../../app/pulsetileui/pages/drawings/drawings-create.component';
 import '../../../../app/index';
 
 describe('Drawings Create', function() {

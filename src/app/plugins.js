@@ -13,27 +13,27 @@
  ~  See the License for the specific language governing permissions and
  ~  limitations under the License.
  */
-import clinicalnotes from './rippleui/pages/clinical-notes/index';
-import allergies from './rippleui/pages/allergies/index';
-import eolcareplans from './rippleui/pages/care-plans/index';
-import contacts from './rippleui/pages/contacts/index';
-import diagnoses from './rippleui/pages/diagnoses/index';
-import dicom from './rippleui/pages/dicom/index';
-import documents from './rippleui/pages/documents/index';
-import genericmdt from './rippleui/pages/generic-mdt/index';
-import heightAndWeight from './rippleui/pages/height-and-weight/index';
-import medication from './rippleui/pages/medications/index';
-import orders from './rippleui/pages/orders/index';
-import personalnotes from './rippleui/pages/personal-notes/index';
-import procedures from './rippleui/pages/procedures/index';
-import referrals from './rippleui/pages/referrals/index';
-import results from './rippleui/pages/results/index';
-import transferOfCare from './rippleui/pages/transfer-of-care/index';
-import vaccinations from './rippleui/pages/vaccinations/index';
-import vitals from './rippleui/pages/vitals/index';
-import clinicalstatements from './rippleui/pages/clinical-statements/index';
-import events from './rippleui/pages/events/index';
-import drawings from './rippleui/pages/drawings/index';
+import clinicalnotes from './pulsetileui/pages/clinical-notes/index';
+import allergies from './pulsetileui/pages/allergies/index';
+import eolcareplans from './pulsetileui/pages/care-plans/index';
+import contacts from './pulsetileui/pages/contacts/index';
+import diagnoses from './pulsetileui/pages/diagnoses/index';
+import dicom from './pulsetileui/pages/dicom/index';
+import documents from './pulsetileui/pages/documents/index';
+import genericmdt from './pulsetileui/pages/generic-mdt/index';
+import heightAndWeight from './pulsetileui/pages/height-and-weight/index';
+import medication from './pulsetileui/pages/medications/index';
+import orders from './pulsetileui/pages/orders/index';
+import personalnotes from './pulsetileui/pages/personal-notes/index';
+import procedures from './pulsetileui/pages/procedures/index';
+import referrals from './pulsetileui/pages/referrals/index';
+import results from './pulsetileui/pages/results/index';
+import transferOfCare from './pulsetileui/pages/transfer-of-care/index';
+import vaccinations from './pulsetileui/pages/vaccinations/index';
+import vitals from './pulsetileui/pages/vitals/index';
+import clinicalstatements from './pulsetileui/pages/clinical-statements/index';
+import events from './pulsetileui/pages/events/index';
+import drawings from './pulsetileui/pages/drawings/index';
 
 export default [
   diagnoses,

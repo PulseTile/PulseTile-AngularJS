@@ -1,4 +1,4 @@
-import MedicationsCreateComponent from '../../../../app/rippleui/pages/medications/medications-create.component';
+import MedicationsCreateComponent from '../../../../app/pulsetileui/pages/medications/medications-create.component';
 import '../../../../app/index';
 
 describe('Medications Create', function() {

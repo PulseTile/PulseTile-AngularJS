@@ -1,5 +1,5 @@
 'use strict';
-import TransferOfCareListComponent from '../../../../app/rippleui/pages/transfer-of-care/transfer-of-care-list.component';
+import TransferOfCareListComponent from '../../../../app/pulsetileui/pages/transfer-of-care/transfer-of-care-list.component';
 import '../../../../app/index';
 
 describe('Transfer Of Care List', function() {

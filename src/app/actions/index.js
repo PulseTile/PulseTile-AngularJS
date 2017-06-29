@@ -15,10 +15,10 @@
 */
 import angular from 'angular';
 
-import patientsActions from '../rippleui/pages/patients-list/patients-actions';
-import searchActions from '../rippleui/search/search-actions';
-import searchReport from '../rippleui/search/search-report-actions';
-import imageActions from '../rippleui/pages/dicom/image-actions';
+import patientsActions from '../pulsetileui/pages/patients-list/patients-actions';
+import searchActions from '../pulsetileui/search/search-actions';
+import searchReport from '../pulsetileui/search/search-report-actions';
+import imageActions from '../pulsetileui/pages/dicom/image-actions';
 import plugins from '../plugins';
 
 let app = angular

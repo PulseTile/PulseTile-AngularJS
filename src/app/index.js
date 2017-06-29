@@ -49,39 +49,39 @@ import deviceDetector from './helpers/deviceDetector';
 import './helpers/polyfills';
 
 //components 
-import UiKitComponent from './rippleui/pages/ui-kit/ui-kit.component';
-import ProfileComponent from './rippleui/pages/profile/profile.component';
-import HeaderComponent from './rippleui/header-bar/header.component.js';
-import PatientsChartsComponent from './rippleui/pages/patients-charts/patients-charts.component';
-import PatientsSummaryComponent from './rippleui/pages/patient-summary/patients-summary.component';
-import PatientsListFullComponent from './rippleui/pages/patients-list-full/patients-list-full.component';
-import PatientsSidebarComponent from './rippleui/pages/patients-detail/patients-sidebar.component';
-import PatientsBannerComponent from './rippleui/pages/patients-detail/patients-banner.component';
-import SearchComponent from './rippleui/search/search.component';
-import SearchAdvancedComponent from './rippleui/search/search-advanced.component';
-import ReportChartComponent from './rippleui/search/report-chart.component';
-import MainComponent from './rippleui/main-component/main.component';
-import HomeSidebarComponent from './rippleui/pages/patients-lookup/home-sidebar.component';
+import UiKitComponent from './pulsetileui/pages/ui-kit/ui-kit.component';
+import ProfileComponent from './pulsetileui/pages/profile/profile.component';
+import HeaderComponent from './pulsetileui/header-bar/header.component.js';
+import PatientsChartsComponent from './pulsetileui/pages/patients-charts/patients-charts.component';
+import PatientsSummaryComponent from './pulsetileui/pages/patient-summary/patients-summary.component';
+import PatientsListFullComponent from './pulsetileui/pages/patients-list-full/patients-list-full.component';
+import PatientsSidebarComponent from './pulsetileui/pages/patients-detail/patients-sidebar.component';
+import PatientsBannerComponent from './pulsetileui/pages/patients-detail/patients-banner.component';
+import SearchComponent from './pulsetileui/search/search.component';
+import SearchAdvancedComponent from './pulsetileui/search/search-advanced.component';
+import ReportChartComponent from './pulsetileui/search/report-chart.component';
+import MainComponent from './pulsetileui/main-component/main.component';
+import HomeSidebarComponent from './pulsetileui/pages/patients-lookup/home-sidebar.component';
 import ServiceRequests from './services/serviceRequests.js';
 import ServiceStateManager from './services/serviceStateManager.js';
-import ServiceVitalsSigns from './rippleui/pages/vitals/serviceVitalsSigns.js';
-import ServiceActions from './rippleui/pages/dicom/serviceActions.js';
+import ServiceVitalsSigns from './pulsetileui/pages/vitals/serviceVitalsSigns.js';
+import ServiceActions from './pulsetileui/pages/dicom/serviceActions.js';
 import ServiceFormatted from './services/serviceFormatted.js';
 import TemplateService from './services/TemplateService.js';
 import ServiceThemes from './services/serviceThemes.js';
-import ServiceTransferOfCare from './rippleui/pages/transfer-of-care/serviceTransferOfCare.js';
-import ServicePatients from './rippleui/pages/patients-list/servicePatients.js';
+import ServiceTransferOfCare from './pulsetileui/pages/transfer-of-care/serviceTransferOfCare.js';
+import ServicePatients from './pulsetileui/pages/patients-list/servicePatients.js';
 
-import ScheduleModal from './rippleui/pages/events/schedule-modal';
-import ConfirmationModal from './rippleui/confirmation/confirmation';
-import ConfirmationDocsModal from './rippleui/confirmation/confirmation-documents';
+import ScheduleModal from './pulsetileui/pages/events/schedule-modal';
+import ConfirmationModal from './pulsetileui/confirmation/confirmation';
+import ConfirmationDocsModal from './pulsetileui/confirmation/confirmation-documents';
 
 import routeConfig from 'app/index.route';
 import 'app/scss/core.scss';
 
 import 'app/directives/index.js';
 import 'app/filters/index.js';
-import 'app/rippleui/pages/patients-list/index.js';
+import 'app/pulsetileui/pages/patients-list/index.js';
 
 import plugins from './plugins';
 
@@ -150,7 +150,7 @@ let app = angular
     
     .config(routeConfig)
     .config(function (paginationTemplateProvider) {
-        paginationTemplateProvider.setString(require('./rippleui/pagination/dirPagination.tpl.html'));
+        paginationTemplateProvider.setString(require('./pulsetileui/pagination/dirPagination.tpl.html'));
     })
     .config(['$ngReduxProvider', $ngReduxProvider => {
         const middleware = ['httpMiddleware'];

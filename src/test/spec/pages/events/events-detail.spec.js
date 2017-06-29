@@ -1,4 +1,4 @@
-import EventsDetailComponent from '../../../../app/rippleui/pages/events/events-detail.component';
+import EventsDetailComponent from '../../../../app/pulsetileui/pages/events/events-detail.component';
 import '../../../../app/index';
 import '../../../../app/actions/index';
 

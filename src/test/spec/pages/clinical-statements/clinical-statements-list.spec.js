@@ -1,4 +1,4 @@
-import ClinicalstatementsListComponent from '../../../../app/rippleui/pages/clinical-statements/clinicalstatements-list.component';
+import ClinicalstatementsListComponent from '../../../../app/pulsetileui/pages/clinical-statements/clinicalstatements-list.component';
 import '../../../../app/index';
 import '../../../../app/actions/index';
 

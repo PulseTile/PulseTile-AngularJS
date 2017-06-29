@@ -1,5 +1,5 @@
 'use strict';
-import ClinicalnotesDetailComponent from '../../../../app/rippleui/pages/clinical-notes/clinicalnotes-detail.component.js';
+import ClinicalnotesDetailComponent from '../../../../app/pulsetileui/pages/clinical-notes/clinicalnotes-detail.component.js';
 import '../../../../app/index';
 
 describe('Clinicalnotes Details', function() {

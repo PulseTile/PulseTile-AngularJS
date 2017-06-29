@@ -1,5 +1,5 @@
 'use strict';
-import PatientsSidebarComponent from '../../../../app/rippleui/pages/patients-detail/patients-sidebar.component';
+import PatientsSidebarComponent from '../../../../app/pulsetileui/pages/patients-detail/patients-sidebar.component';
 import '../../../../app/index';
 
 describe('Patients Sidebar', function() {

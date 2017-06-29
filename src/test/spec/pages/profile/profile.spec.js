@@ -1,5 +1,5 @@
 'use strict';
-import ProfileComponent from '../../../../app/rippleui/pages/profile/profile.component.js'
+import ProfileComponent from '../../../../app/pulsetileui/pages/profile/profile.component.js'
 import '../../../../app/index';
 
 describe('Profile', function() {

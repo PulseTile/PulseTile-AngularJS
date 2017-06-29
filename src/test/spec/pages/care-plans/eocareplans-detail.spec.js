@@ -1,5 +1,5 @@
 'use strict';
-import EolcareplansDetailComponent from '../../../../app/rippleui/pages/care-plans/eolcareplans-detail.component';
+import EolcareplansDetailComponent from '../../../../app/pulsetileui/pages/care-plans/eolcareplans-detail.component';
 import '../../../../app/index';
 
 describe('Care Plans Detail', function() {

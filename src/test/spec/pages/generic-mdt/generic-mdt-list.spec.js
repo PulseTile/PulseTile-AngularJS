@@ -1,9 +1,9 @@
 'use strict';
-import GenericMdtListComponent from '../../../../app/rippleui/pages/generic-mdt/generic-mdt-list.component.js';
+import GenericMdtListComponent from '../../../../app/pulsetileui/pages/generic-mdt/generic-mdt-list.component.js';
 import '../../../../app/index';
 import '../../../../app/actions/index';
 import * as types from '../../../../app/constants/ActionTypes';
-import genericmdt from '../../../../app/rippleui/pages/generic-mdt/generic-mdt-reducer-all.js';
+import genericmdt from '../../../../app/pulsetileui/pages/generic-mdt/generic-mdt-reducer-all.js';
 
 describe('GenericMdt List', function() {
 
