@@ -253,7 +253,10 @@ class PatientsListFullController {
       if (queryParams && queryParams.dateOfBirth) {
         queryParams.dateOfBirth = new Date(queryParams.dateOfBirth.getTime() - (60000 * queryParams.dateOfBirth.getTimezoneOffset()));
       }
-
+      console.log('queryType');
+      console.log(queryType);
+      console.log('queryParams');
+      console.log(queryParams);
       this.searchResult = queryType === 'advanced' ? searchActions.advancedSearch : searchActions.querySearch;
       this.searchResult(queryParams);
     };

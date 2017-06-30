@@ -14,7 +14,6 @@
    ~  limitations under the License.
  */
 let templateSearch = require('./search-advanced.html');
-import plugins from '../../plugins';
 
 class SearchAdvancedController {
   constructor($scope, $http, $ngRedux, serviceRequests, searchActions, $state, $timeout, ConfirmationModal, $rootScope, serviceFormatted) {
@@ -80,10 +79,10 @@ class SearchAdvancedController {
         });
       }
 
-      if (params.query && params.queryNext) {
+      if (params.query && params.queryText) {
         paramsArr.push({
           key: 'Search Query',
-          value: params.query + ' ' + params.queryNext
+          value: params.query + ' ' + params.queryText
         });
       }
 
@@ -131,14 +130,25 @@ class SearchAdvancedController {
     };
 
     this.typesList = [];
-    this.queryList = ['contains' , 'excludes'];
-    
-    plugins.forEach((plugin)=>{
-      /* istanbul ignore if  */
-      if (!Object.keys(plugin.sidebarInfo).length) return;
-      this.typesList.push(plugin.sidebarInfo);
-    });
-
+    this.queryList = [
+      'contains', 
+      // 'excludes'
+    ];
+    this.typesList = [
+      {
+        name: 'Allergies',
+        key: 'allergies'
+      }, {
+        name: 'Problems / Diagnosis',
+        key: 'diagnosis'
+      }, {
+        name: 'Procedures',
+        key: 'procedures'
+      }, {
+        name: 'Medications',
+        key: 'medications'
+      }
+    ];
 
     var step;
     for (var i = 0; i < 100; i += 5) {
@@ -219,9 +229,9 @@ class SearchAdvancedController {
             sendData.surname = $scope.searchParams.surname;
 
           } else if ($scope.typeOfGroupOfFieldsOfSearches === 'clinicalQuery') {
-            sendData.type = $scope.sliderRange.type;
-            sendData.query = $scope.sliderRange.query;
-            sendData.queryNext = $scope.searchParams.queryNext;
+            // sendData.type = $scope.searchParams.type;
+            // sendData.query = $scope.searchParams.query;
+            sendData.queryNext = $scope.searchParams.queryText;
           }
 
           if ($scope.selectAgeField === 'range') {
@@ -236,13 +246,20 @@ class SearchAdvancedController {
           sendData.sexFemale = $scope.searchParams.sexFemale;
         }
 
-        $state.go('patients-list-full', {
-          queryType: queryOption.type,
-          searchParams: sendData,
-          searchString: JSON.stringify(sendData),
-        });
+        if ($scope.typeOfGroupOfFieldsOfSearches === 'clinicalQuery') {
+          $state.go('search-report', {
+            searchParams: sendData,
+            searchString: JSON.stringify(sendData),
+          });
+        } else {
+          $state.go('patients-list-full', {
+            queryType: this.option.type,
+            searchParams: sendData,
+            searchString: JSON.stringify(sendData),
+          });
+        }
       }
-    };  
+    }.bind(this);  
 
     $scope.isNhsNumberRequired = function (advancedSearchForm) {
       var nhsNumber = $scope.advancedSearchForm.nhsNumber.$viewValue;

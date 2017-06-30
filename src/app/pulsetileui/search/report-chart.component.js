@@ -16,82 +16,173 @@
 let templateReportChart = require('./report-chart.html');
 
 class ReportChartController {
-  constructor($scope, $rootScope, $window, $uibModal, $state, $stateParams, searchReport, $timeout, $ngRedux, serviceRequests) {
-    var vm = this;
+  constructor($scope, $state, $ngRedux, $stateParams, searchActions, serviceRequests, Patient, $window, $timeout) {
+    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-charts'});
 
-    $rootScope.searchMode = true;
-    $rootScope.reportMode = true;
-    $rootScope.reportTypeSet = true;
-    vm.resultSize = 0;
-    vm.noResults = '';
+    let _ = require('underscore');
+    $scope.isResults = false;
 
-    var requestBody;
-    var graphData;
-    vm.setDataRequest = function (result) {
-      /* istanbul ignore if  */
-      if (result.chart.data && !graphData) {
-        graphData = [
-          {
-            series: '11-18',
-            value: result.chart.data.agedElevenToEighteen
-          },
-          {
-            series: '19-30',
-            value: result.chart.data.agedNineteenToThirty
-          },
-          {
-            series: '31-60',
-            value: result.chart.data.agedThirtyOneToSixty
-          },
-          {
-            series: '61-80',
-            value: result.chart.data.agedSixtyOneToEighty
-          },
-          {
-            series: '>80',
-            value: result.chart.data.agedEightyPlus
-          }
-        ];
-
-        vm.resultSize = result.chart.data.all;
-
-        /* istanbul ignore if  */
-        if (vm.resultSize !== 0) {
-          vm.ageChart(graphData);
-        } else {
-          vm.noResults = 'There are no results that match your search criteria';
-        }
-
+    var goToPatients = function (row) {
+      /* istanbul ignore next */
+      var data =  { 
+        patientsList: row.patients 
       }
-        result.chart.data = 0;
+      if (row.patients.length === 0) {
+        data.displayEmptyTable = true;
+      }
+
+      $state.go('patients-list', data);
     };
 
-    /* istanbul ignore if  */
-    if ($stateParams.searchString !== undefined) {
-      var searchQuery = $stateParams.searchString.split(':');
-      vm.reportType = searchQuery[0];
-      vm.searchString = searchQuery[1];
-      $rootScope.reportTypeString = vm.reportType;
+    var createChart = function (options) {
+      /* istanbul ignore next  */
+      if (options && options.id && options.data) {
+        var canvas, ctx, barChart;
+        var labels = [];
+        var datasets = [];
 
-      if (searchQuery.length === 1) {
-        $state.go('patients-charts');
+        if (options.data) {
+          for (var i = 0; i < options.data.length; i++) {
+            labels.push(options.data[i].series);
+            datasets.push(options.data[i].value);
+          }
+        }
+
+        $timeout(function () {
+          canvas = document.getElementById(options.id);
+          
+          if (canvas) {
+            ctx = canvas.getContext("2d");
+            barChart = new $window.Chart(ctx, {
+                type: 'bar',
+                data: {
+                  labels: labels,
+                  datasets: [{data: datasets}]
+                },
+                options: {
+                  capBezierPoints: false,
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  legend: {
+                    display: false
+                  },
+                  elements: {
+                    rectangle: {
+                      borderColor: options.borderColor,
+                      backgroundColor: options.backgroundColor,
+                      borderWidth: 1
+                    }
+                  },
+                  tooltips: {
+                    enabled: true,
+                    mode: 'label',
+                    titleMarginBottom: 15,
+                    bodySpacing: 10,
+                    xPadding: 10,
+                    yPadding: 10,
+                    callbacks: {
+                      label: function(tooltipItem) {
+                        /* istanbul ignore next */
+                        return '  Patients : ' + tooltipItem.yLabel;
+                      }
+                    }
+                  },
+                  scales: {
+                      xAxes: [{
+                          stacked: true
+                      }],
+                      yAxes: [{
+                          stacked: true
+                      }]
+                  }
+                }
+            });
+            if (options.onClick) {
+              canvas.onclick = options.onClick(barChart);
+            }
+          }
+        }, 0);
       }
+    };
 
-      requestBody = {
-        reportType: searchQuery[0],
-        searchString: searchQuery[1]
-      };
-      searchReport.getChart(requestBody);
-    } else {
-      $state.go('patients-charts');
-    }
+    this.setDataRequest = function (result) {
+      if (result.data && result.data.length) {
+        $scope.isResults = true;
+
+        var changedPatients = [];
+        var patientsAgeData;
+        var chartAgeData = {};
+        var chartAgeDataKeys = ["11-18", "19-30", "31-60", "61-80", ">80"];
+
+        for (let i = 0; i < chartAgeDataKeys.length; i++) {
+          chartAgeData[chartAgeDataKeys[i]] = [];
+        }
+
+        angular.forEach(result.data, function (patient) {
+          var curPatient = new Patient.patient(patient);
+          changedPatients.push(curPatient);
+        });
+
+        patientsAgeData = _.chain(changedPatients)
+          .filter(function (patient) {
+            return !!patient.age;
+          })
+          .groupBy(function (patient) {
+            return patient.ageRange;
+          })
+          .value();
+
+        chartAgeData = Object.assign(chartAgeData, patientsAgeData);
+        
+        chartAgeData = _.chain(chartAgeData)
+          .mapObject(function(patients, key) {
+            return {
+              series: key,
+              value: patients.length,
+              patients: patients
+            };
+          })
+          .toArray()
+          .value();
+
+        createChart({
+          id: "chart-age", 
+          data: chartAgeData, 
+          borderColor: 'rgba(126, 41, 205,1)',
+          backgroundColor: 'rgba(126, 41, 205,0.3)',
+          onClick: function (chart) {
+            return function (ev) {
+              var activePoint = chart.getElementAtEvent(ev)[0];
+
+              if (activePoint) {
+                goToPatients(chartAgeData[activePoint._index]);
+              }
+            }
+          }
+        });
+
+      } else {
+        $scope.isResults = false;
+      }
+    };
+
+    var params = JSON.parse($stateParams.searchString);
+    
+    /* istanbul ignore if  */
+    if (params !== undefined) {
+      if (params.dateOfBirth) {
+        params.dateOfBirth = new Date(params.dateOfBirth.getTime() - (60000 * params.dateOfBirth.getTimezoneOffset()));
+      }
+      console.log('searchActions.querySearch');
+      console.log(params);
+      searchActions.querySearch(params);
+    } 
 
     let unsubscribe = $ngRedux.connect(state => ({
-      getDataRequest: vm.setDataRequest(state)
+      getDataRequest: this.setDataRequest(state.search)
     }))(this);
 
     $scope.$on('$destroy', unsubscribe);
-
   }
 }
 
@@ -100,5 +191,5 @@ const ReportChartComponent = {
   controller: ReportChartController
 };
 
-ReportChartController.$inject = ['$scope', '$rootScope', '$window', '$uibModal', '$state', '$stateParams', 'searchReport', '$timeout', '$ngRedux', 'serviceRequests'];
+ReportChartController.$inject = ['$scope', '$state', '$ngRedux', '$stateParams', 'searchActions', 'serviceRequests', 'Patient', '$window', '$timeout'];
 export default ReportChartComponent;

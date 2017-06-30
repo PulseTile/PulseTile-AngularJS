@@ -115,7 +115,14 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         url: '/search-report?searchString',
         views: {
           main: {template: '<report-chart-component><report-chart-component>'}
-        }
+        },
+        breadcrumbs: [{
+          title: 'Home',
+          state: 'patients-charts'
+        }, {
+          title: 'Search Report',
+          state: 'search-report'
+        }]
       })
       .state('patients-list-full', {
         url: '/patients-full-details?ageFrom&ageTo&orderType&pageNumber&reportType&searchString&queryType',
