@@ -249,7 +249,7 @@
                           <td data-th="Type"><span>{{ record.typeTitle }}</span></td>
                           <td data-th="Date"><span>{{ record.date }}</span></td>
                           <td data-th="Source"><span>{{ record.source }}</span></td>
-                          <td data-th=""><span><div ng-click="removeRecord(index)" class="btn btn-smaller btn-danger btn-icon-normal"><i class="btn-icon fa fa-times"></i></div></span></td>
+                          <td data-th="" class="table-transferOfCare__control"><div ng-click="removeRecord(index); closePopovers();" class="btn btn-smaller btn-danger btn-icon-normal"><i class="btn-icon fa fa-times"></i></div></td>
                       </tr>
                       <tr class="dndPlaceholder">
                         <td><span></span></td>

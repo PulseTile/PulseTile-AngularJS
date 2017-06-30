@@ -254,4 +254,20 @@ td[ng-click] { cursor: pointer; }
   @include respond-from(xs) {
     border-top: 0px !important;
   }
+  @include respond-to(xs) {
+    tr {
+      position: relative;
+    }
+    td {
+      padding-right: 48px !important;
+    }
+    .table-transferOfCare__control {
+      .btn {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+      }
+      &:before { display: none !important; }
+    }
+  }
 }
