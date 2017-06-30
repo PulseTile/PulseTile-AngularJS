@@ -229,9 +229,9 @@ class SearchAdvancedController {
             sendData.surname = $scope.searchParams.surname;
 
           } else if ($scope.typeOfGroupOfFieldsOfSearches === 'clinicalQuery') {
-            // sendData.type = $scope.searchParams.type;
-            // sendData.query = $scope.searchParams.query;
-            sendData.queryNext = $scope.searchParams.queryText;
+            sendData.type = $scope.searchParams.type;
+            sendData.queryContains = $scope.searchParams.query ? true : false;
+            sendData.queryText = $scope.searchParams.queryText;
           }
 
           if ($scope.selectAgeField === 'range') {
