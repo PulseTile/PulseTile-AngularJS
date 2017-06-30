@@ -173,8 +173,7 @@ class ReportChartController {
       if (params.dateOfBirth) {
         params.dateOfBirth = new Date(params.dateOfBirth.getTime() - (60000 * params.dateOfBirth.getTimezoneOffset()));
       }
-      console.log('searchActions.querySearch');
-      console.log(params);
+  
       searchActions.querySearch(params);
     } 
 
