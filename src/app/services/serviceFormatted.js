@@ -34,6 +34,10 @@ class ServiceFormatted {
         if (angular.isNumber(date)) {
           return moment(date).format(format);
         } else {
+          var timestamp = Number(date);
+          if(!isNaN(timestamp)) {
+            return moment(timestamp).format(format);
+          }
           dateType = new Date(date).getTime();
           return moment(dateType).format(format);
         }
