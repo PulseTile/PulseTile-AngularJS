@@ -69,7 +69,7 @@ PulseTile uses Webpack together for its build system.
 
 `Angular 1.5` use for modular structure.
 
-Additional information on such topics as data structure we're using is available on [Documentation portal](http://docs.pulsetile.com/)
+Additional information on such topics as data structure we're using is available within the [PulseTile Documentation](http://docs.pulsetile.com/)
 
 **NB** Note that the PulseTile Framework is easiest to understand/experiment with in the context of a wider healthcare stack.
 
