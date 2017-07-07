@@ -111,6 +111,17 @@ class HeaderController {
           $state.go('patients-list');
           break;
         case 'patients-list': 
+          if ($stateParams.searchString) {
+            $state.go('search-report', {
+              searchParams: JSON.parse($stateParams.searchString),
+              searchString: $stateParams.searchString,
+            });
+          } else {
+            $state.go('patients-charts');
+          }
+          break;
+        case 'patients-list-full': 
+        case 'search-report': 
           $state.go('patients-charts');
           break;
         default:

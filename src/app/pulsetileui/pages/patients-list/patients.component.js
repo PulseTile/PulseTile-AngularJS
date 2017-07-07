@@ -261,7 +261,7 @@ class PatientsController {
       this.loadPatientsList = patientsActions.loadPatients;
       this.loadPatientsList();
     } else {
-      // vm.patients = $stateParams.patientsList;
+      
       vm.filters = {
         advancedSearch: true,
         advancedSearchParams: $stateParams.advancedSearchParams
@@ -271,6 +271,7 @@ class PatientsController {
           data: $stateParams.patientsList
         }
       }
+
       vm.setCurrentPageData(data);
       $location.url($location.path());
     }

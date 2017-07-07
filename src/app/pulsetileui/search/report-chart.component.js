@@ -25,12 +25,13 @@ class ReportChartController {
     var goToPatients = function (row) {
       /* istanbul ignore next */
       var data =  { 
-        patientsList: row.patients 
+        patientsList: row.patients,
+        searchString: $stateParams.searchString
       }
       if (row.patients.length === 0) {
         data.displayEmptyTable = true;
       }
-
+      
       $state.go('patients-list', data);
     };
 
@@ -167,6 +168,7 @@ class ReportChartController {
     };
 
     var params = JSON.parse($stateParams.searchString);
+
     
     /* istanbul ignore if  */
     if (params !== undefined) {
@@ -176,6 +178,76 @@ class ReportChartController {
   
       searchActions.querySearch(params);
     } 
+
+    /* istanbul ignore next */
+    $scope.isSearchParams = function () {
+      return !!$stateParams.searchString;
+    };
+    
+    /* istanbul ignore next */
+    $scope.getSearchParams = function () {
+      if (!$scope.isSearchParams()) return '';
+
+      var params = JSON.parse($stateParams.searchString);
+      var paramsText = '';
+      var paramsArr = [];
+
+      if (params.type) {
+        paramsArr.push({
+          key: 'Search Type',
+          value: params.type
+        });
+      }
+
+      if (params.queryContains && params.queryText) {
+        paramsArr.push({
+          key: 'Search Query',
+          value: 'contains "' + params.queryText + '"'
+        });
+      }
+
+      if (params.minValue && params.maxValue) {
+        paramsArr.push({
+          key: 'Age Range',
+          value: $scope.sliderRange.minValue + '-' + $scope.sliderRange.maxValue
+        });
+      } else {
+        if (params.dateOfBirth) {
+          paramsArr.push({
+            key: 'Date of Birth',
+            value: serviceFormatted.formattingDate(params.dateOfBirth, serviceFormatted.formatCollection.DDMMMYYYY)
+          });
+        }
+      }
+
+      if (params.sexFemale || params.sexMale) {
+        let genderText = '';
+
+        if (params.sexFemale && params.sexMale) {
+          genderText = 'All';
+        } else if (params.sexFemale) {
+          genderText = 'Female';
+        } else {
+          genderText = 'Male';
+        }
+
+        paramsArr.push({
+          key: 'Gender',
+          value: genderText
+        });
+      }
+
+      for (var i = 0; i < paramsArr.length; i++) {
+        if (i !== 0) {
+          paramsText += ', ';
+        }
+
+        paramsText += paramsArr[i].key + ': ' + paramsArr[i].value;
+      }
+      
+
+      return paramsText.length ? ': ' + paramsText : '';
+    };
 
     let unsubscribe = $ngRedux.connect(state => ({
       getDataRequest: this.setDataRequest(state.search)

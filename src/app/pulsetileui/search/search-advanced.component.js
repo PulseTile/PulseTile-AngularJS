@@ -27,6 +27,27 @@ class SearchAdvancedController {
     $scope.searchParams = {};
     $scope.agesSteps = [];
 
+    this.typesList = [];
+    this.queryList = [
+      'contains', 
+      // 'excludes'
+    ];
+    this.typesList = [
+      {
+        name: 'Allergies',
+        key: 'allergies'
+      }, {
+        name: 'Problems / Diagnosis',
+        key: 'diagnosis'
+      }, {
+        name: 'Procedures',
+        key: 'procedures'
+      }, {
+        name: 'Medications',
+        key: 'medications'
+      }
+    ];
+
     $scope.changeParams = function (type) {
       $scope.typeOfGroupOfFieldsOfSearches = type;
     }
@@ -42,7 +63,9 @@ class SearchAdvancedController {
     $scope.clearSearchParams = function () {
       $scope.selectAgeField = 'range';
       $scope.searchParams = {};
-    };
+      $scope.searchParams.query = this.queryList[0];
+    }.bind(this);
+    $scope.clearSearchParams();
 
     serviceRequests.subscriber('clearSearchParams', $scope.clearSearchParams);
 
@@ -79,10 +102,10 @@ class SearchAdvancedController {
         });
       }
 
-      if (params.query && params.queryText) {
+      if (params.queryContains && params.queryText) {
         paramsArr.push({
           key: 'Search Query',
-          value: params.query + ' ' + params.queryText
+          value: 'contains "' + params.queryText + '"'
         });
       }
 
@@ -128,27 +151,6 @@ class SearchAdvancedController {
 
       return paramsText.length ? ': ' + paramsText : '';
     };
-
-    this.typesList = [];
-    this.queryList = [
-      'contains', 
-      // 'excludes'
-    ];
-    this.typesList = [
-      {
-        name: 'Allergies',
-        key: 'allergies'
-      }, {
-        name: 'Problems / Diagnosis',
-        key: 'diagnosis'
-      }, {
-        name: 'Procedures',
-        key: 'procedures'
-      }, {
-        name: 'Medications',
-        key: 'medications'
-      }
-    ];
 
     var step;
     for (var i = 0; i < 100; i += 5) {
@@ -319,7 +321,8 @@ class SearchAdvancedController {
       $scope.isOpenPanelSearch = false;
 
       if ($scope.isSearchCompleted &&
-          currentState !== 'patients-list-full') {
+          currentState !== 'patients-list-full' &&
+          currentState !== 'search-report') {
         $scope.isSearchCompleted = false;
         $scope.clearSearchParams();
         serviceRequests.publisher('closeAdvancedSearch');
