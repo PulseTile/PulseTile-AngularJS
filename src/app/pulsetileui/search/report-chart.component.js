@@ -26,6 +26,7 @@ class ReportChartController {
       /* istanbul ignore next */
       var data =  { 
         patientsList: row.patients,
+        searchDescription: $scope.getSearchParams(),
         searchString: $stateParams.searchString
       }
       if (row.patients.length === 0) {
@@ -246,7 +247,7 @@ class ReportChartController {
       }
       
 
-      return paramsText.length ? ': ' + paramsText : '';
+      return paramsText.length ? paramsText : '';
     };
 
     let unsubscribe = $ngRedux.connect(state => ({

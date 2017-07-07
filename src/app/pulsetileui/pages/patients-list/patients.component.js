@@ -115,6 +115,14 @@ class PatientsController {
       serviceRequests.patientsTable = $scope.patientsTable;
     }
 
+    $scope.getSearchDescription = function () {
+      if ($stateParams.searchDescription) {
+        return $stateParams.searchDescription;
+      }
+
+      return false;
+    };
+
     $scope.getCounts = function (patient) {
       if (servicePatients.isQueryPatientsCounts(patient.nhsNumber)) {
         servicePatients.queryPatientCounts(patient.nhsNumber, patient);
@@ -261,7 +269,8 @@ class PatientsController {
       this.loadPatientsList = patientsActions.loadPatients;
       this.loadPatientsList();
     } else {
-      
+      console.log('$stateParams');
+      console.log($stateParams);
       vm.filters = {
         advancedSearch: true,
         advancedSearchParams: $stateParams.advancedSearchParams

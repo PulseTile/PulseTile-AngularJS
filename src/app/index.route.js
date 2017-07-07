@@ -86,7 +86,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
         views: {
           main: {template: '<patients-component><patients-component>'}
         },
-        params: { patientsList: [], advancedSearchParams: [], displayEmptyTable: false, searchString: null },
+        params: { patientsList: [], advancedSearchParams: [], displayEmptyTable: false, searchString: null, searchDescription: null },
 				breadcrumbs: [{
           title: 'Home',
           state: 'patients-charts'

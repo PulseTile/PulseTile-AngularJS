@@ -16,14 +16,14 @@
 
 <div class="panel panel-secondary">
   <div class="panel-heading">
-    <h3 class="panel-title"><i class="fa fa-bar-chart"></i> Patients Sorted By Age</h3>
+    <h3 class="panel-title"><i class="fa fa-bar-chart"></i> Patients Sorted By Age <span ng-if="isSearchParams()">(<span ng-bind-html="getSearchParams()"></span>)</span></h3>
   </div>
   <div class="panel-body">
     <div class="panel-body-inner">
       <div ng-if="isResults" class="chart-block" ng-class="{hoverChart: hoverAge}" ng-mouseenter="hoverAge = true" ng-mouseleave="hoverAge = false">
         <div class="chart-title-group">
           <h2 class="chart-title">Found Patients By Clinical Query</h2>
-          <p ng-if="isSearchParams()" class="chart-subtitle">Clinical Query<span ng-bind-html="getSearchParams()"></span></p>
+          <p ng-if="isSearchParams()" class="chart-subtitle">Clinical Query: <span ng-bind-html="getSearchParams()"></span></p>
         </div>
         <div class="wrap-chart chart-dashboard">
           <canvas id="chart-age" height="350" width="600"></canvas>
