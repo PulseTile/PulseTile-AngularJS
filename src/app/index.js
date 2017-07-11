@@ -227,8 +227,8 @@ app.run(function($state, serviceRequests, serviceThemes) {
           break;
         case 'PHR':
           //Trick for PHR user login
-          loadPatient = patientsActions.getPatient;
-          loadPatient(currentUser.nhsNumber);
+          // loadPatient = patientsActions.getPatient;
+          // loadPatient(currentUser.nhsNumber);
           $state.go('patients-summary', {
             patientId: currentUser.nhsNumber
           });
@@ -243,7 +243,7 @@ app.run(function($state, serviceRequests, serviceThemes) {
     /* istanbul ignore next */
     var setLoginData = function (loginResult) {
       serviceRequests.publisher('setUserData', {userData: loginResult.data});
-      // switchDirectByRole(loginResult.data);
+      switchDirectByRole(loginResult.data);
     };
     
     /* istanbul ignore next */
