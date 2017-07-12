@@ -49,11 +49,28 @@
                   <div class="form-control-static">{{ $ctrl.event.note }}</div>
                 </div>
               </div>
-              <div class="col-expand-right" ng-if="$ctrl.event.location">
+              
+            </div>
+
+            <div class="row-expand">
+              <div class="col-expand-left">
                 <div class="form-group">
-                  <label class="control-label">Location</label>
-                  <div class="form-control-static">{{ $ctrl.event.location }}</div>
+                  <label class="control-label">Event Date</label>
+                  <div class="form-control-static">{{ $ctrl.event.dateOfAppointment | date:'dd-MMM-yyyy' }}</div>
                 </div>
+              </div>
+              <div class="col-expand-right">
+                <div class="form-group">
+                  <label class="control-label">Time Slot</label>
+                  <div class="form-control-static">{{ $ctrl.event.timeSlot }}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-expand-right">
+              <div class="form-group">
+                <label class="control-label">Date</label>
+                <div class="form-control-static">{{ $ctrl.event.dateCreate| date:'dd-MMM-yyyy'}}</div>
               </div>
             </div>
           </div>
@@ -162,58 +179,7 @@
       </div>
     </div>
   </div>
-  
-  <div class="panel panel-secondary" ng-if="getShowPanel('eventSchedule')" ng-class="getOpenPanelClass('eventSchedule');">
-    <div class="panel-heading">
-      <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'eventSchedule')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
-        <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="openPanel('eventSchedule')"><i class="btn-icon fa fa-chevron-up"></i></button>
-      </div>
-      <h3 class="panel-title">Event - Appointment Schedule</h3>
-    </div>
-    <div class="panel-body">
-      <div class="panel-body-inner">
-        <div class="form">
-          <div class="form-group-wrapper">
-            <div class="row-expand">
-              <div class="col-expand-left">
-                <div class="form-group">
-                  <label class="control-label">Event Date</label>
-                  <div class="form-control-static">{{ $ctrl.event.dateOfAppointment | date:'dd-MMM-yyyy' }}</div>
-                </div>
-              </div>
-              <div class="col-expand-right">
-                <div class="form-group">
-                  <label class="control-label">Time Slot</label>
-                  <div class="form-control-static">{{ $ctrl.event.timeSlot }}</div>
-                </div>
-              </div>
-            </div>
 
-            <div class="row-expand">
-              <div class="col-expand-left">
-                <div class="form-group">
-                  <label class="control-label">Status</label>
-                  <div class="form-control-static">{{ $ctrl.event.status }}</div>
-                </div>
-
-                <div class="form-group">
-                  <div class="wrap-control-group">
-                    <div class="control-group left">
-                      <button type="button" class="btn btn-primary btn-icon-normal" ng-click="$ctrl.openSchedule()">
-                        <i class="btn-icon fa fa-calendar"></i>
-                        <span class="btn-text">Schedule</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <div class="panel panel-secondary" ng-if="getShowPanel('eventMetadata')" ng-class="getOpenPanelClass('eventMetadata');">
     <div class="panel-heading">
@@ -233,17 +199,8 @@
                   <label class="control-label">Author</label>
                   <div class="form-control-static">{{ $ctrl.event.author }}</div>
                 </div>
-              </div>
+              </div>              
               <div class="col-expand-right">
-                <div class="form-group">
-                  <label class="control-label">Date</label>
-                  <div class="form-control-static">{{ $ctrl.event.dateCreate| date:'dd-MMM-yyyy'}}</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row-expand">
-              <div class="col-expand-left">
                 <div class="form-group">
                   <label class="control-label">Source</label>
                   <div class="form-control-static">{{ $ctrl.event.source }}</div>

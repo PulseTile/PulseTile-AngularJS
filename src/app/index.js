@@ -74,6 +74,7 @@ import ServicePatients from './pulsetileui/pages/patients-list/servicePatients.j
 
 import ScheduleModal from './pulsetileui/pages/events/schedule-modal';
 import ConfirmationModal from './pulsetileui/confirmation/confirmation';
+import ConfirmationRedirectModal from './pulsetileui/confirmation/confirmation-redirect';
 import ConfirmationDocsModal from './pulsetileui/confirmation/confirmation-documents';
 
 import routeConfig from 'app/index.route';
@@ -110,6 +111,7 @@ let app = angular
     ])
     .factory('ScheduleModal', ScheduleModal)
     .factory('ConfirmationModal', ConfirmationModal)
+    .factory('ConfirmationRedirectModal', ConfirmationRedirectModal)
     .factory('ConfirmationDocsModal', ConfirmationDocsModal)
 
     
@@ -209,7 +211,7 @@ let app = angular
 console.log('app start');
 
 /*Project initialise*/
-app.run(function($state, serviceRequests, serviceThemes) {
+app.run(function($state, serviceRequests, serviceThemes, ConfirmationRedirectModal) {
     var classLoadingPage = 'loading';
     var body = angular.element('body');
 
@@ -217,27 +219,41 @@ app.run(function($state, serviceRequests, serviceThemes) {
 
     /* istanbul ignore next */
     var switchDirectByRole = function (currentUser) {
+      var locationHrefBeforeLogin = localStorage.getItem('locationHrefBeforeLogin');
+      localStorage.removeItem('locationHrefBeforeLogin');
+
       /* istanbul ignore if  */
       if (!currentUser) return;
-      // Direct different roles to different pages at login
-      /* istanbul ignore next  */
-      switch (currentUser.role) {
-        case 'IDCR':
-          $state.go('patients-charts');
-          break;
-        case 'PHR':
-          //Trick for PHR user login
-          // loadPatient = patientsActions.getPatient;
-          // loadPatient(currentUser.nhsNumber);
-          $state.go('patients-summary', {
-            patientId: currentUser.nhsNumber
-          });
-          break;
-        default:
-          $state.go('patients-summary', {
-            patientId: currentUser.nhsNumber
-          });
-      }
+
+        // Direct different roles to different pages at login
+        /* istanbul ignore next  */
+        switch (currentUser.role) {
+          case 'IDCR':
+            /*Go to URL from localStorage*/
+            if (locationHrefBeforeLogin) {
+              console.log(locationHrefBeforeLogin);
+              location.href = locationHrefBeforeLogin;
+            }
+            break;
+          case 'PHR':
+            //Trick for PHR user login
+            if (locationHrefBeforeLogin && locationHrefBeforeLogin.indexOf(currentUser.nhsNumber)) {
+                console.log('123');
+                console.log(123);
+                location.href = locationHrefBeforeLogin;
+
+            } else if (location.href.indexOf(currentUser.nhsNumber)) {
+              ConfirmationRedirectModal.openModal(currentUser.nhsNumber);
+              $state.go('patients-summary', {
+                patientId: currentUser.nhsNumber,
+                // openModalRedirect: true
+              });
+
+            }
+            break;
+          default:
+            $state.go('patients-charts');
+        }
     };
 
     /* istanbul ignore next */
@@ -296,12 +312,6 @@ app.run(function($state, serviceRequests, serviceThemes) {
       
       /* istanbul ignore if */
       if (result.data && result.data.ok) {
-        var locationHrefBeforeLogin = localStorage.getItem('locationHrefBeforeLogin');
-        if (locationHrefBeforeLogin) {
-          /*Go to URL from localStorage*/
-          localStorage.removeItem('locationHrefBeforeLogin');
-          location.href = locationHrefBeforeLogin;
-        }
         console.log('Cookie was for a valid session, so fetch the simulated user');
         login();
       }
