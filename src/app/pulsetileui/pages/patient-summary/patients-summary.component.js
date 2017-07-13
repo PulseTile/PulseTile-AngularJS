@@ -18,6 +18,8 @@ let templatePatientsSummary = require('./patients-summary.html');
 class PatientsSummaryController {
   constructor($scope, $state, $stateParams, $ngRedux, $location, patientsActions, serviceRequests, usSpinnerService) {
 
+    console.log('PatientsSummaryController');
+    
     serviceRequests.publisher('headerTitle', {title: 'Patients Summary'});
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-summary'});
 

@@ -211,16 +211,16 @@ let app = angular
 console.log('app start');
 
 /*Project initialise*/
-app.run(function($state, serviceRequests, serviceThemes, ConfirmationRedirectModal) {
+app.run(function($rootScope, $state, serviceRequests, serviceThemes, ConfirmationRedirectModal) {
     var classLoadingPage = 'loading';
     var body = angular.element('body');
+    var userData = null;
 
     body.addClass(classLoadingPage);
 
     /* istanbul ignore next */
     var switchDirectByRole = function (currentUser) {
       var locationHrefBeforeLogin = localStorage.getItem('locationHrefBeforeLogin');
-      localStorage.removeItem('locationHrefBeforeLogin');
 
       /* istanbul ignore if  */
       if (!currentUser) return;
@@ -231,25 +231,25 @@ app.run(function($state, serviceRequests, serviceThemes, ConfirmationRedirectMod
           case 'IDCR':
             /*Go to URL from localStorage*/
             if (locationHrefBeforeLogin) {
-              console.log(locationHrefBeforeLogin);
+              localStorage.removeItem('locationHrefBeforeLogin');
               location.href = locationHrefBeforeLogin;
             }
             break;
           case 'PHR':
             //Trick for PHR user login
             if (locationHrefBeforeLogin && locationHrefBeforeLogin.indexOf(currentUser.nhsNumber)) {
-                console.log('123');
-                console.log(123);
+                localStorage.removeItem('locationHrefBeforeLogin');
                 location.href = locationHrefBeforeLogin;
 
-            } else if (location.href.indexOf(currentUser.nhsNumber)) {
+            } else if (location.href.indexOf(currentUser.nhsNumber) === -1) {
               ConfirmationRedirectModal.openModal(currentUser.nhsNumber);
+              localStorage.removeItem('locationHrefBeforeLogin');
               $state.go('patients-summary', {
-                patientId: currentUser.nhsNumber,
-                // openModalRedirect: true
+                patientId: currentUser.nhsNumber
               });
 
             }
+
             break;
           default:
             $state.go('patients-charts');
@@ -259,7 +259,8 @@ app.run(function($state, serviceRequests, serviceThemes, ConfirmationRedirectMod
     /* istanbul ignore next */
     var setLoginData = function (loginResult) {
       serviceRequests.publisher('setUserData', {userData: loginResult.data});
-      switchDirectByRole(loginResult.data);
+      userData = loginResult.data;
+      switchDirectByRole(userData);
     };
     
     /* istanbul ignore next */
@@ -298,10 +299,7 @@ app.run(function($state, serviceRequests, serviceThemes, ConfirmationRedirectMod
         console.log('running in UAT mode, so now login via auth0');
         
         /*Set URL to localStorage*/
-        var locationHrefBeforeLogin = localStorage.getItem('locationHrefBeforeLogin');
-        if (!locationHrefBeforeLogin) {
-          localStorage.setItem('locationHrefBeforeLogin', location.href);
-        }
+        localStorage.setItem('locationHrefBeforeLogin', location.href);
 
         if (!auth0) auth0 = new Auth0(result.data.config);
         auth0.login({
@@ -320,6 +318,12 @@ app.run(function($state, serviceRequests, serviceThemes, ConfirmationRedirectMod
       //for dev and testing
       login();
     });
+
+    
+    /* istanbul ignore next */
+    $rootScope.$on('$locationChangeSuccess', function() {
+      switchDirectByRole(userData);
+    }.bind(this));
 });
 
 

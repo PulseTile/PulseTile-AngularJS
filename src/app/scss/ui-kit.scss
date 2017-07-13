@@ -344,6 +344,10 @@ $ui-color: #f26604;
   height: 250px;
   overflow: hidden;
   position: relative;
+  .sidebar {
+    position: absolute;
+    top: 0 !important;
+  }
 }
 .ui-main-content {
   background: #f0ffff;

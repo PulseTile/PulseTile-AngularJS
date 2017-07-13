@@ -12,7 +12,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-export default function ConfirmationModal($uibModal, $ngRedux) {
+export default function ConfirmationRedirectModal($uibModal, $ngRedux) {
   var isModalClosed = true;
 
   /* istanbul ignore next */
@@ -22,7 +22,7 @@ export default function ConfirmationModal($uibModal, $ngRedux) {
       isModalClosed = false;
 
       var modalInstance = $uibModal.open({
-        template: require('./confirmation.html'),
+        template: require('./confirmation-redirect.html'),
         controller: function ($scope, $state, $uibModalInstance) {
           $scope.ok = function () {
             $uibModalInstance.dismiss('cancel');
@@ -31,14 +31,14 @@ export default function ConfirmationModal($uibModal, $ngRedux) {
       });
     }
 
-    
-
     /* istanbul ignore next */
-    modalInstance.result.then(function() {
-      isModalClosed = true;
-    }, function() {
-      isModalClosed = true;
-    });
+    if (modalInstance) {
+      modalInstance.result.then(function() {
+        isModalClosed = true;
+      }, function() {
+        isModalClosed = true;
+      });
+    }
 
   };
 
@@ -47,4 +47,4 @@ export default function ConfirmationModal($uibModal, $ngRedux) {
     openModal: openModal
   };
 }
-ConfirmationModal.$inject = ['$uibModal', '$ngRedux'];
+ConfirmationRedirectModal.$inject = ['$uibModal', '$ngRedux'];
