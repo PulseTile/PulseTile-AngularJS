@@ -17,6 +17,7 @@
 @import '~angularjs-slider/dist/rzslider.min.css';
 @import '~angular-ui-select/dist/select.min.css';
 @import '../../../bower_components/swiper/dist/css/swiper.min.css';
+@import '../../../bower_components/angular-bootstrap-datetimepicker/src/scss/datetimepicker';
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js');
 @import url('//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css');
 @import url('https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css');
@@ -45,6 +46,7 @@
 @import 'components/panel/index';
 @import 'components/color-palette';
 @import 'components/drag-and-drop';
+@import 'components/datetimepicker';
 
 @import 'base';
 

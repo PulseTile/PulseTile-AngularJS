@@ -1,0 +1,30 @@
+.datetimepicker {
+
+  .active:hover,
+  .active:hover:hover,
+  .active.disabled:hover,
+  .active.disabled:hover:hover,
+  .active:active,
+  .active:hover:active,
+  .active.disabled:active,
+  .active.disabled:hover:active,
+  .active.active,
+  .active:hover.active,
+  .active.disabled.active,
+  .active.disabled:hover.active,
+  .active.disabled,
+  .active:hover.disabled,
+  .active.disabled.disabled,
+  .active.disabled:hover.disabled,
+  td.active[disabled],
+  td.active:hover[disabled],
+  td.active.disabled[disabled],
+  td.active.disabled:hover[disabled],
+  span.active[disabled],
+  span.active:hover[disabled],
+  span.active.disabled[disabled],
+  span.active.disabled:hover[disabled] {
+    background: $base-color;
+  }
+
+}

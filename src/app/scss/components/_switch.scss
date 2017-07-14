@@ -1,12 +1,12 @@
 .switch-group {
   margin-bottom: -4px;
   overflow: hidden;
-  .switch {
+  .switch:not(th) {
     float: left;
     margin: 0 4px 4px 0;
   }
 }
-.switch {
+.switch:not(th) {
   display: inline-block;
   height: 30px;
   margin: 0;

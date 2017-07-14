@@ -21,7 +21,8 @@ class ServiceFormatted {
     this.formatCollection = {
       DDMMMYYYY: 'DD-MMM-YYYY',
       DDMMMMYYYY: 'DD MMMM YYYY',
-      HHmm: 'HH:mm'
+      HHmm: 'HH:mm',
+      DDMMMYYYYHHmm: 'DD-MMM-YYYY  HH:mm'
     };
     this.filteringKeys = [];
     this.filteringKeys2 = [];

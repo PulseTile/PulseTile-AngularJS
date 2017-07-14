@@ -1,5 +1,5 @@
 .switch {
-  .slider {
+  .slider:not(th) {
     background-color: #e8e8e8;
     border-color: #c3c3c3;
     &:before {

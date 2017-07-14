@@ -16,7 +16,7 @@
 let templateEventsCreate = require('./events-create.html');
 
 class EventsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, eventsActions, serviceRequests, ScheduleModal) {
+  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, eventsActions, serviceRequests, serviceDateTimePicker) {
     var currentStateName = $state.router.globals.$current.name;
     var partsCurrentStateName = currentStateName.split('-');
     this.typeCreate = partsCurrentStateName[partsCurrentStateName.length - 1];
@@ -28,6 +28,8 @@ class EventsCreateController {
       status: "Scheduled",
       timeOfAppointment: "2017-02-10T14:00:00.000Z"
     };
+
+    $scope.startDateBeforeRender = serviceDateTimePicker.startDateBeforeRender;
 
     $scope.event = {};
     $scope.event.dateCreated = new Date();
@@ -77,29 +79,18 @@ class EventsCreateController {
       this.goList();
     };
 
-    this.openSchedule = function () {
-      ScheduleModal.openModal(this.currentPatient, {title: 'Schedule event (Appointment)'}, {}, $scope.currentUser);
-    };
-    
     $scope.create = function (eventForm, event) {
       $scope.formSubmitted = true;
       
       if (eventForm.$valid) {
         let toAdd = {
-          // name: event.name,
-          // comment: event.comment,
-          // seriesNumber: event.seriesNumber,
-          // dateCreated: event.dateCreated,
-          // startDate: event.startDate,
-          // source: event.source
-          dateCreated: event.dateCreated,
-          dateOfAppointment: event.date,
-          location: event.location,
-          serviceTeam: event.name,
-          status: "Scheduled",
-          timeOfAppointment: "2017-02-10T14:00:00.000Z"
+          name: event.name,
+          type: event.type,
+          description: event.description,
+          dateTime: event.dateTime,
+          author: event.author
         };
-
+        
         $scope.eventsCreate(this.currentPatient.id, toAdd);
       }
     }.bind(this);
@@ -119,5 +110,5 @@ const EventsCreateComponent = {
   controller: EventsCreateController
 };
 
-EventsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'eventsActions', 'serviceRequests', 'ScheduleModal'];
+EventsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'eventsActions', 'serviceRequests', 'serviceDateTimePicker'];
 export default EventsCreateComponent;

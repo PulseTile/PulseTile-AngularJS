@@ -39,6 +39,7 @@ import 'angular-swiper';
 import 'swiper';
 import 'angular-drag-and-drop-lists';
 import 'fabric.js';
+import 'angular-bootstrap-datetimepicker';
 
 //commons
 import reducer from './redux/reducer';
@@ -67,6 +68,7 @@ import ServiceStateManager from './services/serviceStateManager.js';
 import ServiceVitalsSigns from './pulsetileui/pages/vitals/serviceVitalsSigns.js';
 import ServiceActions from './pulsetileui/pages/dicom/serviceActions.js';
 import ServiceFormatted from './services/serviceFormatted.js';
+import ServiceDateTimePicker from './services/serviceDateTimePicker.js';
 import TemplateService from './services/TemplateService.js';
 import ServiceThemes from './services/serviceThemes.js';
 import ServiceTransferOfCare from './pulsetileui/pages/transfer-of-care/serviceTransferOfCare.js';
@@ -100,6 +102,7 @@ let app = angular
         'angularSpinner',
         'ui.calendar',
         'ui.timepicker',
+        'ui.bootstrap.datetimepicker',
         'angular-loading-bar',
         'xeditable',
         'ngScrollbars',
@@ -127,7 +130,8 @@ let app = angular
     .service('serviceRequests', ServiceRequests)
     .service('serviceStateManager', ServiceStateManager)
     .service('serviceVitalsSigns', ServiceVitalsSigns)
-    .service('serviceActions', ServiceActions);
+    .service('serviceActions', ServiceActions)
+    .service('serviceDateTimePicker', ServiceDateTimePicker);
 
   plugins.forEach((plugin)=>{
     Object.keys(plugin.components).forEach((name)=>{

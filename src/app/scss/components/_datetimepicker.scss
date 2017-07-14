@@ -1,0 +1,60 @@
+.datetimepicker {
+  border-radius: 4px;
+  margin-top: 0;
+  width: 300px;
+  
+  .hour,
+  .minute {
+    height: 34px;
+    line-height: 34px;
+    margin: 0;
+    width: 25%;
+  }
+
+  .table td,
+  .table th {
+    border: 0;
+    border-radius: 0;
+    height: 20px;
+  }
+  .table thead tr th, 
+  .table tbody tr td {
+    padding: 4px 2px;;
+  }
+
+  span {
+    border-radius: 0;
+    height: 40px;
+    line-height: 40px;
+    margin: 0;
+    width: 25%;
+  }
+
+  .active:hover,
+  .active:hover:hover,
+  .active.disabled:hover,
+  .active.disabled:hover:hover,
+  .active:active,
+  .active:hover:active,
+  .active.disabled:active,
+  .active.disabled:hover:active,
+  .active.active,
+  .active:hover.active,
+  .active.disabled.active,
+  .active.disabled:hover.active,
+  .active.disabled,
+  .active:hover.disabled,
+  .active.disabled.disabled,
+  .active.disabled:hover.disabled,
+  td.active[disabled],
+  td.active:hover[disabled],
+  td.active.disabled[disabled],
+  td.active.disabled:hover[disabled],
+  span.active[disabled],
+  span.active:hover[disabled],
+  span.active.disabled[disabled],
+  span.active.disabled:hover[disabled] {
+    background: $base-color;
+  }
+
+}
