@@ -98,10 +98,10 @@ class EventsListController {
       if (data.events.data) {
         this.events = data.events.data;
       
-        serviceFormatted.filteringKeys = ['serviceTeam', 'type', 'dateOfAppointment'];
+        serviceFormatted.filteringKeys = ['name', 'type', 'dateTime'];
 
         this.eventsFilterSteps = $scope.getFilterArray(this.events);
-        serviceFormatted.formattingTablesDate(this.eventsFilterSteps, ['value', 'legend'], serviceFormatted.formatCollection.DDMMMMYYYY);
+        serviceFormatted.formattingTablesDate(this.eventsFilterSteps, ['dateCreated', 'dateTime'], serviceFormatted.formatCollection.DDMMMMYYYY);
         
         $scope.sliderRange = {
           minValue: filterTimelineData.rangeMin ? filterTimelineData.rangeMin : this.eventsFilterSteps[0].value,
@@ -132,7 +132,7 @@ class EventsListController {
       $scope.eventsFiltering = $scope.filterEvents(events);
       $scope.eventsTimeline = $scope.modificateEventsArr($scope.eventsFiltering);
 
-      serviceFormatted.formattingTablesDate($scope.eventsFiltering, ['dateOfAppointment'], serviceFormatted.formatCollection.DDMMMYYYY);
+      serviceFormatted.formattingTablesDate($scope.eventsFiltering, ['dateTime'], serviceFormatted.formatCollection.DDMMMYYYY);
     };
     $scope.filterEvents = function (events) {
       var newEvents = [];
@@ -143,7 +143,7 @@ class EventsListController {
         if (minRange && maxRange) {
           newEvents = _.chain(events)
               .filter(function (el, index, arr) {
-                var dateInSecongs = Date.parse(new Date(el.dateOfAppointment));
+                var dateInSecongs = Date.parse(new Date(el.dateTime));
 
                 return (minRange <= dateInSecongs && dateInSecongs <= maxRange);
               })
@@ -160,22 +160,22 @@ class EventsListController {
 
       arr = _.chain(arr)
             .filter(function (el, index, arr) {
-              return el.dateOfAppointment;
+              return el.dateTime;
             })
             .uniq(function (el) {
-              return el.dateOfAppointment;
+              return el.dateTime;
             })
             .sortBy(function (el) {
-              return el.dateOfAppointment;
+              return el.dateTime;
             })
             .map(function (el, index, arr) {
               var newEl = {
-                value: +(el.dateOfAppointment),
+                value: +(el.dateTime),
               }
               if (index % Math.round(arr.length / countLabel) === 0 ||
                   index === arr.length - 1) {
 
-                newEl.legend = el.dateOfAppointment;
+                newEl.legend = el.dateTime;
               }
               
               return newEl;
@@ -187,7 +187,7 @@ class EventsListController {
     $scope.modificateEventsArr = function (arr) {
       arr = _.chain(arr)
             .sortBy(function (value) {
-              return value.dateOfAppointment;
+              return value.dateTime;
             })
             .reverse()
             .each(function (value, index) {
@@ -196,10 +196,9 @@ class EventsListController {
               } else {
                 value['sideDateInTimeline'] = 'left';
               }
-              value.type = 'Appointment';
             })
             .groupBy(function(value) {
-              return value.dateOfAppointment;
+              return value.dateTime;
             })
             .value();
 

@@ -56,7 +56,7 @@ class DiagnosesDetailController {
       if (diagnosisForm.$valid) {
         $scope.isEdit = false;
         diagnosis = Object.assign(diagnosis, $scope.diagnosisEdit);
-        $scope.diagnosesUpdate($scope.patient.id, toAdd);
+        $scope.diagnosesUpdate(this.currentPatient.id, toAdd);
       }
     }.bind(this);
     

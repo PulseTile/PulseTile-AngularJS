@@ -28,7 +28,7 @@ export default function events(state = INITIAL_STATE, action) {
   const {payload} = action;
 
   var actions = {
-    [types.APPOINTMENTS]: (state) => {
+    [types.EVENTS]: (state) => {
       state.dataCreate = null;
       state.dataUpdate = null;
       return Object.assign({}, state, {
@@ -36,67 +36,67 @@ export default function events(state = INITIAL_STATE, action) {
         error: false
       });
     },
-    [types.APPOINTMENTS_SUCCESS]: (state) => {
+    [types.EVENTS_SUCCESS]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         data: payload.response
       });
     },
-    [types.APPOINTMENTS_ERROR]: (state) => {
+    [types.EVENTS_ERROR]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         error: payload.error
       });
     },
-    [types.APPOINTMENTS_GET]: (state) => {
+    [types.EVENTS_GET]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
         error: false
       });
     },
-    [types.APPOINTMENTS_GET_SUCCESS]: (state) => {
+    [types.EVENTS_GET_SUCCESS]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         dataGet: payload.response
       });
     },
-    [types.APPOINTMENTS_GET_ERROR]: (state) => {
+    [types.EVENTS_GET_ERROR]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         error: payload.error
       });
     },
-    [types.APPOINTMENTS_CREATE]: (state) => {
+    [types.EVENTS_CREATE]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
         error: false
       });
     },
-    [types.APPOINTMENTS_CREATE_SUCCESS]: (state) => {
+    [types.EVENTS_CREATE_SUCCESS]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         dataCreate: payload.response
       });
     },
-    [types.APPOINTMENTS_CREATE_ERROR]: (state) => {
+    [types.EVENTS_CREATE_ERROR]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         error: payload.error
       });
     },
-    [types.APPOINTMENTS_UPDATE]: (state) => {
+    [types.EVENTS_UPDATE]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
         error: false
       });
     },
-    [types.APPOINTMENTS_UPDATE_SUCCESS]: (state) => {
+    [types.EVENTS_UPDATE_SUCCESS]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         dataUpdate: payload.response
       });
     },
-    [types.APPOINTMENTS_UPDATE_ERROR]: (state) => {
+    [types.EVENTS_UPDATE_ERROR]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
         error: payload.error

@@ -16,14 +16,43 @@
 let templateEventsDetail = require('./events-detail.html');
 
 class EventsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, usSpinnerService, serviceDateTimePicker) {
     var socket = io.connect('wss://' + window.location.hostname + ':' + 8070);
+    $scope.isEdit = false;
 
     this.currentUser = serviceRequests.currentUserData;
     $scope.currentUser = this.currentUser;
 
     $scope.formDisabled = true;
     $scope.messages = [];
+    $scope.startDateBeforeRender = serviceDateTimePicker.startDateBeforeRender;
+
+    this.edit = function () {
+      $scope.isEdit = true;
+      $scope.eventEdit = Object.assign({}, this.event);
+      $scope.eventEdit.dataCreated = new Date();
+    };
+    this.cancelEdit = function () {
+      $scope.isEdit = false;
+    };
+    $scope.confirmEdit = function (eventForm, event) {
+      $scope.formSubmitted = true;
+
+      let toAdd = {
+        name: event.name,
+        type: event.type,
+        description: event.description,
+        dateTime: event.dateTime,
+        author: event.author
+      };
+
+      if (eventForm.$valid) {
+        $scope.isEdit = false;
+        this.event = Object.assign(this.event, event);
+
+        this.eventsUpdate(this.currentPatient.id, toAdd);
+      }
+    }.bind(this);
 
     this.setCurrentPageData = function (data) {
       /* istanbul ignore if  */
@@ -67,6 +96,7 @@ class EventsDetailController {
     $scope.$on('$destroy', unsubscribe);
 
     this.eventsLoad = eventsActions.get;
+    this.eventsUpdate = eventsActions.update;
     this.eventsLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
 
 
@@ -228,5 +258,5 @@ const EventsDetailComponent = {
   controller: EventsDetailController
 };
 
-EventsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests', 'usSpinnerService'];
+EventsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests', 'usSpinnerService', 'serviceDateTimePicker'];
 export default EventsDetailComponent;

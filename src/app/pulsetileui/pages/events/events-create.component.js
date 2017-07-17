@@ -21,19 +21,10 @@ class EventsCreateController {
     var partsCurrentStateName = currentStateName.split('-');
     this.typeCreate = partsCurrentStateName[partsCurrentStateName.length - 1];
 
-    $scope.appointment = {
-      dateCreated: new Date(),
-      dateOfAppointment: "2017-02-10",
-      location: "Leeds General",
-      status: "Scheduled",
-      timeOfAppointment: "2017-02-10T14:00:00.000Z"
-    };
-
     $scope.startDateBeforeRender = serviceDateTimePicker.startDateBeforeRender;
 
     $scope.event = {};
     $scope.event.dateCreated = new Date();
-    $scope.event.source = 'Marand';
     $scope.event.isConnection = true;
 
     switch(this.typeCreate) {
