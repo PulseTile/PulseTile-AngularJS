@@ -199,25 +199,13 @@ let app = angular
       editableThemes.bs3.inputClass = 'input-sm';
       editableThemes.bs3.buttonsClass = 'btn-sm';
     });
-    app.controller('mainCtrl', function ($scope, $timeout) {
-        // $timeout(function() {
-        //     $scope.updateScrollbar('scrollTo', 100, {
-        //     scrollInertia: 0
-        //   });
-        // });
-        // $scope.myScrollTo = function () {
-        //   $scope.updateScrollbar('scrollTo', 1000, {
-        //     scrollInertia: 0
-        //   });
-        // };
-    });
 
 console.log('app start');
 
 /*Project initialise*/
 app.run(function($rootScope, $state, serviceRequests, serviceThemes, ConfirmationRedirectModal) {
     var classLoadingPage = 'loading';
-    var body = angular.element('body');
+    var body = $('body');
     var userData = null;
 
     body.addClass(classLoadingPage);

@@ -30,15 +30,15 @@ describe('Events Create', function() {
     }));
     
     beforeEach(function() {
-        spyOn(ctrl, 'openSchedule');
-        spyOn(ctrl, 'cancel');
+        spyOn(scope, 'create');
         spyOn(ctrl, 'setCurrentPageData');
         spyOn(ctrl, 'goList');
+        spyOn(ctrl, 'cancel');
 
-        ctrl.openSchedule();
-        ctrl.cancel();
+        scope.create()
         ctrl.setCurrentPageData();
         ctrl.goList();
+        ctrl.cancel();
     });
 
     it('Template exist', function() {
@@ -47,16 +47,16 @@ describe('Events Create', function() {
     it('Controller exist', function() {
         expect(ctrl).toBeDefined();
     });
-    it("openSchedule was called", function() {
-        expect(ctrl.openSchedule).toHaveBeenCalled();
-    });
-    it("cancel was called", function() {
-        expect(ctrl.cancel).toHaveBeenCalled();
+    it("create was called", function() {
+        expect(scope.create).toHaveBeenCalled();
     });
     it("setCurrentPageData was called", function() {
         expect(ctrl.setCurrentPageData).toHaveBeenCalled();
     });
     it("goList was called", function() {
         expect(ctrl.goList).toHaveBeenCalled();
+    });
+    it("cancel was called", function() {
+        expect(ctrl.cancel).toHaveBeenCalled();
     });
 });

@@ -36,16 +36,17 @@ describe('HeaderComponent', function() {
     beforeEach(function() {
         scope.title = 'IDCR';
         rootScope.searchMode = false;
-        
-        spyOn(scope, 'setTitle');
+
+        spyOn(scope, 'setUserData');
         spyOn(scope, 'changeLogo');
-        spyOn(scope, 'switchDirectByRole');
-        spyOn(scope, 'setLoginData');
-        spyOn(scope, 'login');
         spyOn(scope, 'isActiveTypeSearch');
         spyOn(scope, 'checkIsToggleSearch');
         spyOn(scope, 'isShowSearch');
+
+        spyOn(ctrl, 'closeAdvancedSearch');
+        spyOn(ctrl, 'openAdvancedSearch');
         spyOn(ctrl, 'goBack');
+        spyOn(ctrl, 'goLogo');
         spyOn(ctrl, 'goProfile');
         spyOn(ctrl, 'signout');
         spyOn(ctrl, 'containsReportString');
@@ -65,20 +66,18 @@ describe('HeaderComponent', function() {
         spyOn(ctrl, 'getPopulateHeaderSearch');
         spyOn(ctrl, 'getPageHeader');
         spyOn(ctrl, 'checkIsShowPreviousBtn');
-        spyOn(ctrl, 'closeAdvancedSearch');
-        spyOn(ctrl, 'openAdvancedSearch');
-        spyOn(ctrl, 'goLogo');
 
 
+        scope.setUserData();
         scope.changeLogo();
-        scope.setTitle();
-        scope.switchDirectByRole({role: 'PHR'});
-        scope.setLoginData({data:{role: 'PHR'}});
-        scope.login();
         scope.isActiveTypeSearch();
         scope.checkIsToggleSearch();
         scope.isShowSearch();
+
+        ctrl.closeAdvancedSearch();
+        ctrl.openAdvancedSearch();
         ctrl.goBack();
+        ctrl.goLogo();
         ctrl.goProfile();
         ctrl.signout();
         ctrl.containsReportString();
@@ -98,9 +97,6 @@ describe('HeaderComponent', function() {
         ctrl.getPopulateHeaderSearch();
         ctrl.getPageHeader();
         ctrl.checkIsShowPreviousBtn();
-        ctrl.closeAdvancedSearch();
-        ctrl.openAdvancedSearch();
-        ctrl.goLogo();
     });
 
     it('Controller exist', function() {
@@ -112,27 +108,12 @@ describe('HeaderComponent', function() {
     it("serviceRequests exist", function() {
         expect(serviceRequests).toBeDefined();
     });
-    it("$scope.title exist", function() {
-        expect(scope.title).toBeDefined();
+
+    it("setUserData was called", function() {
+        expect(scope.setUserData).toHaveBeenCalled();
     });
-    
     it("changeLogo was called", function() {
         expect(scope.changeLogo).toHaveBeenCalled();
-    });
-    it("setTitle was called", function() {
-        expect(scope.setTitle).toHaveBeenCalled();
-    });
-    it("switchDirectByRole was called", function() {
-        expect(scope.switchDirectByRole).toHaveBeenCalled();
-    });
-    it("setLoginData was called", function() {
-        expect(scope.setLoginData).toHaveBeenCalled();
-    });
-    it("reportMode was called with params", function() {
-        expect(scope.reportMode).toBe(false);
-    });
-    it("login was called", function() {
-        expect(scope.login).toHaveBeenCalled();
     });
     it("isActiveTypeSearch was called", function() {
         expect(scope.isActiveTypeSearch).toHaveBeenCalled();
@@ -143,8 +124,19 @@ describe('HeaderComponent', function() {
     it("isShowSearch was called", function() {
         expect(scope.isShowSearch).toHaveBeenCalled();
     });
-    it("goHome was called", function() {
+
+
+    it("closeAdvancedSearch was called", function() {
+        expect(ctrl.closeAdvancedSearch).toHaveBeenCalled();
+    });
+    it("openAdvancedSearch was called", function() {
+        expect(ctrl.openAdvancedSearch).toHaveBeenCalled();
+    });
+    it("goBack was called", function() {
         expect(ctrl.goBack).toHaveBeenCalled();
+    });
+    it("goLogo was called", function() {
+        expect(ctrl.goLogo).toHaveBeenCalled();
     });
     it("goProfile was called", function() {
         expect(ctrl.goProfile).toHaveBeenCalled();
@@ -169,9 +161,6 @@ describe('HeaderComponent', function() {
     });
     it("processReportMode was called", function() {
         expect(ctrl.processReportMode).toHaveBeenCalled();
-    });
-    it("searchExpression to be pt", function() {
-        expect(scope.search.searchExpression).toEqual('');
     });
     it("processSettingMode was called", function() {
         expect(ctrl.processSettingMode).toHaveBeenCalled();
@@ -206,13 +195,7 @@ describe('HeaderComponent', function() {
     it("checkIsShowPreviousBtn was called", function() {
         expect(ctrl.checkIsShowPreviousBtn).toHaveBeenCalled();
     });
-    it("closeAdvancedSearch was called", function() {
-        expect(ctrl.closeAdvancedSearch).toHaveBeenCalled();
-    });
-    it("openAdvancedSearch was called", function() {
-        expect(ctrl.openAdvancedSearch).toHaveBeenCalled();
-    });
-    it("goLogo was called", function() {
-        expect(ctrl.goLogo).toHaveBeenCalled();
-    });
+    
+
+    
 });

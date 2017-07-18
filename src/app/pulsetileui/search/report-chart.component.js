@@ -168,7 +168,11 @@ class ReportChartController {
       }
     };
 
-    var params = JSON.parse($stateParams.searchString);
+    var params = {};
+
+    if ($stateParams.searchString !== undefined) {
+      params = JSON.parse($stateParams.searchString);
+    }
 
     
     /* istanbul ignore if  */
@@ -188,10 +192,14 @@ class ReportChartController {
     /* istanbul ignore next */
     $scope.getSearchParams = function () {
       if (!$scope.isSearchParams()) return '';
-
-      var params = JSON.parse($stateParams.searchString);
+      
+      var params = {};
       var paramsText = '';
       var paramsArr = [];
+
+      if ($stateParams.searchString !== undefined) {
+        params = JSON.parse($stateParams.searchString);
+      }
 
       if (params.type) {
         paramsArr.push({
