@@ -14,7 +14,7 @@ describe('Events List', function() {
         template,
         fakeCall,
         serviceStateManager;
-    
+
     beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _eventsActions_, _serviceRequests_, _usSpinnerService_, _serviceFormatted_, _$timeout_, _serviceStateManager_) => {
         controller = $controller;
         scope = $injector.get('$rootScope').$new();
@@ -48,6 +48,11 @@ describe('Events List', function() {
         spyOn(scope, 'saveFilterTimelineParams');
         spyOn(scope, 'refreshSlider');
         spyOn(scope, 'formCollectionsEvents');
+        spyOn(scope, 'filterEvents');
+        spyOn(scope, 'getFilterArray');
+        spyOn(scope, 'modificateEventsArr');
+        spyOn(ctrl, 'isActiveCreate');
+        spyOn(ctrl, 'create');
         spyOn(ctrl, 'setCurrentPageData');
         spyOn(ctrl, 'go');
 
@@ -55,8 +60,13 @@ describe('Events List', function() {
         scope.saveFilterTimelineParams();
         scope.refreshSlider();
         scope.formCollectionsEvents();
-        ctrl.setCurrentPageData();
+        scope.filterEvents();
+        scope.getFilterArray();
+        scope.modificateEventsArr();
+        ctrl.isActiveCreate();
+        ctrl.create();
         ctrl.go();
+        ctrl.setCurrentPageData();
     });
 
     beforeEach(function() {
@@ -85,11 +95,27 @@ describe('Events List', function() {
     it("formCollectionsEvents was called", function() {
         expect(scope.formCollectionsEvents).toHaveBeenCalled();
     });
-    it("setCurrentPageData was called", function() {
-        expect(ctrl.setCurrentPageData).toHaveBeenCalled();
+    it("filterEvents was called", function() {
+        expect(scope.filterEvents).toHaveBeenCalled();
+    });
+    it("getFilterArray was called", function() {
+        expect(scope.getFilterArray).toHaveBeenCalled();
+    });
+    it("modificateEventsArr was called", function() {
+        expect(scope.modificateEventsArr).toHaveBeenCalled();
+    });
+
+    it("isActiveCreate was called", function() {
+        expect(ctrl.isActiveCreate).toHaveBeenCalled();
+    });
+    it("create was called", function() {
+        expect(ctrl.create).toHaveBeenCalled();
     });
     it("go was called", function() {
         expect(ctrl.go).toHaveBeenCalled();
+    });
+    it("setCurrentPageData was called", function() {
+        expect(ctrl.setCurrentPageData).toHaveBeenCalled();
     });
     it("Events reducer was called", function() {
         expect(fakeCall.callEvents).toHaveBeenCalled();

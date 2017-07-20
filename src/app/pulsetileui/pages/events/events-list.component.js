@@ -33,12 +33,14 @@ class EventsListController {
     $scope.eventsFiltering = [];
     $scope.eventsTimeline = [];
 
+    /* istanbul ignore next */
     $scope.toggleFilterTimeline = function () {
       $scope.isFilterTimelineOpen = !$scope.isFilterTimelineOpen;
       serviceStateManager.setFilterTimeline({
       });
     };
     
+    /* istanbul ignore next */
     $scope.saveFilterTimelineParams = function () {
       serviceStateManager.setFilterTimeline({
         isOpen: $scope.isFilterTimelineOpen,
@@ -47,6 +49,7 @@ class EventsListController {
       });
     };
 
+    /* istanbul ignore next */
     $scope.refreshSlider = function () {
         $timeout(function () {
             $scope.$broadcast('rzSliderForceRender');
@@ -68,10 +71,12 @@ class EventsListController {
     //   });
     // }, 1000);
 
+    /* istanbul ignore next */
     this.isActiveCreate = function (typeCreate) {
       return this.partsStateName[this.partsStateName.length - 1] === typeCreate;
     };
 
+    /* istanbul ignore next */
     this.create = function (typeCreate) {
       /* istanbul ignore if  */
       if (typeof typeCreate !== "undefined") {
@@ -83,6 +88,7 @@ class EventsListController {
       }
     };
 
+    /* istanbul ignore next */
     this.go = function (id, source) {
       $scope.saveFilterTimelineParams()
       $state.go('events-detail', {
@@ -93,6 +99,7 @@ class EventsListController {
       });
     };
 
+    /* istanbul ignore next */
     this.setCurrentPageData = function (data) {
       /* istanbul ignore if  */
       if (data.events.data) {
@@ -128,12 +135,16 @@ class EventsListController {
         this.currentUser = serviceRequests.currentUserData;
       }
     };
+    
+    /* istanbul ignore next */
     $scope.formCollectionsEvents = function (events) {
       $scope.eventsFiltering = $scope.filterEvents(events);
       $scope.eventsTimeline = $scope.modificateEventsArr($scope.eventsFiltering);
 
       serviceFormatted.formattingTablesDate($scope.eventsFiltering, ['dateTime'], serviceFormatted.formatCollection.DDMMMYYYY);
     };
+
+    /* istanbul ignore next */
     $scope.filterEvents = function (events) {
       var newEvents = [];
       var minRange, maxRange;
@@ -155,6 +166,8 @@ class EventsListController {
 
       return events;
     };
+
+    /* istanbul ignore next */
     $scope.getFilterArray = function (arr) {
       var countLabel = 3;
 
@@ -184,6 +197,8 @@ class EventsListController {
 
       return arr;
     };
+
+    /* istanbul ignore next */
     $scope.modificateEventsArr = function (arr) {
       arr = _.chain(arr)
             .sortBy(function (value) {

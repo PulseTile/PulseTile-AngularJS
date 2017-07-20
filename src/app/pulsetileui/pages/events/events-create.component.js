@@ -27,6 +27,7 @@ class EventsCreateController {
     $scope.event.dateCreated = new Date();
     $scope.event.isConnection = true;
 
+    /* istanbul ignore next */
     switch(this.typeCreate) {
       case 'appointment':
           $scope.event.type = 'Appointment';
@@ -44,6 +45,7 @@ class EventsCreateController {
           $scope.event.type = 'Event';
     }
 
+    /* istanbul ignore next */
     this.setCurrentPageData = function (data) {
       if (data.events.dataCreate !== null) {
         this.goList();
@@ -57,6 +59,7 @@ class EventsCreateController {
       }
     };
 
+    /* istanbul ignore next */
     this.goList = function () {
       $state.go('events', {
         patientId: $stateParams.patientId,
@@ -66,10 +69,12 @@ class EventsCreateController {
       });
     };
     
+    /* istanbul ignore next */
     this.cancel = function () {
       this.goList();
     };
 
+    /* istanbul ignore next */
     $scope.create = function (eventForm, event) {
       $scope.formSubmitted = true;
       
