@@ -153,6 +153,8 @@ class HeaderController {
     /* istanbul ignore next */
     this.signout = function () {
       deleteCookie('JSESSIONID');
+      
+      localStorage.setItem('signout', true);
       location.reload();
     };
 

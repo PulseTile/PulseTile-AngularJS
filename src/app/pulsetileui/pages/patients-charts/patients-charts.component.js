@@ -221,8 +221,17 @@ class PatientsChartsController {
 
     $scope.$on('$destroy', unsubscribe);
 
-    this.loadPatientsList = patientsActions.loadPatients;
-    this.loadPatientsList();
+    
+    /* istanbul ignore next */
+    $scope.setUserData = function (data) {
+      $scope.user = data.userData;
+      
+      if ($scope.user.role == 'IDCR') {
+        patientsActions.loadPatients();
+      }
+    };
+    serviceRequests.subscriber('setUserData', $scope.setUserData);
+    
   }
 }
 

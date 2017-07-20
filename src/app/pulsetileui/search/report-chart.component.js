@@ -218,7 +218,7 @@ class ReportChartController {
       if (params.minValue && params.maxValue) {
         paramsArr.push({
           key: 'Age Range',
-          value: $scope.sliderRange.minValue + '-' + $scope.sliderRange.maxValue
+          value: params.minValue + '-' + params.maxValue
         });
       } else {
         if (params.dateOfBirth) {

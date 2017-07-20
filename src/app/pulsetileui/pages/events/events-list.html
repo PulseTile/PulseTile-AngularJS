@@ -97,8 +97,7 @@
       </table>
     </div>
 
-    <div class="wrap-timeline" ng-show="isActiveView('timeline')" ng-controller="mainCtrl">
-      <!-- <button ng-click="myScrollTo()">Scroll</button> -->
+    <div class="wrap-timeline" ng-show="isActiveView('timeline')">
       <div class="timeline-content-scroll" ng-scrollbars ng-scroll-to="2500" ng-scrollbars-config="configScrollbar" ng-scrollbars-update=updateScrollbar>
         <div class="timeline">
           <div class="timeline-inner">
@@ -109,7 +108,7 @@
                   <div class="timeline-date-content" ng-click="$ctrl.go(event.sourceId, event)" ng-class="{active: selectedRow(event.sourceId)}">
                     <div class="timeline-date-title">{{ event.name }}</div>
                     <div class="timeline-date-subtitle">{{ event.type }}</div>
-                    <div class="timeline-date-text">{{ event.dateTime | date:'dd MMMM yyyy' }}<!-- , 10:00-10:59 --></div>
+                    <div class="timeline-date-text">{{ event.dateTime | date: 'dd MMMM yyyy  HH:mm' }}<!-- , 10:00-10:59 --></div>
                   </div>
                 </div>
               </div>

@@ -8,6 +8,7 @@ $(document).ready(function () {
   $(window).on('beforeunload', function () {
     return 'Please, close the appointment by pressing "End call" or the appointment will stay active!';
   });
+ 
   var appointmentId = window.location.search.split('?appointmentId=').pop();
   var ROLE_DOCTOR = 'IDCR';
   var socket = io.connect('wss://' + window.location.hostname + ':' + 8070);
@@ -73,10 +74,11 @@ $(document).ready(function () {
   }
 
   function setLocalStream(stream) {
+    console.log('setLocalStream');
     $.get('/api/user').then(function (usr) {
       user = usr;
 console.log('user: ', user);
-      $('#patientName').text(user.username);
+      $('#patientName').text(user.given_name + ' ' + user.family_name);
       $('#patientPhone').text(user.phone);
       $('#patientDob').text(moment(user.dateOfBirth).format('DD-MMM-YYYY'));
       $('#patientGender').text(user.gender);
@@ -104,7 +106,7 @@ console.log('user: ', user);
       "iceServers": [
         {url: 'stun:stun.xten.com'},
         {
-          url: 'turn:138.68.134.7:3478',
+          url: 'turn:46.101.95.245:3478',
           username: 'idcr',
           credential: 'E3rtvo6fkghFrt6'
         }]
@@ -199,7 +201,7 @@ console.log('user: ', user);
       $('#patientGender').text(data.gender);
       $('#patientNhs').text(data.nhsNumber);
     });
-    $.get('/api/patients/' + data.patientId + '/appointments/' + appointmentId).then(function (data) {
+    $.get('/api/patients/' + data.patientId + '/events/' + appointmentId).then(function (data) {
       var appointment = data;
       if (!appointment) {
         appointment = {

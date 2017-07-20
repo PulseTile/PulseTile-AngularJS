@@ -229,7 +229,7 @@ app.run(function($rootScope, $state, serviceRequests, serviceThemes, Confirmatio
             break;
           case 'PHR':
             //Trick for PHR user login
-            if (locationHrefBeforeLogin && locationHrefBeforeLogin.indexOf(currentUser.nhsNumber)) {
+            if (locationHrefBeforeLogin && ( locationHrefBeforeLogin.indexOf(currentUser.nhsNumber) || locationHrefBeforeLogin.indexOf('profile')) ) {
                 localStorage.removeItem('locationHrefBeforeLogin');
                 location.href = locationHrefBeforeLogin;
 
@@ -290,8 +290,14 @@ app.run(function($rootScope, $state, serviceRequests, serviceThemes, Confirmatio
       if (result.data.redirectTo === 'auth0') {
         console.log('running in UAT mode, so now login via auth0');
         
-        /*Set URL to localStorage*/
-        localStorage.setItem('locationHrefBeforeLogin', location.href);
+        var isSignout = localStorage.getItem('signout');
+        localStorage.removeItem('signout');
+
+        if (isSignout) {
+          /*Set URL to localStorage*/
+          localStorage.setItem('locationHrefBeforeLogin', location.href);
+        }
+
 
         if (!auth0) auth0 = new Auth0(result.data.config);
         auth0.login({
@@ -311,11 +317,8 @@ app.run(function($rootScope, $state, serviceRequests, serviceThemes, Confirmatio
       login();
     });
 
-    
     /* istanbul ignore next */
     $rootScope.$on('$locationChangeSuccess', function() {
       switchDirectByRole(userData);
     }.bind(this));
 });
-
-
