@@ -106,7 +106,7 @@ console.log('user: ', user);
       "iceServers": [
         {url: 'stun:stun.xten.com'},
         {
-          url: 'turn:46.101.95.245:3478',
+          url: 'turn:dev.ripple.foundation:3478',
           username: 'idcr',
           credential: 'E3rtvo6fkghFrt6'
         }]
