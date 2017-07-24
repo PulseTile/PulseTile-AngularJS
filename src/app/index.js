@@ -203,7 +203,7 @@ let app = angular
 console.log('app start');
 
 /*Project initialise*/
-app.run(function($rootScope, $state, serviceRequests, serviceThemes, ConfirmationRedirectModal) {
+app.run(function($rootScope, $state, serviceRequests, serviceThemes, ConfirmationRedirectModal, $location) {
     var classLoadingPage = 'loading';
     var body = $('body');
     var userData = null;
@@ -229,18 +229,29 @@ app.run(function($rootScope, $state, serviceRequests, serviceThemes, Confirmatio
             break;
           case 'PHR':
             //Trick for PHR user login
-            if (locationHrefBeforeLogin && ( locationHrefBeforeLogin.indexOf(currentUser.nhsNumber) || locationHrefBeforeLogin.indexOf('profile')) ) {
-                localStorage.removeItem('locationHrefBeforeLogin');
+            if (locationHrefBeforeLogin && 
+                 (locationHrefBeforeLogin.indexOf(currentUser.nhsNumber) === -1 ||
+                  locationHrefBeforeLogin.indexOf('profile') === -1) ) {
+
                 location.href = locationHrefBeforeLogin;
 
             } else if (location.href.indexOf(currentUser.nhsNumber) === -1) {
-              ConfirmationRedirectModal.openModal(currentUser.nhsNumber);
-              localStorage.removeItem('locationHrefBeforeLogin');
+
+              if (locationHrefBeforeLogin) {
+                let path = locationHrefBeforeLogin.split('#/')[1];
+                if (path !== '' ||
+                    path !== 'charts') {
+                  ConfirmationRedirectModal.openModal(currentUser.nhsNumber);
+                }
+              }
+
               $state.go('patients-summary', {
                 patientId: currentUser.nhsNumber
               });
 
             }
+              
+            localStorage.removeItem('locationHrefBeforeLogin');
 
             break;
           default:
@@ -293,7 +304,7 @@ app.run(function($rootScope, $state, serviceRequests, serviceThemes, Confirmatio
         var isSignout = localStorage.getItem('signout');
         localStorage.removeItem('signout');
 
-        if (isSignout) {
+        if (!isSignout) {
           /*Set URL to localStorage*/
           localStorage.setItem('locationHrefBeforeLogin', location.href);
         }
