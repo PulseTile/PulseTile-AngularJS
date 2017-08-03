@@ -41,10 +41,10 @@
 
             <div class="row-expand">
               <div class="col-expand-left">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalNoteForm.notes.$dirty) && clinicalNoteForm.notes.$invalid, 'has-success': clinicalNoteForm.notes.$valid && clinicalNoteForm.notes.$dirty}">
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalNoteForm.note.$dirty) && clinicalNoteForm.note.$invalid, 'has-success': clinicalNoteForm.note.$valid && clinicalNoteForm.note.$dirty}">
                   <label for="notes" class="control-label">Note</label>
                   <div class="input-holder">
-                    <textarea class="form-control textarea-big input-sm" id="notes" name="notes" ng-model="clinicalNote.notes" required></textarea>
+                    <textarea class="form-control textarea-big input-sm" id="note" name="note" ng-model="clinicalNote.note" required></textarea>
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && clinicalNoteForm.note.$error.required">You must enter a value.</span>
                 </div>

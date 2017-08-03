@@ -96,7 +96,7 @@ class MedicationsCreateController {
           name: medication.name,
           route: medication.route,
           startDate: medication.startDate,
-          startTime: medication.startTime,
+          startTime: new Date(),
           author: medication.author,
           dateCreated: medication.dateCreated,
           isImport: medication.isImport,

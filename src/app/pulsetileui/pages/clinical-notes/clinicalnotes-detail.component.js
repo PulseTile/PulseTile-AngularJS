@@ -64,7 +64,7 @@ class ClinicalnotesDetailController {
       if (clinicalNoteForm.$valid) {
         let toUpdate = {
           clinicalNotesType: clinicalNote.clinicalNotesType,
-          notes: clinicalNote.note,
+          note: clinicalNote.note,
           author: clinicalNote.author,
           source: clinicalNote.source,
           sourceId: clinicalNote.sourceId

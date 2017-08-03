@@ -38,12 +38,11 @@ class ReferralsCreateController {
 		$scope.isEdit = false;
 
 		this.setCurrentPageData = function (data) {
+      if (data.referrals.dataCreate !== null) {
+        this.goList();
+      }
 		  if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
-		  }
-		  if (data.referrals.dataGet) {
-        this.referral = data.referrals.dataGet;
-        usSpinnerService.stop('referralsDetail-spinner');
 		  }
 		  if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;
@@ -75,9 +74,9 @@ class ReferralsCreateController {
 
 			if (referralsForm.$valid) {
 
-				$scope.referralsCreate($scope.currentPatient.id, referral);
+				$scope.referralsCreate(this.currentPatient.id, referral);
 			}
-		};
+		}.bind(this);
 
 		$scope.referralsCreate = referralsActions.create;
 

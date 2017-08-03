@@ -53,7 +53,7 @@ class ClinicalnotesCreateController {
       if (clinicalNoteForm.$valid) {
         let toAdd = {
           clinicalNotesType: clinicalNote.clinicalNotesType,
-          notes: clinicalNote.notes,
+          note: clinicalNote.note,
           dateCreated: clinicalNote.dateCreated,
           author: clinicalNote.author,
           source: 'openehr'
