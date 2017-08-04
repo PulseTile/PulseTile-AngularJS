@@ -34,7 +34,6 @@ class ReferralsCreateController {
 			this.goList();
 		};
 
-
 		$scope.isEdit = false;
 
 		this.setCurrentPageData = function (data) {
@@ -54,21 +53,6 @@ class ReferralsCreateController {
       		getStoreData: this.setCurrentPageData(state)
 		}))(this);
 
-		// this.edit = function () {
-
-		// 	$scope.isEdit = true;
-
-		// 	$scope.currentUser = this.currentUser;
-		// 	$scope.referralsEdit = Object.assign({}, this.referral);
-		// 	$scope.patient = this.currentPatient;
-
-		// 	$scope.referralsEdit.dateCreated = new Date(this.clinicalNote.dateCreated).toISOString().slice(0, 10);
-		// };
-
-		// this.cancelEdit = function () {
-		// 	$scope.isEdit = false;
-		// };
-
 		$scope.create = function (referralsForm, referral) {
 			$scope.formSubmitted = true;
 
@@ -80,11 +64,7 @@ class ReferralsCreateController {
 
 		$scope.referralsCreate = referralsActions.create;
 
-
     $scope.$on('$destroy', unsubscribe);
-
-    this.referralsLoad = referralsActions.get;
-    this.referralsLoad($stateParams.patientId, $stateParams.referralId);
   }
 }
 

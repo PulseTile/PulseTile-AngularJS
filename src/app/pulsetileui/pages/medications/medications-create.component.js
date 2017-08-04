@@ -86,6 +86,10 @@ class MedicationsCreateController {
       $scope.formSubmitted = true;
 
       if (medicationForm.$valid) {
+        let now = new Date();
+        let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        let startTime = now - today;
+
         let toAdd = {
           sourceId: '',
           doseAmount: medication.doseAmount,
@@ -95,8 +99,8 @@ class MedicationsCreateController {
           medicationTerminology: medication.medicationTerminology,
           name: medication.name,
           route: medication.route,
-          startDate: medication.startDate,
-          startTime: new Date(),
+          startDate: medication.startDate.getTime(),
+          startTime: startTime,
           author: medication.author,
           dateCreated: medication.dateCreated,
           isImport: medication.isImport,
