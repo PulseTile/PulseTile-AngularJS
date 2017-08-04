@@ -31,6 +31,8 @@ export default function clinicalstatements(state = INITIAL_STATE, action) {
 
   var actions = {
     [types.CLINICALSTATEMENTS]: (state) => {
+      state.dataCreate = null;
+      state.dataUpdate = null;
       return Object.assign({}, state, {
         isFetching: true,
         error: false

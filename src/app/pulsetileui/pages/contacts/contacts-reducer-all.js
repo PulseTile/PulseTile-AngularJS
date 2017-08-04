@@ -29,14 +29,14 @@ export default function contacts(state = INITIAL_STATE, action) {
 
   var actions = {
     [types.CONTACTS]: (state) => {
+      state.dataCreate = null;
+      state.dataUpdate = null;
       return Object.assign({}, state, {
         isFetching: true,
         error: false
       });
     },
     [types.CONTACTS_SUCCESS]: (state) => {
-      state.dataCreate = null;
-      state.dataUpdate = null;
       return Object.assign({}, state, {
         isFetching: false,
         data: payload.response
