@@ -31,13 +31,13 @@ describe('Events Detail', function() {
     }));
 
     beforeEach(function() {
-        spyOn(scope.'confirmEdit');
-        spyOn(scope.'canStartAppointment');
-        spyOn(scope.'isDoctor');
-        spyOn(scope.'canJoinAppointment');
-        spyOn(scope.'isPatient');
-        spyOn(scope.'startAppointment');
-        spyOn(scope.'joinAppointment');
+        spyOn(scope, 'confirmEdit');
+        spyOn(scope, 'canStartAppointment');
+        spyOn(scope, 'isDoctor');
+        spyOn(scope, 'canJoinAppointment');
+        spyOn(scope, 'isPatient');
+        spyOn(scope, 'startAppointment');
+        spyOn(scope, 'joinAppointment');
         spyOn(ctrl, 'edit');
         spyOn(ctrl, 'cancelEdit');
         spyOn(ctrl, 'setCurrentPageData');

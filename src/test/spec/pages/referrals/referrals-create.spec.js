@@ -27,13 +27,11 @@ describe('Referrals Create', function() {
         spyOn(ctrl, 'setCurrentPageData');
         spyOn(ctrl, 'goList');
         spyOn(ctrl, 'cancel');
-        spyOn(ctrl, 'referralsLoad');
         spyOn(scope, 'create');
 
         ctrl.setCurrentPageData();
         ctrl.goList();
         ctrl.cancel();
-        ctrl.referralsLoad();
         scope.create();
 
     });
@@ -49,9 +47,6 @@ describe('Referrals Create', function() {
     });
     it("cancel was called", function() {
         expect(ctrl.cancel).toHaveBeenCalled();
-    });
-    it("referralsLoad was called", function() {
-        expect(ctrl.referralsLoad).toHaveBeenCalled();
     });
     it("create was called", function() {
         expect(scope.create).toHaveBeenCalled();
