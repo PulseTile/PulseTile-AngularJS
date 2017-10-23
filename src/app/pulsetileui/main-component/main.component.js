@@ -88,7 +88,7 @@ class MainController {
     serviceRequests.subscriber('changeActiveTheme', $scope.changeActiveTheme);
 
     /* istanbul ignore next */
-    this.changeisClassShowSidebar = function (data) {
+    this.changeIsClassShowSidebar = function (data) {
       /* istanbul ignore if  */
       if (data.click) {
         $scope.isClassShowSidebar = !$scope.isClassShowSidebar;
@@ -109,7 +109,7 @@ class MainController {
         this.hideSidebar();
       }
     };
-    serviceRequests.subscriber('changeStateSidebar', this.changeisClassShowSidebar);
+    serviceRequests.subscriber('changeStateSidebar', this.changeIsClassShowSidebar);
 
     /* istanbul ignore next */
     this.checkIsViews = function () {
@@ -136,7 +136,7 @@ class MainController {
         var footerHeight = page.find('.footer').outerHeight();
         var sidebar = page.find('.sidebar');
         var sidebarUnderlay = page.find('.sidebar-underlay');
-        var scrollPageTop = document.body.scrollTop;
+        var scrollPageTop = document.documentElement.scrollTop;
         var sidebarTop = headerHeight - scrollPageTop;
 
         sidebarTop = sidebarTop > 0 ? sidebarTop : 0;
@@ -158,7 +158,7 @@ class MainController {
     serviceRequests.subscriber('changePositionSidebar', function() {
       $timeout(function() {
         this.setPositionForSidebar();
-      }.bind(this), 0);
+      }.bind(this), 50);
     }.bind(this));
     
     angular.element(document).ready(function () {
