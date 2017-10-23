@@ -57,8 +57,11 @@
           <td data-th="Source" ng-class="sortClass('source')" class="hidden-xs-cell"><span>{{ personalNote.source }}</span></td>
         </tr>
 
-        <tr ng-if="!$ctrl.personalNotes.length">
-          <td colspan="4"><span class="label label-default">No personal notes</span></td>
+        <tr ng-if="!$ctrl.personalNotes || !$ctrl.personalNotes.length">
+          <td colspan="4">
+            <span class="label label-default" ng-if="!$ctrl.personalNotes">Loading...</span>
+            <span class="label label-default" ng-if="$ctrl.personalNotes && !$ctrl.personalNotes.length">No personal notes</span>
+          </td>
         </tr>
       </tbody>
     </table>

@@ -57,8 +57,11 @@
           <td data-th="Source" ng-class="sortClass('source')"><span>{{ mdt.source }}</span></td>
         </tr>
 
-        <tr ng-if="!$ctrl.genericMdtComposition.length">
-          <td colspan="4"><span class="label label-default">No MDTs</span></td>
+        <tr ng-if="!$ctrl.genericMdtComposition || !$ctrl.genericMdtComposition.length">
+          <td colspan="4">
+            <span class="label label-default" ng-if="!$ctrl.genericMdtComposition">Loading...</span>
+            <span class="label label-default" ng-if="$ctrl.genericMdtComposition && !$ctrl.genericMdtComposition.length">No MDTs</span>
+          </td>
         </tr>
       </tbody>
     </table>

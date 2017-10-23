@@ -54,8 +54,11 @@
           <td data-th="Date" ng-class="sortClass('dateCreated')"><span>{{ vaccination.dateCreated}}</span></td>
         </tr>
 
-        <tr ng-if="!$ctrl.vaccinations.length">
-            <td colspan="4"><span class="label label-default">No vaccinations</span></td>
+        <tr ng-if="!$ctrl.vaccinations || !$ctrl.vaccinations.length">
+          <td colspan="4">
+            <span class="label label-default" ng-if="!$ctrl.vaccinations">Loading...</span>
+            <span class="label label-default" ng-if="$ctrl.vaccinations && !$ctrl.vaccinations.length">No vaccinations</span>
+          </td>
         </tr>
       </tbody>
     </table>

@@ -57,8 +57,11 @@
           <td data-th="Source" ng-class="sortClass('source')"><span>{{ referral.source }}</span></td>
         </tr>
 
-        <tr ng-if="!$ctrl.referrals.length">
-          <td colspan="4"><span class="label label-default">No refferals</span></td>
+        <tr ng-if="!$ctrl.referrals || !$ctrl.referrals.length">
+          <td colspan="4">
+            <span class="label label-default" ng-if="!$ctrl.referrals">Loading...</span>
+            <span class="label label-default" ng-if="$ctrl.referrals && !$ctrl.referrals.length">No referrals</span>
+          </td>
         </tr>
       </tbody>
     </table>

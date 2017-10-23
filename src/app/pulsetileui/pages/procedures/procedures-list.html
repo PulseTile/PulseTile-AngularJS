@@ -57,8 +57,11 @@
           <td data-th="Source" ng-class="sortClass('source');"><span>{{procedure.source}}</span></td>
         </tr>
 
-        <tr ng-if="!$ctrl.procedures.length">
-          <td colspan="4"><span class="label label-default">No procedures</span></td>
+        <tr ng-if="!$ctrl.procedures || !$ctrl.procedures.length">
+          <td colspan="4">
+            <span class="label label-default" ng-if="!$ctrl.procedures">Loading...</span>
+            <span class="label label-default" ng-if="$ctrl.procedures && !$ctrl.procedures.length">No procedures</span>
+          </td>
         </tr>
       </tbody>
     </table>

@@ -90,8 +90,11 @@
             <td data-th="Date" ng-class="sortClass('dateTime')">{{ event.dateTime | date:'dd-MMM-yyyy' }}</td>
           </tr>
 
-          <tr ng-if="!$ctrl.events.length">
-              <td colspan="4"><span class="label label-default">No events</span></td>
+          <tr ng-if="!$ctrl.events || !$ctrl.events.length">
+            <td colspan="4">
+              <span class="label label-default" ng-if="!$ctrl.events">Loading...</span>
+              <span class="label label-default" ng-if="$ctrl.events && !$ctrl.events.length">No events</span>
+            </td>
           </tr>
         </tbody>
       </table>

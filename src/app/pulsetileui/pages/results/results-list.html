@@ -68,8 +68,11 @@
           <td data-th="Source" ng-class="sortClass('source')" class="hidden-xs-cell"><span>{{ result.source }}</span></td>
         </tr>
 
-        <tr ng-if="!$ctrl.results.length">
-            <td colspan="4"><span class="label label-default">No results</span></td>
+        <tr ng-if="!$ctrl.results || !$ctrl.results.length">
+          <td colspan="4">
+            <span class="label label-default" ng-if="!$ctrl.results">Loading...</span>
+            <span class="label label-default" ng-if="$ctrl.results && !$ctrl.results.length">No results</span>
+          </td>
         </tr>
       </tbody>
     </table>

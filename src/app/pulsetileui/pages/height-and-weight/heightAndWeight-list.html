@@ -38,9 +38,11 @@
         <td>{{ heightAndWeight.source }}</td>
     </tr>
 
-
-    <tr ng-if="!$ctrl.heightAndWeights.length">
-      <td colspan="3"><span class="label label-default">No heights and weights</span></td>
+    <tr ng-if="!$ctrl.heightAndWeights || !$ctrl.heightAndWeights.length">
+        <td colspan="4">
+            <span class="label label-default" ng-if="!$ctrl.heightAndWeights">Loading...</span>
+            <span class="label label-default" ng-if="$ctrl.heightAndWeights && !$ctrl.heightAndWeights.length">No heights and weights</span>
+        </td>
     </tr>
   </tbody>
 </table>

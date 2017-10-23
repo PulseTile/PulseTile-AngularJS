@@ -141,8 +141,11 @@
               </td>
           </tr>
 
-          <tr ng-if="!$ctrl.patients.length">
-              <td colspan="10"><span class="label label-default">No patients found</span></td>
+          <tr ng-if="!$ctrl.patients || !$ctrl.patients.length">
+            <td colspan="10">
+              <span class="label label-default" ng-if="!$ctrl.patients">Loading...</span>
+              <span class="label label-default" ng-if="$ctrl.patients && !$ctrl.patients.length">No patients found</span>
+            </td>
           </tr>
         </tbody>
       </table>

@@ -59,8 +59,11 @@
           <td data-th="Source" class="hidden-xs-cell" ng-class="sortClass('source')"><span>{{ contact.source }}</span></td>
         </tr>
 
-        <tr ng-if="!$ctrl.contacts.length">
-            <td colspan="4"><span class="label label-default">No contacts</span></td>
+        <tr ng-if="!$ctrl.contacts || !$ctrl.contacts.length">
+          <td colspan="4">
+            <span class="label label-default" ng-if="!$ctrl.contacts">Loading...</span>
+            <span class="label label-default" ng-if="$ctrl.contacts && !$ctrl.contacts.length">No contacts</span>
+          </td>
         </tr>
       </tbody>
     </table>

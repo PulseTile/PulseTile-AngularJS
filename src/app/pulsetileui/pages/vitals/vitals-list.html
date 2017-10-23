@@ -82,8 +82,11 @@
             <td data-th="Source" ng-class="sortClass('source')"><span>{{ vital.source }}</span></td>
           </tr>
 
-          <tr ng-if="!vitals.length">
-              <td colspan="4"><span class="label label-default">No vitals</span></td>
+          <tr ng-if="!vitals || !vitals.length">
+            <td colspan="4">
+              <span class="label label-default" ng-if="!vitals">Loading...</span>
+              <span class="label label-default" ng-if="vitals && !vitals.length">No vitals</span>
+            </td>
           </tr>
         </tbody>
       </table>

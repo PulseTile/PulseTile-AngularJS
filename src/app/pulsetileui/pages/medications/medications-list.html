@@ -62,8 +62,11 @@
             <td class="hidden-xs-cell" ng-class="sortClass('source')"><span>{{ medication.source}}</span></td>
         </tr>
 
-        <tr ng-if="!$ctrl.medications.length">
-            <td colspan="4"><span class="label label-default">No medications</span></td>
+        <tr ng-if="!$ctrl.medications || !$ctrl.medications.length">
+          <td colspan="4">
+            <span class="label label-default" ng-if="!$ctrl.medications">Loading...</span>
+            <span class="label label-default" ng-if="$ctrl.medications && !$ctrl.medications.length">No medications</span>
+          </td>
         </tr>
       </tbody>
     </table>

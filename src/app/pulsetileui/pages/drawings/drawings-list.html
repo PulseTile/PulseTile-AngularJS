@@ -54,8 +54,11 @@
           <td data-th="Source" ng-class="sortClass('source')"><span>{{ drawing.source }}</span></td>
         </tr>
 
-        <tr ng-if="!$ctrl.drawings.length">
-          <td colspan="5"><span class="label label-default">No drawings</span></td>
+        <tr ng-if="!$ctrl.drawings || !$ctrl.drawings.length">
+          <td colspan="4">
+            <span class="label label-default" ng-if="!$ctrl.drawings">Loading...</span>
+            <span class="label label-default" ng-if="$ctrl.drawings && !$ctrl.drawings.length">No drawings</span>
+          </td>
         </tr>
       </tbody>
     </table>

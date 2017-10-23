@@ -38,7 +38,7 @@ class UiKitController {
       $scope.scrollTo = function (id) {
         var $elm = $('#' + id);
         
-        $("body").animate({scrollTop: $elm.offset().top - 60}, "slow");
+        document.documentElement.scrollTop = $elm.offset().top - 60;
         
         if ($scope.isMobileScreen()) {
           $scope.isOpenSidebar = false;
@@ -118,7 +118,7 @@ class UiKitController {
         }, {
           text: 'Item 5',
           code: 5
-        }]
+        }];
         $scope.chosenOrders = [];
         $scope.idSelectedLeft = null;
         $scope.idSelectedRight = null;
