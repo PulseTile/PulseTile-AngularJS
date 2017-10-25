@@ -29,7 +29,6 @@ class EventsListController {
 
     $scope.isFilterTimelineOpen = filterTimelineData.isOpen;
     $scope.sliderRange;
-    this.events = [];
     $scope.eventsFiltering = [];
     $scope.eventsTimeline = [];
 
@@ -109,7 +108,7 @@ class EventsListController {
 
         this.eventsFilterSteps = $scope.getFilterArray(this.events);
         serviceFormatted.formattingTablesDate(this.eventsFilterSteps, ['dateCreated', 'dateTime'], serviceFormatted.formatCollection.DDMMMMYYYY);
-        
+
         $scope.sliderRange = {
           minValue: filterTimelineData.rangeMin ? filterTimelineData.rangeMin : this.eventsFilterSteps[0].value,
           maxValue: filterTimelineData.rangeMax ? filterTimelineData.rangeMax : this.eventsFilterSteps[this.eventsFilterSteps.length - 1].value,
@@ -122,7 +121,7 @@ class EventsListController {
             stepsArray: this.eventsFilterSteps
           }
         };
-        
+
         $scope.formCollectionsEvents(this.events);
 
         usSpinnerService.stop('patientSummary-spinner');
