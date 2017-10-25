@@ -35,24 +35,28 @@ class DiagnosesDetailController {
     this.edit = function () {
       $scope.isEdit = true;
       $scope.diagnosisEdit = Object.assign({}, this.diagnosis);
-      $scope.diagnosisEdit.dateCreated = new Date(this.diagnosis.dateCreated);
+			$scope.diagnosisEdit.dateCreated = new Date(this.diagnosis.dateCreated);
+			$scope.diagnosisEdit.dateOfOnset = new Date(this.diagnosis.dateOfOnset);
       $scope.diagnosisEdit.dateSubmitted = new Date();
     };
     this.cancelEdit = function () {
       $scope.isEdit = false;
     };
+
     $scope.confirmEdit = function (diagnosisForm, diagnosis) {
       $scope.formSubmitted = true;
 
       let toAdd = {
-        code: $scope.diagnosis.code,
-        dateOfOnset: $scope.diagnosis.dateOfOnset.toISOString().slice(0, 10),
-        description: $scope.diagnosis.description,
-        problem: $scope.diagnosis.problem,
-        source: $scope.diagnosis.source,
+        code: $scope.diagnosisEdit.code,
+        dateOfOnset: $scope.diagnosisEdit.dateOfOnset.toISOString().slice(0, 10),
+        description: $scope.diagnosisEdit.description,
+        problem: $scope.diagnosisEdit.problem,
+        source: $scope.diagnosisEdit.source,
         sourceId: '',
-        terminology: $scope.diagnosis.terminology
+        terminology: $scope.diagnosisEdit.terminology
       };
+
+
       if (diagnosisForm.$valid) {
         $scope.isEdit = false;
         diagnosis = Object.assign(diagnosis, $scope.diagnosisEdit);
