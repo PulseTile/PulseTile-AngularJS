@@ -13,6 +13,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
+<div class="patients-list">
 <div table-settings order="name" filtering class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
@@ -162,7 +163,7 @@
               <td class="patient-control">
                 <div uib-dropdown class="patient-buttons dropdown">
                   <button uib-dropdown-toggle class="btn btn-success btn-inverse btn-sm btn-dropdown-toggle" ng-click="toggleDropdown($event);"></button>
-                  <div uib-dropdown-menu class="dropdown-menu dropdown-menu-right">
+                  <div uib-dropdown-menu class="dropdown-menu" ng-class="{'dropdown-menu-right': true}">
                     <div class="dropdown-menu-wrap-list">
                       <div class="dropdown-menu-list">
                         <div class="dropdown-menu-item" ng-click="$ctrl.openModal(patient, 'orders')"><span class="dropdown-menu-item-text">Orders</span></div>
@@ -173,7 +174,7 @@
                     </div>
                   </div>
                   <div class="wrap-overflow">
-                    <button class="btn btn-success btn-inverse btn-sm btn-bold btn-view-patient" ng-click="$ctrl.openModal(patient)">View</button>
+                    <button class="btn btn-success btn-inverse btn-sm btn-bold btn-view-patient" ng-click="$ctrl.openModal(patient)">View {{current-page}}</button>
                   </div>
                 </div>
               </td>
@@ -191,35 +192,4 @@
     </div>
   </div>
 </div>
-
-<div class="row">
-
-  <!-- <div class="col-md-3 col-sm-4 col-xs-12 form-group" ng-if="$ctrl.filters.ageRange">
-    <div class="search-left-inner-addon">
-      <i class="glyphicon glyphicon-list glyphicon-list-patients black-color-text"></i>
-      <input class="form-control" placeholder=" Age range: {{$ctrl.filters.ageRange}}" readonly />
-    </div>
-  </div> -->
-
-  <!-- <div class="col-md-3 col-sm-4 col-xs-12 form-group" ng-if="$ctrl.filters.department">
-    <div class="search-left-inner-addon">
-      <i class="glyphicon glyphicon-list glyphicon-list-patients black-color-text"></i>
-      <input class="form-control" placeholder=" Setting: {{$ctrl.filters.department}}" readonly />
-    </div>
-  </div> -->
-
-  <!-- <div class="col-md-3 col-sm-4 col-xs-12 form-group" ng-if="!$ctrl.filters.department && !$ctrl.filters.ageRange && !$ctrl.filters.advancedSearch">
-    <div class="search-left-inner-addon">
-      <i class="glyphicon glyphicon-list glyphicon-list-patients black-color-text"></i>
-      <input class="form-control" placeholder=" Patients: All" readonly style="cursor: not-allowed"/>
-    </div>
-  </div> -->
-
-  <!-- <div class="col-md-3 col-sm-4 col-xs-12 form-group" ng-if="$ctrl.filters.advancedSearch">
-    <div class="search-left-inner-addon">
-      <i class="glyphicon glyphicon-list glyphicon-list-patients black-color-text"></i>
-      <input class="form-control patientFilterOptions" placeholder="Patients: {{$ctrl.filters.advancedSearchParams.forename}} {{$ctrl.filters.advancedSearchParams.surname}}, {{$ctrl.filters.advancedSearchParams.dateOfBirth | date:'dd-MMM-yyyy'}}" readonly ng-click="$ctrl.openAdvancedSearch()" />
-      <i class="glyphicon fa fa-pencil" style="margin-left: 422px; color: #7cbe31;"></i>
-    </div>
-  </div> -->
 </div>

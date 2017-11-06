@@ -7,6 +7,9 @@
     @include respond-to(xs) { display: none; }
   }
 }
+.patients-list {
+  padding-bottom: 50px;
+}
 .patient-buttons {
   @include clearfix;
   float: right; 

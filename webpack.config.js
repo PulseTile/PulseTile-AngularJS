@@ -32,15 +32,14 @@ const API_URL =  'http://46.101.95.245';
 //---------------------------------------------------------
 const config = {
   resolve: {
-    extensions: ['', '.js'],
-    modulesDirectories: ["node_modules", "bower_components"],
+		extensions: ['', '.js'],
+		modulesDirectories: ["node_modules", "bower_components"],
 
-    root: path.resolve('./src'),
-    alias: {
-      // 'morrisjs': '../../bower_components/morrisjs/morris.js',
-      'spin': 'spin.js',
-    }
-  },
+		root: path.resolve('./src'),
+		alias: {
+			'spin': 'spin.js',
+		}
+	},
 
   module: {
     loaders: [
