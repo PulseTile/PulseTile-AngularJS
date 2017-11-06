@@ -230,8 +230,9 @@ app.run(function($rootScope, $state, serviceRequests, serviceThemes, Confirmatio
           case 'PHR':
             //Trick for PHR user login
             if (locationHrefBeforeLogin && 
-                 (locationHrefBeforeLogin.indexOf(currentUser.nhsNumber) === -1 ||
-                  locationHrefBeforeLogin.indexOf('profile') === -1) ) {
+                 (locationHrefBeforeLogin.indexOf(currentUser.nhsNumber) > -1 ||
+                  locationHrefBeforeLogin.indexOf('profile') > -1) ) {
+                // If patient can go to the link from Local Storage
 
                 location.href = locationHrefBeforeLogin;
 
