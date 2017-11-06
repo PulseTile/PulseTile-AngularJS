@@ -107,7 +107,7 @@ class EventsListController {
         serviceFormatted.filteringKeys = ['name', 'type', 'dateTime'];
 
         this.eventsFilterSteps = $scope.getFilterArray(this.events);
-        serviceFormatted.formattingTablesDate(this.eventsFilterSteps, ['dateCreated', 'dateTime'], serviceFormatted.formatCollection.DDMMMMYYYY);
+        serviceFormatted.formattingTablesDate(this.eventsFilterSteps, ['value'], serviceFormatted.formatCollection.DDMMMMYYYY);
 
         $scope.sliderRange = {
           minValue: filterTimelineData.rangeMin ? filterTimelineData.rangeMin : this.eventsFilterSteps[0].value,
@@ -171,7 +171,7 @@ class EventsListController {
       var countLabel = 3;
 
       arr = _.chain(arr)
-            .filter(function (el, index, arr) {
+            .filter(function (el) {
               return el.dateTime;
             })
             .uniq(function (el) {
@@ -187,7 +187,7 @@ class EventsListController {
               if (index % Math.round(arr.length / countLabel) === 0 ||
                   index === arr.length - 1) {
 
-                newEl.legend = el.dateTime;
+                newEl.legend = serviceFormatted.formattingDate(el.dateTime, serviceFormatted.formatCollection.DDMMMYYYY);;
               }
               
               return newEl;
