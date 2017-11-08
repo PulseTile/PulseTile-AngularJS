@@ -95,7 +95,6 @@ const config = {
 //  DEVELOPMENT or PRODUCTION
 //-------------------------------------
 if (ENV_DEVELOPMENT || ENV_PRODUCTION || ENV_PRODUCTION_EXTENSION) {
-
   config.entry = {
     index: [
       'bootstrap-loader',
@@ -179,15 +178,22 @@ if (ENV_DEVELOPMENT) {
 //  PRODUCTION
 //-------------------------------------
 if (ENV_PRODUCTION || ENV_PRODUCTION_EXTENSION) {
-  config.devtool = 'source-map';
+  config.devtool = 'cheap-inline-module';
 
   config.module.loaders.push(
       {test: /\.scss$/, loader: 'style!css!postcss!sass'}
   );
-
   config.plugins.push(
-      new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.optimize.DedupePlugin()
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      comments: false,
+      exclude: [/bower_components/, /node_modules/],
+      parallel: 4,
+      compress: {
+        warnings: false
+      }
+    })
   );
 }
 

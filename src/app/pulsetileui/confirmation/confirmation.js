@@ -21,28 +21,31 @@ export default function ConfirmationModal($uibModal, $ngRedux) {
     if (isModalClosed) {
       isModalClosed = false;
 
+      var controller = function ($scope, $state, $uibModalInstance) {
+        $scope.cancel = function () {
+          $uibModalInstance.dismiss('cancel');
+        };
+
+        $scope.ok = function () {
+          if (state != undefined) {
+            $state.go(state, {
+              patientId: patient.id,
+            });
+          } else {
+            $state.go('patients-summary', {
+              patientId: patient.id
+            });
+          }
+
+          $uibModalInstance.dismiss('cancel');
+        };
+
+      };
+      controller.$inject = ['$scope', '$state', '$uibModalInstance'];
+
       var modalInstance = $uibModal.open({
         template: require('./confirmation.html'),
-        controller: function ($scope, $state, $uibModalInstance) {
-          $scope.cancel = function () {
-            $uibModalInstance.dismiss('cancel');
-          };
-
-          $scope.ok = function () {
-            if (state != undefined) {
-              $state.go(state, {
-                patientId: patient.id,
-              });
-            } else {
-              $state.go('patients-summary', {
-                patientId: patient.id
-              });
-            }
-
-            $uibModalInstance.dismiss('cancel');
-          };
-
-        }
+        controller: controller
       });
     }
 

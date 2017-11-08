@@ -21,20 +21,22 @@ export default function ConfirmationDocsModal($uibModal, $stateParams) {
     if (isModalClosed) {
       isModalClosed = false;
 
+      var controller = function ($scope, $state, $uibModalInstance) {
+        $scope.cancel = function () {
+          $uibModalInstance.dismiss('cancel');
+        };
+
+        $scope.ok = function () {
+          agreeFunc();
+
+          $uibModalInstance.dismiss('cancel');
+        };
+      };
+      controller.$inject = ['$scope', '$state', '$uibModalInstance'];
+
       var modalInstance = $uibModal.open({
         template: require('./confirmation-documents.html'),
-        controller: function ($scope, $state, $uibModalInstance) {
-          $scope.cancel = function () {
-            $uibModalInstance.dismiss('cancel');
-          };
-
-          $scope.ok = function () {
-            agreeFunc();
-
-            $uibModalInstance.dismiss('cancel');
-          };
-
-        }
+        controller: controller
       });
     }
 

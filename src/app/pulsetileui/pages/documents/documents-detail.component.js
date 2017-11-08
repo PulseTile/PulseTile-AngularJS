@@ -57,14 +57,17 @@ class DocumentsDetailController {
       this.documentsFindReferral($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
   }
 }
+DocumentsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'documentsActions', 'usSpinnerService', 'ConfirmationDocsModal', 'templateService'];
+
+var templateFn = function($element, $attrs, templateService) {
+  let templateDocumentsType = require('./' + templateService.getTemplate());
+  return templateDocumentsType;
+}
+templateFn.$inject = ['$element', '$attrs', 'templateService'];
 
 const DocumentsDetailComponent = {
-  template: function($element, $attrs, templateService) {
-    let templateDocumentsType = require('./' + templateService.getTemplate());
-    return templateDocumentsType;
-  },
+  template: templateFn,
   controller: DocumentsDetailController
 };
 
-DocumentsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'documentsActions', 'usSpinnerService', 'ConfirmationDocsModal', 'templateService'];
 export default DocumentsDetailComponent;

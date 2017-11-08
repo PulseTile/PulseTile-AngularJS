@@ -21,13 +21,16 @@ export default function ConfirmationRedirectModal($uibModal, $ngRedux) {
     if (isModalClosed) {
       isModalClosed = false;
 
+      var controller = function ($scope, $state, $uibModalInstance) {
+        $scope.ok = function () {
+          $uibModalInstance.dismiss('cancel');
+        };
+      };
+      controller.$inject = ['$scope', '$state', '$uibModalInstance'];
+
       var modalInstance = $uibModal.open({
         template: require('./confirmation-redirect.html'),
-        controller: function ($scope, $state, $uibModalInstance) {
-          $scope.ok = function () {
-            $uibModalInstance.dismiss('cancel');
-          };
-        }
+        controller: controller
       });
     }
 
