@@ -12,11 +12,11 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-export default function ConfirmationRedirectModal($uibModal, $ngRedux) {
+export default function ConfirmationRedirectModal($uibModal) {
   var isModalClosed = true;
 
   /* istanbul ignore next */
-  var openModal = function (patient, state) {
+  var openModal = function () {
     /* istanbul ignore if  */
     if (isModalClosed) {
       isModalClosed = false;
@@ -50,4 +50,4 @@ export default function ConfirmationRedirectModal($uibModal, $ngRedux) {
     openModal: openModal
   };
 }
-ConfirmationRedirectModal.$inject = ['$uibModal', '$ngRedux'];
+ConfirmationRedirectModal.$inject = ['$uibModal'];

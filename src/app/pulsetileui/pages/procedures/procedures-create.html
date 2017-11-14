@@ -30,7 +30,7 @@
                 <div class="form-group" ng-class="{'has-error': (formSubmitted || procedureForm.procedureName.$dirty) && procedureForm.procedureName.$invalid, 'has-success': procedureForm.procedureName.$valid && procedureForm.procedureName.$dirty}">
                   <label for="procedureName" class="control-label">Procedure Name</label>
                   <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="procedureName" name="procedureName" ng-model="procedureEdit.procedureName" required />
+                    <input type="text" class="form-control input-sm" id="procedureName" name="procedureName" ng-model="procedure.procedureName" required />
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && procedureForm.procedureName.$error.required">You must enter a value.</span>
                 </div>
@@ -121,7 +121,7 @@
         <div class="wrap-control-group">
           <div class="control-group right">
             <button class="btn btn-danger" ng-click="$ctrl.cancel()"><i class="btn-icon fa fa-ban"></i> <span class="btn-text">Cancel</span></button>
-            <button class="btn btn-success" ng-click="create(procedureForm, procedureEdit)"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Complete</span></button>
+            <button class="btn btn-success" ng-click="create(procedureForm, procedure)"><i class="btn-icon fa fa-check"></i> <span class="btn-text">Complete</span></button>
           </div>
         </div>
       </div>

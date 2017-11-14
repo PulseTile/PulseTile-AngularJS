@@ -12,7 +12,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-export default function ConfirmationDocsModal($uibModal, $stateParams) {
+export default function ConfirmationDocsModal($uibModal) {
   var isModalClosed = true;
 
   /* istanbul ignore next */
@@ -54,4 +54,4 @@ export default function ConfirmationDocsModal($uibModal, $stateParams) {
     openModal: openModal
   };
 }
-ConfirmationDocsModal.$inject = ['$uibModal', '$stateParams'];
+ConfirmationDocsModal.$inject = ['$uibModal'];

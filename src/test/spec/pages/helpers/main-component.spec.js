@@ -41,7 +41,7 @@ describe('MainComponent', function() {
         spyOn(ctrl, 'changeFullPanel');
         spyOn(ctrl, 'hideSidebar');
         spyOn(ctrl, 'hideSidebarOnMobile');
-        spyOn(ctrl, 'changeisClassShowSidebar');
+        spyOn(ctrl, 'changeIsClassShowSidebar');
         spyOn(ctrl, 'checkIsViews');
         spyOn(ctrl, 'setPositionForSidebar');
            
@@ -55,7 +55,7 @@ describe('MainComponent', function() {
         ctrl.changeFullPanel();
         ctrl.hideSidebar();
         ctrl.hideSidebarOnMobile();
-        ctrl.changeisClassShowSidebar();
+        ctrl.changeIsClassShowSidebar();
         ctrl.checkIsViews();
         ctrl.setPositionForSidebar();
     });
@@ -106,8 +106,8 @@ describe('MainComponent', function() {
     it("hideSidebarOnMobile was called", function() {
         expect(ctrl.hideSidebarOnMobile).toHaveBeenCalled();
     });
-    it("changeisClassShowSidebar was called", function() {
-        expect(ctrl.changeisClassShowSidebar).toHaveBeenCalled();
+    it("changeIsClassShowSidebar was called", function() {
+        expect(ctrl.changeIsClassShowSidebar).toHaveBeenCalled();
     });
     it("checkIsViews was called", function() {
         expect(ctrl.checkIsViews).toHaveBeenCalled();
