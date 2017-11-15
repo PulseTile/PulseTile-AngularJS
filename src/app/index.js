@@ -155,9 +155,11 @@ let app = angular
     .component('reportChartComponent', ReportChartComponent)
     
     .config(routeConfig)
-    .config(function (paginationTemplateProvider) {
+    .config(['paginationTemplateProvider',
+      function (paginationTemplateProvider) {
         paginationTemplateProvider.setString(require('./pulsetileui/pagination/dirPagination.tpl.html'));
-    })
+      }
+    ])
     .config(['$ngReduxProvider', $ngReduxProvider => {
         const middleware = ['httpMiddleware'];
 
@@ -173,37 +175,44 @@ let app = angular
     .config(['cfpLoadingBarProvider', cfpLoadingBarProvider => {
         cfpLoadingBarProvider.includeSpinner = false;
     }])
-    .config(function (ScrollBarsProvider) {
+    .config(['ScrollBarsProvider',
+      function (ScrollBarsProvider) {
         // the following settings are defined for all scrollbars unless the
         // scrollbar has local scope configuration
         ScrollBarsProvider.defaults = {
-            scrollButtons: {
-                scrollAmount: 'auto', // scroll amount when button pressed
-                enable: false // enable scrolling buttons by default
-            },
-            scrollInertia: 0, // adjust however you want
-            axis: 'y',
-            theme: 'dark-custom',
-            autoHideScrollbar: false,
-            mouseWheel:{ preventDefault: false }
+          scrollButtons: {
+            scrollAmount: 'auto', // scroll amount when button pressed
+            enable: false // enable scrolling buttons by default
+          },
+          scrollInertia: 0, // adjust however you want
+          axis: 'y',
+          theme: 'dark-custom',
+          autoHideScrollbar: false,
+          mouseWheel:{ preventDefault: false }
         };
-    })
-    .config(function(uiSelectConfig) {
+      }
+    ])
+    .config(['uiSelectConfig',
+      function(uiSelectConfig) {
         uiSelectConfig.theme = 'bootstrap';
         uiSelectConfig.resetSearchInput = false;
         uiSelectConfig.appendToBody = true;
         uiSelectConfig.searchEnabled = false;
-    });
-    app.run(function(editableOptions, editableThemes) {
-      editableOptions.theme = 'bs3'; // bootstrap3 theme
-      editableThemes.bs3.inputClass = 'input-sm';
-      editableThemes.bs3.buttonsClass = 'btn-sm';
-    });
+      }
+    ]);
+    app.run(['editableOptions', 'editableThemes',
+      function(editableOptions, editableThemes) {
+        editableOptions.theme = 'bs3'; // bootstrap3 theme
+        editableThemes.bs3.inputClass = 'input-sm';
+        editableThemes.bs3.buttonsClass = 'btn-sm';
+      }
+    ]);
 
 console.log('app start');
 
 /*Project initialise*/
-app.run(function($rootScope, $state, serviceRequests, serviceThemes, ConfirmationRedirectModal, $location) {
+app.run(['$rootScope', '$state', 'serviceRequests', 'serviceThemes', 'ConfirmationRedirectModal',
+  function($rootScope, $state, serviceRequests, serviceThemes, ConfirmationRedirectModal) {
     var classLoadingPage = 'loading';
     var body = $('body');
     var userData = null;
@@ -217,47 +226,47 @@ app.run(function($rootScope, $state, serviceRequests, serviceThemes, Confirmatio
       /* istanbul ignore if  */
       if (!currentUser) return;
 
-        // Direct different roles to different pages at login
-        /* istanbul ignore next  */
-        switch (currentUser.role) {
-          case 'IDCR':
-            /*Go to URL from localStorage*/
-            if (locationHrefBeforeLogin) {
-              localStorage.removeItem('locationHrefBeforeLogin');
-              location.href = locationHrefBeforeLogin;
-            }
-            break;
-          case 'PHR':
-            //Trick for PHR user login
-            if (locationHrefBeforeLogin && 
-                 (locationHrefBeforeLogin.indexOf(currentUser.nhsNumber) > -1 ||
-                  locationHrefBeforeLogin.indexOf('profile') > -1) ) {
-                // If patient can go to the link from Local Storage
-
-                location.href = locationHrefBeforeLogin;
-
-            } else if (location.href.indexOf(currentUser.nhsNumber) === -1) {
-
-              if (locationHrefBeforeLogin) {
-                let path = locationHrefBeforeLogin.split('#/')[1];
-                if (path !== '' ||
-                    path !== 'charts') {
-                  ConfirmationRedirectModal.openModal(currentUser.nhsNumber);
-                }
-              }
-
-              $state.go('patients-summary', {
-                patientId: currentUser.nhsNumber
-              });
-
-            }
-              
+      // Direct different roles to different pages at login
+      /* istanbul ignore next  */
+      switch (currentUser.role) {
+        case 'IDCR':
+          /*Go to URL from localStorage*/
+          if (locationHrefBeforeLogin) {
             localStorage.removeItem('locationHrefBeforeLogin');
+            location.href = locationHrefBeforeLogin;
+          }
+          break;
+        case 'PHR':
+          //Trick for PHR user login
+          if (locationHrefBeforeLogin &&
+            (locationHrefBeforeLogin.indexOf(currentUser.nhsNumber) > -1 ||
+              locationHrefBeforeLogin.indexOf('profile') > -1) ) {
+            // If patient can go to the link from Local Storage
 
-            break;
-          default:
-            $state.go('patients-charts');
-        }
+            location.href = locationHrefBeforeLogin;
+
+          } else if (location.href.indexOf(currentUser.nhsNumber) === -1) {
+
+            if (locationHrefBeforeLogin) {
+              let path = locationHrefBeforeLogin.split('#/')[1];
+              if (path !== '' ||
+                path !== 'charts') {
+                ConfirmationRedirectModal.openModal(currentUser.nhsNumber);
+              }
+            }
+
+            $state.go('patients-summary', {
+              patientId: currentUser.nhsNumber
+            });
+
+          }
+
+          localStorage.removeItem('locationHrefBeforeLogin');
+
+          break;
+        default:
+          $state.go('patients-charts');
+      }
     };
 
     /* istanbul ignore next */
@@ -266,7 +275,7 @@ app.run(function($rootScope, $state, serviceRequests, serviceThemes, Confirmatio
       userData = loginResult.data;
       switchDirectByRole(userData);
     };
-    
+
     /* istanbul ignore next */
     var login = function () {
       serviceRequests.login().then(function (result) {
@@ -301,7 +310,7 @@ app.run(function($rootScope, $state, serviceRequests, serviceThemes, Confirmatio
       /* istanbul ignore next */
       if (result.data.redirectTo === 'auth0') {
         console.log('running in UAT mode, so now login via auth0');
-        
+
         var isSignout = localStorage.getItem('signout');
         localStorage.removeItem('signout');
 
@@ -317,7 +326,7 @@ app.run(function($rootScope, $state, serviceRequests, serviceThemes, Confirmatio
         });
         return;
       }
-      
+
       /* istanbul ignore if */
       if (result.data && result.data.ok) {
         console.log('Cookie was for a valid session, so fetch the simulated user');
@@ -333,4 +342,4 @@ app.run(function($rootScope, $state, serviceRequests, serviceThemes, Confirmatio
     $rootScope.$on('$locationChangeSuccess', function() {
       switchDirectByRole(userData);
     }.bind(this));
-});
+}]);
