@@ -211,8 +211,8 @@ let app = angular
 console.log('app start');
 
 /*Project initialise*/
-app.run(['$rootScope', '$state', 'serviceRequests', 'serviceThemes', 'ConfirmationRedirectModal',
-  function($rootScope, $state, serviceRequests, serviceThemes, ConfirmationRedirectModal) {
+app.run(['$rootScope', '$state', 'serviceRequests', 'serviceThemes',
+  function($rootScope, $state, serviceRequests, serviceThemes) {
     var classLoadingPage = 'loading';
     var body = $('body');
     var userData = null;
@@ -251,7 +251,7 @@ app.run(['$rootScope', '$state', 'serviceRequests', 'serviceThemes', 'Confirmati
               let path = locationHrefBeforeLogin.split('#/')[1];
               if (path !== '' ||
                 path !== 'charts') {
-                ConfirmationRedirectModal.openModal(currentUser.nhsNumber);
+                // ConfirmationRedirectModal.openModal(currentUser.nhsNumber);
               }
             }
 
