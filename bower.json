@@ -24,5 +24,8 @@
     "angular-ui-select": "0.19.8",
     "fabric.js": "fabric#1.7.16",
     "angular-bootstrap-datetimepicker": "1.1.4"
+  },
+  "resolutions": {
+    "angular": "1.5.8"
   }
 }
