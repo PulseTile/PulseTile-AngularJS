@@ -97,7 +97,7 @@
     </div>
     <div class="panel-body">
       <div class="panel-expand-wrapper">
-        <div class="panel-expand-row" ng-if="$even" ng-repeat="detail in $ctrl.result.testResults">
+        <div class="panel-expand-row" ng-if="$ctrl.result.testResults && $ctrl.result.testResults.length && $even" ng-repeat="detail in $ctrl.result.testResults">
           <div class="panel-expand-item" >
             <div class="panel-body-inner">
               <div class="form">
@@ -151,6 +151,16 @@
                     <div class="form-control-static">{{ $ctrl.result.testResults[$index + 1].comment }}</div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-body-inner" ng-if="!$ctrl.result.testResults || !$ctrl.result.testResults.length">
+          <div class="form">
+            <div class="form-group-wrapper">
+              <div class="form-group">
+                <div class="form-control-static">No results</div>
               </div>
             </div>
           </div>
