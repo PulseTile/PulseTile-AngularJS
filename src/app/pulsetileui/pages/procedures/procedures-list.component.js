@@ -48,7 +48,9 @@ class ProceduresListController {
         this.procedures = data.procedures.data;
 
         serviceFormatted.formattingTablesDate(this.procedures, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
-        serviceFormatted.formattingTablesDate(this.procedures, ['time'], serviceFormatted.formatCollection.HHmm);
+        if (this.procedures && this.procedures[0] && angular.isNumber(this.procedures[0].time)) {
+          serviceFormatted.formattingTablesDate(this.procedures, ['time'], serviceFormatted.formatCollection.HHmm);
+        }
         serviceFormatted.filteringKeys = ['date', 'name', 'time', 'source'];
       }
       if (serviceRequests.currentUserData) {
