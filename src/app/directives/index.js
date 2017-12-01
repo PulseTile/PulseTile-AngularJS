@@ -424,7 +424,7 @@ angular.module('ripple-ui.directives', [])
         };
       }
     }
-  })
+  }) 
   .directive('mcUploadfile', function () {
       /* istanbul ignore next  */
       return {

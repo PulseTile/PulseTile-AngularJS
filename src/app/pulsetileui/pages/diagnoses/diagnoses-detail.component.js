@@ -52,15 +52,15 @@ class DiagnosesDetailController {
         description: $scope.diagnosisEdit.description,
         problem: $scope.diagnosisEdit.problem,
         source: $scope.diagnosisEdit.source,
-        sourceId: '',
+        sourceId: $scope.diagnosisEdit.sourceId,
         terminology: $scope.diagnosisEdit.terminology
       };
 
 
       if (diagnosisForm.$valid) {
         $scope.isEdit = false;
-        diagnosis = Object.assign(diagnosis, $scope.diagnosisEdit);
-        $scope.diagnosesUpdate(this.currentPatient.id, toAdd);
+        this.diagnosis = Object.assign(this.diagnosis, $scope.diagnosisEdit);
+        $scope.diagnosesUpdate(this.currentPatient.id, $scope.diagnosisEdit.sourceId, toAdd);
       }
     }.bind(this);
     

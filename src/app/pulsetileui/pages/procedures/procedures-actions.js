@@ -65,7 +65,7 @@ export function create(patientId, composition) {
     }
   };
 }
-export function update(patientId, composition) {
+export function update(patientId, sourceId, composition) {
   return {
     types: [types.PROCEDURES_UPDATE, types.PROCEDURES_UPDATE_SUCCESS, types.PROCEDURES_UPDATE_ERROR],
 
@@ -73,7 +73,7 @@ export function update(patientId, composition) {
 
     config: {
       method: 'put',
-      url: '/api/patients/' + patientId + '/procedures',
+      url: '/api/patients/' + patientId + '/procedures/' + sourceId,
       data: composition
     },
 

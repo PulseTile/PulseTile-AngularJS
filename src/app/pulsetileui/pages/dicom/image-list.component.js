@@ -32,12 +32,6 @@ class ImageListController {
       });
     };
     
-    this.create = function () {
-      $state.go('images-create', {
-          patientId: $stateParams.patientId
-      });
-    };
-
     this.setCurrentPageData = function (data) {
       if (data.studies.data) {
         this.images = data.studies.data;

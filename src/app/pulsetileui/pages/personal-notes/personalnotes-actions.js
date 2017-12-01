@@ -66,7 +66,7 @@ export function create(patientId, composition) {
     }
   };
 }
-export function update(patientId, composition) {
+export function update(patientId, sourceId, composition) {
   return {
     types: [types.PERSONALNOTES_UPDATE, types.PERSONALNOTES_UPDATE_SUCCESS, types.PERSONALNOTES_UPDATE_ERROR],
 
@@ -74,7 +74,7 @@ export function update(patientId, composition) {
 
     config: {
       method: 'put',
-      url: '/api/patients/' + patientId + '/personalnotes',
+      url: '/api/patients/' + patientId + '/personalnotes/' + sourceId,
       data: composition
     },
 

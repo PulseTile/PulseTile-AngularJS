@@ -86,8 +86,11 @@ class MedicationsDetailController {
       $scope.isMedicationEdit = false;
     };
     $scope.confirmEditMedication = function (medicationForm, medication) {
-      
       $scope.formSubmitted = true;
+      const now = new Date();
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const startTime = now - today;
+      
       let toAdd = {
         sourceId: '',
         doseAmount: medication.doseAmount,
@@ -97,16 +100,17 @@ class MedicationsDetailController {
         medicationTerminology: medication.medicationTerminology,
         name: medication.name,
         route: medication.route,
-        startDate: medication.startDate,
-        startTime: medication.startTime,
+        startDate: new Date().getTime(),
+        startTime: startTime,
         author: medication.author,
-        dateCreated: medication.dateCreated
+        dateCreated: medication.dateCreated,
+        sourceId: medication.sourceId
       };
 
       if (medicationForm.$valid) {
         this.medication = Object.assign(this.medication, $scope.medicationEdit);
         $scope.isMedicationEdit = false;
-        $scope.medicationsUpdate($scope.patient.id, toAdd);
+        $scope.medicationsUpdate($scope.patient.id, medication.sourceId, toAdd);
 
       }
     }.bind(this);

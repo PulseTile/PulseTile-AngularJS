@@ -60,7 +60,7 @@ class VitalsDetailController {
         $scope.vital = Object.assign($scope.vital, $scope.vitalEdit);
         $scope.changeNewScore($scope.vital);
 
-        $scope.vitalsUpdate(this.currentPatient.id, $scope.vital);
+        $scope.vitalsUpdate(this.currentPatient.id, $scope.vital.sourceId, $scope.vital);
       }
     }.bind(this);
 

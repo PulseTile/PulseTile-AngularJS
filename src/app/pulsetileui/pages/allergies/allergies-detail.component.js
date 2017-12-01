@@ -49,7 +49,7 @@ class AllergiesDetailController {
       $scope.formSubmitted = true;
 
       let toAdd = {
-        sourceId: '',
+        sourceId: allergies.sourceId,
         cause: allergies.cause,
         causeCode: allergies.causeCode,
         causeTerminology: allergies.causeTerminology,
@@ -60,7 +60,7 @@ class AllergiesDetailController {
       if (allergyForm.$valid) {
         $scope.isEdit = false;
         this.allergy = Object.assign(this.allergy, $scope.allergyEdit);
-        $scope.allergiesUpdate(this.currentPatient.id, toAdd);
+        $scope.allergiesUpdate(this.currentPatient.id, allergies.sourceId, toAdd);
       }
     }.bind(this);
 
@@ -81,7 +81,7 @@ class AllergiesDetailController {
       $scope.formSubmitted = true;
 
       let toAdd = {
-        sourceId: '',
+        sourceId: allergies.sourceId,
         cause: allergies.cause,
         causeCode: allergies.causeCode,
         causeTerminology: allergies.causeTerminology,
@@ -91,7 +91,7 @@ class AllergiesDetailController {
       if (allergyForm.$valid) {
         $scope.isEditMeta = false;
         this.allergy = Object.assign(this.allergy, $scope.allergyEditMeta);
-        $scope.allergiesUpdate(this.currentPatient.id, toAdd);
+        $scope.allergiesUpdate(this.currentPatient.id, allergies.sourceId, toAdd);
       }
     }.bind(this);
 

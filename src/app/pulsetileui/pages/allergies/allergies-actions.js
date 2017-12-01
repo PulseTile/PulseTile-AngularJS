@@ -69,7 +69,7 @@ export function create(patientId, composition) {
   };
 }
 /* istanbul ignore next */
-export function update(patientId, composition) {
+export function update(patientId, sourceId, composition) {
   return {
     types: [types.ALLERGIES_UPDATE, types.ALLERGIES_UPDATE_SUCCESS, types.ALLERGIES_UPDATE_ERROR],
 
@@ -77,7 +77,7 @@ export function update(patientId, composition) {
 
     config: {
       method: 'put',
-      url: '/api/patients/' + patientId + '/allergies',
+      url: '/api/patients/' + patientId + '/allergies/' + sourceId,
       data: composition
     },
 

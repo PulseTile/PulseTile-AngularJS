@@ -72,7 +72,7 @@ class ClinicalnotesDetailController {
         
         this.clinicalNote = Object.assign(clinicalNote, $scope.clinicalNoteEdit);
         $scope.isEdit = false;
-        clinicalnotesActions.update($scope.patient.id, toUpdate);
+        clinicalnotesActions.update($scope.patient.id, clinicalNote.sourceId, toUpdate);
         setTimeout(function () {
           $state.go('clinicalNotes-detail', {
             patientId: $scope.patient.id,

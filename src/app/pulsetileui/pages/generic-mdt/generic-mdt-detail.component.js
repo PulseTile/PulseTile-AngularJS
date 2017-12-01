@@ -35,7 +35,8 @@ class GenericMdtDetailController {
       if (mdtForm.$valid) {
         $scope.isEdit = false;
         this.genericMdt = Object.assign(this.genericMdt, $scope.mdtEdit);
-        $scope.genericmdtUpdate(this.currentPatient.id, this.genericMdt);
+        this.genericMdt.dateSubmitted = new Date().getTime();
+        $scope.genericmdtUpdate(this.currentPatient.id, genericMdt.sourceId, this.genericMdt);
       }
     }.bind(this);
     

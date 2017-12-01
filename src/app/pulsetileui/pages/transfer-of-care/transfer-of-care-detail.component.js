@@ -99,13 +99,15 @@ class TransferOfCareDetailController {
           records: transferOfCare.records,
           clinicalSummary: transferOfCare.clinicalSummary,
           reasonForContact: transferOfCare.reasonForContact,
-          transferDateTime: transferOfCare.transferDateTime
+          transferDateTime: transferOfCare.transferDateTime,
+          userId: $stateParams.patientId,
+          sourceId: $stateParams.detailsIndex
         };
 
         this.transferOfCare = Object.assign(transferOfCare, toUpdate);
         $scope.isEdit = false;
         
-        this.transferOfCareUpdate($stateParams.patientId, toUpdate);
+        this.transferOfCareUpdate($stateParams.patientId, $stateParams.detailsIndex, toUpdate);
       }
     }.bind(this);
 

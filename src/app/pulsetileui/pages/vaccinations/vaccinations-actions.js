@@ -65,7 +65,7 @@ export function create(patientId, composition) {
     }
   };
 }
-export function update(patientId, composition) {
+export function update(patientId, sourceId, composition) {
   return {
     types: [types.VACCINATIONS_UPDATE, types.VACCINATIONS_UPDATE_SUCCESS, types.VACCINATIONS_UPDATE_ERROR],
 
@@ -73,7 +73,7 @@ export function update(patientId, composition) {
 
     config: {
       method: 'put',
-      url: '/api/patients/' + patientId + '/vaccinations',
+      url: '/api/patients/' + patientId + '/vaccinations/' + sourceId,
       data: composition
     },
 

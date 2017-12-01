@@ -60,17 +60,19 @@ class ReferralsDetailController {
 				let toUpdate = {
 					referralFrom: referrals.referralFrom,
 					referralTo: referrals.referralTo,
-					dateOfReferral: referrals.dateOfReferral,
+					dateOfReferral: new Date(referrals.dateOfReferral),
 					referralReason: referrals.referralReason,
 					referralSummary: referrals.referralSummary,
 					author: referrals.author,
 					dateCreated: referrals.dateCreated,
-					source: referrals.source
+          source: referrals.source,
+          sourceId: referrals.sourceId,
+          userId: $scope.patient.id.toString()
 				};
 
-				this.referralsEdit = Object.assign(referrals, toUpdate);
+				this.referral = Object.assign(this.referral, toUpdate);
 				$scope.isEdit = false;
-				referralsActions.update($scope.patient.id, this.referralsEdit);
+				referralsActions.update($scope.patient.id, referrals.sourceId, toUpdate);
 				setTimeout(function () {
 					$state.go('referrals', {
 						patientId: $scope.patient.id,
@@ -78,7 +80,7 @@ class ReferralsDetailController {
 					});
 				}, 1000);
 			}
-		};
+		}.bind(this);
 
 
     $scope.$on('$destroy', unsubscribe);

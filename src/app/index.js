@@ -212,7 +212,7 @@ console.log('app start');
 
 /*Project initialise*/
 app.run(['$rootScope', '$state', 'serviceRequests', 'serviceThemes', 'ConfirmationRedirectModal',
-  function($rootScope, $state, serviceRequests, serviceThemes, ) {
+  function($rootScope, $state, serviceRequests, serviceThemes, ConfirmationRedirectModal) {
     var classLoadingPage = 'loading';
     var body = $('body');
     var userData = null;
@@ -233,7 +233,6 @@ app.run(['$rootScope', '$state', 'serviceRequests', 'serviceThemes', 'Confirmati
           /*Go to URL from localStorage*/
           if (locationHrefBeforeLogin) {
             localStorage.removeItem('locationHrefBeforeLogin');
-            location.href = locationHrefBeforeLogin;
           }
           break;
         case 'PHR':

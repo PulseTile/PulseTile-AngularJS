@@ -19,14 +19,11 @@ class VaccinationsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vaccinationsActions, serviceRequests, usSpinnerService) {
     $scope.isEdit = false;
 
-    // this.vaccination = $stateParams.source;
-
     this.edit = function () {
       $scope.isEdit = true;
 
       $scope.vaccinationEdit = Object.assign({}, this.vaccination);
-      $scope.vaccinationEdit.date = new Date(+$scope.vaccinationEdit.date);
-      $scope.vaccinationEdit.dateCreate = new Date();
+      $scope.vaccinationEdit.dateCreated = new Date();
     };
 
     this.cancelEdit = function () {
@@ -38,7 +35,9 @@ class VaccinationsDetailController {
       if (vaccinationForm.$valid) {
         $scope.isEdit = false;
         this.vaccination = Object.assign(this.vaccination, $scope.vaccinationEdit);
-        $scope.vaccinationsUpdate(this.currentPatient.id, $scope.vaccination);
+        $scope.vaccinationEdit.vaccinationDateTime = new Date($scope.vaccinationEdit.vaccinationDateTime).getTime();
+        $scope.vaccinationEdit.userId = this.currentPatient.id.toString();
+        $scope.vaccinationsUpdate(this.currentPatient.id, vaccination.sourceId, $scope.vaccinationEdit);
       }
     }.bind(this);
 

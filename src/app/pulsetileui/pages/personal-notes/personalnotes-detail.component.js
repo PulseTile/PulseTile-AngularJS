@@ -71,9 +71,9 @@ class PersonalnotesDetailController {
           sourceId: personalNote.sourceId
         };
         
-        this.personalNote = Object.assign(personalNote, $scope.personalNoteEdit);
+        this.personalNote = Object.assign(this.personalNote, personalNote);
         $scope.isEdit = false;
-        personalnotesActions.update($scope.patient.id, toUpdate);
+        personalnotesActions.update($scope.patient.id, personalNote.sourceId, toUpdate);
         setTimeout(function () {
           $state.go('personalNotes-detail', {
             patientId: $scope.patient.id,
@@ -81,7 +81,7 @@ class PersonalnotesDetailController {
           });
         }, 1000);
       }
-    };
+    }.bind(this);
   }
 }
 

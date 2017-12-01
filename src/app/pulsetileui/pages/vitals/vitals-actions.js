@@ -65,7 +65,7 @@ export function create(patientId, composition) {
     }
   };
 }
-export function update(patientId, composition) {
+export function update(patientId, sourceId, composition) {
   return {
     types: [types.VITALS_UPDATE, types.VITALS_UPDATE_SUCCESS, types.VITALS_UPDATE_ERROR],
 
@@ -73,7 +73,7 @@ export function update(patientId, composition) {
 
     config: {
       method: 'put',
-      url: '/api/patients/' + patientId + '/vitalsigns',
+      url: '/api/patients/' + patientId + '/vitalsigns/' + sourceId,
       data: composition
     },
 

@@ -3,6 +3,8 @@
   border: 0;
   margin: 0;
   background: $header-bg;
+  position: relative;
+  z-index: 1001;
   @include respond-from(sm) {
     align-items: center;
     display: flex;

@@ -32,7 +32,7 @@ class ContactsDetailController {
       if (contactForm.$valid) {
         $scope.isEdit = false;
         this.contact = Object.assign(this.contact, $scope.contactEdit);
-        $scope.contactsUpdate(this.currentPatient.id, this.contact);
+        $scope.contactsUpdate(this.currentPatient.id, contact.sourceId, this.contact);
       }
     }.bind(this);
 

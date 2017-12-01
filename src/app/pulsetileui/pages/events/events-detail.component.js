@@ -48,14 +48,15 @@ class EventsDetailController {
         type: event.type,
         description: event.description,
         dateTime: event.dateTime,
-        author: event.author
+        author: event.author,
+        sourceId: event.sourceId
       };
 
       if (eventForm.$valid) {
         $scope.isEdit = false;
         this.event = Object.assign(this.event, event);
 
-        this.eventsUpdate(this.currentPatient.id, toAdd);
+        this.eventsUpdate(this.currentPatient.id, event.sourceId, toAdd);
       }
     }.bind(this);
 

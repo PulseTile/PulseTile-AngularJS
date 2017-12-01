@@ -13,7 +13,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-let templateProceduresDetail= require('./procedures-detail.html');
+let templateProceduresDetail = require('./procedures-detail.html');
 
 class ProceduresDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, proceduresActions, usSpinnerService, serviceRequests) {
@@ -35,8 +35,9 @@ class ProceduresDetailController {
 			$scope.formSubmitted = true;
 			if (procedureForm.$valid) {
 				$scope.isEdit = false;
-				this.procedure = Object.assign(this.contact, $scope.procedureEdit);
-				proceduresActions.update(this.currentPatient.id, this.procedure);
+
+				this.procedure = Object.assign(this.procedure, $scope.procedureEdit);
+				proceduresActions.update(this.currentPatient.id, this.procedure.sourceId, this.procedure);
 			}
 		}.bind(this);
 

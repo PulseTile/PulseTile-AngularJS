@@ -65,7 +65,7 @@ export function create(patientId, composition) {
     }
   };
 }
-export function update(patientId, composition) {
+export function update(patientId, sourceId, composition) {
   return {
     types: [types.REFERRALS_UPDATE, types.REFERRALS_UPDATE_SUCCESS, types.REFERRALS_UPDATE_ERROR],
 
@@ -73,7 +73,7 @@ export function update(patientId, composition) {
 
     config: {
       method: 'put',
-      url: '/api/patients/' + patientId + '/referrals',
+      url: '/api/patients/' + patientId + '/referrals/' + sourceId,
       data: composition
     },
 
