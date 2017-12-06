@@ -20,7 +20,6 @@ class ContactsCreateController {
     $scope.contact = {};
     $scope.contact.dateSubmitted = new Date();
     // $scope.contact.dateSubmitted = new Date().toISOString().slice(0, 10);
-    $scope.contact.relationshipCode = 'at0039';
     $scope.contact.relationshipTerminology = 'local';
 
     this.setCurrentPageData = function (data) {
@@ -52,11 +51,12 @@ class ContactsCreateController {
     $scope.create = function (contactForm, contact) {
       $scope.formSubmitted = true;
 
+      console.log('contact', contact); 
       if (contactForm.$valid) {
         $scope.contactsCreate($scope.currentPatient.id, contact);
         this.goList();
       }
-    };
+    }.bind(this);
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)

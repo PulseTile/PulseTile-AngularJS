@@ -162,7 +162,7 @@ td[ng-click] { cursor: pointer; }
           display: block;
           overflow: hidden;
         }
-        &:before {
+        &[data-th]:before {
           content: attr(data-th)": ";
           display: block;
           float: left;

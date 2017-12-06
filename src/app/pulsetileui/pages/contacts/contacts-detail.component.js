@@ -17,12 +17,26 @@ let templateContactsDetail= require('./contacts-detail.html');
 
 class ContactsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, patientsActions, contactsActions, serviceRequests, usSpinnerService) {
+    var relationshipTypeOptions = [
+      { value: 'at0036', title: 'Informal carer' },
+      { value: 'at0037', title: 'Main informal carer' },
+      { value: 'at0038', title: 'Formal care worker' },
+      { value: 'at0039', title: 'Key formal care worker' },
+    ];
     $scope.isEdit = false;
     this.edit = function () {
       $scope.isEdit = true;
 
       $scope.contactEdit = Object.assign({}, this.contact);
       $scope.contactEdit.dateSubmitted = new Date();
+
+      if (!$scope.contactEdit.relationshipCode) {
+        relationshipTypeOptions.forEach((el) => {
+          if (el.title === $scope.contactEdit.relationshipType) {
+            $scope.contactEdit.relationshipCode = el.value;
+          }
+        });
+      }
     };
     this.cancelEdit = function () {
       $scope.isEdit = false;
@@ -32,6 +46,12 @@ class ContactsDetailController {
       if (contactForm.$valid) {
         $scope.isEdit = false;
         this.contact = Object.assign(this.contact, $scope.contactEdit);
+        relationshipTypeOptions.forEach((el) => {
+          if (el.value === $scope.contactEdit.relationshipCode) {
+            this.contact.relationshipType = el.title;
+          }
+        });
+
         $scope.contactsUpdate(this.currentPatient.id, contact.sourceId, this.contact);
       }
     }.bind(this);

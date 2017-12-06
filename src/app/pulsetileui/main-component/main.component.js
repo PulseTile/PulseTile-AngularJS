@@ -29,7 +29,9 @@ class MainController {
     /* istanbul ignore next */
     $scope.setBreadcrumbs = function (breadcrumbs) {
       if (serviceRequests.currentUserData.role === "PHR" && breadcrumbs) {
-        breadcrumbs.shift();
+        if (breadcrumbs[0].state === 'patients-list') {
+          breadcrumbs.shift();
+        }
       }
       $scope.breadcrumbs = breadcrumbs || [];
     };
@@ -192,11 +194,6 @@ class MainController {
       }.bind(this), 0);
       
     }.bind(this));
-
-
-
-
-    
   }
 }
 const MainComponent = {

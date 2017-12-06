@@ -176,12 +176,17 @@
                 </div>
               </div>
               <div class="col-expand-right">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.relationshipType.$dirty) && contactForm.relationshipType.$invalid, 'has-success': contactForm.relationshipType.$valid && contactForm.relationshipType.$dirty}">
-                  <label for="relationshipType" class="control-label">Relationship Type</label>
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.relationshipCode.$dirty) && contactForm.relationshipCode.$invalid, 'has-success': contactForm.relationshipCode.$valid && contactForm.relationshipCode.$dirty}">
+                  <label for="relationshipCode" class="control-label">Relationship Type</label>
                   <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="relationshipType" name="relationshipType" ng-model="contactEdit.relationshipType" required />
+                    <select class="form-control input-sm" id="relationshipCode" name="relationshipCode" ng-model="contactEdit.relationshipCode" required>
+                        <option value="at0036">Informal carer</option>
+                        <option value="at0037">Main informal carer</option>
+                        <option value="at0038">Formal care worker</option>
+                        <option value="at0039">Key formal care worker</option>
+                    </select>
                   </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.relationshipType.$error.required">You must enter a value.</span>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.relationshipCode.$error.required">You must enter a value.</span>
                 </div>
               </div>
             </div>

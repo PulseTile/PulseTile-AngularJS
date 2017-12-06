@@ -211,6 +211,7 @@ class PatientsChartsController {
 
         return summaries;
       } else {
+        patientsActions.loadPatients();
         return true;
       }
     };
@@ -225,13 +226,11 @@ class PatientsChartsController {
     /* istanbul ignore next */
     $scope.setUserData = function (data) {
       $scope.user = data.userData;
-      
       if ($scope.user.role == 'IDCR') {
         patientsActions.loadPatients();
       }
     };
     serviceRequests.subscriber('setUserData', $scope.setUserData);
-    
   }
 }
 
