@@ -244,7 +244,8 @@ app.run(['$rootScope', '$state', 'serviceRequests', 'serviceThemes', 'Confirmati
 
             location.href = locationHrefBeforeLogin;
 
-          } else if (location.href.indexOf(currentUser.nhsNumber) === -1) {
+          } else if ((location.href.indexOf(currentUser.nhsNumber) === -1) &&
+                    (location.href.indexOf('profile') === -1)) {
 
             if (locationHrefBeforeLogin) {
               let path = locationHrefBeforeLogin.split('#/')[1];
