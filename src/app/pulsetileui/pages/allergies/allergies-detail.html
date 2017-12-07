@@ -187,21 +187,16 @@
               <label class="control-label">Terminology</label>
               <div class="form-control-static">{{ $ctrl.allergy.causeTerminology }}</div>
             </div>
-
-            <!-- <div class="form-group">
-              <label class="control-label">Terminology Code</label>
-              <div class="form-control-static">{{ $ctrl.allergy.terminologyCode }}</div>
-            </div> -->
           </div>
         </div>
       </div>
-      <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
+      <!-- <div class="panel-control" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1">
         <div class="wrap-control-group">
           <div class="control-group right">
             <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.editMeta();"><i class="btn-icon fa fa-edit"></i> <span class="btn-text">Edit</span></button>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <div class="panel panel-secondary" ng-if="getShowPanel('metadata') && isEditMeta" ng-class="getOpenPanelClass('metadata')">
@@ -228,12 +223,9 @@
 
             <div class="row-expand">
               <div class="col-expand-left">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || allergyFormMeta.causeTerminology.$dirty) && allergyFormMeta.causeTerminology.$invalid, 'has-success': allergyFormMeta.causeCode.$valid && allergyFormMeta.causeCode.$dirty}">
-                  <label for="causeTerminology" class="control-label">Terminology</label>
-                  <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="causeTerminology" name="causeTerminology" ng-model="allergyEditMeta.causeTerminology" required />
-                  </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && allergyFormMeta.causeTerminology.$error.required">You must enter a value.</span>
+                <div class="form-group">
+                  <label class="control-label">Terminology</label>
+                  <div class="non-edit-value">{{ allergyEditMeta.causeTerminology }}</div>
                 </div>
               </div>
               <div class="col-expand-right">

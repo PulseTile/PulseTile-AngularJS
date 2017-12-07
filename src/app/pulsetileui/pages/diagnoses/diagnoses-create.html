@@ -72,12 +72,9 @@
 
             <div class="row-expand">
               <div class="col-expand-left">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || diagnosisForm.terminology.$dirty) && diagnosisForm.terminology.$invalid, 'has-success': diagnosisForm.terminology.$valid && diagnosisForm.terminology.$dirty}">
-                  <label for="text" class="control-label">Terminology</label>
-                  <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="terminology" name="terminology" ng-model="diagnosis.terminology" required />
-                  </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && diagnosisForm.terminology.$error.required">You must enter a value.</span>
+                <div class="form-group">
+                  <label for="code" class="control-label codeLabel">Terminology</label>
+                  <div class="non-edit-value">{{ diagnosis.terminology }}</div>
                 </div>
               </div>
               <div class="col-expand-right">

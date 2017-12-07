@@ -33,6 +33,7 @@ class AllergiesCreateController {
 
     $scope.allergy.causeCode = '1239085';
     $scope.allergy.terminologyCode = '12393890';  
+    $scope.allergy.causeTerminology = 'SNOMED-CT';
     
     /* istanbul ignore next */
     this.backToDocs = function () {

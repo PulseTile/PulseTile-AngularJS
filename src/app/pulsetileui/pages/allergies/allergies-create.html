@@ -54,12 +54,9 @@
 
             <div class="row">
               <div class="col-md-6">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || allergyForm.causeTerminology.$dirty) && allergyForm.causeTerminology.$invalid, 'has-success': allergyForm.causeCode.$valid && allergyForm.causeCode.$dirty}">
-                  <label for="causeTerminology" class="control-label">Terminology</label>
-                  <div class="input-holder">
-                    <input type="text" class="form-control input-sm" id="causeTerminology" name="causeTerminology" ng-model="allergy.causeTerminology" required />
-                  </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && allergyForm.causeTerminology.$error.required">You must enter a value.</span>
+                <div class="form-group">
+                  <label class="control-label">Terminology</label>
+                  <div class="non-edit-value">{{ allergy.causeTerminology }}</div>
                 </div>
               </div>
               <div class="col-md-6">

@@ -30,6 +30,7 @@ class DiagnosesCreateController {
     }
     
     $scope.diagnosis.code = '12393890';
+    $scope.diagnosis.terminology = 'SNOMED-CT';
     
     this.backToDocs = function () {
       $state.go('documents-detail', {
