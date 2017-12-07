@@ -101,8 +101,7 @@ class PatientsChartsController {
 
         $timeout(function () {
           canvas = document.getElementById(options.id);
-          
-          if (canvas) {
+          if (canvas && !canvas.onclick) {
             ctx = canvas.getContext("2d");
             barChart = new $window.Chart(ctx, {
                 type: 'bar',
@@ -131,6 +130,7 @@ class PatientsChartsController {
 
 
     this.getPatients = function (patients) {
+      console.log('this.getPatients');
       /* istanbul ignore if  */
       if (patients) {
         var summaries = {};
@@ -211,10 +211,11 @@ class PatientsChartsController {
 
         return summaries;
       } else {
-        patientsActions.loadPatients();
         return true;
       }
     };
+
+    patientsActions.loadPatients();
 
     let unsubscribe = $ngRedux.connect(state => ({
       setPatients: self.getPatients(state.patients.data)
