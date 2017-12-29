@@ -16,7 +16,7 @@
 let templateDiagnosesDetail = require('./diagnoses-detail.html');
 
 class DiagnosesDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, diagnosesActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, diagnosesActions, serviceRequests, usSpinnerService, serviceFormatted) {
     $scope.isEdit = false;
 
     this.setCurrentPageData = function (data) {
@@ -48,7 +48,7 @@ class DiagnosesDetailController {
 
       let toAdd = {
         code: $scope.diagnosisEdit.code,
-        dateOfOnset: $scope.diagnosisEdit.dateOfOnset.toISOString().slice(0, 10),
+        dateOfOnset: serviceFormatted.formattingDate(diagnosis.dateOfOnset, serviceFormatted.formatCollection.YYYYMMDD),
         description: $scope.diagnosisEdit.description,
         problem: $scope.diagnosisEdit.problem,
         source: $scope.diagnosisEdit.source,
@@ -105,5 +105,5 @@ const DiagnosesDetailComponent = {
   controller: DiagnosesDetailController
 };
 
-DiagnosesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'diagnosesActions', 'serviceRequests', 'usSpinnerService'];
+DiagnosesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'diagnosesActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default DiagnosesDetailComponent;

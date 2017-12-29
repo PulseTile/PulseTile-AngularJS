@@ -143,7 +143,7 @@
             <div class="row-expand">
               <div class="col-expand-left">
                 <div class="form-group" ng-class="{'has-error': (formSubmitted || diagnosisForm.problem.$dirty) && diagnosisForm.problem.$invalid, 'has-success': diagnosisForm.problem.$valid && diagnosisForm.problem.$dirty}">
-                  <label for="text" class="control-label">Problem / Diagnosis</label>
+                  <label for="problem" class="control-label">Problem / Diagnosis</label>
                   <div class="input-holder">
                     <input type="text" class="form-control input-sm" id="problem" name="problem" ng-model="diagnosisEdit.problem" required />
                   </div>
@@ -166,9 +166,9 @@
             <div class="row-expand">
               <div class="col-expand-left">
                 <div class="form-group">
-                  <label for="text" class="control-label">Description</label>
+                  <label for="description" class="control-label">Description</label>
                   <div class="input-holder">
-                    <textarea class="form-control textarea-big input-sm" id="text" name="text" ng-model="diagnosisEdit.description"></textarea>
+                    <textarea class="form-control textarea-big input-sm" id="description" name="description" ng-model="diagnosisEdit.description"></textarea>
                   </div>
                 </div>
               </div>

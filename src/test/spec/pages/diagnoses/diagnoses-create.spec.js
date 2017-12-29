@@ -7,7 +7,7 @@ describe('Diagnoses Create', function() {
 
     let scope, ctrl, controller, template, state;
     
-    beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _patientsActions_, _diagnosesActions_, _serviceRequests_) => {
+    beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _patientsActions_, _diagnosesActions_, _serviceRequests_, _serviceFormatted_) => {
         controller = $controller;
         scope = $injector.get('$rootScope').$new();
         state = _$state_;
@@ -20,7 +20,8 @@ describe('Diagnoses Create', function() {
             $ngRedux: _$ngRedux_,
             patientsActions: _patientsActions_,
             diagnosesActions: _diagnosesActions_,
-            serviceRequests: _serviceRequests_
+            serviceRequests: _serviceRequests_,
+            serviceFormatted: _serviceFormatted_
         });
     }));
 

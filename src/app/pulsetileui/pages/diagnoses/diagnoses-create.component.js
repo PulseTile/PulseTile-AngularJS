@@ -16,7 +16,7 @@
 let templateDiagnosesCreate = require('./diagnoses-create.html');
 
 class DiagnosesCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, diagnosesActions, serviceRequests) {
+  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, diagnosesActions, serviceRequests, serviceFormatted) {
     $scope.diagnosis = {};
 
     $scope.diagnosis.isImport = false;
@@ -71,7 +71,7 @@ class DiagnosesCreateController {
       if (diagnosisForm.$valid) {
         let toAdd = {
           code: diagnosis.code,
-          dateOfOnset: diagnosis.dateOfOnset.toISOString().slice(0, 10),
+          dateOfOnset: serviceFormatted.formattingDate(diagnosis.dateOfOnset, serviceFormatted.formatCollection.YYYYMMDD),
           description: diagnosis.description,
           problem: diagnosis.problem,
           source: diagnosis.source,
@@ -107,5 +107,5 @@ const DiagnosesCreateComponent = {
   controller: DiagnosesCreateController
 };
 
-DiagnosesCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'diagnosesActions', 'serviceRequests'];
+DiagnosesCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'diagnosesActions', 'serviceRequests', 'serviceFormatted'];
 export default DiagnosesCreateComponent;

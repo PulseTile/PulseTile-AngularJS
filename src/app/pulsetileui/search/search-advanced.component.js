@@ -196,7 +196,7 @@ class SearchAdvancedController {
     }
 
     // if ($scope.searchParams.dateOfBirth) {
-    //   $scope.searchParams.dateOfBirth = new Date($scope.searchParams.dateOfBirth).toISOString().slice(0, 10);
+    //   $scope.searchParams.dateOfBirth = new Date($scope.searchParams.dateOfBirth).getTime();
     //   this.detailsFocused = true;
     // }
 

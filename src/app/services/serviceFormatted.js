@@ -20,6 +20,7 @@ class ServiceFormatted {
   constructor () {
     this.formatCollection = {
       DDMMMYYYY: 'DD-MMM-YYYY',
+      YYYYMMDD: 'YYYY-MM-DD',
       DDMMMMYYYY: 'DD MMMM YYYY',
       HHmm: 'HH:mm',
       DDMMMYYYYHHmm: 'DD-MMM-YYYY  HH:mm'

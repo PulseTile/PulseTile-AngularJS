@@ -6,9 +6,9 @@ describe('Diagnoses Details', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope, ctrl, controller, template, stateParams, state, ngRedux, diagnosesActions, usSpinnerService;
+  let scope, ctrl, controller, template, stateParams, state, ngRedux, diagnosesActions, usSpinnerService, serviceFormatted;
 
-  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _diagnosesActions_, _usSpinnerService_) => {
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _diagnosesActions_, _usSpinnerService_, _serviceFormatted_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
     state = _$state_;
@@ -16,6 +16,7 @@ describe('Diagnoses Details', function() {
     stateParams = _$stateParams_;
     diagnosesActions = _diagnosesActions_;
     usSpinnerService = _usSpinnerService_;
+    serviceFormatted = _serviceFormatted_;
 
     template = DiagnosesDetailComponent.template;
     ctrl = controller(DiagnosesDetailComponent.controller, {
@@ -24,7 +25,8 @@ describe('Diagnoses Details', function() {
       $stateParams: stateParams,
       $ngRedux: ngRedux,
       diagnosesActions: diagnosesActions,
-      usSpinnerService: usSpinnerService
+      usSpinnerService: usSpinnerService,
+      serviceFormatted: serviceFormatted
     });
   }));
 

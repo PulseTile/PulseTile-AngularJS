@@ -142,12 +142,12 @@
                 </div>
               </div>
               <div class="col-expand-right">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.note.$dirty) && contactForm.note.$invalid, 'has-success': contactForm.note.$valid && contactForm.note.$dirty}">
-                  <label for="note" class="control-label">Note</label>
+                <div class="form-group" ng-class="{'has-error': (formSubmitted || contactForm.notes.$dirty) && contactForm.notes.$invalid, 'has-success': contactForm.notes.$valid && contactForm.notes.$dirty}">
+                  <label for="notes" class="control-label">Note</label>
                   <div class="input-holder">
-                    <textarea class="form-control textarea-big input-sm" id="note" name="note" ng-model="contact.notes" required></textarea>
+                    <textarea class="form-control textarea-big input-sm" id="notes" name="notes" ng-model="contact.notes" required></textarea>
                   </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.note.$error.required">You must enter a value.</span>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && contactForm.notes.$error.required">You must enter a value.</span>
                 </div>
               </div>
             </div>
