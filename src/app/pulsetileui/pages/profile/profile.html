@@ -33,14 +33,14 @@
                     <div class="col-md-11">
                       <div class="form-group">
                         <label class="control-label">Application Title</label>
-                        <div class="form-control-static">{{ $ctrl.appSettings.title }}</div>
+                        <div class="form-control-static">{{ appSettings.title }}</div>
                       </div>
 
                       <div class="form-group">
                         <label class="control-label">Application Logo File</label>
                         <div class="form-control-static">
-                          <div ng-if="$ctrl.appSettings.logoB64">
-                            <img ng-src="{{ $ctrl.appSettings.logoB64 }}" alt="">
+                          <div ng-if="appSettings.logoB64">
+                            <img ng-src="{{ appSettings.logoB64 }}" alt="">
                           </div>
                         </div>
                       </div>
@@ -48,14 +48,14 @@
                       <div class="form-group">
                         <label class="control-label">Application Theme</label>
                         <div class="palette-color">
-                          <span class="palette-color-icon" ng-style="{background: $ctrl.appSettings.theme.baseColor}"></span>
-                          <span class="palette-color-name">{{ $ctrl.appSettings.theme.name }}</span>
+                          <span class="palette-color-icon" ng-style="{background: appSettings.theme.baseColor}"></span>
+                          <span class="palette-color-name">{{ appSettings.theme.name }}</span>
                         </div>
                       </div>
 
                       <div class="form-group">
                         <label class="control-label">Browser Window Title</label>
-                        <div class="form-control-static">{{ $ctrl.appSettings.browserTitle }}</div>
+                        <div class="form-control-static">{{ appSettings.browserTitle }}</div>
                       </div>
                     </div>
                   </div>

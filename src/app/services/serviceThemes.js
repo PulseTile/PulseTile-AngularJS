@@ -57,6 +57,8 @@ class ServiceThemes {
           if (data.browserTitle) {
             this.setBrowserTitle(data.browserTitle);
           }
+
+          serviceRequests.publisher('changeApplicationDate', {data: this.getDataApplication()});
         };
 
         /* istanbul ignore next */
@@ -96,9 +98,12 @@ class ServiceThemes {
 
         /* istanbul ignore next */
         this.getThemeById = function (themeId) {
-          if (typeof themeId === 'undefined') return null;
-          if (typeof this.themes[themeId] === 'undefined') return null;
-          
+          if ((typeof themeId === 'undefined') ||
+            (typeof this.themes[themeId] === 'undefined')) {
+
+            return this.themes['default']
+          }
+
           return this.themes[themeId];
         };
 
@@ -111,7 +116,7 @@ class ServiceThemes {
         this.setActiveTheme = function (themeId) {
           if (typeof themeId === 'undefined') return null;
           if (typeof this.themes[themeId] === 'undefined') return null;
-          
+
           this.activeTheme = themeId;
 
           serviceRequests.publisher('changeActiveTheme', {themeId: themeId});

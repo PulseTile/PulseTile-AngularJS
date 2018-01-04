@@ -30,7 +30,7 @@ class ProfileController {
 
     /* istanbul ignore next  */
     this.appSettingsEdit = function () {
-      $scope.appSettingsEdit = Object.assign({}, this.appSettings);
+      $scope.appSettingsEdit = Object.assign({}, $scope.appSettings);
       $scope.isAppSettingsEdit = true;
     };
     /* istanbul ignore next  */
@@ -85,8 +85,8 @@ class ProfileController {
       if (appSettingsForm.$valid) {
         $scope.isAppSettingsEdit = false;
 
-        this.appSettings = Object.assign({}, toAdd);
-        this.appSettings.theme = serviceThemes.getThemeById(toAdd.themeColor);
+        $scope.appSettings = Object.assign({}, toAdd);
+        $scope.appSettings.theme = serviceThemes.getThemeById(toAdd.themeColor);
 
         serviceThemes.setActiveTheme(toAdd.themeColor);
         serviceThemes.setLogoB64(toAdd.logoB64);
@@ -169,7 +169,7 @@ class ProfileController {
         ]
       };
 
-      this.appSettings = serviceThemes.getDataApplication();
+      $scope.appSettings = serviceThemes.getDataApplication();
     };
 
     /* istanbul ignore next  */
@@ -193,6 +193,10 @@ class ProfileController {
     };
 
     this.setProfileData();
+    $scope.changeApplicationDate = function (data) {
+      $scope.appSettings = data.data;
+    };
+    serviceRequests.subscriber('changeApplicationDate', $scope.changeApplicationDate);
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
