@@ -191,17 +191,17 @@
                     <div class="col-md-11">
                       <div class="form-group">
                         <label class="control-label">First Name</label>
-                        <div class="form-control-static">{{ $ctrl.profile.firstname }}</div>
+                        <div class="form-control-static">{{ profile.firstname }}</div>
                       </div>
 
                       <div class="form-group">
                         <label class="control-label">Last Name</label>
-                        <div class="form-control-static">{{ $ctrl.profile.lastname }}</div>
+                        <div class="form-control-static">{{ profile.lastname }}</div>
                       </div>
                       
                       <div class="form-group">
                         <label class="control-label">NHS No</label>
-                        <div class="form-control-static">{{ $ctrl.profile.nhs }}</div>
+                        <div class="form-control-static">{{ profile.nhs }}</div>
                       </div>
                     </div>
                   </div>
@@ -211,17 +211,17 @@
                     <div class="col-md-11 col-md-offset-1">
                       <div class="form-group">
                         <label class="control-label">Date of Birth</label>
-                        <div class="form-control-static">{{ $ctrl.profile.birthday | date:'dd-MMM-yyyy'}}</div>
+                        <div class="form-control-static">{{ profile.birthday | date:'dd-MMM-yyyy'}}</div>
                       </div>
 
                       <div class="form-group">
                         <label class="control-label">Gender</label>
-                        <div class="form-control-static">{{ $ctrl.profile.gender }}</div>
+                        <div class="form-control-static">{{ profile.gender }}</div>
                       </div>
 
                       <div class="form-group">
                         <label class="control-label">Doctor</label>
-                        <div class="form-control-static">{{ $ctrl.profile.doctor }}</div>
+                        <div class="form-control-static">{{ profile.doctor }}</div>
                       </div>
                     </div>
                   </div>
@@ -351,27 +351,27 @@
                     <div class="col-md-11">
                       <div class="form-group">
                         <label class="control-label">Address</label>
-                        <div class="form-control-static">{{ $ctrl.profile.address }}</div>
+                        <div class="form-control-static">{{ profile.address }}</div>
                       </div>
 
                       <div class="form-group">
                         <label class="control-label">City</label>
-                        <div class="form-control-static">{{ $ctrl.profile.city }}</div>
+                        <div class="form-control-static">{{ profile.city }}</div>
                       </div>
 
                       <div class="form-group">
                         <label class="control-label">State</label>
-                        <div class="form-control-static">{{ $ctrl.profile.state }}</div>
+                        <div class="form-control-static">{{ profile.state }}</div>
                       </div>
 
                       <div class="form-group">
                         <label class="control-label">Postal Code</label>
-                        <div class="form-control-static">{{ $ctrl.profile.postalCode }}</div>
+                        <div class="form-control-static">{{ profile.postalCode }}</div>
                       </div>
 
                       <div class="form-group">
                         <label class="control-label">Country</label>
-                        <div class="form-control-static">{{ $ctrl.profile.country }}</div>
+                        <div class="form-control-static">{{ profile.country }}</div>
                       </div>
                     </div>
                   </div>
@@ -381,12 +381,12 @@
                     <div class="col-md-11 col-md-offset-1">
                       <div class="form-group">
                         <label class="control-label">Phone Number</label>
-                        <div class="form-control-static">{{ $ctrl.profile.phone }}</div>
+                        <div class="form-control-static">{{ profile.phone }}</div>
                       </div>
 
                       <div class="form-group">
                         <label class="control-label">Email</label>
-                        <div class="form-control-static">{{ $ctrl.profile.email }}</div>
+                        <div class="form-control-static">{{ profile.email }}</div>
                       </div>
                     </div>
                   </div>
@@ -516,7 +516,7 @@
         <h3 class="panel-title">Change History</h3>
       </div>
       <div class="panel-body">
-        <div class="panel-body-inner" ng-repeat="historyChange in $ctrl.profile.historyChanges">
+        <div class="panel-body-inner" ng-repeat="historyChange in profile.historyChanges">
           <div class="form">
             <div class="form-group-wrapper">
               <div class="form-group">

@@ -35,12 +35,12 @@ class ProfileController {
     };
     /* istanbul ignore next  */
     this.personalEdit = function () {
-      $scope.personalEdit = Object.assign({}, this.profile);
+      $scope.personalEdit = Object.assign({}, $scope.profile);
       $scope.isPersonalEdit = true;
     };
     /* istanbul ignore next  */
     this.contactEdit = function () {
-      $scope.contactEdit = Object.assign({}, this.profile);
+      $scope.contactEdit = Object.assign({}, $scope.profile);
       $scope.isContactEdit = true;
     };
 
@@ -138,7 +138,7 @@ class ProfileController {
     this.setProfileData = function () {
       let tempProfileData = serviceRequests.currentUserData;
 
-      this.profile = {
+      $scope.profile = {
         firstname: tempProfileData.given_name,
         lastname: tempProfileData.family_name,
         nhs: tempProfileData.nhsNumber,
@@ -184,7 +184,7 @@ class ProfileController {
         usSpinnerService.stop('patientSummary-spinner');
       }
       // if (data.profile.data) {
-      //   this.profile = data.profile.data;
+      //   $scope.profile = data.profile.data;
       // }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
@@ -197,6 +197,15 @@ class ProfileController {
       $scope.appSettings = data.data;
     };
     serviceRequests.subscriber('changeApplicationDate', $scope.changeApplicationDate);
+    $scope.setUserData = function (data) {
+      var userData = data.userData;
+
+      $scope.profile.firstname = userData.given_name;
+      $scope.profile.lastname = userData.family_name;
+      $scope.profile.nhs = userData.nhsNumber;
+      $scope.profile.email = userData.email;
+    };
+    serviceRequests.subscriber('setUserData', $scope.setUserData);
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
