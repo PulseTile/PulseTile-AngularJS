@@ -138,7 +138,7 @@ class MainController {
         var footerHeight = page.find('.footer').outerHeight();
         var sidebar = page.find('.sidebar');
         var sidebarUnderlay = page.find('.sidebar-underlay');
-        var scrollPageTop = document.documentElement.scrollTop;
+        var scrollPageTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
         var sidebarTop = headerHeight - scrollPageTop;
 
         sidebarTop = sidebarTop > 0 ? sidebarTop : 0;

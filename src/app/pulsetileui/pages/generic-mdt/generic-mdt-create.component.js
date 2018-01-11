@@ -54,7 +54,6 @@ class GenericMdtCreateController {
 
             if (mdtForm.$valid) {
                 $scope.genericmdtCreate($scope.currentPatient.id, genericMdt);
-                this.goList();
             }
         };
 

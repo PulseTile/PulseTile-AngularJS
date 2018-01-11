@@ -40,7 +40,7 @@ class VitalsDetailController {
       $scope.isEdit = true;
 
       $scope.vitalEdit = Object.assign({}, $scope.vital);
-      $scope.vitalEdit.dateCreate = Date.parse(new Date());
+      $scope.vitalEdit.dateCreated = Date.parse(new Date());
 
       $scope.changeNewScore($scope.vitalEdit);
     };

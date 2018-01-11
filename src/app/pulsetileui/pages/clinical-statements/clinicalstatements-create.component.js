@@ -36,6 +36,9 @@ class ClinicalstatementsCreateController {
     
     /* istanbul ignore next  */
     this.setCurrentPageData = function (data) {
+      if (data.clinicalstatements.dataCreate !== null) {
+        this.goList();
+      }
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;
       }
@@ -96,7 +99,6 @@ class ClinicalstatementsCreateController {
       
       if (clinicalStatementForm.$valid) {
         this.clinicalstatementsCreate($stateParams.patientId, $scope.clinicalStatementCreate);
-        this.goList();
       }
     }.bind(this);
 

@@ -22,7 +22,7 @@ class VitalsCreateController {
     $scope.pattern = serviceVitalsSigns.pattern;
 
     $scope.vitalEdit = {};
-    $scope.vitalEdit.dateCreate = Date.parse(new Date());
+    $scope.vitalEdit.dateCreated = Date.parse(new Date());
     $scope.vitalEdit.author = 'ripple_osi';
 
     this.setCurrentPageData = function (data) {

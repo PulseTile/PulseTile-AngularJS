@@ -54,7 +54,6 @@ class ContactsCreateController {
       console.log('contact', contact); 
       if (contactForm.$valid) {
         $scope.contactsCreate($scope.currentPatient.id, contact);
-        this.goList();
       }
     }.bind(this);
 
