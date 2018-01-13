@@ -17,7 +17,7 @@
 let templateClinicalnotesDetail = require('./clinicalnotes-detail.html');
 
 class ClinicalnotesDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, clinicalnotesActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, clinicalnotesActions, serviceRequests, usSpinnerService, serviceFormatted) {
     
     this.setCurrentPageData = function (data) {
       /* istanbul ignore if  */
@@ -72,6 +72,7 @@ class ClinicalnotesDetailController {
         
         this.clinicalNote = Object.assign(clinicalNote, $scope.clinicalNoteEdit);
         $scope.isEdit = false;
+        serviceFormatted.propsToString(toUpdate);
         clinicalnotesActions.update($scope.patient.id, clinicalNote.sourceId, toUpdate);
         setTimeout(function () {
           $state.go('clinicalNotes-detail', {
@@ -89,5 +90,5 @@ const ClinicalnotesDetailComponent = {
   controller: ClinicalnotesDetailController
 };
 
-ClinicalnotesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalnotesActions', 'serviceRequests', 'usSpinnerService'];
+ClinicalnotesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalnotesActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default ClinicalnotesDetailComponent;

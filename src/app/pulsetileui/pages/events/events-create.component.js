@@ -16,7 +16,7 @@
 let templateEventsCreate = require('./events-create.html');
 
 class EventsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, eventsActions, serviceRequests, serviceDateTimePicker) {
+  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, eventsActions, serviceRequests, serviceDateTimePicker, serviceFormatted) {
     var currentStateName = $state.router.globals.$current.name;
     var partsCurrentStateName = currentStateName.split('-');
     this.typeCreate = partsCurrentStateName[partsCurrentStateName.length - 1];
@@ -87,6 +87,7 @@ class EventsCreateController {
           author: event.author
         };
         
+        serviceFormatted.propsToString(toAdd);
         $scope.eventsCreate(this.currentPatient.id, toAdd);
       }
     }.bind(this);
@@ -106,5 +107,5 @@ const EventsCreateComponent = {
   controller: EventsCreateController
 };
 
-EventsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'eventsActions', 'serviceRequests', 'serviceDateTimePicker'];
+EventsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'eventsActions', 'serviceRequests', 'serviceDateTimePicker', 'serviceFormatted'];
 export default EventsCreateComponent;

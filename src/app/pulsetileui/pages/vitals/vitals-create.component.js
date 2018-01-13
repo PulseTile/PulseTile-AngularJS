@@ -16,7 +16,7 @@
 let templateVitalsCreate = require('./vitals-create.html');
 
 class VitalsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, serviceVitalsSigns) {
+  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, serviceVitalsSigns, serviceFormatted) {
     $scope.vitalStatuses = {};
     $scope.popoverLabels = serviceVitalsSigns.getLabels();
     $scope.pattern = serviceVitalsSigns.pattern;
@@ -70,6 +70,7 @@ class VitalsCreateController {
       $scope.changeNewScore(vital);
 
       if (vitalForm.$valid) {
+        serviceFormatted.propsToString(vital);
         $scope.vitalsCreate(this.currentPatient.id, vital);
       }
     }.bind(this);
@@ -89,5 +90,5 @@ const VitalsCreateComponent = {
   controller: VitalsCreateController
 };
 
-VitalsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vitalsActions', 'serviceRequests', 'serviceVitalsSigns'];
+VitalsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vitalsActions', 'serviceRequests', 'serviceVitalsSigns', 'serviceFormatted'];
 export default VitalsCreateComponent;

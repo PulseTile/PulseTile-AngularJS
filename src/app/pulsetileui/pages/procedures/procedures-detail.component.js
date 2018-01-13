@@ -16,7 +16,7 @@
 let templateProceduresDetail = require('./procedures-detail.html');
 
 class ProceduresDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, proceduresActions, usSpinnerService, serviceRequests) {
+  constructor($scope, $state, $stateParams, $ngRedux, proceduresActions, usSpinnerService, serviceRequests, serviceFormatted) {
 
 		$scope.isEdit = false;
 
@@ -37,6 +37,7 @@ class ProceduresDetailController {
 				$scope.isEdit = false;
 
 				this.procedure = Object.assign(this.procedure, $scope.procedureEdit);
+        serviceFormatted.propsToString(this.procedure);
 				proceduresActions.update(this.currentPatient.id, this.procedure.sourceId, this.procedure);
 			}
 		}.bind(this);
@@ -70,5 +71,5 @@ const ProceduresDetailComponent = {
   controller: ProceduresDetailController
 };
 
-ProceduresDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'proceduresActions', 'usSpinnerService', 'serviceRequests'];
+ProceduresDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'proceduresActions', 'usSpinnerService', 'serviceRequests', 'serviceFormatted'];
 export default ProceduresDetailComponent;

@@ -17,7 +17,7 @@
 let templateClinicalnotesCreate = require('./clinicalnotes-create.html');
 
 class ClinicalnotesCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, clinicalnotesActions, serviceRequests) {
+  constructor($scope, $state, $stateParams, $ngRedux, clinicalnotesActions, serviceRequests, serviceFormatted) {
     $scope.clinicalNote = {};
     $scope.clinicalNote.dateCreated = new Date().toISOString().slice(0, 10);
     
@@ -59,6 +59,7 @@ class ClinicalnotesCreateController {
           source: 'openehr'
         };
 
+        serviceFormatted.propsToString(toAdd, 'dateCreated');
         $scope.clinicalnotesCreate(this.currentPatient.id, toAdd);
       }
     }.bind(this);
@@ -78,5 +79,5 @@ const ClinicalnotesCreateComponent = {
   controller: ClinicalnotesCreateController
 };
 
-ClinicalnotesCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalnotesActions', 'serviceRequests'];
+ClinicalnotesCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalnotesActions', 'serviceRequests', 'serviceFormatted'];
 export default ClinicalnotesCreateComponent;

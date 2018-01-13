@@ -16,7 +16,7 @@
 let templateCreate= require('./referrals-create.html');
 
 class ReferralsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, referralsActions, usSpinnerService, serviceRequests) {
+  constructor($scope, $state, $stateParams, $ngRedux, referralsActions, usSpinnerService, serviceRequests, serviceFormatted) {
 
   	$scope.referralsEdit = {};
   	$scope.referralsEdit.dateCreated = new Date();
@@ -57,7 +57,7 @@ class ReferralsCreateController {
 			$scope.formSubmitted = true;
 
 			if (referralsForm.$valid) {
-
+        serviceFormatted.propsToString(referral);
 				$scope.referralsCreate(this.currentPatient.id, referral);
 			}
 		}.bind(this);
@@ -73,5 +73,5 @@ const ReferralsCreateComponent = {
   controller: ReferralsCreateController
 };
 
-ReferralsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'usSpinnerService', 'serviceRequests'];
+ReferralsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'usSpinnerService', 'serviceRequests', 'serviceFormatted'];
 export default ReferralsCreateComponent;

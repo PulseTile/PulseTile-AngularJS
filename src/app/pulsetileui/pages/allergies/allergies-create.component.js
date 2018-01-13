@@ -17,7 +17,7 @@
 let templateAllergiesCreate = require('./allergies-create.html');
 
 class AllergiesCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, allergiesActions, serviceRequests) {
+  constructor($scope, $state, $stateParams, $ngRedux, allergiesActions, serviceRequests, serviceFormatted) {
     $scope.allergy = {};
 
     $scope.allergy.isImport = false;
@@ -96,7 +96,7 @@ class AllergiesCreateController {
           originalSource: allergies.originalSource,
           originalComposition: allergies.originalComposition
         };
-        
+        serviceFormatted.propsToString(toAdd);
         $scope.allergiesCreate(this.currentPatient.id, toAdd);
       }
     }.bind(this);
@@ -118,5 +118,5 @@ const AllergiesCreateComponent = {
   controller: AllergiesCreateController
 };
 
-AllergiesCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions', 'serviceRequests'];
+AllergiesCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions', 'serviceRequests', 'serviceFormatted'];
 export default AllergiesCreateComponent;

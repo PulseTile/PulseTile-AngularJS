@@ -16,7 +16,7 @@
 let templateTransferOfCareDetail= require('./transfer-of-care-detail.html');
 
 class TransferOfCareDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, transferOfCareActions, usSpinnerService, serviceRequests, serviceTransferOfCare, $window) {
+  constructor($scope, $state, $stateParams, $ngRedux, transferOfCareActions, usSpinnerService, serviceRequests, serviceTransferOfCare, $window, serviceFormatted) {
 
     $scope.isEdit = false;
     $scope.formDisabled = true;
@@ -106,7 +106,8 @@ class TransferOfCareDetailController {
 
         this.transferOfCare = Object.assign(transferOfCare, toUpdate);
         $scope.isEdit = false;
-        
+
+        serviceFormatted.propsToString(toUpdate);
         this.transferOfCareUpdate($stateParams.patientId, $stateParams.detailsIndex, toUpdate);
       }
     }.bind(this);
@@ -220,5 +221,5 @@ const TransferOfCareDetailComponent = {
   controller: TransferOfCareDetailController
 };
 
-TransferOfCareDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'transferOfCareActions', 'usSpinnerService', 'serviceRequests', 'serviceTransferOfCare', '$window'];
+TransferOfCareDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'transferOfCareActions', 'usSpinnerService', 'serviceRequests', 'serviceTransferOfCare', '$window', 'serviceFormatted'];
 export default TransferOfCareDetailComponent;

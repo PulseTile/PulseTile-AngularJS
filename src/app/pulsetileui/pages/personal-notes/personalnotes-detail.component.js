@@ -17,7 +17,7 @@
 let templatePersonalnotesDetail = require('./personalnotes-detail.html');
 
 class PersonalnotesDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, personalnotesActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, personalnotesActions, serviceRequests, usSpinnerService, serviceFormatted) {
     
     this.setCurrentPageData = function (data) {
       /* istanbul ignore if  */
@@ -73,6 +73,7 @@ class PersonalnotesDetailController {
         
         this.personalNote = Object.assign(this.personalNote, personalNote);
         $scope.isEdit = false;
+        serviceFormatted.propsToString(toUpdate);
         personalnotesActions.update($scope.patient.id, personalNote.sourceId, toUpdate);
         setTimeout(function () {
           $state.go('personalNotes-detail', {
@@ -90,5 +91,5 @@ const PersonalnotesDetailComponent = {
   controller: PersonalnotesDetailController
 };
 
-PersonalnotesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'personalnotesActions', 'serviceRequests', 'usSpinnerService'];
+PersonalnotesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'personalnotesActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default PersonalnotesDetailComponent;

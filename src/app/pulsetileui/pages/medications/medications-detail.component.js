@@ -16,7 +16,7 @@
 let templateMedicationsDetail= require('./medications-detail.html');
 
 class MedicationsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, usSpinnerService, serviceRequests) {
+  constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, usSpinnerService, serviceRequests, serviceFormatted) {
 
     $scope.formDisabled = true;
     $scope.isShowSchedule = true;
@@ -110,6 +110,7 @@ class MedicationsDetailController {
       if (medicationForm.$valid) {
         this.medication = Object.assign(this.medication, $scope.medicationEdit);
         $scope.isMedicationEdit = false;
+        serviceFormatted.propsToString(toAdd, 'startDate', 'startTime', 'dateCreated');
         $scope.medicationsUpdate($scope.patient.id, medication.sourceId, toAdd);
 
       }
@@ -136,5 +137,5 @@ const MedicationsDetailComponent = {
   controller: MedicationsDetailController
 };
 
-MedicationsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'medicationsActions', 'usSpinnerService', 'serviceRequests'];
+MedicationsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'medicationsActions', 'usSpinnerService', 'serviceRequests', 'serviceFormatted'];
 export default MedicationsDetailComponent;

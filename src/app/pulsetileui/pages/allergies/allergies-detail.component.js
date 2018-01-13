@@ -16,7 +16,7 @@
 let templateAllergiesDetail = require('./allergies-detail.html');
 
 class AllergiesDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, allergiesActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, allergiesActions, serviceRequests, usSpinnerService, serviceFormatted) {
     $scope.isEdit = false;
     $scope.isEditMeta = false;
     
@@ -91,6 +91,7 @@ class AllergiesDetailController {
       if (allergyForm.$valid) {
         $scope.isEditMeta = false;
         this.allergy = Object.assign(this.allergy, $scope.allergyEditMeta);
+        serviceFormatted.propsToString(toAdd);
         $scope.allergiesUpdate(this.currentPatient.id, allergies.sourceId, toAdd);
       }
     }.bind(this);
@@ -114,5 +115,5 @@ const AllergiesDetailComponent = {
   controller: AllergiesDetailController
 };
 
-AllergiesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions', 'serviceRequests', 'usSpinnerService'];
+AllergiesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default AllergiesDetailComponent;

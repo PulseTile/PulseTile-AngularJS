@@ -16,7 +16,7 @@
 let templateGenericMdtCreate= require('./generic-mdt-create.html');
 
 class GenericMdtCreateController {
-    constructor($scope, $state, $stateParams, $ngRedux, patientsActions, genericmdtActions, serviceRequests) {
+    constructor($scope, $state, $stateParams, $ngRedux, patientsActions, genericmdtActions, serviceRequests, serviceFormatted) {
         $scope.genericMdt = {};
         $scope.genericMdt.dateSubmitted = new Date();
         // $scope.contact.dateSubmitted = new Date().toISOString().slice(0, 10);
@@ -53,6 +53,7 @@ class GenericMdtCreateController {
             $scope.formSubmitted = true;
 
             if (mdtForm.$valid) {
+                serviceFormatted.propsToString(genericMdt);
                 $scope.genericmdtCreate($scope.currentPatient.id, genericMdt);
             }
         };
@@ -72,5 +73,5 @@ const GenericMdtCreateComponent = {
     controller: GenericMdtCreateController
 };
 
-GenericMdtCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'genericmdtActions', 'serviceRequests'];
+GenericMdtCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'genericmdtActions', 'serviceRequests', 'serviceFormatted'];
 export default GenericMdtCreateComponent;

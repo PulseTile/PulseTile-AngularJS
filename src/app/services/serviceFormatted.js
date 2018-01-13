@@ -41,7 +41,7 @@ class ServiceFormatted {
         }
       }
 
-      return;
+      return '';
     };
 
     /* istanbul ignore next  */
@@ -87,6 +87,16 @@ class ServiceFormatted {
       });
 
       return farmatedStr;
+    };
+
+    this.propsToString = function(obj, ...ignoreKeys) {
+      for (const key in obj) {
+        if (obj.hasOwnProperty(key) &&
+            ignoreKeys.indexOf(key) === -1 &&
+            _.isNumber(obj[key])) {
+          obj[key] = obj[key].toString();
+        }
+      }
     };
       
   };

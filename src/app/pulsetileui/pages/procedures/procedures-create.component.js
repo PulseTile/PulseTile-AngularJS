@@ -16,7 +16,7 @@
 let templateProceduresCreate = require('./procedures-create.html');
 
 class ProceduresCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, proceduresActions, serviceRequests) {
+  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, proceduresActions, serviceRequests, serviceFormatted) {
     $scope.procedure = {};
     $scope.procedure.dateSubmitted = new Date();
 
@@ -50,7 +50,7 @@ class ProceduresCreateController {
       $scope.formSubmitted = true;
 
       if (procedureForm.$valid) {
-
+        serviceFormatted.propsToString(procedure);
         $scope.proceduresCreate($scope.currentPatient.id, procedure);
       }
     };
@@ -70,5 +70,5 @@ const ProceduresCreateComponent = {
   controller: ProceduresCreateController
 };
 
-ProceduresCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'proceduresActions', 'serviceRequests'];
+ProceduresCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'proceduresActions', 'serviceRequests', 'serviceFormatted'];
 export default ProceduresCreateComponent;

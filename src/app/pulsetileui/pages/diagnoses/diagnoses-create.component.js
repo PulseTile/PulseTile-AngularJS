@@ -81,7 +81,7 @@ class DiagnosesCreateController {
           originalSource: diagnosis.originalSource,
           originalComposition: diagnosis.originalComposition
         };
-          
+        serviceFormatted.propsToString(toAdd);
         $scope.diagnosesCreate(this.currentPatient.id, toAdd);
       }
     }.bind(this);

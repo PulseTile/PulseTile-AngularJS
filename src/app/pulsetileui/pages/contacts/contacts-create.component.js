@@ -16,7 +16,7 @@
 let templateContactsCreate= require('./contacts-create.html');
 
 class ContactsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, contactsActions, serviceRequests) {
+  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, contactsActions, serviceRequests, serviceFormatted) {
     $scope.contact = {};
     $scope.contact.dateSubmitted = new Date();
     // $scope.contact.dateSubmitted = new Date().toISOString().slice(0, 10);
@@ -53,6 +53,7 @@ class ContactsCreateController {
 
       console.log('contact', contact); 
       if (contactForm.$valid) {
+        serviceFormatted.propsToString(contact);
         $scope.contactsCreate($scope.currentPatient.id, contact);
       }
     }.bind(this);
@@ -72,5 +73,5 @@ const ContactsCreateComponent = {
   controller: ContactsCreateController
 };
 
-ContactsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'contactsActions', 'serviceRequests'];
+ContactsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'contactsActions', 'serviceRequests', 'serviceFormatted'];
 export default ContactsCreateComponent;

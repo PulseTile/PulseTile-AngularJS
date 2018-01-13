@@ -60,6 +60,7 @@ class DiagnosesDetailController {
       if (diagnosisForm.$valid) {
         $scope.isEdit = false;
         this.diagnosis = Object.assign(this.diagnosis, $scope.diagnosisEdit);
+        serviceFormatted.propsToString(toAdd);
         $scope.diagnosesUpdate(this.currentPatient.id, $scope.diagnosisEdit.sourceId, toAdd);
       }
     }.bind(this);

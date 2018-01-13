@@ -16,7 +16,7 @@
 let templateVaccinationsDetail = require('./vaccinations-detail.html');
 
 class VaccinationsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vaccinationsActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vaccinationsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     $scope.isEdit = false;
 
     this.edit = function () {
@@ -37,6 +37,7 @@ class VaccinationsDetailController {
         this.vaccination = Object.assign(this.vaccination, $scope.vaccinationEdit);
         $scope.vaccinationEdit.vaccinationDateTime = new Date($scope.vaccinationEdit.vaccinationDateTime).getTime();
         $scope.vaccinationEdit.userId = this.currentPatient.id.toString();
+        serviceFormatted.propsToString(toAdd, 'vaccinationDateTime');
         $scope.vaccinationsUpdate(this.currentPatient.id, vaccination.sourceId, $scope.vaccinationEdit);
       }
     }.bind(this);
@@ -71,5 +72,5 @@ const VaccinationsDetailComponent = {
   controller: VaccinationsDetailController
 };
 
-VaccinationsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vaccinationsActions', 'serviceRequests', 'usSpinnerService'];
+VaccinationsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vaccinationsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default VaccinationsDetailComponent;

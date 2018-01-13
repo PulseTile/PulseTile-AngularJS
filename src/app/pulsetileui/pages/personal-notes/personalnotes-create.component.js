@@ -17,7 +17,7 @@
 let templatePersonalnotesCreate = require('./personalnotes-create.html');
 
 class PersonalnotesCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, personalnotesActions, serviceRequests) {
+  constructor($scope, $state, $stateParams, $ngRedux, personalnotesActions, serviceRequests, serviceFormatted) {
     $scope.personalNote = {};
     $scope.personalNote.dateCreated = new Date().toISOString().slice(0, 10);
     
@@ -58,7 +58,7 @@ class PersonalnotesCreateController {
           author: personalNote.author,
           source: 'openehr'
         };
-
+        serviceFormatted.propsToString(toAdd, dateCreated);
         $scope.personalnotesCreate(this.currentPatient.id, toAdd);
       }
     }.bind(this);
@@ -78,5 +78,5 @@ const PersonalnotesCreateComponent = {
   controller: PersonalnotesCreateController
 };
 
-PersonalnotesCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'personalnotesActions', 'serviceRequests'];
+PersonalnotesCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'personalnotesActions', 'serviceRequests', 'serviceFormatted'];
 export default PersonalnotesCreateComponent;

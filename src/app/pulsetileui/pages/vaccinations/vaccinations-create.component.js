@@ -16,7 +16,7 @@
 let templateVaccinationsCreate = require('./vaccinations-create.html');
 
 class VaccinationsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vaccinationsActions, serviceRequests) {
+  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vaccinationsActions, serviceRequests, serviceFormatted) {
     $scope.vaccination = {};
     $scope.vaccination.dateCreated = new Date();
     $scope.vaccination.source = 'Marand';
@@ -59,7 +59,7 @@ class VaccinationsCreateController {
           vaccinationDateTime: vaccination.vaccinationDateTime,
           source: vaccination.source
         };
-
+        serviceFormatted.propsToString(toAdd, 'vaccinationDateTime');
         $scope.vaccinationsCreate(this.currentPatient.id, toAdd);
       }
     }.bind(this);
@@ -79,5 +79,5 @@ const VaccinationsCreateComponent = {
   controller: VaccinationsCreateController
 };
 
-VaccinationsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vaccinationsActions', 'serviceRequests'];
+VaccinationsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vaccinationsActions', 'serviceRequests', 'serviceFormatted'];
 export default VaccinationsCreateComponent;

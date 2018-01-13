@@ -16,7 +16,7 @@
 let templateEventsDetail = require('./events-detail.html');
 
 class EventsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, usSpinnerService, serviceDateTimePicker) {
+  constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, usSpinnerService, serviceDateTimePicker, serviceFormatted) {
     var socket = io.connect('wss://' + window.location.hostname + ':' + 8070);
     $scope.isEdit = false;
 
@@ -56,6 +56,7 @@ class EventsDetailController {
         $scope.isEdit = false;
         this.event = Object.assign(this.event, event);
 
+        serviceFormatted.propsToString(toAdd);
         this.eventsUpdate(this.currentPatient.id, event.sourceId, toAdd);
       }
     }.bind(this);
@@ -276,5 +277,5 @@ const EventsDetailComponent = {
   controller: EventsDetailController
 };
 
-EventsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests', 'usSpinnerService', 'serviceDateTimePicker'];
+EventsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests', 'usSpinnerService', 'serviceDateTimePicker', 'serviceFormatted'];
 export default EventsDetailComponent;

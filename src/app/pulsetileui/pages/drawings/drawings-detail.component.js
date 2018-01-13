@@ -68,6 +68,7 @@ class DrawingsDetailController {
           drawingBase64: this.drawing.drawingBase64
         };
 
+        serviceFormatted.propsToString(toUpdate);
         this.drawingsUpdate($stateParams.patientId, $stateParams.detailsIndex, toUpdate);
       }
     }.bind(this);
@@ -102,6 +103,7 @@ class DrawingsDetailController {
         $scope.isEdit = false;
         
         // this.drawingsUpdate($stateParams.patientId, toUpdate);
+        serviceFormatted.propsToString(toUpdate);
         this.drawingsUpdate($stateParams.patientId, $stateParams.detailsIndex, toUpdate);
       }
     }.bind(this);

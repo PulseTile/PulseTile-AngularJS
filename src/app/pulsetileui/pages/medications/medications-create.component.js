@@ -17,7 +17,7 @@
 let templateMedicationsCreate = require('./medications-create.html');
 
 class MedicationsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, serviceRequests, usSpinnerService, serviceFormatted) {
 
     $scope.medication = {};
     
@@ -108,6 +108,7 @@ class MedicationsCreateController {
           originalComposition: medication.originalComposition
         };
 
+        serviceFormatted.propsToString(toAdd, 'startDate', 'startTime', 'dateCreated');
         $scope.medicationsCreate($scope.patient.id, toAdd);
 
       }
@@ -123,5 +124,5 @@ const MedicationsCreateComponent = {
   controller: MedicationsCreateController
 };
 
-MedicationsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'medicationsActions', 'serviceRequests', 'usSpinnerService'];
+MedicationsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'medicationsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default MedicationsCreateComponent;

@@ -16,7 +16,7 @@
 let templateVitalsDetail = require('./vitals-detail.html');
 
 class VitalsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, usSpinnerService, serviceVitalsSigns) {
+  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, usSpinnerService, serviceVitalsSigns, serviceFormatted) {
     $scope.isEdit = false;
     $scope.vitalStatuses = {};
     $scope.popoverLabels = serviceVitalsSigns.getLabels();
@@ -59,7 +59,7 @@ class VitalsDetailController {
         
         $scope.vital = Object.assign($scope.vital, $scope.vitalEdit);
         $scope.changeNewScore($scope.vital);
-
+        serviceFormatted.propsToString($scope.vital);
         $scope.vitalsUpdate(this.currentPatient.id, $scope.vital.sourceId, $scope.vital);
       }
     }.bind(this);
@@ -99,5 +99,5 @@ const VitalsDetailComponent = {
   controller: VitalsDetailController
 };
 
-VitalsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vitalsActions', 'serviceRequests', 'usSpinnerService', 'serviceVitalsSigns'];
+VitalsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vitalsActions', 'serviceRequests', 'usSpinnerService', 'serviceVitalsSigns', 'serviceFormatted'];
 export default VitalsDetailComponent;

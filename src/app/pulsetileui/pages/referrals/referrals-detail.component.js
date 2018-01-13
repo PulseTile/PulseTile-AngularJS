@@ -16,7 +16,7 @@
 let templateReferralsDetail= require('./referrals-detail.html');
 
 class ReferralsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, referralsActions, usSpinnerService, serviceRequests) {
+  constructor($scope, $state, $stateParams, $ngRedux, referralsActions, usSpinnerService, serviceRequests, serviceFormatted) {
 
 		$scope.isEdit = false;
 
@@ -72,6 +72,7 @@ class ReferralsDetailController {
 
 				this.referral = Object.assign(this.referral, toUpdate);
 				$scope.isEdit = false;
+        serviceFormatted.propsToString(toUpdate);
 				referralsActions.update($scope.patient.id, referrals.sourceId, toUpdate);
 				setTimeout(function () {
 					$state.go('referrals', {
@@ -95,5 +96,5 @@ const ReferralsDetailComponent = {
   controller: ReferralsDetailController
 };
 
-ReferralsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'usSpinnerService', 'serviceRequests'];
+ReferralsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'usSpinnerService', 'serviceRequests', 'serviceFormatted'];
 export default ReferralsDetailComponent;

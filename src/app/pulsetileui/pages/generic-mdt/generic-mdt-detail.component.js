@@ -16,7 +16,7 @@
 let templateGenericMdtDetail= require('./generic-mdt-detail.html');
 
 class GenericMdtDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, genericmdtActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, genericmdtActions, serviceRequests, usSpinnerService, serviceFormatted) {
     $scope.isEdit = false;
     
     this.edit = function () {
@@ -36,6 +36,7 @@ class GenericMdtDetailController {
         $scope.isEdit = false;
         this.genericMdt = Object.assign(this.genericMdt, $scope.mdtEdit);
         this.genericMdt.dateSubmitted = new Date().getTime();
+        serviceFormatted.propsToString(this.genericMdt);
         $scope.genericmdtUpdate(this.currentPatient.id, genericMdt.sourceId, this.genericMdt);
       }
     }.bind(this);
@@ -70,5 +71,5 @@ const GenericMdtDetailComponent = {
   controller: GenericMdtDetailController
 };
 
-GenericMdtDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'genericmdtActions', 'serviceRequests', 'usSpinnerService'];
+GenericMdtDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'genericmdtActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default GenericMdtDetailComponent;

@@ -42,7 +42,7 @@ class OrdersListController {
       if (data.orders.data) {
         this.orders = data.orders.data;
 
-        serviceFormatted.formattingTablesDate(this.orders, ['orderDate'], serviceFormatted.formatCollection.DDMMMYYYY);
+        // serviceFormatted.formattingTablesDate(this.orders, ['orderDate'], serviceFormatted.formatCollection.DDMMMYYYY);
         serviceFormatted.filteringKeys = ['name', 'orderDate', 'source'];
       }
       if (data.patientsGet.data) {

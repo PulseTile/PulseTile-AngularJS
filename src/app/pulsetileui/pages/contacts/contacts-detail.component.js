@@ -16,7 +16,7 @@
 let templateContactsDetail= require('./contacts-detail.html');
 
 class ContactsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, contactsActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, contactsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     var relationshipTypeOptions = [
       { value: 'at0036', title: 'Informal carer' },
       { value: 'at0037', title: 'Main informal carer' },
@@ -51,7 +51,7 @@ class ContactsDetailController {
             this.contact.relationshipType = el.title;
           }
         });
-
+        serviceFormatted.propsToString(this.contact);
         $scope.contactsUpdate(this.currentPatient.id, contact.sourceId, this.contact);
       }
     }.bind(this);
@@ -86,5 +86,5 @@ const ContactsDetailComponent = {
   controller: ContactsDetailController
 };
 
-ContactsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'contactsActions', 'serviceRequests', 'usSpinnerService'];
+ContactsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'contactsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default ContactsDetailComponent;

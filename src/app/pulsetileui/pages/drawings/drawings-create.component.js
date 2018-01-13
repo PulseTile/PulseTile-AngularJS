@@ -47,7 +47,7 @@ class DrawingsCreateController {
           name: drawingEdit.name,
           author: drawingEdit.author,
         };
-        
+        serviceFormatted.propsToString(toAdd);
         $scope.drawingsCreate($stateParams.patientId, toAdd);
       }
     }.bind(this);

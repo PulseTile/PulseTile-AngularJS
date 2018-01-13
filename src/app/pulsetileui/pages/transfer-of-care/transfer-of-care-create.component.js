@@ -152,6 +152,7 @@ class TransferOfCareCreateController {
           transferDateTime: $scope.transferOfCareEdit.transferDateTime
         };
         
+        serviceFormatted.propsToString(toAdd);
         $scope.transferOfCareCreate($stateParams.patientId, toAdd);
       }
     }.bind(this);

@@ -16,7 +16,7 @@
 let templateOrdersCreate= require('./orders-create.html');
 
 class OrdersCreateController {
-    constructor($scope, $state, $stateParams, $ngRedux, ordersActions, serviceRequests) {
+    constructor($scope, $state, $stateParams, $ngRedux, ordersActions, serviceRequests, serviceFormatted) {
         $scope.order = {};
         $scope.order.dateSubmitted = new Date();
         $scope.firstPage = true;
@@ -64,6 +64,7 @@ class OrdersCreateController {
         $scope.create = function (ordersForm, order) {
             $scope.formSubmitted = true;
             if (ordersForm.$valid) {
+                serviceFormatted.propsToString($scope.chosenOrders);
                 $scope.ordersCreate($scope.patient.id, $scope.chosenOrders);
             }
         };
@@ -165,5 +166,5 @@ const OrdersCreateComponent = {
     controller: OrdersCreateController
 };
 
-OrdersCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'ordersActions', 'serviceRequests'];
+OrdersCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'ordersActions', 'serviceRequests', 'serviceFormatted'];
 export default OrdersCreateComponent;
