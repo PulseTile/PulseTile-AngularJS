@@ -17,6 +17,8 @@ import routes from "./index.route";
 import reducer from "./documents-reducer-all";
 import documentsListComponent from './documents-list.component';
 import documentsDetailComponent from './documents-detail.component';
+import { documentsDetailReferralComponent } from './documents-detail-type.component';
+import { documentsDetailDischargeComponent } from './documents-detail-type.component';
 import documentsActions from './documents-actions';
 
 export default {
@@ -25,7 +27,9 @@ export default {
   "reducer": reducer,
   "components": {
     documentsListComponent,
-    documentsDetailComponent
+    documentsDetailComponent,
+    documentsDetailReferralComponent,
+    documentsDetailDischargeComponent
   },
   "actions": {
     documentsActions

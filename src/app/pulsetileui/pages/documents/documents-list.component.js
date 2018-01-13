@@ -16,12 +16,11 @@
 let templateDocumentsList = require('./documents-list.html');
 
 class DocumentsListController {
-  constructor($scope, $state, $stateParams, $ngRedux, documentsActions, serviceRequests, usSpinnerService, serviceFormatted, templateService) {
+  constructor($scope, $state, $stateParams, $ngRedux, documentsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
     this.go = function (id, documentType) {
-      templateService.setTemplateType(documentType);
       $state.go('documents-detail', {
         patientId: $stateParams.patientId,
         detailsIndex: id,
@@ -61,5 +60,5 @@ const DocumentsListComponent = {
   controller: DocumentsListController
 };
 
-DocumentsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'documentsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted', 'templateService'];
+DocumentsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'documentsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default DocumentsListComponent;

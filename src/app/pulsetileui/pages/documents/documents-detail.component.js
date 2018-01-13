@@ -13,39 +13,43 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-class DocumentsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, documentsActions, usSpinnerService, ConfirmationDocsModal, templateService) {
+const DOCUMENT_TYPE_DISCHARGE = 'discharge';
+const DOCUMENT_TYPE_REFERRAL = 'referral';
 
-    // $scope.documentType = $stateParams.documentType;
+const templateDocumentsDetail = require('./documents-detail.html');
+
+class DocumentsDetailController {
+  constructor($scope, $state, $stateParams, $ngRedux, documentsActions, usSpinnerService, serviceRequests) {
+
+    $scope.typeOfDocument = '';
+    this.clinicalDocument = {};
 
     this.setCurrentPageData = function (data) {
-      // if (data.documents.data) {
-      //   this.clinicalDocument = data.findDischarge.data;
-      // }
-      if (data.documents.data) {
+      if (data.findReferral.data) {
         this.clinicalDocument = data.findReferral.data;
+        $scope.getTypeOfDocument();
+        serviceRequests.publisher('setDocument', {document: this.clinicalDocument});
       }
       usSpinnerService.stop('documentssDetail-spinner');
     };
 
-    $scope.importToCreate = function (typeCreate, data) {
-      ConfirmationDocsModal.openModal(function () {
-        data.isImport = true;
-        data.originalSource = location.href;
-        data.originalComposition = templateService.getTemplateType();
-        /* istanbul ignore if */
-        if (typeCreate && data) {
-          $state.go(typeCreate + '-create', {
-            patientId: $stateParams.patientId,
-            importData: {
-              data: data,
-              documentIndex: $stateParams.detailsIndex
-            }
+    $scope.sendDocument = function (data) {
+      serviceRequests.publisher('setDocument', {document: this.clinicalDocument});
+    }.bind(this);
+    serviceRequests.subscriber('getDocument', $scope.sendDocument);
 
-          });
-        } 
-      });
-    }
+    $scope.getTypeOfDocument = () => {
+      if (this.clinicalDocument.documentType) {
+        const documentType = this.clinicalDocument.documentType.toLowerCase();
+
+        if (documentType.indexOf(DOCUMENT_TYPE_DISCHARGE) >= 0) {
+          $scope.typeOfDocument = DOCUMENT_TYPE_DISCHARGE;
+        }
+        if (documentType.indexOf(DOCUMENT_TYPE_REFERRAL) >= 0) {
+          $scope.typeOfDocument = DOCUMENT_TYPE_REFERRAL;
+        }
+      }
+     };
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
@@ -57,16 +61,10 @@ class DocumentsDetailController {
       this.documentsFindReferral($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
   }
 }
-DocumentsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'documentsActions', 'usSpinnerService', 'ConfirmationDocsModal', 'templateService'];
-
-var templateFn = function($element, $attrs, templateService) {
-  let templateDocumentsType = require('./' + templateService.getTemplate());
-  return templateDocumentsType;
-}
-templateFn.$inject = ['$element', '$attrs', 'templateService'];
+DocumentsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'documentsActions', 'usSpinnerService', 'serviceRequests'];
 
 const DocumentsDetailComponent = {
-  template: templateFn,
+  template: templateDocumentsDetail,
   controller: DocumentsDetailController
 };
 

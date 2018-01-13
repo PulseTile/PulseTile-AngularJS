@@ -13,209 +13,193 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 -->
-<div mc-full-panel mc-accordion mc-open-panel="detail" class="panel-group accordion">
-  <div class="panel panel-secondary" ng-if="getShowPanel('detail')" ng-class="getOpenPanelClass('detail')">
-    <div class="panel-heading">
-      <div class="control-group right">
-        <button class="btn btn-success btn-inverse btn-square hidden-xs hidden-sm btn-expand-panel" ng-click="changeFullPanel('details', 'detail')"><i class="btn-icon fa fa-expand"></i><i class="btn-icon fa fa-compress"></i></button>
+<div class="form">
+  <div class="row-expand">
+    <div class="col-expand-left" ng-if="documentData.documentName">
+      <div class="form-group">
+        <label class="control-label">Document Name</label>
+        <div class="form-control-static">{{ documentData.documentName }}</div>
       </div>
-      <h3 class="panel-title">Document Details</h3>
     </div>
-    <div class="panel-body">
-      <div class="panel-body-inner">
-        <div class="form">
-          <div class="row-expand">
-            <div class="col-expand-left" ng-if="$ctrl.clinicalDocument.documentName">
-              <div class="form-group">
-                <label class="control-label">Document Name</label>
-                <div class="form-control-static">{{ $ctrl.clinicalDocument.documentName }}</div>
-              </div>
-            </div>
-            <div ng-class="{'col-expand-right': $ctrl.clinicalDocument.documentName, 'col-expand-left':!$ctrl.clinicalDocument.documentName}" ng-if="$ctrl.clinicalDocument.documentDate">
-              <div class="form-group">
-                <label class="control-label">Document Date</label>
-                <div class="form-control-static">{{ $ctrl.clinicalDocument.documentDate | date:'dd-MMM-y' }}</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row-expand">
-            <div class="col-expand-left" ng-if="$ctrl.clinicalDocument.author_name">
-              <div class="form-group">
-                <label class="control-label">Author</label>
-                <div class="form-control-static">{{ $ctrl.clinicalDocument.author_name }}</div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="form-group-section-list">
-            <div class="form-group-section-list-heading">
-              <label class="control-label">Facility</label>
-            </div>
-            <div class="form-group-section" ng-if="$ctrl.clinicalDocument.facility">
-              <div class="form-group-section-body">
-                <div class="form-group-wrapper">
-                  <div class="row-expand">
-                    <div class="col-expand-left">
-                      <div class="form-group">
-                        <label class="control-label">Name</label>
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.facility }}</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          
-          <div class="form-group-section-list">
-            <div class="form-group-section-list-heading">
-              <label class="control-label">Patient Identifier</label>
-            </div>
-            <div class="form-group-section">
-              <div class="form-group-section-body">
-                <div class="form-group-wrapper">
-                  <div class="row-expand">
-                    <div class="col-expand-left" ng-if="$ctrl.clinicalDocument.patientIdentifier_mrnType">
-                      <div class="form-group">
-                        <label class="control-label">MRM Type</label>
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.patientIdentifier_mrnType }}</div>
-                      </div>
-                    </div>
-                    <div class="col-expand-right" ng-if="$ctrl.clinicalDocument.patientIdentifier_othType">
-                      <div class="form-group">
-                        <label class="control-label">OTH Type</label>
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.patientIdentifier_othType }}</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row-expand">
-                    <div class="col-expand-left" ng-if="$ctrl.clinicalDocument.patientIdentifier_gmsType">
-                      <div class="form-group">
-                        <label class="control-label">GMS Type</label>
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.patientIdentifier_gmsType }}</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row-expand">
-                    <div class="col-expand-left" ng-if="$ctrl.clinicalDocument.responsibleProfessional_name">
-                      <div class="form-group">
-                        <label class="control-label">Responsible Professional</label>
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.responsibleProfessional_name }}</div>
-                      </div>
-                    </div>
-                    <div class="col-expand-right" ng-if="$ctrl.clinicalDocument.responsibleProfessional_idType">
-                      <div class="form-group">
-                        <label class="control-label">Responsible Professional Type</label>
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.responsibleProfessional_idType }}</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row-expand">
-                    <div class="col-expand-left" ng-if="$ctrl.clinicalDocument.source">
-                      <div class="form-group">
-                        <label class="control-label">From</label>
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.source }}</div>
-                      </div>
-                    </div>
-                    <div class="col-expand-right" ng-if="$ctrl.clinicalDocument.dischargingOrganisation">
-                      <div class="form-group">
-                        <label class="control-label">Discharging Organisation</label>
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.dischargingOrganisation }}</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row-expand">
-                    <div class="col-expand-left" ng-if="$ctrl.clinicalDocument.dateTimeOfDischarge">
-                      <div class="form-group">
-                        <label class="control-label">Discharging Date</label>
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.dateTimeOfDischarge }}</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row-expand">
-                    <div class="col-expand-left" ng-if="$ctrl.clinicalDocument.clinicalSynopsis">
-                      <div class="form-group">
-                        <label class="control-label">Clinical Synopsis</label>
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.clinicalSynopsis }}</div>
-                      </div>
-                    </div>
-                    <div class="col-expand-right" ng-if="$ctrl.clinicalDocument.dateOfAdmission">
-                      <div class="form-group">
-                        <label class="control-label">Date of Admission</label>
-                        <div class="form-control-static">{{ $ctrl.clinicalDocument.dateOfAdmission }}</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="form-group-section-list" ng-if="$ctrl.clinicalDocument.diagnosisList">
-            <div class="form-group-section-list-heading">
-              <label class="control-label">Diagnosis List</label>
-            </div>
-            <div mc-sub-accordion class="form-group-section form-group-section-bordered form-group-section-primary accordion" ng-class="getOpenSubAccordion()" ng-repeat="diagnosisItem in $ctrl.clinicalDocument.diagnosisList">
-              <div class="form-group-section-heading">
-                <div class="control-group without-side-indent right">
-                    <button class="btn btn-primary" ng-click="importToCreate('diagnoses', diagnosisItem)"><span class="btn-text">Import Data</span></button>
-                    <button class="btn btn-primary btn-inverse btn-square btn-form-group-section-toggle" ng-click="toggleSubAccordion()"><i class="btn-icon fa fa-chevron-up"></i></button>
-                </div>
-                <h3 class="panel-title">Problem: {{ diagnosisItem.problem }}</h3>
-              </div>
-              <div class="form-group-section-body">
-                <div class="form-group-wrapper">
-                  <div class="row-expand">
-                    <div class="col-expand-left">
-                      <div class="form-group">
-                        <label class="control-label">Problem</label>
-                        <div class="form-control-static">{{ diagnosisItem.problem }}</div>
-                      </div>
-                    </div>
-                    <div class="col-expand-right">
-                      <div class="form-group">
-                        <label class="control-label">Description</label>
-                        <div class="form-control-static">{{ diagnosisItem.description }}</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row-expand">
-                    <div class="col-expand-left">
-                      <div class="form-group">
-                        <label class="control-label">Terminology</label>
-                        <div class="form-control-static">{{ diagnosisItem.terminology }}</div>
-                      </div>
-                    </div>
-                    <div class="col-expand-right">
-                      <div class="form-group">
-                        <label class="control-label">Terminology Code</label>
-                        <div class="form-control-static">{{ diagnosisItem.terminologyCode }}</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- <div class="form-group-section-control">
-                  <div class="wrap-control-group">
-                    <div class="control-group right">
-                      <button class="btn btn-primary" ng-click="importToCreate('diagnoses', diagnosisItem)"><span>Import Data</span></button>
-                    </div>
-                  </div>
-                </div> -->
-              </div>
-            </div>
-          </div>
-
-        </div>
+    <div ng-class="{'col-expand-right': documentData.documentName, 'col-expand-left':!documentData.documentName}" ng-if="documentData.documentDate">
+      <div class="form-group">
+        <label class="control-label">Document Date</label>
+        <div class="form-control-static">{{ documentData.documentDate | date:'dd-MMM-y' }}</div>
       </div>
     </div>
   </div>
 
-  <span class="patientSummary-spinner" us-spinner="{radius:20, width:8, length: 16}" spinner-key="documentssDetail-spinner" spinner-start-active="true"></span>
+  <div class="row-expand">
+    <div class="col-expand-left" ng-if="documentData.author_name">
+      <div class="form-group">
+        <label class="control-label">Author</label>
+        <div class="form-control-static">{{ documentData.author_name }}</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-group-section-list">
+    <div class="form-group-section-list-heading">
+      <label class="control-label">Facility</label>
+    </div>
+    <div class="form-group-section" ng-if="documentData.facility">
+      <div class="form-group-section-body">
+        <div class="form-group-wrapper">
+          <div class="row-expand">
+            <div class="col-expand-left">
+              <div class="form-group">
+                <label class="control-label">Name</label>
+                <div class="form-control-static">{{ documentData.facility }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="form-group-section-list">
+    <div class="form-group-section-list-heading">
+      <label class="control-label">Patient Identifier</label>
+    </div>
+    <div class="form-group-section">
+      <div class="form-group-section-body">
+        <div class="form-group-wrapper">
+          <div class="row-expand">
+            <div class="col-expand-left" ng-if="documentData.patientIdentifier_mrnType">
+              <div class="form-group">
+                <label class="control-label">MRM Type</label>
+                <div class="form-control-static">{{ documentData.patientIdentifier_mrnType }}</div>
+              </div>
+            </div>
+            <div class="col-expand-right" ng-if="documentData.patientIdentifier_othType">
+              <div class="form-group">
+                <label class="control-label">OTH Type</label>
+                <div class="form-control-static">{{ documentData.patientIdentifier_othType }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row-expand">
+            <div class="col-expand-left" ng-if="documentData.patientIdentifier_gmsType">
+              <div class="form-group">
+                <label class="control-label">GMS Type</label>
+                <div class="form-control-static">{{ documentData.patientIdentifier_gmsType }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row-expand">
+            <div class="col-expand-left" ng-if="documentData.responsibleProfessional_name">
+              <div class="form-group">
+                <label class="control-label">Responsible Professional</label>
+                <div class="form-control-static">{{ documentData.responsibleProfessional_name }}</div>
+              </div>
+            </div>
+            <div class="col-expand-right" ng-if="documentData.responsibleProfessional_idType">
+              <div class="form-group">
+                <label class="control-label">Responsible Professional Type</label>
+                <div class="form-control-static">{{ documentData.responsibleProfessional_idType }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row-expand">
+            <div class="col-expand-left" ng-if="documentData.source">
+              <div class="form-group">
+                <label class="control-label">From</label>
+                <div class="form-control-static">{{ documentData.source }}</div>
+              </div>
+            </div>
+            <div class="col-expand-right" ng-if="documentData.dischargingOrganisation">
+              <div class="form-group">
+                <label class="control-label">Discharging Organisation</label>
+                <div class="form-control-static">{{ documentData.dischargingOrganisation }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row-expand">
+            <div class="col-expand-left" ng-if="documentData.dateTimeOfDischarge">
+              <div class="form-group">
+                <label class="control-label">Discharging Date</label>
+                <div class="form-control-static">{{ documentData.dateTimeOfDischarge }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row-expand">
+            <div class="col-expand-left" ng-if="documentData.clinicalSynopsis">
+              <div class="form-group">
+                <label class="control-label">Clinical Synopsis</label>
+                <div class="form-control-static">{{ documentData.clinicalSynopsis }}</div>
+              </div>
+            </div>
+            <div class="col-expand-right" ng-if="documentData.dateOfAdmission">
+              <div class="form-group">
+                <label class="control-label">Date of Admission</label>
+                <div class="form-control-static">{{ documentData.dateOfAdmission }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-group-section-list" ng-if="documentData.diagnosisList">
+    <div class="form-group-section-list-heading">
+      <label class="control-label">Diagnosis List</label>
+    </div>
+    <div mc-sub-accordion class="form-group-section form-group-section-bordered form-group-section-primary accordion" ng-class="getOpenSubAccordion()" ng-repeat="diagnosisItem in documentData.diagnosisList">
+      <div class="form-group-section-heading">
+        <div class="control-group without-side-indent right">
+            <button class="btn btn-primary" ng-click="importToCreate('diagnoses', diagnosisItem)"><span class="btn-text">Import Data</span></button>
+            <button class="btn btn-primary btn-inverse btn-square btn-form-group-section-toggle" ng-click="toggleSubAccordion()"><i class="btn-icon fa fa-chevron-up"></i></button>
+        </div>
+        <h3 class="panel-title">Problem: {{ diagnosisItem.problem }}</h3>
+      </div>
+      <div class="form-group-section-body">
+        <div class="form-group-wrapper">
+          <div class="row-expand">
+            <div class="col-expand-left">
+              <div class="form-group">
+                <label class="control-label">Problem</label>
+                <div class="form-control-static">{{ diagnosisItem.problem }}</div>
+              </div>
+            </div>
+            <div class="col-expand-right">
+              <div class="form-group">
+                <label class="control-label">Description</label>
+                <div class="form-control-static">{{ diagnosisItem.description }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="row-expand">
+            <div class="col-expand-left">
+              <div class="form-group">
+                <label class="control-label">Terminology</label>
+                <div class="form-control-static">{{ diagnosisItem.terminology }}</div>
+              </div>
+            </div>
+            <div class="col-expand-right">
+              <div class="form-group">
+                <label class="control-label">Terminology Code</label>
+                <div class="form-control-static">{{ diagnosisItem.terminologyCode }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group-section-control">
+          <div class="wrap-control-group">
+            <div class="control-group right">
+              <button class="btn btn-primary" ng-click="importToCreate('diagnoses', diagnosisItem)"><span>Import Data</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+      

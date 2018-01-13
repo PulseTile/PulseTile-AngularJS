@@ -69,7 +69,6 @@ import ServiceVitalsSigns from './pulsetileui/pages/vitals/serviceVitalsSigns.js
 import ServiceActions from './pulsetileui/pages/dicom/serviceActions.js';
 import ServiceFormatted from './services/serviceFormatted.js';
 import ServiceDateTimePicker from './services/serviceDateTimePicker.js';
-import TemplateService from './services/TemplateService.js';
 import ServiceThemes from './services/serviceThemes.js';
 import ServiceTransferOfCare from './pulsetileui/pages/transfer-of-care/serviceTransferOfCare.js';
 import ServicePatients from './pulsetileui/pages/patients-list/servicePatients.js';
@@ -122,7 +121,6 @@ let app = angular
     .factory('Patient', Patient)
     .factory('deviceDetector', deviceDetector)
 
-    .service('templateService', TemplateService)
     .service('serviceThemes', ServiceThemes)
     .service('serviceTransferOfCare', ServiceTransferOfCare)
     .service('servicePatients', ServicePatients)
