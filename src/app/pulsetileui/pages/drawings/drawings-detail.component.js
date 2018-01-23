@@ -16,7 +16,7 @@
 let templateDrawingsDetail= require('./drawings-detail.html');
 
 class DrawingsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, drawingsActions, usSpinnerService, serviceRequests, $timeout, $window) {
+  constructor($scope, $state, $stateParams, $ngRedux, drawingsActions, usSpinnerService, serviceRequests, serviceFormatted) {
 
     $scope.isEdit = false;
     $scope.isEditDetail = false;
@@ -130,5 +130,5 @@ const DrawingsDetailComponent = {
   controller: DrawingsDetailController
 };
 
-DrawingsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'drawingsActions', 'usSpinnerService', 'serviceRequests', '$timeout', '$window'];
+DrawingsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'drawingsActions', 'usSpinnerService', 'serviceRequests', 'serviceFormatted'];
 export default DrawingsDetailComponent;

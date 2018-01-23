@@ -48,7 +48,7 @@ class serviceTransferOfCare {
         actionsFuncOne: vitalsActions.get,
         records: null
       }
-    }
+    };
 
     this.cache = {};
 
