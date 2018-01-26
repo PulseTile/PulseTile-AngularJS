@@ -118,14 +118,13 @@ class serviceTransferOfCare {
     this.modificateEventsArr = function (arr) {
       // goto: Later types will come
       arr = _.chain(arr)
-            .filter(function (value) {
-              return value.dateOfAppointment;
+            .filter(function (item) {
+              return item.dateCreated && item.type;
             })
             .each(function (value, index) {
-              value.type = 'Appointment';
-              value.date = serviceFormatted.formattingDate(value.dateOfAppointment, serviceFormatted.formatCollection.DDMMMYYYY);
-              value.tableName = value.serviceTeam;
-              value.selectName = value.serviceTeam;
+              value.date = serviceFormatted.formattingDate(value.dateCreated, serviceFormatted.formatCollection.DDMMMYYYY);
+              value.tableName = value.name;
+              value.selectName = value.name;
               return value;
             })
             .groupBy(function(value) {
@@ -146,7 +145,7 @@ class serviceTransferOfCare {
       this.config.vitals.records = [];
       this.config.vitals.records.push(data[1]);
 
-      this.config.vitals.records[0].date = serviceFormatted.formattingDate(this.config.vitals.records[0].dateCreate, serviceFormatted.formatCollection.DDMMMYYYY);
+      this.config.vitals.records[0].date = serviceFormatted.formattingDate(this.config.vitals.records[0].dateCreated, serviceFormatted.formatCollection.DDMMMYYYY);
       this.config.vitals.records[0].selectName = 'Latest Vitals Data';
       this.config.vitals.records[0].tableName = 'Latest Vitals Data (News Score: ' + this.config.vitals.records[0].newsScore + ')';
     };
