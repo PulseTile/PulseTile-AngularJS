@@ -110,13 +110,13 @@
           <div class="col-xs-12 col-md-6">
             <div class="form-group">
               <label class="control-label">Reason for Referral</label>
-              <div class="form-control-static">{{ data.referrals.reason }}</div>
+              <div class="form-control-static">{{ data.referrals.referralReason }}</div>
             </div>
           </div>
           <div class="col-xs-12 col-md-6">
             <div class="form-group">
               <label class="control-label">Clinical Summary</label>
-              <div class="form-control-static">{{ data.referrals.clinicalSummary }}</div>
+              <div class="form-control-static">{{ data.referrals.referralSummary }}</div>
             </div>
           </div>
         </div>
@@ -132,7 +132,7 @@
           <div class="col-xs-12 col-md-6">
             <div class="form-group">
               <label class="control-label">Event Name</label>
-              <div class="form-control-static">{{ data.events.serviceTeam }}</div>
+              <div class="form-control-static">{{ data.events.name }}</div>
             </div>
           </div>
           <div class="col-xs-12 col-md-6">
@@ -145,7 +145,7 @@
 
         <div class="form-group">
           <label class="control-label">Notes</label>
-          <div class="form-control-static">{{ data.events.note }}</div>
+          <div class="form-control-static">{{ data.events.description }}</div>
         </div>
         
         <div class="row">
@@ -162,7 +162,6 @@
             </div>
           </div>
         </div>
-
 
       </div>
 
