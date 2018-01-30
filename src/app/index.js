@@ -280,8 +280,6 @@ app.run(['$rootScope', '$state', 'serviceRequests', 'serviceThemes', 'Confirmati
         serviceRequests.currentUserData = result.data;
         setLoginData(result);
         serviceRequests.getAppSettings().then(function (res) {
-          console.log('getAppSettings ', res);
-
           if (res.data) {
             serviceThemes.setDataApplication(res.data);
           }

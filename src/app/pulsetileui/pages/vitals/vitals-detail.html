@@ -357,15 +357,15 @@
                 </div>
               </div>
               <div class="col-expand-right">
-                <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || vitalForm.dateCreate.$dirty) && vitalForm.dateCreate.$invalid, 'has-success': vitalForm.dateCreate.$valid && vitalForm.dateCreate.$dirty}">
-                  <label for="Date" class="control-label">Date</label>
+                <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || vitalForm.dateCreated.$dirty) && vitalForm.dateCreated.$invalid, 'has-success': vitalForm.dateCreated.$valid && vitalForm.dateCreated.$dirty}">
+                  <label for="dateCreated" class="control-label">Date</label>
                   <div class="inner-addon addon-left">
                     <div class="addon">
                       <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control" id="dateCreate" name="dateCreate" ng-model="vitalEdit.dateCreate" ng-click="dateofSubmittedDatepicker($event, 'dateCreate')" uib-datepicker-popup="dd-MMM-y" is-open="dateCreate" required disabled/>
+                    <input type="text" class="form-control" id="dateCreated" name="dateCreated" ng-model="vitalEdit.dateCreated" ng-click="dateofSubmittedDatepicker($event, 'dateCreated')" uib-datepicker-popup="dd-MMM-y" is-open="dateCreated" required disabled/>
                   </div>
-                  <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.dateCreate.$error.required || vitalForm.dateCreate.$invalid)">You must enter a valid date.</span>
+                  <span class="help-block animate-fade" ng-show="formSubmitted && (vitalForm.dateCreated.$error.required || vitalForm.dateCreated.$invalid)">You must enter a valid date.</span>
                 </div>
               </div>
             </div>

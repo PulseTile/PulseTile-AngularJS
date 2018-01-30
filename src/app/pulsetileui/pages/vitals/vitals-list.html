@@ -16,7 +16,7 @@
 
 <div mc-full-panel table-settings order="id" filtering class="panel panel-primary">
   <div class="panel-heading">
-    <div ng-if="isViewList('tableNews')" class="control-group right">
+    <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="btn-icon fa fa-filter"></i></button>
     </div>
     <div class="control-group right" >
@@ -42,17 +42,17 @@
     </div>
     <h3 class="panel-title">Vitals - News</h3>
 
-    <div class="panel-filter" ng-show="isFilterOpen && isViewList('tableNews')">
+    <div class="panel-filter" ng-show="isFilterOpen">
       <div class="inner-addon addon-left">
         <div class="addon">
           <i class="fa fa-filter"></i>
         </div>
-        <input type="text" id="filter" class="form-control" placeholder="Filter..." ng-model="queryFilter"/>
+        <input type="text" id="filter" class="form-control" placeholder="Filter..." ng-change="chartUpdate()" ng-model="queryFilter"/>
       </div>
     </div>
   </div>
   <div class="panel-body">
-    <div ng-if="isViewList('tableNews')">
+    <div ng-show="isViewList('tableNews')">
       <table class="table table-striped table-hover table-bordered rwd-table table-sorted table-fixedcol">
         <colgroup>
           <col style="width: 21%;">
@@ -100,8 +100,8 @@
 
     <div class="panel-control">
       <div class="wrap-control-group">
-        <div class="control-group with-indent left" ng-if="isViewList('tableNews')">
-          <dir-pagination-controls max-size="6" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
+        <div class="control-group with-indent left">
+          <dir-pagination-controls max-size="6" on-page-change="pageChangeHandler(newPageNumber); chartUpdate()" boundary-links="false"></dir-pagination-controls>
         </div>
         <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1 && $ctrl.isShowCreateBtn">
           <button class="btn btn-success btn-inverse btn-create" ng-click="$ctrl.create();"><i class="btn-icon fa fa-plus"></i> <span class="btn-text">Create</span></button>

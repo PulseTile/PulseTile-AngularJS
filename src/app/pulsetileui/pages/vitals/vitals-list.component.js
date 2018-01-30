@@ -20,6 +20,7 @@ class VitalsListController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
 
+    $scope.chart = null;
     $scope.vitals;
     $scope.viewList;
 
@@ -66,87 +67,91 @@ class VitalsListController {
       };
     }
 
+		$scope.getChartDataSet = function(vitals) {
+			var tempDate;
+			var lastDate = '';
+			var dataChart = {
+				labels: []
+			};
+			var datasetsData = {
+				diastolicBP: [],
+				systolicBP: [],
+				temperature: [],
+				heartRate: [],
+				respirationRate: [],
+				oxygenSaturation: []
+			};
+
+			/* istanbul ignore next  */
+			for (var i = 0; i < vitals.length; i++) {
+				tempDate = formatDate(new Date(+vitals[i]['dataCreatedSource']));
+
+				if (lastDate === tempDate.date) {
+					dataChart.labels.push(tempDate.time);
+				} else {
+					lastDate = tempDate.date;
+					dataChart.labels.push(tempDate.date + ' ' + tempDate.time);
+				}
+
+				datasetsData.diastolicBP.push(vitals[i].diastolicBP);
+				datasetsData.systolicBP.push(vitals[i].systolicBP);
+				datasetsData.temperature.push(vitals[i].temperature);
+				datasetsData.heartRate.push(vitals[i].heartRate);
+				datasetsData.respirationRate.push(vitals[i].respirationRate);
+				datasetsData.oxygenSaturation.push(vitals[i].oxygenSaturation);
+			}
+
+			dataChart.datasets = [
+				{
+					label: "Resp",
+					backgroundColor: "rgba(13, 141, 5, 0.4)",
+					borderColor: "rgba(13, 141, 5, 1)",
+					pointBorderColor: "rgba(13, 141, 5, 1)",
+					pointBackgroundColor: "rgba(13, 141, 5, 1)",
+					data: datasetsData.respirationRate,
+				}, {
+					label: "SpO2",
+					backgroundColor: "rgba(219, 0, 120, 0.4)",
+					borderColor: "rgba(219, 0, 120, 1)",
+					pointBorderColor: "rgba(219, 0, 120, 1)",
+					pointBackgroundColor: "rgba(219, 0, 120, 1)",
+					data: datasetsData.oxygenSaturation,
+				}, {
+					label: "HR",
+					backgroundColor: "rgba(70, 124, 174, 0.4)",
+					borderColor: "rgba(70, 124, 174, 1)",
+					pointBorderColor: "rgba(70, 124, 174, 1)",
+					pointBackgroundColor: "rgba(70, 124, 174, 1)",
+					data: datasetsData.heartRate,
+				}, {
+					label: "SBP",
+					backgroundColor: "rgba(236, 109, 28, 0.4)",
+					borderColor: "rgba(236, 109, 28, 1)",
+					borderJoinStyle: 'miter',
+					pointBorderColor: "rgba(236, 109, 28, 1)",
+					pointBackgroundColor: "rgba(236, 109, 28, 1)",
+					data: datasetsData.systolicBP,
+				}, {
+					label: "DBP",
+					backgroundColor: "rgba(5, 186, 195, 0.4)",
+					borderColor: "rgba(5, 186, 195, 1)",
+					pointBorderColor: "rgba(5, 186, 195, 1)",
+					pointBackgroundColor: "rgba(5, 186, 195, 1)",
+					data: datasetsData.diastolicBP,
+				}, {
+					label: "Temp",
+					backgroundColor: "rgba(221, 43, 8, 0.4)",
+					borderColor: "rgba(221, 43, 8, 1)",
+					pointBorderColor: "rgba(221, 43, 8, 1)",
+					pointBackgroundColor: "rgba(221, 43, 8, 1)",
+					data: datasetsData.temperature,
+				}
+			];
+			return dataChart;
+    };
+
     $scope.chartLoad = function(vitals) {
-      var tempDate;
-      var lastDate = '';
-      var dataChart = {
-        labels: []
-      };
-      var datasetsData = {
-        diastolicBP: [],
-        systolicBP: [],
-        temperature: [],
-        heartRate: [],
-        respirationRate: [],
-        oxygenSaturation: []
-      };
-
-      /* istanbul ignore next  */
-      for (var i = 0; i < vitals.length; i++) {
-        tempDate = formatDate(new Date(+vitals[i].dateCreated));
-
-        if (lastDate === tempDate.date) {
-          dataChart.labels.push(tempDate.time);
-        } else {
-          lastDate = tempDate.date;
-          dataChart.labels.push(tempDate.date + ' ' + tempDate.time);
-        }
-
-        datasetsData.diastolicBP.push(vitals[i].diastolicBP);
-        datasetsData.systolicBP.push(vitals[i].systolicBP);
-        datasetsData.temperature.push(vitals[i].temperature);
-        datasetsData.heartRate.push(vitals[i].heartRate);
-        datasetsData.respirationRate.push(vitals[i].respirationRate);
-        datasetsData.oxygenSaturation.push(vitals[i].oxygenSaturation);
-      }
-
-      dataChart.datasets = [
-        {
-          label: "Resp",
-          backgroundColor: "rgba(13, 141, 5, 0.4)",
-          borderColor: "rgba(13, 141, 5, 1)",
-          pointBorderColor: "rgba(13, 141, 5, 1)",
-          pointBackgroundColor: "rgba(13, 141, 5, 1)",
-          data: datasetsData.respirationRate,
-        }, {
-          label: "SpO2",
-          backgroundColor: "rgba(219, 0, 120, 0.4)",
-          borderColor: "rgba(219, 0, 120, 1)",
-          pointBorderColor: "rgba(219, 0, 120, 1)",
-          pointBackgroundColor: "rgba(219, 0, 120, 1)",
-          data: datasetsData.oxygenSaturation,
-        }, {
-          label: "HR",
-          backgroundColor: "rgba(70, 124, 174, 0.4)",
-          borderColor: "rgba(70, 124, 174, 1)",
-          pointBorderColor: "rgba(70, 124, 174, 1)",
-          pointBackgroundColor: "rgba(70, 124, 174, 1)",
-          data: datasetsData.heartRate,
-        }, {
-          label: "SBP",
-          backgroundColor: "rgba(236, 109, 28, 0.4)",
-          borderColor: "rgba(236, 109, 28, 1)",
-          borderJoinStyle: 'miter',
-          pointBorderColor: "rgba(236, 109, 28, 1)",
-          pointBackgroundColor: "rgba(236, 109, 28, 1)",
-          data: datasetsData.systolicBP,
-        }, {
-          label: "DBP",
-          backgroundColor: "rgba(5, 186, 195, 0.4)",
-          borderColor: "rgba(5, 186, 195, 1)",
-          pointBorderColor: "rgba(5, 186, 195, 1)",
-          pointBackgroundColor: "rgba(5, 186, 195, 1)",
-          data: datasetsData.diastolicBP,
-        }, {
-          label: "Temp",
-          backgroundColor: "rgba(221, 43, 8, 0.4)",
-          borderColor: "rgba(221, 43, 8, 1)",
-          pointBorderColor: "rgba(221, 43, 8, 1)",
-          pointBackgroundColor: "rgba(221, 43, 8, 1)",
-          data: datasetsData.temperature,
-        }
-      ];
-
+      var dataChart = $scope.getChartDataSet(vitals);
       var options = {
           capBezierPoints: false,
           responsive: true,
@@ -180,11 +185,6 @@ class VitalsListController {
             }
           },
           scales: {
-            yAxes: [{
-                ticks: {
-                    stepSize: 5
-                }
-            }],
             xAxes: [{
               ticks: {
                   maxRotation: 90,
@@ -196,14 +196,14 @@ class VitalsListController {
 
       var canvas = document.getElementById("vitalNewsChart");
       var ctx = canvas.getContext("2d");
-      var myLineChart = new $window.Chart(ctx, {
+			$scope.chart = new $window.Chart(ctx, {
           type: 'line',
           data: dataChart,
           options: options
       });
      
       canvas.onclick = function(ev){
-        var activePoint = myLineChart.getElementAtEvent(ev)[0];
+        var activePoint = $scope.chart.getElementAtEvent(ev)[0];
         var vital;
 
         if (activePoint) {
@@ -213,19 +213,42 @@ class VitalsListController {
       }.bind(this);
     };
 
+    $scope.getVitalsForChart = function () {
+			var currentPage = $scope.currentPage || 1;
+			var vitals = angular.copy($scope.dateForChart);
+			vitals = vitals.map(function(item) {
+			  item['dataCreatedSource'] = item['dateCreated'];
+			  return item;
+      });
+			serviceFormatted.formattingTablesDate(vitals, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
+			var filteringVitals = vitals.filter(function (item) {
+        return serviceFormatted.formattedSearching(item, $scope.queryFilter);
+			});
+			return filteringVitals.slice((currentPage - 1) * 10, currentPage * 10);
+    };
+
+    $scope.chartUpdate = function() {
+      if ($scope.isViewList('chartNews') && $scope.chart) {
+        var vitals = $scope.getVitalsForChart();
+        var dataChart = $scope.getChartDataSet(vitals);
+				$scope.chart.data.datasets = dataChart.datasets;
+				$scope.chart.data.labels = dataChart.labels;
+				$scope.chart.update();
+      }
+    };
+
     $scope.isViewList = function (viewName) {
       return $scope.viewList === viewName;
     };
 
     /* istanbul ignore next  */
     $scope.changeViewList = function (viewName) {
-      var currentPage = $scope.currentPage || 1;
       var vitalsForChart;
       $scope.viewList = viewName;
 
       if ($scope.dateForChart) {
         if (viewName === 'chartNews') {
-          vitalsForChart = $scope.dateForChart.slice((currentPage - 1) * 10, currentPage * 10);
+          vitalsForChart = $scope.getVitalsForChart();
 
           $timeout(function(){
             $scope.chartLoad(vitalsForChart);

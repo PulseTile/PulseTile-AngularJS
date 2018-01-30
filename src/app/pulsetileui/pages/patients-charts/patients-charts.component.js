@@ -130,7 +130,6 @@ class PatientsChartsController {
 
 
     this.getPatients = function (patients) {
-      console.log('this.getPatients');
       /* istanbul ignore if  */
       if (patients) {
         var summaries = {};

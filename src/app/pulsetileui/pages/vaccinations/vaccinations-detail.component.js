@@ -37,7 +37,7 @@ class VaccinationsDetailController {
         this.vaccination = Object.assign(this.vaccination, $scope.vaccinationEdit);
         $scope.vaccinationEdit.vaccinationDateTime = new Date($scope.vaccinationEdit.vaccinationDateTime).getTime();
         $scope.vaccinationEdit.userId = this.currentPatient.id.toString();
-        serviceFormatted.propsToString(toAdd, 'vaccinationDateTime');
+        serviceFormatted.propsToString($scope.vaccinationEdit, 'vaccinationDateTime');
         $scope.vaccinationsUpdate(this.currentPatient.id, vaccination.sourceId, $scope.vaccinationEdit);
       }
     }.bind(this);
