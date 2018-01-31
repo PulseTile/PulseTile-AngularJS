@@ -19,6 +19,8 @@ class OrdersListController {
   constructor($scope, $state, $stateParams, $ngRedux, ordersActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
+    ordersActions.clear();
+    this.actionLoadList = ordersActions.all;
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'orders-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'orders';
@@ -38,16 +40,21 @@ class OrdersListController {
       });
     };
 
-    this.setCurrentPageData = function (data) {
-      if (data.orders.data) {
-        this.orders = data.orders.data;
+    this.setCurrentPageData = function (store) {
+      const state = store.orders;
+
+      if ((state.patientId !== $stateParams.patientId || !state.data) &&
+        !state.isFetching && !state.error) {
+
+        this.actionLoadList($stateParams.patientId);
+        usSpinnerService.spin('list-spinner');
+      }
+      if (state.data) {
+        this.orders = state.data;
 
         serviceFormatted.formattingTablesDate(this.orders, ['orderDate'], serviceFormatted.formatCollection.DDMMMYYYY);
         serviceFormatted.filteringKeys = ['name', 'orderDate', 'source'];
-      }
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-        usSpinnerService.stop('patientSummary-spinner');
+        usSpinnerService.stop('list-spinner');
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
@@ -57,11 +64,7 @@ class OrdersListController {
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-    
     $scope.$on('$destroy', unsubscribe);
-    
-    this.ordersLoad = ordersActions.all;
-    this.ordersLoad($stateParams.patientId);
   }
 }
 

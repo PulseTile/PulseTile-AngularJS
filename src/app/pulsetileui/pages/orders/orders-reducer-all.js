@@ -20,7 +20,9 @@ const INITIAL_STATE = {
   error: false,
   data: null,
   dataGet: null,
+  isGetFetching: false,
   dataCreate: null,
+  patientId: null,
   dataSuggestion: null
 };
 
@@ -30,7 +32,6 @@ export default function orders(state = INITIAL_STATE, action) {
   var actions = {
     [types.ORDERS]: (state) => {
       state.dataCreate = null;
-      state.dataUpdate = null;
       return Object.assign({}, state, {
         isFetching: true,
         error: false
@@ -39,7 +40,8 @@ export default function orders(state = INITIAL_STATE, action) {
     [types.ORDERS_SUCCESS]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
-        data: payload.response
+        data: payload.response,
+        patientId: payload.meta.patientId,
       });
     },
     [types.ORDERS_ERROR]: (state) => {
@@ -48,24 +50,34 @@ export default function orders(state = INITIAL_STATE, action) {
         error: payload.error
       });
     },
+    [types.ORDERS__CLEAR]: (state) => {
+      return Object.assign({}, state, {
+        error: false,
+      });
+    },
+
     [types.ORDERS_GET]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
+        isGetFetching: true,
         error: false
       });
     },
     [types.ORDERS_GET_SUCCESS]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
+        isGetFetching: false,
         dataGet: payload.response
       });
     },
     [types.ORDERS_GET_ERROR]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
+        isGetFetching: false,
         error: payload.error
       });
     },
+
     [types.ORDERS_CREATE]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
@@ -84,6 +96,7 @@ export default function orders(state = INITIAL_STATE, action) {
         error: payload.error
       });
     },
+
     [types.ORDERS_SUGGESTION]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,

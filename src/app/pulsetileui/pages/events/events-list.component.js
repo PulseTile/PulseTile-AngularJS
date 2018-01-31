@@ -19,6 +19,9 @@ class EventsListController {
   constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, usSpinnerService, serviceFormatted, $timeout, serviceStateManager) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
+    eventsActions.clear();
+    this.actionLoadList = eventsActions.all;
+
     var filterTimelineData = serviceStateManager.getFilterTimeline();
 
     let _ = require('underscore');
@@ -99,11 +102,19 @@ class EventsListController {
     };
 
     /* istanbul ignore next */
-    this.setCurrentPageData = function (data) {
+    this.setCurrentPageData = function (store) {
       /* istanbul ignore if  */
-      if (data.events.data) {
-        this.events = data.events.data;
-      
+      const state = store.events;
+
+      if ((state.patientId !== $stateParams.patientId || !state.data) &&
+        !state.isFetching && !state.error) {
+
+        this.actionLoadList($stateParams.patientId);
+        usSpinnerService.spin('list-spinner');
+      }
+      if (state.data) {
+        this.events = state.data;
+
         serviceFormatted.filteringKeys = ['name', 'type', 'dateTime'];
 
         this.eventsFilterSteps = $scope.getFilterArray(this.events);
@@ -123,12 +134,7 @@ class EventsListController {
         };
 
         $scope.formCollectionsEvents(this.events);
-
-        usSpinnerService.stop('patientSummary-spinner');
-      }
-
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
+        usSpinnerService.stop('list-spinner');
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
@@ -261,12 +267,7 @@ class EventsListController {
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-    
     $scope.$on('$destroy', unsubscribe);
-    
-    this.eventsLoad = eventsActions.all;
-    this.eventsLoad($stateParams.patientId);
-
   }
 }
 

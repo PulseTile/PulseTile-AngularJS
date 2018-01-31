@@ -19,6 +19,8 @@ class ProceduresListController {
   constructor($scope, $state, $stateParams, $ngRedux, proceduresActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
+    proceduresActions.clear();
+    this.actionLoadList = proceduresActions.all;
 
 		this.isShowCreateBtn = $state.router.globals.$current.name !== 'procedures-create';
 		this.isShowExpandBtn = $state.router.globals.$current.name !== 'procedures';
@@ -39,19 +41,24 @@ class ProceduresListController {
       });
     };
 
-    this.setCurrentPageData = function (data) {
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-        usSpinnerService.stop('patientSummary-spinner');
+    this.setCurrentPageData = function (store) {
+      const state = store.procedures;
+
+      if ((state.patientId !== $stateParams.patientId || !state.data) &&
+        !state.isFetching && !state.error) {
+
+        this.actionLoadList($stateParams.patientId);
+        usSpinnerService.spin('list-spinner');
       }
-      if (data.procedures.data) {
-        this.procedures = data.procedures.data;
+      if (state.data) {
+        this.procedures = state.data;
 
         serviceFormatted.formattingTablesDate(this.procedures, ['date'], serviceFormatted.formatCollection.DDMMMYYYY);
         if (this.procedures && this.procedures[0] && angular.isNumber(this.procedures[0].time)) {
           serviceFormatted.formattingTablesDate(this.procedures, ['time'], serviceFormatted.formatCollection.HHmm);
         }
         serviceFormatted.filteringKeys = ['date', 'name', 'time', 'source'];
+        usSpinnerService.stop('list-spinner');
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
@@ -61,11 +68,7 @@ class ProceduresListController {
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    this.proceduresLoad = proceduresActions.all;
-    this.proceduresLoad($stateParams.patientId);
   }
 }
 

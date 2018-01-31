@@ -19,6 +19,8 @@ class ReferralsListController {
   constructor($scope, $state, $stateParams, $ngRedux, referralsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
+    referralsActions.clear();
+    this.actionLoadList = referralsActions.all;
 
 		this.isShowCreateBtn = $state.router.globals.$current.name !== 'referrals-create';
 		this.isShowExpandBtn = $state.router.globals.$current.name !== 'referrals';
@@ -37,17 +39,21 @@ class ReferralsListController {
       });
     };
 
-    this.setCurrentPageData = function (data) {
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-        usSpinnerService.stop('patientSummary-spinner');
-      }
+    this.setCurrentPageData = function (store) {
+      const state = store.referrals;
 
-      if (data.referrals.data) {
-        this.referrals = data.referrals.data;
+      if ((state.patientId !== $stateParams.patientId || !state.data) &&
+        !state.isFetching && !state.error) {
+
+        this.actionLoadList($stateParams.patientId);
+        usSpinnerService.spin('list-spinner');
+      }
+      if (state.data) {
+        this.referrals = state.data;
 
         serviceFormatted.formattingTablesDate(this.referrals, ['dateOfReferral'], serviceFormatted.formatCollection.DDMMMYYYY);
         serviceFormatted.filteringKeys = ['dateOfReferral', 'referralFrom', 'referralTo', 'source'];
+        usSpinnerService.stop('list-spinner');
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
@@ -57,11 +63,7 @@ class ReferralsListController {
 		let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    this.referralsLoad = referralsActions.all;
-    this.referralsLoad($stateParams.patientId);
   }
 }
 

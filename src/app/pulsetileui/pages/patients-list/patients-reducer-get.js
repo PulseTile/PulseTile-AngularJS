@@ -43,6 +43,12 @@ export default function patients(state = INITIAL_STATE, action) {
                 error: payload.error
             });
         },
+        [types.PATIENTS_GET__CLEAR]: (state) => {
+          return Object.assign({}, state, {
+            isFetching: false,
+            error: false,
+          });
+        },
     };
 
     return actions[action.type] ?

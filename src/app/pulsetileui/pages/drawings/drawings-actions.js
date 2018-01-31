@@ -16,6 +16,9 @@
 import {bindActionCreators} from 'redux';
 import * as types from '../../../constants/ActionTypes';
 
+export function clear() {
+  return { type: types.DRAWINGS__CLEAR }
+}
 export function all(patientId) {
   return {
     types: [types.DRAWINGS, types.DRAWINGS_SUCCESS, types.DRAWINGS_ERROR],
@@ -27,7 +30,8 @@ export function all(patientId) {
       url: '/api/pictures/' + patientId
     },
 
-    d: {
+    meta: {
+      patientId: patientId,
       timestamp: Date.now()
     }
   };
@@ -43,7 +47,7 @@ export function get(patientId, compositionId) {
       url: '/api/pictures/' + patientId + '/' + compositionId
     },
 
-    d: {
+    meta: {
       timestamp: Date.now()
     }
   };
@@ -61,7 +65,7 @@ export function create(patientId, composition) {
       data: composition
     },
 
-    d: {
+    meta: {
       timestamp: Date.now()
     }
   };
@@ -79,7 +83,7 @@ export function update(patientId, compositionId, composition) {
       data: composition
     },
 
-    d: {
+    meta: {
       timestamp: Date.now()
     }
   };
@@ -87,7 +91,7 @@ export function update(patientId, compositionId, composition) {
 
 export default function drawingsActions($ngRedux) {
   let actionCreator = {
-    all, get, create, update
+    all, clear, get, create, update
   };
 
   return bindActionCreators(actionCreator, $ngRedux.dispatch);

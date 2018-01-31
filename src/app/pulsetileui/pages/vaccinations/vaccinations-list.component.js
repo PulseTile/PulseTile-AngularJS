@@ -19,6 +19,8 @@ class VaccinationsListController {
   constructor($scope, $state, $stateParams, $ngRedux, vaccinationsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
+    vaccinationsActions.clear();
+    this.actionLoadList = vaccinationsActions.all;
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'vaccinations-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'vaccinations';
@@ -38,18 +40,21 @@ class VaccinationsListController {
       });
     };
     
-    this.setCurrentPageData = function (data) {
-      if (data.vaccinations.data) {
-        this.vaccinations = data.vaccinations.data;
-        
+    this.setCurrentPageData = function (store) {
+      const state = store.vaccinations;
+
+      if ((state.patientId !== $stateParams.patientId || !state.data) &&
+        !state.isFetching && !state.error) {
+
+        this.actionLoadList($stateParams.patientId);
+        usSpinnerService.spin('list-spinner');
+      }
+      if (state.data) {
+        this.vaccinations = state.data;
+
         serviceFormatted.formattingTablesDate(this.vaccinations, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
         serviceFormatted.filteringKeys = ['vaccinationName', 'source', 'dateCreated'];
-
-        usSpinnerService.stop('patientSummary-spinner');
-      }
-      
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
+        usSpinnerService.stop('list-spinner');
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
@@ -59,11 +64,7 @@ class VaccinationsListController {
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-    
     $scope.$on('$destroy', unsubscribe);
-    
-    this.vaccinationsLoad = vaccinationsActions.all;
-    this.vaccinationsLoad($stateParams.patientId);
   }
 }
 

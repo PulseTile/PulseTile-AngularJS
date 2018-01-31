@@ -16,6 +16,9 @@
 import {bindActionCreators} from 'redux';
 import * as types from '../../../constants/ActionTypes';
 
+export function clear() {
+  return { type: types.VACCINATIONS__CLEAR }
+}
 export function all(patientId) {
   return {
     types: [types.VACCINATIONS, types.VACCINATIONS_SUCCESS, types.VACCINATIONS_ERROR],
@@ -28,6 +31,7 @@ export function all(patientId) {
     },
 
     meta: {
+      patientId: patientId,
       timestamp: Date.now()
     }
   };
@@ -85,7 +89,7 @@ export function update(patientId, sourceId, composition) {
 
 export default function vaccinationsActions($ngRedux) {
   let actionCreator = {
-    all, get, create, update
+    all, clear, get, create, update
   };
 
   return bindActionCreators(actionCreator, $ngRedux.dispatch);

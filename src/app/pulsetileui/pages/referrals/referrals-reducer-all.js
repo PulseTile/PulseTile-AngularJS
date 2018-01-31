@@ -20,8 +20,11 @@ const INITIAL_STATE = {
   error: false,
   data: null,
   dataGet: null,
+  isGetFetching: false,
   dataCreate: null,
-  dataUpdate: null
+  dataUpdate: null,
+  isUpdateProcess: false,
+  patientId: null
 };
 
 export default function referrals(state = INITIAL_STATE, action) {
@@ -29,15 +32,21 @@ export default function referrals(state = INITIAL_STATE, action) {
 
   var actions = {
     [types.REFERRALS]: (state) => {
+      state.dataCreate = null;
+      state.dataUpdate = null;
       return Object.assign({}, state, {
         isFetching: true,
         error: false
       });
     },
     [types.REFERRALS_SUCCESS]: (state) => {
+      if (state.isUpdateProcess) {
+        state.dataGet = null;
+      }
       return Object.assign({}, state, {
         isFetching: false,
-        data: payload.response
+        data: payload.response,
+        patientId: payload.meta.patientId,
       });
     },
     [types.REFERRALS_ERROR]: (state) => {
@@ -46,24 +55,36 @@ export default function referrals(state = INITIAL_STATE, action) {
         error: payload.error
       });
     },
+    [types.REFERRALS__CLEAR]: (state) => {
+      return Object.assign({}, state, {
+        error: false,
+      });
+    },
+
     [types.REFERRALS_GET]: (state) => {
+      state.dataUpdate = null;
       return Object.assign({}, state, {
         isFetching: true,
+        isGetFetching: true,
         error: false
       });
     },
     [types.REFERRALS_GET_SUCCESS]: (state) => {
       return Object.assign({}, state, {
+        isUpdateProcess: false,
         isFetching: false,
+        isGetFetching: false,
         dataGet: payload.response
       });
     },
     [types.REFERRALS_GET_ERROR]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
+        isGetFetching: false,
         error: payload.error
       });
     },
+
     [types.REFERRALS_CREATE]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
@@ -82,8 +103,10 @@ export default function referrals(state = INITIAL_STATE, action) {
         error: payload.error
       });
     },
+
     [types.REFERRALS_UPDATE]: (state) => {
       return Object.assign({}, state, {
+        isUpdateProcess: true,
         isFetching: true,
         error: false
       });

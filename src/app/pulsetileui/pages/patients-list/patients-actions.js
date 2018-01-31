@@ -36,6 +36,9 @@ export function loadPatients() {
         }
     };
 }
+export function clearPatient() {
+  return { type: types.PATIENTS_GET__CLEAR };
+}
 
 export function getPatient(id) {
     return {
@@ -61,7 +64,8 @@ export function getPatient(id) {
 export default function patientsActions($ngRedux) {
     let actionCreator = {
         loadPatients,
-        getPatient
+        getPatient,
+        clearPatient
     };
 
     return bindActionCreators(actionCreator, $ngRedux.dispatch);

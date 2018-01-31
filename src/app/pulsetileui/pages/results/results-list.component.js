@@ -19,6 +19,8 @@ class ResultsListController {
   constructor($scope, $state, $stateParams, $ngRedux, resultsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
+    resultsActions.clear();
+    this.actionLoadList = resultsActions.all;
 
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'results';
 
@@ -31,25 +33,31 @@ class ResultsListController {
       });
     };
 
-    this.setCurrentPageData = function (data) {
-      if (data.results.data) {
-        this.results = data.results.data;
+    this.setCurrentPageData = function (store) {
+      const state = store.results;
+
+      if ((state.patientId !== $stateParams.patientId || !state.data) &&
+        !state.isFetching && !state.error) {
+
+        this.actionLoadList($stateParams.patientId);
+        usSpinnerService.spin('list-spinner');
+      }
+      if (state.data) {
+        this.results = state.data;
 
         serviceFormatted.formattingTablesDate(this.results, ['dateCreated', 'sampleTaken'], serviceFormatted.formatCollection.DDMMMYYYY);
         serviceFormatted.filteringKeys = ['sampleTaken', 'testName', 'dateCreated', 'source'];
-        
-        usSpinnerService.stop('resultsSummary-spinner');
+        usSpinnerService.stop('list-spinner');
+      }
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
       }
     };
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    this.resultsLoad = resultsActions.all;
-    this.resultsLoad($stateParams.patientId);
   }
 }
 

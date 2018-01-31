@@ -20,27 +20,11 @@ class ClinicalstatementsListController {
   constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'clinicalStatements-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
+    clinicalstatementsActions.clear();
+    this.actionLoadList = clinicalstatementsActions.all;
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'clinicalstatements-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'clinicalstatements';
-
-
-    this.setCurrentPageData = function (data) {
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
-      if (data.clinicalstatements.data) {
-        this.clinicalStatements = data.clinicalstatements.data;
-        serviceFormatted.formattingTablesDate(this.clinicalStatements, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
-        serviceFormatted.filteringKeys = ['type', 'author', 'dateCreated', 'source'];
-      }
-
-      usSpinnerService.stop("patientSummary-spinner");
-
-      if (serviceRequests.currentUserData) {
-        this.currentUser = serviceRequests.currentUserData;
-      }
-    };
 
     this.create = function () {
       $state.go('clinicalstatements-create', {
@@ -58,14 +42,31 @@ class ClinicalstatementsListController {
       });
     };
 
+    this.setCurrentPageData = function (store) {
+      const state = store.clinicalstatements;
+
+      if ((state.patientId !== $stateParams.patientId || !state.data) &&
+        !state.isFetching && !state.error) {
+
+        this.actionLoadList($stateParams.patientId);
+        usSpinnerService.spin('list-spinner');
+      }
+      if (state.data) {
+        this.clinicalStatements = state.data;
+
+        serviceFormatted.formattingTablesDate(this.clinicalStatements, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['type', 'author', 'dateCreated', 'source'];
+        usSpinnerService.stop('list-spinner');
+      }
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
+      }
+    };
+
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    this.clinicalstatementsLoad = clinicalstatementsActions.all;
-    this.clinicalstatementsLoad($stateParams.patientId);
   }
 }
 

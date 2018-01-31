@@ -17,6 +17,13 @@ let templateContactsDetail= require('./contacts-detail.html');
 
 class ContactsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, patientsActions, contactsActions, serviceRequests, usSpinnerService, serviceFormatted) {
+    this.contactsLoadAll = contactsActions.all;
+    this.contactsLoad = contactsActions.get;
+    $scope.contactsUpdate = contactsActions.update;
+
+    usSpinnerService.spin('detail-spinner');
+    this.contactsLoad($stateParams.patientId, $stateParams.detailsIndex);
+
     var relationshipTypeOptions = [
       { value: 'at0036', title: 'Informal carer' },
       { value: 'at0037', title: 'Main informal carer' },
@@ -45,27 +52,43 @@ class ContactsDetailController {
       $scope.formSubmitted = true;
       if (contactForm.$valid) {
         $scope.isEdit = false;
-        this.contact = Object.assign(this.contact, $scope.contactEdit);
-        relationshipTypeOptions.forEach((el) => {
-          if (el.value === $scope.contactEdit.relationshipCode) {
-            this.contact.relationshipType = el.title;
-          }
-        });
-        serviceFormatted.propsToString(this.contact);
-        $scope.contactsUpdate(this.currentPatient.id, contact.sourceId, this.contact);
+
+        serviceFormatted.propsToString($scope.contactEdit);
+        $scope.contactsUpdate($stateParams.patientId, contact.sourceId, $scope.contactEdit);
       }
     }.bind(this);
 
-    this.setCurrentPageData = function (data) {
-      if (data.contacts.dataGet) {
-        this.contact = data.contacts.dataGet;
-        usSpinnerService.stop('contactDetail-spinner');
+    this.setCurrentPageData = function (store) {
+      const stateContacts = store.contacts;
+      const { patientId, detailsIndex } = $stateParams;
+
+      if (stateContacts.dataGet) {
+        this.contact = stateContacts.dataGet;
+        usSpinnerService.stop('detail-spinner');
       }
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
+
+      if (stateContacts.dataUpdate !== null) {
+        // After Update we request all list firstly
+        this.contactsLoadAll(patientId);
       }
+      if (stateContacts.isUpdateProcess) {
+        usSpinnerService.spin('detail-update-spinner');
+        if (!stateContacts.dataGet && !stateContacts.isGetFetching) {
+          // We request detail when data is empty
+          // Details are cleared after request LoadAll list
+          this.contactsLoad(patientId, detailsIndex);
+        }
+      } else {
+        usSpinnerService.stop('detail-update-spinner');
+      }
+
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
+      }
+
+      if (stateContacts.error) {
+        usSpinnerService.stop('detail-spinner');
+        usSpinnerService.stop('detail-update-spinner');
       }
     };
 
@@ -74,10 +97,6 @@ class ContactsDetailController {
     }))(this);
 
     $scope.$on('$destroy', unsubscribe);
-
-    this.contactsLoad = contactsActions.get;
-    this.contactsLoad($stateParams.patientId, $stateParams.detailsIndex);
-    $scope.contactsUpdate = contactsActions.update;
   }
 }
 

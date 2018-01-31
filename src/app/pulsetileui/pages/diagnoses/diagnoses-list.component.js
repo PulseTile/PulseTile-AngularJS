@@ -19,27 +19,11 @@ class DiagnosesListController {
   constructor($scope, $state, $stateParams, $ngRedux, diagnosesActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
+    diagnosesActions.clear();
+    this.actionLoadList = diagnosesActions.all;
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'diagnoses-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'diagnoses';
-
-    this.setCurrentPageData = function (data) {
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-        usSpinnerService.stop('patientSummary-spinner');
-      }
-      
-      if (data.diagnoses.data) {
-        this.diagnoses = data.diagnoses.data;
-        
-        serviceFormatted.formattingTablesDate(this.diagnoses, ['dateOfOnset'], serviceFormatted.formatCollection.DDMMMYYYY);
-        serviceFormatted.filteringKeys = ['problem', 'dateOfOnset', 'source'];
-      }
-      
-      if (serviceRequests.currentUserData) {
-        this.currentUser = serviceRequests.currentUserData;
-      }
-    };
     
     this.go = function (id, diagnosisSource) {
       $state.go('diagnoses-detail', {
@@ -56,14 +40,31 @@ class DiagnosesListController {
       });
     };
 
+    this.setCurrentPageData = function (store) {
+      const state = store.diagnoses;
+
+      if ((state.patientId !== $stateParams.patientId || !state.data) &&
+        !state.isFetching && !state.error) {
+
+        this.actionLoadList($stateParams.patientId);
+        usSpinnerService.spin('list-spinner');
+      }
+      if (state.data) {
+        this.diagnoses = state.data;
+
+        serviceFormatted.formattingTablesDate(this.diagnoses, ['dateOfOnset'], serviceFormatted.formatCollection.DDMMMYYYY);
+        serviceFormatted.filteringKeys = ['problem', 'dateOfOnset', 'source'];
+        usSpinnerService.stop('list-spinner');
+      }
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
+      }
+    };
+
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-    
     $scope.$on('$destroy', unsubscribe);
-    
-    this.diagnosesLoad = diagnosesActions.all;
-    this.diagnosesLoad($stateParams.patientId);
   }
 }
 

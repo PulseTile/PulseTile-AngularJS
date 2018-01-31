@@ -14,7 +14,7 @@
  ~  limitations under the License.
  */
 import routes from "./index.route";
-import reducer from "./medication-reducer-all";
+import reducer from "./medications-reducer-all";
 import medicationsListComponent from './medications-list.component';
 import medicationsCreateComponent from './medications-create.component';
 import medicationsDetailComponent from './medications-detail.component';

@@ -19,6 +19,8 @@ class MedicationsListController {
   constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
+    medicationsActions.clear();
+    this.actionLoadList = medicationsActions.all;
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'medications-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'medications';
@@ -38,14 +40,19 @@ class MedicationsListController {
       });
     };
 
-    this.setCurrentPageData = function (data) {
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-        usSpinnerService.stop('patientSummary-spinner');
+    this.setCurrentPageData = function (store) {
+      const state = store.medication;
+
+      if ((state.patientId !== $stateParams.patientId || !state.data) &&
+        !state.isFetching && !state.error) {
+
+        this.actionLoadList($stateParams.patientId);
+        usSpinnerService.spin('list-spinner');
       }
-      if (data.medication.data) {
-        this.medications = data.medication.data;
-        
+      if (state.data) {
+        this.medications = state.data;
+
+        serviceFormatted.filteringKeys = ['name', 'relationship', 'nextOfKin', 'source'];
         serviceFormatted.formattingTablesDate(this.medications, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
         serviceFormatted.filteringKeys = ['name', 'doseAmount', 'dateCreated', 'source'];
         /*
@@ -57,6 +64,7 @@ class MedicationsListController {
         if (this.medications[1]) {
           this.medications[1].danger = true;
         }
+        usSpinnerService.stop('list-spinner');
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
@@ -66,11 +74,7 @@ class MedicationsListController {
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    this.medicationsLoad = medicationsActions.all;
-    this.medicationsLoad($stateParams.patientId);
   }
 }
 

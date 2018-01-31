@@ -19,6 +19,8 @@ class ContactsListController {
   constructor($scope, $state, $stateParams, $ngRedux, contactsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
+    contactsActions.clear();
+    this.actionLoadList = contactsActions.all;
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'contacts-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'contacts';
@@ -37,16 +39,20 @@ class ContactsListController {
       });
     };
 
-    this.setCurrentPageData = function (data) {
-      if (data.contacts.data) {
-        this.contacts = data.contacts.data;
+    this.setCurrentPageData = function (store) {
+      const state = store.contacts;
+
+      if ((state.patientId !== $stateParams.patientId || !state.data) &&
+          !state.isFetching && !state.error) {
+
+        this.actionLoadList($stateParams.patientId);
+        usSpinnerService.spin('list-spinner');
+      }
+      if (state.data) {
+        this.contacts = state.data;
         
         serviceFormatted.filteringKeys = ['name', 'relationship', 'nextOfKin', 'source'];
-        
-        usSpinnerService.stop('patientSummary-spinner');
-      }
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
+        usSpinnerService.stop('list-spinner');
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
@@ -56,11 +62,7 @@ class ContactsListController {
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-    
     $scope.$on('$destroy', unsubscribe);
-    
-    this.contactsLoad = contactsActions.all;
-    this.contactsLoad($stateParams.patientId);
   }
 }
 

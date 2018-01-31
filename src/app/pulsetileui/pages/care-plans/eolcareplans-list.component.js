@@ -16,35 +16,35 @@
 let templateEolcareplansList = require('./eolcareplans-list.html');
 
 class EolcareplansListController {
-  constructor($scope, $state, $stateParams, $ngRedux, eolcareplansActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, eolcareplansActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
+    eolcareplansActions.clear();
+    this.actionLoadList = eolcareplansActions.all;
 
     this.go = function (id) {
       $state.go('eolcareplans-detail', {
         patientId: $stateParams.patientId,
-        eolcareplansIndex: id,
+        detailsIndex: id,
         filter: vm.query,
-        page: this.currentPage,
-        reportType: $stateParams.reportType,
-        searchString: $stateParams.searchString,
-        queryType: $stateParams.queryType
+        page: $scope.currentPage || 1
       });
     };
 
-    this.setCurrentPageData = function (data) {
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
-      if (data.eolcareplans.data) {
-        this.eolcareplans = data.eolcareplans.data;
+    this.setCurrentPageData = function (store) {
+      const state = store.eolcareplans;
 
-        if (this.eolcareplans.length > 0) {
-          for (var i = 0; i < this.eolcareplans.length; i++) {
-            this.eolcareplans[i].date = moment(this.eolcareplans[i].date).format('DD-MMM-YYYY');
-          }
-        }
-        usSpinnerService.stop('patientSummary-spinner');
+      if ((state.patientId !== $stateParams.patientId || !state.data) &&
+        !state.isFetching && !state.error) {
+
+        this.actionLoadList($stateParams.patientId);
+        usSpinnerService.spin('list-spinner');
+      }
+      if (state.data) {
+        this.eolcareplans = state.data;
+
+        serviceFormatted.filteringKeys = ['name', 'type', 'date', 'source'];
+        usSpinnerService.stop('list-spinner');
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
@@ -54,11 +54,7 @@ class EolcareplansListController {
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    this.eolcareplansLoad = eolcareplansActions.all;
-    this.eolcareplansLoad($stateParams.patientId);
   }
 }
 
@@ -67,5 +63,5 @@ const EolcareplansListComponent = {
   controller: EolcareplansListController
 };
 
-EolcareplansListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eolcareplansActions', 'serviceRequests', 'usSpinnerService'];
+EolcareplansListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eolcareplansActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default EolcareplansListComponent;

@@ -16,6 +16,9 @@
 import {bindActionCreators} from 'redux';
 import * as types from '../../../constants/ActionTypes';
 
+export function clear() {
+  return { type: types.ORDERS__CLEAR }
+}
 export function all(patientId) {
   return {
     types: [types.ORDERS, types.ORDERS_SUCCESS, types.ORDERS_ERROR],
@@ -28,6 +31,7 @@ export function all(patientId) {
     },
 
     meta: {
+      patientId: patientId,
       timestamp: Date.now()
     }
   };
@@ -84,7 +88,7 @@ export function suggestion(patientId, composition) {
 
 export default function ordersActions($ngRedux) {
   let actionCreator = {
-    all, get, create, suggestion
+    all, clear, get, create, suggestion
   };
 
   return bindActionCreators(actionCreator, $ngRedux.dispatch);

@@ -16,6 +16,9 @@
 import {bindActionCreators} from 'redux';
 import * as types from '../../../constants/ActionTypes';
 
+export function clear() {
+  return { type: types.TRANSFEROFCARE__CLEAR }
+}
 export function all(patientId) {
   return {
     types: [types.TRANSFEROFCARE, types.TRANSFEROFCARE_SUCCESS, types.TRANSFEROFCARE_ERROR],
@@ -27,7 +30,8 @@ export function all(patientId) {
       url: '/api/patients/' + patientId + '/events/toc'
     },
 
-    d: {
+    meta: {
+      patientId: patientId,
       timestamp: Date.now()
     }
   };
@@ -43,7 +47,7 @@ export function get(patientId, compositionId) {
       url: '/api/patients/' + patientId + '/events/toc/' + compositionId
     },
 
-    d: {
+    meta: {
       timestamp: Date.now()
     }
   };
@@ -61,7 +65,7 @@ export function create(patientId, composition) {
       data: composition
     },
 
-    d: {
+    meta: {
       timestamp: Date.now()
     }
   };
@@ -79,7 +83,7 @@ export function update(patientId, sourceId, composition) {
       data: composition
     },
 
-    d: {
+    meta: {
       timestamp: Date.now()
     }
   };
@@ -87,7 +91,7 @@ export function update(patientId, sourceId, composition) {
 
 export default function transferOfCareActions($ngRedux) {
   let actionCreator = {
-    all, get, create, update
+    all, clear, get, create, update
   };
 
   return bindActionCreators(actionCreator, $ngRedux.dispatch);

@@ -19,15 +19,14 @@ class ContactsCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, patientsActions, contactsActions, serviceRequests, serviceFormatted) {
     $scope.contact = {};
     $scope.contact.dateSubmitted = new Date();
-    // $scope.contact.dateSubmitted = new Date().toISOString().slice(0, 10);
     $scope.contact.relationshipTerminology = 'local';
 
-    this.setCurrentPageData = function (data) {
-      if (data.contacts.dataCreate !== null) {
+    this.setCurrentPageData = function (store) {
+      if (store.contacts.dataCreate !== null) {
         this.goList();
       }
-      if (data.patientsGet.data) {
-        $scope.currentPatient = data.patientsGet.data;
+      if (store.patientsGet.data) {
+        $scope.currentPatient = store.patientsGet.data;
       }
       if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;
@@ -51,7 +50,6 @@ class ContactsCreateController {
     $scope.create = function (contactForm, contact) {
       $scope.formSubmitted = true;
 
-      console.log('contact', contact); 
       if (contactForm.$valid) {
         serviceFormatted.propsToString(contact);
         $scope.contactsCreate($scope.currentPatient.id, contact);

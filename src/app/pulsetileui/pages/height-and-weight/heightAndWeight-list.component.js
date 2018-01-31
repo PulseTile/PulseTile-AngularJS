@@ -16,34 +16,34 @@
 let templateHeightAndWeightList = require('./heightAndWeight-list.html');
 
 class HeightAndWeightListController {
-  constructor($scope, $state, $stateParams, $ngRedux, heightAndWeightActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, heightAndWeightActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
+    heightAndWeightActions.clear();
+    this.actionLoadList = heightAndWeightActions.all;
 
     this.go = function (id) {
       $state.go('heightAndWeights-detail', {
         patientId: $stateParams.patientId,
-        heightAndWeightIndex: id,
-        filter: this.query,
-        page: this.currentPage,
-        reportType: $stateParams.reportType,
-        searchString: $stateParams.searchString,
-        queryType: $stateParams.queryType
+        detailsIndex: id,
+        page: $scope.currentPage || 1
       });
     };
 
-    this.setCurrentPageData = function (data) {
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
-      if (data.heightAndWeight.data) {
-        this.heightAndWeights = data.heightAndWeight.data;
+    this.setCurrentPageData = function (store) {
+      const state = store.heightAndWeight;
 
-        for (var i = 0; i < this.heightAndWeights.length; i++) {
-          this.heightAndWeights[i].weightRecorded = moment(this.heightAndWeights[i].weightRecorded).format('DD-MMM-YYYY');
-          this.heightAndWeights[i].heightRecorded = moment(this.heightAndWeights[i].heightRecorded).format('DD-MMM-YYYY');
-        }
-        usSpinnerService.stop("patientSummary-spinner");
+      if ((state.patientId !== $stateParams.patientId || !state.data) &&
+        !state.isFetching && !state.error) {
+
+        this.actionLoadList($stateParams.patientId);
+        usSpinnerService.spin('list-spinner');
+      }
+      if (state.data) {
+        this.heightAndWeights = state.data;
+
+        serviceFormatted.formattingTablesDate(this.heightAndWeights, ['weightRecorded', 'heightRecorded'], serviceFormatted.formatCollection.DDMMMYYYY);
+        usSpinnerService.stop('list-spinner');
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
@@ -53,11 +53,7 @@ class HeightAndWeightListController {
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    this.heightAndWeightLoad = heightAndWeightActions.all;
-    this.heightAndWeightLoad($stateParams.patientId);
   }
 }
 
@@ -66,5 +62,5 @@ const HeightAndWeightListComponent = {
   controller: HeightAndWeightListController
 };
 
-HeightAndWeightListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'heightAndWeightActions', 'serviceRequests', 'usSpinnerService'];
+HeightAndWeightListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'heightAndWeightActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default HeightAndWeightListComponent;

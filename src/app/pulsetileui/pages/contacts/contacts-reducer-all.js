@@ -20,8 +20,11 @@ const INITIAL_STATE = {
   error: false,
   data: null,
   dataGet: null,
+  isGetFetching: false,
   dataCreate: null,
-  dataUpdate: null
+  dataUpdate: null,
+  isUpdateProcess: false,
+  patientId: null
 };
 
 export default function contacts(state = INITIAL_STATE, action) {
@@ -37,9 +40,13 @@ export default function contacts(state = INITIAL_STATE, action) {
       });
     },
     [types.CONTACTS_SUCCESS]: (state) => {
+      if (state.isUpdateProcess) {
+        state.dataGet = null;
+      }
       return Object.assign({}, state, {
         isFetching: false,
-        data: payload.response
+        data: payload.response,
+        patientId: payload.meta.patientId,
       });
     },
     [types.CONTACTS_ERROR]: (state) => {
@@ -48,24 +55,36 @@ export default function contacts(state = INITIAL_STATE, action) {
         error: payload.error
       });
     },
+    [types.CONTACTS__CLEAR]: (state) => {
+      return Object.assign({}, state, {
+        error: false,
+      });
+    },
+
     [types.CONTACTS_GET]: (state) => {
+      state.dataUpdate = null;
       return Object.assign({}, state, {
         isFetching: true,
+        isGetFetching: true,
         error: false
       });
     },
     [types.CONTACTS_GET_SUCCESS]: (state) => {
       return Object.assign({}, state, {
+        isUpdateProcess: false,
         isFetching: false,
+        isGetFetching: false,
         dataGet: payload.response
       });
     },
     [types.CONTACTS_GET_ERROR]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
+        isGetFetching: false,
         error: payload.error
       });
     },
+
     [types.CONTACTS_CREATE]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
@@ -84,8 +103,10 @@ export default function contacts(state = INITIAL_STATE, action) {
         error: payload.error
       });
     },
+
     [types.CONTACTS_UPDATE]: (state) => {
       return Object.assign({}, state, {
+        isUpdateProcess: true,
         isFetching: true,
         error: false
       });

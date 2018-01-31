@@ -17,6 +17,10 @@ import {bindActionCreators} from 'redux';
 import * as types from '../../../constants/ActionTypes';
 
 /* istanbul ignore next */
+export function clear() {
+  return { type: types.ALLERGIES__CLEAR }
+}
+/* istanbul ignore next */
 export function all(patientId) {
   return {
     types: [types.ALLERGIES, types.ALLERGIES_SUCCESS, types.ALLERGIES_ERROR],
@@ -29,6 +33,7 @@ export function all(patientId) {
     },
 
     meta: {
+      patientId: patientId,
       timestamp: Date.now()
     }
   };
@@ -90,7 +95,7 @@ export function update(patientId, sourceId, composition) {
 /* istanbul ignore next */
 export default function allergiesActions($ngRedux) {
   let actionCreator = {
-    all, get, create, update
+    all, clear, get, create, update
   };
 
   return bindActionCreators(actionCreator, $ngRedux.dispatch);

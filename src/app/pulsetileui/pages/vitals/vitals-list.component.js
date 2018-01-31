@@ -19,6 +19,8 @@ class VitalsListController {
   constructor($scope, $state, $stateParams, $ngRedux, vitalsActions, serviceRequests, usSpinnerService, $window, $timeout, serviceVitalsSigns, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
+    vitalsActions.clear();
+    this.actionLoadList = vitalsActions.all;
 
     $scope.chart = null;
     $scope.vitals;
@@ -257,23 +259,25 @@ class VitalsListController {
       }
     }.bind(this);
 
-    this.setCurrentPageData = function (data) {
-      if (data.vitals.data) {
-        $scope.dateForChart = serviceVitalsSigns.modificateVitalsArr(data.vitals.data);
-        $scope.vitals = angular.copy(data.vitals.data);
-        
+    this.setCurrentPageData = function (store) {
+      const state = store.vitals;
+
+      if ((state.patientId !== $stateParams.patientId || !state.data) &&
+        !state.isFetching && !state.error) {
+
+        this.actionLoadList($stateParams.patientId);
+        usSpinnerService.spin('list-spinner');
+      }
+      if (state.data) {
+        $scope.dateForChart = serviceVitalsSigns.modificateVitalsArr(state.data);
+        $scope.vitals = angular.copy(state.data);
+
         serviceFormatted.formattingTablesDate($scope.vitals, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
         serviceFormatted.filteringKeys = ['id', 'dateCreated', 'newsScore', 'source'];
-        
-        usSpinnerService.stop('patientSummary-spinner');
 
         $scope.changeViewList(serviceRequests.viewList || 'tableNews');
+        usSpinnerService.stop('list-spinner');
       }
-
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
-
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
       }
@@ -282,11 +286,7 @@ class VitalsListController {
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-    
     $scope.$on('$destroy', unsubscribe);
-    
-    this.vitalsLoad = vitalsActions.all;
-    this.vitalsLoad($stateParams.patientId);
   }
 }
 

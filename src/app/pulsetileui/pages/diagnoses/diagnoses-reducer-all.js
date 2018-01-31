@@ -20,8 +20,11 @@ const INITIAL_STATE = {
   error: false,
   data: null,
   dataGet: null,
+  isGetFetching: false,
   dataCreate: null,
-  dataUpdate: null
+  dataUpdate: null,
+  isUpdateProcess: false,
+  patientId: null
 };
 
 export default function diagnoses(state = INITIAL_STATE, action) {
@@ -29,17 +32,21 @@ export default function diagnoses(state = INITIAL_STATE, action) {
 
   var actions = {
     [types.DIAGNOSES]: (state) => {
+      state.dataCreate = null;
+      state.dataUpdate = null;
       return Object.assign({}, state, {
         isFetching: true,
         error: false
       });
     },
     [types.DIAGNOSES_SUCCESS]: (state) => {
-      state.dataCreate = null;
-      state.dataUpdate = null;
+      if (state.isUpdateProcess) {
+        state.dataGet = null;
+      }
       return Object.assign({}, state, {
         isFetching: false,
-        data: payload.response
+        data: payload.response,
+        patientId: payload.meta.patientId,
       });
     },
     [types.DIAGNOSES_ERROR]: (state) => {
@@ -48,24 +55,37 @@ export default function diagnoses(state = INITIAL_STATE, action) {
         error: payload.error
       });
     },
+    [types.DIAGNOSES__CLEAR]: (state) => {
+      return Object.assign({}, state, {
+        error: false,
+      });
+    },
+
     [types.DIAGNOSES_GET]: (state) => {
+      state.dataUpdate = null;
       return Object.assign({}, state, {
         isFetching: true,
+        isGetFetching: true,
         error: false
       });
     },
     [types.DIAGNOSES_GET_SUCCESS]: (state) => {
+      state.dataUpdate = null;
       return Object.assign({}, state, {
+        isUpdateProcess: false,
         isFetching: false,
+        isGetFetching: false,
         dataGet: payload.response
       });
     },
     [types.DIAGNOSES_GET_ERROR]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
+        isGetFetching: false,
         error: payload.error
       });
     },
+
     [types.DIAGNOSES_CREATE]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
@@ -84,8 +104,10 @@ export default function diagnoses(state = INITIAL_STATE, action) {
         error: payload.error
       });
     },
+
     [types.DIAGNOSES_UPDATE]: (state) => {
       return Object.assign({}, state, {
+        isUpdateProcess: true,
         isFetching: true,
         error: false
       });

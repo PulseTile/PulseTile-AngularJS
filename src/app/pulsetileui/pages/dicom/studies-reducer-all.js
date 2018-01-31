@@ -18,7 +18,8 @@ import * as types from '../../../constants/ActionTypes';
 const INITIAL_STATE = {
   isFetching: false,
   error: false,
-  data: null
+  data: null,
+  patientId: null
 };
 
 export default function studies(state = INITIAL_STATE, action) {
@@ -34,7 +35,8 @@ export default function studies(state = INITIAL_STATE, action) {
     [types.STUDIES_SUCCESS]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
-        data: payload.response
+        data: payload.response,
+        patientId: payload.meta.patientId,
       });
     },
     [types.STUDIES_ERROR]: (state) => {
@@ -42,7 +44,12 @@ export default function studies(state = INITIAL_STATE, action) {
         isFetching: false,
         error: payload.error
       });
-    }
+    },
+    [types.STUDIES__CLEAR]: (state) => {
+      return Object.assign({}, state, {
+        error: false,
+      });
+    },
   };
 
   return actions[action.type] ?

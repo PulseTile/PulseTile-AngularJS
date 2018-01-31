@@ -16,6 +16,9 @@
 import {bindActionCreators} from 'redux';
 import * as types from '../../../constants/ActionTypes';
 
+export function clear() {
+  return { type: types.DOCUMENTS__CLEAR }
+}
 export function findAllDocuments(patientId) {
   return {
     types: [types.DOCUMENTS, types.DOCUMENTS_SUCCESS, types.DOCUMENTS_ERROR],
@@ -28,6 +31,7 @@ export function findAllDocuments(patientId) {
     },
 
     meta: {
+      patientId: patientId,
       timestamp: Date.now()
     }
   };
@@ -101,7 +105,7 @@ export function uploadDischarge(patientId, discharge) {
 
 export default function documentsActions($ngRedux) {
   let actionCreator = {
-    findAllDocuments, findReferral, findDischarge, uploadReferral, uploadDischarge
+    findAllDocuments, clear, findReferral, findDischarge, uploadReferral, uploadDischarge
   };
 
   return bindActionCreators(actionCreator, $ngRedux.dispatch);

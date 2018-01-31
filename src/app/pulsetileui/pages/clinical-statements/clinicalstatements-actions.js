@@ -16,6 +16,9 @@
 import {bindActionCreators} from 'redux';
 import * as types from '../../../constants/ActionTypes';
 
+export function clear() {
+  return { type: types.CLINICALSTATEMENTS__CLEAR }
+}
 export function all(patientId) {
   return {
     types: [types.CLINICALSTATEMENTS, types.CLINICALSTATEMENTS_SUCCESS, types.CLINICALSTATEMENTS_ERROR],
@@ -28,6 +31,7 @@ export function all(patientId) {
     },
 
     meta: {
+      patientId: patientId,
       timestamp: Date.now()
     }
   };
@@ -118,7 +122,7 @@ export function query(prefix='', tag='') {
 
 export default function clinicalstatementsActions($ngRedux) {
   let actionCreator = {
-    all, get, create, update, query, getTags
+    all, clear, get, create, update, query, getTags
   };
 
   return bindActionCreators(actionCreator, $ngRedux.dispatch);

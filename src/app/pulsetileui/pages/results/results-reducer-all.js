@@ -19,7 +19,9 @@ const INITIAL_STATE = {
   isFetching: false,
   error: false,
   data: null,
-  dataGet: null
+  dataGet: null,
+  isGetFetching: false,
+  patientId: null
 };
 
 export default function results(state = INITIAL_STATE, action) {
@@ -35,7 +37,8 @@ export default function results(state = INITIAL_STATE, action) {
     [types.RESULTS_SUCCESS]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
-        data: payload.response
+        data: payload.response,
+        patientId: payload.meta.patientId,
       });
     },
     [types.RESULTS_ERROR]: (state) => {
@@ -44,21 +47,30 @@ export default function results(state = INITIAL_STATE, action) {
         error: payload.error
       });
     },
+    [types.RESULTS__CLEAR]: (state) => {
+      return Object.assign({}, state, {
+        error: false,
+      });
+    },
+
     [types.RESULTS_GET]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
+        isGetFetching: true,
         error: false
       });
     },
     [types.RESULTS_GET_SUCCESS]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
+        isGetFetching: false,
         dataGet: payload.response
       });
     },
     [types.RESULTS_GET_ERROR]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
+        isGetFetching: false,
         error: payload.error
       });
     }

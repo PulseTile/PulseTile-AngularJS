@@ -16,6 +16,9 @@
 import {bindActionCreators} from 'redux';
 import * as types from '../../../constants/ActionTypes';
 
+export function clear() {
+  return { type: types.EOLCAREPLANS__CLEAR }
+}
 export function all(patientId) {
   return {
     types: [types.EOLCAREPLANS, types.EOLCAREPLANS_SUCCESS, types.EOLCAREPLANS_ERROR],
@@ -28,6 +31,7 @@ export function all(patientId) {
     },
 
     meta: {
+      patientId: patientId,
       timestamp: Date.now()
     }
   };
@@ -85,7 +89,7 @@ export function update(patientId, composition) {
 
 export default function eolcareplansActions($ngRedux) {
   let actionCreator = {
-    all, get, create, update
+    all, clear, get, create, update
   };
 
   return bindActionCreators(actionCreator, $ngRedux.dispatch);

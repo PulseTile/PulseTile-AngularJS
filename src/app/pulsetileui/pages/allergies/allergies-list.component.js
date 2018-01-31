@@ -19,25 +19,11 @@ class AllergiesListController {
   constructor($scope, $state, $stateParams, $ngRedux, allergiesActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
+    allergiesActions.clear();
+    this.actionLoadList = allergiesActions.all;
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'allergies-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'allergies';
-    
-    /* istanbul ignore next */
-    this.setCurrentPageData = function (data) {
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-        usSpinnerService.stop('patientSummary-spinner');
-      }
-      if (data.allergies.data) {
-        this.allergies = data.allergies.data;
-
-        serviceFormatted.filteringKeys = ['cause', 'reaction', 'source'];
-      }
-      if (serviceRequests.currentUserData) {
-        this.currentUser = serviceRequests.currentUserData;
-      }
-    };
 
     /* istanbul ignore next */
     this.go = function (id, allergySource) {
@@ -56,14 +42,32 @@ class AllergiesListController {
       });
     };
 
+    /* istanbul ignore next */
+    this.setCurrentPageData = function (store) {
+      const state = store.allergies;
+
+      if ((state.patientId !== $stateParams.patientId || !state.data) &&
+        !state.isFetching && !state.error) {
+
+        this.actionLoadList($stateParams.patientId);
+        usSpinnerService.spin('list-spinner');
+      }
+      if (state.data) {
+        this.allergies = state.data;
+
+        serviceFormatted.filteringKeys = ['cause', 'reaction', 'source'];
+        usSpinnerService.stop('list-spinner');
+      }
+
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
+      }
+    };
+
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    this.allergiesLoad = allergiesActions.all;
-    this.allergiesLoad($stateParams.patientId);
   }
 }
 

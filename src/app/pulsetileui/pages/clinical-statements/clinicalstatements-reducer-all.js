@@ -18,11 +18,14 @@ import * as types from '../../../constants/ActionTypes';
 const INITIAL_STATE = {
   isFetching: false,
   error: false,
-  searchData: null,
   data: null,
   dataGet: null,
+  isGetFetching: false,
   dataCreate: null,
   dataUpdate: null,
+  isUpdateProcess: false,
+  patientId: null,
+  searchData: null,
   dataTags: null
 };
 
@@ -39,9 +42,13 @@ export default function clinicalstatements(state = INITIAL_STATE, action) {
       });
     },
     [types.CLINICALSTATEMENTS_SUCCESS]: (state) => {
+      if (state.isUpdateProcess) {
+        state.dataGet = null;
+      }
       return Object.assign({}, state, {
         isFetching: false,
-        data: payload.response
+        data: payload.response,
+        patientId: payload.meta.patientId,
       });
     },
     [types.CLINICALSTATEMENTS_ERROR]: (state) => {
@@ -50,24 +57,36 @@ export default function clinicalstatements(state = INITIAL_STATE, action) {
         error: payload.error
       });
     },
+    [types.CLINICALSTATEMENTS__CLEAR]: (state) => {
+      return Object.assign({}, state, {
+        error: false,
+      });
+    },
+
     [types.CLINICALSTATEMENTS_GET]: (state) => {
+      state.dataUpdate = null;
       return Object.assign({}, state, {
         isFetching: true,
+        isGetFetching: true,
         error: false
       });
     },
     [types.CLINICALSTATEMENTS_GET_SUCCESS]: (state) => {
       return Object.assign({}, state, {
+        isUpdateProcess: false,
         isFetching: false,
+        isGetFetching: false,
         dataGet: payload.response
       });
     },
     [types.CLINICALSTATEMENTS_GET_ERROR]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
+        isGetFetching: false,
         error: payload.error
       });
     },
+
     [types.CLINICALSTATEMENTS_TAGS]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
@@ -86,6 +105,7 @@ export default function clinicalstatements(state = INITIAL_STATE, action) {
         error: payload.error
       });
     },
+
     [types.CLINICALSTATEMENTS_CREATE]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
@@ -104,8 +124,10 @@ export default function clinicalstatements(state = INITIAL_STATE, action) {
         error: payload.error
       });
     },
+
     [types.CLINICALSTATEMENTS_UPDATE]: (state) => {
       return Object.assign({}, state, {
+        isUpdateProcess: true,
         isFetching: true,
         error: false
       });
@@ -122,6 +144,7 @@ export default function clinicalstatements(state = INITIAL_STATE, action) {
         error: payload.error
       });
     },
+
     [types.CLINICALSTATEMENTS_QUERY]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,

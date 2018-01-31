@@ -21,8 +21,11 @@ const INITIAL_STATE = {
   error: false,
   data: null,
   dataGet: null,
+  isGetFetching: false,
   dataCreate: null,
-  dataUpdate: null
+  dataUpdate: null,
+  isUpdateProcess: false,
+  patientId: null
 };
 
 export default function personalnotes(state = INITIAL_STATE, action) {
@@ -30,15 +33,21 @@ export default function personalnotes(state = INITIAL_STATE, action) {
 
   var actions = {
     [types.PERSONALNOTES]: (state) => {
+      state.dataCreate = null;
+      state.dataUpdate = null;
       return Object.assign({}, state, {
         isFetching: true,
         error: false
       });
     },
     [types.PERSONALNOTES_SUCCESS]: (state) => {
+      if (state.isUpdateProcess) {
+        state.dataGet = null;
+      }
       return Object.assign({}, state, {
         isFetching: false,
-        data: payload.response
+        data: payload.response,
+        patientId: payload.meta.patientId,
       });
     },
     [types.PERSONALNOTES_ERROR]: (state) => {
@@ -47,6 +56,12 @@ export default function personalnotes(state = INITIAL_STATE, action) {
         error: payload.error
       });
     },
+    [types.PERSONALNOTES__CLEAR]: (state) => {
+      return Object.assign({}, state, {
+        error: false,
+      });
+    },
+
     [types.PERSONALNOTES_GET]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
@@ -54,23 +69,29 @@ export default function personalnotes(state = INITIAL_STATE, action) {
       });
     },
     [types.PERSONALNOTES_GET_SUCCESS]: (state) => {
+      state.dataUpdate = null;
       return Object.assign({}, state, {
-        isFetching: false,
-        dataGet: payload.response
+        isFetching: true,
+        isGetFetching: true,
+        error: false
       });
     },
     [types.PERSONALNOTES_GET_ERROR]: (state) => {
       return Object.assign({}, state, {
+        isUpdateProcess: false,
         isFetching: false,
+        isGetFetching: false,
         error: payload.error
       });
     },
     [types.PERSONALNOTES_CREATE]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
+        isGetFetching: false,
         error: false
       });
     },
+
     [types.PERSONALNOTES_CREATE_SUCCESS]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
@@ -83,8 +104,10 @@ export default function personalnotes(state = INITIAL_STATE, action) {
         error: payload.error
       });
     },
+
     [types.PERSONALNOTES_UPDATE]: (state) => {
       return Object.assign({}, state, {
+        isUpdateProcess: true,
         isFetching: true,
         error: false
       });

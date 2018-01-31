@@ -20,8 +20,11 @@ const INITIAL_STATE = {
   error: false,
   data: null,
   dataGet: null,
+  isGetFetching: false,
   dataCreate: null,
-  dataUpdate: null
+  dataUpdate: null,
+  isUpdateProcess: false,
+  patientId: null
 };
 
 export default function genericmdt(state = INITIAL_STATE, action) {
@@ -29,17 +32,21 @@ export default function genericmdt(state = INITIAL_STATE, action) {
 
   var actions = {
     [types.GENERICMDT]: (state) => {
+      state.dataCreate = null;
+      state.dataUpdate = null;
       return Object.assign({}, state, {
         isFetching: true,
         error: false
       });
     },
     [types.GENERICMDT_SUCCESS]: (state) => {
-      state.dataCreate = null;
-      state.dataUpdate = null;
+      if (state.isUpdateProcess) {
+        state.dataGet = null;
+      }
       return Object.assign({}, state, {
         isFetching: false,
-        data: payload.response
+        data: payload.response,
+        patientId: payload.meta.patientId,
       });
     },
     [types.GENERICMDT_ERROR]: (state) => {
@@ -48,24 +55,36 @@ export default function genericmdt(state = INITIAL_STATE, action) {
         error: payload.error
       });
     },
+    [types.GENERICMDT__CLEAR]: (state) => {
+      return Object.assign({}, state, {
+        error: false,
+      });
+    },
+
     [types.GENERICMDT_GET]: (state) => {
+      state.dataUpdate = null;
       return Object.assign({}, state, {
         isFetching: true,
+        isGetFetching: true,
         error: false
       });
     },
     [types.GENERICMDT_GET_SUCCESS]: (state) => {
       return Object.assign({}, state, {
+        isUpdateProcess: false,
         isFetching: false,
+        isGetFetching: false,
         dataGet: payload.response
       });
     },
     [types.GENERICMDT_GET_ERROR]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
+        isGetFetching: false,
         error: payload.error
       });
     },
+
     [types.GENERICMDT_CREATE]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
@@ -84,8 +103,10 @@ export default function genericmdt(state = INITIAL_STATE, action) {
         error: payload.error
       });
     },
+
     [types.GENERICMDT_UPDATE]: (state) => {
       return Object.assign({}, state, {
+        isUpdateProcess: true,
         isFetching: true,
         error: false
       });

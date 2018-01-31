@@ -19,6 +19,8 @@ class ImageListController {
   constructor($scope, $window, $state, $stateParams, $ngRedux, imageActions, serviceRequests, usSpinnerService, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-details'});
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
+    imageActions.clear();
+    this.actionLoadList = imageActions.allStudies;
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'images-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'images';
@@ -32,17 +34,21 @@ class ImageListController {
       });
     };
     
-    this.setCurrentPageData = function (data) {
-      if (data.studies.data) {
-        this.images = data.studies.data;
-      
+    this.setCurrentPageData = function (store) {
+      const state = store.studies;
+
+      if ((state.patientId !== $stateParams.patientId || !state.data) &&
+        !state.isFetching && !state.error) {
+        debugger
+        this.actionLoadList($stateParams.patientId);
+        usSpinnerService.spin('list-spinner');
+      }
+      if (state.data) {
+        this.images = state.data;
+
         serviceFormatted.formattingTablesDate(this.images, ['dateRecorded'], serviceFormatted.formatCollection.DDMMMYYYY);
         serviceFormatted.filteringKeys = ['studyDescription', 'dateRecorded', 'source'];
-        usSpinnerService.stop('patientSummary-spinner');
-      }
-      
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
+        usSpinnerService.stop('list-spinner');
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
@@ -52,11 +58,7 @@ class ImageListController {
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    this.imageLoad = imageActions.allStudies;
-    this.imageLoad($stateParams.patientId);
   }
 }
 
