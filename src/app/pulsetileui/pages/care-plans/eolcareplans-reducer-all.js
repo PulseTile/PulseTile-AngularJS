@@ -77,6 +77,7 @@ export default function eolcareplans(state = INITIAL_STATE, action) {
     },
     [types.EOLCAREPLANS_GET_ERROR]: (state) => {
       return Object.assign({}, state, {
+        isUpdateProcess: false,
         isFetching: false,
         isGetFetching: false,
         error: payload.error

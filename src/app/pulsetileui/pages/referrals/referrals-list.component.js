@@ -41,11 +41,12 @@ class ReferralsListController {
 
     this.setCurrentPageData = function (store) {
       const state = store.referrals;
+      const pagesInfo = store.pagesInfo;
+      const pluginName = 'referrals';
 
-      if ((state.patientId !== $stateParams.patientId || !state.data) &&
-        !state.isFetching && !state.error) {
-
+      if (serviceRequests.checkIsCanLoadingListData(state, pagesInfo, pluginName, $stateParams.patientId)) {
         this.actionLoadList($stateParams.patientId);
+        serviceRequests.setPluginPage(pluginName);
         usSpinnerService.spin('list-spinner');
       }
       if (state.data) {

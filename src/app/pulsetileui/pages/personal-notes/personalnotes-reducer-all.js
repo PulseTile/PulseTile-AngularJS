@@ -65,14 +65,16 @@ export default function personalnotes(state = INITIAL_STATE, action) {
     [types.PERSONALNOTES_GET]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
+        isGetFetching: true,
         error: false
       });
     },
     [types.PERSONALNOTES_GET_SUCCESS]: (state) => {
       state.dataUpdate = null;
       return Object.assign({}, state, {
-        isFetching: true,
-        isGetFetching: true,
+        isUpdateProcess: false,
+        isFetching: false,
+        isGetFetching: false,
         error: false
       });
     },
@@ -84,10 +86,10 @@ export default function personalnotes(state = INITIAL_STATE, action) {
         error: payload.error
       });
     },
+
     [types.PERSONALNOTES_CREATE]: (state) => {
       return Object.assign({}, state, {
         isFetching: true,
-        isGetFetching: false,
         error: false
       });
     },

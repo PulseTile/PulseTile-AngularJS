@@ -17,83 +17,101 @@ let _ = require('lodash');
 
 class ServiceRequests {
 
-    constructor ($http) {
-        this.evCache = {};
-        this.cbCache = {};
-        this.debug = false;
-        this.currentUserData = {};
-    
-        this.publisher = function(eventName, data) {
-            if (this.debug) { console.log('PUBLISH', eventName, data); }
-    
-            this.evCache[eventName] = this.evCache[eventName] || {
-                  cache: undefined,
-                  uids: []
-              };
-    
-            _.forEach(this.evCache[eventName].uids, function (uid) {
-                this.cbCache[uid].fn(data, this.evCache[eventName].cache)
-            }.bind(this));
-    
-            this.evCache[eventName].cache = data;
-    
-        };
-    
-        this.subscriber = function(eventName, callback) {
-            if (this.debug) { console.log('SUBSCRIBE', eventName, callback); }
-    
-            if (!(eventName && callback)) {
-                throw new Error();
-            }
-    
-            var uid = _.uniqueId(eventName);
-    
-            this.evCache[eventName] = this.evCache[eventName] || {
-                  cache: undefined,
-                  uids: []
-              };
-            this.evCache[eventName].uids.push(uid);
-            this.cbCache[uid] = {fn: callback, eventName: eventName};
-    
-            return uid;
-    
-        };
+  constructor ($http, pagesActions) {
+    this.evCache = {};
+    this.cbCache = {};
+    this.debug = false;
+    this.currentUserData = {};
 
-        this.initialise = function() {
-            var options = {
-                method: 'GET',
-                url: '/api/initialise',
-                dataType: 'json'
-            };
-            return $http(options);
-        };
-        
-        this.login = function() {
-            var options = {
-                method: 'GET',
-                url: '/api/user'
-            };
-            return $http(options);
-        };
+    this.publisher = function(eventName, data) {
+      if (this.debug) { console.log('PUBLISH', eventName, data); }
 
-        this.setAppTheme = function(data) {
-            var options = {
-                method: 'POST',
-                url: '/api/application',
-                data: data
-            };
-            return $http(options);
+      this.evCache[eventName] = this.evCache[eventName] || {
+        cache: undefined,
+        uids: []
+      };
+
+      _.forEach(this.evCache[eventName].uids, function (uid) {
+        this.cbCache[uid].fn(data, this.evCache[eventName].cache)
+      }.bind(this));
+
+      this.evCache[eventName].cache = data;
+    };
+
+    this.subscriber = function(eventName, callback) {
+      if (this.debug) { console.log('SUBSCRIBE', eventName, callback); }
+
+      if (!(eventName && callback)) {
+        throw new Error();
+      }
+
+      var uid = _.uniqueId(eventName);
+
+      this.evCache[eventName] = this.evCache[eventName] || {
+          cache: undefined,
+          uids: []
         };
-        
-        this.getAppSettings = function() {
-            var options = {
-                method: 'GET',
-                url: '/api/application'
-            };
-            return $http(options);
-        };
-    }
+      this.evCache[eventName].uids.push(uid);
+      this.cbCache[uid] = {fn: callback, eventName: eventName};
+
+      return uid;
+    };
+
+    this.initialise = function() {
+      var options = {
+        method: 'GET',
+        url: '/api/initialise',
+        dataType: 'json'
+      };
+      return $http(options);
+    };
+
+    this.login = function() {
+      var options = {
+        method: 'GET',
+        url: '/api/user'
+      };
+      return $http(options);
+    };
+
+    this.setAppTheme = function(data) {
+      var options = {
+        method: 'POST',
+        url: '/api/application',
+        data: data
+      };
+      return $http(options);
+    };
+
+    this.getAppSettings = function() {
+      var options = {
+        method: 'GET',
+        url: '/api/application'
+      };
+      return $http(options);
+    };
+
+    this.checkIsNotCurrentPage = function(pages, pageName) {
+      return !pages.currentPlugin || pages.currentPlugin !== pageName;
+    };
+
+    this.checkIsCanLoadingListData = function(state, pages, pluginName, patientId) {
+      // List of Plugin can loading
+      // if (list isn't loaded OR user just switched to the plugin OR user changed patient)
+      // AND list does not load now
+      // AND no error occurred while loading
+      return (!state.data ||
+              this.checkIsNotCurrentPage(pages, pluginName) ||
+              state.patientId !== patientId)
+          && !state.isFetching
+          && !state.error;
+    };
+
+    this.setPluginPage = function (pluginName) {
+      pagesActions.changePlugin(pluginName);
+    };
+  }
 }
 
-ServiceRequests.$inject = ['$http'];
+ServiceRequests.$inject = ['$http', 'pagesActions'];
 export default ServiceRequests;

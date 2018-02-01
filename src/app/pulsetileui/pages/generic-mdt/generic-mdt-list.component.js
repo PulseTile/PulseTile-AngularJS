@@ -41,11 +41,12 @@ class GenericMdtListController {
 
     this.setCurrentPageData = function (store) {
       const state = store.genericmdt;
+      const pagesInfo = store.pagesInfo;
+      const pluginName = 'genericMDT';
 
-      if ((state.patientId !== $stateParams.patientId || !state.data) &&
-        !state.isFetching && !state.error) {
-
+      if (serviceRequests.checkIsCanLoadingListData(state, pagesInfo, pluginName, $stateParams.patientId)) {
         this.actionLoadList($stateParams.patientId);
+        serviceRequests.setPluginPage(pluginName);
         usSpinnerService.spin('list-spinner');
       }
       if (state.data) {

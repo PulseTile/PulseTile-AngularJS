@@ -79,6 +79,7 @@ export default function allergies(state = INITIAL_STATE, action) {
     },
     [types.ALLERGIES_GET_ERROR]: (state) => {
       return Object.assign({}, state, {
+        isUpdateProcess: false,
         isFetching: false,
         isGetFetching: false,
         error: payload.error

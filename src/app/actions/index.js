@@ -19,6 +19,7 @@ import patientsActions from '../pulsetileui/pages/patients-list/patients-actions
 import searchActions from '../pulsetileui/search/search-actions';
 import searchReport from '../pulsetileui/search/search-report-actions';
 import imageActions from '../pulsetileui/pages/dicom/image-actions';
+import pagesActions from '../redux/pages/pages-actions';
 import plugins from '../plugins';
 
 let app = angular
@@ -27,6 +28,7 @@ let app = angular
   .factory('searchActions', searchActions)
   .factory('searchReport', searchReport)
   .factory('imageActions', imageActions)
+  .factory('pagesActions', pagesActions)
 
 plugins.forEach((plugin)=>{
   Object.keys(plugin.actions).forEach((name)=>{

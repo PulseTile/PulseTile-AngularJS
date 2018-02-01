@@ -15,6 +15,7 @@
 */
 import { combineReducers } from 'redux';
 
+import pagesInfo from './pages/pages-reducer';
 import patients from '../pulsetileui/pages/patients-list/patients-reducer-all';
 import patientsGet from '../pulsetileui/pages/patients-list/patients-reducer-get';
 import search from '../pulsetileui/search/search-reducer-all';
@@ -23,11 +24,11 @@ import studies from '../pulsetileui/pages/dicom/studies-reducer-all';
 import series from '../pulsetileui/pages/dicom/series-reducer-all';
 import instanceGet from '../pulsetileui/pages/dicom/instance-reducer-get';
 import instanceIdGet from '../pulsetileui/pages/dicom/instance-id-reducer-get';
-import findReferral from '../pulsetileui/pages/documents/documents-reducer-find-referral';
 
 import plugins from '../plugins';
 
 let reducers = {
+  pagesInfo,
   patients,
   patientsGet,
   search,
@@ -36,7 +37,6 @@ let reducers = {
   series,
   instanceGet,
   instanceIdGet,
-  findReferral
 };
 
 plugins.forEach((plugin)=>{

@@ -18,7 +18,8 @@ import * as types from '../../../constants/ActionTypes';
 const INITIAL_STATE = {
   isFetching: false,
   error: false,
-  data: null
+  data: null,
+  dataGet: null
 };
 
 export default function documents(state = INITIAL_STATE, action) {
@@ -34,12 +35,40 @@ export default function documents(state = INITIAL_STATE, action) {
     [types.DOCUMENTS_SUCCESS]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
-        data: payload.response
+        data: payload.response,
+        patientId: payload.meta.patientId,
       });
     },
     [types.DOCUMENTS_ERROR]: (state) => {
       return Object.assign({}, state, {
         isFetching: false,
+        error: payload.error
+      });
+    },
+    [types.DOCUMENTS__CLEAR]: (state) => {
+      return Object.assign({}, state, {
+        error: false,
+      });
+    },
+
+    [types.DOCUMENTS_GET]: (state) => {
+      return Object.assign({}, state, {
+        isFetching: true,
+        isGetFetching: true,
+        error: false
+      });
+    },
+    [types.DOCUMENTS_GET_SUCCESS]: (state) => {
+      return Object.assign({}, state, {
+        isFetching: false,
+        isGetFetching: false,
+        dataGet: payload.response
+      });
+    },
+    [types.DOCUMENTS_GET_ERROR]: (state) => {
+      return Object.assign({}, state, {
+        isFetching: false,
+        isGetFetching: false,
         error: payload.error
       });
     }

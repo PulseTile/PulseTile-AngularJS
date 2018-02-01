@@ -14,6 +14,7 @@
   ~  limitations under the License.
 */
 let templatePatientsSummary = require('./patients-summary.html');
+const LOADING_TEXT = 'Loading ...';
 
 class PatientsSummaryController {
   constructor($scope, $state, $stateParams, $ngRedux, $location, patientsActions, serviceRequests, usSpinnerService) {
@@ -24,27 +25,33 @@ class PatientsSummaryController {
       problems: {
         show: true,
         title: 'Problems',
-        toState: 'diagnoses'
+        toState: 'diagnoses',
+        array: [{text: LOADING_TEXT}, {}, {}, {}]
       },
       contacts: {
         show: true,
         title: 'Contacts',
-        toState: 'contacts'
+        toState: 'contacts',
+        array: [{text: LOADING_TEXT}, {}, {}, {}]
       },
       allergies: {
         show: true,
         title: 'Allergies',
-        toState: 'allergies'
+        toState: 'allergies',
+        array: [{text: LOADING_TEXT}, {}, {}, {}]
       },
       medications: {
         show: true,
         title: 'Medications',
-        toState: 'medications'
+        toState: 'medications',
+        array: [{text: LOADING_TEXT}, {}, {}, {}]
+      },
+      transfers: {
+        show: true,
+        title: 'Transfer',
+        toState: 'transferOfCare',
+        array: [{text: LOADING_TEXT}, {}, {}, {}]
       }
-      // transfers: {
-      //   title: 'Transfer',
-      //   toState: 'transferOfCare'
-      // }
     };
     this.countPatientArr = 4;
 
@@ -87,16 +94,23 @@ class PatientsSummaryController {
       return arr;
     }
     /* istanbul ignore next  */
-    this.setCurrentPageData = function (data) {
+    this.setCurrentPageData = function (store) {
+      const data = store.patientsGet.data;
+      const pluginName = 'patientsSummary';
+
+      if (serviceRequests.checkIsNotCurrentPage(store.pagesInfo, pluginName)) {
+        serviceRequests.setPluginPage(pluginName);
+      }
+
       /* istanbul ignore if  */
       if (!data || !data.nhsNumber) {
         return false;
       }
-
       this.patient = data;
 
       // Putting it all together dashboards
       for (var dashboard in $scope.listsDashboards) {
+        $scope.listsDashboards[dashboard].array = null;
         $scope.listsDashboards[dashboard].array = this.patient[dashboard].slice(0, this.countPatientArr);
       }
 
@@ -121,9 +135,8 @@ class PatientsSummaryController {
     };
 
     let unsubscribe = $ngRedux.connect(state => ({
-      patient: this.setCurrentPageData(state.patientsGet.data)
+      patient: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
     
     this.loadPatient = patientsActions.getPatient;

@@ -79,6 +79,7 @@ export default function heightAndWeight(state = INITIAL_STATE, action) {
     },
     [types.HEIGHTANDWEIGHT_GET_ERROR]: (state) => {
       return Object.assign({}, state, {
+        isUpdateProcess: false,
         isFetching: false,
         isGetFetching: false,
         error: payload.error

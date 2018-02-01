@@ -80,6 +80,7 @@ export default function clinicalnotes(state = INITIAL_STATE, action) {
     },
     [types.CLINICALNOTES_GET_ERROR]: (state) => {
       return Object.assign({}, state, {
+        isUpdateProcess: false,
         isFetching: false,
         isGetFetching: false,
         error: payload.error

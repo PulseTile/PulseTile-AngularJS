@@ -79,6 +79,7 @@ export default function transferOfCare(state = INITIAL_STATE, action) {
     },
     [types.TRANSFEROFCARE_GET_ERROR]: (state) => {
       return Object.assign({}, state, {
+        isUpdateProcess: false,
         isFetching: false,
         isGetFetching: false,
         error: payload.error

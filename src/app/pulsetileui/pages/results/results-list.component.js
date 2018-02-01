@@ -35,11 +35,12 @@ class ResultsListController {
 
     this.setCurrentPageData = function (store) {
       const state = store.results;
+      const pagesInfo = store.pagesInfo;
+      const pluginName = 'results';
 
-      if ((state.patientId !== $stateParams.patientId || !state.data) &&
-        !state.isFetching && !state.error) {
-
+      if (serviceRequests.checkIsCanLoadingListData(state, pagesInfo, pluginName, $stateParams.patientId)) {
         this.actionLoadList($stateParams.patientId);
+        serviceRequests.setPluginPage(pluginName);
         usSpinnerService.spin('list-spinner');
       }
       if (state.data) {

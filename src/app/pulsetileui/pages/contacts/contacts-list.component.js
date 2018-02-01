@@ -41,11 +41,12 @@ class ContactsListController {
 
     this.setCurrentPageData = function (store) {
       const state = store.contacts;
+      const pagesInfo = store.pagesInfo;
+      const pluginName = 'contacts';
 
-      if ((state.patientId !== $stateParams.patientId || !state.data) &&
-          !state.isFetching && !state.error) {
-
+      if (serviceRequests.checkIsCanLoadingListData(state, pagesInfo, pluginName, $stateParams.patientId)) {
         this.actionLoadList($stateParams.patientId);
+        serviceRequests.setPluginPage(pluginName);
         usSpinnerService.spin('list-spinner');
       }
       if (state.data) {

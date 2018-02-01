@@ -24,7 +24,7 @@ class VitalsListController {
 
     $scope.chart = null;
     $scope.vitals;
-    $scope.viewList;
+    $scope.viewList = 'tableNews';
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'vitals-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'vitals';
@@ -261,11 +261,12 @@ class VitalsListController {
 
     this.setCurrentPageData = function (store) {
       const state = store.vitals;
+      const pagesInfo = store.pagesInfo;
+      const pluginName = 'vitals';
 
-      if ((state.patientId !== $stateParams.patientId || !state.data) &&
-        !state.isFetching && !state.error) {
-
+      if (serviceRequests.checkIsCanLoadingListData(state, pagesInfo, pluginName, $stateParams.patientId)) {
         this.actionLoadList($stateParams.patientId);
+        serviceRequests.setPluginPage(pluginName);
         usSpinnerService.spin('list-spinner');
       }
       if (state.data) {

@@ -19,7 +19,7 @@ import * as types from '../../../constants/ActionTypes';
 export function clear() {
   return { type: types.DOCUMENTS__CLEAR }
 }
-export function findAllDocuments(patientId) {
+export function all(patientId) {
   return {
     types: [types.DOCUMENTS, types.DOCUMENTS_SUCCESS, types.DOCUMENTS_ERROR],
 
@@ -36,65 +36,15 @@ export function findAllDocuments(patientId) {
     }
   };
 }
-export function findReferral(patientId, referralId, source) {
+export function get(patientId, compositionId) {
   return {
-    types: [types.DOCUMENTS_FIND_REFERRAL, types.DOCUMENTS_FIND_REFERRAL_SUCCESS, types.DOCUMENTS_FIND_REFERRAL_ERROR],
+    types: [types.DOCUMENTS_GET, types.DOCUMENTS_GET_SUCCESS, types.DOCUMENTS_GET_ERROR],
 
     shouldCallAPI: (state) => !state.documents.response,
 
     config: {
       method: 'get',
-      url: '/api/documents/patient/' + patientId + '/' + referralId
-    },
-
-    meta: {
-      timestamp: Date.now()
-    }
-  };
-}
-export function findDischarge(patientId, dischargeId, source) {
-  return {
-    types: [types.DOCUMENTS_FIND_DISCHARGE, types.DOCUMENTS_FIND_DISCHARGE_SUCCESS, types.DOCUMENTS_FIND_DISCHARGE_ERROR],
-
-    shouldCallAPI: (state) => !state.documents.response,
-
-    config: {
-      method: 'get',
-      url: '/api/patients/' + patientId + '/documents/discharge/' + dischargeId + '?source=' + source
-    },
-
-    meta: {
-      timestamp: Date.now()
-    }
-  };
-}
-export function uploadReferral(patientId, referral) {
-  return {
-    types: [types.DOCUMENTS_UPLOAD_REFERRAL, types.DOCUMENTS_UPLOAD_REFERRAL_SUCCESS, types.DOCUMENTS_UPLOAD_REFERRAL_ERROR],
-
-    shouldCallAPI: (state) => !state.documents.response,
-
-    config: {
-      method: 'post',
-      url: '/api/patients/' + patientId + '/documents/referral',
-      data: referral
-    },
-
-    meta: {
-      timestamp: Date.now()
-    }
-  };
-}
-export function uploadDischarge(patientId, discharge) {
-  return {
-    types: [types.DOCUMENTS_UPLOAD_DISCHARGE, types.DOCUMENTS_UPLOAD_DISCHARGE_SUCCESS, types.DOCUMENTS_UPLOAD_DISCHARGE_ERROR],
-
-    shouldCallAPI: (state) => !state.documents.response,
-
-    config: {
-      method: 'post',
-      url: '/api/patients/' + patientId + '/documents/discharge',
-      data: discharge
+      url: '/api/documents/patient/' + patientId + '/' + compositionId
     },
 
     meta: {
@@ -105,7 +55,7 @@ export function uploadDischarge(patientId, discharge) {
 
 export default function documentsActions($ngRedux) {
   let actionCreator = {
-    findAllDocuments, clear, findReferral, findDischarge, uploadReferral, uploadDischarge
+    all, clear, get
   };
 
   return bindActionCreators(actionCreator, $ngRedux.dispatch);

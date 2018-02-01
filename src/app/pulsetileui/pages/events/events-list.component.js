@@ -105,11 +105,12 @@ class EventsListController {
     this.setCurrentPageData = function (store) {
       /* istanbul ignore if  */
       const state = store.events;
+      const pagesInfo = store.pagesInfo;
+      const pluginName = 'events';
 
-      if ((state.patientId !== $stateParams.patientId || !state.data) &&
-        !state.isFetching && !state.error) {
-
+      if (serviceRequests.checkIsCanLoadingListData(state, pagesInfo, pluginName, $stateParams.patientId)) {
         this.actionLoadList($stateParams.patientId);
+        serviceRequests.setPluginPage(pluginName);
         usSpinnerService.spin('list-spinner');
       }
       if (state.data) {

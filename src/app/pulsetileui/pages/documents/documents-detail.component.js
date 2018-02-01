@@ -20,18 +20,13 @@ const templateDocumentsDetail = require('./documents-detail.html');
 
 class DocumentsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, documentsActions, usSpinnerService, serviceRequests) {
+    this.contactsLoad = documentsActions.get;
+
+    usSpinnerService.spin('detail-spinner');
+    this.contactsLoad($stateParams.patientId, $stateParams.detailsIndex);
 
     $scope.typeOfDocument = '';
     this.clinicalDocument = {};
-
-    this.setCurrentPageData = function (data) {
-      if (data.findReferral.data) {
-        this.clinicalDocument = data.findReferral.data;
-        $scope.getTypeOfDocument();
-        serviceRequests.publisher('setDocument', {document: this.clinicalDocument});
-      }
-      usSpinnerService.stop('documentssDetail-spinner');
-    };
 
     $scope.sendDocument = function (data) {
       serviceRequests.publisher('setDocument', {document: this.clinicalDocument});
@@ -51,14 +46,29 @@ class DocumentsDetailController {
       }
      };
 
+    this.setCurrentPageData = function (store) {
+      const state = store.documents;
+      const { detailsIndex } = $stateParams;
+
+      // Get Details data
+      if (state.dataGet) {
+        this.clinicalDocument = state.dataGet;
+        $scope.getTypeOfDocument();
+        serviceRequests.publisher('setDocument', {document: this.clinicalDocument});
+        (detailsIndex === state.dataGet.sourceId) ? usSpinnerService.stop('detail-spinner') : null;
+      }
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
+      }
+      if (state.error) {
+        usSpinnerService.stop('detail-spinner');
+      }
+    };
+
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-      this.documentsFindReferral = documentsActions.findReferral;
-      this.documentsFindReferral($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
   }
 }
 DocumentsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'documentsActions', 'usSpinnerService', 'serviceRequests'];

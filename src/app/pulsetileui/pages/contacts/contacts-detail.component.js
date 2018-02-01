@@ -59,21 +59,23 @@ class ContactsDetailController {
     }.bind(this);
 
     this.setCurrentPageData = function (store) {
-      const stateContacts = store.contacts;
+      const state = store.contacts;
       const { patientId, detailsIndex } = $stateParams;
 
-      if (stateContacts.dataGet) {
-        this.contact = stateContacts.dataGet;
-        usSpinnerService.stop('detail-spinner');
+      // Get Details data
+      if (state.dataGet) {
+        this.contact = state.dataGet;
+        (detailsIndex === state.dataGet.sourceId) ? usSpinnerService.stop('detail-spinner') : null;
       }
 
-      if (stateContacts.dataUpdate !== null) {
+      // Update Detail
+      if (state.dataUpdate !== null) {
         // After Update we request all list firstly
         this.contactsLoadAll(patientId);
       }
-      if (stateContacts.isUpdateProcess) {
+      if (state.isUpdateProcess) {
         usSpinnerService.spin('detail-update-spinner');
-        if (!stateContacts.dataGet && !stateContacts.isGetFetching) {
+        if (!state.dataGet && !state.isGetFetching) {
           // We request detail when data is empty
           // Details are cleared after request LoadAll list
           this.contactsLoad(patientId, detailsIndex);
@@ -81,12 +83,11 @@ class ContactsDetailController {
       } else {
         usSpinnerService.stop('detail-update-spinner');
       }
-
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
       }
 
-      if (stateContacts.error) {
+      if (state.error) {
         usSpinnerService.stop('detail-spinner');
         usSpinnerService.stop('detail-update-spinner');
       }
@@ -95,7 +96,6 @@ class ContactsDetailController {
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
   }
 }

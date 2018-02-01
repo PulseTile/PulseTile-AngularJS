@@ -36,11 +36,12 @@ class ImageListController {
     
     this.setCurrentPageData = function (store) {
       const state = store.studies;
+      const pagesInfo = store.pagesInfo;
+      const pluginName = 'studies';
 
-      if ((state.patientId !== $stateParams.patientId || !state.data) &&
-        !state.isFetching && !state.error) {
-        debugger
+      if (serviceRequests.checkIsCanLoadingListData(state, pagesInfo, pluginName, $stateParams.patientId)) {
         this.actionLoadList($stateParams.patientId);
+        serviceRequests.setPluginPage(pluginName);
         usSpinnerService.spin('list-spinner');
       }
       if (state.data) {
