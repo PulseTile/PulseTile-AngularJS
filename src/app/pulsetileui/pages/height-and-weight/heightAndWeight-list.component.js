@@ -44,7 +44,10 @@ class HeightAndWeightListController {
         this.heightAndWeights = state.data;
 
         serviceFormatted.formattingTablesDate(this.heightAndWeights, ['weightRecorded', 'heightRecorded'], serviceFormatted.formatCollection.DDMMMYYYY);
+      }
+      if (state.data || state.error) {
         usSpinnerService.stop('list-spinner');
+        setTimeout(() => { usSpinnerService.stop('list-spinner') }, 0);
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;

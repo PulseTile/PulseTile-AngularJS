@@ -45,7 +45,10 @@ class EolcareplansListController {
         this.eolcareplans = state.data;
 
         serviceFormatted.filteringKeys = ['name', 'type', 'date', 'source'];
+      }
+      if (state.data || state.error) {
         usSpinnerService.stop('list-spinner');
+        setTimeout(() => { usSpinnerService.stop('list-spinner') }, 0);
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;

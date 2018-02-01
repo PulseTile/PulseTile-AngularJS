@@ -54,7 +54,10 @@ class ReferralsListController {
 
         serviceFormatted.formattingTablesDate(this.referrals, ['dateOfReferral'], serviceFormatted.formatCollection.DDMMMYYYY);
         serviceFormatted.filteringKeys = ['dateOfReferral', 'referralFrom', 'referralTo', 'source'];
+      }
+      if (state.data || state.error) {
         usSpinnerService.stop('list-spinner');
+        setTimeout(() => { usSpinnerService.stop('list-spinner') }, 0);
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;

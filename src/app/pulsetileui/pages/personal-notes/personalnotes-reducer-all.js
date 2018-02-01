@@ -75,7 +75,8 @@ export default function personalnotes(state = INITIAL_STATE, action) {
         isUpdateProcess: false,
         isFetching: false,
         isGetFetching: false,
-        error: false
+        error: false,
+        dataGet: payload.response
       });
     },
     [types.PERSONALNOTES_GET_ERROR]: (state) => {

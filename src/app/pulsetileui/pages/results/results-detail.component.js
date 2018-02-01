@@ -16,25 +16,32 @@
 let templateResultsDetail= require('./results-detail.html');
 
 class ResultsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, resultsActions, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, resultsActions, serviceRequests, usSpinnerService) {
+    this.actionLoadDetail = resultsActions.get;
+
+    usSpinnerService.spin('detail-spinner');
+    this.actionLoadDetail($stateParams.patientId, $stateParams.detailsIndex);
 
     $scope.formDisabled = true;
 
-    this.setCurrentPageData = function (data) {
-      if (data.results.dataGet) {
-        this.result = data.results.dataGet;
-        usSpinnerService.stop('resultsDetail-spinner');
+    this.setCurrentPageData = function (store) {
+      const state = store.results;
+      const { patientId, detailsIndex } = $stateParams;
+
+      // Get Details data
+      if (state.dataGet) {
+        this.result = state.dataGet;
+        (detailsIndex === state.dataGet.sourceId) ? usSpinnerService.stop('detail-spinner') : null;
+      }
+      if (state.error) {
+        usSpinnerService.stop('detail-spinner');
       }
     };
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    this.resultsLoad = resultsActions.get;
-    this.resultsLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
   }
 }
 
@@ -43,5 +50,5 @@ const ResultsDetailComponent = {
   controller: ResultsDetailController
 };
 
-ResultsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'resultsActions', 'usSpinnerService'];
+ResultsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'resultsActions', 'serviceRequests', 'usSpinnerService'];
 export default ResultsDetailComponent;

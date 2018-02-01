@@ -55,7 +55,10 @@ class VaccinationsListController {
 
         serviceFormatted.formattingTablesDate(this.vaccinations, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
         serviceFormatted.filteringKeys = ['vaccinationName', 'source', 'dateCreated'];
+      }
+      if (state.data || state.error) {
         usSpinnerService.stop('list-spinner');
+        setTimeout(() => { usSpinnerService.stop('list-spinner') }, 0);
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;

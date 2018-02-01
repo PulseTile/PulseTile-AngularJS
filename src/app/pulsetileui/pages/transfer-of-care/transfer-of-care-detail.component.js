@@ -17,6 +17,12 @@ let templateTransferOfCareDetail= require('./transfer-of-care-detail.html');
 
 class TransferOfCareDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, transferOfCareActions, usSpinnerService, serviceRequests, serviceTransferOfCare, $window, serviceFormatted) {
+    this.actionLoadList = transferOfCareActions.all;
+    this.actionLoadDetail = transferOfCareActions.get;
+    $scope.actionUpdateDetail = transferOfCareActions.update;
+
+    usSpinnerService.spin('detail-spinner');
+    this.actionLoadDetail($stateParams.patientId, $stateParams.detailsIndex);
 
     $scope.isEdit = false;
     $scope.formDisabled = true;
@@ -31,55 +37,11 @@ class TransferOfCareDetailController {
     $scope.typeRecords = serviceTransferOfCare.getConfig();
 
     /* istanbul ignore next */
-    this.setCurrentPageData = function (data) {
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
-
-      if (data.transferOfCare.dataGet) {
-        this.transferOfCare = data.transferOfCare.dataGet;
-        usSpinnerService.stop('transferDetail-spinner');
-      }
-
-      if (serviceRequests.currentUserData) {
-        this.currentUser = serviceRequests.currentUserData;
-      }
-
-      // For type Records
-      if (data.diagnoses.data) {
-        serviceTransferOfCare.setDiagnosisRecords(data.diagnoses.data);
-        usSpinnerService.stop('diagnosis-spinner');
-      }
-
-      if (data.medication.data) {
-        serviceTransferOfCare.setMedicationRecords(data.medication.data);
-        usSpinnerService.stop('medications-spinner');
-      }
-
-      if (data.referrals.data) {
-        serviceTransferOfCare.setReferralsRecords(data.referrals.data);
-        usSpinnerService.stop('referrals-spinner');
-      }
-
-      if (data.events.data) {
-        serviceTransferOfCare.setEventsRecords(data.events.data);
-        usSpinnerService.stop('events-spinner');
-      }
-
-      if (data.vitals.data) {
-        serviceTransferOfCare.setVitalsRecords(data.vitals.data);
-        usSpinnerService.stop('vitals-spinner');
-      }
-    };
-
-    /* istanbul ignore next */
     this.edit = function () {
       $scope.isEdit = true;
 
       $scope.currentUser = this.currentUser;
       $scope.transferOfCareEdit = Object.assign({}, this.transferOfCare);
-      $scope.patient = this.currentPatient;
-
       $scope.transferOfCareEdit.transferDateTime = new Date();
     };
 
@@ -103,14 +65,12 @@ class TransferOfCareDetailController {
           userId: $stateParams.patientId,
           sourceId: $stateParams.detailsIndex
         };
-
-        this.transferOfCare = Object.assign(transferOfCare, toUpdate);
         $scope.isEdit = false;
 
         serviceFormatted.propsToString(toUpdate);
-        this.transferOfCareUpdate($stateParams.patientId, $stateParams.detailsIndex, toUpdate);
+        $scope.actionUpdateDetail($stateParams.patientId, $stateParams.detailsIndex, toUpdate);
       }
-    }.bind(this);
+    };
 
     /* istanbul ignore next */
     $scope.selectTypeRecords = function (type) {
@@ -142,6 +102,9 @@ class TransferOfCareDetailController {
         record.source = value.source;
         record.sourceId = value.sourceId;
 
+        if (!$scope.transferOfCareEdit.records) {
+          $scope.transferOfCareEdit.records = [];
+        }
         $scope.transferOfCareEdit.records.push(record);
 
         $scope.selectedRecord = null;
@@ -204,15 +167,72 @@ class TransferOfCareDetailController {
       }
     });
 
+    /* istanbul ignore next */
+    this.setCurrentPageData = function (store) {
+      const state = store.transferOfCare;
+      const { patientId, detailsIndex } = $stateParams;
+
+      // Get Details data
+      if (state.dataGet) {
+        this.transferOfCare = state.dataGet;
+        usSpinnerService.stop('detail-spinner');
+        // (detailsIndex === state.dataGet.sourceId) ? usSpinnerService.stop('detail-spinner') : null;
+      }
+
+      // Update Detail
+      if (state.dataUpdate !== null) {
+        // After Update we request all list firstly
+        this.actionLoadList(patientId);
+      }
+      if (state.isUpdateProcess) {
+        usSpinnerService.spin('detail-update-spinner');
+        if (!state.dataGet && !state.isGetFetching) {
+          // We request detail when data is empty
+          // Details are cleared after request LoadAll list
+          this.actionLoadDetail(patientId, detailsIndex);
+        }
+      } else {
+        usSpinnerService.stop('detail-update-spinner');
+      }
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
+      }
+      if (state.error) {
+        usSpinnerService.stop('detail-spinner');
+        usSpinnerService.stop('detail-update-spinner');
+      }
+
+      // For type Records
+      if (store.diagnoses.data) {
+        serviceTransferOfCare.setDiagnosisRecords(store.diagnoses.data);
+        usSpinnerService.stop('diagnosis-spinner');
+      }
+
+      if (store.medication.data) {
+        serviceTransferOfCare.setMedicationRecords(store.medication.data);
+        usSpinnerService.stop('medications-spinner');
+      }
+
+      if (store.referrals.data) {
+        serviceTransferOfCare.setReferralsRecords(store.referrals.data);
+        usSpinnerService.stop('referrals-spinner');
+      }
+
+      if (store.events.data) {
+        serviceTransferOfCare.setEventsRecords(store.events.data);
+        usSpinnerService.stop('events-spinner');
+      }
+
+      if (store.vitals.data) {
+        serviceTransferOfCare.setVitalsRecords(store.vitals.data);
+        usSpinnerService.stop('vitals-spinner');
+      }
+    };
+
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    this.transferOfCareLoad = transferOfCareActions.get;
-    this.transferOfCareUpdate = transferOfCareActions.update;
-    this.transferOfCareLoad($stateParams.patientId, $stateParams.detailsIndex);
   }
 }
 

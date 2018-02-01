@@ -18,41 +18,21 @@ let templatePersonalnotesDetail = require('./personalnotes-detail.html');
 
 class PersonalnotesDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, personalnotesActions, serviceRequests, usSpinnerService, serviceFormatted) {
-    
-    this.setCurrentPageData = function (data) {
-      /* istanbul ignore if  */
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
-      if (data.personalnotes.dataGet) {
-        this.personalNote = data.personalnotes.dataGet;
-        this.dateCreated = moment(this.personalNote.dateCreated).format('DD-MMM-YYYY');
-        usSpinnerService.stop("clinicalNoteDetail-spinner");
-      }
-    };
+    this.actionLoadList = personalnotesActions.all;
+    this.actionLoadDetail = personalnotesActions.get;
+    $scope.actionUpdateDetail = personalnotesActions.update;
 
-    let unsubscribe = $ngRedux.connect(state => ({
-      getStoreData: this.setCurrentPageData(state)
-    }))(this);
-
-    $scope.$on('$destroy', unsubscribe);
-
-    this.personalnotesLoad = personalnotesActions.get;
-    this.personalnotesLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
+    usSpinnerService.spin('detail-spinner');
+    this.actionLoadDetail($stateParams.patientId, $stateParams.detailsIndex);
   
     //Edit Clinical Note
-    
     $scope.isEdit = false;
 
     /* istanbul ignore next  */
     this.edit = function () {
       $scope.isEdit = true;
-
-      $scope.currentUser = this.currentUser;
       $scope.personalNoteEdit = Object.assign({}, this.personalNote);
-      $scope.patient = this.currentPatient;
-      
-      $scope.personalNoteEdit.dateCreated = new Date(this.personalNote.dateCreated).toISOString().slice(0, 10);
+      $scope.personalNoteEdit.dateCreated = new Date(this.personalNote.dateCreated);
     };
     this.cancelEdit = function () {
       $scope.isEdit = false;
@@ -68,21 +48,56 @@ class PersonalnotesDetailController {
           notes: personalNote.notes,
           author: personalNote.author,
           source: personalNote.source,
-          sourceId: personalNote.sourceId
+          sourceId: personalNote.sourceId,
+          dateCreated: new Date().getTime()
         };
         
-        this.personalNote = Object.assign(this.personalNote, personalNote);
         $scope.isEdit = false;
         serviceFormatted.propsToString(toUpdate);
-        personalnotesActions.update($scope.patient.id, personalNote.sourceId, toUpdate);
-        setTimeout(function () {
-          $state.go('personalNotes-detail', {
-            patientId: $scope.patient.id,
-            personalNoteIndex: personalNote.sourceId
-          });
-        }, 1000);
+        $scope.actionUpdateDetail($stateParams.patientId, personalNote.sourceId, toUpdate);
       }
-    }.bind(this);
+    };
+
+    this.setCurrentPageData = function (store) {
+      const state = store.personalnotes;
+      const { patientId, detailsIndex } = $stateParams;
+
+      // Get Details data
+      if (state.dataGet) {
+        this.personalNote = state.dataGet;
+        this.dateCreated = moment(this.personalNote.dateCreated).format('DD-MMM-YYYY');
+        (detailsIndex === state.dataGet.sourceId) ? usSpinnerService.stop('detail-spinner') : null;
+      }
+
+      // Update Detail
+      if (state.dataUpdate !== null) {
+        // After Update we request all list firstly
+        this.actionLoadList(patientId);
+      }
+      if (state.isUpdateProcess) {
+        usSpinnerService.spin('detail-update-spinner');
+        if (!state.dataGet && !state.isGetFetching) {
+          // We request detail when data is empty
+          // Details are cleared after request LoadAll list
+          this.actionLoadDetail(patientId, detailsIndex);
+        }
+      } else {
+        usSpinnerService.stop('detail-update-spinner');
+      }
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
+      }
+
+      if (state.error) {
+        usSpinnerService.stop('detail-spinner');
+        usSpinnerService.stop('detail-update-spinner');
+      }
+    };
+
+    let unsubscribe = $ngRedux.connect(state => ({
+      getStoreData: this.setCurrentPageData(state)
+    }))(this);
+    $scope.$on('$destroy', unsubscribe);
   }
 }
 

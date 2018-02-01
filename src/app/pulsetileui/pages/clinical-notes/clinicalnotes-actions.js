@@ -45,7 +45,7 @@ export function get(patientId, compositionId, source) {
 
     config: {
       method: 'get',
-      url: '/api/patients/' + patientId + '/clinicalnotes/' + compositionId + '?source=' + source
+      url: '/api/patients/' + patientId + '/clinicalnotes/' + compositionId
     },
 
     meta: {

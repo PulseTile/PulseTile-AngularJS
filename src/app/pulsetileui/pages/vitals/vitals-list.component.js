@@ -277,7 +277,10 @@ class VitalsListController {
         serviceFormatted.filteringKeys = ['id', 'dateCreated', 'newsScore', 'source'];
 
         $scope.changeViewList(serviceRequests.viewList || 'tableNews');
+      }
+      if (state.data || state.error) {
         usSpinnerService.stop('list-spinner');
+        setTimeout(() => { usSpinnerService.stop('list-spinner') }, 0);
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;

@@ -55,11 +55,12 @@ class AllergiesListController {
       }
       if (state.data) {
         this.allergies = state.data;
-
         serviceFormatted.filteringKeys = ['cause', 'reaction', 'source'];
-        usSpinnerService.stop('list-spinner');
       }
-
+      if (state.data || state.error) {
+        usSpinnerService.stop('list-spinner');
+        setTimeout(() => { usSpinnerService.stop('list-spinner') }, 0);
+      }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
       }

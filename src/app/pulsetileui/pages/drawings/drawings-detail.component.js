@@ -17,27 +17,16 @@ let templateDrawingsDetail= require('./drawings-detail.html');
 
 class DrawingsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, drawingsActions, usSpinnerService, serviceRequests, serviceFormatted) {
+    this.actionLoadList = drawingsActions.all;
+    this.actionLoadDetail = drawingsActions.get;
+    $scope.actionUpdateDetail = drawingsActions.update;
+
+    usSpinnerService.spin('detail-spinner');
+    this.actionLoadDetail($stateParams.patientId, $stateParams.detailsIndex);
 
     $scope.isEdit = false;
     $scope.isEditDetail = false;
     $scope.tempDrawingBase64 = '';
-
-    /* istanbul ignore next */
-    this.setCurrentPageData = function (data) {
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
-
-      if (data.drawings.dataGet) {
-        $scope.isData = true;
-        this.drawing = data.drawings.dataGet;
-        usSpinnerService.stop('detail-spinner');
-      }
-
-      if (serviceRequests.currentUserData) {
-        this.currentUser = serviceRequests.currentUserData;
-      }
-    };
 
     /* istanbul ignore next */
     this.edit = function () {
@@ -65,11 +54,15 @@ class DrawingsDetailController {
         let toUpdate = {
           name: this.drawing.name,
           author: this.drawing.author,
-          drawingBase64: this.drawing.drawingBase64
+          drawingBase64: this.drawing.drawingBase64,
+          source: this.drawing.source || 'qewdDB',
+          sourceId: this.drawing.sourceId || $stateParams.detailsIndex,
+          dateCreated: new Date().getTime(),
+          dateUpdated: new Date().getTime(),
         };
 
         serviceFormatted.propsToString(toUpdate);
-        this.drawingsUpdate($stateParams.patientId, $stateParams.detailsIndex, toUpdate);
+        $scope.actionUpdateDetail($stateParams.patientId, $stateParams.detailsIndex, toUpdate);
       }
     }.bind(this);
 
@@ -78,7 +71,6 @@ class DrawingsDetailController {
       $scope.isEditDetail = true;
       $scope.currentUser = this.currentUser;
       $scope.drawingEdit = Object.assign({}, this.drawing);
-      $scope.patient = this.currentPatient;
 
       $scope.drawingEdit.dateCreated = new Date();
     };
@@ -96,15 +88,19 @@ class DrawingsDetailController {
         let toUpdate = {
           name: drawing.name,
           author: drawing.author,
-          drawingBase64: drawing.drawingBase64
+          drawingBase64: drawing.drawingBase64,
+          source: drawing.source || 'qewdDB',
+          sourceId: drawing.sourceId || $stateParams.detailsIndex,
+          dateCreated: new Date().getTime(),
+          dateUpdated: new Date().getTime(),
         };
 
-        this.drawing = Object.assign(drawing, toUpdate);
+        // this.drawing = Object.assign(drawing, toUpdate);
         $scope.isEdit = false;
         
         // this.drawingsUpdate($stateParams.patientId, toUpdate);
         serviceFormatted.propsToString(toUpdate);
-        this.drawingsUpdate($stateParams.patientId, $stateParams.detailsIndex, toUpdate);
+        $scope.actionUpdateDetail($stateParams.patientId, $stateParams.detailsIndex, toUpdate);
       }
     }.bind(this);
 
@@ -113,15 +109,47 @@ class DrawingsDetailController {
       serviceRequests.publisher('resizeDrawing', {});
     };
 
+    /* istanbul ignore next */
+    this.setCurrentPageData = function (store) {
+      const state = store.drawings;
+      const { patientId, detailsIndex } = $stateParams;
+
+      // Get Details data
+      if (state.dataGet) {
+        $scope.isData = true;
+        this.drawing = state.dataGet;
+        (detailsIndex === state.dataGet.sourceId) ? usSpinnerService.stop('detail-spinner') : null;
+      }
+
+      // Update Detail
+      if (state.dataUpdate !== null) {
+        // After Update we request all list firstly
+        this.actionLoadList(patientId);
+      }
+      if (state.isUpdateProcess) {
+        usSpinnerService.spin('detail-update-spinner');
+        if (!state.dataGet && !state.isGetFetching) {
+          // We request detail when data is empty
+          // Details are cleared after request LoadAll list
+          this.actionLoadDetail(patientId, detailsIndex);
+        }
+      } else {
+        usSpinnerService.stop('detail-update-spinner');
+      }
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
+      }
+
+      if (state.error) {
+        usSpinnerService.stop('detail-spinner');
+        usSpinnerService.stop('detail-update-spinner');
+      }
+    };
+
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    this.drawingsLoad = drawingsActions.get;
-    this.drawingsUpdate = drawingsActions.update;
-    this.drawingsLoad($stateParams.patientId, $stateParams.detailsIndex);
   }
 }
 

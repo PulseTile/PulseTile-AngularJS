@@ -16,23 +16,16 @@
 let templateAllergiesDetail = require('./allergies-detail.html');
 
 class AllergiesDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, allergiesActions, serviceRequests, usSpinnerService, serviceFormatted) {
+  constructor($scope, $state, $stateParams, $ngRedux, allergiesActions, serviceRequests, usSpinnerService) {
+    this.actionLoadList = allergiesActions.all;
+    this.actionLoadDetail = allergiesActions.get;
+    $scope.actionUpdateDetail = allergiesActions.update;
+
+    usSpinnerService.spin('detail-spinner');
+    this.actionLoadDetail($stateParams.patientId, $stateParams.detailsIndex);
+
     $scope.isEdit = false;
     $scope.isEditMeta = false;
-    
-    /* istanbul ignore next */
-    this.setCurrentPageData = function (data) {
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
-      if (data.allergies.dataGet) {
-        this.allergy = data.allergies.dataGet;
-        usSpinnerService.stop('allergiesDetail-spinner');
-      }
-      if (serviceRequests.currentUserData) {
-        this.currentUser = serviceRequests.currentUserData;
-      }
-    };
     
     /* istanbul ignore next */
     this.edit = function () {
@@ -59,54 +52,50 @@ class AllergiesDetailController {
 
       if (allergyForm.$valid) {
         $scope.isEdit = false;
-        this.allergy = Object.assign(this.allergy, $scope.allergyEdit);
-        $scope.allergiesUpdate(this.currentPatient.id, allergies.sourceId, toAdd);
+        $scope.actionUpdateDetail($stateParams.patientId, allergies.sourceId, toAdd);
       }
     }.bind(this);
 
     /* istanbul ignore next */
-    this.editMeta = function () {
-      $scope.isEditMeta = true;
-      /*
-        TODO: Later Understand the logic for storing data when editing both panels
-      */
-      $scope.allergyEditMeta = Object.assign({}, this.allergy);
-    };
-    /* istanbul ignore next */
-    this.cancelEditMeta = function () {
-      $scope.isEditMeta = false;
-    };
-    /* istanbul ignore next */
-    $scope.confirmEditMeta = function (allergyForm, allergies) {
-      $scope.formSubmitted = true;
+    this.setCurrentPageData = function (store) {
+      const state = store.allergies;
+      const { patientId, detailsIndex } = $stateParams;
 
-      let toAdd = {
-        sourceId: allergies.sourceId,
-        cause: allergies.cause,
-        causeCode: allergies.causeCode,
-        causeTerminology: allergies.causeTerminology,
-        reaction: allergies.reaction,
-        source: allergies.source
-      };
-      if (allergyForm.$valid) {
-        $scope.isEditMeta = false;
-        this.allergy = Object.assign(this.allergy, $scope.allergyEditMeta);
-        serviceFormatted.propsToString(toAdd);
-        $scope.allergiesUpdate(this.currentPatient.id, allergies.sourceId, toAdd);
+      // Get Details data
+      if (state.dataGet) {
+        this.allergy = state.dataGet;
+        (detailsIndex === state.dataGet.sourceId) ? usSpinnerService.stop('detail-spinner') : null;
       }
-    }.bind(this);
 
-    $scope.formDisabled = true;
+      // Update Detail
+      if (state.dataUpdate !== null) {
+        // After Update we request all list firstly
+        this.actionLoadList(patientId);
+      }
+      if (state.isUpdateProcess) {
+        usSpinnerService.spin('detail-update-spinner');
+        if (!state.dataGet && !state.isGetFetching) {
+          // We request detail when data is empty
+          // Details are cleared after request LoadAll list
+          this.actionLoadDetail(patientId, detailsIndex);
+        }
+      } else {
+        usSpinnerService.stop('detail-update-spinner');
+      }
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
+      }
+
+      if (state.error) {
+        usSpinnerService.stop('detail-spinner');
+        usSpinnerService.stop('detail-update-spinner');
+      }
+    };
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    this.allergiesLoad = allergiesActions.get;
-    this.allergiesLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
-    $scope.allergiesUpdate = allergiesActions.update;
   }
 }
 
@@ -115,5 +104,5 @@ const AllergiesDetailComponent = {
   controller: AllergiesDetailController
 };
 
-AllergiesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
+AllergiesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions', 'serviceRequests', 'usSpinnerService'];
 export default AllergiesDetailComponent;

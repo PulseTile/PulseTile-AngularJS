@@ -20,10 +20,10 @@ const templateDocumentsDetail = require('./documents-detail.html');
 
 class DocumentsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, documentsActions, usSpinnerService, serviceRequests) {
-    this.contactsLoad = documentsActions.get;
+    this.actionLoaddetail = documentsActions.get;
 
     usSpinnerService.spin('detail-spinner');
-    this.contactsLoad($stateParams.patientId, $stateParams.detailsIndex);
+    this.actionLoaddetail($stateParams.patientId, $stateParams.detailsIndex);
 
     $scope.typeOfDocument = '';
     this.clinicalDocument = {};

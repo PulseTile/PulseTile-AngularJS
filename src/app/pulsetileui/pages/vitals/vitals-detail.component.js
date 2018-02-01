@@ -17,6 +17,13 @@ let templateVitalsDetail = require('./vitals-detail.html');
 
 class VitalsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, usSpinnerService, serviceVitalsSigns, serviceFormatted) {
+    this.actionLoadList = vitalsActions.all;
+    this.actionLoadDetail = vitalsActions.get;
+    $scope.actionUpdateDetail = vitalsActions.update;
+
+    usSpinnerService.spin('detail-spinner');
+    this.actionLoadDetail($stateParams.patientId, $stateParams.detailsIndex);
+
     $scope.isEdit = false;
     $scope.vitalStatuses = {};
     $scope.popoverLabels = serviceVitalsSigns.getLabels();
@@ -56,29 +63,48 @@ class VitalsDetailController {
   
       if (vitalForm.$valid) {
         $scope.isEdit = false;
-        
-        $scope.vital = Object.assign($scope.vital, $scope.vitalEdit);
-        $scope.changeNewScore($scope.vital);
-        serviceFormatted.propsToString($scope.vital);
-        $scope.vitalsUpdate(this.currentPatient.id, $scope.vital.sourceId, $scope.vital);
+
+        var toUpdate = Object.assign({}, $scope.vitalEdit);
+        $scope.changeNewScore(toUpdate);
+        serviceFormatted.propsToString(toUpdate);
+        $scope.actionUpdateDetail($stateParams.patientId, $scope.vital.sourceId, toUpdate);
       }
-    }.bind(this);
+    };
 
-    this.setCurrentPageData = function (data) {
-      if (data.vitals.dataGet) {
-        $scope.vital = serviceVitalsSigns.convertVitalCharacteristics(data.vitals.dataGet);
+    this.setCurrentPageData = function (store) {
+      const state = store.vitals;
+      const { patientId, detailsIndex } = $stateParams;
 
+      // Get Details data
+      if (state.dataGet) {
+        $scope.vital = serviceVitalsSigns.convertVitalCharacteristics(state.dataGet);
         $scope.vitalStatuses = serviceVitalsSigns.setVitalStatuses($scope.vital);
 
-        usSpinnerService.stop('vitalDetail-spinner');
-      }
-  
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
+        (detailsIndex === state.dataGet.sourceId) ? usSpinnerService.stop('detail-spinner') : null;
       }
 
+      // Update Detail
+      if (state.dataUpdate !== null) {
+        // After Update we request all list firstly
+        this.actionLoadList(patientId);
+      }
+      if (state.isUpdateProcess) {
+        usSpinnerService.spin('detail-update-spinner');
+        if (!state.dataGet && !state.isGetFetching) {
+          // We request detail when data is empty
+          // Details are cleared after request LoadAll list
+          this.actionLoadDetail(patientId, detailsIndex);
+        }
+      } else {
+        usSpinnerService.stop('detail-update-spinner');
+      }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
+      }
+
+      if (state.error) {
+        usSpinnerService.stop('detail-spinner');
+        usSpinnerService.stop('detail-update-spinner');
       }
     };
 

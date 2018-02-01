@@ -19,7 +19,6 @@ import cornerstoneToolsJS from '../../../../cornerstone/cornerstoneTools';
 
 class ImageDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, serviceActions, serviceRequests, usSpinnerService) {
-    
     $scope.series = [];
     $scope.isMove = false;
     $scope.isFade = false;

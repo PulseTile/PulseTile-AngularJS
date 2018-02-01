@@ -17,6 +17,13 @@ let templateEventsDetail = require('./events-detail.html');
 
 class EventsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, usSpinnerService, serviceDateTimePicker, serviceFormatted) {
+    this.actionLoadList = eventsActions.all;
+    this.actionLoadDetail = eventsActions.get;
+    $scope.actionUpdateDetail = eventsActions.update;
+
+    usSpinnerService.spin('detail-spinner');
+    this.actionLoadDetail($stateParams.patientId, $stateParams.detailsIndex);
+
     var socket = io.connect('wss://' + window.location.hostname + ':' + 8070);
     $scope.isEdit = false;
 
@@ -49,36 +56,63 @@ class EventsDetailController {
         description: event.description,
         dateTime: event.dateTime,
         author: event.author,
+        source: event.source,
         sourceId: event.sourceId
       };
 
       if (eventForm.$valid) {
         $scope.isEdit = false;
-        this.event = Object.assign(this.event, event);
 
         serviceFormatted.propsToString(toAdd);
-        this.eventsUpdate(this.currentPatient.id, event.sourceId, toAdd);
+        $scope.actionUpdateDetail($stateParams.patientId, event.sourceId, toAdd);
       }
     }.bind(this);
 
     /* istanbul ignore next */
-    this.setCurrentPageData = function (data) {
-      /* istanbul ignore if  */
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
-      if (data.events.dataGet) {
-        this.appointment = data.events.dataGet;
-        this.event = data.events.dataGet;
-        $scope.appt = this.appointment;
-        usSpinnerService.stop('appointmentsDetail-spinner');
+    this.setCurrentPageData = function (store) {
+      const state = store.events;
+      const { patientId, detailsIndex } = $stateParams;
 
+      // Get Details data
+      if (state.dataGet) {
+        this.appointment = state.dataGet;
+        this.event = state.dataGet;
+        $scope.appt = this.appointment;
+
+        (detailsIndex === state.dataGet.sourceId) ? usSpinnerService.stop('detail-spinner') : null;
         socket.emit('appointment:messages', {appointmentId: this.appointment.sourceId});
       }
-      // if (data.user.data) {
-      //   this.currentUser = serviceRequests.currentUserData;
-      // }
+
+      // Update Detail
+      if (state.dataUpdate !== null) {
+        // After Update we request all list firstly
+        this.actionLoadList(patientId);
+      }
+      if (state.isUpdateProcess) {
+        usSpinnerService.spin('detail-update-spinner');
+        if (!state.dataGet && !state.isGetFetching) {
+          // We request detail when data is empty
+          // Details are cleared after request LoadAll list
+          this.actionLoadDetail(patientId, detailsIndex);
+        }
+      } else {
+        usSpinnerService.stop('detail-update-spinner');
+      }
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
+      }
+
+      if (state.error) {
+        usSpinnerService.stop('detail-spinner');
+        usSpinnerService.stop('detail-update-spinner');
+      }
     };
+    let unsubscribe = $ngRedux.connect(state => ({
+      getStoreData: this.setCurrentPageData(state)
+    }))(this);
+    $scope.$on('$destroy', unsubscribe);
+
+
 
     /* istanbul ignore next */
     window.onbeforeunload = function (e) {
@@ -98,17 +132,6 @@ class EventsDetailController {
       }
       return null;
     }
-
-    let unsubscribe = $ngRedux.connect(state => ({
-      getStoreData: this.setCurrentPageData(state)
-    }))(this);
-
-    $scope.$on('$destroy', unsubscribe);
-
-    this.eventsLoad = eventsActions.get;
-    this.eventsUpdate = eventsActions.update;
-    this.eventsLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
-
 
     var appointmentId = $stateParams.detailsIndex;
     var user = serviceRequests.currentUserData;

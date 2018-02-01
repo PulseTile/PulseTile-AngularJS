@@ -19,34 +19,42 @@ let templateClinicalstatementsDetail = require('./clinicalstatements-detail.html
 
 class ClinicalstatementsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, serviceRequests, usSpinnerService) {
+    this.actionLoadDetail = clinicalstatementsActions.get;
 
-      this.setCurrentPageData = function (data) {
-          if (data.patientsGet.data) {
-              this.currentPatient = data.patientsGet.data;
-          }
-          if (data.clinicalstatements.dataGet) {
-              this.clinicalStatement = data.clinicalstatements.dataGet;
-              var mapObj = {
-                  'fa-close':'',
-                  'tag':'',
-                  'editable':''
+    usSpinnerService.spin('detail-spinner');
+    this.actionLoadDetail($stateParams.patientId, $stateParams.detailsIndex);
 
-              };
-              this.clinicalStatement.text = this.clinicalStatement.text.replace(/fa-close|tag|editable/gi, function(matched){
-                  return mapObj[matched];
-              });
-          }
-          usSpinnerService.stop("clinicalStatementDetail-spinner");
-      };
+    this.setCurrentPageData = function (store) {
+      const state = store.clinicalstatements;
+      const { detailsIndex } = $stateParams;
 
-      let unsubscribe = $ngRedux.connect(state => ({
-          getStoreData: this.setCurrentPageData(state)
-      }))(this);
+      // Get Details data
+      if (state.dataGet) {
+        this.clinicalStatement = state.dataGet;
+        var mapObj = {
+          'fa-close':'',
+          'tag':'',
+          'editable':''
 
-      $scope.$on('$destroy', unsubscribe);
+        };
+        this.clinicalStatement.text = this.clinicalStatement.text.replace(/fa-close|tag|editable/gi, function(matched){
+          return mapObj[matched];
+        });
+        (detailsIndex === state.dataGet.sourceId) ? usSpinnerService.stop('detail-spinner') : null;
+      }
 
-      this.clinicalstatementsLoad = clinicalstatementsActions.get;
-      this.clinicalstatementsLoad($stateParams.patientId, $stateParams.detailsIndex);
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
+      }
+      if (state.error) {
+        usSpinnerService.stop('detail-spinner');
+      }
+    };
+
+    let unsubscribe = $ngRedux.connect(state => ({
+      getStoreData: this.setCurrentPageData(state)
+    }))(this);
+    $scope.$on('$destroy', unsubscribe);
   }
 }
 

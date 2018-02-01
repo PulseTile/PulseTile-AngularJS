@@ -16,21 +16,15 @@
 let templateDiagnosesDetail = require('./diagnoses-detail.html');
 
 class DiagnosesDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, diagnosesActions, serviceRequests, usSpinnerService, serviceFormatted) {
-    $scope.isEdit = false;
+  constructor($scope, $state, $stateParams, $ngRedux, diagnosesActions, serviceRequests, usSpinnerService, serviceFormatted) {
+    this.actionLoadList = diagnosesActions.all;
+    this.actionLoadDetail = diagnosesActions.get;
+    $scope.actionUpdateDetail = diagnosesActions.update;
 
-    this.setCurrentPageData = function (data) {
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
-      if (data.diagnoses.dataGet) {
-        this.diagnosis = data.diagnoses.dataGet;
-        usSpinnerService.stop('diagnosisDetail-spinner');
-      }
-      if (serviceRequests.currentUserData) {
-        this.currentUser = serviceRequests.currentUserData;
-      }
-    };
+    usSpinnerService.spin('detail-spinner');
+    this.actionLoadDetail($stateParams.patientId, $stateParams.detailsIndex);
+
+    $scope.isEdit = false;
 
     this.edit = function () {
       $scope.isEdit = true;
@@ -56,12 +50,10 @@ class DiagnosesDetailController {
         terminology: $scope.diagnosisEdit.terminology
       };
 
-
       if (diagnosisForm.$valid) {
         $scope.isEdit = false;
-        this.diagnosis = Object.assign(this.diagnosis, $scope.diagnosisEdit);
         serviceFormatted.propsToString(toAdd);
-        $scope.diagnosesUpdate(this.currentPatient.id, $scope.diagnosisEdit.sourceId, toAdd);
+        $scope.actionUpdateDetail($stateParams.patientId, $scope.diagnosisEdit.sourceId, toAdd);
       }
     }.bind(this);
     
@@ -89,15 +81,45 @@ class DiagnosesDetailController {
       return result.charAt(0).toUpperCase() + result.slice(1);
     };
 
+    this.setCurrentPageData = function (store) {
+      const state = store.diagnoses;
+      const { patientId, detailsIndex } = $stateParams;
+
+      // Get Details data
+      if (state.dataGet) {
+        this.diagnosis = state.dataGet;
+        (detailsIndex === state.dataGet.sourceId) ? usSpinnerService.stop('detail-spinner') : null;
+      }
+
+      // Update Detail
+      if (state.dataUpdate !== null) {
+        // After Update we request all list firstly
+        this.actionLoadList(patientId);
+      }
+      if (state.isUpdateProcess) {
+        usSpinnerService.spin('detail-update-spinner');
+        if (!state.dataGet && !state.isGetFetching) {
+          // We request detail when data is empty
+          // Details are cleared after request LoadAll list
+          this.actionLoadDetail(patientId, detailsIndex);
+        }
+      } else {
+        usSpinnerService.stop('detail-update-spinner');
+      }
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
+      }
+
+      if (state.error) {
+        usSpinnerService.stop('detail-spinner');
+        usSpinnerService.stop('detail-update-spinner');
+      }
+    };
+
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    this.diagnosesLoad = diagnosesActions.get;
-    this.diagnosesLoad($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
-    $scope.diagnosesUpdate = diagnosesActions.update;
   }
 }
 
@@ -106,5 +128,5 @@ const DiagnosesDetailComponent = {
   controller: DiagnosesDetailController
 };
 
-DiagnosesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'diagnosesActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
+DiagnosesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'diagnosesActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default DiagnosesDetailComponent;

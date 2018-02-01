@@ -17,12 +17,12 @@ let templateContactsDetail= require('./contacts-detail.html');
 
 class ContactsDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, patientsActions, contactsActions, serviceRequests, usSpinnerService, serviceFormatted) {
-    this.contactsLoadAll = contactsActions.all;
-    this.contactsLoad = contactsActions.get;
-    $scope.contactsUpdate = contactsActions.update;
+    this.actionLoadList = contactsActions.all;
+    this.actionLoadDetail = contactsActions.get;
+    $scope.actionUpdateDetail = contactsActions.update;
 
     usSpinnerService.spin('detail-spinner');
-    this.contactsLoad($stateParams.patientId, $stateParams.detailsIndex);
+    this.actionLoadDetail($stateParams.patientId, $stateParams.detailsIndex);
 
     var relationshipTypeOptions = [
       { value: 'at0036', title: 'Informal carer' },
@@ -54,7 +54,7 @@ class ContactsDetailController {
         $scope.isEdit = false;
 
         serviceFormatted.propsToString($scope.contactEdit);
-        $scope.contactsUpdate($stateParams.patientId, contact.sourceId, $scope.contactEdit);
+        $scope.actionUpdateDetail($stateParams.patientId, contact.sourceId, $scope.contactEdit);
       }
     }.bind(this);
 
@@ -71,14 +71,14 @@ class ContactsDetailController {
       // Update Detail
       if (state.dataUpdate !== null) {
         // After Update we request all list firstly
-        this.contactsLoadAll(patientId);
+        this.actionLoadList(patientId);
       }
       if (state.isUpdateProcess) {
         usSpinnerService.spin('detail-update-spinner');
         if (!state.dataGet && !state.isGetFetching) {
           // We request detail when data is empty
           // Details are cleared after request LoadAll list
-          this.contactsLoad(patientId, detailsIndex);
+          this.actionLoadDetail(patientId, detailsIndex);
         }
       } else {
         usSpinnerService.stop('detail-update-spinner');

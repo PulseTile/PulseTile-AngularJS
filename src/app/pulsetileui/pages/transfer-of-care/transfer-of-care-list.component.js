@@ -63,7 +63,10 @@ class TransferOfCareListController {
 
         serviceFormatted.formattingTablesDate(this.transferOfCares, ['transferDateTime'], serviceFormatted.formatCollection.DDMMMYYYY);
         serviceFormatted.filteringKeys = ['transfer', 'from', 'to', 'transferDateTime', 'source'];
+      }
+      if (state.data || state.error) {
         usSpinnerService.stop('list-spinner');
+        setTimeout(() => { usSpinnerService.stop('list-spinner') }, 0);
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
