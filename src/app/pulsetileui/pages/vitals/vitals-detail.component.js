@@ -16,7 +16,7 @@
 let templateVitalsDetail = require('./vitals-detail.html');
 
 class VitalsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, usSpinnerService, serviceVitalsSigns, serviceFormatted) {
+  constructor($scope, $state, $stateParams, $ngRedux, vitalsActions, serviceRequests, usSpinnerService, serviceVitalsSigns, serviceFormatted) {
     this.actionLoadList = vitalsActions.all;
     this.actionLoadDetail = vitalsActions.get;
     $scope.actionUpdateDetail = vitalsActions.update;
@@ -125,5 +125,5 @@ const VitalsDetailComponent = {
   controller: VitalsDetailController
 };
 
-VitalsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vitalsActions', 'serviceRequests', 'usSpinnerService', 'serviceVitalsSigns', 'serviceFormatted'];
+VitalsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'vitalsActions', 'serviceRequests', 'usSpinnerService', 'serviceVitalsSigns', 'serviceFormatted'];
 export default VitalsDetailComponent;

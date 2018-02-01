@@ -18,6 +18,9 @@ let templateAllergiesCreate = require('./allergies-create.html');
 
 class AllergiesCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, allergiesActions, serviceRequests, serviceFormatted) {
+    $scope.actionLoadList = allergiesActions.all;
+    $scope.actionCreateDetail = allergiesActions.create;
+
     $scope.allergy = {};
 
     $scope.allergy.isImport = false;
@@ -42,27 +45,6 @@ class AllergiesCreateController {
         detailsIndex: $stateParams.importData.documentIndex,
         page: 1
       });
-    };
-
-    /* istanbul ignore next */
-    this.setCurrentPageData = function (data) {
-      if (data.allergies.dataCreate !== null) {
-        this.goList();
-      }
-      // if (data.allergies.dataUpdate !== null) {
-      //   $state.go('allergies-details', {
-      //     patientId: $scope.patient.id,
-      //     filter: $scope.query,
-      //     page: $scope.currentPage
-      //   });
-      // }
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
-      if (serviceRequests.currentUserData) {
-        $scope.currentUser = serviceRequests.currentUserData;
-        $scope.allergy.author = $scope.currentUser.email;
-      }
     };
 
     /* istanbul ignore next */
@@ -97,19 +79,29 @@ class AllergiesCreateController {
           originalComposition: allergies.originalComposition
         };
         serviceFormatted.propsToString(toAdd);
-        $scope.allergiesCreate(this.currentPatient.id, toAdd);
+        $scope.actionCreateDetail($stateParams.patientId, toAdd);
       }
     }.bind(this);
+
+    /* istanbul ignore next */
+    this.setCurrentPageData = function (data) {
+      if (data.allergies.dataCreate !== null) {
+        $scope.actionLoadList($stateParams.patientId);
+        this.goList();
+      }
+      if (data.patientsGet.data) {
+        this.currentPatient = data.patientsGet.data;
+      }
+      if (serviceRequests.currentUserData) {
+        $scope.currentUser = serviceRequests.currentUserData;
+        $scope.allergy.author = $scope.currentUser.email;
+      }
+    };
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    $scope.allergiesCreate = allergiesActions.create;
-    // $scope.allergiesUpdate = allergiesActions.update;
-    $scope.allergiesLoad = allergiesActions.all;
   }
 }
 

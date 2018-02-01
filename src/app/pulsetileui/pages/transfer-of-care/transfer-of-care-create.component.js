@@ -17,6 +17,8 @@ let templateCreate = require('./transfer-of-care-create.html');
 
 class TransferOfCareCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, transferOfCareActions, serviceRequests, serviceTransferOfCare, serviceFormatted, usSpinnerService, $window) {
+    $scope.actionLoadList = transferOfCareActions.all;
+    $scope.actionCreateDetail = transferOfCareActions.create;
 
     $scope.transferOfCareEdit = {};
     $scope.transferOfCareEdit.transferDateTime = new Date();
@@ -153,17 +155,15 @@ class TransferOfCareCreateController {
         };
         
         serviceFormatted.propsToString(toAdd);
-        $scope.transferOfCareCreate($stateParams.patientId, toAdd);
+        $scope.actionCreateDetail($stateParams.patientId, toAdd);
       }
     }.bind(this);
 
     /* istanbul ignore next */
-    this.setCurrentPageData = function (data) {
-      if (data.transferOfCare.dataCreate !== null) {
+    this.setCurrentPageData = function (store) {
+      if (store.transferOfCare.dataCreate !== null) {
+        $scope.actionLoadList($stateParams.patientId);
         this.goList();
-      }
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
       }
       if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;
@@ -171,40 +171,36 @@ class TransferOfCareCreateController {
       }
 
       // For type Records
-      if (data.diagnoses.data) {
-        serviceTransferOfCare.setDiagnosisRecords(data.diagnoses.data);
+      if (store.diagnoses.data) {
+        serviceTransferOfCare.setDiagnosisRecords(store.diagnoses.data);
         usSpinnerService.stop('diagnosis-spinner');
       }
 
-      if (data.medication.data) {
-        serviceTransferOfCare.setMedicationRecords(data.medication.data);
+      if (store.medication.data) {
+        serviceTransferOfCare.setMedicationRecords(store.medication.data);
         usSpinnerService.stop('medications-spinner');
       }
 
-      if (data.referrals.data) {
-        serviceTransferOfCare.setReferralsRecords(data.referrals.data);
+      if (store.referrals.data) {
+        serviceTransferOfCare.setReferralsRecords(store.referrals.data);
         usSpinnerService.stop('referrals-spinner');
       }
 
-      if (data.events.data) {
-        serviceTransferOfCare.setEventsRecords(data.events.data);
+      if (store.events.data) {
+        serviceTransferOfCare.setEventsRecords(store.events.data);
         usSpinnerService.stop('events-spinner');
       }
 
-      if (data.vitals.data) {
-        serviceTransferOfCare.setVitalsRecords(data.vitals.data);
+      if (store.vitals.data) {
+        serviceTransferOfCare.setVitalsRecords(store.vitals.data);
         usSpinnerService.stop('vitals-spinner');
       }
-
     };
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    $scope.transferOfCareCreate = transferOfCareActions.create;
   }
 }
 

@@ -17,6 +17,8 @@ let templateCreate= require('./referrals-create.html');
 
 class ReferralsCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, referralsActions, usSpinnerService, serviceRequests, serviceFormatted) {
+    $scope.actionLoadList = referralsActions.all;
+    $scope.actionCreateDetail = referralsActions.create;
 
   	$scope.referralsEdit = {};
   	$scope.referralsEdit.dateCreated = new Date();
@@ -36,34 +38,29 @@ class ReferralsCreateController {
 
 		$scope.isEdit = false;
 
-		this.setCurrentPageData = function (data) {
-      if (data.referrals.dataCreate !== null) {
-        this.goList();
-      }
-		  if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-		  }
-		  if (serviceRequests.currentUserData) {
-        $scope.currentUser = serviceRequests.currentUserData;
-        $scope.referralsEdit.author = $scope.currentUser.email;
-		  }
-		};
-
-		let unsubscribe = $ngRedux.connect(state => ({
-      		getStoreData: this.setCurrentPageData(state)
-		}))(this);
-
 		$scope.create = function (referralsForm, referral) {
 			$scope.formSubmitted = true;
 
 			if (referralsForm.$valid) {
         serviceFormatted.propsToString(referral);
-				$scope.referralsCreate(this.currentPatient.id, referral);
+        $scope.actionCreateDetail($stateParams.patientId, referral);
 			}
 		}.bind(this);
 
-		$scope.referralsCreate = referralsActions.create;
+    this.setCurrentPageData = function (store) {
+      if (store.referrals.dataCreate !== null) {
+        $scope.actionLoadList($stateParams.patientId);
+        this.goList();
+      }
+      if (serviceRequests.currentUserData) {
+        $scope.currentUser = serviceRequests.currentUserData;
+        $scope.referralsEdit.author = $scope.currentUser.email;
+      }
+    };
 
+    let unsubscribe = $ngRedux.connect(state => ({
+      getStoreData: this.setCurrentPageData(state)
+    }))(this);
     $scope.$on('$destroy', unsubscribe);
   }
 }

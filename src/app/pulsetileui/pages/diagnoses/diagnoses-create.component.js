@@ -16,7 +16,10 @@
 let templateDiagnosesCreate = require('./diagnoses-create.html');
 
 class DiagnosesCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, diagnosesActions, serviceRequests, serviceFormatted) {
+  constructor($scope, $state, $stateParams, $ngRedux, diagnosesActions, serviceRequests, serviceFormatted) {
+    $scope.actionLoadList = diagnosesActions.all;
+    $scope.actionCreateDetail = diagnosesActions.create;
+
     $scope.diagnosis = {};
 
     $scope.diagnosis.isImport = false;
@@ -38,19 +41,6 @@ class DiagnosesCreateController {
         detailsIndex: $stateParams.importData.documentIndex,
         page: 1
       });
-    }
-
-    this.setCurrentPageData = function (data) {
-      if (data.diagnoses.dataCreate !== null) {
-        this.goList();
-      }
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
-      if (serviceRequests.currentUserData) {
-        $scope.currentUser = serviceRequests.currentUserData;
-        $scope.diagnosis.author = $scope.currentUser.email;
-      }
     };
 
     this.goList = function () {
@@ -60,7 +50,7 @@ class DiagnosesCreateController {
         searchString: $stateParams.searchString,
         queryType: $stateParams.queryType
       });
-    }
+    };
     this.cancel = function () {
       this.goList();
     };
@@ -82,7 +72,7 @@ class DiagnosesCreateController {
           originalComposition: diagnosis.originalComposition
         };
         serviceFormatted.propsToString(toAdd);
-        $scope.diagnosesCreate(this.currentPatient.id, toAdd);
+        $scope.actionCreateDetail($stateParams.patientId, toAdd);
       }
     }.bind(this);
 
@@ -92,13 +82,24 @@ class DiagnosesCreateController {
 
     $scope.formDisabled = true;
 
+    this.setCurrentPageData = function (store) {
+      if (store.diagnoses.dataCreate !== null) {
+        $scope.actionLoadList($stateParams.patientId);
+        this.goList();
+      }
+      if (store.patientsGet.data) {
+        this.currentPatient = store.patientsGet.data;
+      }
+      if (serviceRequests.currentUserData) {
+        $scope.currentUser = serviceRequests.currentUserData;
+        $scope.diagnosis.author = $scope.currentUser.email;
+      }
+    };
+
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    $scope.diagnosesCreate = diagnosesActions.create;
   }
 }
 
@@ -107,5 +108,5 @@ const DiagnosesCreateComponent = {
   controller: DiagnosesCreateController
 };
 
-DiagnosesCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'diagnosesActions', 'serviceRequests', 'serviceFormatted'];
+DiagnosesCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'diagnosesActions', 'serviceRequests', 'serviceFormatted'];
 export default DiagnosesCreateComponent;

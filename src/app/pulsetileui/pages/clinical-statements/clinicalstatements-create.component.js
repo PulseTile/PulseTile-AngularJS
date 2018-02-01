@@ -20,6 +20,12 @@ let _ = require('underscore');
 
 class ClinicalstatementsCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, usSpinnerService, serviceRequests, serviceFormatted) {
+    $scope.actionLoadList = clinicalstatementsActions.all;
+    $scope.actionCreateDetail = clinicalstatementsActions.create;
+    this.clinicalstatementsTags = clinicalstatementsActions.getTags;
+    this.clinicalstatementsQuery = clinicalstatementsActions.query;
+
+    this.clinicalstatementsTags($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
 
     this.clinicalStatement = $stateParams.source;
     $scope.statements = [];
@@ -33,32 +39,6 @@ class ClinicalstatementsCreateController {
     };
     $scope.queryFilter = '';
     $scope.openSearch = false;
-    
-    /* istanbul ignore next  */
-    this.setCurrentPageData = function (data) {
-      if (data.clinicalstatements.dataCreate !== null) {
-        this.goList();
-      }
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
-      if (serviceRequests.currentUserData) {
-        this.currentUser = serviceRequests.currentUserData;
-        $scope.clinicalStatementCreate.dateCreated = new Date();
-        $scope.clinicalStatementCreate.author = this.currentUser.email;
-      }
-      if (data.clinicalstatements.dataTags) {
-        $scope.tags = data.clinicalstatements.dataTags;
-      }
-      if (data.clinicalstatements.searchData && $scope.clinicalTag.length) {
-        $scope.statements = data.clinicalstatements.searchData;
-        $scope.statementsText = _.map($scope.statements, function (el, index) {
-          el.index = index;
-          return el;
-        });
-      }
-      usSpinnerService.stop("clinicalStatementDetail-spinner");
-    };
 
     this.getTag = function (tag) {
       $scope.clinicalTag = tag;
@@ -98,7 +78,7 @@ class ClinicalstatementsCreateController {
       $scope.clinicalTag = '';
       
       if (clinicalStatementForm.$valid) {
-        this.clinicalstatementsCreate($stateParams.patientId, $scope.clinicalStatementCreate);
+        $scope.actionCreateDetail($stateParams.patientId, $scope.clinicalStatementCreate);
       }
     }.bind(this);
 
@@ -106,17 +86,38 @@ class ClinicalstatementsCreateController {
     $scope.queryFiltering = function (row) {
       return serviceFormatted.formattedSearching2(row, $scope.queryFilter);
     };
-    
+
+    /* istanbul ignore next  */
+    this.setCurrentPageData = function (store) {
+      const state = store.clinicalstatements;
+
+      if (state.dataCreate !== null) {
+        $scope.actionLoadList($stateParams.patientId);
+        this.goList();
+      }
+      if (serviceRequests.currentUserData) {
+        this.currentUser = serviceRequests.currentUserData;
+        $scope.clinicalStatementCreate.dateCreated = new Date();
+        $scope.clinicalStatementCreate.author = this.currentUser.email;
+      }
+      if (state.dataTags) {
+        $scope.tags = state.dataTags;
+      }
+      if (state.searchData && $scope.clinicalTag.length) {
+        $scope.statements = state.searchData;
+        $scope.statementsText = _.map($scope.statements, function (el, index) {
+          el.index = index;
+          return el;
+        });
+      }
+      usSpinnerService.stop("clinicalStatementDetail-spinner");
+    };
+
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
 
-    this.clinicalstatementsTags = clinicalstatementsActions.getTags;
-    this.clinicalstatementsQuery = clinicalstatementsActions.query;
-    this.clinicalstatementsCreate = clinicalstatementsActions.create;
-    this.clinicalstatementsTags($stateParams.patientId, $stateParams.detailsIndex, $stateParams.source);
 
     // Add Dropdown to Input (select or change value)
     $scope.cc = 0;

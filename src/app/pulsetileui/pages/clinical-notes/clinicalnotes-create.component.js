@@ -18,21 +18,11 @@ let templateClinicalnotesCreate = require('./clinicalnotes-create.html');
 
 class ClinicalnotesCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, clinicalnotesActions, serviceRequests, serviceFormatted) {
+    $scope.actionLoadList = clinicalnotesActions.all;
+    $scope.actionCreateDetail = clinicalnotesActions.create;
+
     $scope.clinicalNote = {};
     $scope.clinicalNote.dateCreated = new Date().toISOString().slice(0, 10);
-    
-    this.setCurrentPageData = function (data) {
-      if (data.clinicalnotes.dataCreate !== null) {
-        this.goList();
-      }
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
-      if (serviceRequests.currentUserData) {
-        $scope.currentUser = serviceRequests.currentUserData;
-        $scope.clinicalNote.author = $scope.currentUser.email;
-      }
-    };
 
     this.goList = function () {
       $state.go('clinicalNotes', {
@@ -60,17 +50,25 @@ class ClinicalnotesCreateController {
         };
 
         serviceFormatted.propsToString(toAdd, 'dateCreated');
-        $scope.clinicalnotesCreate(this.currentPatient.id, toAdd);
+        $scope.actionCreateDetail($stateParams.patientId, toAdd);
       }
     }.bind(this);
+
+    this.setCurrentPageData = function (store) {
+      if (store.clinicalnotes.dataCreate !== null) {
+        $scope.actionLoadList($stateParams.patientId);
+        this.goList();
+      }
+      if (serviceRequests.currentUserData) {
+        $scope.currentUser = serviceRequests.currentUserData;
+        $scope.clinicalNote.author = $scope.currentUser.email;
+      }
+    };
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    $scope.clinicalnotesCreate = clinicalnotesActions.create;
   }
 }
 

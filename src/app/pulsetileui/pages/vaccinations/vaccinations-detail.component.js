@@ -16,7 +16,7 @@
 let templateVaccinationsDetail = require('./vaccinations-detail.html');
 
 class VaccinationsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vaccinationsActions, serviceRequests, usSpinnerService, serviceFormatted) {
+  constructor($scope, $state, $stateParams, $ngRedux, vaccinationsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     this.actionLoadList = vaccinationsActions.all;
     this.actionLoadDetail = vaccinationsActions.get;
     $scope.actionUpdateDetail = vaccinationsActions.update;
@@ -96,5 +96,5 @@ const VaccinationsDetailComponent = {
   controller: VaccinationsDetailController
 };
 
-VaccinationsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vaccinationsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
+VaccinationsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'vaccinationsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default VaccinationsDetailComponent;

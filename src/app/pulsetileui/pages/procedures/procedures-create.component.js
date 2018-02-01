@@ -16,22 +16,12 @@
 let templateProceduresCreate = require('./procedures-create.html');
 
 class ProceduresCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, proceduresActions, serviceRequests, serviceFormatted) {
+  constructor($scope, $state, $stateParams, $ngRedux, proceduresActions, serviceRequests, serviceFormatted) {
+    $scope.actionLoadList = proceduresActions.all;
+    $scope.actionCreateDetail = proceduresActions.create;
+
     $scope.procedure = {};
     $scope.procedure.dateSubmitted = new Date();
-
-    this.setCurrentPageData = function (data) {
-      if (data.procedures.dataCreate !== null) {
-        this.goList();
-      }
-      if (data.patientsGet.data) {
-        $scope.currentPatient = data.patientsGet.data;
-      }
-      if (serviceRequests.currentUserData) {
-        $scope.currentUser = serviceRequests.currentUserData;
-        $scope.procedure.author = $scope.currentUser.email;
-      }
-    };
 
     this.goList = function () {
       $state.go('procedures', {
@@ -51,17 +41,25 @@ class ProceduresCreateController {
 
       if (procedureForm.$valid) {
         serviceFormatted.propsToString(procedure);
-        $scope.proceduresCreate($scope.currentPatient.id, procedure);
+        $scope.actionCreateDetail($stateParams.patientId, procedure);
+      }
+    };
+
+    this.setCurrentPageData = function (store) {
+      if (store.procedures.dataCreate !== null) {
+        $scope.actionLoadList($stateParams.patientId);
+        this.goList();
+      }
+      if (serviceRequests.currentUserData) {
+        $scope.currentUser = serviceRequests.currentUserData;
+        $scope.procedure.author = $scope.currentUser.email;
       }
     };
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    $scope.proceduresCreate = proceduresActions.create;
   }
 }
 
@@ -70,5 +68,5 @@ const ProceduresCreateComponent = {
   controller: ProceduresCreateController
 };
 
-ProceduresCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'proceduresActions', 'serviceRequests', 'serviceFormatted'];
+ProceduresCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'proceduresActions', 'serviceRequests', 'serviceFormatted'];
 export default ProceduresCreateComponent;

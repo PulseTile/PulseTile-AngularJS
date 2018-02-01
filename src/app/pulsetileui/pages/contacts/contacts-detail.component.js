@@ -16,7 +16,7 @@
 let templateContactsDetail= require('./contacts-detail.html');
 
 class ContactsDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, contactsActions, serviceRequests, usSpinnerService, serviceFormatted) {
+  constructor($scope, $state, $stateParams, $ngRedux, contactsActions, serviceRequests, usSpinnerService, serviceFormatted) {
     this.actionLoadList = contactsActions.all;
     this.actionLoadDetail = contactsActions.get;
     $scope.actionUpdateDetail = contactsActions.update;
@@ -105,5 +105,5 @@ const ContactsDetailComponent = {
   controller: ContactsDetailController
 };
 
-ContactsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'contactsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
+ContactsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'contactsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default ContactsDetailComponent;

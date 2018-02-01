@@ -16,23 +16,13 @@
 let templateContactsCreate= require('./contacts-create.html');
 
 class ContactsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, contactsActions, serviceRequests, serviceFormatted) {
+  constructor($scope, $state, $stateParams, $ngRedux, contactsActions, serviceRequests, serviceFormatted) {
+    $scope.actionLoadList = contactsActions.all;
+    $scope.actionCreateDetail = contactsActions.create;
+
     $scope.contact = {};
     $scope.contact.dateSubmitted = new Date();
     $scope.contact.relationshipTerminology = 'local';
-
-    this.setCurrentPageData = function (store) {
-      if (store.contacts.dataCreate !== null) {
-        this.goList();
-      }
-      if (store.patientsGet.data) {
-        $scope.currentPatient = store.patientsGet.data;
-      }
-      if (serviceRequests.currentUserData) {
-        $scope.currentUser = serviceRequests.currentUserData;
-        $scope.contact.author = $scope.currentUser.email;
-      }
-    };
 
     this.goList = function () {
       $state.go('contacts', {
@@ -52,17 +42,26 @@ class ContactsCreateController {
 
       if (contactForm.$valid) {
         serviceFormatted.propsToString(contact);
-        $scope.contactsCreate($scope.currentPatient.id, contact);
+        $scope.actionCreateDetail($stateParams.patientId, contact);
       }
     }.bind(this);
+
+    this.setCurrentPageData = function (store) {
+      if (store.contacts.dataCreate !== null) {
+        $scope.actionLoadList($stateParams.patientId);
+        this.goList();
+      }
+      if (serviceRequests.currentUserData) {
+        $scope.currentUser = serviceRequests.currentUserData;
+        $scope.contact.author = $scope.currentUser.email;
+      }
+    };
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
 
     $scope.$on('$destroy', unsubscribe);
-
-    $scope.contactsCreate = contactsActions.create;
   }
 }
 
@@ -71,5 +70,5 @@ const ContactsCreateComponent = {
   controller: ContactsCreateController
 };
 
-ContactsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'contactsActions', 'serviceRequests', 'serviceFormatted'];
+ContactsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'contactsActions', 'serviceRequests', 'serviceFormatted'];
 export default ContactsCreateComponent;

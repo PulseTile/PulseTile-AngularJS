@@ -16,23 +16,13 @@
 let templateVaccinationsCreate = require('./vaccinations-create.html');
 
 class VaccinationsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vaccinationsActions, serviceRequests, serviceFormatted) {
+  constructor($scope, $state, $stateParams, $ngRedux, vaccinationsActions, serviceRequests, serviceFormatted) {
+    $scope.actionLoadList = vaccinationsActions.all;
+    $scope.actionCreateDetail = vaccinationsActions.create;
+
     $scope.vaccination = {};
     $scope.vaccination.dateCreated = new Date();
     $scope.vaccination.source = 'Marand';
-
-    this.setCurrentPageData = function (data) {
-      if (data.vaccinations.dataCreate !== null) {
-        this.goList();
-      }
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
-      if (serviceRequests.currentUserData) {
-        $scope.currentUser = serviceRequests.currentUserData;
-        $scope.vaccination.author = $scope.currentUser.email;
-      }
-    };
 
     this.goList = function () {
       $state.go('vaccinations', {
@@ -60,17 +50,28 @@ class VaccinationsCreateController {
           source: vaccination.source
         };
         serviceFormatted.propsToString(toAdd, 'vaccinationDateTime');
-        $scope.vaccinationsCreate(this.currentPatient.id, toAdd);
+        $scope.actionCreateDetail($stateParams.patientId, toAdd);
       }
     }.bind(this);
+
+    this.setCurrentPageData = function (store) {
+      if (store.vaccinations.dataCreate !== null) {
+        $scope.actionLoadList($stateParams.patientId);
+        this.goList();
+      }
+      if (data.patientsGet.data) {
+        this.currentPatient = data.patientsGet.data;
+      }
+      if (serviceRequests.currentUserData) {
+        $scope.currentUser = serviceRequests.currentUserData;
+        $scope.vaccination.author = $scope.currentUser.email;
+      }
+    };
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    $scope.vaccinationsCreate = vaccinationsActions.create;
   }
 }
 
@@ -79,5 +80,5 @@ const VaccinationsCreateComponent = {
   controller: VaccinationsCreateController
 };
 
-VaccinationsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vaccinationsActions', 'serviceRequests', 'serviceFormatted'];
+VaccinationsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'vaccinationsActions', 'serviceRequests', 'serviceFormatted'];
 export default VaccinationsCreateComponent;

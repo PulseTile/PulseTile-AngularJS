@@ -16,62 +16,59 @@
 let templateGenericMdtCreate= require('./generic-mdt-create.html');
 
 class GenericMdtCreateController {
-    constructor($scope, $state, $stateParams, $ngRedux, patientsActions, genericmdtActions, serviceRequests, serviceFormatted) {
-        $scope.genericMdt = {};
-        $scope.genericMdt.dateSubmitted = new Date();
-        // $scope.contact.dateSubmitted = new Date().toISOString().slice(0, 10);
-        $scope.genericMdt.relationshipCode = 'at0039';
-        $scope.genericMdt.relationshipTerminology = 'local';
-        
-        this.setCurrentPageData = function (data) {
-            if (data.genericmdt.dataCreate !== null) {
-                this.goList();
-            }
-            if (data.patientsGet.data) {
-                $scope.currentPatient = data.patientsGet.data;
-            }
-            if (serviceRequests.currentUserData) {
-                $scope.currentUser = serviceRequests.currentUserData;
-                $scope.genericMdt.author = $scope.currentUser.email;
-            }
-        };
+  constructor($scope, $state, $stateParams, $ngRedux, genericmdtActions, serviceRequests, serviceFormatted) {
+    $scope.actionLoadList = genericmdtActions.all;
+    $scope.actionCreateDetail = genericmdtActions.create;
 
-        this.goList = function () {
-            $state.go('genericMdt', {
-                patientId: $stateParams.patientId,
-                reportType: $stateParams.reportType,
-                searchString: $stateParams.searchString,
-                queryType: $stateParams.queryType
-            });
-        };
-        
-        this.cancel = function () {
-            this.goList();
-        };
-        
-        $scope.create = function (mdtForm, genericMdt) {
-            $scope.formSubmitted = true;
+    $scope.genericMdt = {};
+    $scope.genericMdt.dateSubmitted = new Date();
+    $scope.genericMdt.relationshipCode = 'at0039';
+    $scope.genericMdt.relationshipTerminology = 'local';
 
-            if (mdtForm.$valid) {
-                serviceFormatted.propsToString(genericMdt);
-                $scope.genericmdtCreate($scope.currentPatient.id, genericMdt);
-            }
-        };
+    this.goList = function () {
+      $state.go('genericMdt', {
+        patientId: $stateParams.patientId,
+        reportType: $stateParams.reportType,
+        searchString: $stateParams.searchString,
+        queryType: $stateParams.queryType
+      });
+    };
 
-        let unsubscribe = $ngRedux.connect(state => ({
-            getStoreData: this.setCurrentPageData(state)
-        }))(this);
+    this.cancel = function () {
+      this.goList();
+    };
 
-        $scope.$on('$destroy', unsubscribe);
+    $scope.create = function (mdtForm, genericMdt) {
+      $scope.formSubmitted = true;
 
-        $scope.genericmdtCreate = genericmdtActions.create;
-    }
+      if (mdtForm.$valid) {
+        serviceFormatted.propsToString(genericMdt);
+        $scope.actionCreateDetail($stateParams.patientId, genericMdt);
+      }
+    };
+
+    this.setCurrentPageData = function (data) {
+      if (data.genericmdt.dataCreate !== null) {
+        $scope.actionLoadList($stateParams.patientId);
+        this.goList();
+      }
+      if (serviceRequests.currentUserData) {
+        $scope.currentUser = serviceRequests.currentUserData;
+        $scope.genericMdt.author = $scope.currentUser.email;
+      }
+    };
+
+    let unsubscribe = $ngRedux.connect(state => ({
+      getStoreData: this.setCurrentPageData(state)
+    }))(this);
+    $scope.$on('$destroy', unsubscribe);
+  }
 }
 
 const GenericMdtCreateComponent = {
-    template: templateGenericMdtCreate,
-    controller: GenericMdtCreateController
+  template: templateGenericMdtCreate,
+  controller: GenericMdtCreateController
 };
 
-GenericMdtCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'genericmdtActions', 'serviceRequests', 'serviceFormatted'];
+GenericMdtCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'genericmdtActions', 'serviceRequests', 'serviceFormatted'];
 export default GenericMdtCreateComponent;

@@ -16,7 +16,10 @@
 let templateEventsCreate = require('./events-create.html');
 
 class EventsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, eventsActions, serviceRequests, serviceDateTimePicker, serviceFormatted) {
+  constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, serviceDateTimePicker, serviceFormatted) {
+    $scope.actionLoadList = eventsActions.all;
+    $scope.actionCreateDetail = eventsActions.create;
+
     var currentStateName = $state.router.globals.$current.name;
     var partsCurrentStateName = currentStateName.split('-');
     this.typeCreate = partsCurrentStateName[partsCurrentStateName.length - 1];
@@ -44,20 +47,6 @@ class EventsCreateController {
       default: 
           $scope.event.type = 'Event';
     }
-
-    /* istanbul ignore next */
-    this.setCurrentPageData = function (data) {
-      if (data.events.dataCreate !== null) {
-        this.goList();
-      }
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
-      if (serviceRequests.currentUserData) {
-        $scope.currentUser = serviceRequests.currentUserData;
-        $scope.event.author = $scope.currentUser.email;
-      }
-    };
 
     /* istanbul ignore next */
     this.goList = function () {
@@ -88,17 +77,26 @@ class EventsCreateController {
         };
         
         serviceFormatted.propsToString(toAdd);
-        $scope.eventsCreate(this.currentPatient.id, toAdd);
+        $scope.actionCreateDetail($stateParams.patientId, toAdd);
       }
     }.bind(this);
+
+    /* istanbul ignore next */
+    this.setCurrentPageData = function (store) {
+      if (store.events.dataCreate !== null) {
+        $scope.actionLoadList($stateParams.patientId);
+        this.goList();
+      }
+      if (serviceRequests.currentUserData) {
+        $scope.currentUser = serviceRequests.currentUserData;
+        $scope.event.author = $scope.currentUser.email;
+      }
+    };
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    $scope.eventsCreate = eventsActions.create;
   }
 }
 
@@ -107,5 +105,5 @@ const EventsCreateComponent = {
   controller: EventsCreateController
 };
 
-EventsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'eventsActions', 'serviceRequests', 'serviceDateTimePicker', 'serviceFormatted'];
+EventsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests', 'serviceDateTimePicker', 'serviceFormatted'];
 export default EventsCreateComponent;

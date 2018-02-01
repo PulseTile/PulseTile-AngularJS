@@ -16,7 +16,9 @@
 let templateCreate = require('./drawings-create.html');
 
 class DrawingsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, drawingsActions, serviceRequests, serviceFormatted, usSpinnerService, $window) {
+  constructor($scope, $state, $stateParams, $ngRedux, drawingsActions, serviceRequests, serviceFormatted) {
+    $scope.actionLoadList = drawingsActions.all;
+    $scope.actionCreateDetail = drawingsActions.create;
 
     $scope.drawingEdit = {};
     $scope.drawingEdit.dateCreated = new Date();
@@ -46,9 +48,11 @@ class DrawingsCreateController {
           drawingBase64: drawingEdit.drawingBase64,
           name: drawingEdit.name,
           author: drawingEdit.author,
+          dateCreated: new Date().getTime(),
+          dateUpdated: new Date().getTime(),
         };
         serviceFormatted.propsToString(toAdd);
-        $scope.drawingsCreate($stateParams.patientId, toAdd);
+        $scope.actionCreateDetail($stateParams.patientId, toAdd);
       }
     }.bind(this);
 
@@ -64,12 +68,10 @@ class DrawingsCreateController {
     };
 
     /* istanbul ignore next */
-    this.setCurrentPageData = function (data) {
-      if (data.drawings.dataCreate !== null) {
+    this.setCurrentPageData = function (store) {
+      if (store.drawings.dataCreate !== null) {
+        $scope.actionLoadList($stateParams.patientId);
         this.goList();
-      }
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
       }
       if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;
@@ -80,10 +82,7 @@ class DrawingsCreateController {
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    $scope.drawingsCreate = drawingsActions.create;
   }
 }
 
@@ -92,5 +91,5 @@ const DrawingsCreateComponent = {
   controller: DrawingsCreateController
 };
 
-DrawingsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'drawingsActions', 'serviceRequests', 'serviceFormatted', 'usSpinnerService', '$window'];
+DrawingsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'drawingsActions', 'serviceRequests', 'serviceFormatted'];
 export default DrawingsCreateComponent;

@@ -18,6 +18,8 @@ let templateMedicationsCreate = require('./medications-create.html');
 
 class MedicationsCreateController {
   constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, serviceRequests, usSpinnerService, serviceFormatted) {
+    $scope.actionLoadList = medicationsActions.all;
+    $scope.actionCreateDetail = medicationsActions.create;
 
     $scope.medication = {};
     
@@ -37,29 +39,9 @@ class MedicationsCreateController {
         detailsIndex: $stateParams.importData.documentIndex,
         page: 1
       });
-    }
-    
-    this.setCurrentPageData = function (data) {
-      if (data.medication.dataCreate !== null) {
-        this.goList();
-      }
-      if (data.patientsGet.data) {
-        $scope.currentPatient = data.patientsGet.data;
-      }
-      if (serviceRequests.currentUserData) {
-        $scope.currentUser = serviceRequests.currentUserData;
-        $scope.medication.author = $scope.currentUser.email;
-      }
     };
 
-    let unsubscribe = $ngRedux.connect(state => ({
-      getStoreData: this.setCurrentPageData(state)
-    }))(this);
-
-    $scope.$on('$destroy', unsubscribe);
-
     //Create Medication
-
     $scope.routes = [
       'Po Per Oral',
       'IV Intra Venous',
@@ -70,7 +52,6 @@ class MedicationsCreateController {
       'IM Intra Muscular'
     ];
 
-    $scope.patient = $scope.currentPatient;
     this.goList = function () {
       $state.go('medications', {
         patientId: $stateParams.patientId,
@@ -78,10 +59,12 @@ class MedicationsCreateController {
         searchString: $stateParams.searchString,
         queryType: $stateParams.queryType
       });
-    }
+    };
+
     this.cancel = function () {
       this.goList();
     };
+
     $scope.create = function (medicationForm, medication) {
       $scope.formSubmitted = true;
 
@@ -109,13 +92,25 @@ class MedicationsCreateController {
         };
 
         serviceFormatted.propsToString(toAdd, 'startDate', 'startTime', 'dateCreated');
-        $scope.medicationsCreate($scope.patient.id, toAdd);
-
+        $scope.actionCreateDetail($stateParams.patientId, toAdd);
       }
     };
 
-    $scope.medicationsLoad = medicationsActions.all;
-    $scope.medicationsCreate = medicationsActions.create;
+    this.setCurrentPageData = function (store) {
+      if (store.medication.dataCreate !== null) {
+        $scope.actionLoadList($stateParams.patientId);
+        this.goList();
+      }
+      if (serviceRequests.currentUserData) {
+        $scope.currentUser = serviceRequests.currentUserData;
+        $scope.medication.author = $scope.currentUser.email;
+      }
+    };
+
+    let unsubscribe = $ngRedux.connect(state => ({
+      getStoreData: this.setCurrentPageData(state)
+    }))(this);
+    $scope.$on('$destroy', unsubscribe);
   }
 }
 

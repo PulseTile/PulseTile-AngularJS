@@ -16,7 +16,10 @@
 let templateVitalsCreate = require('./vitals-create.html');
 
 class VitalsCreateController {
-  constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, serviceVitalsSigns, serviceFormatted) {
+  constructor($scope, $state, $stateParams, $ngRedux, vitalsActions, serviceRequests, serviceVitalsSigns, serviceFormatted) {
+    $scope.actionLoadList = vitalsActions.all;
+    $scope.actionCreateDetail = vitalsActions.create;
+
     $scope.vitalStatuses = {};
     $scope.popoverLabels = serviceVitalsSigns.getLabels();
     $scope.pattern = serviceVitalsSigns.pattern;
@@ -24,21 +27,6 @@ class VitalsCreateController {
     $scope.vitalEdit = {};
     $scope.vitalEdit.dateCreated = Date.parse(new Date());
     $scope.vitalEdit.author = 'ripple_osi';
-
-    this.setCurrentPageData = function (data) {
-      if (data.vitals.dataCreate !== null) {
-        this.goList();
-      }
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
-      }
-      if (serviceRequests.currentUserData) {
-        $scope.currentUser = serviceRequests.currentUserData;
-        $scope.vitalEdit.author = $scope.currentUser.email;
-      }
-      
-      $scope.vitalStatuses = serviceVitalsSigns.setVitalStatuses($scope.vitalEdit);
-    };
 
     $scope.getHighlighterClass = function (vitalName) {
       return serviceVitalsSigns.getHighlighterClass($scope.vitalStatuses[vitalName]);
@@ -71,17 +59,27 @@ class VitalsCreateController {
 
       if (vitalForm.$valid) {
         serviceFormatted.propsToString(vital);
-        $scope.vitalsCreate(this.currentPatient.id, vital);
+        $scope.actionCreateDetail($stateParams.patientId, vital);
       }
     }.bind(this);
+
+    this.setCurrentPageData = function (data) {
+      if (data.vitals.dataCreate !== null) {
+        $scope.actionLoadList($stateParams.patientId);
+        this.goList();
+      }
+      if (serviceRequests.currentUserData) {
+        $scope.currentUser = serviceRequests.currentUserData;
+        $scope.vitalEdit.author = $scope.currentUser.email;
+      }
+
+      $scope.vitalStatuses = serviceVitalsSigns.setVitalStatuses($scope.vitalEdit);
+    };
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    $scope.vitalsCreate = vitalsActions.create;
   }
 }
 
@@ -90,5 +88,5 @@ const VitalsCreateComponent = {
   controller: VitalsCreateController
 };
 
-VitalsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vitalsActions', 'serviceRequests', 'serviceVitalsSigns', 'serviceFormatted'];
+VitalsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'vitalsActions', 'serviceRequests', 'serviceVitalsSigns', 'serviceFormatted'];
 export default VitalsCreateComponent;
