@@ -16,7 +16,7 @@
 let templateProfile = require('./profile.html');
 
 class ProfileController {
-  constructor($scope, $state, $stateParams, $ngRedux, allergiesActions, serviceRequests, usSpinnerService, $timeout, serviceThemes) {
+  constructor($scope, $state, $stateParams, $ngRedux, serviceRequests, usSpinnerService, $timeout, serviceThemes) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'profile'});
     serviceRequests.publisher('headerTitle', {title: 'Personal Information', isShowTitle: true});
 
@@ -219,9 +219,6 @@ class ProfileController {
     };
     $scope.$on('$destroy', setActiveThemeOnSite);
 
-    this.allergiesLoad = allergiesActions.all;
-    this.allergiesLoad($stateParams.patientId);
-
     $scope.$watch('logoFileParams.name', function() {
       $scope.exampleLogoB64 = '';
       if ($scope.logoFileParams.name) {
@@ -240,5 +237,5 @@ const ProfileComponent = {
   controller: ProfileController
 };
 
-ProfileController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions', 'serviceRequests', 'usSpinnerService', '$timeout', 'serviceThemes'];
+ProfileController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'serviceRequests', 'usSpinnerService', '$timeout', 'serviceThemes'];
 export default ProfileComponent;

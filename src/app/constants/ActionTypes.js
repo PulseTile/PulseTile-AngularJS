@@ -13,6 +13,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
+export const HANDLE_ERRORS = 'HANDLE_ERRORS';
 export const PAGE_PLUGIN_CHANGE = 'PAGE_PLUGIN_CHANGE';
 
 export const USER_LOGIN = 'USER_LOGIN';

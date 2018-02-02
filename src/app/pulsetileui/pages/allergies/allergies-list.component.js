@@ -44,6 +44,7 @@ class AllergiesListController {
 
     /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
+      console.log(store);
       const state = store.allergies;
       const pagesInfo = store.pagesInfo;
       const pluginName = 'allergies';

@@ -38,7 +38,7 @@ class ImageDetailController {
     });
 
     $scope.getURLtoImage = function(id) {
-      return 'http://46.101.95.245/orthanc/instances/' + id + '/preview';
+      return `${window.location.protocol}//46.101.95.245/orthanc/instances/${id}/preview`;
     };
 
     /* istanbul ignore next  */

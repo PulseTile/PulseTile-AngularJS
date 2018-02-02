@@ -215,7 +215,8 @@ class ReportChartController {
         });
       }
 
-      if (params.minValue && params.maxValue) {
+      if ((params.minValue || params.minValue === 0) &&
+           params.maxValue) {
         paramsArr.push({
           key: 'Age Range',
           value: params.minValue + '-' + params.maxValue
