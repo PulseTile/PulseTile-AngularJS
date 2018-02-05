@@ -14,6 +14,7 @@
   ~  limitations under the License.
 */
 let templateImageDetail= require('./image-detail.html');
+import { httpHandleErrors } from '../../handle-errors/handle-errors-actions';
 import cornerstoneJS from '../../../../cornerstone/cornerstone';
 import cornerstoneToolsJS from '../../../../cornerstone/cornerstoneTools';
 
@@ -35,7 +36,7 @@ class ImageDetailController {
           findFirstInstanceId(seriesIds[i], i);
       }
       usSpinnerService.stop('patientSummary-spinner');
-    });
+    }).catch(function (err) {$ngRedux.dispatch(httpHandleErrors(err))});
 
     $scope.getURLtoImage = function(id) {
       return `${window.location.protocol}//46.101.95.245/orthanc/instances/${id}/preview`;
@@ -45,7 +46,7 @@ class ImageDetailController {
     var findFirstInstanceId = function (seriesId, index) {
       serviceActions.getInstanceId($stateParams.patientId, seriesId, $stateParams.source).then(function (result) {
         $scope.instanceIds[index] = result.data.instanceId;
-      });
+      }).catch(function (err) {$ngRedux.dispatch(httpHandleErrors(err))});;
     };
 
     /* istanbul ignore next  */
@@ -54,7 +55,7 @@ class ImageDetailController {
         $scope.series[index] = result.data;
         $scope.series[index].seriesDate = moment($scope.series[index].seriesDate).format('DD-MMM-YYYY');
         $scope.series[index].seriesTime = moment($scope.series[index].seriesTime).format('h:mma');
-      });
+      }).catch(function (err) {$ngRedux.dispatch(httpHandleErrors(err))});;
     };
 
     /* istanbul ignore next  */

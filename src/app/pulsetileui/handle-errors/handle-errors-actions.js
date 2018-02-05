@@ -13,26 +13,13 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-import * as types from '../constants/ActionTypes';
+import * as types from '../../constants/ActionTypes';
 
-const INITIAL_STATE = {
-  status: null,
-  error: null
+export function httpHandleErrors(err) {
+	return {
+		type: types.HANDLE_ERRORS,
+		payload: {
+			error: err
+		}
+	};
 };
-
-export default function errorOfRequest(state = INITIAL_STATE, action) {
-  const { payload } = action;
-
-  var actions = {
-    [types.HANDLE_ERRORS]: (state) => {
-      debugger
-      return Object.assign({}, state, {
-        error: payload.error
-      });
-    },
-  };
-
-  return actions[action.type] ?
-    actions[action.type](state) :
-    state;
-}

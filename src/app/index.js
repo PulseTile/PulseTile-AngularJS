@@ -48,11 +48,13 @@ import httpMiddleware from './helpers/httpMiddleware';
 import Patient from './helpers/patient';
 import deviceDetector from './helpers/deviceDetector';
 import './helpers/polyfills';
+import { httpHandleErrors } from './pulsetileui/handle-errors/handle-errors-actions';
 
 //components 
 import UiKitComponent from './pulsetileui/pages/ui-kit/ui-kit.component';
 import ProfileComponent from './pulsetileui/pages/profile/profile.component';
-import HeaderComponent from './pulsetileui/header-bar/header.component.js';
+import HeaderComponent from './pulsetileui/header-bar/header.component';
+import HandleErrorsComponent from './pulsetileui/handle-errors/handle-errors.component';
 import PatientsChartsComponent from './pulsetileui/pages/patients-charts/patients-charts.component';
 import PatientsSummaryComponent from './pulsetileui/pages/patient-summary/patients-summary.component';
 import PatientsListFullComponent from './pulsetileui/pages/patients-list-full/patients-list-full.component';
@@ -77,6 +79,7 @@ import ScheduleModal from './pulsetileui/pages/events/schedule-modal';
 import ConfirmationModal from './pulsetileui/confirmation/confirmation';
 import ConfirmationRedirectModal from './pulsetileui/confirmation/confirmation-redirect';
 import ConfirmationDocsModal from './pulsetileui/confirmation/confirmation-documents';
+import ConfirmationHandleErrors from './pulsetileui/handle-errors/handle-errors-confirmation';
 
 import routeConfig from 'app/index.route';
 import 'app/scss/core.scss';
@@ -115,6 +118,7 @@ let app = angular
     .factory('ConfirmationModal', ConfirmationModal)
     .factory('ConfirmationRedirectModal', ConfirmationRedirectModal)
     .factory('ConfirmationDocsModal', ConfirmationDocsModal)
+	  .factory('ConfirmationHandleErrors', ConfirmationHandleErrors)
 
     
     .factory('httpMiddleware', httpMiddleware)
@@ -140,7 +144,8 @@ let app = angular
   app
     .component('uiKitComponent', UiKitComponent)
     .component('profileComponent', ProfileComponent)
-    .component('headerComponent', HeaderComponent)
+		.component('headerComponent', HeaderComponent)
+		.component('handleErrorsComponent', HandleErrorsComponent)
     .component('patientsChartsComponent', PatientsChartsComponent)
     .component('patientsSummaryComponent', PatientsSummaryComponent)
     .component('patientsSidebarComponent', PatientsSidebarComponent)
@@ -209,8 +214,8 @@ let app = angular
 console.log('app start');
 
 /*Project initialise*/
-app.run(['$rootScope', '$state', 'serviceRequests', 'serviceThemes', 'ConfirmationRedirectModal',
-  function($rootScope, $state, serviceRequests, serviceThemes, ConfirmationRedirectModal) {
+app.run(['$rootScope', '$state', 'serviceRequests', 'serviceThemes', 'ConfirmationRedirectModal', '$ngRedux',
+  function($rootScope, $state, serviceRequests, serviceThemes, ConfirmationRedirectModal, $ngRedux) {
     var classLoadingPage = 'loading';
     var body = $('body');
     var userData = null;
@@ -285,8 +290,14 @@ app.run(['$rootScope', '$state', 'serviceRequests', 'serviceThemes', 'Confirmati
           }
 
           body.removeClass(classLoadingPage);
-        });
-      });
+        }).catch(function (err) {
+					err.initialiseError = true;
+					$ngRedux.dispatch(httpHandleErrors(err));
+				});
+      }).catch(function (err) {
+				err.initialiseError = true;
+				$ngRedux.dispatch(httpHandleErrors(err));
+			});
     };
 
     var auth0;
@@ -329,10 +340,10 @@ app.run(['$rootScope', '$state', 'serviceRequests', 'serviceThemes', 'Confirmati
         login();
       }
 
-    }, function (error){
-      //for dev and testing
-      login();
-    });
+    }).catch(function (err) {
+      err.initialiseError = true;
+      $ngRedux.dispatch(httpHandleErrors(err));
+		});
 
     /* istanbul ignore next */
     $rootScope.$on('$locationChangeSuccess', function() {

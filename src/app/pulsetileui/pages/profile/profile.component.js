@@ -14,6 +14,7 @@
   ~  limitations under the License.
 */
 let templateProfile = require('./profile.html');
+import { httpHandleErrors } from '../../handle-errors/handle-errors-actions';
 
 class ProfileController {
   constructor($scope, $state, $stateParams, $ngRedux, serviceRequests, usSpinnerService, $timeout, serviceThemes) {
@@ -91,7 +92,9 @@ class ProfileController {
         serviceThemes.setActiveTheme(toAdd.themeColor);
         serviceThemes.setLogoB64(toAdd.logoB64);
 
-        serviceRequests.setAppTheme(toAdd);
+        serviceRequests.setAppTheme(toAdd).catch(function (err) {
+					$ngRedux.dispatch(httpHandleErrors(err));
+				});
       }
     }.bind(this);
 

@@ -9,6 +9,9 @@
 }
 
 /* Confirmation Modal */
+.modal {
+  z-index: 10001 !important;
+}
 .modal-header {
   margin: -1px;
   margin-bottom: 0;
@@ -30,11 +33,25 @@
   border-top: 0;
   padding-top: 0;
 }
-.modal-backdrop { background-color: #000; }
+.modal-backdrop {
+  background-color: #000;
+  z-index: 10000 !important;
+}
+.modal-hide {
+  position: fixed;
+  top: -3000px;
+  left: -3000px;
+  right: -3000px;
+  bottom: -3000px;
+  z-index: 1;
+  background: transparent;
+}
 .modal-content {
   background: transparent;
   border-radius: 0;
   border: 0;
+  position: relative;
+  z-index: 2;
 }
 .modal-content-inner {
   border-radius: 6px 6px 0 0;

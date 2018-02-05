@@ -16,7 +16,7 @@
 let templateSearch = require('./search-advanced.html');
 
 class SearchAdvancedController {
-  constructor($scope, $http, $ngRedux, serviceRequests, searchActions, $state, $timeout, ConfirmationModal, $rootScope, serviceFormatted) {
+  constructor($scope, serviceRequests, $state, $timeout, $rootScope, serviceFormatted) {
     $scope.typeOfGroupOfFieldsOfSearches = '';
     $scope.selectAgeField = 'range';
     $scope.isOpenPanelSearch = true;
@@ -346,5 +346,5 @@ const SearchAdvancedComponent = {
   controller: SearchAdvancedController
 };
 
-SearchAdvancedController.$inject = ['$scope', '$http', '$ngRedux', 'serviceRequests', 'searchActions', '$state', '$timeout', 'ConfirmationModal', '$rootScope', 'serviceFormatted'];
+SearchAdvancedController.$inject = ['$scope', 'serviceRequests', '$state', '$timeout', '$rootScope', 'serviceFormatted'];
 export default SearchAdvancedComponent;

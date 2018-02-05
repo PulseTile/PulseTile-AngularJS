@@ -16,7 +16,7 @@
 import { combineReducers } from 'redux';
 
 import pagesInfo from './pages/pages-reducer';
-import errorOfRequest from './handle-errors-reducer';
+import errorOfRequest from '../pulsetileui/handle-errors/handle-errors-reducer';
 import patients from '../pulsetileui/pages/patients-list/patients-reducer-all';
 import patientsGet from '../pulsetileui/pages/patients-list/patients-reducer-get';
 import search from '../pulsetileui/search/search-reducer-all';

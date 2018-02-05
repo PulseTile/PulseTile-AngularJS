@@ -13,7 +13,9 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-export default function httpMiddleware($http, $timeout) {
+import * as actionTypes from '../constants/ActionTypes';
+
+export default function httpMiddleware($http) {
 
   function callAPI(config) {
     config = angular.extend(config, {
@@ -73,16 +75,27 @@ export default function httpMiddleware($http, $timeout) {
           meta
         }
       })),
-      error => dispatch(Object.assign({}, {
-        type: failureType,
-        error: true,
-        payload: {
-          error: error,
-          meta
-        }
-      }))
+      error => {
+				dispatch(Object.assign({}, {
+					type: failureType,
+					error: true,
+					payload: {
+						error: error,
+						meta
+					}
+				}));
+				// Handle all async Errors from Requests
+				dispatch(Object.assign({}, {
+					type: actionTypes.HANDLE_ERRORS,
+					error: true,
+					payload: {
+						error: error,
+						meta
+					}
+				}));
+      }
     );
   }
 }
 
-httpMiddleware.$inject = ['$http', '$timeout'];
+httpMiddleware.$inject = ['$http'];

@@ -26,10 +26,9 @@ class PatientsBannerController {
       const statePatients = data.patientsGet;
       const patientId = $stateParams.patientId;
 
-      if ((!statePatients.data || statePatients.data.id !== patientId)
+      if ((!statePatients.data || parseInt(statePatients.data.nhsNumber) !== patientId)
           && !statePatients.isFetching
           && !statePatients.error) {
-
         this.loadPatient(patientId);
       }
       if (statePatients.data) {

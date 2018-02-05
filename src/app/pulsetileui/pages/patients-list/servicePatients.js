@@ -1,6 +1,7 @@
-class servicePatients {
+import { httpHandleErrors } from '../../handle-errors/handle-errors-actions';
 
-  constructor (patientsActions, $http) {
+class servicePatients {
+  constructor (patientsActions, $http, $ngRedux) {
     this.isQueryCache = {};
 
     /* istanbul ignore next */
@@ -31,11 +32,13 @@ class servicePatients {
           if (responce.data.length) {
             patient = Object.assign(patient, responce.data[0]);
           }
-        }.bind(this));
+        }.bind(this)).catch(function (err) {
+					$ngRedux.dispatch(httpHandleErrors(err));
+				});
       }
     };
     
   }
 }
-servicePatients.$inject = ['patientsActions', '$http'];
+servicePatients.$inject = ['patientsActions', '$http', '$ngRedux'];
 export default servicePatients;
