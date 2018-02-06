@@ -19,7 +19,7 @@
   },
   "scripts": {
     "commit": "git-cz",
-    "build": "cross-env NODE_ENV=production webpack --display-chunks --progress && ./build_videochat.sh",
+    "build": "cross-env NODE_ENV=production webpack --display-chunks --progress && build_videochat.sh",
     "build-plugins": "cross-env NODE_ENV=extension webpack --display-chunks --progress",
     "copy": "cross-env NODE_ENV=copy webpack --display-chunks --progress",
     "clean": "del-cli target",

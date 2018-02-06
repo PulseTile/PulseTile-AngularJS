@@ -25,7 +25,7 @@ class ReferralsDetailController {
     this.actionLoadDetail($stateParams.patientId, $stateParams.detailsIndex);
 
 		$scope.isEdit = false;
-
+    /* istanbul ignore next */
 		this.edit = function () {
 			$scope.isEdit = true;
 
@@ -33,11 +33,11 @@ class ReferralsDetailController {
 			$scope.referralsEdit = Object.assign({}, this.referral);
 			$scope.referralsEdit.dateCreated = new Date();
 		};
-
+    /* istanbul ignore next */
 		this.cancelEdit = function () {
 			$scope.isEdit = false;
 		};
-
+    /* istanbul ignore next */
 		$scope.confirmEdit = function (referralsForm, referrals) {
 			$scope.formSubmitted = true;
 
@@ -60,7 +60,7 @@ class ReferralsDetailController {
         $scope.actionUpdateDetail($stateParams.patientId, referrals.sourceId, toUpdate);
 			}
 		};
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.referrals;
       const { patientId, detailsIndex } = $stateParams;

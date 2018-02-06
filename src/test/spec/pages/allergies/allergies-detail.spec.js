@@ -3,20 +3,13 @@ import AllergiesDetailComponent from '../../../../app/pulsetileui/pages/allergie
 import '../../../../app/index';
 
 describe('Allergies Detail', function() {
-
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope, ctrl, controller, template, stateParams, state, ngRedux, allergiesActions, serviceRequests, usSpinnerService, element;
+  let scope, ctrl, controller, template, actions, element;
 
   beforeEach(inject(($injector, $controller, $compile, _$state_, _$stateParams_, _$ngRedux_, _allergiesActions_, _serviceRequests_, _usSpinnerService_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
-    state = _$state_;
-    ngRedux = _$ngRedux_;
-    stateParams = _$stateParams_;
-    allergiesActions = _allergiesActions_;
-    serviceRequests = _serviceRequests_;
-    usSpinnerService = _usSpinnerService_;
 
     element = angular.element('<allergies-detail-component></allergies-detail-component>');
     element = $compile(element)(scope);
@@ -24,54 +17,50 @@ describe('Allergies Detail', function() {
     template = AllergiesDetailComponent.template;
     ctrl = controller(AllergiesDetailComponent.controller, {
       $scope: scope,
-      $state: state,
-      $stateParams: stateParams,
-      $ngRedux: ngRedux,
-      allergiesActions: allergiesActions,
-      serviceRequests: serviceRequests,
-      usSpinnerService: usSpinnerService
+      $state: _$state_,
+      $stateParams: _$stateParams_,
+      $ngRedux: _$ngRedux_,
+      allergiesActions: _allergiesActions_,
+      serviceRequests: _serviceRequests_,
+      usSpinnerService: _usSpinnerService_
     });
+    actions = $injector.get('allergiesActions');
   }));
 
   beforeEach(function() {
+    spyOn(scope, 'actionUpdateDetail');
     spyOn(scope, 'confirmEdit');
-    spyOn(scope, 'confirmEditMeta');
+    spyOn(ctrl, 'actionLoadList');
+    spyOn(ctrl, 'actionLoadDetail');
     spyOn(ctrl, 'edit');
-    spyOn(ctrl, 'allergiesLoad');
-    spyOn(ctrl, 'setCurrentPageData');
     spyOn(ctrl, 'cancelEdit');
-    spyOn(ctrl, 'editMeta');
-    spyOn(ctrl, 'cancelEditMeta');
-    spyOn(allergiesActions, 'all');
-    spyOn(allergiesActions, 'get');
-    spyOn(allergiesActions, 'create');
-    spyOn(allergiesActions, 'update');
+    spyOn(ctrl, 'setCurrentPageData');
+    spyOn(actions, 'all');
+    spyOn(actions, 'get');
+    spyOn(actions, 'create');
+    spyOn(actions, 'update');
 
+    scope.actionUpdateDetail();
     scope.confirmEdit();
-    scope.confirmEditMeta();
+    ctrl.actionLoadList();
+    ctrl.actionLoadDetail();
     ctrl.edit();
-    ctrl.allergiesLoad();
-    ctrl.setCurrentPageData();
     ctrl.cancelEdit();
-    ctrl.editMeta();
-    ctrl.cancelEditMeta();
-    allergiesActions.all();
-    allergiesActions.get();
-    allergiesActions.create();
-    allergiesActions.update();
+    ctrl.setCurrentPageData();
+    actions.all();
+    actions.get();
+    actions.create();
+    actions.update();
   });
 
   it('Template element exist', function() {
     expect(element).toBeDefined();
   });
-  it("allergiesActions methods was called", function() {
-    expect(allergiesActions.all).toHaveBeenCalled();
-    expect(allergiesActions.get).toHaveBeenCalled();
-    expect(allergiesActions.create).toHaveBeenCalled();
-    expect(allergiesActions.update).toHaveBeenCalled();
-  });
-  it('formDisabled', function() {
-    expect(scope.formDisabled).toBe(true);
+  it('allergiesActions methods was called', function() {
+    expect(actions.all).toHaveBeenCalled();
+    expect(actions.get).toHaveBeenCalled();
+    expect(actions.create).toHaveBeenCalled();
+    expect(actions.update).toHaveBeenCalled();
   });
   it('Controller exist', function() {
     expect(ctrl).toBeDefined();
@@ -79,28 +68,27 @@ describe('Allergies Detail', function() {
   it('Template exist', function() {
     expect(template).toBeDefined();
   });
-  it("confirmEdit was called", function() {
+
+  it('actionUpdateDetail was called', function() {
+    expect(scope.actionUpdateDetail).toHaveBeenCalled();
+  });
+  it('confirmEdit was called', function() {
     expect(scope.confirmEdit).toHaveBeenCalled();
   });
-  it("confirmEditMeta was called", function() {
-    expect(scope.confirmEditMeta).toHaveBeenCalled();
+
+  it('actionLoadList was called', function() {
+    expect(ctrl.actionLoadList).toHaveBeenCalled();
   });
-  it("edit was called", function() {
+  it('actionLoadDetail was called', function() {
+    expect(ctrl.actionLoadDetail).toHaveBeenCalled();
+  });
+  it('edit was called', function() {
     expect(ctrl.edit).toHaveBeenCalled();
   });
-  it("allergiesLoad was called", function() {
-    expect(ctrl.allergiesLoad).toHaveBeenCalled();
-  });
-  it("setCurrentPageData was called", function() {
-    expect(ctrl.setCurrentPageData).toHaveBeenCalled();
-  });
-  it("cancelEdit was called", function() {
+  it('cancelEdit was called', function() {
     expect(ctrl.cancelEdit).toHaveBeenCalled();
   });
-  it("editMeta was called", function() {
-    expect(ctrl.editMeta).toHaveBeenCalled();
-  });
-  it("cancelEditMeta was called", function() {
-    expect(ctrl.cancelEditMeta).toHaveBeenCalled();
+  it('setCurrentPageData was called', function() {
+    expect(ctrl.setCurrentPageData).toHaveBeenCalled();
   });
 });

@@ -315,7 +315,7 @@ app.run(['$rootScope', '$state', 'serviceRequests', 'serviceThemes', 'Confirmati
       }
 
       /* istanbul ignore next */
-      if (result.data.redirectTo === 'auth0') {
+      if (result.data.redirectURL === 'auth0') {
         console.log('running in UAT mode, so now login via auth0');
 
         var isSignout = localStorage.getItem('signout');

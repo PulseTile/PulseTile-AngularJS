@@ -24,13 +24,13 @@ class VaccinationsListController {
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'vaccinations-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'vaccinations';
-    
+    /* istanbul ignore next */
     this.create = function () {
       $state.go('vaccinations-create', {
         patientId: $stateParams.patientId
       });
     };
-
+    /* istanbul ignore next */
     this.go = function (id, source) {
       $state.go('vaccinations-detail', {
         patientId: $stateParams.patientId,
@@ -39,7 +39,7 @@ class VaccinationsListController {
         source: source
       });
     };
-    
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.vaccinations;
       const pagesInfo = store.pagesInfo;

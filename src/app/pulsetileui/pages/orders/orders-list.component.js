@@ -24,13 +24,13 @@ class OrdersListController {
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'orders-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'orders';
-
+    /* istanbul ignore next */
     this.create = function () {
       $state.go('orders-create', {
         patientId: $stateParams.patientId
       });
     };
-
+    /* istanbul ignore next */
     this.go = function (id, source) {
       $state.go('orders-detail', {
         patientId: $stateParams.patientId,
@@ -39,7 +39,7 @@ class OrdersListController {
         source: source
       });
     };
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.orders;
       const pagesInfo = store.pagesInfo;

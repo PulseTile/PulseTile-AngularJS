@@ -23,7 +23,7 @@ class PersonalnotesCreateController {
 
     $scope.personalNote = {};
     $scope.personalNote.dateCreated = new Date().toISOString().slice(0, 10);
-
+    /* istanbul ignore next */
     this.goList = function () {
       $state.go('personalNotes', {
         patientId: $stateParams.patientId,
@@ -32,11 +32,11 @@ class PersonalnotesCreateController {
         queryType: $stateParams.queryType
       });
     };
-    
+    /* istanbul ignore next */
     this.cancel = function () {
       this.goList();
     };
-    
+    /* istanbul ignore next */
     $scope.create = function (personalNoteForm, personalNote) {
       $scope.formSubmitted = true;
 
@@ -52,7 +52,7 @@ class PersonalnotesCreateController {
         $scope.actionCreateDetail($stateParams.patientId, toAdd);
       }
     }.bind(this);
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       if (store.personalnotes.dataCreate !== null) {
         $scope.actionLoadList($stateParams.patientId);

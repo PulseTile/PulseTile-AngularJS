@@ -9,31 +9,25 @@ describe('HeightAndWeight List', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope, ctrl, controller, template, actions, fakeCall, stateParams, state, ngRedux, heightAndWeightActions, serviceRequests, usSpinnerService;
+  let scope, ctrl, controller, template, actions, fakeCall;
 
-  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _heightAndWeightActions_, _serviceRequests_, _usSpinnerService_) => {
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _heightAndWeightActions_, _serviceRequests_, _usSpinnerService_, _serviceFormatted_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
-    state = _$state_;
-    serviceRequests = _serviceRequests_;
-    ngRedux = _$ngRedux_;
-    stateParams = _$stateParams_;
-    heightAndWeightActions = _heightAndWeightActions_;
-    usSpinnerService = _usSpinnerService_;
 
     template = HeightAndWeightListComponent.template;
 
     ctrl = controller(HeightAndWeightListComponent.controller, {
       $scope: scope,
-      $state: state,
-      $stateParams: stateParams,
-      $ngRedux: ngRedux,
-      heightAndWeightActions: heightAndWeightActions,
-      serviceRequests: serviceRequests,
-      usSpinnerService: usSpinnerService
+      $state: _$state_,
+      $stateParams: _$stateParams_,
+      $ngRedux: _$ngRedux_,
+      heightAndWeightActions: _heightAndWeightActions_,
+      serviceRequests: _serviceRequests_,
+      usSpinnerService: _usSpinnerService_,
+      serviceFormatted: _serviceFormatted_,
     });
     actions = $injector.get('heightAndWeightActions');
-    // scope.$digest();
   }));
   beforeEach(function() {
     fakeCall = {
@@ -60,13 +54,14 @@ describe('HeightAndWeight List', function() {
   it('Include heightAndWeightActions in index actions file', function() {
     expect(actions).toBeDefined();
   });
-  it("HeightAndWeight reducer was called", function() {
+  it('HeightAndWeight reducer was called', function() {
     expect(fakeCall.callHeightAndWeight).toHaveBeenCalled();
   });
-  it("route go was called", function() {
+
+  it('route go was called', function() {
     expect(ctrl.go).toHaveBeenCalled();
   });
-  it("setCurrentPageData was called", function() {
+  it('setCurrentPageData was called', function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
   });
 });

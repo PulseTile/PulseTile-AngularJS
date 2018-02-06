@@ -3,27 +3,26 @@ import HomeSidebarComponent from '../../../../app/pulsetileui/pages/patients-loo
 import '../../../../app/index';
 
 describe('HomeSidebar', function() {
+  beforeEach(angular.mock.module('ripple-ui'));
 
-    beforeEach(angular.mock.module('ripple-ui'));
+  let scope, controller, ctrl, template;
 
-    let scope, controller, ctrl, template;
-    
-    beforeEach(inject(($injector, $controller, _$state_, _serviceRequests_) => {
-        controller = $controller;
-        scope = $injector.get('$rootScope').$new();
-        
-        template = HomeSidebarComponent.template;
-        ctrl = controller(HomeSidebarComponent.controller, {
-            $scope: scope,
-            $state: _$state_,
-            serviceRequests: _serviceRequests_
-        });
-    }));
+  beforeEach(inject(($injector, $controller, _$state_, _serviceRequests_) => {
+    controller = $controller;
+    scope = $injector.get('$rootScope').$new();
 
-    it('Template exist', function() {
-        expect(template).toBeDefined();
+    template = HomeSidebarComponent.template;
+    ctrl = controller(HomeSidebarComponent.controller, {
+      $scope: scope,
+      $state: _$state_,
+      serviceRequests: _serviceRequests_
     });
-    it('Controller exist', function() {
-        expect(ctrl).toBeDefined();
-    });
+  }));
+
+  it('Template exist', function() {
+    expect(template).toBeDefined();
+  });
+  it('Controller exist', function() {
+    expect(ctrl).toBeDefined();
+  });
 });

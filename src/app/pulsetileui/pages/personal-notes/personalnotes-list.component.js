@@ -26,12 +26,13 @@ class PersonalnotesListController {
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'personalNotes-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'personalNotes';
 
+    /* istanbul ignore next */
     this.create = function () {
       $state.go('personalNotes-create', {
         patientId: $stateParams.patientId
       });
     };
-    
+    /* istanbul ignore next */
     this.go = function (id, source) {
       $state.go('personalNotes-detail', {
         patientId: $stateParams.patientId,
@@ -40,7 +41,7 @@ class PersonalnotesListController {
         source: source
       });
     };
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.personalnotes;
       const pagesInfo = store.pagesInfo;

@@ -29,7 +29,7 @@ class AllergiesCreateController {
     if ($stateParams.importData) {
       $scope.allergy = $stateParams.importData.data;
     }
-
+    /* istanbul ignore if */
     if (typeof $scope.allergy.dateCreated == "undefined") {
       $scope.allergy.dateCreated = new Date();
     }

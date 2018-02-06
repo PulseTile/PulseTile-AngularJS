@@ -9,43 +9,26 @@ describe('Clinicalnotes List', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope, 
-    ctrl, 
-    controller, 
-    template, 
-    stateParams, 
-    state, 
-    ngRedux,
-    personalnotesActions, 
-    serviceRequests, 
-    usSpinnerService,
-    fakeCall,
-    actions;
+  let scope, ctrl, controller, template, fakeCall, actions;
 
-  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _personalnotesActions_, _serviceRequests_, _usSpinnerService_) => {
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _personalnotesActions_, _serviceRequests_, _usSpinnerService_, _serviceFormatted_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
-    state = _$state_;
-    serviceRequests = _serviceRequests_;
-    ngRedux = _$ngRedux_;
-    stateParams = _$stateParams_;
-    personalnotesActions = _personalnotesActions_;
-    usSpinnerService = _usSpinnerService_;
 
     template = ClinicalnotesListComponent.template;
 
     ctrl = controller(ClinicalnotesListComponent.controller, {
       $scope: scope,
-      $state: state,
-      $stateParams: stateParams,
-      $ngRedux: ngRedux,
-      personalnotesActions: personalnotesActions,
-      serviceRequests: serviceRequests,
-      usSpinnerService: usSpinnerService
+      $state: _$state_,
+      $stateParams: _$stateParams_,
+      $ngRedux: _$ngRedux_,
+      personalnotesActions: _personalnotesActions_,
+      serviceRequests: _serviceRequests_,
+      usSpinnerService: _usSpinnerService_,
+      serviceFormatted: _serviceFormatted_,
     });
 
     actions = $injector.get('personalnotesActions');
-    // scope.$digest();
   }));
 
   beforeEach(function() {
@@ -55,10 +38,11 @@ describe('Clinicalnotes List', function() {
 
     spyOn(fakeCall, 'callClinicalnotes');
 
-    spyOn(ctrl, 'go');
+    spyOn(ctrl, 'actionLoadList');
     spyOn(ctrl, 'create');
+    spyOn(ctrl, 'go');
     spyOn(ctrl, 'setCurrentPageData');
-    spyOn(ctrl, 'clinicalnotesLoad');
+
     spyOn(actions, 'all');
     spyOn(actions, 'get');
     spyOn(actions, 'create');
@@ -66,10 +50,10 @@ describe('Clinicalnotes List', function() {
 
     fakeCall.callClinicalnotes({}, types.EOLCAREPLANS);
 
-    ctrl.go();
+    ctrl.actionLoadList();
     ctrl.create();
+    ctrl.go();
     ctrl.setCurrentPageData();
-    ctrl.clinicalnotesLoad();
     actions.all();
     actions.get();
     actions.create();
@@ -85,25 +69,25 @@ describe('Clinicalnotes List', function() {
   it('Include personalnotesActions in index actions file', function() {
     expect(actions).toBeDefined();
   });
-  it("Clinicalnotes reducer was called", function() {
+  it('Clinicalnotes reducer was called', function() {
     expect(fakeCall.callClinicalnotes).toHaveBeenCalled();
   });
-  it("personalnotesActions methods was called", function() {
+  it('personalnotesActions methods was called', function() {
     expect(actions.all).toHaveBeenCalled();
     expect(actions.get).toHaveBeenCalled();
     expect(actions.create).toHaveBeenCalled();
     expect(actions.update).toHaveBeenCalled();
   });
-  it("route go was called", function() {
-    expect(ctrl.go).toHaveBeenCalled();
+  it('actionLoadList was called', function() {
+    expect(ctrl.actionLoadList).toHaveBeenCalled();
   });
-  it("create was called", function() {
+  it('create was called', function() {
     expect(ctrl.create).toHaveBeenCalled();
   });
-  it("setCurrentPageData was called", function() {
-    expect(ctrl.setCurrentPageData).toHaveBeenCalled();
+  it('go was called', function() {
+    expect(ctrl.go).toHaveBeenCalled();
   });
-  it("personalnotesLoad was called", function() {
-    expect(ctrl.clinicalnotesLoad).toHaveBeenCalled();
+  it('setCurrentPageData was called', function() {
+    expect(ctrl.setCurrentPageData).toHaveBeenCalled();
   });
 });

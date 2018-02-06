@@ -20,6 +20,8 @@ class EolcareplansDetailController {
     // this.edit = function () {
     //   EolcareplansModal.openModal(this.currentPatient, {title: 'Edit End of Life Care Document'}, this.eolcareplan, this.currentUser);
     // };
+    this.actionLoadDetail = eolcareplansActions.get;
+    this.actionLoadDetail($stateParams.patientId, $stateParams.eolcareplansIndex);
 
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
@@ -39,9 +41,6 @@ class EolcareplansDetailController {
     }))(this);
 
     $scope.$on('$destroy', unsubscribe);
-
-    this.eolcareplansLoad = eolcareplansActions.get;
-    this.eolcareplansLoad($stateParams.patientId, $stateParams.eolcareplansIndex);
   }
 }
 

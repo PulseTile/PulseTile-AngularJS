@@ -37,7 +37,7 @@ class ImageDetailController {
       }
       usSpinnerService.stop('patientSummary-spinner');
     }).catch(function (err) {$ngRedux.dispatch(httpHandleErrors(err))});
-
+    /* istanbul ignore next */
     $scope.getURLtoImage = function(id) {
       return `${window.location.protocol}//46.101.95.245/orthanc/instances/${id}/preview`;
     };
@@ -62,19 +62,21 @@ class ImageDetailController {
     function getImgBlock() {
       return $('#dicomImage').get(0);
     }
-    
+    /* istanbul ignore next */
     $scope.zoomIn = function (ev) {
       var element = getImgBlock();
       var viewport = cornerstone.getViewport(element);
       viewport.scale += 0.25;
       cornerstone.setViewport(element, viewport);
     };
+    /* istanbul ignore next */
     $scope.zoomOut = function (ev) {
       var element = getImgBlock();
       var viewport = cornerstone.getViewport(element);
       viewport.scale -= 0.25;
       cornerstone.setViewport(element, viewport);
     };
+    /* istanbul ignore next */
     $scope.moveImg = function (ev) {
       $scope.isMove = !$scope.isMove;
       
@@ -90,7 +92,7 @@ class ImageDetailController {
       cornerstoneTools.mouseInput.enable(element);
       cornerstoneTools.pan.activate(element, 1);
     };
-
+    /* istanbul ignore next */
     $scope.fadeImg = function (ev) {
       $scope.isFade = !$scope.isFade;
 

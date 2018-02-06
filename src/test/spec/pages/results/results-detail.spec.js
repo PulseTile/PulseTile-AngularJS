@@ -6,33 +6,29 @@ describe('Results Details', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope, ctrl, controller, template, stateParams, state, ngRedux, resultsActions, usSpinnerService;
+  let scope, ctrl, controller, template;
 
-  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _resultsActions_, _usSpinnerService_) => {
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _resultsActions_, _serviceRequests_ ,_usSpinnerService_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
-    state = _$state_;
-    ngRedux = _$ngRedux_;
-    stateParams = _$stateParams_;
-    resultsActions = _resultsActions_;
-    usSpinnerService = _usSpinnerService_;
 
     template = ResultsDetailComponent.template;
     ctrl = controller(ResultsDetailComponent.controller, {
       $scope: scope,
-      $state: state,
-      $stateParams: stateParams,
-      $ngRedux: ngRedux,
-      resultsActions: resultsActions,
-      usSpinnerService: usSpinnerService
+      $state: _$state_,
+      $stateParams: _$stateParams_,
+      $ngRedux: _$ngRedux_,
+      resultsActions: _resultsActions_,
+      serviceRequests: _serviceRequests_,
+      usSpinnerService: _usSpinnerService_
     });
   }));
 
   beforeEach(function() {
+    spyOn(ctrl, 'actionLoadDetail');
     spyOn(ctrl, 'setCurrentPageData');
-    spyOn(ctrl, 'resultsLoad');
 
-    ctrl.resultsLoad();
+    ctrl.actionLoadDetail();
     ctrl.setCurrentPageData();
   });
 
@@ -42,10 +38,10 @@ describe('Results Details', function() {
   it('Template exist', function() {
     expect(template).toBeDefined();
   });
-  it("resultsLoad was called", function() {
-    expect(ctrl.resultsLoad).toHaveBeenCalled();
+  it('actionLoadDetail was called', function() {
+    expect(ctrl.actionLoadDetail).toHaveBeenCalled();
   });
-  it("setCurrentPageData was called", function() {
+  it('setCurrentPageData was called', function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
   });
 });

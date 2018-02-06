@@ -34,7 +34,7 @@ class DiagnosesCreateController {
     
     $scope.diagnosis.code = '12393890';
     $scope.diagnosis.terminology = 'SNOMED-CT';
-    
+    /* istanbul ignore next */
     this.backToDocs = function () {
       $state.go('documents-detail', {
         patientId: $stateParams.patientId,
@@ -42,7 +42,7 @@ class DiagnosesCreateController {
         page: 1
       });
     };
-
+    /* istanbul ignore next */
     this.goList = function () {
       $state.go('diagnoses', {
         patientId: $stateParams.patientId,
@@ -51,10 +51,11 @@ class DiagnosesCreateController {
         queryType: $stateParams.queryType
       });
     };
+    /* istanbul ignore next */
     this.cancel = function () {
       this.goList();
     };
-
+    /* istanbul ignore next */
     $scope.create = function (diagnosisForm, diagnosis) {
       $scope.formSubmitted = true;
 
@@ -81,7 +82,7 @@ class DiagnosesCreateController {
     ];
 
     $scope.formDisabled = true;
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       if (store.diagnoses.dataCreate !== null) {
         $scope.actionLoadList($stateParams.patientId);

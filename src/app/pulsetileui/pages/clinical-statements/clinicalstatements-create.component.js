@@ -39,20 +39,20 @@ class ClinicalstatementsCreateController {
     };
     $scope.queryFilter = '';
     $scope.openSearch = false;
-
+    /* istanbul ignore next */
     this.getTag = function (tag) {
       $scope.clinicalTag = tag;
       $scope.queryFilter = '';
       this.clinicalstatementsQuery(null, tag);
     };
-
+    /* istanbul ignore next */
     this.removeTag = function () {
       $scope.clinicalTag = '';
       $scope.queryFilter = '';
       $scope.statements = [];
       $scope.statementsText = [];
     };
-
+    /* istanbul ignore next */
     this.goList = function () {
       $state.go('clinicalstatements', {
         patientId: $stateParams.patientId,
@@ -61,10 +61,11 @@ class ClinicalstatementsCreateController {
         queryType: $stateParams.queryType
       });
     };
+    /* istanbul ignore next */
     this.cancelEdit = function () {
       this.goList();
     };
-
+    /* istanbul ignore next */
     $scope.confirmEdit = function (clinicalStatementForm, clinicalStatement) {
       $scope.formSubmitted = true;
       var userinput = $('#clinicalNote');
@@ -83,6 +84,7 @@ class ClinicalstatementsCreateController {
     }.bind(this);
 
     serviceFormatted.filteringKeys2 = ['phrase'];
+    /* istanbul ignore next */
     $scope.queryFiltering = function (row) {
       return serviceFormatted.formattedSearching2(row, $scope.queryFilter);
     };
@@ -121,6 +123,7 @@ class ClinicalstatementsCreateController {
 
     // Add Dropdown to Input (select or change value)
     $scope.cc = 0;
+    /* istanbul ignore next */
     $scope.clickSelect = function () {
       $scope.cc++;
       if ($scope.cc == 2) {
@@ -128,7 +131,7 @@ class ClinicalstatementsCreateController {
         $scope.cc = 0;
       }
     };
-
+    /* istanbul ignore next */
     $scope.changeSelect = function (index) {
       var userinput = jQuery('#clinicalNote');
       var statement = $scope.statementsText[index];

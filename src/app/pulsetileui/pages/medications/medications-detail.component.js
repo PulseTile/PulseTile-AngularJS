@@ -79,6 +79,7 @@ class MedicationsDetailController {
     ];
     
     $scope.isMedicationEdit = false;
+    /* istanbul ignore next */
     this.editMedication = function () {
       $scope.isMedicationEdit = true;
 
@@ -91,6 +92,7 @@ class MedicationsDetailController {
     };
 
     $scope.isPrescriptionEdit = false;
+    /* istanbul ignore next */
     this.editPrescription = function () {
       $scope.isPrescriptionEdit = true;
       $scope.prescriptionEdit = {
@@ -100,10 +102,11 @@ class MedicationsDetailController {
         doseQuantity: ''
       };
     };
-
+    /* istanbul ignore next */
     this.cancelEditMedication = function () {
       $scope.isMedicationEdit = false;
     };
+    /* istanbul ignore next */
     $scope.confirmEditMedication = function (medicationForm, medication) {
       $scope.formSubmitted = true;
       const now = new Date();
@@ -133,14 +136,15 @@ class MedicationsDetailController {
 
       }
     }.bind(this);
-
+    /* istanbul ignore next */
     this.cancelEditPrescription = function () {
       $scope.isPrescriptionEdit = false;
     };
+    /* istanbul ignore next */
     $scope.confirmEditPrescription = function (medicationForm, medication) {
       $scope.isPrescriptionEdit = false;
     }.bind(this);
-
+    /* istanbul ignore next */
     $scope.toggleShowSchedule = function () {
       $scope.isShowSchedule = !$scope.isShowSchedule;
     }

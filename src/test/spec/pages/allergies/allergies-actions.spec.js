@@ -3,10 +3,9 @@ import AllergiesActions from '../../../../app/pulsetileui/pages/allergies/allerg
 // import '../../../../app/index';
 
 describe('Allergies Actions', function() {
+  beforeEach(angular.mock.module('ripple-ui'));
 
-    beforeEach(angular.mock.module('ripple-ui'));
-
-    it("AllergiesActions exist", function() {
-        expect(AllergiesActions).toBeDefined();
-    });
+  it('AllergiesActions exist', function() {
+    expect(AllergiesActions).toBeDefined();
+  });
 });

@@ -8,31 +8,25 @@ describe('Referrals List', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope, ctrl, controller, template, actions, fakeCall, stateParams, state, ngRedux, referralsActions, serviceRequests, usSpinnerService;
+  let scope, ctrl, controller, template, actions, fakeCall;
 
-  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _referralsActions_, _serviceRequests_, _usSpinnerService_) => {
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _referralsActions_, _serviceRequests_, _usSpinnerService_, _serviceFormatted_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
-    state = _$state_;
-    serviceRequests = _serviceRequests_;
-    ngRedux = _$ngRedux_;
-    stateParams = _$stateParams_;
-    referralsActions = _referralsActions_;
-    usSpinnerService = _usSpinnerService_;
 
     template = ReferralsListComponent.template;
 
     ctrl = controller(ReferralsListComponent.controller, {
       $scope: scope,
-      $state: state,
-      $stateParams: stateParams,
-      $ngRedux: ngRedux,
-      referralsActions: referralsActions,
-      serviceRequests: serviceRequests,
-      usSpinnerService: usSpinnerService
+      $state: _$state_,
+      $stateParams: _$stateParams_,
+      $ngRedux: _$ngRedux_,
+      referralsActions: _referralsActions_,
+      serviceRequests: _serviceRequests_,
+      usSpinnerService: _usSpinnerService_,
+      serviceFormatted: _serviceFormatted_,
     });
     actions = $injector.get('referralsActions');
-    // scope.$digest();
   }));
   beforeEach(function() {
     fakeCall = {
@@ -44,12 +38,14 @@ describe('Referrals List', function() {
     spyOn(ctrl, 'go');
     spyOn(ctrl, 'create');
     spyOn(ctrl, 'setCurrentPageData');
+    spyOn(ctrl, 'actionLoadList');
 
     fakeCall.callReferrals({}, types.REFERRALS);
 
     ctrl.go();
     ctrl.create();
     ctrl.setCurrentPageData();
+    ctrl.actionLoadList();
   });
 
   it('Template exist', function() {
@@ -61,16 +57,19 @@ describe('Referrals List', function() {
   it('Include ReferralsActions in index actions file', function() {
     expect(actions).toBeDefined();
   });
-  it("Referrals reducer was called", function() {
+  it('Referrals reducer was called', function() {
     expect(fakeCall.callReferrals).toHaveBeenCalled();
   });
-  it("route go was called", function() {
+  it('route go was called', function() {
     expect(ctrl.go).toHaveBeenCalled();
   });
-  it("create was called", function() {
+  it('create was called', function() {
     expect(ctrl.create).toHaveBeenCalled();
   });
-  it("setCurrentPageData was called", function() {
+  it('setCurrentPageData was called', function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
+  });
+  it('actionLoadList was called', function() {
+    expect(ctrl.actionLoadList).toHaveBeenCalled();
   });
 });

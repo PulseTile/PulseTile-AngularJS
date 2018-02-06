@@ -19,7 +19,7 @@ class HeightAndWeightDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, heightAndWeightActions, usSpinnerService, serviceRequests) {
 
     $scope.formDisabled = true;
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (data) {
       if (data.patientsGet.data) {
         this.currentPatient = data.patientsGet.data;

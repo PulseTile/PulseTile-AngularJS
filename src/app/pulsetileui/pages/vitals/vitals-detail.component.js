@@ -29,20 +29,21 @@ class VitalsDetailController {
     $scope.popoverLabels = serviceVitalsSigns.getLabels();
     $scope.pattern = serviceVitalsSigns.pattern;
     $scope.vital = {};
-
+    /* istanbul ignore next */
     $scope.getHighlighterClass = function (vitalName) {
       return serviceVitalsSigns.getHighlighterClass($scope.vitalStatuses[vitalName]);
     };
-
+    /* istanbul ignore next */
     $scope.changeVital = function (vital, vitalName) {
       $scope.vitalStatuses[vitalName] = serviceVitalsSigns.getStatusOnValue(vital[vitalName], vitalName);
       $scope.changeNewScore(vital);
     };
+    /* istanbul ignore next */
     $scope.changeNewScore = function (vital) {
       vital.newsScore = serviceVitalsSigns.countNewsScore($scope.vitalStatuses);
       $scope.vitalStatuses.newsScore = serviceVitalsSigns.getStatusOnValue(vital.newsScore, 'newsScore');
     };
-
+    /* istanbul ignore next */
     this.edit = function () {
       $scope.isEdit = true;
 
@@ -51,13 +52,13 @@ class VitalsDetailController {
 
       $scope.changeNewScore($scope.vitalEdit);
     };
-
+    /* istanbul ignore next */
     this.cancelEdit = function () {
       $scope.isEdit = false;
       $scope.vitalStatuses = serviceVitalsSigns.setVitalStatuses($scope.vital);
 
     };
-
+    /* istanbul ignore next */
     $scope.confirmEdit = function (vitalForm, vital) {
       $scope.formSubmitted = true;
   
@@ -70,7 +71,7 @@ class VitalsDetailController {
         $scope.actionUpdateDetail($stateParams.patientId, $scope.vital.sourceId, toUpdate);
       }
     };
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.vitals;
       const { patientId, detailsIndex } = $stateParams;
@@ -111,12 +112,7 @@ class VitalsDetailController {
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)
     }))(this);
-
     $scope.$on('$destroy', unsubscribe);
-
-    $scope.vitalsLoad = vitalsActions.get;
-    $scope.vitalsLoad($stateParams.patientId, $stateParams.detailsIndex);
-    $scope.vitalsUpdate = vitalsActions.update;
   }
 }
 

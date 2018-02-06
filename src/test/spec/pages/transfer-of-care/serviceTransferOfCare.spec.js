@@ -6,16 +6,7 @@ describe('serviceTransferOfCare', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope,
-    ctrl,
-    controller,
-    template,
-    diagnosesActions,
-    eventsActions,
-    vitalsActions,
-    referralsActions,
-    medicationsActions,
-    serviceFormatted;
+  let scope, ctrl, controller, template, diagnosesActions, eventsActions, vitalsActions, referralsActions, medicationsActions, serviceFormatted;
 
   beforeEach(inject(($injector, $controller, diagnosesActions, eventsActions, vitalsActions, referralsActions, medicationsActions, serviceFormatted) => {
     controller = $controller;
@@ -61,37 +52,37 @@ describe('serviceTransferOfCare', function() {
   it('Controller exist', function() {
     expect(ctrl).toBeDefined();
   });
-  it("getConfig was called", function() {
+  it('getConfig was called', function() {
       expect(ctrl.getConfig).toHaveBeenCalled();
   });
-  it("isInCache was called", function() {
+  it('isInCache was called', function() {
       expect(ctrl.isInCache).toHaveBeenCalled();
   });
-  it("setInCache was called", function() {
+  it('setInCache was called', function() {
       expect(ctrl.setInCache).toHaveBeenCalled();
   });
-  it("getInCache was called", function() {
+  it('getInCache was called', function() {
       expect(ctrl.getInCache).toHaveBeenCalled();
   });
-  it("changeArraysForTable was called", function() {
+  it('changeArraysForTable was called', function() {
       expect(ctrl.changeArraysForTable).toHaveBeenCalled();
   });
-  it("setDiagnosisRecords was called", function() {
+  it('setDiagnosisRecords was called', function() {
       expect(ctrl.setDiagnosisRecords).toHaveBeenCalled();
   });
-  it("setMedicationRecords was called", function() {
+  it('setMedicationRecords was called', function() {
       expect(ctrl.setMedicationRecords).toHaveBeenCalled();
   });
-  it("setReferralsRecords was called", function() {
+  it('setReferralsRecords was called', function() {
       expect(ctrl.setReferralsRecords).toHaveBeenCalled();
   });
-  it("modificateEventsArr was called", function() {
+  it('modificateEventsArr was called', function() {
       expect(ctrl.modificateEventsArr).toHaveBeenCalled();
   });
-  it("setEventsRecords was called", function() {
+  it('setEventsRecords was called', function() {
       expect(ctrl.setEventsRecords).toHaveBeenCalled();
   });
-  it("setVitalsRecords was called", function() {
+  it('setVitalsRecords was called', function() {
       expect(ctrl.setVitalsRecords).toHaveBeenCalled();
   });
 });

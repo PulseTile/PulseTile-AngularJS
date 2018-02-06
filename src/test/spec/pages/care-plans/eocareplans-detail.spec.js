@@ -6,45 +6,31 @@ describe('Care Plans Detail', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope,
-    ctrl,
-    controller,
-    template,
-    stateParams,
-    state,
-    ngRedux,
-    eolcareplansActions, serviceRequests, usSpinnerService;
+  let scope, ctrl, controller, template;
 
   beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _eolcareplansActions_, _serviceRequests_, _usSpinnerService_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
-    state = _$state_;
-    serviceRequests = _serviceRequests_;
-    ngRedux = _$ngRedux_;
-    stateParams = _$stateParams_;
-    eolcareplansActions = _eolcareplansActions_;
-    usSpinnerService = _usSpinnerService_;
 
     template = EolcareplansDetailComponent.template;
 
     ctrl = controller(EolcareplansDetailComponent.controller, {
       $scope: scope,
-      $state: state,
-      $stateParams: stateParams,
-      $ngRedux: ngRedux,
-      eolcareplansActions: eolcareplansActions,
-      serviceRequests: serviceRequests,
-      usSpinnerService: usSpinnerService
+      $state: _$state_,
+      $stateParams: _$stateParams_,
+      $ngRedux: _$ngRedux_,
+      eolcareplansActions: _eolcareplansActions_,
+      serviceRequests: _serviceRequests_,
+      usSpinnerService: _usSpinnerService_
     });
-    // scope.$digest();
   }));
 
   beforeEach(function() {
     spyOn(ctrl, 'setCurrentPageData');
-    spyOn(ctrl, 'eolcareplansLoad');
+    spyOn(ctrl, 'actionLoadDetail');
 
     ctrl.setCurrentPageData();
-    ctrl.eolcareplansLoad();
+    ctrl.actionLoadDetail();
   });
 
   it('Template exist', function() {
@@ -53,10 +39,10 @@ describe('Care Plans Detail', function() {
   it('Controller exist', function() {
     expect(ctrl).toBeDefined();
   });
-  it("setCurrentPageData was called", function() {
+  it('setCurrentPageData was called', function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
   });
-  it("eolcareplansLoad was called", function() {
-    expect(ctrl.eolcareplansLoad).toHaveBeenCalled();
+  it('actionLoadDetail was called', function() {
+    expect(ctrl.actionLoadDetail).toHaveBeenCalled();
   });
 });

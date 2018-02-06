@@ -2,35 +2,30 @@
 import MedicationsListComponent from '../../../../app/pulsetileui/pages/medications/medications-list.component.js';
 import '../../../../app/index';
 import * as types from '../../../../app/constants/ActionTypes';
-import medications from '../../../../app/pulsetileui/pages/medications/medication-reducer-all.js';
+import medications from '../../../../app/pulsetileui/pages/medications/medications-reducer-all.js';
 import '../../../../app/index';
 
 describe('Medications List', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope, ctrl, controller, template, actions, fakeCall, stateParams, state, ngRedux, medicationsActions, serviceRequests, usSpinnerService;
+  let scope, ctrl, controller, template, actions, fakeCall;
 
-  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _medicationsActions_, _serviceRequests_, _usSpinnerService_) => {
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _medicationsActions_, _serviceRequests_, _usSpinnerService_, _serviceFormatted_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
-    state = _$state_;
-    serviceRequests = _serviceRequests_;
-    ngRedux = _$ngRedux_;
-    stateParams = _$stateParams_;
-    medicationsActions = _medicationsActions_;
-    usSpinnerService = _usSpinnerService_;
 
     template = MedicationsListComponent.template;
 
     ctrl = controller(MedicationsListComponent.controller, {
       $scope: scope,
-      $state: state,
-      $stateParams: stateParams,
-      $ngRedux: ngRedux,
-      medicationsActions: medicationsActions,
-      serviceRequests: serviceRequests,
-      usSpinnerService: usSpinnerService
+      $state: _$state_,
+      $stateParams: _$stateParams_,
+      $ngRedux: _$ngRedux_,
+      medicationsActions: _medicationsActions_,
+      serviceRequests: _serviceRequests_,
+      usSpinnerService: _usSpinnerService_,
+      serviceFormatted: _serviceFormatted_,
     });
     actions = $injector.get('medicationsActions');
     // scope.$digest();
@@ -45,12 +40,14 @@ describe('Medications List', function() {
     spyOn(ctrl, 'go');
     spyOn(ctrl, 'create');
     spyOn(ctrl, 'setCurrentPageData');
+    spyOn(ctrl, 'actionLoadList');
 
     fakeCall.callMedications({}, types.MEDICATIONS);
 
     ctrl.go();
     ctrl.create();
     ctrl.setCurrentPageData();
+    ctrl.actionLoadList();
   });
 
   it('Template exist', function() {
@@ -62,16 +59,19 @@ describe('Medications List', function() {
   it('Include ordersActions in index actions file', function() {
     expect(actions).toBeDefined();
   });
-  it("Medications reducer was called", function() {
+  it('Medications reducer was called', function() {
     expect(fakeCall.callMedications).toHaveBeenCalled();
   });
-  it("route go was called", function() {
+  it('route go was called', function() {
     expect(ctrl.go).toHaveBeenCalled();
   });
-  it("create was called", function() {
+  it('create was called', function() {
     expect(ctrl.create).toHaveBeenCalled();
   });
-  it("setCurrentPageData was called", function() {
+  it('setCurrentPageData was called', function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
+  });
+  it('actionLoadList was called', function() {
+    expect(ctrl.actionLoadList).toHaveBeenCalled();
   });
 });

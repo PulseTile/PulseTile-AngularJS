@@ -19,11 +19,10 @@ class OrdersDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, ordersActions, usSpinnerService, serviceRequests) {
     this.actionLoadList = ordersActions.all;
     this.actionLoadDetail = ordersActions.get;
-    $scope.actionUpdateDetail = ordersActions.update;
 
     usSpinnerService.spin('detail-spinner');
     this.actionLoadDetail($stateParams.patientId, $stateParams.detailsIndex);
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.orders;
       const { detailsIndex } = $stateParams;

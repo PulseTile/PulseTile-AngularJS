@@ -19,7 +19,7 @@ const templateDocumentsDetailDischarge = require('./documents-detail-discharge.h
 class DocumentsDetailTypeController {
   constructor($scope, $state, $stateParams, serviceRequests, ConfirmationDocsModal) {
     $scope.documentData = {};
-
+    /* istanbul ignore next */
     $scope.setDocument = function (data) {
       $scope.documentData = data.document;
       // $scope.documentData = Object.assign($scope.documentData, data.document);
@@ -29,8 +29,8 @@ class DocumentsDetailTypeController {
     setTimeout(function () {
       serviceRequests.publisher('getDocument');
     }, 1000);
-    
 
+    /* istanbul ignore next */
     $scope.importToCreate = function (typeCreate, data) {
       ConfirmationDocsModal.openModal(function () {
         data.isImport = true;

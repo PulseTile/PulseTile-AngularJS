@@ -24,7 +24,7 @@ class ImageListController {
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'images-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'images';
-
+    /* istanbul ignore next */
     this.go = function (id, source) {
       $state.go('images-detail', {
         patientId: $stateParams.patientId,
@@ -33,7 +33,7 @@ class ImageListController {
         source: source
       });
     };
-    
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.studies;
       const pagesInfo = store.pagesInfo;

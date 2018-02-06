@@ -25,18 +25,18 @@ class ProceduresDetailController {
     this.actionLoadDetail($stateParams.patientId, $stateParams.detailsIndex);
 
 		$scope.isEdit = false;
-
+    /* istanbul ignore next */
 		this.edit = function () {
 			$scope.isEdit = true;
 
 			$scope.procedureEdit = Object.assign({}, this.procedure);
 			$scope.procedureEdit.dateSubmitted = new Date();
 		};
-
+    /* istanbul ignore next */
 		this.cancelEdit = function () {
 			$scope.isEdit = false;
 		};
-
+    /* istanbul ignore next */
 		$scope.confirmEdit = function (procedureForm) {
 			$scope.formSubmitted = true;
 			if (procedureForm.$valid) {
@@ -47,7 +47,7 @@ class ProceduresDetailController {
         $scope.actionUpdateDetail($stateParams.patientId, this.procedure.sourceId, $scope.procedureEdit);
 			}
 		}.bind(this);
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.procedures;
       const { patientId, detailsIndex } = $stateParams;

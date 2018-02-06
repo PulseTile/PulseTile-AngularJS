@@ -27,32 +27,32 @@ class VitalsCreateController {
     $scope.vitalEdit = {};
     $scope.vitalEdit.dateCreated = Date.parse(new Date());
     $scope.vitalEdit.author = 'ripple_osi';
-
+    /* istanbul ignore next */
     $scope.getHighlighterClass = function (vitalName) {
       return serviceVitalsSigns.getHighlighterClass($scope.vitalStatuses[vitalName]);
     };
-
+    /* istanbul ignore next */
     $scope.changeVital = function (vital, vitalName) {
       $scope.vitalStatuses[vitalName] = serviceVitalsSigns.getStatusOnValue(vital[vitalName], vitalName);
       $scope.changeNewScore(vital);
     };
-
+    /* istanbul ignore next */
     $scope.changeNewScore = function (vital) {
       vital.newsScore = serviceVitalsSigns.countNewsScore($scope.vitalStatuses);
       $scope.vitalStatuses.newsScore = serviceVitalsSigns.getStatusOnValue(vital.newsScore, 'newsScore');
     };
-
+    /* istanbul ignore next */
     this.goList = function () {
       $state.go('vitals', {
         patientId: $stateParams.patientId,
         reportType: $stateParams.reportType,
       });
     };
-
+    /* istanbul ignore next */
     this.cancel = function () {
       this.goList();
     };
-
+    /* istanbul ignore next */
     $scope.create = function (vitalForm, vital) {
       $scope.formSubmitted = true;
       $scope.changeNewScore(vital);
@@ -62,7 +62,7 @@ class VitalsCreateController {
         $scope.actionCreateDetail($stateParams.patientId, vital);
       }
     }.bind(this);
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (data) {
       if (data.vitals.dataCreate !== null) {
         $scope.actionLoadList($stateParams.patientId);

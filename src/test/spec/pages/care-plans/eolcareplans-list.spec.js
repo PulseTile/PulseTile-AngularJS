@@ -9,39 +9,23 @@ describe('Care Plans List', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope, 
-    ctrl, 
-    controller, 
-    template, 
-    stateParams, 
-    state, 
-    ngRedux, 
-    eolcareplansActions, 
-    serviceRequests, 
-    usSpinnerService,
-    actions,
-    fakeCall;
+  let scope, ctrl, controller, template, fakeCall;
 
-  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _eolcareplansActions_, _serviceRequests_, _usSpinnerService_) => {
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _eolcareplansActions_, _serviceRequests_, _usSpinnerService_, _serviceFormatted_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
-    state = _$state_;
-    serviceRequests = _serviceRequests_;
-    ngRedux = _$ngRedux_;
-    stateParams = _$stateParams_;
-    eolcareplansActions = _eolcareplansActions_;
-    usSpinnerService = _usSpinnerService_;
 
     template = EolcareplansListComponent.template;
 
     ctrl = controller(EolcareplansListComponent.controller, {
       $scope: scope,
-      $state: state,
-      $stateParams: stateParams,
-      $ngRedux: ngRedux,
-      eolcareplansActions: eolcareplansActions,
-      serviceRequests: serviceRequests,
-      usSpinnerService: usSpinnerService
+      $state: _$state_,
+      $stateParams: _$stateParams_,
+      $ngRedux: _$ngRedux_,
+      eolcareplansActions: _eolcareplansActions_,
+      serviceRequests: _serviceRequests_,
+      usSpinnerService: _usSpinnerService_,
+      serviceFormatted: _serviceFormatted_,
     });
 
     // scope.$digest();
@@ -56,13 +40,13 @@ describe('Care Plans List', function() {
 
     spyOn(ctrl, 'go');
     spyOn(ctrl, 'setCurrentPageData');
-    spyOn(ctrl, 'eolcareplansLoad');
+    spyOn(ctrl, 'actionLoadList');
 
     fakeCall.callCareplans({}, types.EOLCAREPLANS);
 
     ctrl.go();
     ctrl.setCurrentPageData();
-    ctrl.eolcareplansLoad();
+    ctrl.actionLoadList();
   });
 
   it('Template exist', function() {
@@ -71,16 +55,16 @@ describe('Care Plans List', function() {
   it('Controller exist', function() {
     expect(ctrl).toBeDefined();
   });
-  it("Appointments reducer was called", function() {
+  it('Appointments reducer was called', function() {
     expect(fakeCall.callCareplans).toHaveBeenCalled();
   });
-  it("route go was called", function() {
+  it('route go was called', function() {
     expect(ctrl.go).toHaveBeenCalled();
   });
-  it("setCurrentPageData was called", function() {
+  it('setCurrentPageData was called', function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
   });
-  it("appointmentsLoad was called", function() {
-    expect(ctrl.eolcareplansLoad).toHaveBeenCalled();
+  it('actionLoadList was called', function() {
+    expect(ctrl.actionLoadList).toHaveBeenCalled();
   });
 });

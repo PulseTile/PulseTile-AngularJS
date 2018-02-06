@@ -9,42 +9,25 @@ describe('Documents List', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope, 
-    ctrl, 
-    controller, 
-    template, 
-    stateParams, 
-    state, 
-    ngRedux, 
-    documentsActions, 
-    serviceRequests, 
-    usSpinnerService,
-    actions,
-    fakeCall;
+  let scope, ctrl, controller, template, actions, fakeCall;
 
-  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _documentsActions_, _serviceRequests_, _usSpinnerService_) => {
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _documentsActions_, _serviceRequests_, _usSpinnerService_, _serviceFormatted_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
-    state = _$state_;
-    serviceRequests = _serviceRequests_;
-    ngRedux = _$ngRedux_;
-    stateParams = _$stateParams_;
-    documentsActions = _documentsActions_;
-    usSpinnerService = _usSpinnerService_;
 
     template = DocumentsListComponent.template;
 
     ctrl = controller(DocumentsListComponent.controller, {
       $scope: scope,
-      $state: state,
-      $stateParams: stateParams,
-      $ngRedux: ngRedux,
-      documentsActions: documentsActions,
-      serviceRequests: serviceRequests,
-      usSpinnerService: usSpinnerService
+      $state: _$state_,
+      $stateParams: _$stateParams_,
+      $ngRedux: _$ngRedux_,
+      documentsActions: _documentsActions_,
+      serviceRequests: _serviceRequests_,
+      usSpinnerService: _usSpinnerService_,
+      serviceFormatted: _serviceFormatted_,
     });
     actions = $injector.get('documentsActions');
-    // scope.$digest();
   }));
 
   beforeEach(function() {
@@ -56,13 +39,13 @@ describe('Documents List', function() {
 
     spyOn(ctrl, 'go');
     spyOn(ctrl, 'setCurrentPageData');
-    spyOn(ctrl, 'documentsLoad');
+    spyOn(ctrl, 'actionLoadList');
 
     fakeCall.callDocuments({}, types.DOCUMENTS);
 
     ctrl.go();
     ctrl.setCurrentPageData();
-    ctrl.documentsLoad();
+    ctrl.actionLoadList();
   });
 
   it('Template exist', function() {
@@ -74,16 +57,16 @@ describe('Documents List', function() {
   it('Include contactsActions in index actions file', function() {
     expect(actions).toBeDefined();
   });
-  it("Documents reducer was called", function() {
+  it('Documents reducer was called', function() {
     expect(fakeCall.callDocuments).toHaveBeenCalled();
   });
-  it("route go was called", function() {
+  it('route go was called', function() {
     expect(ctrl.go).toHaveBeenCalled();
   });
-  it("setCurrentPageData was called", function() {
+  it('setCurrentPageData was called', function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
   });
-  it("documentsLoad was called", function() {
-    expect(ctrl.documentsLoad).toHaveBeenCalled();
+  it('actionLoadList was called', function() {
+    expect(ctrl.actionLoadList).toHaveBeenCalled();
   });
 });

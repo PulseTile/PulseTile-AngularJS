@@ -28,13 +28,13 @@ class VitalsListController {
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'vitals-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'vitals';
-
+    /* istanbul ignore next */
     this.create = function () {
       $state.go('vitals-create', {
         patientId: $stateParams.patientId
       });
     };
-
+    /* istanbul ignore next */
     $scope.go = function (id, vital) {
       serviceRequests.viewList = $scope.viewList;
 
@@ -45,7 +45,7 @@ class VitalsListController {
         source: vital
       });
     }.bind(this);
-
+    /* istanbul ignore next */
     function formatDate(date) {
       var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
       
@@ -68,7 +68,7 @@ class VitalsListController {
         time: hh + ':' + min
       };
     }
-
+    /* istanbul ignore next */
 		$scope.getChartDataSet = function(vitals) {
 			var tempDate;
 			var lastDate = '';
@@ -151,7 +151,7 @@ class VitalsListController {
 			];
 			return dataChart;
     };
-
+    /* istanbul ignore next */
     $scope.chartLoad = function(vitals) {
       var dataChart = $scope.getChartDataSet(vitals);
       var options = {
@@ -214,7 +214,7 @@ class VitalsListController {
         }
       }.bind(this);
     };
-
+    /* istanbul ignore next */
     $scope.getVitalsForChart = function () {
 			var currentPage = $scope.currentPage || 1;
 			var vitals = angular.copy($scope.dateForChart);
@@ -228,7 +228,7 @@ class VitalsListController {
 			});
 			return filteringVitals.slice((currentPage - 1) * 10, currentPage * 10);
     };
-
+    /* istanbul ignore next */
     $scope.chartUpdate = function() {
       if ($scope.isViewList('chartNews') && $scope.chart) {
         var vitals = $scope.getVitalsForChart();
@@ -238,12 +238,12 @@ class VitalsListController {
 				$scope.chart.update();
       }
     };
-
+    /* istanbul ignore next */
     $scope.isViewList = function (viewName) {
       return $scope.viewList === viewName;
     };
 
-    /* istanbul ignore next  */
+    /* istanbul ignore next */
     $scope.changeViewList = function (viewName) {
       var vitalsForChart;
       $scope.viewList = viewName;
@@ -258,7 +258,7 @@ class VitalsListController {
         }
       }
     }.bind(this);
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.vitals;
       const pagesInfo = store.pagesInfo;

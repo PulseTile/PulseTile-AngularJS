@@ -37,10 +37,11 @@ class ClinicalnotesDetailController {
       
       $scope.clinicalNoteEdit.dateCreated = new Date(this.clinicalNote.dateCreated).toISOString().slice(0, 10);
     };
+    /* istanbul ignore next */
     this.cancelEdit = function () {
       $scope.isEdit = false;
     };
-
+    /* istanbul ignore next */
     $scope.confirmEdit = function (clinicalNoteForm, clinicalNote) {
       $scope.formSubmitted = true;
       /* istanbul ignore if  */
@@ -57,7 +58,7 @@ class ClinicalnotesDetailController {
         $scope.actionUpdateDetail($stateParams.patientId, clinicalNote.sourceId, toUpdate);
       }
     };
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.clinicalnotes;
       const { patientId, detailsIndex } = $stateParams;

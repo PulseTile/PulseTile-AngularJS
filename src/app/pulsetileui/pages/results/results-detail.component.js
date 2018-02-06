@@ -23,7 +23,7 @@ class ResultsDetailController {
     this.actionLoadDetail($stateParams.patientId, $stateParams.detailsIndex);
 
     $scope.formDisabled = true;
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.results;
       const { patientId, detailsIndex } = $stateParams;

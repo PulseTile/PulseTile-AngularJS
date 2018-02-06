@@ -51,16 +51,16 @@ describe('Patients Summary', function() {
   it('Controller exist', function() {
     expect(ctrl).toBeDefined();
   });
-  it("goToSection was called", function() {
+  it('goToSection was called', function() {
     expect(ctrl.goToSection).toHaveBeenCalled();
   });
-  it("setCurrentPageData was called", function() {
+  it('setCurrentPageData was called', function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
   });
-  it("route go was called", function() {
+  it('route go was called', function() {
     expect(scope.go).toHaveBeenCalled();
   });
-  it("changeDashboards was called", function() {
+  it('changeDashboards was called', function() {
     expect(scope.changeDashboards).toHaveBeenCalled();
   });
 });

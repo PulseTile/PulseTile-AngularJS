@@ -21,7 +21,7 @@ class HeightAndWeightListController {
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
     heightAndWeightActions.clear();
     this.actionLoadList = heightAndWeightActions.all;
-
+    /* istanbul ignore next */
     this.go = function (id) {
       $state.go('heightAndWeights-detail', {
         patientId: $stateParams.patientId,
@@ -29,7 +29,7 @@ class HeightAndWeightListController {
         page: $scope.currentPage || 1
       });
     };
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.heightAndWeight;
       const pagesInfo = store.pagesInfo;

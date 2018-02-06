@@ -24,7 +24,7 @@ class ReferralsListController {
 
 		this.isShowCreateBtn = $state.router.globals.$current.name !== 'referrals-create';
 		this.isShowExpandBtn = $state.router.globals.$current.name !== 'referrals';
-
+    /* istanbul ignore next */
     this.go = function (id) {
       $state.go('referrals-detail', {
         patientId: $stateParams.patientId,
@@ -32,13 +32,13 @@ class ReferralsListController {
         page: $scope.currentPage || 1
       });
     };
-    
+    /* istanbul ignore next */
     this.create = function () {
       $state.go('referrals-create', {
         patientId: $stateParams.patientId
       });
     };
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.referrals;
       const pagesInfo = store.pagesInfo;

@@ -22,7 +22,7 @@ class ReferralsCreateController {
 
   	$scope.referralsEdit = {};
   	$scope.referralsEdit.dateCreated = new Date();
-
+    /* istanbul ignore next */
 		this.goList = function () {
 			$state.go('referrals', {
 				patientId: $stateParams.patientId,
@@ -32,12 +32,13 @@ class ReferralsCreateController {
 				page: $stateParams.page
 			});
 		};
+    /* istanbul ignore next */
 		this.cancel = function () {
 			this.goList();
 		};
 
 		$scope.isEdit = false;
-
+    /* istanbul ignore next */
 		$scope.create = function (referralsForm, referral) {
 			$scope.formSubmitted = true;
 
@@ -46,7 +47,7 @@ class ReferralsCreateController {
         $scope.actionCreateDetail($stateParams.patientId, referral);
 			}
 		}.bind(this);
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       if (store.referrals.dataCreate !== null) {
         $scope.actionLoadList($stateParams.patientId);

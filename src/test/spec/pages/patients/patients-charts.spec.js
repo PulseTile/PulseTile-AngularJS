@@ -3,7 +3,6 @@ import PatientsChartsComponent from '../../../../app/pulsetileui/pages/patients-
 import '../../../../app/index';
 
 describe('Patients Charts', function() {
-
   beforeEach(angular.mock.module('ripple-ui'));
 
   let scope, ctrl, controller, template, state, $window, patientsActions, ngRedux, uibModal, serviceRequests, $timeout, Patient;
@@ -51,13 +50,13 @@ describe('Patients Charts', function() {
   it('Controller exist', function() {
     expect(ctrl).toBeDefined();
   });
-  it("goToPatientsList was called", function() {
+  it('goToPatientsList was called', function() {
     expect(ctrl.goToPatientsList).toHaveBeenCalled();
   });
-  it("goToLookUp was called", function() {
+  it('goToLookUp was called', function() {
     expect(ctrl.goToLookUp).toHaveBeenCalled();
   });
-  it("getPatients was called", function() {
+  it('getPatients was called', function() {
     expect(ctrl.getPatients).toHaveBeenCalled();
   });
 });

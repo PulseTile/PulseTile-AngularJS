@@ -22,7 +22,7 @@ class ProceduresCreateController {
 
     $scope.procedure = {};
     $scope.procedure.dateSubmitted = new Date();
-
+    /* istanbul ignore next */
     this.goList = function () {
       $state.go('procedures', {
         patientId: $stateParams.patientId,
@@ -31,11 +31,11 @@ class ProceduresCreateController {
         queryType: $stateParams.queryType
       });
     };
-
+    /* istanbul ignore next */
     this.cancel = function () {
       this.goList();
     };
-
+    /* istanbul ignore next */
     $scope.create = function (procedureForm, procedure) {
       $scope.formSubmitted = true;
 
@@ -44,7 +44,7 @@ class ProceduresCreateController {
         $scope.actionCreateDetail($stateParams.patientId, procedure);
       }
     };
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       if (store.procedures.dataCreate !== null) {
         $scope.actionLoadList($stateParams.patientId);

@@ -3,20 +3,18 @@ import VitalsListComponent from '../../../../app/pulsetileui/pages/vitals/vitals
 import '../../../../app/index';
 
 describe('Vitals List', function() {
-
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope, ctrl, controller, template, stateParams, state;
-       
+  let scope, ctrl, controller, template;
+
   beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _vitalsActions_, _serviceRequests_, _usSpinnerService_, _$window_, _$timeout_, _serviceVitalsSigns_, _serviceFormatted_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
-    state = _$state_;
 
     template = VitalsListComponent.template;
     ctrl = controller(VitalsListComponent.controller, {
       $scope: scope,
-      $state: state,
+      $state: _$state_,
       $stateParams: _$stateParams_,
       $ngRedux: _$ngRedux_,
       vitalsActions: _vitalsActions_,
@@ -30,18 +28,25 @@ describe('Vitals List', function() {
   }));
   
   beforeEach(function() {
-
     spyOn(scope, 'go');
+    spyOn(scope, 'getChartDataSet');
     spyOn(scope, 'chartLoad');
+    spyOn(scope, 'getVitalsForChart');
+    spyOn(scope, 'chartUpdate');
     spyOn(scope, 'isViewList');
     spyOn(scope, 'changeViewList');
+    spyOn(ctrl, 'actionLoadList');
     spyOn(ctrl, 'create');
     spyOn(ctrl, 'setCurrentPageData');
 
     scope.go();
+    scope.getChartDataSet();
     scope.chartLoad();
+    scope.getVitalsForChart();
+    scope.chartUpdate();
     scope.isViewList();
     scope.changeViewList();
+    ctrl.actionLoadList();
     ctrl.create();
     ctrl.setCurrentPageData();
   });
@@ -52,22 +57,35 @@ describe('Vitals List', function() {
   it('ctrl exist', function() {
     expect(ctrl).toBeDefined();
   });
-  it("go was called", function() {
+  it('go was called', function() {
     expect(scope.go).toHaveBeenCalled();
   });
-  it("chartLoad was called", function() {
+  it('getChartDataSet was called', function() {
+    expect(scope.getChartDataSet).toHaveBeenCalled();
+  });
+  it('chartLoad was called', function() {
     expect(scope.chartLoad).toHaveBeenCalled();
   });
-  it("isViewList was called", function() {
+  it('getVitalsForChart was called', function() {
+    expect(scope.getVitalsForChart).toHaveBeenCalled();
+  });
+  it('chartUpdate was called', function() {
+    expect(scope.chartUpdate).toHaveBeenCalled();
+  });
+  it('isViewList was called', function() {
     expect(scope.isViewList).toHaveBeenCalled();
   });
-  it("changeViewList was called", function() {
+  it('changeViewList was called', function() {
     expect(scope.changeViewList).toHaveBeenCalled();
   });
-  it("create was called", function() {
+
+  it('actionLoadList was called', function() {
+    expect(ctrl.actionLoadList).toHaveBeenCalled();
+  });
+  it('create was called', function() {
     expect(ctrl.create).toHaveBeenCalled();
   });
-  it("setCurrentPageData was called", function() {
+  it('setCurrentPageData was called', function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
   });
 });

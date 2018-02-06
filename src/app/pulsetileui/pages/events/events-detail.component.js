@@ -100,6 +100,8 @@ class EventsDetailController {
       }
       if (serviceRequests.currentUserData) {
         this.currentUser = serviceRequests.currentUserData;
+        $scope.patient =  this.currentUser;
+
       }
 
       if (state.error) {
@@ -159,7 +161,7 @@ class EventsDetailController {
       return user && user.role == ROLE_DOCTOR;
     }
 
-    $scope.patient =  this.currentPatient;
+    // $scope.patient =  this.currentPatient;
     $scope.appt =  this.appointment;
 
     /* istanbul ignore next */
@@ -202,6 +204,7 @@ class EventsDetailController {
       console.log('startAppointment ===> ',  $scope.patient, $scope.appt);
       if (!$scope.appt) return;
 
+      console.log('$scope.patient', $scope.patient);
       socket.emit('appointment:init', {
         patientId: $scope.patient.id,
         appointmentId: $scope.appt.sourceId

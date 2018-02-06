@@ -23,7 +23,7 @@ class ClinicalstatementsDetailController {
 
     usSpinnerService.spin('detail-spinner');
     this.actionLoadDetail($stateParams.patientId, $stateParams.detailsIndex);
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.clinicalstatements;
       const { detailsIndex } = $stateParams;

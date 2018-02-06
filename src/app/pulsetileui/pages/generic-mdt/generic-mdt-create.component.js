@@ -24,7 +24,7 @@ class GenericMdtCreateController {
     $scope.genericMdt.dateSubmitted = new Date();
     $scope.genericMdt.relationshipCode = 'at0039';
     $scope.genericMdt.relationshipTerminology = 'local';
-
+    /* istanbul ignore next */
     this.goList = function () {
       $state.go('genericMdt', {
         patientId: $stateParams.patientId,
@@ -33,11 +33,11 @@ class GenericMdtCreateController {
         queryType: $stateParams.queryType
       });
     };
-
+    /* istanbul ignore next */
     this.cancel = function () {
       this.goList();
     };
-
+    /* istanbul ignore next */
     $scope.create = function (mdtForm, genericMdt) {
       $scope.formSubmitted = true;
 
@@ -46,7 +46,7 @@ class GenericMdtCreateController {
         $scope.actionCreateDetail($stateParams.patientId, genericMdt);
       }
     };
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (data) {
       if (data.genericmdt.dataCreate !== null) {
         $scope.actionLoadList($stateParams.patientId);

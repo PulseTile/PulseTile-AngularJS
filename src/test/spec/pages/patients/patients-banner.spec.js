@@ -3,7 +3,6 @@ import PatientsBannerComponent from '../../../../app/pulsetileui/pages/patients-
 import '../../../../app/index';
 
 describe('Patients Banner', function() {
-
   beforeEach(angular.mock.module('ripple-ui'));
 
   let scope, ctrl, controller, template, state, stateParams, ngRedux, patientsActions;

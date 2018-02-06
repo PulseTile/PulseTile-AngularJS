@@ -3,10 +3,9 @@ import SearchAdvancedComponent from '../../../../app/pulsetileui/search/search-a
 import '../../../../app/index';
 
 describe('SearchAdvancedComponent', function() {
-
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope, ctrl, controller, template, serviceRequests;
+  let scope, ctrl, controller, template;
   
   beforeEach(inject(($injector, $controller, _$http_, _$ngRedux_, _serviceRequests_, _searchActions_, _$state_) => {
     controller = $controller;
@@ -53,28 +52,29 @@ describe('SearchAdvancedComponent', function() {
   it('Template exist', function() {
     expect(template).toBeDefined();
   });
-  it("cancel was called", function() {
+
+  it('cancel was called', function() {
     expect(scope.cancel).toHaveBeenCalled();
   });
-  it("ok was called", function() {
+  it('ok was called', function() {
     expect(scope.ok).toHaveBeenCalled();
   });
-  it("getSearchParams was called", function() {
+  it('getSearchParams was called', function() {
     expect(scope.getSearchParams).toHaveBeenCalled();
   });
-  it("clearSearchParams was called", function() {
+  it('clearSearchParams was called', function() {
     expect(scope.clearSearchParams).toHaveBeenCalled();
   });
-  it("refreshSlider was called", function() {
+  it('refreshSlider was called', function() {
     expect(scope.refreshSlider).toHaveBeenCalled();
   });
-  it("isNhsNumberRequired was called", function() {
+  it('isNhsNumberRequired was called', function() {
     expect(scope.isNhsNumberRequired).toHaveBeenCalled();
   });
-  it("isNhsNumberTooShort was called", function() {
+  it('isNhsNumberTooShort was called', function() {
     expect(scope.isNhsNumberTooShort).toHaveBeenCalled();
   });
-  it("isNhsNumberFieldInvalid was called", function() {
+  it('isNhsNumberFieldInvalid was called', function() {
     expect(scope.isNhsNumberFieldInvalid).toHaveBeenCalled();
   });
 });

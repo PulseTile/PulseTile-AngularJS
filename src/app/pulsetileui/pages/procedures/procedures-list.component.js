@@ -25,13 +25,13 @@ class ProceduresListController {
 		this.isShowCreateBtn = $state.router.globals.$current.name !== 'procedures-create';
 		this.isShowExpandBtn = $state.router.globals.$current.name !== 'procedures';
 
-
+    /* istanbul ignore next */
 		this.create = function () {
 			$state.go('procedures-create', {
 				patientId: $stateParams.patientId
 			});
 		};
-
+    /* istanbul ignore next */
     this.go = function (id, source) {
       $state.go('procedures-detail', {
         patientId: $stateParams.patientId,
@@ -40,7 +40,7 @@ class ProceduresListController {
         source: source
       });
     };
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.procedures;
       const pagesInfo = store.pagesInfo;

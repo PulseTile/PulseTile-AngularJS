@@ -28,16 +28,17 @@ class PersonalnotesDetailController {
     //Edit Clinical Note
     $scope.isEdit = false;
 
-    /* istanbul ignore next  */
+    /* istanbul ignore next */
     this.edit = function () {
       $scope.isEdit = true;
       $scope.personalNoteEdit = Object.assign({}, this.personalNote);
       $scope.personalNoteEdit.dateCreated = new Date(this.personalNote.dateCreated);
     };
+    /* istanbul ignore next */
     this.cancelEdit = function () {
       $scope.isEdit = false;
     };
-
+    /* istanbul ignore next */
     $scope.confirmEdit = function (personalNoteForm, personalNote) {
       $scope.formSubmitted = true;
 
@@ -57,7 +58,7 @@ class PersonalnotesDetailController {
         $scope.actionUpdateDetail($stateParams.patientId, personalNote.sourceId, toUpdate);
       }
     };
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.personalnotes;
       const { patientId, detailsIndex } = $stateParams;

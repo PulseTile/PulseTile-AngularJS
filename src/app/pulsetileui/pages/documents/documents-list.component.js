@@ -21,7 +21,7 @@ class DocumentsListController {
     serviceRequests.publisher('headerTitle', {title: 'Patients Details'});
     documentsActions.clear();
     this.actionLoadList = documentsActions.all;
-
+    /* istanbul ignore next */
     this.go = function (id) {
       $state.go('documents-detail', {
         patientId: $stateParams.patientId,
@@ -29,7 +29,7 @@ class DocumentsListController {
         page: $scope.currentPage || 1
       });
     };
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.documents;
       const pagesInfo = store.pagesInfo;

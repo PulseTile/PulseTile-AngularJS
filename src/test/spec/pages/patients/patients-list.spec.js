@@ -6,7 +6,6 @@ import * as types from '../../../../app/constants/ActionTypes';
 import patients from '../../../../app/pulsetileui/pages/patients-list/patients-reducer-all';
 
 describe('Patients List', function() {
-
   beforeEach(angular.mock.module('ripple-ui'));
   beforeEach(angular.mock.module('app.actions'));
 
@@ -81,16 +80,16 @@ describe('Patients List', function() {
   it('Include patientsActions in index actions file', function() {
     expect(actions).toBeDefined();
   });
-  it("Patients reducer was called", function() {
+  it('Patients reducer was called', function() {
     expect(fakeCall.callPatients).toHaveBeenCalled();
   });
-  it("route selectAllSettings was called", function() {
+  it('route selectAllSettings was called', function() {
     expect(scope.selectAllSettings).toHaveBeenCalled();
   });
-  it("patientFilter was called", function() {
+  it('patientFilter was called', function() {
     expect(ctrl.patientFilter).toHaveBeenCalled();
   });
-  it("setCurrentPageData was called", function() {
+  it('setCurrentPageData was called', function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
   });
   it('patient  exist', function() {

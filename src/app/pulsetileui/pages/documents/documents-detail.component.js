@@ -27,12 +27,12 @@ class DocumentsDetailController {
 
     $scope.typeOfDocument = '';
     this.clinicalDocument = {};
-
+    /* istanbul ignore next */
     $scope.sendDocument = function (data) {
       serviceRequests.publisher('setDocument', {document: this.clinicalDocument});
     }.bind(this);
     serviceRequests.subscriber('getDocument', $scope.sendDocument);
-
+    /* istanbul ignore next */
     $scope.getTypeOfDocument = () => {
       if (this.clinicalDocument.documentType) {
         const documentType = this.clinicalDocument.documentType.toLowerCase();
@@ -45,7 +45,7 @@ class DocumentsDetailController {
         }
       }
      };
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.documents;
       const { detailsIndex } = $stateParams;

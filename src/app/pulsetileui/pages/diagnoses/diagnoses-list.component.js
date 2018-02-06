@@ -24,7 +24,7 @@ class DiagnosesListController {
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'diagnoses-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'diagnoses';
-    
+    /* istanbul ignore next */
     this.go = function (id, diagnosisSource) {
       $state.go('diagnoses-detail', {
         patientId: $stateParams.patientId,
@@ -33,13 +33,13 @@ class DiagnosesListController {
         source: diagnosisSource
       });
     };
-
+    /* istanbul ignore next */
     this.create = function () {
       $state.go('diagnoses-create', {
         patientId: $stateParams.patientId
       });
     };
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.diagnoses;
       const pagesInfo = store.pagesInfo;

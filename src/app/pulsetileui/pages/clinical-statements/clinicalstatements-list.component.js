@@ -25,14 +25,14 @@ class ClinicalstatementsListController {
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'clinicalstatements-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'clinicalstatements';
-
+    /* istanbul ignore next */
     this.create = function () {
       $state.go('clinicalstatements-create', {
         patientId: $stateParams.patientId,
         page: $scope.currentPage || 1
       });
     };
-    
+    /* istanbul ignore next */
     this.go = function (id, source) {
       $state.go('clinicalstatements-detail', {
         patientId: $stateParams.patientId,
@@ -41,7 +41,7 @@ class ClinicalstatementsListController {
         source: source
       });
     };
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.clinicalstatements;
       const pagesInfo = store.pagesInfo;

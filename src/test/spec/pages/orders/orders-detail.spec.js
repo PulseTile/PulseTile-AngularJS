@@ -6,42 +6,44 @@ describe('Orders Details', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope, ctrl, controller, template, stateParams, state, ngRedux, ordersActions, usSpinnerService;
+  let scope, ctrl, controller, template;
 
-  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _ordersActions_, _usSpinnerService_) => {
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _ordersActions_, _usSpinnerService_, _serviceRequests_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
-    state = _$state_;
-    ngRedux = _$ngRedux_;
-    stateParams = _$stateParams_;
-    ordersActions = _ordersActions_;
-    usSpinnerService = _usSpinnerService_;
 
     template = OrdersDetailComponent.template;
     ctrl = controller(OrdersDetailComponent.controller, {
       $scope: scope,
-      $state: state,
-      $stateParams: stateParams,
-      $ngRedux: ngRedux,
-      ordersActions: ordersActions,
-      usSpinnerService: usSpinnerService
+      $state: _$state_,
+      $stateParams: _$stateParams_,
+      $ngRedux: _$ngRedux_,
+      ordersActions: _ordersActions_,
+      usSpinnerService: _usSpinnerService_,
+      serviceRequests: _serviceRequests_,
     });
   }));
   beforeEach(function() {
+    spyOn(ctrl, 'actionLoadList');
+    spyOn(ctrl, 'actionLoadDetail');
     spyOn(ctrl, 'setCurrentPageData');
-    spyOn(ctrl, 'ordersLoad');
 
-    ctrl.ordersLoad();
+    ctrl.actionLoadList();
+    ctrl.actionLoadDetail();
     ctrl.setCurrentPageData();
   });
 
   it('Template exist', function() {
     expect(template).toBeDefined();
   });
-  it("ordersLoad was called", function() {
-    expect(ctrl.ordersLoad).toHaveBeenCalled();
+
+  it('actionLoadList was called', function() {
+    expect(ctrl.actionLoadList).toHaveBeenCalled();
   });
-  it("setCurrentPageData was called", function() {
+  it('actionLoadDetail was called', function() {
+    expect(ctrl.actionLoadDetail).toHaveBeenCalled();
+  });
+  it('setCurrentPageData was called', function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
   });
 });

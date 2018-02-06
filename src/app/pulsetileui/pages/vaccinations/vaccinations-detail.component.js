@@ -25,18 +25,18 @@ class VaccinationsDetailController {
     this.actionLoadDetail($stateParams.patientId, $stateParams.detailsIndex);
 
     $scope.isEdit = false;
-
+    /* istanbul ignore next */
     this.edit = function () {
       $scope.isEdit = true;
 
       $scope.vaccinationEdit = Object.assign({}, this.vaccination);
       $scope.vaccinationEdit.dateCreated = new Date();
     };
-
+    /* istanbul ignore next */
     this.cancelEdit = function () {
       $scope.isEdit = false;
     };
-    
+    /* istanbul ignore next */
     $scope.confirmEdit = function (vaccinationForm, vaccination) {
       $scope.formSubmitted = true;
       if (vaccinationForm.$valid) {
@@ -48,7 +48,7 @@ class VaccinationsDetailController {
         $scope.actionUpdateDetail($stateParams.patientId, vaccination.sourceId, $scope.vaccinationEdit);
       }
     }.bind(this);
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.vaccinations;
       const { patientId, detailsIndex } = $stateParams;

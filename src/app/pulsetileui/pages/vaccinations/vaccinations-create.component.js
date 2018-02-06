@@ -23,7 +23,7 @@ class VaccinationsCreateController {
     $scope.vaccination = {};
     $scope.vaccination.dateCreated = new Date();
     $scope.vaccination.source = 'Marand';
-
+    /* istanbul ignore next */
     this.goList = function () {
       $state.go('vaccinations', {
         patientId: $stateParams.patientId,
@@ -32,11 +32,11 @@ class VaccinationsCreateController {
         queryType: $stateParams.queryType
       });
     };
-    
+    /* istanbul ignore next */
     this.cancel = function () {
       this.goList();
     };
-    
+    /* istanbul ignore next */
     $scope.create = function (vaccinationForm, vaccination) {
       $scope.formSubmitted = true;
 
@@ -53,14 +53,14 @@ class VaccinationsCreateController {
         $scope.actionCreateDetail($stateParams.patientId, toAdd);
       }
     }.bind(this);
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       if (store.vaccinations.dataCreate !== null) {
         $scope.actionLoadList($stateParams.patientId);
         this.goList();
       }
-      if (data.patientsGet.data) {
-        this.currentPatient = data.patientsGet.data;
+      if (store.patientsGet.data) {
+        this.currentPatient = store.patientsGet.data;
       }
       if (serviceRequests.currentUserData) {
         $scope.currentUser = serviceRequests.currentUserData;

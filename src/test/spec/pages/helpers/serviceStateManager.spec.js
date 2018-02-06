@@ -6,10 +6,7 @@ describe('ServiceStateManager', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope,
-    ctrl,
-    controller,
-    template;
+  let scope, ctrl, controller, template;
 
   beforeEach(inject(($injector, $controller) => {
     controller = $controller;
@@ -47,34 +44,35 @@ describe('ServiceStateManager', function() {
   it('Controller exist', function() {
     expect(ctrl).toBeDefined();
   });
-  it("getFilter was called", function() {
+
+  it('getFilter was called', function() {
     expect(ctrl.getFilter).toHaveBeenCalled();
   });
-  it("setFilter was called", function() {
+  it('setFilter was called', function() {
     expect(ctrl.setFilter).toHaveBeenCalled();
   });
-  it("getFilterTimeline was called", function() {
+  it('getFilterTimeline was called', function() {
       expect(ctrl.getFilterTimeline).toHaveBeenCalled();
   });
-  it("setFilterTimeline was called", function() {
+  it('setFilterTimeline was called', function() {
       expect(ctrl.setFilterTimeline).toHaveBeenCalled();
   });
-  it("getTableSettings was called", function() {
+  it('getTableSettings was called', function() {
       expect(ctrl.getTableSettings).toHaveBeenCalled();
   });
-  it("setTableSettings was called", function() {
+  it('setTableSettings was called', function() {
       expect(ctrl.setTableSettings).toHaveBeenCalled();
   });
-  it("clearData was called", function() {
+  it('clearData was called', function() {
       expect(ctrl.clearData).toHaveBeenCalled();
   });
-  it("getViewsSettings was called", function() {
+  it('getViewsSettings was called', function() {
       expect(ctrl.getViewsSettings).toHaveBeenCalled();
   });
-  it("setViewsSettings was called", function() {
+  it('setViewsSettings was called', function() {
       expect(ctrl.setViewsSettings).toHaveBeenCalled();
   });
-  it("checkChangeState was called", function() {
+  it('checkChangeState was called', function() {
       expect(ctrl.checkChangeState).toHaveBeenCalled();
   });
 });

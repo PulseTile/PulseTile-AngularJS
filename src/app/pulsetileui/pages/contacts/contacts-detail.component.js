@@ -31,6 +31,7 @@ class ContactsDetailController {
       { value: 'at0039', title: 'Key formal care worker' },
     ];
     $scope.isEdit = false;
+    /* istanbul ignore next */
     this.edit = function () {
       $scope.isEdit = true;
 
@@ -45,9 +46,11 @@ class ContactsDetailController {
         });
       }
     };
+    /* istanbul ignore next */
     this.cancelEdit = function () {
       $scope.isEdit = false;
     };
+    /* istanbul ignore next */
     $scope.confirmEdit = function (contactForm, contact) {
       $scope.formSubmitted = true;
       if (contactForm.$valid) {
@@ -57,7 +60,7 @@ class ContactsDetailController {
         $scope.actionUpdateDetail($stateParams.patientId, contact.sourceId, $scope.contactEdit);
       }
     }.bind(this);
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.contacts;
       const { patientId, detailsIndex } = $stateParams;

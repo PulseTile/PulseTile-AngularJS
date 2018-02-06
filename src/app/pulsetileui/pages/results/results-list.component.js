@@ -23,7 +23,7 @@ class ResultsListController {
     this.actionLoadList = resultsActions.all;
 
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'results';
-
+    /* istanbul ignore next */
     this.go = function (id, source) {
       $state.go('results-detail', {
         patientId: $stateParams.patientId,
@@ -32,7 +32,7 @@ class ResultsListController {
         source: source
       });
     };
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.results;
       const pagesInfo = store.pagesInfo;

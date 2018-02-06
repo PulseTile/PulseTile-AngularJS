@@ -23,7 +23,7 @@ class ClinicalnotesCreateController {
 
     $scope.clinicalNote = {};
     $scope.clinicalNote.dateCreated = new Date().toISOString().slice(0, 10);
-
+    /* istanbul ignore next */
     this.goList = function () {
       $state.go('clinicalNotes', {
         patientId: $stateParams.patientId,
@@ -32,11 +32,12 @@ class ClinicalnotesCreateController {
         queryType: $stateParams.queryType
       });
     };
-    
+    /* istanbul ignore next */
     this.cancel = function () {
       this.goList();
     };
-    
+
+    /* istanbul ignore next */
     $scope.create = function (clinicalNoteForm, clinicalNote) {
       $scope.formSubmitted = true;
 
@@ -54,6 +55,7 @@ class ClinicalnotesCreateController {
       }
     }.bind(this);
 
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       if (store.clinicalnotes.dataCreate !== null) {
         $scope.actionLoadList($stateParams.patientId);

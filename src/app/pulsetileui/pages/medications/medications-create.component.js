@@ -32,7 +32,7 @@ class MedicationsCreateController {
     if (typeof $scope.medication.startDate == "undefined") {
       $scope.medication.startDate = new Date();
     }
-    
+    /* istanbul ignore next */
     this.backToDocs = function () {
       $state.go('documents-detail', {
         patientId: $stateParams.patientId,
@@ -51,7 +51,7 @@ class MedicationsCreateController {
       'SC Sub Cutaneous',
       'IM Intra Muscular'
     ];
-
+    /* istanbul ignore next */
     this.goList = function () {
       $state.go('medications', {
         patientId: $stateParams.patientId,
@@ -60,11 +60,11 @@ class MedicationsCreateController {
         queryType: $stateParams.queryType
       });
     };
-
+    /* istanbul ignore next */
     this.cancel = function () {
       this.goList();
     };
-
+    /* istanbul ignore next */
     $scope.create = function (medicationForm, medication) {
       $scope.formSubmitted = true;
 
@@ -95,7 +95,7 @@ class MedicationsCreateController {
         $scope.actionCreateDetail($stateParams.patientId, toAdd);
       }
     };
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       if (store.medication.dataCreate !== null) {
         $scope.actionLoadList($stateParams.patientId);

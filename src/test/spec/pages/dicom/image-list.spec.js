@@ -9,42 +9,25 @@ describe('Image List', function() {
 
   beforeEach(angular.mock.module('ripple-ui'));
 
-  let scope, 
-    ctrl, 
-    controller, 
-    template, 
-    stateParams, 
-    state, 
-    ngRedux, 
-    imageActions, 
-    serviceRequests, 
-    usSpinnerService, 
-    actions, 
-    fakeCall;
+  let scope, ctrl, controller, template, actions, fakeCall;
 
-  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _imageActions_, _serviceRequests_, _usSpinnerService_) => {
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _imageActions_, _serviceRequests_, _usSpinnerService_, _serviceFormatted_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
-    state = _$state_;
-    serviceRequests = _serviceRequests_;
-    ngRedux = _$ngRedux_;
-    stateParams = _$stateParams_;
-    imageActions = _imageActions_;
-    usSpinnerService = _usSpinnerService_;
 
     template = ImageListComponent.template;
 
     ctrl = controller(ImageListComponent.controller, {
       $scope: scope,
-      $state: state,
-      $stateParams: stateParams,
-      $ngRedux: ngRedux,
-      imageActions: imageActions,
-      serviceRequests: serviceRequests,
-      usSpinnerService: usSpinnerService
+      $state: _$state_,
+      $stateParams: _$stateParams_,
+      $ngRedux: _$ngRedux_,
+      imageActions: _imageActions_,
+      serviceRequests: _serviceRequests_,
+      usSpinnerService: _usSpinnerService_,
+      serviceFormatted: _serviceFormatted_,
     });
     actions = $injector.get('imageActions');
-    // scope.$digest();
   }));
 
   beforeEach(function() {
@@ -54,15 +37,15 @@ describe('Image List', function() {
 
     spyOn(fakeCall, 'callSeries');
 
+    spyOn(ctrl, 'actionLoadList');
     spyOn(ctrl, 'go');
     spyOn(ctrl, 'setCurrentPageData');
-    spyOn(ctrl, 'imageLoad');
 
     fakeCall.callSeries({}, types.SERIES_GET);
 
+    ctrl.actionLoadList();
     ctrl.go();
     ctrl.setCurrentPageData();
-    ctrl.imageLoad();
   });
 
   it('Template exist', function() {
@@ -74,16 +57,17 @@ describe('Image List', function() {
   it('Include contactsActions in index actions file', function() {
     expect(actions).toBeDefined();
   });
-  it("Series reducer was called", function() {
+  it('Series reducer was called', function() {
     expect(fakeCall.callSeries).toHaveBeenCalled();
   });
-  it("route go was called", function() {
+
+  it('actionLoadList was called', function() {
+    expect(ctrl.actionLoadList).toHaveBeenCalled();
+  });
+  it('go was called', function() {
     expect(ctrl.go).toHaveBeenCalled();
   });
-  it("setCurrentPageData was called", function() {
+  it('setCurrentPageData was called', function() {
     expect(ctrl.setCurrentPageData).toHaveBeenCalled();
-  });
-  it("imageLoad was called", function() {
-    expect(ctrl.imageLoad).toHaveBeenCalled();
   });
 });

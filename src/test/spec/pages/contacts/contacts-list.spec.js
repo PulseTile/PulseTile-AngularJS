@@ -10,42 +10,24 @@ describe('Contacts List', function() {
   beforeEach(angular.mock.module('ripple-ui'));
   beforeEach(angular.mock.module('app.actions'));
 
-  let scope, 
-    ctrl, 
-    controller, 
-    template, 
-    stateParams, 
-    state, 
-    ngRedux, 
-    contactsActions, 
-    serviceRequests, 
-    usSpinnerService,
-    actions,
-    fakeCall;
+  let scope, ctrl, controller, template, actions, fakeCall;
 
   beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _contactsActions_, _serviceRequests_, _usSpinnerService_) => {
     controller = $controller;
     scope = $injector.get('$rootScope').$new();
-    state = _$state_;
-    serviceRequests = _serviceRequests_;
-    ngRedux = _$ngRedux_;
-    stateParams = _$stateParams_;
-    contactsActions = _contactsActions_;
-    usSpinnerService = _usSpinnerService_;
 
     template = ContactsListComponent.template;
 
     ctrl = controller(ContactsListComponent.controller, {
       $scope: scope,
-      $state: state,
-      $stateParams: stateParams,
-      $ngRedux: ngRedux,
-      contactsActions: contactsActions,
-      serviceRequests: serviceRequests,
-      usSpinnerService: usSpinnerService
+      $state: _$state_,
+      $stateParams: _$stateParams_,
+      $ngRedux: _$ngRedux_,
+      contactsActions: _contactsActions_,
+      serviceRequests: _serviceRequests_,
+      usSpinnerService: _usSpinnerService_
     });
     actions = $injector.get('contactsActions');
-    // scope.$digest();
   }));
 
   beforeEach(function() {
@@ -55,17 +37,17 @@ describe('Contacts List', function() {
 
     spyOn(fakeCall, 'callContacts');
 
-    spyOn(ctrl, 'go');
+    spyOn(ctrl, 'actionLoadList');
     spyOn(ctrl, 'create');
+    spyOn(ctrl, 'go');
     spyOn(ctrl, 'setCurrentPageData');
-    spyOn(ctrl, 'contactsLoad');
 
     fakeCall.callContacts({}, types.CONTACTS);
 
-    ctrl.go();
+    ctrl.actionLoadList();
     ctrl.create();
+    ctrl.go();
     ctrl.setCurrentPageData();
-    ctrl.contactsLoad();
   });
 
   it('Template exist', function() {
@@ -77,19 +59,20 @@ describe('Contacts List', function() {
   it('Include contactsActions in index actions file', function() {
     expect(actions).toBeDefined();
   });
-  it("Contacts reducer was called", function() {
+  it('Contacts reducer was called', function() {
     expect(fakeCall.callContacts).toHaveBeenCalled();
   });
-  it("route go was called", function() {
-    expect(ctrl.go).toHaveBeenCalled();
+
+  it('actionLoadList go was called', function() {
+    expect(ctrl.actionLoadList).toHaveBeenCalled();
   });
-  it("create was called", function() {
+  it('create was called', function() {
     expect(ctrl.create).toHaveBeenCalled();
   });
-  it("setCurrentPageData was called", function() {
-    expect(ctrl.setCurrentPageData).toHaveBeenCalled();
+  it('go was called', function() {
+    expect(ctrl.go).toHaveBeenCalled();
   });
-  it("contactsLoad was called", function() {
-    expect(ctrl.contactsLoad).toHaveBeenCalled();
+  it('setCurrentPageData was called', function() {
+    expect(ctrl.setCurrentPageData).toHaveBeenCalled();
   });
 });

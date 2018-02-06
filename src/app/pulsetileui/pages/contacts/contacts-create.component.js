@@ -23,7 +23,7 @@ class ContactsCreateController {
     $scope.contact = {};
     $scope.contact.dateSubmitted = new Date();
     $scope.contact.relationshipTerminology = 'local';
-
+    /* istanbul ignore next */
     this.goList = function () {
       $state.go('contacts', {
         patientId: $stateParams.patientId,
@@ -32,11 +32,11 @@ class ContactsCreateController {
         queryType: $stateParams.queryType
       });
     };
-
+    /* istanbul ignore next */
     this.cancel = function () {
       this.goList();
     };
-    
+    /* istanbul ignore next */
     $scope.create = function (contactForm, contact) {
       $scope.formSubmitted = true;
 
@@ -45,7 +45,7 @@ class ContactsCreateController {
         $scope.actionCreateDetail($stateParams.patientId, contact);
       }
     }.bind(this);
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       if (store.contacts.dataCreate !== null) {
         $scope.actionLoadList($stateParams.patientId);

@@ -70,59 +70,59 @@ describe('Ui Kit Component', function() {
     });
 
 
-    it("Controller exist", function() {
+    it('Controller exist', function() {
         expect(ctrl).toBeDefined();
     });
     it('Template exist', function() {
         expect(template).toBeDefined();
     });
 
-    it("isMobileScreen was called", function() {
+    it('isMobileScreen was called', function() {
       expect(scope.isMobileScreen).toHaveBeenCalled();
     });
-    it("scrollTo was called", function() {
+    it('scrollTo was called', function() {
         expect(scope.scrollTo).toHaveBeenCalled();
     });
-    it("toggleSidebar was called", function() {
+    it('toggleSidebar was called', function() {
         expect(scope.toggleSidebar).toHaveBeenCalled();
     });
-    it("toggleFullPanelClass was called", function() {
+    it('toggleFullPanelClass was called', function() {
         expect(scope.toggleFullPanelClass).toHaveBeenCalled();
     });
-    it("getFullPanelClass was called", function() {
+    it('getFullPanelClass was called', function() {
         expect(scope.getFullPanelClass).toHaveBeenCalled();
     });
-    it("setSelectedLeft was called", function() {
+    it('setSelectedLeft was called', function() {
         expect(scope.setSelectedLeft).toHaveBeenCalled();
     });
-    it("setSelectedRight was called", function() {
+    it('setSelectedRight was called', function() {
         expect(scope.setSelectedRight).toHaveBeenCalled();
     });
-    it("toggleSelectedItem was called", function() {
+    it('toggleSelectedItem was called', function() {
         expect(scope.toggleSelectedItem).toHaveBeenCalled();
     });
-    it("isInSuggestionsList was called", function() {
+    it('isInSuggestionsList was called', function() {
         expect(scope.isInSuggestionsList).toHaveBeenCalled();
     });
-    it("chooseItem was called", function() {
+    it('chooseItem was called', function() {
         expect(scope.chooseItem).toHaveBeenCalled();
     });
-    it("chooseAll was called", function() {
+    it('chooseAll was called', function() {
         expect(scope.chooseAll).toHaveBeenCalled();
     });
-    it("cancelItem was called", function() {
+    it('cancelItem was called', function() {
         expect(scope.cancelItem).toHaveBeenCalled();
     });
-    it("cancelAll was called", function() {
+    it('cancelAll was called', function() {
         expect(scope.cancelAll).toHaveBeenCalled();
     });
-    it("openModal was called", function() {
+    it('openModal was called', function() {
         expect(ctrl.openModal).toHaveBeenCalled();
     });
-    it("getHighlighterClass was called", function() {
+    it('getHighlighterClass was called', function() {
         expect(scope.getHighlighterClass).toHaveBeenCalled();
     });
-    it("showInfo was called", function() {
+    it('showInfo was called', function() {
         expect(ctrl.showInfo).toHaveBeenCalled();
     });
 });

@@ -24,7 +24,7 @@ class GenericMdtListController {
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'genericMdt-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'genericMdt';
-
+    /* istanbul ignore next */
     this.go = function (id) {
       $state.go('genericMdt-detail', {
         patientId: $stateParams.patientId,
@@ -32,13 +32,13 @@ class GenericMdtListController {
         page: $scope.currentPage || 1
       });
     };
-
+    /* istanbul ignore next */
     this.create = function () {
       $state.go('genericMdt-create', {
         patientId: $stateParams.patientId
       });
     };
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.genericmdt;
       const pagesInfo = store.pagesInfo;

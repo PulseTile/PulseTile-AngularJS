@@ -3,86 +3,92 @@ import DrawingsComponent from '../../../../app/pulsetileui/pages/drawings/drawin
 import '../../../../app/index';
 
 describe('Drawings Details', function() {
+  beforeEach(angular.mock.module('ripple-ui'));
 
-    beforeEach(angular.mock.module('ripple-ui'));
+  let scope, ctrl, controller, template;
 
-    let scope, ctrl, controller, template, state, stateParams, ngRedux, drawingsActions, usSpinnerService, serviceRequests, $timeout, $window;
-    
-    beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _drawingsActions_, _usSpinnerService_, _serviceRequests_, _$timeout_, _$window_) => {
-        controller = $controller;
-        scope = $injector.get('$rootScope').$new();
-        state = _$state_;
-        stateParams = _$stateParams_;
-        ngRedux = _$ngRedux_;
-        drawingsActions = _drawingsActions_;
-        usSpinnerService = _usSpinnerService_;
-        serviceRequests = _serviceRequests_;
-        $timeout = _$timeout_;
-        $window = _$window_;
+  beforeEach(inject(($injector, $controller, _$state_, _$stateParams_, _$ngRedux_, _drawingsActions_, _usSpinnerService_, _serviceRequests_, _serviceFormatted_) => {
+    controller = $controller;
+    scope = $injector.get('$rootScope').$new();
 
-        template = DrawingsComponent.template;
-        ctrl = controller(DrawingsComponent.controller, {
-            $scope: scope,
-            $state: state,
-            $stateParams: stateParams,
-            $ngRedux: ngRedux,
-            drawingsActions: drawingsActions,
-            usSpinnerService: usSpinnerService,
-            serviceRequests: serviceRequests,
-            $timeout: $timeout,
-            $window: $window
-        });
-    }));
+    template = DrawingsComponent.template;
+    ctrl = controller(DrawingsComponent.controller, {
+      $scope: scope,
+      $state: _$state_,
+      $stateParams: _$stateParams_,
+      $ngRedux: _$ngRedux_,
+      drawingsActions: _drawingsActions_,
+      usSpinnerService: _usSpinnerService_,
+      serviceRequests: _serviceRequests_,
+      serviceFormatted: _serviceFormatted_,
+    });
+  }));
 
-    beforeEach(function() {
-        spyOn(scope, 'confirmEdit');
-        spyOn(scope, 'confirmEditDetail');
-        spyOn(scope, 'resizeDrawing');
-        spyOn(ctrl, 'setCurrentPageData');
-        spyOn(ctrl, 'edit');
-        spyOn(ctrl, 'cancelEdit');
-        spyOn(ctrl, 'editDetail');
-        spyOn(ctrl, 'cancelEditDetail');
+  beforeEach(function() {
+    spyOn(scope, 'getCanvasImage64');
+    spyOn(scope, 'confirmEdit');
+    spyOn(scope, 'confirmEditDetail');
+    spyOn(scope, 'resizeDrawing');
+    spyOn(ctrl, 'actionLoadList');
+    spyOn(ctrl, 'actionLoadDetail');
+    spyOn(ctrl, 'edit');
+    spyOn(ctrl, 'cancelEdit');
+    spyOn(ctrl, 'editDetail');
+    spyOn(ctrl, 'cancelEditDetail');
+    spyOn(ctrl, 'setCurrentPageData');
 
-        scope.confirmEdit();
-        scope.confirmEditDetail();
-        scope.resizeDrawing();
-        ctrl.setCurrentPageData();
-        ctrl.edit();
-        ctrl.cancelEdit();
-        ctrl.editDetail();
-        ctrl.cancelEditDetail();
-    });
+    scope.getCanvasImage64();
+    scope.confirmEdit();
+    scope.confirmEditDetail();
+    scope.resizeDrawing();
+    ctrl.actionLoadList();
+    ctrl.actionLoadDetail();
+    ctrl.edit();
+    ctrl.cancelEdit();
+    ctrl.editDetail();
+    ctrl.cancelEditDetail();
+    ctrl.setCurrentPageData();
+  });
 
-    it("Controller exist", function() {
-        expect(ctrl).toBeDefined();
-    });
-    it('Template exist', function() {
-        expect(template).toBeDefined();
-    });
+  it('Controller exist', function() {
+    expect(ctrl).toBeDefined();
+  });
+  it('Template exist', function() {
+    expect(template).toBeDefined();
+  });
 
-    it("confirmEdit was called", function() {
-        expect(scope.confirmEdit).toHaveBeenCalled();
-    });
-    it("confirmEditDetail was called", function() {
-        expect(scope.confirmEditDetail).toHaveBeenCalled();
-    });
-    it("resizeDrawing was called", function() {
-        expect(scope.resizeDrawing).toHaveBeenCalled();
-    });
-    it("setCurrentPageData was called", function() {
-        expect(ctrl.setCurrentPageData).toHaveBeenCalled();
-    });
-    it("edit was called", function() {
-        expect(ctrl.edit).toHaveBeenCalled();
-    });
-    it("cancelEdit was called", function() {
-        expect(ctrl.cancelEdit).toHaveBeenCalled();
-    });
-    it("editDetail was called", function() {
-        expect(ctrl.editDetail).toHaveBeenCalled();
-    });
-    it("cancelEditDetail was called", function() {
-        expect(ctrl.cancelEditDetail).toHaveBeenCalled();
-    });
+  it('getCanvasImage64 was called', function() {
+    expect(scope.getCanvasImage64).toHaveBeenCalled();
+  });
+  it('confirmEdit was called', function() {
+    expect(scope.confirmEdit).toHaveBeenCalled();
+  });
+  it('confirmEditDetail was called', function() {
+    expect(scope.confirmEditDetail).toHaveBeenCalled();
+  });
+  it('resizeDrawing was called', function() {
+    expect(scope.resizeDrawing).toHaveBeenCalled();
+  });
+
+  it('actionLoadList was called', function() {
+    expect(ctrl.actionLoadList).toHaveBeenCalled();
+  });
+  it('actionLoadDetail was called', function() {
+    expect(ctrl.actionLoadDetail).toHaveBeenCalled();
+  });
+  it('edit was called', function() {
+    expect(ctrl.edit).toHaveBeenCalled();
+  });
+  it('cancelEdit was called', function() {
+    expect(ctrl.cancelEdit).toHaveBeenCalled();
+  });
+  it('editDetail was called', function() {
+    expect(ctrl.editDetail).toHaveBeenCalled();
+  });
+  it('cancelEditDetail was called', function() {
+    expect(ctrl.cancelEditDetail).toHaveBeenCalled();
+  });
+  it('setCurrentPageData was called', function() {
+    expect(ctrl.setCurrentPageData).toHaveBeenCalled();
+  });
 });

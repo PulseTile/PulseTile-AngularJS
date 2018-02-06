@@ -25,18 +25,18 @@ class GenericMdtDetailController {
     this.actionLoadDetail($stateParams.patientId, $stateParams.detailsIndex);
 
     $scope.isEdit = false;
-    
+    /* istanbul ignore next */
     this.edit = function () {
       $scope.isEdit = true;
 
       $scope.mdtEdit = Object.assign({}, this.genericMdt);
       $scope.mdtEdit.dateSubmitted = new Date();
     };
-    
+    /* istanbul ignore next */
     this.cancelEdit = function () {
       $scope.isEdit = false;
     };
-    
+    /* istanbul ignore next */
     $scope.confirmEdit = function (mdtForm, genericMdt) {
       $scope.formSubmitted = true;
       if (mdtForm.$valid) {
@@ -46,7 +46,7 @@ class GenericMdtDetailController {
         $scope.actionUpdateDetail($stateParams.patientId, genericMdt.sourceId, $scope.mdtEdit);
       }
     }.bind(this);
-    
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.genericmdt;
       const { patientId, detailsIndex } = $stateParams;

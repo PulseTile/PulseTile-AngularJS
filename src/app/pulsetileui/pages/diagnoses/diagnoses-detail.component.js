@@ -25,7 +25,7 @@ class DiagnosesDetailController {
     this.actionLoadDetail($stateParams.patientId, $stateParams.detailsIndex);
 
     $scope.isEdit = false;
-
+    /* istanbul ignore next */
     this.edit = function () {
       $scope.isEdit = true;
       $scope.diagnosisEdit = Object.assign({}, this.diagnosis);
@@ -33,10 +33,11 @@ class DiagnosesDetailController {
 			$scope.diagnosisEdit.dateOfOnset = new Date(this.diagnosis.dateOfOnset);
       $scope.diagnosisEdit.dateSubmitted = new Date();
     };
+    /* istanbul ignore next */
     this.cancelEdit = function () {
       $scope.isEdit = false;
     };
-
+    /* istanbul ignore next */
     $scope.confirmEdit = function (diagnosisForm, diagnosis) {
       $scope.formSubmitted = true;
 
@@ -62,7 +63,7 @@ class DiagnosesDetailController {
     ];
 
     $scope.formDisabled = true;
-
+    /* istanbul ignore next */
     $scope.isLocked = function (diagnosis) {
       if (!(diagnosis && diagnosis.id)) {
         return true;
@@ -75,12 +76,12 @@ class DiagnosesDetailController {
 
       return true;
     };
-
+    /* istanbul ignore next */
     this.convertToLabel = function (text) {
       var result = text.replace(/([A-Z])/g, ' $1');
       return result.charAt(0).toUpperCase() + result.slice(1);
     };
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.diagnoses;
       const { patientId, detailsIndex } = $stateParams;

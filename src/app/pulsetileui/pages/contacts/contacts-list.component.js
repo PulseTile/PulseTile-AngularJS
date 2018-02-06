@@ -24,13 +24,13 @@ class ContactsListController {
 
     this.isShowCreateBtn = $state.router.globals.$current.name !== 'contacts-create';
     this.isShowExpandBtn = $state.router.globals.$current.name !== 'contacts';
-
+    /* istanbul ignore next */
     this.create = function () {
       $state.go('contacts-create', {
         patientId: $stateParams.patientId,
       });
     };
-
+    /* istanbul ignore next */
     this.go = function (id) {
       $state.go('contacts-detail', {
         patientId: $stateParams.patientId,
@@ -38,7 +38,7 @@ class ContactsListController {
         page: $scope.currentPage || 1
       });
     };
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       const state = store.contacts;
       const pagesInfo = store.pagesInfo;
