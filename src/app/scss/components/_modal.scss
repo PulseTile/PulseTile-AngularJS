@@ -9,9 +9,6 @@
 }
 
 /* Confirmation Modal */
-.modal {
-  z-index: 10001 !important;
-}
 .modal-header {
   margin: -1px;
   margin-bottom: 0;
@@ -35,7 +32,6 @@
 }
 .modal-backdrop {
   background-color: #000;
-  z-index: 10000 !important;
 }
 .modal-hide {
   position: fixed;

@@ -13,7 +13,6 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-let template = require('./handle-errors-confirmation.html');
 
 class HandleErrorsController {
 	constructor($scope, $ngRedux, ConfirmationHandleErrors) {
@@ -39,27 +38,33 @@ class HandleErrorsController {
 			console.log('requestErrorStatus', requestErrorStatus);
 			switch (true) {
 				case requestError.initialiseError:
+          return {
+            eventOk: reloadPage,
+            eventHide: reloadPage,
+            textOk: 'Reload Page',
+            textMessage: 'Some connection error has occurred. Please check your connection and try again.',
+          };
 				case requestErrorStatus < 0:
 				case requestErrorStatus === 0:
 					return {
 						eventOk: reloadPage,
-						eventHide: reloadPage,
 						textOk: 'Reload Page',
+            isShowCancelButton: true,
 						textMessage: 'Some connection error has occurred. Please check your connection and try again.',
 					};
 				case requestErrorStatus > 499:
 					return {
 						eventOk: reloadPage,
-						isShowCancelButton: true,
 						textOk: 'Reload Page',
-						textMessage: 'Something is wrong with the server. Please try again later.',
+            isShowCancelButton: true,
+            textMessage: 'Something is wrong with the server. Please try again later.',
 					};
 				case requestErrorStatus === 403:
 					return {
 						eventOk: reloadPage,
-						isShowCancelButton: true,
 						textOk: 'Reload Page',
-						textMessage: 'Your token has been expired. Please reload the page.',
+            isShowCancelButton: true,
+            textMessage: 'Your token has been expired. Please reload the page.',
 					};
 				case requestErrorStatus === 400:
 				case requestErrorStatus === 404:
@@ -97,7 +102,6 @@ class HandleErrorsController {
 	}
 }
 const HandleErrorsComponent = {
-	// template: template,
 	controller: HandleErrorsController
 };
 

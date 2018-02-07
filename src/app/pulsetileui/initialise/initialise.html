@@ -1,0 +1,12 @@
+<div ng-if="isLoadingPage" class="main-spinner">
+	<div class="lds-css ng-scope">
+		<div class="lds-dual-ring">
+			<div></div>
+			<div></div>
+		</div>
+	</div>
+</div>
+
+<handle-errors-component></handle-errors-component>
+
+<main-component ng-if="isInitialised"></main-component>

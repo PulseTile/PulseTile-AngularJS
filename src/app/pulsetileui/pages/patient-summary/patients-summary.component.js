@@ -46,12 +46,12 @@ class PatientsSummaryController {
         toState: 'medications',
         array: [{text: LOADING_TEXT}, {}, {}, {}]
       },
-      transfers: {
-        show: true,
-        title: 'Transfer',
-        toState: 'transferOfCare',
-        array: [{text: LOADING_TEXT}, {}, {}, {}]
-      }
+      // transfers: {
+      //   show: true,
+      //   title: 'Transfer',
+      //   toState: 'transferOfCare',
+      //   array: [{text: LOADING_TEXT}, {}, {}, {}]
+      // }
     };
     this.countPatientArr = 4;
 

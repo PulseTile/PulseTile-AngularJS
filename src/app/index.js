@@ -50,7 +50,10 @@ import deviceDetector from './helpers/deviceDetector';
 import './helpers/polyfills';
 import { httpHandleErrors } from './pulsetileui/handle-errors/handle-errors-actions';
 
-//components 
+//components
+import InitialiseComponent from './pulsetileui/initialise/initialise.component';
+import MainComponent from './pulsetileui/main-component/main.component';
+import HomeSidebarComponent from './pulsetileui/pages/patients-lookup/home-sidebar.component';
 import UiKitComponent from './pulsetileui/pages/ui-kit/ui-kit.component';
 import ProfileComponent from './pulsetileui/pages/profile/profile.component';
 import HeaderComponent from './pulsetileui/header-bar/header.component';
@@ -63,8 +66,7 @@ import PatientsBannerComponent from './pulsetileui/pages/patients-detail/patient
 import SearchComponent from './pulsetileui/search/search.component';
 import SearchAdvancedComponent from './pulsetileui/search/search-advanced.component';
 import ReportChartComponent from './pulsetileui/search/report-chart.component';
-import MainComponent from './pulsetileui/main-component/main.component';
-import HomeSidebarComponent from './pulsetileui/pages/patients-lookup/home-sidebar.component';
+
 import ServiceRequests from './services/serviceRequests.js';
 import ServiceStateManager from './services/serviceStateManager.js';
 import ServiceVitalsSigns from './pulsetileui/pages/vitals/serviceVitalsSigns.js';
@@ -142,6 +144,9 @@ let app = angular
   });
 
   app
+    .component('initialiseComponent', InitialiseComponent)
+    .component('mainComponent', MainComponent)
+    .component('homeSidebarComponent', HomeSidebarComponent)
     .component('uiKitComponent', UiKitComponent)
     .component('profileComponent', ProfileComponent)
 		.component('headerComponent', HeaderComponent)
@@ -150,9 +155,7 @@ let app = angular
     .component('patientsSummaryComponent', PatientsSummaryComponent)
     .component('patientsSidebarComponent', PatientsSidebarComponent)
     .component('patientsBannerComponent', PatientsBannerComponent)   
-    .component('patientsListFullComponent', PatientsListFullComponent)    
-    .component('mainComponent', MainComponent)
-    .component('homeSidebarComponent', HomeSidebarComponent)
+    .component('patientsListFullComponent', PatientsListFullComponent)
     .component('searchComponent', SearchComponent)
     .component('searchAdvancedComponent', SearchAdvancedComponent)
     .component('reportChartComponent', ReportChartComponent)
@@ -212,141 +215,3 @@ let app = angular
     ]);
 
 console.log('app start');
-
-/*Project initialise*/
-app.run(['$rootScope', '$state', 'serviceRequests', 'serviceThemes', 'ConfirmationRedirectModal', '$ngRedux',
-  function($rootScope, $state, serviceRequests, serviceThemes, ConfirmationRedirectModal, $ngRedux) {
-    var classLoadingPage = 'loading';
-    var body = $('body');
-    var userData = null;
-
-    body.addClass(classLoadingPage);
-
-    /* istanbul ignore next */
-    var switchDirectByRole = function (currentUser) {
-      var locationHrefBeforeLogin = localStorage.getItem('locationHrefBeforeLogin');
-
-      /* istanbul ignore if  */
-      if (!currentUser) return;
-
-      // Direct different roles to different pages at login
-      /* istanbul ignore next  */
-      switch (currentUser.role) {
-        case 'IDCR':
-          /*Go to URL from localStorage*/
-          if (locationHrefBeforeLogin) {
-            localStorage.removeItem('locationHrefBeforeLogin');
-          }
-          break;
-        case 'PHR':
-          //Trick for PHR user login
-          if (locationHrefBeforeLogin &&
-            (locationHrefBeforeLogin.indexOf(currentUser.nhsNumber) > -1 ||
-              locationHrefBeforeLogin.indexOf('profile') > -1) ) {
-            // If patient can go to the link from Local Storage
-
-            location.href = locationHrefBeforeLogin;
-
-          } else if ((location.href.indexOf(currentUser.nhsNumber) === -1) &&
-                    (location.href.indexOf('profile') === -1)) {
-
-            if (locationHrefBeforeLogin) {
-              let path = locationHrefBeforeLogin.split('#/')[1];
-              if (path !== '' ||
-                path !== 'charts') {
-                ConfirmationRedirectModal.openModal(currentUser.nhsNumber);
-              }
-            }
-
-            $state.go('patients-summary', {
-              patientId: currentUser.nhsNumber
-            });
-
-          }
-
-          localStorage.removeItem('locationHrefBeforeLogin');
-
-          break;
-        default:
-          $state.go('patients-charts');
-      }
-    };
-
-    /* istanbul ignore next */
-    var setLoginData = function (loginResult) {
-      serviceRequests.publisher('setUserData', {userData: loginResult.data});
-      userData = loginResult.data;
-      switchDirectByRole(userData);
-    };
-
-    /* istanbul ignore next */
-    var login = function () {
-      serviceRequests.login().then(function (result) {
-        serviceRequests.currentUserData = result.data;
-        setLoginData(result);
-        serviceRequests.getAppSettings().then(function (res) {
-          if (res.data) {
-            serviceThemes.setDataApplication(res.data);
-          }
-
-          body.removeClass(classLoadingPage);
-        }).catch(function (err) {
-					err.initialiseError = true;
-					$ngRedux.dispatch(httpHandleErrors(err));
-				});
-      }).catch(function (err) {
-				err.initialiseError = true;
-				$ngRedux.dispatch(httpHandleErrors(err));
-			});
-    };
-
-    var auth0;
-
-
-    serviceRequests.initialise().then(function (result){
-      /* istanbul ignore next */
-      if (result.data.token) {
-        // reset the JSESSIONID cookie with the new incoming cookie
-        document.cookie = "JSESSIONID=" + result.data.token;
-
-        location.reload();
-
-        return;
-      }
-
-      /* istanbul ignore next */
-      if (result.data.redirectURL === 'auth0') {
-        console.log('running in UAT mode, so now login via auth0');
-
-        var isSignout = localStorage.getItem('signout');
-        localStorage.removeItem('signout');
-
-        if (!isSignout) {
-          /*Set URL to localStorage*/
-          localStorage.setItem('locationHrefBeforeLogin', location.href);
-        }
-
-
-        if (!auth0) auth0 = new Auth0(result.data.config);
-        auth0.login({
-          connections: result.data.connections
-        });
-        return;
-      }
-
-      /* istanbul ignore if */
-      if (result.data && result.data.ok) {
-        console.log('Cookie was for a valid session, so fetch the simulated user');
-        login();
-      }
-
-    }).catch(function (err) {
-      err.initialiseError = true;
-      $ngRedux.dispatch(httpHandleErrors(err));
-		});
-
-    /* istanbul ignore next */
-    $rootScope.$on('$locationChangeSuccess', function() {
-      switchDirectByRole(userData);
-    }.bind(this));
-}]);
