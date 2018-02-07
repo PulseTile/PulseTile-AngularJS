@@ -44,7 +44,7 @@
         <tr>
             <th ng-click="sort('name')" ng-class="sortClass('name')">Name</th>
             <th ng-click="sort('relationship')" ng-class="sortClass('relationship')">Relationship</th>
-            <th ng-click="sort('next')" ng-class="sortClass('next')">Next of Kin</th>
+            <th ng-click="sort('nextOfKin')" ng-class="sortClass('nextOfKin')">Next of Kin</th>
             <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
         </tr>
       </thead>
@@ -53,7 +53,7 @@
         <tr dir-paginate="contact in $ctrl.contacts | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(contact.sourceId, this)" ng-class="{info: selectedRow(contact.sourceId)}">
           <td data-th="Name" ng-class="sortClass('name')"><span>{{ contact.name }}</span></td>
           <td data-th="Relationship" ng-class="sortClass('relationship')"><span>{{ contact.relationship }}</span></td>
-          <td data-th="Next of Kin" ng-class="sortClass('next')">
+          <td data-th="Next of Kin" ng-class="sortClass('nextOfKin')">
             <span><span ng-if="contact.nextOfKin">Yes</span><span ng-if="!contact.nextOfKin">No</span></span>
           </td>
           <td data-th="Source" class="hidden-xs-cell" ng-class="sortClass('source')"><span>{{ contact.source }}</span></td>

@@ -58,7 +58,7 @@ class ClinicalnotesListController {
         this.clinicalNotes = state.data;
 
         serviceFormatted.formattingTablesDate(this.clinicalNotes, ['dateCreated'], serviceFormatted.formatCollection.DDMMMYYYY);
-        serviceFormatted.filteringKeys = ['noteType', 'author', 'dateCreated', 'source'];
+        serviceFormatted.filteringKeys = ['clinicalNotesType', 'author', 'dateCreated', 'source'];
       }
       if (state.data || state.error) {
         usSpinnerService.stop('list-spinner');

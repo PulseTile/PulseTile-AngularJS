@@ -229,189 +229,188 @@ angular.module('ripple-ui.directives', [])
     }
   })
   .directive('filtering', function() {
-      /* istanbul ignore next  */
-      return {
-          restrict: 'A',
-          controller: ['$scope', '$element', '$timeout', 'serviceFormatted', 'serviceStateManager', '$state', 
-              function($scope, $element, $timeout, serviceFormatted, serviceStateManager, $state) {
-                  var filterData = serviceStateManager.getFilter();
-                  var filterEl;
+    /* istanbul ignore next  */
+    return {
+      restrict: 'A',
+      controller: ['$scope', '$element', '$timeout', 'serviceFormatted', 'serviceStateManager', '$state',
+        function($scope, $element, $timeout, serviceFormatted, serviceStateManager, $state) {
+          var filterData = serviceStateManager.getFilter();
+          var filterEl;
 
-                  $scope.isFilterOpen = filterData.isOpen;
-                  $scope.queryFilter = filterData.query;
+          $scope.isFilterOpen = filterData.isOpen;
+          $scope.queryFilter = filterData.query;
 
-                  $scope.toggleFilter = function () {
-                      $scope.isFilterOpen = !$scope.isFilterOpen;
+          $scope.toggleFilter = function () {
+            $scope.isFilterOpen = !$scope.isFilterOpen;
 
-                      if ($scope.isFilterOpen) {
-                          $timeout(function(){
-                              filterEl = document.getElementById('filter');
-                              if(filterEl) {
-                                filterEl.focus();
-                              }
-                          }, 0);
-                      } else {
-                          $scope.queryFilter = '';
-                      }
+            if ($scope.isFilterOpen) {
+              $timeout(function(){
+                filterEl = document.getElementById('filter');
+                if(filterEl) {
+                  filterEl.focus();
+                }
+              }, 0);
+            } else {
+              $scope.queryFilter = '';
+            }
 
-                      serviceStateManager.setFilter({
-                        isOpen: $scope.isFilterOpen,
-                        query: $scope.queryFilter
-                      });
-                  };
+            serviceStateManager.setFilter({
+              isOpen: $scope.isFilterOpen,
+              query: $scope.queryFilter
+            });
+          };
 
-                  $scope.$watch('queryFilter', function(queryFilterValue) {
-                      serviceStateManager.setFilter({
-                        isOpen: $scope.isFilterOpen,
-                        query: queryFilterValue
-                      });
-                  });
-                  $scope.queryFiltering = function (row) {
-                    return serviceFormatted.formattedSearching(row, $scope.queryFilter);
-                  };
-          }]
-      }
+          $scope.$watch('queryFilter', function(queryFilterValue) {
+            serviceStateManager.setFilter({
+              isOpen: $scope.isFilterOpen,
+              query: queryFilterValue
+            });
+          });
+          $scope.queryFiltering = function (row) {
+            return serviceFormatted.formattedSearching(row, $scope.queryFilter);
+          };
+      }]
+    }
   })
   .directive('tableSettings', function() {
-      /* istanbul ignore next  */
-      return {
-          restrict: 'A',
-          controller: ['$scope', '$element','$attrs', '$stateParams', 'serviceStateManager', 
-              function($scope, $element, $attrs, $stateParams, serviceStateManager) {
-                  var tableSettingsData = serviceStateManager.getTableSettings();
+    /* istanbul ignore next  */
+    return {
+      restrict: 'A',
+      controller: ['$scope', '$element','$attrs', '$stateParams', 'serviceStateManager',
+        function($scope, $element, $attrs, $stateParams, serviceStateManager) {
+          var tableSettingsData = serviceStateManager.getTableSettings();
 
-                  $scope.order = tableSettingsData.order;
-                  $scope.reverse = tableSettingsData.reverse;
-                  $scope.currentPage = tableSettingsData.currentPage;
+          $scope.order = tableSettingsData.order;
+          $scope.reverse = tableSettingsData.reverse;
+          $scope.currentPage = tableSettingsData.currentPage;
 
-                  $scope.pageChangeHandler = function (newPage) {
-                    $scope.currentPage = newPage;
-                    serviceStateManager.setTableSettings({
-                      currentPage: newPage
-                    });
-                  };
+          $scope.pageChangeHandler = function (newPage) {
+            $scope.currentPage = newPage;
+            serviceStateManager.setTableSettings({
+              currentPage: newPage
+            });
+          };
 
-                  $scope.sort = function (field) {
-                    var reverse = $scope.reverse;
-                    if ($scope.order === field) {
-                      $scope.reverse = !reverse;
-                    } else {
-                      $scope.order = field;
-                      $scope.reverse = false;
-                    }
+          $scope.sort = function (field) {
+            var reverse = $scope.reverse;
+            if ($scope.order === field) {
+              $scope.reverse = !reverse;
+            } else {
+              $scope.order = field;
+              $scope.reverse = false;
+            }
 
-                    serviceStateManager.setTableSettings({
-                      order: $scope.order,
-                      reverse: $scope.reverse
-                    });
-                  };
+            serviceStateManager.setTableSettings({
+              order: $scope.order,
+              reverse: $scope.reverse
+            });
+          };
 
-                  $scope.sortClass = function (field) {
-                    if ($scope.order === field) {
-                      return $scope.reverse ? 'sorted desc' : 'sorted asc';
-                    }
-                  };
+          $scope.sortClass = function (field) {
+            if ($scope.order === field) {
+              return $scope.reverse ? 'sorted desc' : 'sorted asc';
+            }
+          };
 
-                  $scope.selectedRow = function (detailsIndex) {
-                    return detailsIndex === $stateParams.detailsIndex;
-                  };
+          $scope.selectedRow = function (detailsIndex) {
+            return detailsIndex === $stateParams.detailsIndex;
+          };
 
-                  $scope.$watch($attrs.order, function() {
-                    if ($scope.order === '') {
-                      $scope.order = $attrs.order;
-                      serviceStateManager.setTableSettings({
-                        order: $attrs.order,
-                      });
-                    }
-                  });
-          }]
-      }
+          $scope.$watch($attrs.order, function() {
+            if ($scope.order === '') {
+              $scope.order = $attrs.order;
+              serviceStateManager.setTableSettings({
+                order: $attrs.order,
+              });
+            }
+          });
+      }]
+    }
   })
   .directive('mcDatepicker', function() {
-      /* istanbul ignore next  */
-      return {
-          restrict: 'A',
-          controller: ['$scope', function($scope) {
-                $scope.datepickers = {};
+    /* istanbul ignore next  */
+    return {
+      restrict: 'A',
+      controller: ['$scope', function($scope) {
+        $scope.datepickers = {};
 
-                $scope.openDatepicker = function ($event, name) {
-                  $event.preventDefault();
-                  $event.stopPropagation();
-                  
-                  if ($scope.datepickers[name]) {
-                    $scope.datepickers[name] = false;
-                  } else {
-                    $scope.datepickers = {};
-                    $scope.datepickers[name] = true;
-                  }
+        $scope.openDatepicker = function ($event, name) {
+          $event.preventDefault();
+          $event.stopPropagation();
 
-                  return false;
-                };
-                $scope.removeFocus = function ($event) {
-                  $event.currentTarget.blur();
-                  
-                  return false;
-                };
-          }]
-      }
+          if ($scope.datepickers[name]) {
+            $scope.datepickers[name] = false;
+          } else {
+            $scope.datepickers = {};
+            $scope.datepickers[name] = true;
+          }
+
+          return false;
+        };
+        $scope.removeFocus = function ($event) {
+          $event.currentTarget.blur();
+
+          return false;
+        };
+      }]
+    }
   })
   .directive('mcMultiViews', function() {
-      /* istanbul ignore next  */
-      return {
-          restrict: 'A',
-          controller: ['$scope','$attrs', 'serviceStateManager', 
-              function($scope, $attrs, serviceStateManager) {
-                  var viewSettingsData = serviceStateManager.getViewsSettings();
+    /* istanbul ignore next  */
+    return {
+      restrict: 'A',
+      controller: ['$scope','$attrs', 'serviceStateManager',
+        function($scope, $attrs, serviceStateManager) {
+          var viewSettingsData = serviceStateManager.getViewsSettings();
 
-                  $scope.activeView = viewSettingsData.activeView;
-                  
-                  $scope.isActiveView = function (viewName) {
-                    return $scope.activeView === viewName;
-                  };
+          $scope.activeView = viewSettingsData.activeView;
 
-                  $scope.changeActiveView = function (viewName) {
-                    $scope.activeView = viewName;
-                    serviceStateManager.setViewsSettings({
-                      activeView: viewName
-                    });
-                  };
+          $scope.isActiveView = function (viewName) {
+            return $scope.activeView === viewName;
+          };
 
-                  $scope.$watch($attrs.defaultView, function() {
-                    if ($scope.activeView === '') {
-                      $scope.changeActiveView($attrs.defaultView)
-                    }
-                  });
-          }]
-      }
+          $scope.changeActiveView = function (viewName) {
+            $scope.activeView = viewName;
+            serviceStateManager.setViewsSettings({
+              activeView: viewName
+            });
+          };
+
+          $scope.$watch($attrs.defaultView, function() {
+            if ($scope.activeView === '') {
+              $scope.changeActiveView($attrs.defaultView)
+            }
+          });
+      }]
+    }
   })
   .directive('contenteditabled', ['$sce', function($sce) {
     /* istanbul ignore next  */
     return {
-        restrict: 'A',
-        require: '?ngModel',
-        link: function(scope, element, attrs, ngModel) {
-            
-            if (!ngModel) return;
-        
-            ngModel.$render = function() {
-                element.html($sce.getTrustedHtml(ngModel.$viewValue || ''));
-            };
-        
-            // Listen for change events to enable binding
-            element.on('blur keyup change', function() {
-                scope.$evalAsync(read);
-            });
-            read(); // initialize
-        
-            // Write data to the model
-            function read() {
-                var html = element.html();
-                if ( attrs.stripBr && html == '<br>' ) {
-                    html = '';
-                }
-                ngModel.$setViewValue(html);
-            }
+      restrict: 'A',
+      require: '?ngModel',
+      link: function(scope, element, attrs, ngModel) {
+        if (!ngModel) return;
+
+        ngModel.$render = function() {
+          element.html($sce.getTrustedHtml(ngModel.$viewValue || ''));
+        };
+
+        // Listen for change events to enable binding
+        element.on('blur keyup change', function() {
+          scope.$evalAsync(read);
+        });
+        read(); // initialize
+
+        // Write data to the model
+        function read() {
+          var html = element.html();
+          if ( attrs.stripBr && html == '<br>' ) {
+              html = '';
+          }
+          ngModel.$setViewValue(html);
         }
+      }
     };
   }])
   .directive('mcInputFile', function() {
@@ -426,57 +425,57 @@ angular.module('ripple-ui.directives', [])
     }
   }) 
   .directive('mcUploadfile', function () {
-      /* istanbul ignore next  */
-      return {
-        restrict: 'A',
-        scope: {
-          params: '=uploadfileParams',
-          typesFile: '@uploadfileAccept',
-        },
-        link: function(scope, element) {
-          function clearParams () { 
-            if (!scope.params) {
-              scope.params = {};
-            }
-            scope.params.path = '';
-            scope.params.name = '';
-            scope.params.file = null;
-            scope.params.isErrorType = false;
-            scope.params.imgencode = '';
+    /* istanbul ignore next  */
+    return {
+      restrict: 'A',
+      scope: {
+        params: '=uploadfileParams',
+        typesFile: '@uploadfileAccept',
+      },
+      link: function(scope, element) {
+        function clearParams () {
+          if (!scope.params) {
+            scope.params = {};
           }
-          clearParams();
-
-          function errorInput () { 
-            clearParams();
-            scope.params.isErrorType = true;
-          }
-
+          scope.params.path = '';
+          scope.params.name = '';
+          scope.params.file = null;
           scope.params.isErrorType = false;
-          var typesArr = scope.typesFile.replace(' ', '').split(',');
+          scope.params.imgencode = '';
+        }
+        clearParams();
+
+        function errorInput () {
+          clearParams();
+          scope.params.isErrorType = true;
+        }
+
+        scope.params.isErrorType = false;
+        var typesArr = scope.typesFile.replace(' ', '').split(',');
 
 
-          element.on('change', function (changeEvent) {
-            if (changeEvent.target.files.length) {
+        element.on('change', function (changeEvent) {
+          if (changeEvent.target.files.length) {
 
-              var loadFile = changeEvent.target.files[0];
-              var loadFileType = loadFile.type;
+            var loadFile = changeEvent.target.files[0];
+            var loadFileType = loadFile.type;
 
-              if (typesArr.indexOf(loadFileType) !== -1) {
-                scope.params.path = changeEvent.target.value;
-                scope.params.name = loadFile.name;
-                scope.params.file = loadFile;
-                scope.params.isErrorType = false;
-                scope.params.imgencode = changeEvent.target.result;
+            if (typesArr.indexOf(loadFileType) !== -1) {
+              scope.params.path = changeEvent.target.value;
+              scope.params.name = loadFile.name;
+              scope.params.file = loadFile;
+              scope.params.isErrorType = false;
+              scope.params.imgencode = changeEvent.target.result;
 
-              } else {
-                changeEvent.target.value = '';
-                errorInput();
-              }
             } else {
+              changeEvent.target.value = '';
               errorInput();
             }
-            scope.$apply();
-          });
-        }
-      };
+          } else {
+            errorInput();
+          }
+          scope.$apply();
+        });
+      }
+    };
   });

@@ -28,7 +28,7 @@ class DocumentsDetailController {
     $scope.typeOfDocument = '';
     this.clinicalDocument = {};
     /* istanbul ignore next */
-    $scope.sendDocument = function (data) {
+    $scope.sendDocument = function () {
       serviceRequests.publisher('setDocument', {document: this.clinicalDocument});
     }.bind(this);
     serviceRequests.subscriber('getDocument', $scope.sendDocument);
@@ -53,8 +53,10 @@ class DocumentsDetailController {
       // Get Details data
       if (state.dataGet) {
         this.clinicalDocument = state.dataGet;
+        // Variable $scope.clinicalDocument need for render DocumentsType Component
+        $scope.clinicalDocument = state.dataGet;
         $scope.getTypeOfDocument();
-        serviceRequests.publisher('setDocument', {document: this.clinicalDocument});
+        $scope.sendDocument();
         (detailsIndex === state.dataGet.sourceId) ? usSpinnerService.stop('detail-spinner') : null;
       }
       if (serviceRequests.currentUserData) {

@@ -63,7 +63,7 @@ describe('Contacts List', function() {
     expect(fakeCall.callContacts).toHaveBeenCalled();
   });
 
-  it('actionLoadList go was called', function() {
+  it('actionLoadList was called', function() {
     expect(ctrl.actionLoadList).toHaveBeenCalled();
   });
   it('create was called', function() {

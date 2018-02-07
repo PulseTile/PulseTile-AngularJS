@@ -81,7 +81,7 @@
                 <div class="form-group" ng-class="{'has-error': (formSubmitted || mdtForm.question.$dirty) && mdtForm.question.$invalid, 'has-success': mdtForm.question.$valid && mdtForm.question.$dirty}">
                   <label for="question" class="control-label">Question For MDT</label>
                   <div class="input-holder">
-                    <textarea type="text" class="form-control textarea-big input-sm" id="question" name="question" ng-model="mdtEdit.question" required></textarea>
+                    <textarea type="text" class="form-control textarea-big input-sm" id="question" name="question" ng-model="genericMdt.question" required></textarea>
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && mdtForm.question.$error.required">You must enter a value.</span>
                 </div>
@@ -90,7 +90,7 @@
                 <div class="form-group" ng-class="{'has-error': (formSubmitted || mdtForm.notes.$dirty) && mdtForm.notes.$invalid, 'has-success': mdtForm.notes.$valid && mdtForm.notes.$dirty}">
                   <label for="notes" class="control-label">Meeting Discussion</label>
                   <div class="input-holder">
-                    <textarea type="text" class="form-control textarea-big input-sm" id="notes" name="notes" ng-model="mdtEdit.notes" required></textarea>
+                    <textarea type="text" class="form-control textarea-big input-sm" id="notes" name="notes" ng-model="genericMdt.notes" required></textarea>
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && mdtForm.notes.$error.required">You must enter a value.</span>
                 </div>

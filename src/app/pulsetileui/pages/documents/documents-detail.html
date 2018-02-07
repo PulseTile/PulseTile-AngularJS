@@ -9,9 +9,9 @@
     <div class="panel-body">
       <div class="panel-body-inner">
 
-        <documents-detail-referral-component  ng-if="typeOfDocument === 'referral'"></documents-detail-referral-component>
-        
-        <documents-detail-discharge-component ng-if="typeOfDocument === 'discharge'"></documents-detail-discharge-component>
+        <documents-detail-referral-component  ng-if="typeOfDocument === 'referral'" documentData="clinicalDocument"></documents-detail-referral-component>
+
+        <documents-detail-discharge-component ng-if="typeOfDocument === 'discharge'" documentData="clinicalDocument"></documents-detail-discharge-component>
 
         <div class="form" ng-if="typeOfDocument !== 'referral' && typeOfDocument !== 'discharge'">
           <div class="form-group-wrapper">

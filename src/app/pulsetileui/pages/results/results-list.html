@@ -13,7 +13,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
-<div mc-full-panel table-settings order="name" filtering mc-multi-views default-view="table" class="panel panel-primary">
+<div mc-full-panel table-settings order="testName" filtering mc-multi-views default-view="table" class="panel panel-primary">
   <div class="panel-heading">
     <div class="control-group right">
       <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="btn-icon fa fa-filter"></i></button>
@@ -53,18 +53,18 @@
       </colgroup>
       <thead>
         <tr>
-            <th ng-click="sort('name')" ng-class="sortClass('name')">Test Name</th>
-            <th ng-click="sort('taken')" ng-class="sortClass('taken')">Sample Taken</th>
-            <th ng-click="sort('date')" ng-class="sortClass('date')">Date Created</th>
+            <th ng-click="sort('testName')" ng-class="sortClass('testName')">Test Name</th>
+            <th ng-click="sort('sampleTaken')" ng-class="sortClass('sampleTaken')">Sample Taken</th>
+            <th ng-click="sort('dateCreated')" ng-class="sortClass('dateCreated')">Date Created</th>
             <th ng-click="sort('source')" ng-class="sortClass('source')">Source</th>
         </tr>
       </thead>
 
       <tbody>
         <tr dir-paginate="result in $ctrl.results | filter: queryFiltering | orderBy:[order] : reverse | itemsPerPage: 10" current-page="currentPage" ng-click="$ctrl.go(result.sourceId, result.source)" ng-class="{info: selectedRow(result.sourceId)}">
-          <td data-th="Test Name" ng-class="sortClass('name');"><span>{{ result.testName }}</span></td>
-          <td data-th="Sample Taken" ng-class="sortClass('taken')"><span>{{ result.sampleTaken }}</span></td>
-          <td data-th="Date" ng-class="sortClass('date')"><span>{{ result.dateCreated }}</span></td>
+          <td data-th="Test Name" ng-class="sortClass('testName');"><span>{{ result.testName }}</span></td>
+          <td data-th="Sample Taken" ng-class="sortClass('sampleTaken')"><span>{{ result.sampleTaken }}</span></td>
+          <td data-th="Date" ng-class="sortClass('dateCreated')"><span>{{ result.dateCreated }}</span></td>
           <td data-th="Source" ng-class="sortClass('source')" class="hidden-xs-cell"><span>{{ result.source }}</span></td>
         </tr>
 

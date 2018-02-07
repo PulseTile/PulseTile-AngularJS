@@ -259,13 +259,13 @@ class EventsListController {
     }.bind(this));
 
     $scope.$watch('queryFilter', function(queryFilterValue) {
-        if (this.events) {
-          this.events.map(function (el) {
-            el['dateTimeConvert'] = serviceFormatted.formattingDate(el['dateTime'], serviceFormatted.formatCollection.DDMMMYYYYHHmm);
-          });
+      if (this.events) {
+        this.events.map(function (el) {
+          el['dateTimeConvert'] = serviceFormatted.formattingDate(el['dateTime'], serviceFormatted.formatCollection.DDMMMYYYYHHmm);
+        });
 
-          $scope.formCollectionsEvents($scope.filterEvents(this.events, queryFilterValue, ['name', 'type', 'dateTimeConvert']));
-        }
+        $scope.formCollectionsEvents($scope.filterEvents(this.events, queryFilterValue, ['name', 'type', 'dateTimeConvert']));
+      }
     }.bind(this));
 
     let unsubscribe = $ngRedux.connect(state => ({
