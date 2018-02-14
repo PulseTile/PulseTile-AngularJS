@@ -49,8 +49,10 @@ export function removeTags(userinput){
 export function setStructured(userinput, cb){
   // Parse the text box for all tags
   var tags = [];
-  $(userinput).contents().each(function(){
 
+  debugger
+  $(userinput).contents().each(function(){
+    debugger
     // Is it a tag?
     /* istanbul ignore if  */
     if( $(this).hasClass('tag') ){
@@ -123,7 +125,7 @@ export function pasteHtmlAtCaret(html, target) {
       while ( (node = el.firstChild) ) {
         lastNode = frag.appendChild(node);
       }
-      
+      console.log('sel.focusOffset = ', sel.focusOffset);
       if (sel.focusOffset === 0 && lastChildNode) {
         range.selectNode(insertNodeBlock);
       }
@@ -139,7 +141,7 @@ export function pasteHtmlAtCaret(html, target) {
         sel.addRange(range);
       }
     }
-  } else if (document.selection && document.selection.type != "Control") {
+  } else if (document.selection && document.selection.type !== "Control") {
     // IE < 9
     document.selection.createRange().pasteHTML(html);
   }

@@ -35,9 +35,11 @@
                 </div>
               </div>
             </div>
+
+
             <div class="row-expand">
               <div class="col-expand-left">
-                <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.name.$dirty) && clinicalStatementForm.name.$invalid, 'has-success': clinicalStatementForm.name.$valid && clinicalStatementForm.name.$dirty}">
+                <div class="form-group">
                   <label for="search" class="control-label">Search</label>
                   <div class="input-holder">
                     <div class="dropdown" ng-class="{open: !!queryFilter}">
@@ -98,12 +100,14 @@
                 <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.clinicalNote.$dirty) && clinicalStatementForm.clinicalNote.$invalid, 'has-success': clinicalStatementForm.clinicalNote.$valid && clinicalStatementForm.clinicalNote.$dirty}">
                   <label for="clinicalNote" class="control-label">Clinical Note</label>
                   <div class="input-holder">
-                    <div class="form-control textarea-big input-sm contenteditable-resize" tabindex="0" contenteditable="true" id="clinicalNote" name="clinicalNote" ng-html="clinicalStatementCreate.clinicalNote" required><span id="temp"></span></div>
+                    <div class="form-control textarea-big input-sm contenteditable-resize" tabindex="0" contenteditable="true" id="clinicalNote" name="clinicalNote" required><span id="temp" contenteditable="false"></span></div>
                   </div>
                   <span class="help-block animate-fade" ng-show="formSubmitted && clinicalStatementForm.clinicalNote.$error.required">You must enter a value.</span>
                 </div>
               </div>
             </div>
+
+
             <div class="row-expand">
               <div class="col-expand-left">
                 <div class="form-group" ng-class="{'has-error': (formSubmitted || clinicalStatementForm.author.$dirty) && clinicalStatementForm.author.$invalid, 'has-success': clinicalStatementForm.author.$valid && clinicalStatementForm.author.$dirty}">

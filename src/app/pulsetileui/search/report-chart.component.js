@@ -16,7 +16,7 @@
 let templateReportChart = require('./report-chart.html');
 
 class ReportChartController {
-  constructor($scope, $state, $ngRedux, $stateParams, searchActions, serviceRequests, Patient, $window, $timeout) {
+  constructor($scope, $state, $ngRedux, $stateParams, searchActions, serviceRequests, Patient, $window, $timeout, serviceFormatted) {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-charts'});
 
     let _ = require('underscore');
@@ -178,7 +178,8 @@ class ReportChartController {
     /* istanbul ignore if  */
     if (params !== undefined) {
       if (params.dateOfBirth) {
-        params.dateOfBirth = new Date(params.dateOfBirth.getTime() - (60000 * params.dateOfBirth.getTimezoneOffset()));
+        const dateOfBirth = new Date(params.dateOfBirth);
+        params.dateOfBirth = new Date(dateOfBirth.getTime() - (60000 * dateOfBirth.getTimezoneOffset()));
       }
   
       searchActions.querySearch(params);
@@ -272,5 +273,5 @@ const ReportChartComponent = {
   controller: ReportChartController
 };
 
-ReportChartController.$inject = ['$scope', '$state', '$ngRedux', '$stateParams', 'searchActions', 'serviceRequests', 'Patient', '$window', '$timeout'];
+ReportChartController.$inject = ['$scope', '$state', '$ngRedux', '$stateParams', 'searchActions', 'serviceRequests', 'Patient', '$window', '$timeout', 'serviceFormatted'];
 export default ReportChartComponent;

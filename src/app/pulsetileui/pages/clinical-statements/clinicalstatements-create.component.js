@@ -38,7 +38,6 @@ class ClinicalstatementsCreateController {
       phrases: []
     };
     $scope.queryFilter = '';
-    $scope.openSearch = false;
     /* istanbul ignore next */
     this.getTag = function (tag) {
       $scope.clinicalTag = tag;
@@ -65,6 +64,7 @@ class ClinicalstatementsCreateController {
     this.cancelEdit = function () {
       this.goList();
     };
+
     /* istanbul ignore next */
     $scope.confirmEdit = function (clinicalStatementForm, clinicalStatement) {
       $scope.formSubmitted = true;
@@ -79,6 +79,8 @@ class ClinicalstatementsCreateController {
       $scope.clinicalTag = '';
       
       if (clinicalStatementForm.$valid) {
+        console.log('$scope.clinicalStatementCreate', $scope.clinicalStatementCreate);
+        debugger
         $scope.actionCreateDetail($stateParams.patientId, $scope.clinicalStatementCreate);
       }
     }.bind(this);
@@ -120,17 +122,6 @@ class ClinicalstatementsCreateController {
     }))(this);
     $scope.$on('$destroy', unsubscribe);
 
-
-    // Add Dropdown to Input (select or change value)
-    $scope.cc = 0;
-    /* istanbul ignore next */
-    $scope.clickSelect = function () {
-      $scope.cc++;
-      if ($scope.cc == 2) {
-        // $(this).change();
-        $scope.cc = 0;
-      }
-    };
     /* istanbul ignore next */
     $scope.changeSelect = function (index) {
       var userinput = jQuery('#clinicalNote');
@@ -154,8 +145,6 @@ class ClinicalstatementsCreateController {
 
       // Bind Remove to tag
       helper.removeTags('#clinicalNote');
-
-      $scope.cc = -1;
     };
     
   }

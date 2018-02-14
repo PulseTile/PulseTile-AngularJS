@@ -38,7 +38,6 @@ describe('Clinical statements Create', function() {
     spyOn(scope, 'actionCreateDetail');
     spyOn(scope, 'confirmEdit');
     spyOn(scope, 'queryFiltering');
-    spyOn(scope, 'clickSelect');
     spyOn(scope, 'changeSelect');
 
     ctrl.clinicalstatementsTags();
@@ -52,7 +51,6 @@ describe('Clinical statements Create', function() {
     scope.actionCreateDetail();
     scope.confirmEdit();
     scope.queryFiltering();
-    scope.clickSelect();
     scope.changeSelect();
   });
 
@@ -96,9 +94,6 @@ describe('Clinical statements Create', function() {
   });
   it('queryFiltering was called', function() {
     expect(scope.queryFiltering).toHaveBeenCalled();
-  });
-  it('clickSelect was called', function() {
-    expect(scope.clickSelect).toHaveBeenCalled();
   });
   it('changeSelect was called', function() {
     expect(scope.changeSelect).toHaveBeenCalled();
