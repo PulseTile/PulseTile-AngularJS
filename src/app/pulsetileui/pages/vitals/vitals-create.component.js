@@ -25,7 +25,7 @@ class VitalsCreateController {
     $scope.pattern = serviceVitalsSigns.pattern;
 
     $scope.vitalEdit = {};
-    $scope.vitalEdit.dateCreated = Date.parse(new Date());
+    $scope.vitalEdit.dateCreated = new Date().getTime();
     $scope.vitalEdit.author = 'ripple_osi';
     /* istanbul ignore next */
     $scope.getHighlighterClass = function (vitalName) {
@@ -58,7 +58,7 @@ class VitalsCreateController {
       $scope.changeNewScore(vital);
 
       if (vitalForm.$valid) {
-        serviceFormatted.propsToString(vital);
+        serviceFormatted.propsToString(vital, 'dateCreated');
         $scope.actionCreateDetail($stateParams.patientId, vital);
       }
     }.bind(this);
