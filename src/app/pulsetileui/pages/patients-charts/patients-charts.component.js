@@ -231,6 +231,7 @@ class PatientsChartsController {
       }
     };
     serviceRequests.subscriber('setUserData', $scope.setUserData);
+    serviceRequests.publisher('getUserData');
   }
 }
 

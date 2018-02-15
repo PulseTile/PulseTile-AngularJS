@@ -209,6 +209,7 @@ class ProfileController {
       $scope.profile.email = userData.email;
     };
     serviceRequests.subscriber('setUserData', $scope.setUserData);
+    serviceRequests.publisher('getUserData');
 
     let unsubscribe = $ngRedux.connect(state => ({
       getStoreData: this.setCurrentPageData(state)

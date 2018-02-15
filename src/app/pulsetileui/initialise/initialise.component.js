@@ -21,10 +21,11 @@ class InitialiseController {
   constructor($rootScope, $scope, $state, serviceRequests, serviceThemes, ConfirmationRedirectModal, $ngRedux) {
     $scope.isLoadingPage = true;
     $scope.isInitialised = false;
+    $scope.userData = null;
 
     var classLoadingPage = 'loading';
     var body = $('body');
-    var userData = null;
+
 
     body.addClass(classLoadingPage);
 
@@ -96,9 +97,15 @@ class InitialiseController {
     /* istanbul ignore next */
     var setLoginData = function (loginResult) {
       serviceRequests.publisher('setUserData', {userData: loginResult.data});
-      userData = loginResult.data;
-      switchDirectByRole(userData);
+      $scope.userData = loginResult.data;
+      switchDirectByRole($scope.userData);
     };
+
+    serviceRequests.subscriber('getUserData', () => {
+      serviceRequests.publisher('setUserData', {userData: $scope.userData});
+    });
+
+
 
     /* istanbul ignore next */
     var login = function () {
@@ -169,7 +176,7 @@ class InitialiseController {
 
     /* istanbul ignore next */
     $rootScope.$on('$locationChangeSuccess', function() {
-      switchDirectByRole(userData);
+      switchDirectByRole($scope.userData);
     }.bind(this));
   }
 }

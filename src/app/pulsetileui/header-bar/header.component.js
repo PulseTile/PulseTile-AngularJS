@@ -48,6 +48,7 @@ class HeaderController {
       $scope.user = data.userData;
     };
     serviceRequests.subscriber('setUserData', $scope.setUserData);
+    serviceRequests.publisher('getUserData');
 
     /* istanbul ignore next */
     $scope.changeLogo = function (data) {
