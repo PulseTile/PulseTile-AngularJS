@@ -33,6 +33,7 @@ class ClinicalstatementsCreateController {
     $scope.tags = [];
     $scope.clinicalTag = '';
     $scope.clinicalStatementCreate = {};
+    $scope.tempPhrases = {};
     $scope.clinicalStatementCreate.contentStore = {
       name: "ts",
       phrases: []
@@ -68,19 +69,19 @@ class ClinicalstatementsCreateController {
     /* istanbul ignore next */
     $scope.confirmEdit = function (clinicalStatementForm, clinicalStatement) {
       $scope.formSubmitted = true;
-      var userinput = $('#clinicalNote');
-      function cb(text) {
-        $scope.clinicalStatementCreate.text = text;
-      }
-      helper.setStructured(userinput, cb);  
-      
+      $scope.clinicalStatementCreate.text = $('#clinicalNote').html();
+
       $scope.statements.length = 0;
       $scope.statementsText = [];
       $scope.clinicalTag = '';
       
       if (clinicalStatementForm.$valid) {
-        console.log('$scope.clinicalStatementCreate', $scope.clinicalStatementCreate);
-        debugger
+        $scope.clinicalStatementCreate.contentStore.phrases = [];
+        for (var key in $scope.tempPhrases) {
+          if ($scope.tempPhrases[key]) {
+            $scope.clinicalStatementCreate.contentStore.phrases.push($scope.tempPhrases[key])
+          }
+        }
         $scope.actionCreateDetail($stateParams.patientId, $scope.clinicalStatementCreate);
       }
     }.bind(this);
@@ -126,12 +127,13 @@ class ClinicalstatementsCreateController {
     $scope.changeSelect = function (index) {
       var userinput = jQuery('#clinicalNote');
       var statement = $scope.statementsText[index];
+      var tagId = new Date().getTime();
 
       var phraseItem = {id: statement.id, tag: $scope.clinicalTag};
-      $scope.clinicalStatementCreate.contentStore.phrases.push(phraseItem);
+      $scope.tempPhrases[tagId] = phraseItem;
       // Parse inputs
       var inner = statement.phrase.replace(/(.*)(\{|\|)([^~|])(\}|\|)(.*)/, '$1<span class="editable" contenteditable="false" data-arr-subject="$1" editable-text data-arr-unit="$3" data-arr-value="$5">$3</span>$5');
-      var html = '<span class="tag" data-id="' + index + '" data-phrase="' + statement.phrase + '" contenteditable="false">' + inner + '. <a class="remove" contenteditable="false"><i class="fa fa-close" contenteditable="false"></i></a></span>';
+      var html = '<span class="tag" data-tag-id="' + tagId + '" data-id="' + index + '" data-phrase="' + statement.phrase + '" contenteditable="false">' + inner + '. <a class="remove" contenteditable="false"><i class="fa fa-close" contenteditable="false"></i></a></span>';
 
       helper.pasteHtmlAtCaret(html, userinput);
       // Apply Editable
@@ -144,7 +146,9 @@ class ClinicalstatementsCreateController {
       });
 
       // Bind Remove to tag
-      helper.removeTags('#clinicalNote');
+      helper.removeTags('#clinicalNote', function (tagId) {
+        $scope.tempPhrases[+tagId] = null;
+      });
     };
     
   }
