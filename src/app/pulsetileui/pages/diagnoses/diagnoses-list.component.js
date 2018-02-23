@@ -54,7 +54,16 @@ class DiagnosesListController {
         this.diagnoses = state.data;
 
         serviceFormatted.formattingTablesDate(this.diagnoses, ['dateOfOnset'], serviceFormatted.formatCollection.DDMMMYYYY);
-        serviceFormatted.filteringKeys = ['problem', 'dateOfOnset', 'source'];
+        serviceFormatted.modificate(this.diagnoses, [{
+          key: 'dateOfOnset',
+          fn: serviceFormatted.getDateSeconds
+        }, {
+          key: 'dateOfOnset',
+          // keyFrom: 'dateOfOnset',
+          // keyTo: 'dateOfOnsetConvert',
+          fn: serviceFormatted.getDateMainFormat
+        }]);
+        serviceFormatted.filteringKeys = ['problem', 'dateOfOnsetConvert', 'source'];
       }
       if (state.data || state.error) {
         usSpinnerService.stop('list-spinner');

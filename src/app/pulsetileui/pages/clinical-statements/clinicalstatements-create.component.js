@@ -69,7 +69,10 @@ class ClinicalstatementsCreateController {
     /* istanbul ignore next */
     $scope.confirmEdit = function (clinicalStatementForm, clinicalStatement) {
       $scope.formSubmitted = true;
-      $scope.clinicalStatementCreate.text = $('#clinicalNote').html();
+      const tempEl = $('<div>');
+      tempEl.html($('#clinicalNote').html());
+      tempEl.find('.popover').remove();
+      $scope.clinicalStatementCreate.text = tempEl.text();
 
       $scope.statements.length = 0;
       $scope.statementsText = [];

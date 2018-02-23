@@ -28,6 +28,23 @@ class ServiceFormatted {
     this.filteringKeys = [];
     this.filteringKeys2 = [];
 
+    this.modificate = function (collection, options) {
+      if (collection && options) {
+        collection.map((item, index) => {
+          options.forEach((option) => {
+            if (option.key) {
+              option.keyFrom = option.key;
+              option.keyTo = option.key;
+            }
+            item[option.keyTo] = option.fn(item[option.keyFrom], index);
+          });
+
+          return item;
+        });
+      }
+      return collection;
+    };
+
     /* istanbul ignore next  */
     this.formattingDate = function(date, format) {
       var dateType;
@@ -53,6 +70,14 @@ class ServiceFormatted {
       }
       return collection;
     };
+
+    this.getDateSeconds = function (date) {
+      return new Date(date).getTime();
+    };
+
+    this.getDateMainFormat = function (date) {
+      return this.formattingDate(date, this.formatCollection.DDMMMYYYY);
+    }.bind(this);
 
     /* istanbul ignore next  */
     this.formattedSearching = function(row, query) {
