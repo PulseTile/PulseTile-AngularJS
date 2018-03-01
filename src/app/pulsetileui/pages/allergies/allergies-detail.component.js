@@ -16,7 +16,7 @@
 let templateAllergiesDetail = require('./allergies-detail.html');
 
 class AllergiesDetailController {
-  constructor($scope, $state, $stateParams, $ngRedux, allergiesActions, serviceRequests, usSpinnerService) {
+  constructor($scope, $state, $stateParams, $ngRedux, allergiesActions, serviceRequests, usSpinnerService, serviceFormatted) {
     this.actionLoadList = allergiesActions.all;
     this.actionLoadDetail = allergiesActions.get;
     $scope.actionUpdateDetail = allergiesActions.update;
@@ -47,11 +47,15 @@ class AllergiesDetailController {
         causeCode: allergies.causeCode,
         causeTerminology: allergies.causeTerminology,
         reaction: allergies.reaction,
-        source: allergies.source
+        source: allergies.source,
+				isImport: allergies.isImport || false,
+				originalSource: allergies.originalSource || '',
+				originalComposition: allergies.originalComposition || ''
       };
 
       if (allergyForm.$valid) {
         $scope.isEdit = false;
+				serviceFormatted.propsToString(toAdd, 'isImport');
         $scope.actionUpdateDetail($stateParams.patientId, allergies.sourceId, toAdd);
       }
     }.bind(this);
@@ -104,5 +108,5 @@ const AllergiesDetailComponent = {
   controller: AllergiesDetailController
 };
 
-AllergiesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions', 'serviceRequests', 'usSpinnerService'];
+AllergiesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
 export default AllergiesDetailComponent;

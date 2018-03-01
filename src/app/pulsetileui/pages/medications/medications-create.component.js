@@ -24,9 +24,13 @@ class MedicationsCreateController {
     $scope.medication = {};
     
     $scope.medication.isImport = false;
-    
+    $scope.medication.originalSource = '';
+		$scope.medication.originalComposition = '';
+
     if ($stateParams.importData) {
-      $scope.medication = $stateParams.importData.data;
+			$scope.medication = {
+				...$stateParams.importData.data
+			};
     }
 
     if (typeof $scope.medication.startDate == "undefined") {
@@ -91,7 +95,7 @@ class MedicationsCreateController {
           originalComposition: medication.originalComposition
         };
 
-        serviceFormatted.propsToString(toAdd, 'startDate', 'startTime', 'dateCreated');
+        serviceFormatted.propsToString(toAdd, 'startDate', 'startTime', 'dateCreated', 'isImport');
         $scope.actionCreateDetail($stateParams.patientId, toAdd);
       }
     };

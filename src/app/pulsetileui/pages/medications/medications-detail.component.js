@@ -126,12 +126,15 @@ class MedicationsDetailController {
         author: medication.author,
         dateCreated: medication.dateCreated,
         source: medication.source,
-        sourceId: medication.sourceId
+        sourceId: medication.sourceId,
+				isImport: medication.isImport || false,
+				originalSource: medication.originalSource || '',
+				originalComposition: medication.originalComposition || ''
       };
 
       if (medicationForm.$valid) {
         $scope.isMedicationEdit = false;
-        serviceFormatted.propsToString(toAdd, 'startDate', 'startTime', 'dateCreated');
+        serviceFormatted.propsToString(toAdd, 'startDate', 'startTime', 'dateCreated', 'isImport');
         $scope.actionUpdateDetail($stateParams.patientId, medication.sourceId, toAdd);
 
       }

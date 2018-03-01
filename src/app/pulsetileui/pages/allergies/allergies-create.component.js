@@ -23,11 +23,15 @@ class AllergiesCreateController {
 
     $scope.allergy = {};
 
-    $scope.allergy.isImport = false;
-    
+		$scope.allergy.isImport = false;
+		$scope.allergy.originalSource = '';
+		$scope.allergy.originalComposition = '';
+
     /* istanbul ignore if */
     if ($stateParams.importData) {
-      $scope.allergy = $stateParams.importData.data;
+      $scope.allergy = {
+        ...$stateParams.importData.data
+      };
     }
     /* istanbul ignore if */
     if (typeof $scope.allergy.dateCreated == "undefined") {
@@ -78,7 +82,7 @@ class AllergiesCreateController {
           originalSource: allergies.originalSource,
           originalComposition: allergies.originalComposition
         };
-        serviceFormatted.propsToString(toAdd);
+        serviceFormatted.propsToString(toAdd, 'isImport');
         $scope.actionCreateDetail($stateParams.patientId, toAdd);
       }
     }.bind(this);

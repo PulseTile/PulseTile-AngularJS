@@ -48,12 +48,15 @@ class DiagnosesDetailController {
         problem: $scope.diagnosisEdit.problem,
         source: $scope.diagnosisEdit.source,
         sourceId: $scope.diagnosisEdit.sourceId,
-        terminology: $scope.diagnosisEdit.terminology
+        terminology: $scope.diagnosisEdit.terminology,
+				isImport: $scope.diagnosisEdit.isImport || false,
+				originalSource: $scope.diagnosisEdit.originalSource || '',
+				originalComposition: $scope.diagnosisEdit.originalComposition || ''
       };
 
       if (diagnosisForm.$valid) {
         $scope.isEdit = false;
-        serviceFormatted.propsToString(toAdd);
+        serviceFormatted.propsToString(toAdd, 'isImport');
         $scope.actionUpdateDetail($stateParams.patientId, $scope.diagnosisEdit.sourceId, toAdd);
       }
     }.bind(this);

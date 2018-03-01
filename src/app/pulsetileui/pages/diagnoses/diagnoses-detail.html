@@ -186,16 +186,23 @@
               <div class="col-expand-left">
                 <div class="col-expand-left">
                   <div class="form-group">
-                    <label for="code" class="control-label codeLabel">Terminology</label>
+                    <label for="" class="control-label codeLabel">Terminology</label>
                     <div class="non-edit-value">{{ diagnosisEdit.terminology }}</div>
                   </div>
                 </div>
               </div>
               <div class="col-expand-right">
                 <div class="form-group">
-                  <label for="code" class="control-label codeLabel">Terminology Code</label>
+                  <label for="" class="control-label codeLabel">Terminology Code</label>
                   <div class="non-edit-value">{{ diagnosisEdit.code }}</div>
                 </div>
+              </div>
+            </div>
+
+            <div class="form-group form-group-sm" ng-if="diagnosisEdit.isImport">
+              <label for="originalSource" class="control-label">Import URL</label>
+              <div class="input-holder">
+                <input type="text" class="form-control input-sm" id="originalSource" name="originalSource" ng-model="diagnosisEdit.originalSource" disabled />
               </div>
             </div>
 

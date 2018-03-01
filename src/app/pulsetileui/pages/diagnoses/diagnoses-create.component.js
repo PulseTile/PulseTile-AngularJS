@@ -23,9 +23,13 @@ class DiagnosesCreateController {
     $scope.diagnosis = {};
 
     $scope.diagnosis.isImport = false;
+    $scope.diagnosis.originalSource = '';
+		$scope.diagnosis.originalComposition = '';
     
     if ($stateParams.importData) {
-      $scope.diagnosis = $stateParams.importData.data;
+			$scope.diagnosis = {
+				...$stateParams.importData.data
+			};
     }
 
     if (typeof $scope.diagnosis.dateSubmitted == "undefined") {
@@ -72,7 +76,7 @@ class DiagnosesCreateController {
           originalSource: diagnosis.originalSource,
           originalComposition: diagnosis.originalComposition
         };
-        serviceFormatted.propsToString(toAdd);
+        serviceFormatted.propsToString(toAdd, 'isImport');
         $scope.actionCreateDetail($stateParams.patientId, toAdd);
       }
     }.bind(this);

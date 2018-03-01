@@ -128,6 +128,13 @@
               </div>
             </div>
 
+            <div class="form-group form-group-sm" ng-if="allergyEdit.isImport">
+              <label for="originalSource" class="control-label">Import URL</label>
+              <div class="input-holder">
+                <input type="text" class="form-control input-sm" id="originalSource" name="originalSource" ng-model="allergyEdit.originalSource" disabled />
+              </div>
+            </div>
+
             <div class="row-expand">
               <div class="col-expand-left">
                 <div class="form-group form-group-sm" ng-class="{'has-error': (formSubmitted || allergyForm.author.$dirty) && allergyForm.author.$invalid, 'has-success': allergyForm.author.$valid && allergyForm.author.$dirty}">
