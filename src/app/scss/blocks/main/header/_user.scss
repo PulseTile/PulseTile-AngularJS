@@ -28,26 +28,35 @@
       }
     }
   }
+  .specification {
+    border-bottom: 1px solid #d7d7d7;
+    margin-bottom: 9px;
+    padding-bottom: 4px;
+  }
   .user-profile-info {
     color: $text-color;
     font-size: 14px;
     line-height: 18px;
     overflow: hidden;
   }
-  .name {
-    cursor: pointer;
-    font-weight: 600;
+  .user-profile-info__item {
+    line-height: 20px;
     margin-bottom: 2px;
-  }
-  .specification {
-    border-bottom: 1px solid #d7d7d7;
-    margin-bottom: 9px;
-    padding-bottom: 4px;
-    .item {
-      line-height: 20px;
-      margin-bottom: 2px;
+    &.name {
+      cursor: pointer;
+      font-weight: 600;
     }
-    .gray { color: lighten($text-color, 40%); }
+    &.role,
+    &.version-back { font-style: italic; }
+    &.birthday {
+      font-style: italic;
+      color: lighten($text-color, 40%);
+    }
+  }
+  .user-profile-info__title {
+    display: none;
+    font-weight: 600;
+    margin-top: 12px;
   }
   .btn-signout i {
     font-size: 18px;

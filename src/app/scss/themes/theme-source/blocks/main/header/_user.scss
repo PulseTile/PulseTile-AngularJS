@@ -8,6 +8,6 @@
   }
   .specification {
     border-bottom-color: #d7d7d7;
-    .gray { color: lighten($text-color, 40%); }
   }
+  .user-profile-info__item.birthday { color: lighten($text-color, 40%); }
 }

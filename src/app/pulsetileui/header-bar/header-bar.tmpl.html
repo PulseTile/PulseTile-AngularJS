@@ -62,13 +62,18 @@
             </div>
           </div>
           <div class="user-profile-info">
-            <div class="name"  ng-click="$ctrl.goProfile()">{{user.given_name}} {{user.family_name}}</div>
-            <div class="specification">
-              <div class="item" ng-if="user.role"><em>{{user.role}}</em></div>
-              <div class="item" ng-if="user.email">{{user.email}}</div>
-              <div class="item gray"><em>10/05/2099</em></div>
-              <div class="item"><em>About Showcase Stack; PulseTile version 1.0.0/QEWD_Ripple version 1.0.0</em></div>
-            </div>
+						<div class="user-profile-info__item name"  ng-click="$ctrl.goProfile()">{{user.given_name}} {{user.family_name}}</div>
+
+						<div class="user-profile-info__descr">
+							<div class="user-profile-info__item role" ng-if="user.role">{{user.role}}</div>
+							<div class="user-profile-info__item email">{{user.email}}</div>
+							<div class="user-profile-info__item birthday">10/05/2099</div>
+						</div>
+						<div class="specification">
+							<div class="user-profile-info__title registered">Registered GP</div>
+							<div class="user-profile-info__item version-back">About Showcase Stack; PulseTile version 1.0.0/QEWD_Ripple version 1.0.0</div>
+							<div class="user-profile-info__item version-front">Angular</div>
+						</div>
             <a class="btn btn-success btn-block btn-signout" ng-click="$ctrl.signout()"><span class="brn-text">Sign Out</span> <i class="btn-icon fa fa-sign-out"></i></a>
           </div>
         </div>
