@@ -15,6 +15,17 @@
 */
 import * as actionTypes from '../constants/ActionTypes';
 
+export const httpSetTokenToCookie = function (response) {
+  // console.log(response);
+  const token = document.cookie.split('JSESSIONID=')[1];
+  const payloadToken = response.token;
+
+  if (payloadToken !== undefined && payloadToken !== token) {
+    console.log('replace the token');
+    document.cookie = `JSESSIONID=${payloadToken}`
+  }
+};
+
 export default function httpMiddleware($http) {
 
   function callAPI(config) {
@@ -68,13 +79,18 @@ export default function httpMiddleware($http) {
     })); 
 
     return callAPI(config).then(
-      response => dispatch(Object.assign({}, {
-        type: successType,
-        payload: {
-          response,
-          meta
-        }
-      })),
+      response => {
+        // Handle getting a new token
+        httpSetTokenToCookie(response);
+
+        dispatch(Object.assign({}, {
+          type: successType,
+          payload: {
+            response,
+            meta
+          }
+        }));
+      },
       error => {
 				dispatch(Object.assign({}, {
 					type: failureType,

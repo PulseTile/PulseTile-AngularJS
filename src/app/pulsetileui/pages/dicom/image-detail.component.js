@@ -13,6 +13,8 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
+import { httpSetTokenToCookie } from '../../../helpers/httpMiddleware';
+
 let templateImageDetail= require('./image-detail.html');
 import { httpHandleErrors } from '../../handle-errors/handle-errors-actions';
 import cornerstoneJS from '../../../../cornerstone/cornerstone';
@@ -36,6 +38,8 @@ class ImageDetailController {
           findFirstInstanceId(seriesIds[i], i);
       }
       usSpinnerService.stop('patientSummary-spinner');
+    }).then(response => {
+      httpSetTokenToCookie(response.data)
     }).catch(function (err) {$ngRedux.dispatch(httpHandleErrors(err))});
     /* istanbul ignore next */
     $scope.getURLtoImage = function(id) {
@@ -46,6 +50,8 @@ class ImageDetailController {
     var findFirstInstanceId = function (seriesId, index) {
       serviceActions.getInstanceId($stateParams.patientId, seriesId, $stateParams.source).then(function (result) {
         $scope.instanceIds[index] = result.data.instanceId;
+      }).then(response => {
+        httpSetTokenToCookie(response.data)
       }).catch(function (err) {$ngRedux.dispatch(httpHandleErrors(err))});;
     };
 
@@ -55,6 +61,8 @@ class ImageDetailController {
         $scope.series[index] = result.data;
         $scope.series[index].seriesDate = moment($scope.series[index].seriesDate).format('DD-MMM-YYYY');
         $scope.series[index].seriesTime = moment($scope.series[index].seriesTime).format('h:mma');
+      }).then(response => {
+        httpSetTokenToCookie(response.data)
       }).catch(function (err) {$ngRedux.dispatch(httpHandleErrors(err))});;
     };
 

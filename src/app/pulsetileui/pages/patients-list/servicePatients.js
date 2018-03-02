@@ -1,4 +1,5 @@
 import { httpHandleErrors } from '../../handle-errors/handle-errors-actions';
+import { httpSetTokenToCookie } from '../../../helpers/httpMiddleware';
 
 class servicePatients {
   constructor (patientsActions, $http, $ngRedux) {
@@ -28,7 +29,9 @@ class servicePatients {
             url: '/api/patients/'+ id + '/counts'
         };
 
-        $http(options).then(function (responce) {
+        $http(options).then(response => {
+          httpSetTokenToCookie(response.data)
+        }).then(function (responce) {
           if (responce.data.length) {
             patient = Object.assign(patient, responce.data[0]);
           }

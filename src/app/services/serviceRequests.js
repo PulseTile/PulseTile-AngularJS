@@ -14,6 +14,7 @@
   ~  limitations under the License.
 */
 // import
+import { httpSetTokenToCookie } from '../helpers/httpMiddleware';
 let _ = require('lodash');
 
 class ServiceRequests {
@@ -64,7 +65,9 @@ class ServiceRequests {
         url: '/api/initialise',
         dataType: 'json'
       };
-      return $http(options);
+      return $http(options).then(response => {
+        httpSetTokenToCookie(response.data)
+      });
     };
 
     this.login = function() {
@@ -72,7 +75,9 @@ class ServiceRequests {
         method: 'GET',
         url: '/api/user'
       };
-      return $http(options);
+      return $http(options).then(response => {
+        httpSetTokenToCookie(response.data)
+      });
     };
 
     this.setAppTheme = function(data) {
@@ -81,7 +86,9 @@ class ServiceRequests {
         url: '/api/application',
         data: data
       };
-      return $http(options);
+      return $http(options).then(response => {
+        httpSetTokenToCookie(response.data)
+      });
     };
 
     this.getAppSettings = function() {
@@ -89,7 +96,9 @@ class ServiceRequests {
         method: 'GET',
         url: '/api/application'
       };
-      return $http(options);
+      return $http(options).then(response => {
+        httpSetTokenToCookie(response.data)
+      });
     };
 
     this.checkIsNotCurrentPage = function(pages, pageName) {
