@@ -66,7 +66,8 @@ class ServiceRequests {
         dataType: 'json'
       };
       return $http(options).then(response => {
-        httpSetTokenToCookie(response.data)
+        httpSetTokenToCookie(response.data);
+        return response;
       });
     };
 
@@ -76,7 +77,8 @@ class ServiceRequests {
         url: '/api/user'
       };
       return $http(options).then(response => {
-        httpSetTokenToCookie(response.data)
+        httpSetTokenToCookie(response.data);
+        return response;
       });
     };
 
@@ -87,7 +89,8 @@ class ServiceRequests {
         data: data
       };
       return $http(options).then(response => {
-        httpSetTokenToCookie(response.data)
+        httpSetTokenToCookie(response.data);
+        return response;
       });
     };
 
@@ -97,7 +100,8 @@ class ServiceRequests {
         url: '/api/application'
       };
       return $http(options).then(response => {
-        httpSetTokenToCookie(response.data)
+        httpSetTokenToCookie(response.data);
+        return response;
       });
     };
 

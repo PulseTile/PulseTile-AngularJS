@@ -30,7 +30,8 @@ class servicePatients {
         };
 
         $http(options).then(response => {
-          httpSetTokenToCookie(response.data)
+          httpSetTokenToCookie(response.data);
+          return response;
         }).then(function (responce) {
           if (responce.data.length) {
             patient = Object.assign(patient, responce.data[0]);

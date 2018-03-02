@@ -39,7 +39,8 @@ class ImageDetailController {
       }
       usSpinnerService.stop('patientSummary-spinner');
     }).then(response => {
-      httpSetTokenToCookie(response.data)
+      httpSetTokenToCookie(response.data);
+      return response;
     }).catch(function (err) {$ngRedux.dispatch(httpHandleErrors(err))});
     /* istanbul ignore next */
     $scope.getURLtoImage = function(id) {
@@ -51,7 +52,8 @@ class ImageDetailController {
       serviceActions.getInstanceId($stateParams.patientId, seriesId, $stateParams.source).then(function (result) {
         $scope.instanceIds[index] = result.data.instanceId;
       }).then(response => {
-        httpSetTokenToCookie(response.data)
+        httpSetTokenToCookie(response.data);
+        return response;
       }).catch(function (err) {$ngRedux.dispatch(httpHandleErrors(err))});;
     };
 
@@ -62,7 +64,8 @@ class ImageDetailController {
         $scope.series[index].seriesDate = moment($scope.series[index].seriesDate).format('DD-MMM-YYYY');
         $scope.series[index].seriesTime = moment($scope.series[index].seriesTime).format('h:mma');
       }).then(response => {
-        httpSetTokenToCookie(response.data)
+        httpSetTokenToCookie(response.data);
+        return response;
       }).catch(function (err) {$ngRedux.dispatch(httpHandleErrors(err))});;
     };
 
