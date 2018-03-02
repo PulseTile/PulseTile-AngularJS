@@ -5,6 +5,7 @@ const BowerWebpackPlugin = require('bower-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
+const packageJSON = require('./package.json');
 
 
 //=========================================================
@@ -32,14 +33,14 @@ const API_URL =  'http://46.101.95.245';
 //---------------------------------------------------------
 const config = {
   resolve: {
-		extensions: ['', '.js'],
-		modulesDirectories: ["node_modules", "bower_components"],
+    extensions: ['', '.js'],
+    modulesDirectories: ["node_modules", "bower_components"],
 
-		root: path.resolve('./src'),
-		alias: {
-			'spin': 'spin.js',
-		}
-	},
+    root: path.resolve('./src'),
+    alias: {
+      'spin': 'spin.js',
+    }
+  },
 
   module: {
     loaders: [
@@ -54,14 +55,16 @@ const config = {
 
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+      'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
+      'process.env.VERSION_APP': JSON.stringify(packageJSON.version),
+      'process.env.VERSION_ANGULAR': JSON.stringify(packageJSON.dependencies.angular),
     }),
     new BowerWebpackPlugin({
       excludes: ['node_modules'],
       modulesDirectories: ['bower_components']
     }),
     new webpack.ResolverPlugin(
-        new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(".bower.json", ["main"])
+      new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(".bower.json", ["main"])
     ),
     new webpack.ProvidePlugin({
       angularSpinner: 'angular-spinner',
@@ -114,24 +117,24 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION || ENV_PRODUCTION_EXTENSION) {
   };
 
   config.plugins.push(
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks: Infinity
-      }),
-      new HtmlWebpackPlugin({
-        filename: 'index.html',
-        hash: true,
-        inject: 'body',
-        favicon: './src/favicon.png',
-        template: './src/index.html'
-      }),
-      new HtmlWebpackPlugin({
-        filename: 'ui-kit.html',
-        hash: true,
-        inject: 'body',
-        favicon: './src/favicon.png',
-        template: './src/ui-kit.html'
-      })
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      hash: true,
+      inject: 'body',
+      favicon: './src/favicon.png',
+      template: './src/index.html'
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'ui-kit.html',
+      hash: true,
+      inject: 'body',
+      favicon: './src/favicon.png',
+      template: './src/ui-kit.html'
+    })
   );
 }
 
@@ -145,7 +148,7 @@ if (ENV_DEVELOPMENT) {
   config.entry.index.unshift(`webpack-dev-server/client?http://${HOST}:${PORT}`);
 
   config.module.loaders.push(
-      {test: /\.scss$/, loader: 'style!css!postcss!sass'}
+    {test: /\.scss$/, loader: 'style!css!postcss!sass'}
   );
 
   config.devServer = {
@@ -181,7 +184,7 @@ if (ENV_PRODUCTION || ENV_PRODUCTION_EXTENSION) {
   config.devtool = 'cheap-inline-module';
 
   config.module.loaders.push(
-      {test: /\.scss$/, loader: 'style!css!postcss!sass'}
+    {test: /\.scss$/, loader: 'style!css!postcss!sass'}
   );
   config.plugins.push(
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -207,13 +210,13 @@ if (ENV_COPY) {
   };
 
   config.module.loaders.push(
-      {test: /\.scss$/, loader: 'style!css!postcss!sass'}
+    {test: /\.scss$/, loader: 'style!css!postcss!sass'}
   );
 
   config.plugins.push(
-      new CopyWebpackPlugin([
-        { from: './bower_components/moment', to: './build' }
-      ])
+    new CopyWebpackPlugin([
+      { from: './bower_components/moment', to: './build' }
+    ])
   );
 }
 
@@ -225,7 +228,7 @@ if (ENV_TEST) {
   config.devtool = 'inline-source-map';
 
   config.module.loaders.push(
-      {test: /\.scss$/, loader: 'style!css!postcss!sass'}
+    {test: /\.scss$/, loader: 'style!css!postcss!sass'}
   );
   config.module.preLoaders = [
     { test: /\.js$/, loader: 'isparta', include: path.join(__dirname, 'src/app') }

@@ -22,6 +22,7 @@ class InitialiseController {
     $scope.isLoadingPage = true;
     $scope.isInitialised = false;
     $scope.userData = null;
+    $scope.versionOfServer = '-';
 
     var classLoadingPage = 'loading';
     var body = $('body');
@@ -165,13 +166,24 @@ class InitialiseController {
       }
 
       /* istanbul ignore if */
+      if (result.data && result.data.version) {
+        $scope.versionOfServer = result.data.version;
+      }
+
+      /* istanbul ignore if */
       if (result.data && result.data.ok) {
         console.log('Cookie was for a valid session, so fetch the simulated user');
         login();
       }
 
+
+
     }).catch(function (err) {
       $scope.showInitialiseError(err);
+    });
+
+    serviceRequests.subscriber('getVersionServer', () => {
+      serviceRequests.publisher('setVersionServer', {version: $scope.versionOfServer});
     });
 
     /* istanbul ignore next */

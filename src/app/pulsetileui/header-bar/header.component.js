@@ -19,6 +19,15 @@ class HeaderController {
 
   constructor($rootScope, $scope, $state, $stateParams, $ngRedux, patientsActions, serviceRequests, serviceThemes, $window) {
 
+    $scope.versionOfPulseTile = process.env.VERSION_APP;
+    $scope.versionOfAngular = process.env.VERSION_ANGULAR;
+    $scope.versionOfServer = '-';
+
+    serviceRequests.subscriber('setVersionServer', (data) => {
+      $scope.versionOfServer = data.version;
+    });
+    serviceRequests.publisher('getVersionServer');
+
     var self = this;
     $scope.title = '';
     $scope.isOpenSearch = false;
