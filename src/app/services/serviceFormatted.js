@@ -107,7 +107,7 @@ class ServiceFormatted {
         if (this.filteringKeys2.indexOf(key) !== -1) {
           str += ' ' + row[key].toLowerCase();
         }
-        query = query.replace('&nbsp;', ' ');
+        query = query.replace(/&nbsp;/g, ' ').trim();
         farmatedStr = str.indexOf(query.toLowerCase() || '') !== -1;
       });
 

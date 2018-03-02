@@ -95,6 +95,17 @@ class ClinicalstatementsCreateController {
       return serviceFormatted.formattedSearching2(row, $scope.queryFilter);
     };
 
+    $scope.filteringTags = function (item) {
+      const str = item ? `${item.toString().toLowerCase()} ` : '';
+
+      return str.indexOf($scope.queryFilter.replace(/&nbsp;/g, ' ').trim().toLowerCase() || '') !== -1
+    };
+
+    $scope.createMarkup = function (text, queryFilter) {
+      const regular = new RegExp(`(${queryFilter.replace(/&nbsp;/g, ' ').trim()})`, 'gi');
+      return text.replace(regular, '<b class="text-mark">$1</b>');
+    };
+
     /* istanbul ignore next  */
     this.setCurrentPageData = function (store) {
       const state = store.clinicalstatements;

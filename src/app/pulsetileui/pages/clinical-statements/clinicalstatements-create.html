@@ -61,7 +61,9 @@
                         </div>
                         <div class="dropdown-menu-wrap-list">
                           <div class="dropdown-menu-list">
-                            <div class="dropdown-menu-item" ng-click="$ctrl.getTag(tag)" dir-paginate="tag in tags | filter: queryFilter | itemsPerPage: 5" pagination-id="tags"><span class="dropdown-menu-item-text">{{tag}}</span></div>
+                            <div class="dropdown-menu-item" ng-click="$ctrl.getTag(tag)" dir-paginate="tag in tags | filter: filteringTags | itemsPerPage: 5" pagination-id="tags">
+															<span class="dropdown-menu-item-text" ng-bind-html="createMarkup(tag, queryFilter)"></span>
+														</div>
                           </div>
                         </div>
                       </div>
