@@ -9,6 +9,8 @@ dist/
 tests/
 coverage
 .nyc_output/
+src/app/pulsetileui/pages/Bronze-Plugins
+src/app/pulsetileui/pages/Silver-Plugins
 
 
 #---------------------------------
