@@ -46,7 +46,13 @@ class OrdersCreateController {
       $scope.formSubmitted = true;
       if (ordersForm.$valid) {
         serviceFormatted.propsToString($scope.chosenOrders);
-        $scope.actionCreateDetail($stateParams.patientId, $scope.chosenOrders);
+
+        var toCreateOrders = $scope.chosenOrders.map(item => ({
+          code: item.code,
+          name: item.text
+        }));
+
+        $scope.actionCreateDetail($stateParams.patientId, toCreateOrders);
       }
     };
     /* istanbul ignore next */
