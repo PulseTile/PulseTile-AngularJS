@@ -16,6 +16,7 @@
 class ServiceDateTimePicker {
 
   constructor () {
+    /* istanbul ignore next */
     this.startDateBeforeRender = function ($view, $dates) {
       let currentDate = new Date();
 

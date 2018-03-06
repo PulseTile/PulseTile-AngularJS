@@ -25,6 +25,7 @@ class ServiceRequests {
     this.debug = false;
     this.currentUserData = {};
 
+    /* istanbul ignore next */
     this.publisher = function(eventName, data) {
       if (this.debug) { console.log('PUBLISH', eventName, data); }
 
@@ -40,6 +41,7 @@ class ServiceRequests {
       this.evCache[eventName].cache = data;
     };
 
+    /* istanbul ignore next */
     this.subscriber = function(eventName, callback) {
       if (this.debug) { console.log('SUBSCRIBE', eventName, callback); }
 
@@ -59,6 +61,7 @@ class ServiceRequests {
       return uid;
     };
 
+    /* istanbul ignore next */
     this.initialise = function() {
       var options = {
         method: 'GET',
@@ -71,6 +74,7 @@ class ServiceRequests {
       });
     };
 
+    /* istanbul ignore next */
     this.login = function() {
       var options = {
         method: 'GET',
@@ -82,6 +86,7 @@ class ServiceRequests {
       });
     };
 
+    /* istanbul ignore next */
     this.setAppTheme = function(data) {
       var options = {
         method: 'POST',
@@ -94,6 +99,7 @@ class ServiceRequests {
       });
     };
 
+    /* istanbul ignore next */
     this.getAppSettings = function() {
       var options = {
         method: 'GET',
@@ -105,10 +111,12 @@ class ServiceRequests {
       });
     };
 
+    /* istanbul ignore next */
     this.checkIsNotCurrentPage = function(pages, pageName) {
       return !pages.currentPlugin || pages.currentPlugin !== pageName;
     };
 
+    /* istanbul ignore next */
     this.checkIsCanLoadingListData = function(state, pages, pluginName, patientId) {
       // List of Plugin can loading
       // if (list isn't loaded OR user just switched to the plugin OR user changed patient)
@@ -121,6 +129,7 @@ class ServiceRequests {
           && !state.error;
     };
 
+    /* istanbul ignore next */
     this.setPluginPage = function (pluginName) {
       pagesActions.changePlugin(pluginName);
     };

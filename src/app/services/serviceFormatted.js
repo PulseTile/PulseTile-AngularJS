@@ -28,6 +28,7 @@ class ServiceFormatted {
     this.filteringKeys = [];
     this.filteringKeys2 = [];
 
+    /* istanbul ignore next */
     this.modificate = function (collection, options) {
       if (collection && options) {
         collection.map((item, index) => {
@@ -71,10 +72,12 @@ class ServiceFormatted {
       return collection;
     };
 
+    /* istanbul ignore next */
     this.getDateSeconds = function (date) {
       return new Date(date).getTime();
     };
 
+    /* istanbul ignore next */
     this.getDateMainFormat = function (date) {
       return this.formattingDate(date, this.formatCollection.DDMMMYYYY);
     }.bind(this);
@@ -96,6 +99,8 @@ class ServiceFormatted {
       
       return farmatedStr;
     };
+
+    /* istanbul ignore next */
     this.formattedSearching2 = function(row, query) {
       var str = '';
       var farmatedStr;
@@ -114,6 +119,7 @@ class ServiceFormatted {
       return farmatedStr;
     };
 
+    /* istanbul ignore next */
     this.propsToString = function(obj, ...ignoreKeys) {
       for (const key in obj) {
         if (obj.hasOwnProperty(key) &&
