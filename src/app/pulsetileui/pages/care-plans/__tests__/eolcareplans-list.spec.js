@@ -1,6 +1,6 @@
 'use strict';
 import EolcareplansListComponent from '../eolcareplans-list.component';
-import * as types from '../../../../constants/ActionTypes';
+import * as types from '../action-types';
 import eolcareplans from '../eolcareplans-reducer-all.js';
 
 describe('Care Plans List', function() {

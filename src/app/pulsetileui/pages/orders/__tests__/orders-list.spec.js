@@ -1,6 +1,6 @@
 'use strict';
 import OrdersListComponent from '../orders-list.component.js';
-import * as types from '../../../../constants/ActionTypes';
+import * as types from '../action-types';
 import orders from '../orders-reducer-all.js';
 
 describe('Orders List', function() {

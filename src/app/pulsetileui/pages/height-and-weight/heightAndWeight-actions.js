@@ -14,10 +14,10 @@
  ~  limitations under the License.
  */
 import {bindActionCreators} from 'redux';
-import * as types from '../../../constants/ActionTypes';
+import * as types from './action-types';
 
 export function clear() {
-  return { type: types.CONTACTS__CLEAR }
+  return { type: types.HEIGHTANDWEIGHT__CLEAR }
 }
 export function all(patientId) {
   return {

@@ -1,5 +1,7 @@
 'use strict';
 import InitialiseComponent from '../initialise.component';
+// index file need for include module 'ripple-ui' of angular to tests
+import '../../../index';
 
 describe('InitialiseComponent', function() {
   beforeEach(angular.mock.module('ripple-ui'));
@@ -25,8 +27,6 @@ describe('InitialiseComponent', function() {
   beforeEach(function() {
     spyOn(scope, 'hidePageLoading');
     spyOn(scope, 'showInitialiseError');
-
-
 
     scope.hidePageLoading();
     scope.showInitialiseError();

@@ -14,7 +14,7 @@
   ~  limitations under the License.
 */
 
-import * as types from '../../../constants/ActionTypes';
+import * as types from './action-types';
 
 const INITIAL_STATE = {
   isFetching: false,

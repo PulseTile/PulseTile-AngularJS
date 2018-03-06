@@ -1,8 +1,6 @@
 'use strict';
 import GenericMdtListComponent from '../generic-mdt-list.component.js';
-import '../../../../index';
-import '../../../../actions/index';
-import * as types from '../../../../constants/ActionTypes';
+import * as types from '../action-types';
 import genericmdt from '../generic-mdt-reducer-all.js';
 
 describe('GenericMdt List', function() {

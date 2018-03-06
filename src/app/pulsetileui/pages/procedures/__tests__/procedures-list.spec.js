@@ -1,6 +1,6 @@
 'use strict';
 import ProceduresListComponent from '../procedures-list.component.js';
-import * as types from '../../../../constants/ActionTypes';
+import * as types from '../action-types';
 import procedures from '../procedures-reducer-all.js';
 
 describe('Procedures List', function() {

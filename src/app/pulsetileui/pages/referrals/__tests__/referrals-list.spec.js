@@ -1,6 +1,6 @@
 'use strict';
 import ReferralsListComponent from '../referrals-list.component.js';
-import * as types from '../../../../constants/ActionTypes';
+import * as types from '../action-types';
 import referrals from '../referrals-reducer-all.js';
 
 describe('Referrals List', function() {

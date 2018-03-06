@@ -17,6 +17,7 @@ let templatePatientsSidebar = require('./patients-sidebar.html');
 import plugins from '../../../plugins';
 
 class PatientsSidebarController {
+  /* istanbul ignore next */
   constructor($scope, $state, $stateParams, serviceRequests) {
     this.linksCollection = [
       {
@@ -25,7 +26,7 @@ class PatientsSidebarController {
         title: 'Patient Summary'
       }
     ];
-
+    /* istanbul ignore next */
     plugins.forEach((plugin)=>{
       /* istanbul ignore if  */
       if (!Object.keys(plugin.sidebarInfo).length) return;
@@ -40,11 +41,11 @@ class PatientsSidebarController {
     } else {
       $scope.partsNameState = $scope.nameState.split('-');
     }
-
+    /* istanbul ignore next */
     $scope.isActiveItem = function (itemLink) {
       return $scope.partsNameState[0] == itemLink;
     };
-    
+    /* istanbul ignore next */
     this.goTo = function (section) {
       var requestHeader = {
         patientId: $stateParams.patientId,

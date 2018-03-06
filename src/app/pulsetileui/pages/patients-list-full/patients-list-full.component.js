@@ -21,7 +21,7 @@ class PatientsListFullController {
     serviceRequests.publisher('headerTitle', {title: 'Search results', isShowTitle: true});
 
     $scope.patientsCounts = servicePatients.cachePatientsCounts;
-
+    /* istanbul ignore next */
     $scope.patientsTable = serviceRequests.patientsTable || {
       info: {
         title: 'PATIENT INFO',
@@ -108,7 +108,7 @@ class PatientsListFullController {
       }
     };
     $scope.patientsTableSettings = {};
-
+    /* istanbul ignore next */
     $scope.getCounts = function (patient) {
       if (servicePatients.isQueryPatientsCounts(patient.nhsNumber)) {
         servicePatients.queryPatientCounts(patient.nhsNumber, patient);
@@ -118,23 +118,27 @@ class PatientsListFullController {
     if (serviceRequests.patientsTable) {
       serviceRequests.patientsTable = $scope.patientsTable;
     }
-
+    /* istanbul ignore next */
     $scope.changeTableSettings = function () {
       serviceRequests.patientsTable = $scope.patientsTable;
       $scope.resizeFixedTables();
     };
 
     $scope.hoveredTableRow = -1;
+    /* istanbul ignore next */
     $scope.hoverTableRow = function (index) {
       $scope.hoveredTableRow = index;
     };
+    /* istanbul ignore next */
     $scope.unHoverTableRow = function () {
       $scope.hoveredTableRow = -1;
     };
+    /* istanbul ignore next */
     $scope.getHoveredTableRow = function (index) {
       return $scope.hoveredTableRow == index;
     };
 
+    /* istanbul ignore next */
     $scope.getpatientsTableSettings = function () {
       var newSettings = {};
       for (var key in $scope.patientsTable.info.settings) {
@@ -150,7 +154,7 @@ class PatientsListFullController {
       $scope.patientsTableSettings = newSettings;
     };
     $scope.getpatientsTableSettings();
-
+    /* istanbul ignore next */
     $scope.resizeFixedTables = function () {
       $timeout(function () {
         var $wrapTables = $('.wrap-patients-table');
@@ -173,11 +177,11 @@ class PatientsListFullController {
         });
       });
     };
-
+    /* istanbul ignore next */
     $(window).on('resize', function () {
       $scope.resizeFixedTables();
     });
-
+    /* istanbul ignore next */
     $scope.selectAllSettings = function (key) {
       var settings = $scope.patientsTable[key].settings;
       var isSelectAll = true;
@@ -197,10 +201,11 @@ class PatientsListFullController {
 
       $scope.resizeFixedTables();
     };
-
+    /* istanbul ignore next */
     this.openModal = function (patient, state) {
       ConfirmationModal.openModal({id: patient.nhsNumber }, state);
     };
+    /* istanbul ignore next */
     this.openModalCell = function (patient, key) {
       var reg = /Count|Date/;
       var state = undefined;
@@ -226,6 +231,7 @@ class PatientsListFullController {
     this.patients = [];
     $rootScope.searchMode = true;
 
+    /* istanbul ignore next */
     this.getPageInfo = function (info) {
       var from = (15 * info.page - 14);
       var to = 0;
@@ -247,7 +253,7 @@ class PatientsListFullController {
       return total;
     };
 
-
+    /* istanbul ignore next */
     $scope.searchByDetails = function (queryParams, queryType) {
       /* istanbul ignore if */
       if (queryParams && queryParams.dateOfBirth) {
@@ -257,7 +263,7 @@ class PatientsListFullController {
       this.searchResult = queryType === 'advanced' ? searchActions.advancedSearch : searchActions.querySearch;
       this.searchResult(queryParams);
     };
-
+    /* istanbul ignore next */
     this.getData = function () {
       /* istanbul ignore if  */
       if ($stateParams.queryType === 'Setting: ') {
@@ -317,12 +323,14 @@ class PatientsListFullController {
           $scope.searchByDetails($stateParams.searchParams, $stateParams.queryType);
         }
       }
-    }
+    };
 
+    /* istanbul ignore next */
     this.processCounts = function (countString) {
       return countString === null ? 0 : countString;
     };
 
+    /* istanbul ignore next */
     this.processDateFormat = function (dateString) {
       /* istanbul ignore if  */
       if (dateString === null) {
@@ -341,6 +349,7 @@ class PatientsListFullController {
       return dateString.format('YYYY');
     };
 
+    /* istanbul ignore next */
     this.processData = function () {
       /* istanbul ignore next  */
       for (var i = 0; i < this.patients.length; i++) {
@@ -360,6 +369,7 @@ class PatientsListFullController {
       this.pageInfoText = this.getPageInfo(this.pagingInfo);
     };
 
+    /* istanbul ignore next */
     this.setDataRequest = function (result) {
       /* istanbul ignore if  */
       if (result.data) {
@@ -430,21 +440,25 @@ class PatientsListFullController {
       $scope.resizeFixedTables();
     };
 
+    /* istanbul ignore next */
     this.viewPatients = function () {
       this.tab = 'patientInfo';
       this.tabName = 'Patient Info';
     };
 
+    /* istanbul ignore next */
     this.viewDateTime = function () {
       this.tab = 'dateTime';
       this.tabName = 'Date / Time';
     };
 
+    /* istanbul ignore next */
     this.viewCounts = function () {
       this.tab = 'counts';
       this.tabName = 'Counts';
     };
 
+    /* istanbul ignore next */
     this.clickGetItem = false;
     this.go = function (patient) {
       /* istanbul ignore if  */
@@ -463,6 +477,7 @@ class PatientsListFullController {
       this.clickGetItem = false;
     };
 
+    /* istanbul ignore next */
     this.goToSection = function (itemType, nhsNumber) {
       this.clickGetItem = true;
       var requestHeader = {
@@ -495,6 +510,7 @@ class PatientsListFullController {
       $state.go(toState, requestHeader);
     };
 
+    /* istanbul ignore next */
     this.getItem = function (itemType, nhsNumber, itemId) {
       this.clickGetItem = true;
       var requestHeader = {
@@ -541,6 +557,7 @@ class PatientsListFullController {
     /*
       TODO: Only for demo
     */
+    /* istanbul ignore next */
     this.setPatients = function (patients) {
       var curPatients = [];
 

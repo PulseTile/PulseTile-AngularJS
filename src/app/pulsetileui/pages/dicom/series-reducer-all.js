@@ -13,7 +13,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-import * as types from '../../../constants/ActionTypes';
+import * as types from './action-types';
 
 const INITIAL_STATE = {
   isFetching: false,

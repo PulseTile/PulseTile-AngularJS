@@ -7,9 +7,10 @@ describe('ServiceThemes', function() {
 
   let ctrl, controller;
 
-  beforeEach(inject(($injector, $controller) => {
+  beforeEach(inject(($injector, $controller, _serviceRequests_) => {
     controller = $controller;
     ctrl = controller(ServiceThemes, {
+      serviceRequests: _serviceRequests_
     });
   }));
 

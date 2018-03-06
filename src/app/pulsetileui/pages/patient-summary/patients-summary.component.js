@@ -61,14 +61,14 @@ class PatientsSummaryController {
         $scope.listsDashboards[dashboard].show = serviceRequests.showListDashboards[dashboard];
       }
     }
-
+    /* istanbul ignore next */
     this.goToSection = function (state) {
       $state.go(state, {
         patientId: $stateParams.patientId,
         reportType: $stateParams.reportType
       });
     };
-
+    /* istanbul ignore next */
     $scope.changeDashboards = function () {
       var showListDashboards = {};
 
@@ -77,7 +77,7 @@ class PatientsSummaryController {
       }
       serviceRequests.showListDashboards = showListDashboards;
     };
-
+    /* istanbul ignore next */
     $scope.go = function (state, sourceId) {
       var headerRequest = {};
       headerRequest.patientId = $stateParams.patientId;

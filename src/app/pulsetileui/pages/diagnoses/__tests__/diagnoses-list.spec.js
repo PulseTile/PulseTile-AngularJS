@@ -1,6 +1,6 @@
 'use strict';
 import DiagnosesListComponent from '../diagnoses-list.component.js';
-import * as types from '../../../../constants/ActionTypes';
+import * as types from '../action-types';
 import diagnoses from '../diagnoses-reducer-all.js';
 
 describe('Diagnoses List', function() {

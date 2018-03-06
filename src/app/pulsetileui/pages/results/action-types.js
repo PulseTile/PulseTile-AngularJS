@@ -1,0 +1,8 @@
+export const RESULTS = 'RESULTS';
+export const RESULTS_SUCCESS = 'RESULTS_SUCCESS';
+export const RESULTS_ERROR = 'RESULTS_ERROR';
+export const RESULTS__CLEAR = 'RESULTS__CLEAR';
+
+export const RESULTS_GET = 'RESULTS_GET';
+export const RESULTS_GET_SUCCESS = 'RESULTS_GET_SUCCESS';
+export const RESULTS_GET_ERROR = 'RESULTS_GET_ERROR';

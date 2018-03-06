@@ -1,6 +1,6 @@
 'use strict';
 import ImageListComponent from '../image-list.component.js';
-import * as types from '../../../../constants/ActionTypes';
+import * as types from '../action-types';
 import series from '../series-reducer-all.js';
 
 describe('Image List', function() {

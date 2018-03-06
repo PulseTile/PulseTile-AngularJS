@@ -31,12 +31,12 @@ class OrdersCreateController {
 
     $scope.idSelectedLeft = null;
     $scope.idSelectedRight = null;
-
+    /* istanbul ignore next */
     $scope.setSelectedLeft = function (idSelectedLeft) {
       $scope.idSelectedRight = null;
       $scope.idSelectedLeft = idSelectedLeft;
     };
-
+    /* istanbul ignore next */
     $scope.setSelectedRight = function (idSelectedRight) {
       $scope.idSelectedLeft = null;
       $scope.idSelectedRight = idSelectedRight;
@@ -49,11 +49,11 @@ class OrdersCreateController {
         $scope.actionCreateDetail($stateParams.patientId, $scope.chosenOrders);
       }
     };
-
+    /* istanbul ignore next */
     $scope.cancel = function () {
       $scope.order = angular.copy(order);
     };
-
+    /* istanbul ignore next */
     $scope.toggleSelectedItem = function (idSelected) {
       if ($scope.isInSuggestionsList(idSelected)) {
         $scope.setSelectedLeft(idSelected);
@@ -76,7 +76,7 @@ class OrdersCreateController {
         $scope.firstPage = true;
       }
     };
-
+    /* istanbul ignore next */
     $scope.isInSuggestionsList = function (idSelected) {
       for (var b = 0; b < $scope.suggestions.length; b++) {
         if ($scope.suggestions[b].code === idSelected) {
@@ -85,7 +85,7 @@ class OrdersCreateController {
       }
       return false;
     };
-
+    /* istanbul ignore next */
     $scope.chooseItem = function () {
       for (var d = 0; d < $scope.suggestions.length; d++) {
         if ($scope.suggestions[d].code === $scope.idSelectedLeft) {
@@ -94,6 +94,7 @@ class OrdersCreateController {
         }
       }
     };
+    /* istanbul ignore next */
     $scope.chooseAll = function () {
       var d;
       for (d = $scope.suggestions.length - 1; d >= 0; d--) {
@@ -101,6 +102,7 @@ class OrdersCreateController {
         $scope.suggestions.splice(d, 1);
       }
     };
+    /* istanbul ignore next */
     $scope.cancelItem = function () {
       for (var c = 0; c < $scope.chosenOrders.length; c++) {
         if ($scope.chosenOrders[c].code === $scope.idSelectedRight) {
@@ -109,23 +111,24 @@ class OrdersCreateController {
         }
       }
     };
+    /* istanbul ignore next */
     $scope.cancelAll = function () {
       for (var d = $scope.chosenOrders.length - 1; d >= 0; d--) {
         $scope.suggestions.push($scope.chosenOrders[d]);
         $scope.chosenOrders.splice(d, 1);
       }
     };
-
+    /* istanbul ignore next */
     $scope.pageTwo = function () {
       if ($scope.chosenOrders.length) {
         $scope.firstPage = false;
       }
     };
-
+    /* istanbul ignore next */
     $scope.pageOne = function () {
       $scope.firstPage = true;
     };
-
+    /* istanbul ignore next */
     this.goList = function () {
       $state.go('orders', {
         patientId: $stateParams.patientId,
@@ -134,11 +137,11 @@ class OrdersCreateController {
         queryType: $stateParams.queryType
       });
     };
-
+    /* istanbul ignore next */
     this.cancel = function () {
       this.goList();
     };
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (store) {
       if (store.orders.dataSuggestion) {
         $scope.suggestions = store.orders.dataSuggestion;

@@ -1,6 +1,6 @@
 'use strict';
 import HeightAndWeightListComponent from '../heightAndWeight-list.component.js';
-import * as types from '../../../../constants/ActionTypes';
+import * as types from '../action-types';
 import heightAndWeight from '../heightAndWeight-reducer-all.js';
 
 describe('HeightAndWeight List', function() {

@@ -1,6 +1,6 @@
 'use strict';
 import DocumentsListComponent from '../documents-list.component.js';
-import * as types from '../../../../constants/ActionTypes';
+import * as types from '../action-types';
 import documents from '../documents-reducer-all.js';
 
 describe('Documents List', function() {

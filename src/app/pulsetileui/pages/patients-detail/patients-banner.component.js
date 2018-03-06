@@ -16,12 +16,13 @@
 let templatePatientsBanner = require('./patients-banner.html');
 
 class PatientsBannerController {
+  /* istanbul ignore next */
   constructor($scope, $state, $stateParams, serviceRequests, $ngRedux, patientsActions) {
     patientsActions.clearPatient();
     this.loadPatient = patientsActions.getPatient;
 
     $scope.patient = {};
-
+    /* istanbul ignore next */
     this.setCurrentPageData = function (data) {
       const statePatients = data.patientsGet;
       const patientId = $stateParams.patientId;
@@ -38,7 +39,7 @@ class PatientsBannerController {
       serviceRequests.publisher('changePositionSidebar');
     };
 
-
+    /* istanbul ignore next */
     let unsubscribe = $ngRedux.connect(state => ({
       getPatient:  this.setCurrentPageData(state)
     }))(this);
@@ -46,7 +47,7 @@ class PatientsBannerController {
     $scope.$on('$destroy', unsubscribe);
 
     $scope.mobileShowInfo = '';
-
+    /* istanbul ignore next */
     this.showInfo = function() {
       if ($scope.mobileShowInfo === 'show') {
         $scope.mobileShowInfo = '';

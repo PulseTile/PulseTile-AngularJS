@@ -1,6 +1,6 @@
 'use strict';
 import PersonalnotesListComponent from '../personalnotes-list.component.js';
-import * as types from '../../../../constants/ActionTypes';
+import * as types from '../action-types';
 import personalnotes from '../personalnotes-reducer-all.js';
 
 describe('Personalnotes List', function() {
@@ -45,7 +45,7 @@ describe('Personalnotes List', function() {
     spyOn(actions, 'create');
     spyOn(actions, 'update');
 
-    fakeCall.callPersonalnotes({}, types.EOLCAREPLANS);
+    fakeCall.callPersonalnotes({}, types.PERSONALNOTES);
 
     ctrl.go();
     ctrl.create();

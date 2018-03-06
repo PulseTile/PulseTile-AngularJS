@@ -114,7 +114,7 @@ class PatientsController {
     if (serviceRequests.patientsTable) {
       serviceRequests.patientsTable = $scope.patientsTable;
     }
-
+    /* istanbul ignore next */
     $scope.getSearchDescription = function () {
       if ($stateParams.searchDescription) {
         return $stateParams.searchDescription;
@@ -122,29 +122,33 @@ class PatientsController {
 
       return false;
     };
-
+    /* istanbul ignore next */
     $scope.getCounts = function (patient) {
       if (servicePatients.isQueryPatientsCounts(patient.nhsNumber)) {
         servicePatients.queryPatientCounts(patient.nhsNumber, patient);
       }
     };
-
+    /* istanbul ignore next */
     $scope.changeTableSettings = function () {
       serviceRequests.patientsTable = $scope.patientsTable;
       $scope.resizeFixedTables();
     };
 
     $scope.hoveredTableRow = -1;
+    /* istanbul ignore next */
     $scope.hoverTableRow = function (index) {
       $scope.hoveredTableRow = index;
     }.bind(this);
+    /* istanbul ignore next */
     $scope.unHoverTableRow = function () {
       $scope.hoveredTableRow = -1;
     };
+    /* istanbul ignore next */
     $scope.getHoveredTableRow = function (index) {
       return $scope.hoveredTableRow == index;
     };
 
+    /* istanbul ignore next */
     $scope.getPatientsTableSettings = function () {
       var newSettings = {};
 
@@ -161,7 +165,7 @@ class PatientsController {
       $scope.patientsTableSettings = newSettings;
     };
     $scope.getPatientsTableSettings();
-
+    /* istanbul ignore next */
     $scope.resizeFixedTables = function () {
       $timeout(function () {
         var $wrapTables = $('.wrap-patients-table');
@@ -184,7 +188,7 @@ class PatientsController {
         });
       });
     };
-
+    /* istanbul ignore next */
     $scope.selectAllSettings = function (key) {
       var settings = $scope.patientsTable[key].settings;
       var isSelectAll = true;
@@ -204,7 +208,7 @@ class PatientsController {
 
       $scope.resizeFixedTables();
     };
-
+    /* istanbul ignore next */
     vm.patientFilter = function (patient) {
       if (vm.filters.department) {
         return (patient.department === vm.filters.department);
@@ -216,7 +220,7 @@ class PatientsController {
 
       return true;
     };
-
+    /* istanbul ignore next */
     vm.setCurrentPageData = function (data) {
       if (data.patients.data) {
         var curPatients = [];
@@ -232,14 +236,15 @@ class PatientsController {
         $scope.resizeFixedTables();
       }
     };
-
+    /* istanbul ignore next */
     $(window).on('resize', function () {
       $scope.resizeFixedTables();
     });
-
+    /* istanbul ignore next */
     vm.openModal = function (patient, state) {
       ConfirmationModal.openModal(patient, state);
     };
+    /* istanbul ignore next */
     vm.openModalCell = function (patient, key) {
       var reg = /Count|Date/;
       var state = undefined;
@@ -250,7 +255,7 @@ class PatientsController {
 
       vm.openModal(patient, state);
     };
-
+    /* istanbul ignore next */
     if ($stateParams.patientsList.length === 0 && !$stateParams.displayEmptyTable) {
       vm.filters = {
         department: $stateParams.department,

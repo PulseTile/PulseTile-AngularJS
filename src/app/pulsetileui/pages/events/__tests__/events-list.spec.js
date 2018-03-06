@@ -1,5 +1,5 @@
 import EventsListComponent from '../events-list.component';
-import * as types from '../../../../constants/ActionTypes';
+import * as types from '../action-types';
 import events from '../events-reducer-all.js';
 
 describe('Events List', function() {

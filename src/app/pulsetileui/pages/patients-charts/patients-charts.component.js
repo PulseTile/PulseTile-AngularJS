@@ -21,9 +21,11 @@ class PatientsChartsController {
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-charts'});
     $scope.isTouchDevice = deviceDetector.detectDevice();
     //click on "Spine Lookup"
+    /* istanbul ignore next */
     this.goToLookUp = function () {
       $state.go('patients-lookup');
     };
+    /* istanbul ignore next */
     var getOption = function (borderColor, backgroundColor) {
       var enabledTooltips = !$scope.isTouchDevice;
       return {
@@ -64,6 +66,7 @@ class PatientsChartsController {
       }
     };
 
+    /* istanbul ignore next */
     var goToPatients = function (row, chartType) {
       /* istanbul ignore next  */
       switch (chartType) {
@@ -85,6 +88,7 @@ class PatientsChartsController {
       }
     };
 
+    /* istanbul ignore next */
     var createChart = function (options) {
       /* istanbul ignore next  */
       if (options && options.id && options.data) {
@@ -122,13 +126,12 @@ class PatientsChartsController {
     var self = this;
 
     let _ = require('underscore');
-
+    /* istanbul ignore next */
     this.goToPatientsList = function () {
       $state.go('patients-list');
     };
 
-
-
+    /* istanbul ignore next */
     this.getPatients = function (patients) {
       /* istanbul ignore if  */
       if (patients) {

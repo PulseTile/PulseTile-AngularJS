@@ -1,6 +1,6 @@
 'use strict';
 import MedicationsListComponent from '../medications-list.component.js';
-import * as types from '../../../../constants/ActionTypes';
+import * as types from '../action-types';
 import medications from '../medications-reducer-all.js';
 
 describe('Medications List', function() {

@@ -1,7 +1,7 @@
 'use strict';
 import AllergiesListComponent from '../allergies-list.component.js';
-import * as types from '../../../../constants/ActionTypes';
-import allergies from '../../../../pulsetileui/pages/allergies/allergies-reducer-all.js';
+import * as types from '../action-types';
+import allergies from '../allergies-reducer-all.js';
 
 describe('Allergies List', function() {
   beforeEach(angular.mock.module('ripple-ui'));

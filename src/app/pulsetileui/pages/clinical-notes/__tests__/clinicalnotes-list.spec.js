@@ -1,6 +1,6 @@
 'use strict';
 import ClinicalnotesListComponent from '../clinicalnotes-list.component.js';
-import * as types from '../../../../constants/ActionTypes';
+import * as types from '../action-types';
 import clinicalnotes from '../clinicalnotes-reducer-all.js';
 
 describe('Clinicalnotes List', function() {
@@ -46,7 +46,7 @@ describe('Clinicalnotes List', function() {
     spyOn(actions, 'create');
     spyOn(actions, 'update');
 
-    fakeCall.callClinicalnotes({}, types.EOLCAREPLANS);
+    fakeCall.callClinicalnotes({}, types.CLINICALNOTES);
 
     ctrl.actionLoadList();
     ctrl.create();

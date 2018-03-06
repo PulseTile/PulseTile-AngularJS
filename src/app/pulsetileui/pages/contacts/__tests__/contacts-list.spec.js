@@ -1,6 +1,6 @@
 'use strict';
 import ContactsListComponent from '../contacts-list.component.js';
-import * as types from '../../../../constants/ActionTypes';
+import * as types from '../action-types';
 import contacts from '../contacts-reducer-all.js';
 
 describe('Contacts List', function() {
