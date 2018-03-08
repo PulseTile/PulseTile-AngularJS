@@ -19,9 +19,12 @@ const templateDocumentsDetailDischarge = require('./documents-detail-discharge.h
 class DocumentsDetailTypeController {
   constructor($scope, $state, $stateParams, serviceRequests, ConfirmationDocsModal) {
     $scope.documentData = $scope.$parent.clinicalDocument || {};
+    $scope.typeOfDocument = $scope.$parent.typeOfDocument || '';
+
     /* istanbul ignore next */
     $scope.setDocument = function (data) {
       $scope.documentData = data.document;
+      $scope.typeOfDocument = data.type;
     };
     serviceRequests.subscriber('setDocument', $scope.setDocument);
 

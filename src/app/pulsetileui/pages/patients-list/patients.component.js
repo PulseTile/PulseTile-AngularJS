@@ -274,8 +274,6 @@ class PatientsController {
       this.loadPatientsList = patientsActions.loadPatients;
       this.loadPatientsList();
     } else {
-      console.log('$stateParams');
-      console.log($stateParams);
       vm.filters = {
         advancedSearch: true,
         advancedSearchParams: $stateParams.advancedSearchParams

@@ -153,7 +153,7 @@ class EventsDetailController {
 
     socket.on('appointment:init', function(data) {
       $scope.showJoinAppointment = data.appointmentId;
-      console.log('ON appointment:init', $scope.showJoinAppointment);
+      // console.log('ON appointment:init', $scope.showJoinAppointment);
     });
 
     /* istanbul ignore next */
@@ -201,10 +201,9 @@ class EventsDetailController {
     
     /* istanbul ignore next */
     $scope.startAppointment = function () {
-      console.log('startAppointment ===> ',  $scope.patient, $scope.appt);
+      // console.log('startAppointment ===> ',  $scope.patient, $scope.appt);
       if (!$scope.appt) return;
 
-      console.log('$scope.patient', $scope.patient);
       socket.emit('appointment:init', {
         patientId: $scope.patient.id,
         appointmentId: $scope.appt.sourceId
@@ -275,12 +274,12 @@ class EventsDetailController {
         }
         return message;
       });
-      console.log('onMessages ---> ', $scope.messages);
+      // console.log('onMessages ---> ', $scope.messages);
     }
 
     /* istanbul ignore next */
     function onClose(data) {
-      console.log('onClose ---> ', data);
+      // console.log('onClose ---> ', data);
       $scope.showJoinAppointment = null;
       if (data.appointmentId == $stateParams.detailsIndex) {
         socket.emit('appointment:status', {appointmentId: $stateParams.detailsIndex, token: token});
@@ -290,7 +289,7 @@ class EventsDetailController {
 
     /* istanbul ignore next */
     function onStatus(data) {
-      console.log('onStatus ---> ', data, data.appointmentId, ' == ', $stateParams.detailsIndex);
+      // console.log('onStatus ---> ', data, data.appointmentId, ' == ', $stateParams.detailsIndex);
       if (data.appointmentId == $stateParams.detailsIndex) {
         $scope.isClosed = data.isClosed;
       }

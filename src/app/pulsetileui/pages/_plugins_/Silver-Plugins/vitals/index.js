@@ -14,28 +14,33 @@
  ~  limitations under the License.
  */
 import routes from "./index.route";
-import reducer from "./events-reducer-all";
-
-import eventsListComponent from './events-list.component';
-import eventsCreateComponent from './events-create.component';
-import eventsDetailComponent from './events-detail.component';
-import eventsActions from './events-actions';
+import reducer from "./vitals-reducer-all";
+import vitalsListComponent from './vitals-list.component';
+import vitalsCreateComponent from './vitals-create.component';
+import vitalsDetailComponent from './vitals-detail.component';
+import vitalsActions from './vitals-actions';
+import ServiceVitalsSigns from "./serviceVitalsSigns";
+import './directives.js';
 
 export default {
-  "name": 'events',
+  "name": 'vitals',
   "routes": routes,
   "reducer": reducer,
   "components": {
-    eventsListComponent,
-    eventsCreateComponent,
-    eventsDetailComponent
+    vitalsListComponent,
+    vitalsCreateComponent,
+    vitalsDetailComponent
   },
+  "services": {
+    serviceVitalsSigns: ServiceVitalsSigns
+  },
+  "modules": ['ripple-ui.vitalsDirectives'],
   "actions": {
-    eventsActions
+    vitalsActions
   },
   "sidebarInfo": {
-    name: 'events',
-    link: 'events',
-    title: 'Events'
+    name: 'vitals',
+    link: 'vitals',
+    title: 'Vitals - News'
   }
 }

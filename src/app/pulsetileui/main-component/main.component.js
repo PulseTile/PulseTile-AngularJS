@@ -51,8 +51,6 @@ class MainController {
     /* istanbul ignore next */
     this.getPageComponents = function (data) {
       $scope.setBreadcrumbs(data.breadcrumbs);
-      // $scope.userContextViewExists = ('banner' in data.state);
-      // $scope.actionsExists = ('actions' in data.state);
     };
     serviceRequests.subscriber('routeState', this.getPageComponents);
 

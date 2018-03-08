@@ -13,7 +13,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-import {bindActionCreators} from 'redux';
+import { bindActionCreators } from 'redux';
 import * as types from '../../constants/ActionTypes';
 
 /* istanbul ignore next */

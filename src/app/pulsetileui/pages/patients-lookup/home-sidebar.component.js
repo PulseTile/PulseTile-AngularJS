@@ -16,14 +16,14 @@
 let templateHomeSidebar= require('./home-sidebar.html');
 
 class HomeSidebarController {
-    constructor($scope, $state, serviceRequests) {
-        serviceRequests.publisher('headerTitle', {title: 'Patients Lookup'});
-    }
+  constructor($scope, $state, serviceRequests) {
+    serviceRequests.publisher('headerTitle', {title: 'Patients Lookup'});
+  }
 }
 
 const HomeSidebarComponent = {
-    template: templateHomeSidebar,
-    controller: HomeSidebarController
+  template: templateHomeSidebar,
+  controller: HomeSidebarController
 };
 
 HomeSidebarController.$inject = ['$scope', '$state', 'serviceRequests'];

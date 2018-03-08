@@ -29,7 +29,7 @@ class DocumentsDetailController {
     this.clinicalDocument = {};
     /* istanbul ignore next */
     $scope.sendDocument = function () {
-      serviceRequests.publisher('setDocument', {document: this.clinicalDocument});
+      serviceRequests.publisher('setDocument', {document: this.clinicalDocument, type: $scope.typeOfDocument });
     }.bind(this);
     serviceRequests.subscriber('getDocument', $scope.sendDocument);
     /* istanbul ignore next */

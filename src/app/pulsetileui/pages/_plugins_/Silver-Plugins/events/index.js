@@ -14,27 +14,32 @@
  ~  limitations under the License.
  */
 import routes from "./index.route";
-import reducer from "./vitals-reducer-all";
-import vitalsListComponent from './vitals-list.component';
-import vitalsCreateComponent from './vitals-create.component';
-import vitalsDetailComponent from './vitals-detail.component';
-import vitalsActions from './vitals-actions';
+import reducer from "./events-reducer-all";
+
+import eventsListComponent from './events-list.component';
+import eventsCreateComponent from './events-create.component';
+import eventsDetailComponent from './events-detail.component';
+import eventsActions from './events-actions';
+import ScheduleModal from './schedule-modal';
 
 export default {
-  "name": 'vitals',
+  "name": 'events',
   "routes": routes,
   "reducer": reducer,
   "components": {
-    vitalsListComponent,
-    vitalsCreateComponent,
-    vitalsDetailComponent
+    eventsListComponent,
+    eventsCreateComponent,
+    eventsDetailComponent
+  },
+  "factories": {
+    ScheduleModal
   },
   "actions": {
-    vitalsActions
+    eventsActions
   },
   "sidebarInfo": {
-    name: 'vitals',
-    link: 'vitals',
-    title: 'Vitals - News'
+    name: 'events',
+    link: 'events',
+    title: 'Events'
   }
 }

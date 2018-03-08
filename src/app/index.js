@@ -28,7 +28,7 @@ import 'angular-sanitize';
 import 'chart.js';
 import 'bootstrap/dist/js/bootstrap';
 import 'bootstrap-editable';
-import 'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar'
+import 'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar';
 import 'angular-spinner';
 import 'jquery-timepicker-jt';
 import 'angular-jquery-timepicker';
@@ -48,7 +48,6 @@ import httpMiddleware from './helpers/httpMiddleware';
 import Patient from './helpers/patient';
 import deviceDetector from './helpers/deviceDetector';
 import './helpers/polyfills';
-import { httpHandleErrors } from './pulsetileui/handle-errors/handle-errors-actions';
 
 //components
 import InitialiseComponent from './pulsetileui/initialise/initialise.component';
@@ -69,15 +68,11 @@ import ReportChartComponent from './pulsetileui/search/report-chart.component';
 
 import ServiceRequests from './services/serviceRequests.js';
 import ServiceStateManager from './services/serviceStateManager.js';
-import ServiceVitalsSigns from './pulsetileui/pages/vitals/serviceVitalsSigns.js';
-import ServiceActions from './pulsetileui/pages/dicom/serviceActions.js';
 import ServiceFormatted from './services/serviceFormatted.js';
 import ServiceDateTimePicker from './services/serviceDateTimePicker.js';
 import ServiceThemes from './services/serviceThemes.js';
-import ServiceTransferOfCare from './pulsetileui/pages/transfer-of-care/serviceTransferOfCare.js';
 import ServicePatients from './pulsetileui/pages/patients-list/servicePatients.js';
 
-import ScheduleModal from './pulsetileui/pages/events/schedule-modal';
 import ConfirmationModal from './pulsetileui/confirmation/confirmation';
 import ConfirmationRedirectModal from './pulsetileui/confirmation/confirmation-redirect';
 import ConfirmationDocsModal from './pulsetileui/confirmation/confirmation-documents';
@@ -92,53 +87,75 @@ import 'app/pulsetileui/pages/patients-list/index.js';
 
 import plugins from './plugins';
 
+const appModules = [
+  uiRouter,
+  ngAnimate,
+  uiBootstrap,
+  ngRedux,
+  actions,
+  dirPagination,
+  'ripple-ui.patients',
+  'ripple-ui.directives',
+  'ripple-ui.filters',
+  'angularSpinner',
+  'ui.calendar',
+  'ui.timepicker',
+  'ui.bootstrap.datetimepicker',
+  'angular-loading-bar',
+  'xeditable',
+  'ngScrollbars',
+  'rzModule',
+  'ui.select',
+  'ksSwiper',
+  'ngSanitize',
+  'dndLists'
+];
+
+  // Add Modules to App from Plugins
+  plugins.forEach(plugin => {
+    if (plugin.modules) {
+      plugin.modules.forEach(item => {
+        appModules.push(item);
+      })
+    }
+  });
+
 let app = angular
-    .module('ripple-ui', [
-        uiRouter,
-        ngAnimate,
-        uiBootstrap,
-        ngRedux,
-        actions,
-        dirPagination,
-        'ripple-ui.patients',
-        'ripple-ui.directives',
-        'ripple-ui.filters',
-        'angularSpinner',
-        'ui.calendar',
-        'ui.timepicker',
-        'ui.bootstrap.datetimepicker',
-        'angular-loading-bar',
-        'xeditable',
-        'ngScrollbars',
-        'rzModule',
-        'ui.select',
-        'ksSwiper',
-        'ngSanitize',
-        'dndLists'
-    ])
-    .factory('ScheduleModal', ScheduleModal)
-    .factory('ConfirmationModal', ConfirmationModal)
-    .factory('ConfirmationRedirectModal', ConfirmationRedirectModal)
-    .factory('ConfirmationDocsModal', ConfirmationDocsModal)
-	  .factory('ConfirmationHandleErrors', ConfirmationHandleErrors)
+  .module('ripple-ui', appModules)
+  .factory('ConfirmationModal', ConfirmationModal)
+  .factory('ConfirmationRedirectModal', ConfirmationRedirectModal)
+  .factory('ConfirmationDocsModal', ConfirmationDocsModal)
+  .factory('ConfirmationHandleErrors', ConfirmationHandleErrors)
 
-    
-    .factory('httpMiddleware', httpMiddleware)
-    .factory('Patient', Patient)
-    .factory('deviceDetector', deviceDetector)
+  .factory('httpMiddleware', httpMiddleware)
+  .factory('Patient', Patient)
+  .factory('deviceDetector', deviceDetector)
 
-    .service('serviceThemes', ServiceThemes)
-    .service('serviceTransferOfCare', ServiceTransferOfCare)
-    .service('servicePatients', ServicePatients)
-    .service('serviceFormatted', ServiceFormatted)
-    .service('serviceRequests', ServiceRequests)
-    .service('serviceStateManager', ServiceStateManager)
-    .service('serviceVitalsSigns', ServiceVitalsSigns)
-    .service('serviceActions', ServiceActions)
-    .service('serviceDateTimePicker', ServiceDateTimePicker);
+  .service('serviceThemes', ServiceThemes)
+  .service('servicePatients', ServicePatients)
+  .service('serviceFormatted', ServiceFormatted)
+  .service('serviceRequests', ServiceRequests)
+  .service('serviceStateManager', ServiceStateManager)
+  .service('serviceDateTimePicker', ServiceDateTimePicker);
 
-  plugins.forEach((plugin)=>{
-    Object.keys(plugin.components).forEach((name)=>{
+
+  plugins.forEach(plugin => {
+    // Add Factories to App from Plugins
+    if (plugin.factories) {
+      Object.keys(plugin.factories).forEach(name => {
+        app = app.factory(name, plugin.factories[name]);
+      })
+    }
+
+    // Add Services to App from Plugins
+    if (plugin.services) {
+      Object.keys(plugin.services).forEach(name => {
+        app = app.service(name, plugin.services[name]);
+      })
+    }
+
+    // Add Components to App from Plugins
+    Object.keys(plugin.components).forEach(name => {
       app = app.component(name, plugin.components[name]);
     })
   });
@@ -167,19 +184,19 @@ let app = angular
       }
     ])
     .config(['$ngReduxProvider', $ngReduxProvider => {
-        const middleware = ['httpMiddleware'];
+      const middleware = ['httpMiddleware'];
 
-        if (process.env.NODE_ENV === 'development') {
-            middleware.push(createLogger({
-                level: 'info',
-                collapsed: true
-            }));
-        }
+      if (process.env.NODE_ENV === 'development') {
+        middleware.push(createLogger({
+          level: 'info',
+          collapsed: true
+        }));
+      }
 
-        $ngReduxProvider.createStoreWith(reducer, middleware);
+      $ngReduxProvider.createStoreWith(reducer, middleware);
     }])
     .config(['cfpLoadingBarProvider', cfpLoadingBarProvider => {
-        cfpLoadingBarProvider.includeSpinner = false;
+      cfpLoadingBarProvider.includeSpinner = false;
     }])
     .config(['ScrollBarsProvider',
       function (ScrollBarsProvider) {
@@ -214,4 +231,4 @@ let app = angular
       }
     ]);
 
-console.log('app start');
+// console.log('app start');

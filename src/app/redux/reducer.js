@@ -21,10 +21,6 @@ import patients from '../pulsetileui/pages/patients-list/patients-reducer-all';
 import patientsGet from '../pulsetileui/pages/patients-list/patients-reducer-get';
 import search from '../pulsetileui/search/search-reducer-all';
 import chart from '../pulsetileui/search/chart-reducer-get';
-import studies from '../pulsetileui/pages/dicom/studies-reducer-all';
-import series from '../pulsetileui/pages/dicom/series-reducer-all';
-import instanceGet from '../pulsetileui/pages/dicom/instance-reducer-get';
-import instanceIdGet from '../pulsetileui/pages/dicom/instance-id-reducer-get';
 
 import plugins from '../plugins';
 
@@ -35,14 +31,15 @@ let reducers = {
   patientsGet,
   search,
   chart,
-  studies,
-  series,
-  instanceGet,
-  instanceIdGet,
 };
 
-plugins.forEach((plugin)=>{
+plugins.forEach((plugin) => {
   reducers[plugin.name] = plugin.reducer;
+
+  // if plugin has more than one reducer
+  if (plugin.reducers) {
+    Object.assign(reducers, plugin.reducers)
+  }
 });
 
 export default combineReducers(reducers);

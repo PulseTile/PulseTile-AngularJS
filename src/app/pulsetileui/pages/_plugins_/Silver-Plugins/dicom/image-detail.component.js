@@ -13,12 +13,12 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
 */
-import { httpSetTokenToCookie } from '../../../helpers/httpMiddleware';
+import { httpSetTokenToCookie } from '../../../../../helpers/httpMiddleware';
 
-let templateImageDetail= require('./image-detail.html');
-import { httpHandleErrors } from '../../handle-errors/handle-errors-actions';
-import cornerstoneJS from '../../../../cornerstone/cornerstone';
-import cornerstoneToolsJS from '../../../../cornerstone/cornerstoneTools';
+let templateImageDetail = require('./image-detail.html');
+import { httpHandleErrors } from '../../../../handle-errors/handle-errors-actions';
+import cornerstoneJS from '../../../../../../cornerstone/cornerstone';
+import cornerstoneToolsJS from '../../../../../../cornerstone/cornerstoneTools';
 
 class ImageDetailController {
   constructor($scope, $state, $stateParams, $ngRedux, serviceActions, serviceRequests, usSpinnerService) {

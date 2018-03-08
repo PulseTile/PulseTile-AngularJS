@@ -72,9 +72,9 @@ class DiagnosesCreateController {
           source: diagnosis.source,
           sourceId: '',
           terminology: diagnosis.terminology,
-          isImport: diagnosis.isImport,
-          originalSource: diagnosis.originalSource,
-          originalComposition: diagnosis.originalComposition
+          isImport: diagnosis.isImport || false,
+          originalSource: diagnosis.originalSource || '',
+          originalComposition: diagnosis.originalComposition || ''
         };
         serviceFormatted.propsToString(toAdd, 'isImport');
         $scope.actionCreateDetail($stateParams.patientId, toAdd);

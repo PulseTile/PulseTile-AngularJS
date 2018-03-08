@@ -90,9 +90,9 @@ class MedicationsCreateController {
           startTime: startTime,
           author: medication.author,
           dateCreated: medication.dateCreated,
-          isImport: medication.isImport,
-          originalSource: medication.originalSource,
-          originalComposition: medication.originalComposition
+          isImport: medication.isImport || false,
+          originalSource: medication.originalSource || '',
+          originalComposition: medication.originalComposition || ''
         };
 
         serviceFormatted.propsToString(toAdd, 'startDate', 'startTime', 'dateCreated', 'isImport');

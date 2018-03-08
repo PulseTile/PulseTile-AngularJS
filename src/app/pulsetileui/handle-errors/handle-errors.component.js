@@ -35,7 +35,6 @@ class HandleErrorsController {
 		this.getErrorConfig = () => {
 			const requestError = this.currentError;
 			const requestErrorStatus = requestError.status;
-			console.log('requestErrorStatus', requestErrorStatus);
 			switch (true) {
 				case requestError.initialiseError:
           return {

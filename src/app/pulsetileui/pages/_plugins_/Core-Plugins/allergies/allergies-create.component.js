@@ -78,9 +78,9 @@ class AllergiesCreateController {
           causeTerminology: allergies.causeTerminology,
           reaction: allergies.reaction,
           source: allergies.source,
-          isImport: allergies.isImport,
-          originalSource: allergies.originalSource,
-          originalComposition: allergies.originalComposition
+          isImport: allergies.isImport || false,
+          originalSource: allergies.originalSource || '',
+          originalComposition: allergies.originalComposition || ''
         };
         serviceFormatted.propsToString(toAdd, 'isImport');
         $scope.actionCreateDetail($stateParams.patientId, toAdd);
