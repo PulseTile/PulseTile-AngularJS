@@ -15,8 +15,8 @@
  */
 
 import corePlugins from './pulsetileui/pages/_plugins_/Core-Plugins/index';
-import silverPlugins from './pulsetileui/pages/_plugins_/Silver-Plugins/index';
-import bronzePlugins from './pulsetileui/pages/_plugins_/Bronze-Plugins/index';
+// import silverPlugins from './pulsetileui/pages/_plugins_/Silver-Plugins/index';
+// import bronzePlugins from './pulsetileui/pages/_plugins_/Bronze-Plugins/index';
 
 function transferPlugins (from, to) {
   from.forEach((item) => {
@@ -27,7 +27,7 @@ function transferPlugins (from, to) {
 const plugins = [];
 
 transferPlugins(corePlugins, plugins);
-transferPlugins(silverPlugins, plugins);
-transferPlugins(bronzePlugins, plugins);
+// transferPlugins(silverPlugins, plugins);
+// transferPlugins(bronzePlugins, plugins);
 
 export default plugins;
