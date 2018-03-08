@@ -265,7 +265,8 @@ class UiKitController {
         };
       // Timeline
 
-      // Vitals News 
+      // Vitals News
+      if (serviceVitalsSigns) {
         $scope.popoverLabels = serviceVitalsSigns.getLabels();
         $scope.vital = {
           respirationRate: 23,
@@ -276,7 +277,8 @@ class UiKitController {
         $scope.getHighlighterClass = function (vitalName) {
           return serviceVitalsSigns.getHighlighterClass($scope.vitalStatuses[vitalName]);
         };
-      // Vitals News 
+      }
+      // Vitals News
 
       // Info of Patient
         $scope.patientInfo = {
