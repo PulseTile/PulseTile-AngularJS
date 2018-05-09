@@ -2,6 +2,11 @@
   @include clearfix;
   &.hide-indent-bottom { margin-bottom: -5px; }
 }
+.buttoned-control-group {
+  z-index: 9999;
+  position: absolute;
+  right: 0;
+}
 .control-group {
   margin-right: -5px;
   & > * { margin-right: 5px; }

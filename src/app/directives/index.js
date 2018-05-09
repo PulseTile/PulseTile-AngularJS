@@ -459,4 +459,19 @@ angular.module('ripple-ui.directives', [])
         });
       }
     };
+  })
+  .directive('mcTextareaWithButton', function () {
+    return{
+      restrict: 'E',
+      transclude: {
+        button: '?mcButton',
+        field: '?mcField'
+      },
+      template:
+      '              <div class="input-holder">\n' +
+      '                <div class="control-group right buttoned-control-group" ng-transclude="button">\n' +
+      '                </div>\n' +
+      '                <div ng-transclude="field"></div>\n' +
+      '              </div>\n'
+    }
   });
